@@ -11,6 +11,6 @@ public class TestController {
 
   @GetMapping("/test")
   public String testApi(){
-    return "test message";
+    return "this is the test message";
   }
 }
