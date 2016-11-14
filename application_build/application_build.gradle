@@ -4,15 +4,14 @@
 
 // for spring boot
 apply plugin: 'spring-boot'
-//apply plugin: 'swagger'
 
 dependencies {
   // spring mvc, thymeleaf, and layout dialect
   compile("org.springframework.boot:spring-boot-starter-web")
 
-  compile "io.springfox:springfox-swagger2:2.6.1"
+  compile("io.springfox:springfox-swagger2:2.6.1")
 
-  compile 'io.springfox:springfox-swagger-ui:2.6.1'
+  compile('io.springfox:springfox-swagger-ui:2.6.1')
 
   //for spring session
   compile("org.springframework.session:spring-session")
@@ -23,7 +22,18 @@ dependencies {
   //cglib for Spock
   compile('cglib:cglib-nodep:3.1')
 
-  // model mapper for grpc data
+  // model mapper for data
   compile ('org.modelmapper:modelmapper:0.7.6')
 
+  //spring boot test
+  testCompile('org.springframework.boot:spring-boot-starter-test:1.4.0.RELEASE')
+
+  //groovy for spock
+  testCompile('org.codehaus.groovy:groovy-all:2.3.10')
+
+  //spock core
+  testCompile('org.spockframework:spock-core:1.0-groovy-2.3')
+
+  //spock spring
+  testCompile('org.spockframework:spock-spring:1.0-groovy-2.3')
 }

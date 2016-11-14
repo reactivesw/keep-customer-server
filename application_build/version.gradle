@@ -1,4 +1,4 @@
-group = 'reactivesw'
+group = 'io.reactivesw'
 
 // for java jar file base name
 archivesBaseName = 'customer-server'
