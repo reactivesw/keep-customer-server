@@ -1,18 +1,18 @@
 /**
- * Created by yingliu on 9/22/16.
+ * Created by bruce on 11/14/2016.
  */
 
 // for spring boot
 apply plugin: 'spring-boot'
+//apply plugin: 'swagger'
 
 dependencies {
   // spring mvc, thymeleaf, and layout dialect
   compile("org.springframework.boot:spring-boot-starter-web")
 
-  // see http://www.webjars.org/ for supported versions
-  compile 'org.webjars:jquery:3.1.0'
-  compile 'org.webjars:bootstrap:3.3.7'
-  compile 'org.springframework.boot:spring-boot-devtools' // for livereload support
+  compile "io.springfox:springfox-swagger2:2.6.1"
+
+  compile 'io.springfox:springfox-swagger-ui:2.6.1'
 
   //for spring session
   compile("org.springframework.session:spring-session")

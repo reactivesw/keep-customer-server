@@ -2,7 +2,7 @@
  * Created by yingliu on 9/22/16.
  */
 
-package io.reactivesw.customerweb
+package io.reactivesw.customer.server
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest

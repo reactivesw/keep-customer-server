@@ -1,17 +1,14 @@
-package io.reactivesw.customerweb;
+package io.reactivesw.customer.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.MediaType;
-import org.springframework.http.converter.protobuf.ProtobufHttpMessageConverter;
 
-import java.util.ArrayList;
-import java.util.List;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * Created by bruce on 11/14/16.
  */
+@EnableSwagger2
 @SpringBootApplication
 public class Application {
 

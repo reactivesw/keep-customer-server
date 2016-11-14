@@ -9,6 +9,7 @@ buildscript {
     jcenter()
     mavenLocal()
     mavenCentral()
+    maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
   }
 
   dependencies {
@@ -36,6 +37,6 @@ apply from: 'application_build/application_build.gradle'
 apply from: 'application_build/docker_build.gradle'
 
 // these two files are for code analyzer, unit test and code coverage check
-apply from: 'code_analyzer_test_local/code_analyzer.gradle'
-apply from: 'code_analyzer_test_local/code_test_coverage.gradle'
+//apply from: 'code_analyzer_test_local/code_analyzer.gradle'
+//apply from: 'code_analyzer_test_local/code_test_coverage.gradle'
 
