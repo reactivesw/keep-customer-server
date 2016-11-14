@@ -1,0 +1,58 @@
+// for spock unit test
+apply plugin: 'groovy'
+dependencies {
+  testCompile('org.springframework.boot:spring-boot-starter-test')
+  testCompile('org.spockframework:spock-spring')
+}
+
+// for code coverage
+apply plugin: 'com.palantir.jacoco-coverage'
+apply from: 'code_analyzer_test/test_coverage_config.gradle'
+
+test {
+  //  exclude 'io/reactivesw/customerweb/customerauthentication/controllers/*'
+  exclude '**/*IT*'
+  exclude 'io/reactivesw/customerweb/ApplicatinoStarterTest.class'
+}
+
+// config of coverage check
+// see document: https://github.com/palantir/gradle-jacoco-coverage
+jacocoCoverage {
+  // Scopes can be exempt from all coverage requirements by exact scope name or scope name pattern.
+  fileThreshold 0.0, "Application.java"
+  fileThreshold 0.0, "AuthenticationConfig.java"
+  fileThreshold 0.0, "AccountInfoConfig.java"
+  fileThreshold 0.0, "HttpSessionConfig.java"
+  fileThreshold 0.0, "UserInfo.java"
+  fileThreshold 0.0, "Routes.java"
+  //    packageThreshold 0.0, "org/company/module"
+  //    fileThreshold 0.0, ~".*Test.java"
+}
+
+//exclude the folders we do not want to check
+jacocoTestReport {
+  afterEvaluate {
+    classDirectories = files(classDirectories.files.collect {
+      fileTree(dir: it, exclude: [
+        'io/reactivesw/customerinfo/grpc/*',
+        'io/reactivesw/customerauthentication/grpc/*',
+        'io/reactivesw/customerweb/account/*',
+        'io/reactivesw/customerweb/authentication/grpcservices/*',
+        'io/reactivesw/customerweb/authentication/dto/*',
+        'io/reactivesw/customerweb/authentication/controllers/*',
+        'io/reactivesw/catalog/grpc/*',
+        'io/reactivesw/customerweb/catalog/utils/*',
+        'io/reactivesw/customerweb/catalog/controllers/*',
+        'io/reactivesw/customerweb/catalog/config/*',
+        'io/reactivesw/customerweb/catalog/grpcservices/*',
+        'io/reactivesw/customerweb/catalog/interceptors/*',
+        'io/reactivesw/customerweb/catalog/exception/*',
+        'io/reactivesw/shoppingcart/grpc/*',
+        'io/reactivesw/customerweb/shoppingcart/config/*',
+        'io/reactivesw/customerweb/shoppingcart/dto/*',
+        'io/reactivesw/customerweb/shoppingcart/grpcservices/*',
+        'io/reactivesw/customerweb/shoppingcart/utils/*',
+      ])
+    })
+  }
+}

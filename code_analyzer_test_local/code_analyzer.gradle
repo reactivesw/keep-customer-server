@@ -1,0 +1,100 @@
+apply plugin: 'checkstyle'
+apply plugin: 'pmd'
+apply plugin: 'findbugs'
+
+// apply all configurations
+apply from:'code_analyzer_test/code_analyzer_config.gradle'
+
+ext {
+    application_java = 'io/reactivesw/customerweb/Application.java'
+
+    grcp_auth_folder = 'io/reactivesw/customerauthentication/grpc/'
+    grpc_auth_folder_all = grcp_auth_folder + '*'
+
+    //customer info message and services for grpc
+    grpc_customerinfo_folder = 'io/reactivesw/customerinfo/grpc/'
+    grpc_customerinfo_folder_all = grpc_customerinfo_folder + '*'
+
+    grpc_services_folder = 'io/reactivesw/customerweb/authentication/grpcservices/'
+    grpc_services_folder_all = grpc_services_folder + '*'
+
+    dto_folder = 'io/reactivesw/customerweb/authentication/dto/'
+    dto_folder_all = dto_folder + '*'
+
+    dto_customerinfo_folder = 'io/reactivesw/customerweb/account/dto/'
+    dto_customerinfo_all = dto_customerinfo_folder + '*'
+
+    //catalog message and services for grpc
+    grpc_catalog_folder = 'io/reactivesw/catalog/grpc/'
+    grpc_catalog_folder_all = grpc_catalog_folder + '*'
+
+    // shopping cart grpc generated
+    sc_grpc_folder = 'io/reactivesw/shoppingcart/grpc/'
+    sc_grpc_folder_all = sc_grpc_folder + '*'
+}
+
+/*************checkstyle(use google java style)***************/
+checkstyle{
+    //exclude the package you do not want to check
+    checkstyleMain.exclude grpc_auth_folder_all
+    checkstyleMain.exclude grpc_customerinfo_folder_all
+    checkstyleMain.exclude grpc_services_folder_all
+    checkstyleMain.exclude dto_folder_all
+    checkstyleMain.exclude dto_customerinfo_all
+
+    //exclude catalog package
+    checkstyleMain.exclude grpc_catalog_folder_all
+
+    //exclude shopping cart package
+    checkstyleMain.exclude sc_grpc_folder_all
+}
+
+/*************PMD(Project Manager Design)***************/
+tasks.withType(Pmd) {
+    //exclude the package you do not want to check
+    exclude application_java
+    exclude grpc_auth_folder_all
+    exclude grpc_customerinfo_folder_all
+    exclude grpc_services_folder_all
+    exclude dto_folder_all
+    exclude dto_customerinfo_all
+
+    //exclude catalog package
+    exclude grpc_catalog_folder_all
+
+    //exclude shopping cart package
+    exclude sc_grpc_folder_all
+
+    exclude 'io/reactivesw/customerweb/authentication/controllers/ApiLogin.java'
+}
+
+/*************find bug***************/
+tasks.withType(FindBugs) {
+    //exclude the package you do not want to check
+    // findBugs doesn't work if the filter is empty. Comment all if nothing to exclude
+    classes = classes.filter {
+        !it.path.contains(grcp_auth_folder)
+    }
+    classes = classes.filter {
+        !it.path.contains(grpc_customerinfo_folder)
+    }
+    classes = classes.filter {
+        !it.path.contains(grpc_services_folder)
+    }
+    classes = classes.filter {
+        !it.path.contains(dto_folder)
+    }
+    classes = classes.filter {
+        !it.path.contains(dto_customerinfo_folder)
+    }
+
+    //exclude catalog package
+    classes = classes.filter {
+        !it.path.contains(grpc_catalog_folder)
+    }
+
+    //exclude shopping cart package
+    classes = classes.filter {
+        !it.path.contains(sc_grpc_folder)
+    }
+}

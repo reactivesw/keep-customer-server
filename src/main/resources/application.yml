@@ -1,0 +1,12 @@
+#server:
+#  port:8088
+#
+#grpc:
+#  shoppingcart:
+#    host: localhost
+#    port: 6565
+
+grpc:
+  authentication:
+    host: localhost
+    port: 6565

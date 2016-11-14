@@ -1,0 +1,29 @@
+/**
+ * Created by yingliu on 9/22/16.
+ */
+
+// for spring boot
+apply plugin: 'spring-boot'
+
+dependencies {
+  // spring mvc, thymeleaf, and layout dialect
+  compile("org.springframework.boot:spring-boot-starter-web")
+
+  // see http://www.webjars.org/ for supported versions
+  compile 'org.webjars:jquery:3.1.0'
+  compile 'org.webjars:bootstrap:3.3.7'
+  compile 'org.springframework.boot:spring-boot-devtools' // for livereload support
+
+  //for spring session
+  compile("org.springframework.session:spring-session")
+
+  //for redis
+  compile('org.springframework.boot:spring-boot-starter-redis')
+
+  //cglib for Spock
+  compile('cglib:cglib-nodep:3.1')
+
+  // model mapper for grpc data
+  compile ('org.modelmapper:modelmapper:0.7.6')
+
+}

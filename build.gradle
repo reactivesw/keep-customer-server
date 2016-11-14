@@ -1,0 +1,41 @@
+/*
+ *  Created by 'yingliu' at '9/20/16 7:59 PM'
+ */
+
+buildscript {
+  ext { springBootVersion = '1.4.1.RELEASE' }
+
+  repositories {
+    jcenter()
+    mavenLocal()
+    mavenCentral()
+  }
+
+  dependencies {
+    // for spring boot
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+
+    //for docker build
+    classpath('se.transmode.gradle:gradle-docker:1.2')
+
+    // for unit test code coverage  -- need to find a way to put it in its file
+    classpath('com.palantir:jacoco-coverage:0.4.0')
+  }
+}
+
+// init repository, java, wrapper
+apply from: 'application_build/init_build.gradle'
+
+// init application version settings
+apply from: 'application_build/version.gradle'
+
+// application build script
+apply from: 'application_build/application_build.gradle'
+
+// build docker image task
+apply from: 'application_build/docker_build.gradle'
+
+// these two files are for code analyzer, unit test and code coverage check
+apply from: 'code_analyzer_test_local/code_analyzer.gradle'
+apply from: 'code_analyzer_test_local/code_test_coverage.gradle'
+
