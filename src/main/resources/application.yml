@@ -1,12 +1,13 @@
-#server:
-#  port:8088
-#
-#grpc:
-#  shoppingcart:
-#    host: localhost
-#    port: 6565
-
-grpc:
-  authentication:
-    host: localhost
-    port: 6565
+server:
+  port:8080
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/reactivesw
+    username: root
+    password: root
+    driverClassName: com.mysql.jdbc.Driver
+  jpa:
+    database: MYSQL
+    hibernate:
+      ddl-auto: update
+    show-sql: true
