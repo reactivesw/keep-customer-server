@@ -6,7 +6,7 @@ apply plugin: 'findbugs'
 apply from:'code_analyzer_test/code_analyzer_config.gradle'
 
 ext {
-    application_java = 'io/reactivesw/customerweb/Application.java'
+    application_java = 'io/reactivesw/customer/server/Application.java'
 
     grcp_auth_folder = 'io/reactivesw/customerauthentication/grpc/'
     grpc_auth_folder_all = grcp_auth_folder + '*'

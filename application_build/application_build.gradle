@@ -6,30 +6,33 @@
 apply plugin: 'spring-boot'
 
 dependencies {
-  // spring mvc, thymeleaf, and layout dialect
-  compile("org.springframework.boot:spring-boot-starter-web")
+    // spring mvc, thymeleaf, and layout dialect
+    compile("org.springframework.boot:spring-boot-starter-web")
 
-  compile("io.springfox:springfox-swagger2:2.6.1")
-  compile("io.springfox:springfox-swagger-ui:2.6.1")
+    compile("io.springfox:springfox-swagger2:2.6.1")
+    compile("io.springfox:springfox-swagger-ui:2.6.1")
 
-  //for redis
-  compile('org.springframework.boot:spring-boot-starter-redis')
+    //spring data jpa
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
 
-  //cglib for Spock
-  compile('cglib:cglib-nodep:3.1')
+    //mysql driver
+    compile('mysql:mysql-connector-java:5.1.26')
 
-  // model mapper for data
-  compile ('org.modelmapper:modelmapper:0.7.6')
+    //cglib for Spock
+    compile('cglib:cglib-nodep:3.1')
 
-  //spring boot test
-  testCompile('org.springframework.boot:spring-boot-starter-test:1.4.0.RELEASE')
+    // model mapper for data
+    compile('org.modelmapper:modelmapper:0.7.6')
 
-  //groovy for spock
-  testCompile('org.codehaus.groovy:groovy-all:2.3.10')
+    //spring boot test
+    testCompile('org.springframework.boot:spring-boot-starter-test:1.4.0.RELEASE')
 
-  //spock core
-  testCompile('org.spockframework:spock-core:1.0-groovy-2.3')
+    //groovy for spock
+    testCompile('org.codehaus.groovy:groovy-all:2.3.10')
 
-  //spock spring
-  testCompile('org.spockframework:spock-spring:1.0-groovy-2.3')
+    //spock core
+    testCompile('org.spockframework:spock-core:1.0-groovy-2.3')
+
+    //spock spring
+    testCompile('org.spockframework:spock-spring:1.0-groovy-2.3')
 }
