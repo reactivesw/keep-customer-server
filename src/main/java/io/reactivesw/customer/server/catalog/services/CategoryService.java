@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,8 +90,37 @@ public class CategoryService {
   public void deleteCategoryById(int id) {
     //TODO 返回结果问题,ID不存在问题
     LOG.debug("enter deleteCategoryById, id is {}", id);
-    categoryRepository.delete(id);
+    List<Integer> ids = new ArrayList<>();
+    ids.add(id);
+    deleteCategoryByIds(ids);
+    //TODO update cache or send a message
     LOG.debug("end deleteCategoryById, id is {}", id);
+  }
+
+
+  /**
+   * Delete category by ids.
+   *
+   * @param ids the ids
+   */
+  @Transactional
+  private void deleteCategoryByIds(List<Integer> ids){
+    //1. find all category
+    List<CategoryEntity> categoryEntities = categoryRepository.findAll(ids);
+    //2. delete all category
+    categoryRepository.delete(categoryEntities);
+    //TODO send a message
+    //3. query subCategory by ids
+    List<CategoryEntity> subCategoryEntities = categoryRepository.queryIdByParentId(ids);
+
+    if (subCategoryEntities != null && !subCategoryEntities.isEmpty()) {
+      //get all ids
+      List<Integer> subCategoryIds = new ArrayList<>();
+      for(CategoryEntity category : subCategoryEntities){
+        subCategoryIds.add(category.getId());
+      }
+      deleteCategoryByIds(subCategoryIds);
+    }
   }
 
   /**
