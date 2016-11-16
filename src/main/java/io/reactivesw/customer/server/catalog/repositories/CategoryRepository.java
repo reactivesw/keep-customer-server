@@ -11,12 +11,12 @@ import java.util.List;
  */
 public interface CategoryRepository extends JpaRepository<CategoryEntity, Integer> {
   /**
-   * Query id by parent id list.
+   * Query id list by parent id list.
    *
-   * @param parentIds the parent ids
+   * @param id the id
    * @return the list
    */
-  @Query("select c from CategoryEntity c where c.parentId in ?1")
-  List<CategoryEntity> queryIdByParentId(List<Integer> parentIds);
+  @Query("select c.id from CategoryEntity c where c.parentId in ?1")
+  List<Integer> queryIdListByParentId(List<Integer> id);
 }
 

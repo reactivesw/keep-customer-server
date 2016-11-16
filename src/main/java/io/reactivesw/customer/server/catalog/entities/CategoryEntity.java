@@ -21,7 +21,7 @@ public class CategoryEntity {
    */
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private int id;
+  private Integer id;
 
   /**
    * The Name.
@@ -39,7 +39,7 @@ public class CategoryEntity {
    * The Sub categories.
    */
   @Column(name = "parent_id")
-  private int parentId;
+  private Integer parentId;
 
   /**
    * Instantiates a new Category entity.
@@ -66,7 +66,7 @@ public class CategoryEntity {
    * @param description the description
    * @param parentId    the parent id
    */
-  public CategoryEntity(String name, String description, int parentId) {
+  public CategoryEntity(String name, String description, Integer parentId) {
 
     this.name = name;
     this.description = description;
@@ -78,7 +78,7 @@ public class CategoryEntity {
    *
    * @return the id
    */
-  public int getId() {
+  public Integer getId() {
     return id;
   }
 
@@ -87,7 +87,7 @@ public class CategoryEntity {
    *
    * @param id the id
    */
-  public void setId(int id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
@@ -132,7 +132,7 @@ public class CategoryEntity {
    *
    * @return the parent id
    */
-  public int getParentId() {
+  public Integer getParentId() {
     return parentId;
   }
 
@@ -141,7 +141,7 @@ public class CategoryEntity {
    *
    * @param parentId the parent id
    */
-  public void setParentId(int parentId) {
+  public void setParentId(Integer parentId) {
     this.parentId = parentId;
   }
 

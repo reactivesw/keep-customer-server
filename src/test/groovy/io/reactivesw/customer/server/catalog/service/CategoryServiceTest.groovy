@@ -44,15 +44,60 @@ class CategoryServiceTest extends Specification {
         savedCategory != null
     }
 
-    def "test 3 : delete category by id"() {
+    def "test 3 : delete category by id and subCategory is null"() {
         given:
         def id = 1
+        def c = new CategoryEntity(id: id, name: "name", description: "description", parentId: 0)
+        categories.add(c)
+        categoryRepository.findAll(_) >> categories
+        categoryRepository.queryIdListByParentId(_) >> null
 
         when:
         categoryService.deleteCategoryById(id)
 
         then:
         true
+    }
+
+    def "test 3.1 : delete category and find null category"() {
+        given:
+        def id = 1
+        categoryRepository.findAll(_) >> null
+
+        when:
+        categoryService.deleteCategoryById(id)
+
+        then:
+        true
+    }
+
+    def "test 3.2 : delete category and find empty category"() {
+        given:
+        def id = 1
+        categoryRepository.findAll(_) >> new ArrayList<CategoryEntity>()
+
+        when:
+        categoryService.deleteCategoryById(id)
+
+        then:
+        true
+    }
+
+    def "test 3.3 : delete category and subCategory"() {
+        given:
+        def id = 1
+        def c = new CategoryEntity(id: id, name: "name", description: "description", parentId: 0)
+        def subCategoryIds = new ArrayList<Integer>()
+        subCategoryIds.add(2)
+        categories.add(c)
+        categoryRepository.findAll(_) >> categories
+        categoryRepository.queryIdListByParentId(_) >> subCategoryIds
+
+        when:
+        categoryService.deleteCategoryById(id)
+
+        then:
+        thrown(StackOverflowError)
     }
 
     def "test 4 : find category by id"() {
@@ -82,6 +127,17 @@ class CategoryServiceTest extends Specification {
     def "test 6 : find all categories"() {
         given:
         categoryRepository.findAll() >> categories
+
+        when:
+        def result = categoryService.findAllCategories()
+
+        then:
+        result != null
+    }
+
+    def "test 6.1 : find all categories and get null categories"() {
+        given:
+        categoryRepository.findAll() >> null
 
         when:
         def result = categoryService.findAllCategories()
