@@ -16,4 +16,5 @@ public class TaxedItemPrice {
   @ApiModelProperty(required = true)
   private Money totalGross;
 
+
 }
