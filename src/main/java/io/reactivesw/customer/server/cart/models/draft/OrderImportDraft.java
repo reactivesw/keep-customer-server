@@ -2,9 +2,9 @@ package io.reactivesw.customer.server.cart.models.draft;
 
 import io.reactivesw.customer.server.cart.enums.InventoryMode;
 import io.reactivesw.customer.server.cart.models.CustomLineItem;
-import io.reactivesw.customer.server.cart.models.OrderState;
-import io.reactivesw.customer.server.cart.models.PaymentState;
-import io.reactivesw.customer.server.cart.models.ShipmentState;
+import io.reactivesw.customer.server.cart.enums.OrderState;
+import io.reactivesw.customer.server.cart.enums.PaymentState;
+import io.reactivesw.customer.server.cart.enums.ShipmentState;
 import io.reactivesw.customer.server.cart.models.ShippingInfo;
 import io.reactivesw.customer.server.cart.models.TaxedPrice;
 import io.reactivesw.customer.server.common.types.Address;
