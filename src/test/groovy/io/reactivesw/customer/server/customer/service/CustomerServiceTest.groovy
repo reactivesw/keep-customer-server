@@ -3,7 +3,7 @@ package io.reactivesw.customer.server.customer.service
 
 import spock.lang.Specification
 
-import io.reactivesw.customer.server.customer.models.MyCustomerDraft
+import io.reactivesw.customer.server.customer.models.draft.MyCustomerDraft
 
 /**
  * Created by BruceLiu on 16/11/16.

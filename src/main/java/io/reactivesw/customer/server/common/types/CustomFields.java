@@ -1,4 +1,4 @@
-package io.reactivesw.customer.server.customer.models;
+package io.reactivesw.customer.server.common.types;
 
 import io.reactivesw.customer.server.common.types.Reference;
 

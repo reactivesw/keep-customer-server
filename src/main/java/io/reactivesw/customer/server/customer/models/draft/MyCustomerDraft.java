@@ -1,10 +1,10 @@
-package io.reactivesw.customer.server.customer.models;
+package io.reactivesw.customer.server.customer.models.draft;
 
 import java.time.ZonedDateTime;
-import java.util.Date;
 import java.util.List;
 
 import io.reactivesw.customer.server.common.types.Address;
+import io.reactivesw.customer.server.common.types.draft.CustomFieldsDraft;
 
 /**
  * Created by BruceLiu on 16/11/16.
