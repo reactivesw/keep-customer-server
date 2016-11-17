@@ -32,6 +32,9 @@ dependencies {
     compile('org.modelmapper:modelmapper:0.7.6')
     compile('com.google.code.gson:gson:2.8.0')
 
+    //for zoneddatetime
+    compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.8.5')
+
     //spring boot test
     testCompile('org.springframework.boot:spring-boot-starter-test:1.4.0.RELEASE')
 
