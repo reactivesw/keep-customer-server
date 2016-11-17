@@ -2,6 +2,7 @@ package io.reactivesw.customer.server.catalog.models.draft;
 
 import io.reactivesw.customer.server.common.types.LocalizedString;
 import io.reactivesw.customer.server.common.types.Reference;
+import io.reactivesw.customer.server.common.types.draft.CustomFieldsDraft;
 
 /**
  * Created by Davis on 16/11/17.
