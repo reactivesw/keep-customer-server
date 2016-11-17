@@ -8,8 +8,6 @@ import java.util.Set;
 /**
  * Created by Davis on 16/11/16.
  */
-//@Entity
-//@Table(name = "sw_product_type")
 public class ProductType {
   /**
    * The Id.
