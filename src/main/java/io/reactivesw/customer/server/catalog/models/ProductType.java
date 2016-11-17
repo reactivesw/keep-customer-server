@@ -1,7 +1,7 @@
-package io.reactivesw.customer.server.catalog.entities;
+package io.reactivesw.customer.server.catalog.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import io.reactivesw.customer.server.catalog.models.AttributeDefinition;
+
 import java.time.ZonedDateTime;
 import java.util.Set;
 

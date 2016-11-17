@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import io.reactivesw.customer.server.common.types.Address;
+import io.reactivesw.customer.server.common.types.CustomFields;
 import io.reactivesw.customer.server.common.types.Reference;
 import io.swagger.annotations.ApiModel;
 
