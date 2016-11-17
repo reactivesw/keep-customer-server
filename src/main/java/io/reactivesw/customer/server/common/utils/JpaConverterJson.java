@@ -17,9 +17,9 @@ public class JpaConverterJson implements AttributeConverter<LocalizedString, Str
   @Override
   public String convertToDatabaseColumn(LocalizedString meta) {
     try {
-      return objectMapper.writeValueAsString(meta.getLocalized());
-//      return objectMapper.writeValueAsString(meta);
-//      return "{aaaaaaa:sss}";
+//      return objectMapper.writeValueAsString(meta.getLocalized());
+      return objectMapper.writeValueAsString(meta);
+
     } catch (Exception ex) {
       return null;
       // or throw an error

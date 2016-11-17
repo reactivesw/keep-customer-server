@@ -42,9 +42,10 @@ public class AuthFilter implements Filter {
 
   /**
    * auth filter.
-   * @param request ServletRequest
+   *
+   * @param request  ServletRequest
    * @param response ServletResponse
-   * @param next FilterChain
+   * @param next     FilterChain
    */
   @Override
   public void doFilter(ServletRequest request, ServletResponse response,
@@ -61,6 +62,7 @@ public class AuthFilter implements Filter {
 
   /**
    * check auth function.
+   *
    * @param request HttpServletRequest
    */
   private void checkCallAuthorization(HttpServletRequest request) {

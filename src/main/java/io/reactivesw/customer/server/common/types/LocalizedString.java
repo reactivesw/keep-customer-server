@@ -21,13 +21,12 @@ public class LocalizedString {
   /**
    * The Localized.
    */
-  @JsonUnwrapped
   private Map<String, String> localized;
 
   /**
    * private contructor.
    */
-  private LocalizedString() {
+  public LocalizedString() {
     if (localized == null) {
       localized = new HashMap<>();
     }

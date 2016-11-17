@@ -52,10 +52,11 @@ public class ExceptionHandler implements HandlerExceptionResolver {
 
   /**
    * set status to http response .
-   * @param request HttpServletRequest
+   *
+   * @param request  HttpServletRequest
    * @param response HttpServletResponse
-   * @param obj Object
-   * @param ex Exception
+   * @param obj      Object
+   * @param ex       Exception
    * @return Throwable
    */
   public static Throwable setResponse(HttpServletRequest request, HttpServletResponse response,
@@ -100,13 +101,14 @@ public class ExceptionHandler implements HandlerExceptionResolver {
    * <p>The returned {@code ModelAndView} may be {@linkplain ModelAndView#isEmpty() empty}
    * to indicate that the exception has been resolved successfully but that no view
    * should be rendered, for instance by setting a status code.
-   * @param request current HTTP request
+   *
+   * @param request  current HTTP request
    * @param response current HTTP response
-   * @param obj the executed handler, or {@code null} if none chosen at the
-   * time of the exception (for example, if multipart resolution failed)
-   * @param ex the exception that got thrown during handler execution
-   * @return a corresponding {@code ModelAndView} to forward to, or {@code null}
-   * for default processing
+   * @param obj      the executed handler, or {@code null} if none chosen at the time of the
+   *                 exception (for example, if multipart resolution failed)
+   * @param ex       the exception that got thrown during handler execution
+   * @return a corresponding {@code ModelAndView} to forward to, or {@code null} for default
+   * processing
    */
   @Override
   public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response,
