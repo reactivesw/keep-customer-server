@@ -144,7 +144,7 @@ public class Order {
   private ShippingInfo shippingInfo;
 
   /**
-   * Set of SyncInfo.
+   * Set of ReturnItem.
    */
   private Set<SyncInfo> syncInfo;
 
