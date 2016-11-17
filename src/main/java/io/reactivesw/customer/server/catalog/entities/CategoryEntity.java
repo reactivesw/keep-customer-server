@@ -1,11 +1,15 @@
 package io.reactivesw.customer.server.catalog.entities;
 
+import io.reactivesw.customer.server.common.utils.JpaConverterJson;
+import io.reactivesw.customer.server.common.types.LocalizedString;
+import org.hibernate.annotations.GenericGenerator;
+
 import java.util.Objects;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -20,8 +24,10 @@ public class CategoryEntity {
    * The Id.
    */
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private Integer id;
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  @Column(name = "uuid", unique = true)
+  private String id;
 
   /**
    * The Name.
@@ -39,7 +45,12 @@ public class CategoryEntity {
    * The Sub categories.
    */
   @Column(name = "parent_id")
-  private Integer parentId;
+  private String parentId;
+
+  @Column(name = "meta_title")
+  @Convert(converter = JpaConverterJson.class)
+  private LocalizedString metaTitle;
+
 
   /**
    * Instantiates a new Category entity.
@@ -66,7 +77,7 @@ public class CategoryEntity {
    * @param description the description
    * @param parentId    the parent id
    */
-  public CategoryEntity(String name, String description, Integer parentId) {
+  public CategoryEntity(String name, String description, String parentId) {
 
     this.name = name;
     this.description = description;
@@ -78,7 +89,7 @@ public class CategoryEntity {
    *
    * @return the id
    */
-  public Integer getId() {
+  public String getId() {
     return id;
   }
 
@@ -87,7 +98,7 @@ public class CategoryEntity {
    *
    * @param id the id
    */
-  public void setId(Integer id) {
+  public void setId(String id) {
     this.id = id;
   }
 
@@ -132,7 +143,7 @@ public class CategoryEntity {
    *
    * @return the parent id
    */
-  public Integer getParentId() {
+  public String getParentId() {
     return parentId;
   }
 
@@ -141,8 +152,26 @@ public class CategoryEntity {
    *
    * @param parentId the parent id
    */
-  public void setParentId(Integer parentId) {
+  public void setParentId(String parentId) {
     this.parentId = parentId;
+  }
+
+  /**
+   * Gets meta title.
+   *
+   * @return the meta title
+   */
+  public LocalizedString getMetaTitle() {
+    return metaTitle;
+  }
+
+  /**
+   * Sets meta title.
+   *
+   * @param metaTitle the meta title
+   */
+  public void setMetaTitle(LocalizedString metaTitle) {
+    this.metaTitle = metaTitle;
   }
 
   /**

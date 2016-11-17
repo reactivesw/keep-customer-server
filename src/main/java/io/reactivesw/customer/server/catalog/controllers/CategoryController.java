@@ -65,7 +65,7 @@ public class CategoryController {
   public Category getCategoryById(@PathVariable(value = CATEGORY_ID)
                                   @ApiParam(name = CATEGORY_ID,
                                       value = "id for category", required = true)
-                                  @NotNull int id) {
+                                  @NotNull String id) {
     LOG.debug("enter getCategoryById, id is {}", id);
     Category category = categoryService.findCategoryById(id);
     LOG.debug("end getCategoryById, get {}", category.toString());
@@ -97,7 +97,7 @@ public class CategoryController {
   public void deleteCategory(@PathVariable(value = CATEGORY_ID)
                              @ApiParam(name = CATEGORY_ID,
                                  value = "id for category", required = true)
-                             @NotNull int id) {
+                             @NotNull String id) {
     LOG.debug("enter deleteCategory, id is {}", id);
     categoryService.deleteCategoryById(id);
     LOG.debug("end deleteCategory");
@@ -115,7 +115,7 @@ public class CategoryController {
   public Category updateCategory(@PathVariable(value = CATEGORY_ID)
                                  @ApiParam(name = CATEGORY_ID,
                                      value = "id for category", required = true)
-                                 @NotNull int id,
+                                 @NotNull String id,
                                  @RequestBody Category category) {
     LOG.debug("enter updateCategory, id is {}, need to update Category is {}", id, category);
     Category updatedCategory = categoryService.updateCategory(id, category);

@@ -18,6 +18,9 @@ dependencies {
     //mysql driver
     compile('mysql:mysql-connector-java:5.1.26')
 
+    //commons-lang
+    compile('org.apache.commons:commons-lang3:3.4')
+
     //cglib for Spock
     compile('cglib:cglib-nodep:3.1')
 

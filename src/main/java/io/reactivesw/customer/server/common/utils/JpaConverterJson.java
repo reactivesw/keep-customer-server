@@ -18,8 +18,6 @@ public class JpaConverterJson implements AttributeConverter<LocalizedString, Str
   public String convertToDatabaseColumn(LocalizedString meta) {
     try {
       return objectMapper.writeValueAsString(meta.getLocalized());
-//      return objectMapper.writeValueAsString(meta);
-//      return "{aaaaaaa:sss}";
     } catch (Exception ex) {
       return null;
       // or throw an error
@@ -33,9 +31,7 @@ public class JpaConverterJson implements AttributeConverter<LocalizedString, Str
       Map<String, String> localized = objectMapper.readValue(dbData, Map.class);
       localizedString.setLocalized(localized);
       return localizedString;
-//      return objectMapper.readValue(dbData, Object.class);
     } catch (IOException ex) {
-      // logger.error("Unexpected IOEx decoding json from database: " + dbData);
       return null;
     }
   }

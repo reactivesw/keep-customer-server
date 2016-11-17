@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by rai on 16/11/13.
  */
-public interface CategoryRepository extends JpaRepository<CategoryEntity, Integer> {
+public interface CategoryRepository extends JpaRepository<CategoryEntity, String> {
   /**
    * Query id list by parent id list.
    *
@@ -17,6 +17,6 @@ public interface CategoryRepository extends JpaRepository<CategoryEntity, Intege
    * @return the list
    */
   @Query("select c.id from CategoryEntity c where c.parentId in ?1")
-  List<Integer> queryIdListByParentId(List<Integer> id);
+  List<String> queryIdListByParentId(List<String> id);
 }
 

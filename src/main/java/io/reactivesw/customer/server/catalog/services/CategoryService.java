@@ -4,6 +4,7 @@ import io.reactivesw.customer.server.catalog.entities.CategoryEntity;
 import io.reactivesw.customer.server.catalog.models.Category;
 import io.reactivesw.customer.server.catalog.models.mapper.CategoryMapper;
 import io.reactivesw.customer.server.catalog.repositories.CategoryRepository;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class CategoryService {
     LOG.debug("enter saveCategory");
     String name = category.getName();
     String description = category.getName();
-    int parentId = category.getParentId() == null ? -1 : category.getParentId();
+    String parentId = StringUtils.isBlank(category.getParentId()) ? "" : category.getParentId();
     CategoryEntity categoryEntity = new CategoryEntity(name, description, parentId);
     categoryEntity = categoryRepository.save(categoryEntity);
     Category savedCategory = CategoryMapper.createModel(categoryEntity);
@@ -56,7 +57,7 @@ public class CategoryService {
    * @param id the id
    * @return the category
    */
-  public Category findCategoryById(int id) {
+  public Category findCategoryById(String id) {
     LOG.debug("enter findCategoryById, id is {}", id);
     Category category = new Category();
     CategoryEntity categoryEntity = categoryRepository.findOne(id);
@@ -88,9 +89,9 @@ public class CategoryService {
    *
    * @param id the id
    */
-  public void deleteCategoryById(int id) {
+  public void deleteCategoryById(String id) {
     LOG.debug("enter deleteCategoryById, id is {}", id);
-    List<Integer> ids = new ArrayList<>();
+    List<String> ids = new ArrayList<>();
     ids.add(id);
     deleteCategoryByIds(ids);
     //TODO update cache or send a message
@@ -104,7 +105,7 @@ public class CategoryService {
    * @param ids the ids
    */
   @Transactional
-  private void deleteCategoryByIds(List<Integer> ids) {
+  private void deleteCategoryByIds(List<String> ids) {
     LOG.debug("enter deleteCategoryByIds, need to delete {} categories", ids.size());
     //1. find all category
     List<CategoryEntity> categoryEntities = categoryRepository.findAll(ids);
@@ -113,7 +114,7 @@ public class CategoryService {
       categoryRepository.deleteInBatch(categoryEntities);
       //TODO send a message
       //3. query subCategoryIds by parentids
-      List<Integer> subCategoryIds = categoryRepository.queryIdListByParentId(ids);
+      List<String> subCategoryIds = categoryRepository.queryIdListByParentId(ids);
       //delete subCategory
       if (subCategoryIds != null && !subCategoryIds.isEmpty()) {
         deleteCategoryByIds(subCategoryIds);
@@ -129,7 +130,7 @@ public class CategoryService {
    * @param category the category
    * @return the updated category
    */
-  public Category updateCategory(int id, Category category) {
+  public Category updateCategory(String id, Category category) {
     //TODO 需要判断id是否存在, 和parentId与id重复的情况吗?
     LOG.debug("enter updateCategory, id is {}, need to update Category is {}", id, category);
     CategoryEntity categoryEntity = categoryRepository.findOne(id);

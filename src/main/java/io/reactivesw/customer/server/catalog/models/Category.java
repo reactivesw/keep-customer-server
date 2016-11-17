@@ -1,5 +1,10 @@
 package io.reactivesw.customer.server.catalog.models;
 
+import io.reactivesw.customer.server.common.utils.JpaConverterJson;
+import io.reactivesw.customer.server.common.types.LocalizedString;
+
+import javax.persistence.Convert;
+
 /**
  * category model.
  * Created by Davis on 16/11/14.
@@ -8,7 +13,7 @@ public class Category {
   /**
    * The Id.
    */
-  private Integer id;
+  private String id;
   /**
    * The Name.
    */
@@ -20,14 +25,20 @@ public class Category {
   /**
    * The Parent id.
    */
-  private Integer parentId;
+  private String parentId;
+
+  /**
+   * The Meta title.
+   */
+  @Convert(converter = JpaConverterJson.class)
+  private LocalizedString metaTitle;
 
   /**
    * Gets id.
    *
    * @return the id
    */
-  public Integer getId() {
+  public String getId() {
     return id;
   }
 
@@ -36,7 +47,7 @@ public class Category {
    *
    * @param id the id
    */
-  public void setId(Integer id) {
+  public void setId(String id) {
     this.id = id;
   }
 
@@ -81,7 +92,7 @@ public class Category {
    *
    * @return the parent id
    */
-  public Integer getParentId() {
+  public String getParentId() {
     return parentId;
   }
 
@@ -90,8 +101,26 @@ public class Category {
    *
    * @param parentId the parent id
    */
-  public void setParentId(Integer parentId) {
+  public void setParentId(String parentId) {
     this.parentId = parentId;
+  }
+
+  /**
+   * Gets meta title.
+   *
+   * @return the meta title
+   */
+  public LocalizedString getMetaTitle() {
+    return metaTitle;
+  }
+
+  /**
+   * Sets meta title.
+   *
+   * @param metaTitle the meta title
+   */
+  public void setMetaTitle(LocalizedString metaTitle) {
+    this.metaTitle = metaTitle;
   }
 
   /**
