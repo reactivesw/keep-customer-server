@@ -2,7 +2,7 @@ package io.reactivesw.customer.server.catalog.models;
 
 import io.reactivesw.customer.server.common.types.LocalizedString;
 import io.reactivesw.customer.server.common.types.Reference;
-import io.reactivesw.customer.server.common.types.SearchKeyword;
+import io.reactivesw.customer.server.common.types.SearchKeywords;
 
 import java.util.List;
 
@@ -68,7 +68,7 @@ public class ProductData {
   /**
    * search keyword.
    */
-  private SearchKeyword searchKeywords;
+  private SearchKeywords searchKeywords;
 
   /**
    * Gets name.
@@ -255,7 +255,7 @@ public class ProductData {
    *
    * @return the search keywords
    */
-  public SearchKeyword getSearchKeywords() {
+  public SearchKeywords getSearchKeywords() {
     return searchKeywords;
   }
 
@@ -264,7 +264,7 @@ public class ProductData {
    *
    * @param searchKeywords the search keywords
    */
-  public void setSearchKeywords(SearchKeyword searchKeywords) {
+  public void setSearchKeywords(SearchKeywords searchKeywords) {
     this.searchKeywords = searchKeywords;
   }
 

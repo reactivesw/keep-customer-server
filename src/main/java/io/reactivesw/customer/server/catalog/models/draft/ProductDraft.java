@@ -3,7 +3,7 @@ package io.reactivesw.customer.server.catalog.models.draft;
 import io.reactivesw.customer.server.common.types.LocalizedString;
 import io.reactivesw.customer.server.common.types.Reference;
 import io.reactivesw.customer.server.common.types.ResourceIdentifier;
-import io.reactivesw.customer.server.common.types.SearchKeyword;
+import io.reactivesw.customer.server.common.types.SearchKeywords;
 
 import java.util.List;
 
@@ -91,7 +91,7 @@ public class ProductDraft {
   /**
    * The Search keywords.
    */
-  private SearchKeyword searchKeywords;
+  private SearchKeywords searchKeywords;
 
   /**
    * Reference to an initial State.
@@ -344,7 +344,7 @@ public class ProductDraft {
    *
    * @return the search keywords
    */
-  public SearchKeyword getSearchKeywords() {
+  public SearchKeywords getSearchKeywords() {
     return searchKeywords;
   }
 
@@ -353,7 +353,7 @@ public class ProductDraft {
    *
    * @param searchKeywords the search keywords
    */
-  public void setSearchKeywords(SearchKeyword searchKeywords) {
+  public void setSearchKeywords(SearchKeywords searchKeywords) {
     this.searchKeywords = searchKeywords;
   }
 
