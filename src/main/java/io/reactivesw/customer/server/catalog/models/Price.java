@@ -2,9 +2,9 @@ package io.reactivesw.customer.server.catalog.models;
 
 import java.time.ZonedDateTime;
 
+import io.reactivesw.customer.server.common.types.CustomFields;
 import io.reactivesw.customer.server.common.types.Money;
 import io.reactivesw.customer.server.common.types.Reference;
-import io.reactivesw.customer.server.customer.models.CustomFields;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
