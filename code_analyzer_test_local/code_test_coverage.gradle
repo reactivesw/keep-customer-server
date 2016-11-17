@@ -12,7 +12,7 @@ apply from: 'code_analyzer_test/test_coverage_config.gradle'
 test {
     //  exclude 'io/reactivesw/customerweb/customerauthentication/controllers/*'
     exclude '**/*IT*'
-    exclude 'io/reactivesw/customerweb/ApplicatinoStarterTest.class'
+    exclude 'io/reactivesw/customer/server/ApplicatinoStarterTest.class'
 }
 
 // config of coverage check
@@ -35,11 +35,13 @@ jacocoTestReport {
         classDirectories = files(classDirectories.files.collect {
             fileTree(dir: it, exclude: [
                     'io/reactivesw/customer/server/App*',
-                    'io/reactivesw/customer/server/catalog/entities/*',
-                    'io/reactivesw/customer/server/catalog/controllers/*',
-                    'io/reactivesw/customer/server/catalog/models/*',
-                    'io/reactivesw/customer/server/catalog/repositories/*',
-                    'io/reactivesw/customer/server/routes/*'
+                    '**/entities/**',
+                    '**/controllers/**',
+                    '**/models/**',
+                    '**/repositories/**',
+                    '**/exceptions/**',
+                    '**/enums/**',
+                    '**/routes/**'
             ])
         })
     }

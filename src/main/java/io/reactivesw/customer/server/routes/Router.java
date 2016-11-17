@@ -1,33 +1,45 @@
 package io.reactivesw.customer.server.routes;
 
 /**
- * Created by bruceliu on 16/11/14.
+ * router.
+ * Created by BruceLiu on 16/11/14.
  */
 public class Router {
-  /**
-   * test api.
-   */
-  public static final String TEST_API = "/test";
+
+  /*************** Customer. *****************/
   /**
    * customer id.
    */
   public static final String CUSTOMER_ID = "customerId";
 
   /**
-   * for customer apis.
+   * create customer, sign up.
+   */
+  public static final String CUSTOMER_CREATE = "/customers/";
+
+  /**
+   * get customer by id.
    */
   public static final String CUSTOMER_GET_BY_ID = "/customers/{" + CUSTOMER_ID + "}";
 
+  /*************** End Of Customer. *****************/
+
+  /*************** Category. *****************/
   /**
    * for category.
    */
   public static final String CATEGORY_ALL = "/categories";
+
   /**
    * categoryId.
    */
   public static final String CATEGORY_ID = "categoryId";
+
   /**
    * category url with id.
    */
   public static final String CATEGORY_GET_BY_ID = CATEGORY_ALL + "/{" + CATEGORY_ID + "}";
+
+  /*************** End Of Category. *****************/
+
 }
