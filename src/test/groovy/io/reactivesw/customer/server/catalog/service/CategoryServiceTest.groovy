@@ -2,8 +2,7 @@ package io.reactivesw.customer.server.catalog.service
 
 import io.reactivesw.customer.server.catalog.entities.CategoryEntity
 import io.reactivesw.customer.server.catalog.models.Category
-import io.reactivesw.customer.server.catalog.repositories.CategoryRepository
-import io.reactivesw.customer.server.catalog.services.CategoryService
+
 import spock.lang.Specification
 
 /**

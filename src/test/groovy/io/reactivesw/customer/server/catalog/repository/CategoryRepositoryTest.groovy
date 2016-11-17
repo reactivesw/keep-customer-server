@@ -2,7 +2,7 @@ package io.reactivesw.customer.server.catalog.repository
 
 import io.reactivesw.customer.server.Application
 import io.reactivesw.customer.server.catalog.entities.CategoryEntity
-import io.reactivesw.customer.server.catalog.repositories.CategoryRepository
+
 import io.reactivesw.customer.server.common.types.LocalizedString
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootContextLoader
