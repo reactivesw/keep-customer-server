@@ -1,10 +1,9 @@
 package io.reactivesw.customer.server.common.types;
 
-import java.util.List;
-
-import io.reactivesw.customer.server.customer.models.CustomFields;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.util.List;
 
 /**
  * Created by umasuo on 16/11/17.
