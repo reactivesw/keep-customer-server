@@ -3,7 +3,7 @@ package io.reactivesw.customer.server.common.types;
 /**
  * Created by Davis on 16/11/17.
  */
-public class SearchKeywords {
+public class SearchKeyword {
   /**
    * Text to return in the result of a suggest query.
    */
@@ -56,7 +56,7 @@ public class SearchKeywords {
    */
   @Override
   public String toString() {
-    return "SearchKeywords{" +
+    return "SearchKeyword{" +
         "text='" + text + '\'' +
         ", suggestTokenizer=" + suggestTokenizer +
         '}';

@@ -1,5 +1,7 @@
 package io.reactivesw.customer.server.catalog.models.draft;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import io.reactivesw.customer.server.common.types.Money;
 import io.reactivesw.customer.server.common.types.Reference;
 import io.reactivesw.customer.server.common.types.draft.CustomFieldsDraft;
@@ -34,11 +36,13 @@ public class PriceDraft {
   /**
    * Date from which the price is valid.
    */
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime validFrom;
 
   /**
    * Date until which the price is valid.
    */
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime validUntil;
 
   /**

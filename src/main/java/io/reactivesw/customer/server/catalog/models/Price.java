@@ -1,5 +1,7 @@
 package io.reactivesw.customer.server.catalog.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.ZonedDateTime;
 
 import io.reactivesw.customer.server.common.types.CustomFields;
@@ -33,9 +35,11 @@ public class Price {
   private Reference channel;
 
   @ApiModelProperty(value = "Date from which the price is valid.",required = false)
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime validFrom;
 
   @ApiModelProperty(value = "Date until which the price is valid.", required = false)
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime validUntil;
 
   @ApiModelProperty(value = "Set if a matching ProductDiscount exists. " +

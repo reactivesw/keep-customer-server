@@ -1,17 +1,28 @@
 package io.reactivesw.customer.server.catalog.models.draft;
 
-import io.reactivesw.customer.server.catalog.models.AttributeConstraint;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.validation.constraints.NotNull;
+
+import io.reactivesw.customer.server.catalog.enums.AttributeConstraint;
+import io.reactivesw.customer.server.catalog.enums.TextInputHint;
 import io.reactivesw.customer.server.catalog.models.AttributeType;
 import io.reactivesw.customer.server.common.types.LocalizedString;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Created by Davis on 16/11/17.
  */
+@ApiModel
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class AttributeDefinitionDraft {
 
   /**
    * Describes the type of the attribute.
    */
+  @ApiModelProperty(required = true)
+  @NotNull
   private AttributeType type;
 
   /**
@@ -23,22 +34,30 @@ public class AttributeDefinitionDraft {
    * The important constraint is: all fields of the AttributeDefinition
    * need to be the same across all attributes with the same name.
    */
+  @ApiModelProperty(required = true)
+  @NotNull
   private String name;
 
   /**
    * A human-readable label for the attribute.
    */
+  @ApiModelProperty(required = true)
+  @NotNull
   private LocalizedString label;
 
   /**
    * Whether the attribute is required to have a value.
    */
+  @ApiModelProperty(required = true)
+  @NotNull
   private Boolean isRequired;
 
   /**
    * Describes how an attribute or a set of attributes
    * should be validated across all variants of a product.
    */
+  @ApiModelProperty(required = true)
+  @NotNull
   private AttributeConstraint attributeConstraint;
 
   /**
@@ -46,7 +65,9 @@ public class AttributeDefinitionDraft {
    * only relevant for text-based attribute types like TextType and LocalizableTextType.
    */
   //TODO String should be TextInputHint
-  private String inputHint;
+  @ApiModelProperty(required = true)
+  @NotNull
+  private TextInputHint inputHint;
 
   /**
    * Whether the attribute’s values should generally be enabled in product search. This
@@ -55,6 +76,8 @@ public class AttributeDefinitionDraft {
    * queries. The exact features that are enabled/disabled with this flag depend on the concrete
    * attribute type and are described there.
    */
+  @ApiModelProperty(required = true)
+  @NotNull
   private Boolean isSearchable;
 
   /**
@@ -152,7 +175,7 @@ public class AttributeDefinitionDraft {
    *
    * @return the input hint
    */
-  public String getInputHint() {
+  public TextInputHint getInputHint() {
     return inputHint;
   }
 
@@ -161,7 +184,7 @@ public class AttributeDefinitionDraft {
    *
    * @param inputHint the input hint
    */
-  public void setInputHint(String inputHint) {
+  public void setInputHint(TextInputHint inputHint) {
     this.inputHint = inputHint;
   }
 
@@ -185,18 +208,19 @@ public class AttributeDefinitionDraft {
 
   /**
    * toString method.
+   *
    * @return String
    */
   @Override
   public String toString() {
     return "AttributeDefinitionDraft{" +
-        "type=" + type +
-        ", name='" + name + '\'' +
-        ", label=" + label +
-        ", isRequired=" + isRequired +
-        ", attributeConstraint=" + attributeConstraint +
-        ", inputHint='" + inputHint + '\'' +
-        ", isSearchable=" + isSearchable +
-        '}';
+            "type=" + type +
+            ", name='" + name + '\'' +
+            ", label=" + label +
+            ", isRequired=" + isRequired +
+            ", attributeConstraint=" + attributeConstraint +
+            ", inputHint='" + inputHint + '\'' +
+            ", isSearchable=" + isSearchable +
+            '}';
   }
 }

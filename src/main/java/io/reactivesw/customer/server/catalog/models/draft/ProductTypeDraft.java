@@ -1,26 +1,40 @@
 package io.reactivesw.customer.server.catalog.models.draft;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Created by Davis on 16/11/17.
  */
+@ApiModel
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductTypeDraft {
   /**
    * The Name.
    */
+  @ApiModelProperty(required = true)
   private String name;
+
   /**
    * The Key.
    */
+  @ApiModelProperty(required = false)
   private String key;
+
   /**
    * The Description.
    */
+  @ApiModelProperty(required = true)
   private String description;
+
   /**
    * The Attributes.
    */
+  @ApiModelProperty(required = false)
   private List<AttributeDefinitionDraft> attributes;
 
   /**
@@ -98,10 +112,10 @@ public class ProductTypeDraft {
   @Override
   public String toString() {
     return "ProductTypeDraft{" +
-        "name='" + name + '\'' +
-        ", key='" + key + '\'' +
-        ", description='" + description + '\'' +
-        ", attributes=" + attributes +
-        '}';
+            "name='" + name + '\'' +
+            ", key='" + key + '\'' +
+            ", description='" + description + '\'' +
+            ", attributes=" + attributes +
+            '}';
   }
 }

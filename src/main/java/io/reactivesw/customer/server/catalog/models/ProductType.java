@@ -1,6 +1,11 @@
 package io.reactivesw.customer.server.catalog.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import io.reactivesw.customer.server.catalog.models.AttributeDefinition;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.time.ZonedDateTime;
 import java.util.Set;
@@ -8,35 +13,54 @@ import java.util.Set;
 /**
  * Created by Davis on 16/11/16.
  */
+@ApiModel
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductType {
+
   /**
    * The Id.
    */
+  @ApiModelProperty(required = true)
   private String id;
+
   /**
    * The Version.
    */
+  @ApiModelProperty(required = true)
   private Integer version;
+
   /**
    * The Created at.
    */
+  @ApiModelProperty(required = true)
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime createdAt;
+
   /**
    * The Last modified at.
    */
+  @ApiModelProperty(required = true)
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime lastModifiedAt;
+
   /**
    * The Key.
    */
+  @ApiModelProperty(required = false)
   private String key;
+
   /**
    * The Name.
    */
+  @ApiModelProperty(required = true)
   private String name;
+
   /**
    * The Description.
    */
+  @ApiModelProperty(required = true)
   private String description;
+
   /**
    * The Attributes.
    */
@@ -188,19 +212,20 @@ public class ProductType {
 
   /**
    * toString method.
+   *
    * @return String
    */
   @Override
   public String toString() {
     return "ProductType{" +
-        "id='" + id + '\'' +
-        ", version=" + version +
-        ", createdAt=" + createdAt +
-        ", lastModifiedAt=" + lastModifiedAt +
-        ", key='" + key + '\'' +
-        ", name='" + name + '\'' +
-        ", description='" + description + '\'' +
-        ", attributes=" + attributes +
-        '}';
+            "id='" + id + '\'' +
+            ", version=" + version +
+            ", createdAt=" + createdAt +
+            ", lastModifiedAt=" + lastModifiedAt +
+            ", key='" + key + '\'' +
+            ", name='" + name + '\'' +
+            ", description='" + description + '\'' +
+            ", attributes=" + attributes +
+            '}';
   }
 }

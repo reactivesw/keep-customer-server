@@ -2,6 +2,8 @@ package io.reactivesw.customer.server.catalog.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.reactivesw.customer.server.common.types.Reference;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.time.ZonedDateTime;
 import java.util.UUID;
@@ -9,21 +11,25 @@ import java.util.UUID;
 /**
  * Created by Davis on 16/11/17.
  */
+@ApiModel
 public class Product {
   /**
    * The unique ID of the product.
    */
+  @ApiModelProperty(required = true)
   private String id;
 
   /**
    * User-specific unique identifier for the product.
    * Product keys are different from product variant keys.
    */
+  @ApiModelProperty(required = false)
   private String key;
 
   /**
    * The current version of the product.
    */
+  @ApiModelProperty(required = true)
   private Integer version;
 
   /**

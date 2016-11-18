@@ -1,8 +1,5 @@
 package io.reactivesw.customer.server.common.types;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import javax.persistence.Embedded;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,10 +7,6 @@ import java.util.Map;
  * Created by Davis on 16/11/16.
  */
 public class LocalizedString {
-  /**
-   * Object Mapper.
-   */
-  private final static ObjectMapper objectMapper = new ObjectMapper();
 
   /**
    * The Localized.

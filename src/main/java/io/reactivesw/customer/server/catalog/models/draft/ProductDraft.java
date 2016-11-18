@@ -1,9 +1,10 @@
 package io.reactivesw.customer.server.catalog.models.draft;
 
+import io.reactivesw.customer.server.catalog.models.CategoryOrderHint;
 import io.reactivesw.customer.server.common.types.LocalizedString;
 import io.reactivesw.customer.server.common.types.Reference;
 import io.reactivesw.customer.server.common.types.ResourceIdentifier;
-import io.reactivesw.customer.server.common.types.SearchKeywords;
+import io.reactivesw.customer.server.common.types.SearchKeyword;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class ProductDraft {
    * Required.
    */
 //TODO don't know what is the meaning of ResourceIdentifier.
-  ResourceIdentifier productType;
+  private ResourceIdentifier productType;
 
   /**
    * human-readable identifiers usually used as deep-link URL to the related product. Each slug
@@ -53,7 +54,7 @@ public class ProductDraft {
    * CategoryOrderHints.
    */
   //TODO String should be CategoryOrderHints.
-  private String categoryOrderHints;
+  private List<CategoryOrderHint> categoryOrderHints;
 
   /**
    * The Meta title.
@@ -91,7 +92,7 @@ public class ProductDraft {
   /**
    * The Search keywords.
    */
-  private SearchKeywords searchKeywords;
+  private SearchKeyword searchKeyword;
 
   /**
    * Reference to an initial State.
@@ -218,7 +219,7 @@ public class ProductDraft {
    *
    * @return the category order hints
    */
-  public String getCategoryOrderHints() {
+  public List<CategoryOrderHint> getCategoryOrderHints() {
     return categoryOrderHints;
   }
 
@@ -227,7 +228,7 @@ public class ProductDraft {
    *
    * @param categoryOrderHints the category order hints
    */
-  public void setCategoryOrderHints(String categoryOrderHints) {
+  public void setCategoryOrderHints(List<CategoryOrderHint> categoryOrderHints) {
     this.categoryOrderHints = categoryOrderHints;
   }
 
@@ -344,17 +345,17 @@ public class ProductDraft {
    *
    * @return the search keywords
    */
-  public SearchKeywords getSearchKeywords() {
-    return searchKeywords;
+  public SearchKeyword getSearchKeyword() {
+    return searchKeyword;
   }
 
   /**
    * Sets search keywords.
    *
-   * @param searchKeywords the search keywords
+   * @param searchKeyword the search keywords
    */
-  public void setSearchKeywords(SearchKeywords searchKeywords) {
-    this.searchKeywords = searchKeywords;
+  public void setSearchKeyword(SearchKeyword searchKeyword) {
+    this.searchKeyword = searchKeyword;
   }
 
   /**
@@ -395,27 +396,28 @@ public class ProductDraft {
 
   /**
    * toString method.
+   *
    * @return String
    */
   @Override
   public String toString() {
     return "ProductDraft{" +
-        "key='" + key + '\'' +
-        ", name=" + name +
-        ", productType=" + productType +
-        ", slug=" + slug +
-        ", description=" + description +
-        ", categories=" + categories +
-        ", categoryOrderHints='" + categoryOrderHints + '\'' +
-        ", metaTitle=" + metaTitle +
-        ", metaDescription=" + metaDescription +
-        ", metaKeywords=" + metaKeywords +
-        ", masterVariant=" + masterVariant +
-        ", variants=" + variants +
-        ", taxCategory=" + taxCategory +
-        ", searchKeywords=" + searchKeywords +
-        ", state=" + state +
-        ", publish=" + publish +
-        '}';
+            "key='" + key + '\'' +
+            ", name=" + name +
+            ", productType=" + productType +
+            ", slug=" + slug +
+            ", description=" + description +
+            ", categories=" + categories +
+            ", categoryOrderHints='" + categoryOrderHints + '\'' +
+            ", metaTitle=" + metaTitle +
+            ", metaDescription=" + metaDescription +
+            ", metaKeywords=" + metaKeywords +
+            ", masterVariant=" + masterVariant +
+            ", variants=" + variants +
+            ", taxCategory=" + taxCategory +
+            ", searchKeyword=" + searchKeyword +
+            ", state=" + state +
+            ", publish=" + publish +
+            '}';
   }
 }

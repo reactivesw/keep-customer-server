@@ -1,5 +1,6 @@
 package io.reactivesw.customer.server.catalog.models;
 
+import io.reactivesw.customer.server.common.types.AssetDimensions;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 
@@ -20,7 +21,7 @@ public class Image {
    * whether the image is large enough to display a zoom view.
    */
   //TODO String may not ok?
-  private String dimensions;
+  private AssetDimensions dimensions;
 
   /**
    * Custom label that can be used, for example, as an image description.
@@ -50,7 +51,7 @@ public class Image {
    *
    * @return the dimensions
    */
-  public String getDimensions() {
+  public AssetDimensions getDimensions() {
     return dimensions;
   }
 
@@ -59,7 +60,7 @@ public class Image {
    *
    * @param dimensions the dimensions
    */
-  public void setDimensions(String dimensions) {
+  public void setDimensions(AssetDimensions dimensions) {
     this.dimensions = dimensions;
   }
 
@@ -89,9 +90,9 @@ public class Image {
   @Override
   public String toString() {
     return "Image{" +
-        "url='" + url + '\'' +
-        ", dimensions='" + dimensions + '\'' +
-        ", label='" + label + '\'' +
-        '}';
+            "url='" + url + '\'' +
+            ", dimensions='" + dimensions + '\'' +
+            ", label='" + label + '\'' +
+            '}';
   }
 }

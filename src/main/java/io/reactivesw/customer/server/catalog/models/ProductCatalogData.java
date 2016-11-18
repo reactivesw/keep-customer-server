@@ -17,7 +17,7 @@ public class ProductCatalogData {
   /**
    * The staged data of the product.
    */
-  private ProductCatalogData staged;
+  private ProductData staged;
 
   /**
    * Whether the staged data is different from the current data.
@@ -65,7 +65,7 @@ public class ProductCatalogData {
    *
    * @return the staged
    */
-  public ProductCatalogData getStaged() {
+  public ProductData getStaged() {
     return staged;
   }
 
@@ -74,7 +74,7 @@ public class ProductCatalogData {
    *
    * @param staged the staged
    */
-  public void setStaged(ProductCatalogData staged) {
+  public void setStaged(ProductData staged) {
     this.staged = staged;
   }
 
@@ -98,15 +98,16 @@ public class ProductCatalogData {
 
   /**
    * toString method.
+   *
    * @return String
    */
   @Override
   public String toString() {
     return "ProductCatalogData{" +
-        "published=" + published +
-        ", current=" + current +
-        ", staged=" + staged +
-        ", hasStagedChanges=" + hasStagedChanges +
-        '}';
+            "published=" + published +
+            ", current=" + current +
+            ", staged=" + staged +
+            ", hasStagedChanges=" + hasStagedChanges +
+            '}';
   }
 }

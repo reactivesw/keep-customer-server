@@ -1,22 +1,34 @@
 package io.reactivesw.customer.server.catalog.models.draft;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.sun.org.apache.regexp.internal.RE;
+
+import javax.validation.constraints.NotNull;
+
 import io.reactivesw.customer.server.common.types.LocalizedString;
 import io.reactivesw.customer.server.common.types.Reference;
 import io.reactivesw.customer.server.common.types.draft.CustomFieldsDraft;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Created by Davis on 16/11/17.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
+@ApiModel
 public class CategoryDraft {
 
   /**
    * the name.
    */
+  @JsonIgnore
   private LocalizedString name;
 
   /**
    * the description.
    */
+  @JsonIgnore
   private LocalizedString description;
 
   /**
@@ -32,6 +44,7 @@ public class CategoryDraft {
    * Must be unique across a project!
    * The same category can have the same slug for different languages.
    */
+  @JsonIgnore
   private LocalizedString slug;
 
   /**
@@ -43,17 +56,23 @@ public class CategoryDraft {
    * The External id.
    */
   private String externalId;
+
   /**
    * The Meta title.
    */
+  @JsonIgnore
   private LocalizedString metaTitle;
+
   /**
    * The Meta description.
    */
+  @JsonIgnore
   private LocalizedString metaDescription;
+
   /**
    * The Meta keywords.
    */
+  @JsonIgnore
   private LocalizedString metaKeywords;
 
   /**
@@ -66,6 +85,8 @@ public class CategoryDraft {
    *
    * @return the name
    */
+  @ApiModelProperty(required = true)
+  @NotNull
   public LocalizedString getName() {
     return name;
   }

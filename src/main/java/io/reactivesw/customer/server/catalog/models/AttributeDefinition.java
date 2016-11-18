@@ -1,14 +1,25 @@
 package io.reactivesw.customer.server.catalog.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import io.reactivesw.customer.server.catalog.enums.AttributeConstraint;
+import io.reactivesw.customer.server.catalog.enums.TextInputHint;
 import io.reactivesw.customer.server.common.types.LocalizedString;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Created by Davis on 16/11/16.
  */
+@ApiModel
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class AttributeDefinition {
+
   /**
-   * Describes the type of the attribute.
+   * Describes the type of the attribute. TODO
    */
+  @ApiModelProperty(required = true)
   private AttributeType type;
 
   /**
@@ -21,28 +32,34 @@ public class AttributeDefinition {
    * all fields of the AttributeDefinition need to
    * be the same across all attributes with the same name.
    */
+  @ApiModelProperty(required = true)
   private String name;
 
   /**
    * A human-readable label for the attribute.
    */
+  @JsonIgnore
   private LocalizedString label;
 
   /**
    * Additional information about the attribute that aids content managers
    * when setting product details.
    */
+  @JsonIgnore
+  @ApiModelProperty(required = false)
   private LocalizedString inputTip;
 
   /**
    * Whether the attribute is required to have a value.
    */
+  @ApiModelProperty(required = true)
   private Boolean isRequired;
 
   /**
    * Describes how an attribute or a set of attributes
    * should be validated across all variants of a product.
    */
+  @ApiModelProperty(required = true)
   private AttributeConstraint attributeConstraint;
 
   /**
@@ -50,7 +67,8 @@ public class AttributeDefinition {
    * only relevant for text-based attribute types like TextType and LocalizableTextType.
    */
   //TODO String should be TextInputHint
-  private String inputHint;
+  @ApiModelProperty(required = false)
+  private TextInputHint inputHint;
 
   /**
    * Whether the attribute’s values should generally be enabled in product search.
@@ -63,6 +81,7 @@ public class AttributeDefinition {
    * This constraint is enforced at both product creation and product update.
    * If the length of the input exceeds the maximum size an InvalidField error is returned.
    */
+  @ApiModelProperty(required = false)
   private Boolean isSearchable;
 
   /**
@@ -178,7 +197,7 @@ public class AttributeDefinition {
    *
    * @return the input hint
    */
-  public String getInputHint() {
+  public TextInputHint getInputHint() {
     return inputHint;
   }
 
@@ -187,7 +206,7 @@ public class AttributeDefinition {
    *
    * @param inputHint the input hint
    */
-  public void setInputHint(String inputHint) {
+  public void setInputHint(TextInputHint inputHint) {
     this.inputHint = inputHint;
   }
 
@@ -211,19 +230,20 @@ public class AttributeDefinition {
 
   /**
    * toString method.
+   *
    * @return String
    */
   @Override
   public String toString() {
     return "AttributeDefinition{" +
-        "type=" + type +
-        ", name='" + name + '\'' +
-        ", label=" + label +
-        ", inputTip=" + inputTip +
-        ", isRequired=" + isRequired +
-        ", attributeConstraint=" + attributeConstraint +
-        ", inputHint='" + inputHint + '\'' +
-        ", isSearchable=" + isSearchable +
-        '}';
+            "type=" + type +
+            ", name='" + name + '\'' +
+            ", label=" + label +
+            ", inputTip=" + inputTip +
+            ", isRequired=" + isRequired +
+            ", attributeConstraint=" + attributeConstraint +
+            ", inputHint='" + inputHint + '\'' +
+            ", isSearchable=" + isSearchable +
+            '}';
   }
 }

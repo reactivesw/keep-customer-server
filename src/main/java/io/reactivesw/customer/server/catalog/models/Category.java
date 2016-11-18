@@ -1,9 +1,14 @@
 package io.reactivesw.customer.server.catalog.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import io.reactivesw.customer.server.common.types.CustomFields;
 import io.reactivesw.customer.server.common.types.Reference;
 import io.reactivesw.customer.server.common.utils.JpaConverterJson;
 import io.reactivesw.customer.server.common.types.LocalizedString;
+import io.swagger.annotations.ApiModel;
 
 import javax.persistence.Convert;
 import java.time.ZonedDateTime;
@@ -13,6 +18,8 @@ import java.util.List;
  * category model.
  * Created by Davis on 16/11/14.
  */
+@ApiModel
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Category {
   /**
    *  The unique ID of the category.
@@ -27,28 +34,33 @@ public class Category {
   /**
    * create time.
    */
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime createdAt;
 
   /**
    * last modified time.
    */
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime lastModifiedAt;
 
   /**
    * The Name.
    */
+  @JsonIgnore
   private LocalizedString name;
 
   /**
    * human-readable identifiers usually used as deep-link URL to the related category.
    * Each slug is unique across a project,
-   * but a category can have the same slug for different languages.
+   * but a category can have the same slug for different languages. TODO
    */
+  @JsonIgnore
   private LocalizedString slug;
 
   /**
-   * The Description.
+   * The Description. TODO
    */
+  @JsonIgnore
   private LocalizedString description;
 
   /**
@@ -72,18 +84,21 @@ public class Category {
   private String externalId;
 
   /**
-   * The Meta title.
+   * The Meta title. TODO
    */
+  @JsonIgnore
   private LocalizedString metaTitle;
 
   /**
-   * The metaDescription.
+   * The metaDescription. TODO
    */
+  @JsonIgnore
   private LocalizedString metaDescription;
 
   /**
-   * the metaKeywords.
+   * the metaKeywords. TODO
    */
+  @JsonIgnore
   private LocalizedString metaKeywords;
 
   /**

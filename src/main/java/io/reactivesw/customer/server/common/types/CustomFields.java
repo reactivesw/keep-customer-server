@@ -10,6 +10,7 @@ public class CustomFields {
   private Reference type;
   /**
    * A valid JSON object, based on {@code FieldDefinition}.
+   * TODO
    */
   private String fields;
 

@@ -2,7 +2,7 @@ package io.reactivesw.customer.server.catalog.models;
 
 import io.reactivesw.customer.server.common.types.LocalizedString;
 import io.reactivesw.customer.server.common.types.Reference;
-import io.reactivesw.customer.server.common.types.SearchKeywords;
+import io.reactivesw.customer.server.common.types.SearchKeyword;
 
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -77,7 +77,7 @@ public class ProductProjection {
   /**
    * The Search keywords.
    */
-  private SearchKeywords searchKeywords;
+  private SearchKeyword searchKeyword;
   /**
    * The Has staged changes.
    */
@@ -365,17 +365,17 @@ public class ProductProjection {
    *
    * @return the search keywords
    */
-  public SearchKeywords getSearchKeywords() {
-    return searchKeywords;
+  public SearchKeyword getSearchKeyword() {
+    return searchKeyword;
   }
 
   /**
    * Sets search keywords.
    *
-   * @param searchKeywords the search keywords
+   * @param searchKeyword the search keywords
    */
-  public void setSearchKeywords(SearchKeywords searchKeywords) {
-    this.searchKeywords = searchKeywords;
+  public void setSearchKeyword(SearchKeyword searchKeyword) {
+    this.searchKeyword = searchKeyword;
   }
 
   /**
@@ -507,7 +507,7 @@ public class ProductProjection {
         ", metaTitle=" + metaTitle +
         ", metaDescription=" + metaDescription +
         ", metaKeywords=" + metaKeywords +
-        ", searchKeywords=" + searchKeywords +
+        ", searchKeyword=" + searchKeyword +
         ", hasStagedChanges=" + hasStagedChanges +
         ", published=" + published +
         ", masterVariant=" + masterVariant +

@@ -22,7 +22,8 @@ public class ProductVariant {
           required = false)
   private String key;
 
-  @ApiModelProperty(value = "The prices of the variant. The prices does not contain two prices for the same price scope (same currency, country, customer group and channel).",
+  @ApiModelProperty(value = "The prices of the variant. " +
+          "The prices does not contain two prices for the same price scope (same currency, country, customer group and channel).",
           required = false)
   private List<Price> prices;
 
@@ -38,7 +39,8 @@ public class ProductVariant {
   @ApiModelProperty(required = false)
   private List<Asset> assets;
 
-  @ApiModelProperty(value = "The availability is set if the variant is tracked by the inventory. The field might not contain the latest inventory state (it is eventually consistent) and can be used as an optimization to reduce calls to the inventory service.",
+  @ApiModelProperty(value = "The availability is set if the variant is tracked by the inventory. " +
+          "The field might not contain the latest inventory state (it is eventually consistent) and can be used as an optimization to reduce calls to the inventory service.",
           required = false)
   private ProductVariantAvailability availability;
 

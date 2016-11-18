@@ -2,7 +2,7 @@ package io.reactivesw.customer.server.catalog.models;
 
 import io.reactivesw.customer.server.common.types.LocalizedString;
 import io.reactivesw.customer.server.common.types.Reference;
-import io.reactivesw.customer.server.common.types.SearchKeywords;
+import io.reactivesw.customer.server.common.types.SearchKeyword;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class ProductData {
    * categoryOrderHints.
    */
   //TODO String should be CategoryOrderHints
-  private String categoryOrderHints;
+  private List<CategoryOrderHint> categoryOrderHints;
 
   /**
    * the description.
@@ -68,7 +68,7 @@ public class ProductData {
   /**
    * search keyword.
    */
-  private SearchKeywords searchKeywords;
+  private SearchKeyword searchKeyword;
 
   /**
    * Gets name.
@@ -111,7 +111,7 @@ public class ProductData {
    *
    * @return the category order hints
    */
-  public String getCategoryOrderHints() {
+  public List<CategoryOrderHint> getCategoryOrderHints() {
     return categoryOrderHints;
   }
 
@@ -120,7 +120,7 @@ public class ProductData {
    *
    * @param categoryOrderHints the category order hints
    */
-  public void setCategoryOrderHints(String categoryOrderHints) {
+  public void setCategoryOrderHints(List<CategoryOrderHint> categoryOrderHints) {
     this.categoryOrderHints = categoryOrderHints;
   }
 
@@ -255,37 +255,38 @@ public class ProductData {
    *
    * @return the search keywords
    */
-  public SearchKeywords getSearchKeywords() {
-    return searchKeywords;
+  public SearchKeyword getSearchKeyword() {
+    return searchKeyword;
   }
 
   /**
    * Sets search keywords.
    *
-   * @param searchKeywords the search keywords
+   * @param searchKeyword the search keywords
    */
-  public void setSearchKeywords(SearchKeywords searchKeywords) {
-    this.searchKeywords = searchKeywords;
+  public void setSearchKeyword(SearchKeyword searchKeyword) {
+    this.searchKeyword = searchKeyword;
   }
 
   /**
    * toString method.
+   *
    * @return String
    */
   @Override
   public String toString() {
     return "ProductData{" +
-        "name=" + name +
-        ", categories=" + categories +
-        ", categoryOrderHints='" + categoryOrderHints + '\'' +
-        ", description=" + description +
-        ", slug=" + slug +
-        ", metaTitle=" + metaTitle +
-        ", metaDescription=" + metaDescription +
-        ", metaKeywords=" + metaKeywords +
-        ", masterVariant=" + masterVariant +
-        ", variants=" + variants +
-        ", searchKeywords=" + searchKeywords +
-        '}';
+            "name=" + name +
+            ", categories=" + categories +
+            ", categoryOrderHints='" + categoryOrderHints + '\'' +
+            ", description=" + description +
+            ", slug=" + slug +
+            ", metaTitle=" + metaTitle +
+            ", metaDescription=" + metaDescription +
+            ", metaKeywords=" + metaKeywords +
+            ", masterVariant=" + masterVariant +
+            ", variants=" + variants +
+            ", searchKeyword=" + searchKeyword +
+            '}';
   }
 }

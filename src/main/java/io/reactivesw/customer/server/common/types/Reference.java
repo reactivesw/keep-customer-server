@@ -1,8 +1,11 @@
 package io.reactivesw.customer.server.common.types;
 
+import io.swagger.annotations.ApiModel;
+
 /**
  * Created by umasuo on 16/11/16.
  */
+@ApiModel
 public class Reference {
   private String typeId;
   private String id;
