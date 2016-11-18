@@ -1,5 +1,7 @@
 package io.reactivesw.customer.server.cart.models.draft;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import io.reactivesw.customer.server.cart.models.CartDiscountTarget;
 import io.reactivesw.customer.server.cart.models.CartDiscountValue;
 import io.reactivesw.customer.server.common.types.LocalizedString;
@@ -52,11 +54,13 @@ public class CartDiscountDraft {
   /**
    * The Valid from.
    */
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime validFrom;
 
   /**
    * The Valid until.
    */
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime validUntil;
 
   /**

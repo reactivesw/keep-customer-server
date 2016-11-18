@@ -10,7 +10,7 @@ import io.swagger.annotations.ApiModelProperty;
 public class DiscountedLineItemPriceForQuantity {
 
   @ApiModelProperty(required = true)
-  private Float quantity;
+  private Integer quantity;
 
   @ApiModelProperty(required = true)
   private DiscountedLineItemPrice discountedPrice;

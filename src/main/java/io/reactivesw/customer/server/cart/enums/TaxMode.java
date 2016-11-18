@@ -17,7 +17,6 @@ public enum TaxMode {
    * tax rate set.
    */
   External,
-
   /**
    * No taxes are added to the cart.
    */

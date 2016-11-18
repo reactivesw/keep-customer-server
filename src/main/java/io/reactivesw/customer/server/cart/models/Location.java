@@ -11,7 +11,7 @@ public class Location {
   private String country;
 
   /**
-   * the state.
+   * the state, province.
    */
   private String state;
 
