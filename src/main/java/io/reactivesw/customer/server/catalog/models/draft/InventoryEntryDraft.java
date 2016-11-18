@@ -1,5 +1,7 @@
 package io.reactivesw.customer.server.catalog.models.draft;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import io.reactivesw.customer.server.common.types.Reference;
 import io.reactivesw.customer.server.common.types.draft.CustomFieldsDraft;
 
@@ -28,6 +30,7 @@ public class InventoryEntryDraft {
   /**
    * The Expected delivery.
    */
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime expectedDelivery;
 
   /**

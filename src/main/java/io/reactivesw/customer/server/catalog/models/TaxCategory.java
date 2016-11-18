@@ -1,5 +1,7 @@
 package io.reactivesw.customer.server.catalog.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import io.reactivesw.customer.server.common.types.TaxRate;
 
 import java.time.ZonedDateTime;
@@ -23,11 +25,13 @@ public class TaxCategory {
   /**
    * The Created at.
    */
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime createdAt;
 
   /**
    * The Last modified at.
    */
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime lastModifiedAt;
 
   /**

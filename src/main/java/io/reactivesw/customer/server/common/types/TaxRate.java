@@ -20,7 +20,7 @@ public class TaxRate {
 
   @ApiModelProperty(value = "Number Percentage in the range of [0..1]. The sum of the amounts of all subRates, if there are any.",
           required = true)
-  private float amount;
+  private Float amount;
 
   @ApiModelProperty(required = true)
   private Boolean includedInPrice;

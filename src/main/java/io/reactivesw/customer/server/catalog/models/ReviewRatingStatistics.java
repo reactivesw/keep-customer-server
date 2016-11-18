@@ -24,7 +24,7 @@ public class ReviewRatingStatistics {
   /**
    * Number of ratings taken into account.
    */
-  private Float count;
+  private Integer count;
 
   /**
    * The full distribution of the ratings.
@@ -93,7 +93,7 @@ public class ReviewRatingStatistics {
    *
    * @return the count
    */
-  public Float getCount() {
+  public Integer getCount() {
     return count;
   }
 
@@ -102,7 +102,7 @@ public class ReviewRatingStatistics {
    *
    * @param count the count
    */
-  public void setCount(Float count) {
+  public void setCount(Integer count) {
     this.count = count;
   }
 

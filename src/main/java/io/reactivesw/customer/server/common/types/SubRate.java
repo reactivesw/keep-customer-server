@@ -14,5 +14,5 @@ public class SubRate {
   private String name;
 
   @ApiModelProperty(value = "Number Percentage in the range of [0..1].", required = true)
-  private float amount;
+  private Float amount;
 }
