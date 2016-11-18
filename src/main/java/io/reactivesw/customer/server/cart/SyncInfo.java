@@ -1,5 +1,7 @@
 package io.reactivesw.customer.server.cart;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import io.reactivesw.customer.server.common.types.Reference;
 
 import java.time.ZonedDateTime;
@@ -24,6 +26,7 @@ public class SyncInfo {
   /**
    * The Synced at.
    */
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime syncedAt;
 
 }

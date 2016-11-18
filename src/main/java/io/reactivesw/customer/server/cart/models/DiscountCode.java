@@ -1,5 +1,7 @@
 package io.reactivesw.customer.server.cart.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -21,9 +23,11 @@ public class DiscountCode {
   private Integer version;
 
   @ApiModelProperty(required = true)
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime createdAt;
 
   @ApiModelProperty(required = true)
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime lastModifiedAt;
 
   @ApiModelProperty(required = false)
@@ -43,7 +47,7 @@ public class DiscountCode {
 
   @ApiModelProperty(value = "The discount code can only be applied to carts that match this predicate.",
           required = false)
-  CartDiscountPredicate cartPredicate;
+  private CartDiscountPredicate cartPredicate;
 
   @ApiModelProperty(required = true)
   private Boolean isActive;

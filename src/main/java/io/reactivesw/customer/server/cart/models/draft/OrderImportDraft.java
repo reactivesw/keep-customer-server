@@ -1,5 +1,7 @@
 package io.reactivesw.customer.server.cart.models.draft;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import io.reactivesw.customer.server.cart.enums.InventoryMode;
 import io.reactivesw.customer.server.cart.models.CustomLineItem;
 import io.reactivesw.customer.server.cart.enums.OrderState;
@@ -109,6 +111,7 @@ public class OrderImportDraft {
   /**
    * The Completed at.
    */
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime completedAt;
 
   /***

@@ -1,5 +1,7 @@
 package io.reactivesw.customer.server.customer.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
@@ -18,7 +20,9 @@ public class Customer {
   private String id;
   private Integer version;
   private String customerNumber;
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime createdAt;
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime lastModifiedAt;
   private String email;
   private String password;
@@ -32,7 +36,7 @@ public class Customer {
   private List<Address> addresses;
   private String defaultShippingAddressId;
   private String defaultBillingAddressId;
-  private boolean isEmailVerified;
+  private Boolean isEmailVerified;
   private String externalId;
   private Reference customerGroup;
   private CustomFields custom;

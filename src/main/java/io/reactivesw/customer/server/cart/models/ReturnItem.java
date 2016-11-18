@@ -1,5 +1,7 @@
 package io.reactivesw.customer.server.cart.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.ZonedDateTime;
 
 import io.reactivesw.customer.server.cart.enums.ReturnPaymentState;
@@ -17,7 +19,7 @@ public class ReturnItem {
   private String id;
 
   @ApiModelProperty(required = true)
-  private Long quantity;
+  private Integer quantity;
 
   @ApiModelProperty(required = true)
   private String lineItemId;
@@ -32,9 +34,11 @@ public class ReturnItem {
   private ReturnPaymentState paymentState;
 
   @ApiModelProperty(required = true)
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime lastModifiedAt;
 
   @ApiModelProperty(required = true)
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime createdAt;
 
 }

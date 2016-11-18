@@ -1,5 +1,7 @@
 package io.reactivesw.customer.server.cart.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import io.reactivesw.customer.server.cart.SyncInfo;
 import io.reactivesw.customer.server.cart.enums.InventoryMode;
 import io.reactivesw.customer.server.cart.enums.OrderState;
@@ -33,16 +35,19 @@ public class Order {
   /**
    * The Created at.
    */
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime createdAt;
 
   /**
    * The Last modified at.
    */
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime lastModifiedAt;
 
   /**
    * This field will only be present if it was set for Order Import
    */
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime completedAt;
 
   /**

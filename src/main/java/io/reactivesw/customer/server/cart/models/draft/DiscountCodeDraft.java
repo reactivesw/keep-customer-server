@@ -32,7 +32,7 @@ public class DiscountCodeDraft {
 
   @ApiModelProperty(value = "The discount code can only be applied to carts that match this predicate.",
           required = false)
-  CartPredicate cartPredicate;
+  private CartPredicate cartPredicate;
 
   @ApiModelProperty(required = true)
   private Boolean isActive;

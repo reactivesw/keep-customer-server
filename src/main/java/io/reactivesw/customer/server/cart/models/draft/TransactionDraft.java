@@ -1,5 +1,7 @@
 package io.reactivesw.customer.server.cart.models.draft;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.ZonedDateTime;
 
 import io.reactivesw.customer.server.cart.enums.TransactionState;
@@ -15,6 +17,7 @@ import io.swagger.annotations.ApiModelProperty;
 public class TransactionDraft {
 
   @ApiModelProperty(value = "The time at which the transaction took place.", required = false)
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime timestamp;
 
   @ApiModelProperty(value = "The type of this transaction.", required = true)

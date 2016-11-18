@@ -1,5 +1,7 @@
 package io.reactivesw.customer.server.cart.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.ZonedDateTime;
 
 import io.swagger.annotations.ApiModel;
@@ -15,6 +17,7 @@ public class Parcel {
   private String id;
 
   @ApiModelProperty(required = true)
+  @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime createdAt;
 
   @ApiModelProperty(required = false)

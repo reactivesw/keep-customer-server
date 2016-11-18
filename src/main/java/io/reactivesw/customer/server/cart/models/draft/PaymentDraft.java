@@ -53,6 +53,9 @@ public class PaymentDraft {
   @ApiModelProperty(required = true)
   private PaymentMethodInfo paymentMethodInfo;
 
+  @ApiModelProperty(required = false)
+  private CustomFields custom;
+
   @ApiModelProperty(required = true)
   private PaymentStatus paymentStatus;
 
@@ -65,6 +68,5 @@ public class PaymentDraft {
           required = true)
   private List<CustomFieldsDraft> interfaceInteractions;
 
-  @ApiModelProperty(required = false)
-  private CustomFields custom;
+
 }

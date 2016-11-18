@@ -7,12 +7,13 @@ import io.swagger.annotations.ApiModelProperty;
  * The ReturnItemDraft needs to be given with the Add ReturnInfo update method. At this point only
  * Advised or Returned ReturnShipmentState is allowed. Item with Advised shipment state gets the
  * NonRefundable ReturnPaymentState and item with Returned shipment state gets Initial payment
- * state. Created by umasuo on 16/11/17.
+ * state.
+ * Created by umasuo on 16/11/17.
  */
 public class ReturnItemDraft {
 
   @ApiModelProperty(required = true)
-  private Long quantity;
+  private Integer quantity;
 
   @ApiModelProperty(required = true)
   private String lineItemId;

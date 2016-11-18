@@ -9,7 +9,6 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(description = "Tracking data is usually some info about the delivery (like a DHL tracking number) which is useful to keep an eye on your delivery, view its status, etc.")
 public class TrackingData {
 
-
   @ApiModelProperty(value = "The id to track one parcel.", required = false)
   private String trackingId;
 
