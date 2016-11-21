@@ -3,7 +3,7 @@ package io.reactivesw.customer.server.catalog.controllers;
 import io.reactivesw.customer.server.catalog.models.categories.Category;
 import io.reactivesw.customer.server.catalog.models.categories.draft.CategoryDraft;
 import io.reactivesw.customer.server.common.models.QueryConditions;
-import io.reactivesw.customer.server.common.types.Field;
+import io.reactivesw.customer.server.common.models.Field;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
