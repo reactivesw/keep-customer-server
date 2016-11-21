@@ -4,6 +4,8 @@ import io.reactivesw.customer.server.common.models.UpdateAction;
 
 import java.util.List;
 
+import io.reactivesw.customer.server.common.models.UpdateAction;
+
 /**
  * Created by Davis on 16/11/21.
  */
