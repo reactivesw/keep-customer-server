@@ -28,7 +28,7 @@ public class Router {
   /**
    * for category.
    */
-  public static final String CATEGORY_ALL = "/categories";
+  public static final String CATEGORY_ALL = "categories";
 
   /**
    * categoryId.
@@ -38,7 +38,7 @@ public class Router {
   /**
    * category url with id.
    */
-  public static final String CATEGORY_GET_BY_ID = CATEGORY_ALL + "/{" + CATEGORY_ID + "}";
+  public static final String CATEGORIES_WITH_ID = CATEGORY_ALL + "/{" + CATEGORY_ID + "}";
 
   /*************** End Of Category. *****************/
 
