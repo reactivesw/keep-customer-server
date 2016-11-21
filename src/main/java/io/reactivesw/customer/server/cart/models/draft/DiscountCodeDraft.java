@@ -2,10 +2,9 @@ package io.reactivesw.customer.server.cart.models.draft;
 
 import java.util.List;
 
-import io.reactivesw.customer.server.cart.models.CartDiscountPredicate;
 import io.reactivesw.customer.server.cart.models.CartPredicate;
-import io.reactivesw.customer.server.common.types.LocalizedString;
-import io.reactivesw.customer.server.common.types.Reference;
+import io.reactivesw.customer.server.common.models.LocalizedString;
+import io.reactivesw.customer.server.common.models.Reference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -45,4 +44,67 @@ public class DiscountCodeDraft {
           required = true)
   private Integer maxApplicationsPerCustomer;
 
+  public LocalizedString getName() {
+    return name;
+  }
+
+  public void setName(LocalizedString name) {
+    this.name = name;
+  }
+
+  public LocalizedString getDescription() {
+    return description;
+  }
+
+  public void setDescription(LocalizedString description) {
+    this.description = description;
+  }
+
+  public String getCode() {
+    return code;
+  }
+
+  public void setCode(String code) {
+    this.code = code;
+  }
+
+  public List<Reference> getCartDiscounts() {
+    return cartDiscounts;
+  }
+
+  public void setCartDiscounts(List<Reference> cartDiscounts) {
+    this.cartDiscounts = cartDiscounts;
+  }
+
+  public CartPredicate getCartPredicate() {
+    return cartPredicate;
+  }
+
+  public void setCartPredicate(CartPredicate cartPredicate) {
+    this.cartPredicate = cartPredicate;
+  }
+
+  public Boolean getActive() {
+    return isActive;
+  }
+
+  public void setActive(Boolean active) {
+    isActive = active;
+  }
+
+  public Integer getMaxApplications() {
+    return maxApplications;
+  }
+
+  public void setMaxApplications(Integer maxApplications) {
+    this.maxApplications = maxApplications;
+  }
+
+  public Integer getMaxApplicationsPerCustomer() {
+    return maxApplicationsPerCustomer;
+  }
+
+  public void setMaxApplicationsPerCustomer(Integer maxApplicationsPerCustomer) {
+    this.maxApplicationsPerCustomer = maxApplicationsPerCustomer;
+  }
 }

@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.ZonedDateTime;
 
-import io.reactivesw.customer.server.common.types.CustomFields;
-import io.reactivesw.customer.server.common.types.Money;
-import io.reactivesw.customer.server.common.types.Reference;
+import io.reactivesw.customer.server.common.models.CustomFields;
+import io.reactivesw.customer.server.common.models.Money;
+import io.reactivesw.customer.server.common.models.Reference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 

@@ -1,7 +1,7 @@
 package io.reactivesw.customer.server.cart.enums.payments;
 
 /**
- * Not all payment methods support all of the following defined types:
+ * Not all payment methods support all of the following defined models:
  * Created by umasuo on 16/11/17.
  */
 public enum TransactionType {

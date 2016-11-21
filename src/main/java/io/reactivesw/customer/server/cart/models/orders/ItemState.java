@@ -1,6 +1,6 @@
 package io.reactivesw.customer.server.cart.models.orders;
 
-import io.reactivesw.customer.server.common.types.Reference;
+import io.reactivesw.customer.server.common.models.Reference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -17,4 +17,19 @@ public class ItemState {
   @ApiModelProperty(value = "Reference to a State", required = true)
   private Reference state;
 
+  public Integer getQuantity() {
+    return quantity;
+  }
+
+  public void setQuantity(Integer quantity) {
+    this.quantity = quantity;
+  }
+
+  public Reference getState() {
+    return state;
+  }
+
+  public void setState(Reference state) {
+    this.state = state;
+  }
 }

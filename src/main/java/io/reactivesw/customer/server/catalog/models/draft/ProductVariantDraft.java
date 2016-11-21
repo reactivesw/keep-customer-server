@@ -2,7 +2,7 @@ package io.reactivesw.customer.server.catalog.models.draft;
 
 import io.reactivesw.customer.server.catalog.models.Attribute;
 import io.reactivesw.customer.server.catalog.models.Image;
-import io.reactivesw.customer.server.common.types.draft.AssetDraft;
+import io.reactivesw.customer.server.common.models.draft.AssetDraft;
 
 import java.util.List;
 

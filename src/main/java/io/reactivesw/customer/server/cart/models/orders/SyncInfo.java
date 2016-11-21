@@ -2,7 +2,7 @@ package io.reactivesw.customer.server.cart.models.orders;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import io.reactivesw.customer.server.common.types.Reference;
+import io.reactivesw.customer.server.common.models.Reference;
 
 import java.time.ZonedDateTime;
 
@@ -29,4 +29,27 @@ public class SyncInfo {
   @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime syncedAt;
 
+  public Reference getChannel() {
+    return channel;
+  }
+
+  public void setChannel(Reference channel) {
+    this.channel = channel;
+  }
+
+  public String getExternalId() {
+    return externalId;
+  }
+
+  public void setExternalId(String externalId) {
+    this.externalId = externalId;
+  }
+
+  public ZonedDateTime getSyncedAt() {
+    return syncedAt;
+  }
+
+  public void setSyncedAt(ZonedDateTime syncedAt) {
+    this.syncedAt = syncedAt;
+  }
 }

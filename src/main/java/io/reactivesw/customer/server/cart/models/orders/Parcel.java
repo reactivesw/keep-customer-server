@@ -26,4 +26,35 @@ public class Parcel {
   @ApiModelProperty(required = false)
   private TrackingData trackingData;
 
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public ZonedDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(ZonedDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public ParcelMeasurements getMeasurements() {
+    return measurements;
+  }
+
+  public void setMeasurements(ParcelMeasurements measurements) {
+    this.measurements = measurements;
+  }
+
+  public TrackingData getTrackingData() {
+    return trackingData;
+  }
+
+  public void setTrackingData(TrackingData trackingData) {
+    this.trackingData = trackingData;
+  }
 }

@@ -1,6 +1,6 @@
 package io.reactivesw.customer.server.cart.models.carts;
 
-import io.reactivesw.customer.server.common.types.Money;
+import io.reactivesw.customer.server.common.models.Money;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -23,4 +23,27 @@ public class TaxPortion {
   @ApiModelProperty(required = true)
   private Money amount;
 
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public Float getRate() {
+    return rate;
+  }
+
+  public void setRate(Float rate) {
+    this.rate = rate;
+  }
+
+  public Money getAmount() {
+    return amount;
+  }
+
+  public void setAmount(Money amount) {
+    this.amount = amount;
+  }
 }

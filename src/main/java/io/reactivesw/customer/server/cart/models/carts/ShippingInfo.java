@@ -4,9 +4,9 @@ import java.util.List;
 
 import io.reactivesw.customer.server.cart.models.orders.Delivery;
 import io.reactivesw.customer.server.cart.models.ShippingRate;
-import io.reactivesw.customer.server.common.types.Money;
-import io.reactivesw.customer.server.common.types.Reference;
-import io.reactivesw.customer.server.common.types.TaxRate;
+import io.reactivesw.customer.server.common.models.Money;
+import io.reactivesw.customer.server.common.models.Reference;
+import io.reactivesw.customer.server.common.models.TaxRate;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 

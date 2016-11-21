@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import io.reactivesw.customer.server.catalog.enums.AttributeConstraint;
 import io.reactivesw.customer.server.catalog.enums.TextInputHint;
-import io.reactivesw.customer.server.common.types.LocalizedString;
+import io.reactivesw.customer.server.common.models.LocalizedString;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -64,7 +64,7 @@ public class AttributeDefinition {
 
   /**
    * Provides a visual representation type for this attribute.
-   * only relevant for text-based attribute types like TextType and LocalizableTextType.
+   * only relevant for text-based attribute models like TextType and LocalizableTextType.
    */
   //TODO String should be TextInputHint
   @ApiModelProperty(required = false)

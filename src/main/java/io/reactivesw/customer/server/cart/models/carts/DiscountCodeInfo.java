@@ -1,7 +1,7 @@
 package io.reactivesw.customer.server.cart.models.carts;
 
 import io.reactivesw.customer.server.cart.enums.carts.DiscountCodeState;
-import io.reactivesw.customer.server.common.types.Reference;
+import io.reactivesw.customer.server.common.models.Reference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 

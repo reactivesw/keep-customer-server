@@ -1,4 +1,4 @@
-package io.reactivesw.customer.server.common.types;
+package io.reactivesw.customer.server.common.models;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -20,4 +20,36 @@ public class AssetSource {
 
   @ApiModelProperty(required = false)
   private String contentType;
+
+  public String getUri() {
+    return uri;
+  }
+
+  public void setUri(String uri) {
+    this.uri = uri;
+  }
+
+  public String getKey() {
+    return key;
+  }
+
+  public void setKey(String key) {
+    this.key = key;
+  }
+
+  public AssetDimensions getDimensions() {
+    return dimensions;
+  }
+
+  public void setDimensions(AssetDimensions dimensions) {
+    this.dimensions = dimensions;
+  }
+
+  public String getContentType() {
+    return contentType;
+  }
+
+  public void setContentType(String contentType) {
+    this.contentType = contentType;
+  }
 }

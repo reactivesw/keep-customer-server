@@ -41,4 +41,67 @@ public class ReturnItem {
   @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime createdAt;
 
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public Integer getQuantity() {
+    return quantity;
+  }
+
+  public void setQuantity(Integer quantity) {
+    this.quantity = quantity;
+  }
+
+  public String getLineItemId() {
+    return lineItemId;
+  }
+
+  public void setLineItemId(String lineItemId) {
+    this.lineItemId = lineItemId;
+  }
+
+  public String getComment() {
+    return comment;
+  }
+
+  public void setComment(String comment) {
+    this.comment = comment;
+  }
+
+  public ReturnShipmentState getShipmentState() {
+    return shipmentState;
+  }
+
+  public void setShipmentState(ReturnShipmentState shipmentState) {
+    this.shipmentState = shipmentState;
+  }
+
+  public ReturnPaymentState getPaymentState() {
+    return paymentState;
+  }
+
+  public void setPaymentState(ReturnPaymentState paymentState) {
+    this.paymentState = paymentState;
+  }
+
+  public ZonedDateTime getLastModifiedAt() {
+    return lastModifiedAt;
+  }
+
+  public void setLastModifiedAt(ZonedDateTime lastModifiedAt) {
+    this.lastModifiedAt = lastModifiedAt;
+  }
+
+  public ZonedDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(ZonedDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
 }

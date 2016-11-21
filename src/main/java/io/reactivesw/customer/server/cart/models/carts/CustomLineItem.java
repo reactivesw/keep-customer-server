@@ -3,11 +3,11 @@ package io.reactivesw.customer.server.cart.models.carts;
 import java.util.List;
 
 import io.reactivesw.customer.server.cart.models.orders.ItemState;
-import io.reactivesw.customer.server.common.types.CustomFields;
-import io.reactivesw.customer.server.common.types.LocalizedString;
-import io.reactivesw.customer.server.common.types.Money;
-import io.reactivesw.customer.server.common.types.Reference;
-import io.reactivesw.customer.server.common.types.TaxRate;
+import io.reactivesw.customer.server.common.models.CustomFields;
+import io.reactivesw.customer.server.common.models.LocalizedString;
+import io.reactivesw.customer.server.common.models.Money;
+import io.reactivesw.customer.server.common.models.Reference;
+import io.reactivesw.customer.server.common.models.TaxRate;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -63,4 +63,100 @@ public class CustomLineItem {
 
   @ApiModelProperty(required = false)
   private CustomFields custom;
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public LocalizedString getName() {
+    return name;
+  }
+
+  public void setName(LocalizedString name) {
+    this.name = name;
+  }
+
+  public Money getMoney() {
+    return money;
+  }
+
+  public void setMoney(Money money) {
+    this.money = money;
+  }
+
+  public TaxedItemPrice getTaxedPrice() {
+    return taxedPrice;
+  }
+
+  public void setTaxedPrice(TaxedItemPrice taxedPrice) {
+    this.taxedPrice = taxedPrice;
+  }
+
+  public Money getTotalPrice() {
+    return totalPrice;
+  }
+
+  public void setTotalPrice(Money totalPrice) {
+    this.totalPrice = totalPrice;
+  }
+
+  public String getSlug() {
+    return slug;
+  }
+
+  public void setSlug(String slug) {
+    this.slug = slug;
+  }
+
+  public Integer getQuantity() {
+    return quantity;
+  }
+
+  public void setQuantity(Integer quantity) {
+    this.quantity = quantity;
+  }
+
+  public List<ItemState> getState() {
+    return state;
+  }
+
+  public void setState(List<ItemState> state) {
+    this.state = state;
+  }
+
+  public Reference getTaxCategory() {
+    return taxCategory;
+  }
+
+  public void setTaxCategory(Reference taxCategory) {
+    this.taxCategory = taxCategory;
+  }
+
+  public TaxRate getTaxRate() {
+    return taxRate;
+  }
+
+  public void setTaxRate(TaxRate taxRate) {
+    this.taxRate = taxRate;
+  }
+
+  public List<DiscountedLineItemPriceForQuantity> getDiscountedPricePerQuantity() {
+    return discountedPricePerQuantity;
+  }
+
+  public void setDiscountedPricePerQuantity(List<DiscountedLineItemPriceForQuantity> discountedPricePerQuantity) {
+    this.discountedPricePerQuantity = discountedPricePerQuantity;
+  }
+
+  public CustomFields getCustom() {
+    return custom;
+  }
+
+  public void setCustom(CustomFields custom) {
+    this.custom = custom;
+  }
 }

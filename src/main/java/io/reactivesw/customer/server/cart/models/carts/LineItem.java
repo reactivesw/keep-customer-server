@@ -6,11 +6,11 @@ import io.reactivesw.customer.server.cart.models.orders.ItemState;
 import io.reactivesw.customer.server.catalog.models.Price;
 import io.reactivesw.customer.server.catalog.models.ProductVariant;
 import io.reactivesw.customer.server.cart.enums.carts.LineItemPriceMode;
-import io.reactivesw.customer.server.common.types.CustomFields;
-import io.reactivesw.customer.server.common.types.LocalizedString;
-import io.reactivesw.customer.server.common.types.Money;
-import io.reactivesw.customer.server.common.types.Reference;
-import io.reactivesw.customer.server.common.types.TaxRate;
+import io.reactivesw.customer.server.common.models.CustomFields;
+import io.reactivesw.customer.server.common.models.LocalizedString;
+import io.reactivesw.customer.server.common.models.Money;
+import io.reactivesw.customer.server.common.models.Reference;
+import io.reactivesw.customer.server.common.models.TaxRate;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -82,4 +82,131 @@ public class LineItem {
   @ApiModelProperty(required = false)
   private CustomFields custom;
 
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public String getProductId() {
+    return productId;
+  }
+
+  public void setProductId(String productId) {
+    this.productId = productId;
+  }
+
+  public LocalizedString getName() {
+    return name;
+  }
+
+  public void setName(LocalizedString name) {
+    this.name = name;
+  }
+
+  public LocalizedString getProductSlug() {
+    return productSlug;
+  }
+
+  public void setProductSlug(LocalizedString productSlug) {
+    this.productSlug = productSlug;
+  }
+
+  public ProductVariant getVariant() {
+    return variant;
+  }
+
+  public void setVariant(ProductVariant variant) {
+    this.variant = variant;
+  }
+
+  public Price getPrice() {
+    return price;
+  }
+
+  public void setPrice(Price price) {
+    this.price = price;
+  }
+
+  public TaxedItemPrice getTaxedPrice() {
+    return taxedPrice;
+  }
+
+  public void setTaxedPrice(TaxedItemPrice taxedPrice) {
+    this.taxedPrice = taxedPrice;
+  }
+
+  public Money getTotalPrice() {
+    return totalPrice;
+  }
+
+  public void setTotalPrice(Money totalPrice) {
+    this.totalPrice = totalPrice;
+  }
+
+  public Integer getQuantity() {
+    return quantity;
+  }
+
+  public void setQuantity(Integer quantity) {
+    this.quantity = quantity;
+  }
+
+  public List<ItemState> getState() {
+    return state;
+  }
+
+  public void setState(List<ItemState> state) {
+    this.state = state;
+  }
+
+  public TaxRate getTaxRate() {
+    return taxRate;
+  }
+
+  public void setTaxRate(TaxRate taxRate) {
+    this.taxRate = taxRate;
+  }
+
+  public Reference getSupplyChannel() {
+    return supplyChannel;
+  }
+
+  public void setSupplyChannel(Reference supplyChannel) {
+    this.supplyChannel = supplyChannel;
+  }
+
+  public Reference getDistributionChannel() {
+    return distributionChannel;
+  }
+
+  public void setDistributionChannel(Reference distributionChannel) {
+    this.distributionChannel = distributionChannel;
+  }
+
+  public List<DiscountedLineItemPriceForQuantity> getDiscountedPricePerQuantity() {
+    return discountedPricePerQuantity;
+  }
+
+  public void setDiscountedPricePerQuantity(List<DiscountedLineItemPriceForQuantity> discountedPricePerQuantity) {
+    this.discountedPricePerQuantity = discountedPricePerQuantity;
+  }
+
+  public LineItemPriceMode getPriceMode() {
+    return priceMode;
+  }
+
+  public void setPriceMode(LineItemPriceMode priceMode) {
+    this.priceMode = priceMode;
+  }
+
+  public CustomFields getCustom() {
+    return custom;
+  }
+
+  public void setCustom(CustomFields custom) {
+    this.custom = custom;
+  }
 }

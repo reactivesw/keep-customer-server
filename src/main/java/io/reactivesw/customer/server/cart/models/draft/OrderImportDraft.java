@@ -9,10 +9,10 @@ import io.reactivesw.customer.server.cart.enums.orders.PaymentState;
 import io.reactivesw.customer.server.cart.enums.orders.ShipmentState;
 import io.reactivesw.customer.server.cart.models.carts.ShippingInfo;
 import io.reactivesw.customer.server.cart.models.carts.TaxedPrice;
-import io.reactivesw.customer.server.common.types.Address;
-import io.reactivesw.customer.server.common.types.Money;
-import io.reactivesw.customer.server.common.types.Reference;
-import io.reactivesw.customer.server.common.types.draft.CustomFieldsDraft;
+import io.reactivesw.customer.server.common.models.Address;
+import io.reactivesw.customer.server.common.models.Money;
+import io.reactivesw.customer.server.common.models.Reference;
+import io.reactivesw.customer.server.common.models.draft.CustomFieldsDraft;
 
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -123,4 +123,148 @@ public class OrderImportDraft {
    * If not given the mode None will be assigned by default.
    */
   private InventoryMode inventoryMode;
+
+  public String getOrderNumber() {
+    return orderNumber;
+  }
+
+  public void setOrderNumber(String orderNumber) {
+    this.orderNumber = orderNumber;
+  }
+
+  public String getCustomerId() {
+    return customerId;
+  }
+
+  public void setCustomerId(String customerId) {
+    this.customerId = customerId;
+  }
+
+  public String getCustomerEmail() {
+    return customerEmail;
+  }
+
+  public void setCustomerEmail(String customerEmail) {
+    this.customerEmail = customerEmail;
+  }
+
+  public List<LineItemImportDraft> getLineItems() {
+    return lineItems;
+  }
+
+  public void setLineItems(List<LineItemImportDraft> lineItems) {
+    this.lineItems = lineItems;
+  }
+
+  public List<CustomLineItem> getCustomLineItems() {
+    return customLineItems;
+  }
+
+  public void setCustomLineItems(List<CustomLineItem> customLineItems) {
+    this.customLineItems = customLineItems;
+  }
+
+  public Money getTotalPrice() {
+    return totalPrice;
+  }
+
+  public void setTotalPrice(Money totalPrice) {
+    this.totalPrice = totalPrice;
+  }
+
+  public TaxedPrice getTaxedPrice() {
+    return taxedPrice;
+  }
+
+  public void setTaxedPrice(TaxedPrice taxedPrice) {
+    this.taxedPrice = taxedPrice;
+  }
+
+  public Address getShippingAddress() {
+    return shippingAddress;
+  }
+
+  public void setShippingAddress(Address shippingAddress) {
+    this.shippingAddress = shippingAddress;
+  }
+
+  public Address getBillingAddress() {
+    return billingAddress;
+  }
+
+  public void setBillingAddress(Address billingAddress) {
+    this.billingAddress = billingAddress;
+  }
+
+  public Reference getCustomerGroup() {
+    return customerGroup;
+  }
+
+  public void setCustomerGroup(Reference customerGroup) {
+    this.customerGroup = customerGroup;
+  }
+
+  public String getCountry() {
+    return country;
+  }
+
+  public void setCountry(String country) {
+    this.country = country;
+  }
+
+  public OrderState getOrderState() {
+    return orderState;
+  }
+
+  public void setOrderState(OrderState orderState) {
+    this.orderState = orderState;
+  }
+
+  public ShipmentState getShipmentState() {
+    return shipmentState;
+  }
+
+  public void setShipmentState(ShipmentState shipmentState) {
+    this.shipmentState = shipmentState;
+  }
+
+  public PaymentState getPaymentState() {
+    return paymentState;
+  }
+
+  public void setPaymentState(PaymentState paymentState) {
+    this.paymentState = paymentState;
+  }
+
+  public ShippingInfo getShippingInfo() {
+    return shippingInfo;
+  }
+
+  public void setShippingInfo(ShippingInfo shippingInfo) {
+    this.shippingInfo = shippingInfo;
+  }
+
+  public ZonedDateTime getCompletedAt() {
+    return completedAt;
+  }
+
+  public void setCompletedAt(ZonedDateTime completedAt) {
+    this.completedAt = completedAt;
+  }
+
+  public CustomFieldsDraft getCustom() {
+    return custom;
+  }
+
+  public void setCustom(CustomFieldsDraft custom) {
+    this.custom = custom;
+  }
+
+  public InventoryMode getInventoryMode() {
+    return inventoryMode;
+  }
+
+  public void setInventoryMode(InventoryMode inventoryMode) {
+    this.inventoryMode = inventoryMode;
+  }
 }

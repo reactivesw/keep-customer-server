@@ -1,9 +1,8 @@
 package io.reactivesw.customer.server.cart.models.payments;
 
-import io.reactivesw.customer.server.common.types.LocalizedString;
+import io.reactivesw.customer.server.common.models.LocalizedString;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import javafx.scene.shape.Line;
 
 /**
  * Created by umasuo on 16/11/17.
@@ -25,4 +24,27 @@ public class PaymentMethodInfo {
           required = false)
   private LocalizedString name;
 
+  public String getPaymentInterface() {
+    return paymentInterface;
+  }
+
+  public void setPaymentInterface(String paymentInterface) {
+    this.paymentInterface = paymentInterface;
+  }
+
+  public String getMethod() {
+    return method;
+  }
+
+  public void setMethod(String method) {
+    this.method = method;
+  }
+
+  public LocalizedString getName() {
+    return name;
+  }
+
+  public void setName(LocalizedString name) {
+    this.name = name;
+  }
 }

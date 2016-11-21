@@ -2,7 +2,7 @@ package io.reactivesw.customer.server.cart.models.carts;
 
 import java.util.List;
 
-import io.reactivesw.customer.server.common.types.Money;
+import io.reactivesw.customer.server.common.models.Money;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 

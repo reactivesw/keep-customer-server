@@ -2,8 +2,8 @@ package io.reactivesw.customer.server.catalog.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import io.reactivesw.customer.server.common.types.LocalizedString;
-import io.reactivesw.customer.server.common.types.Reference;
+import io.reactivesw.customer.server.common.models.LocalizedString;
+import io.reactivesw.customer.server.common.models.Reference;
 
 import java.time.ZonedDateTime;
 import java.util.List;

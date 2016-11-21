@@ -1,4 +1,4 @@
-package io.reactivesw.customer.server.common.types;
+package io.reactivesw.customer.server.common.models;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -13,4 +13,20 @@ public class AssetDimensions {
   private float w;
   @ApiModelProperty(value = "The height of the asset source", required = true)
   private float h;
+
+  public float getW() {
+    return w;
+  }
+
+  public void setW(float w) {
+    this.w = w;
+  }
+
+  public float getH() {
+    return h;
+  }
+
+  public void setH(float h) {
+    this.h = h;
+  }
 }

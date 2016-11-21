@@ -58,13 +58,13 @@ public enum Scope {
   manageMyProfile,
 
   /**
-   * Grants access to the APIs for creating, modifying and viewing anything related to types in a
+   * Grants access to the APIs for creating, modifying and viewing anything related to models in a
    * project.
    */
   manageTypes,
 
   /**
-   * Grants access to the APIs for viewing anything related to types in a project.
+   * Grants access to the APIs for viewing anything related to models in a project.
    */
   viewTypes,
 

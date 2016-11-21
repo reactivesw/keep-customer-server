@@ -1,7 +1,7 @@
 package io.reactivesw.customer.server.common.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.reactivesw.customer.server.common.types.LocalizedString;
+import io.reactivesw.customer.server.common.models.LocalizedString;
 
 import javax.persistence.AttributeConverter;
 import java.io.IOException;

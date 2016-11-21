@@ -31,4 +31,36 @@ public class Delivery {
 
   @ApiModelProperty(required = false)
   private List<Parcel> parcels;
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public ZonedDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(ZonedDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public List<DeliveryItem> getItems() {
+    return items;
+  }
+
+  public void setItems(List<DeliveryItem> items) {
+    this.items = items;
+  }
+
+  public List<Parcel> getParcels() {
+    return parcels;
+  }
+
+  public void setParcels(List<Parcel> parcels) {
+    this.parcels = parcels;
+  }
 }

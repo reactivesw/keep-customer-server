@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-import io.reactivesw.customer.server.common.types.Reference;
+import io.reactivesw.customer.server.common.models.Reference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -45,4 +45,75 @@ public class ShippingMethod {
   @ApiModelProperty(value = "One shipping method in a project can be default.", required = true)
   private Boolean isDefault;
 
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public Integer getVersion() {
+    return version;
+  }
+
+  public void setVersion(Integer version) {
+    this.version = version;
+  }
+
+  public ZonedDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(ZonedDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public ZonedDateTime getLastModifiedAt() {
+    return lastModifiedAt;
+  }
+
+  public void setLastModifiedAt(ZonedDateTime lastModifiedAt) {
+    this.lastModifiedAt = lastModifiedAt;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public Reference getTaxCategory() {
+    return taxCategory;
+  }
+
+  public void setTaxCategory(Reference taxCategory) {
+    this.taxCategory = taxCategory;
+  }
+
+  public List<ZoneRate> getZoneRates() {
+    return zoneRates;
+  }
+
+  public void setZoneRates(List<ZoneRate> zoneRates) {
+    this.zoneRates = zoneRates;
+  }
+
+  public Boolean getDefault() {
+    return isDefault;
+  }
+
+  public void setDefault(Boolean aDefault) {
+    isDefault = aDefault;
+  }
 }

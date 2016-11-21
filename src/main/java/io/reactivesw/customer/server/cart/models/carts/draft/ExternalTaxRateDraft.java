@@ -2,7 +2,7 @@ package io.reactivesw.customer.server.cart.models.carts.draft;
 
 import java.util.List;
 
-import io.reactivesw.customer.server.common.types.SubRate;
+import io.reactivesw.customer.server.common.models.SubRate;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 

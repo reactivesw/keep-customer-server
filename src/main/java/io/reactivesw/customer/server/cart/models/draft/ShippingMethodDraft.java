@@ -3,7 +3,7 @@ package io.reactivesw.customer.server.cart.models.draft;
 import java.util.List;
 
 import io.reactivesw.customer.server.cart.models.ZoneRate;
-import io.reactivesw.customer.server.common.types.Reference;
+import io.reactivesw.customer.server.common.models.Reference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -29,4 +29,43 @@ public class ShippingMethodDraft {
   @ApiModelProperty(value = "If true the shipping method will be the default one in a project.", required = true)
   private Boolean isDefault;
 
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public Reference getTaxCategory() {
+    return taxCategory;
+  }
+
+  public void setTaxCategory(Reference taxCategory) {
+    this.taxCategory = taxCategory;
+  }
+
+  public List<ZoneRate> getZoneRates() {
+    return zoneRates;
+  }
+
+  public void setZoneRates(List<ZoneRate> zoneRates) {
+    this.zoneRates = zoneRates;
+  }
+
+  public Boolean getDefault() {
+    return isDefault;
+  }
+
+  public void setDefault(Boolean aDefault) {
+    isDefault = aDefault;
+  }
 }

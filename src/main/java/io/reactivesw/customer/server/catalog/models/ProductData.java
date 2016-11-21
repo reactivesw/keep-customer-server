@@ -1,8 +1,8 @@
 package io.reactivesw.customer.server.catalog.models;
 
-import io.reactivesw.customer.server.common.types.LocalizedString;
-import io.reactivesw.customer.server.common.types.Reference;
-import io.reactivesw.customer.server.common.types.SearchKeyword;
+import io.reactivesw.customer.server.common.models.LocalizedString;
+import io.reactivesw.customer.server.common.models.Reference;
+import io.reactivesw.customer.server.common.models.SearchKeyword;
 
 import java.util.List;
 

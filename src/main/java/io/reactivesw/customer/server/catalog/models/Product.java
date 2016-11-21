@@ -1,12 +1,11 @@
 package io.reactivesw.customer.server.catalog.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.reactivesw.customer.server.common.types.Reference;
+import io.reactivesw.customer.server.common.models.Reference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.time.ZonedDateTime;
-import java.util.UUID;
 
 /**
  * Created by Davis on 16/11/17.

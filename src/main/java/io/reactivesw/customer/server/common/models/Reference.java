@@ -1,4 +1,4 @@
-package io.reactivesw.customer.server.common.types;
+package io.reactivesw.customer.server.common.models;
 
 import io.swagger.annotations.ApiModel;
 

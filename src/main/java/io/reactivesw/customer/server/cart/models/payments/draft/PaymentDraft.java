@@ -4,10 +4,10 @@ import java.util.List;
 
 import io.reactivesw.customer.server.cart.models.payments.PaymentMethodInfo;
 import io.reactivesw.customer.server.cart.models.payments.PaymentStatus;
-import io.reactivesw.customer.server.common.types.CustomFields;
-import io.reactivesw.customer.server.common.types.Money;
-import io.reactivesw.customer.server.common.types.Reference;
-import io.reactivesw.customer.server.common.types.draft.CustomFieldsDraft;
+import io.reactivesw.customer.server.common.models.CustomFields;
+import io.reactivesw.customer.server.common.models.Money;
+import io.reactivesw.customer.server.common.models.Reference;
+import io.reactivesw.customer.server.common.models.draft.CustomFieldsDraft;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
@@ -67,5 +67,107 @@ public class PaymentDraft {
           required = true)
   private List<CustomFieldsDraft> interfaceInteractions;
 
+  public Reference getCustomer() {
+    return customer;
+  }
 
+  public void setCustomer(Reference customer) {
+    this.customer = customer;
+  }
+
+  public String getExternalId() {
+    return externalId;
+  }
+
+  public void setExternalId(String externalId) {
+    this.externalId = externalId;
+  }
+
+  public String getInterfaceId() {
+    return interfaceId;
+  }
+
+  public void setInterfaceId(String interfaceId) {
+    this.interfaceId = interfaceId;
+  }
+
+  public Money getAmountPlanned() {
+    return amountPlanned;
+  }
+
+  public void setAmountPlanned(Money amountPlanned) {
+    this.amountPlanned = amountPlanned;
+  }
+
+  public Money getAmountAuthorized() {
+    return amountAuthorized;
+  }
+
+  public void setAmountAuthorized(Money amountAuthorized) {
+    this.amountAuthorized = amountAuthorized;
+  }
+
+  public String getAuthorizedUntil() {
+    return authorizedUntil;
+  }
+
+  public void setAuthorizedUntil(String authorizedUntil) {
+    this.authorizedUntil = authorizedUntil;
+  }
+
+  public Money getAmountPaid() {
+    return amountPaid;
+  }
+
+  public void setAmountPaid(Money amountPaid) {
+    this.amountPaid = amountPaid;
+  }
+
+  public Money getAmountRefunded() {
+    return amountRefunded;
+  }
+
+  public void setAmountRefunded(Money amountRefunded) {
+    this.amountRefunded = amountRefunded;
+  }
+
+  public PaymentMethodInfo getPaymentMethodInfo() {
+    return paymentMethodInfo;
+  }
+
+  public void setPaymentMethodInfo(PaymentMethodInfo paymentMethodInfo) {
+    this.paymentMethodInfo = paymentMethodInfo;
+  }
+
+  public CustomFields getCustom() {
+    return custom;
+  }
+
+  public void setCustom(CustomFields custom) {
+    this.custom = custom;
+  }
+
+  public PaymentStatus getPaymentStatus() {
+    return paymentStatus;
+  }
+
+  public void setPaymentStatus(PaymentStatus paymentStatus) {
+    this.paymentStatus = paymentStatus;
+  }
+
+  public List<TransactionDraft> getTransactions() {
+    return transactions;
+  }
+
+  public void setTransactions(List<TransactionDraft> transactions) {
+    this.transactions = transactions;
+  }
+
+  public List<CustomFieldsDraft> getInterfaceInteractions() {
+    return interfaceInteractions;
+  }
+
+  public void setInterfaceInteractions(List<CustomFieldsDraft> interfaceInteractions) {
+    this.interfaceInteractions = interfaceInteractions;
+  }
 }

@@ -46,4 +46,60 @@ public class Zone {
    * The Locations.
    */
   private List<Location> locations;
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public Integer getVersion() {
+    return version;
+  }
+
+  public void setVersion(Integer version) {
+    this.version = version;
+  }
+
+  public ZonedDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(ZonedDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public ZonedDateTime getLastModifiedAt() {
+    return lastModifiedAt;
+  }
+
+  public void setLastModifiedAt(ZonedDateTime lastModifiedAt) {
+    this.lastModifiedAt = lastModifiedAt;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public List<Location> getLocations() {
+    return locations;
+  }
+
+  public void setLocations(List<Location> locations) {
+    this.locations = locations;
+  }
 }

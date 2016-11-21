@@ -1,4 +1,4 @@
-package io.reactivesw.customer.server.common.types;
+package io.reactivesw.customer.server.common.models;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -15,4 +15,20 @@ public class SubRate {
 
   @ApiModelProperty(value = "Number Percentage in the range of [0..1].", required = true)
   private Float amount;
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public Float getAmount() {
+    return amount;
+  }
+
+  public void setAmount(Float amount) {
+    this.amount = amount;
+  }
 }

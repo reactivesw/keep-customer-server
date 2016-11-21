@@ -12,10 +12,10 @@ import io.reactivesw.customer.server.cart.models.carts.DiscountCodeInfo;
 import io.reactivesw.customer.server.cart.models.carts.LineItem;
 import io.reactivesw.customer.server.cart.models.carts.ShippingInfo;
 import io.reactivesw.customer.server.cart.models.carts.TaxedPrice;
-import io.reactivesw.customer.server.common.types.Address;
-import io.reactivesw.customer.server.common.types.CustomFields;
-import io.reactivesw.customer.server.common.types.Money;
-import io.reactivesw.customer.server.common.types.Reference;
+import io.reactivesw.customer.server.common.models.Address;
+import io.reactivesw.customer.server.common.models.CustomFields;
+import io.reactivesw.customer.server.common.models.Money;
+import io.reactivesw.customer.server.common.models.Reference;
 
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -200,4 +200,260 @@ public class Order {
    * The Inventory mode.
    */
   private InventoryMode inventoryMode;
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public Integer getVersion() {
+    return version;
+  }
+
+  public void setVersion(Integer version) {
+    this.version = version;
+  }
+
+  public ZonedDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(ZonedDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public ZonedDateTime getLastModifiedAt() {
+    return lastModifiedAt;
+  }
+
+  public void setLastModifiedAt(ZonedDateTime lastModifiedAt) {
+    this.lastModifiedAt = lastModifiedAt;
+  }
+
+  public ZonedDateTime getCompletedAt() {
+    return completedAt;
+  }
+
+  public void setCompletedAt(ZonedDateTime completedAt) {
+    this.completedAt = completedAt;
+  }
+
+  public String getOrderNumber() {
+    return orderNumber;
+  }
+
+  public void setOrderNumber(String orderNumber) {
+    this.orderNumber = orderNumber;
+  }
+
+  public String getCustomerId() {
+    return customerId;
+  }
+
+  public void setCustomerId(String customerId) {
+    this.customerId = customerId;
+  }
+
+  public String getCustomerEmail() {
+    return customerEmail;
+  }
+
+  public void setCustomerEmail(String customerEmail) {
+    this.customerEmail = customerEmail;
+  }
+
+  public String getAnonymousId() {
+    return anonymousId;
+  }
+
+  public void setAnonymousId(String anonymousId) {
+    this.anonymousId = anonymousId;
+  }
+
+  public List<LineItem> getLineItems() {
+    return lineItems;
+  }
+
+  public void setLineItems(List<LineItem> lineItems) {
+    this.lineItems = lineItems;
+  }
+
+  public List<CustomLineItem> getCustomLineItems() {
+    return customLineItems;
+  }
+
+  public void setCustomLineItems(List<CustomLineItem> customLineItems) {
+    this.customLineItems = customLineItems;
+  }
+
+  public Money getTotalPrice() {
+    return totalPrice;
+  }
+
+  public void setTotalPrice(Money totalPrice) {
+    this.totalPrice = totalPrice;
+  }
+
+  public TaxedPrice getTaxedPrice() {
+    return taxedPrice;
+  }
+
+  public void setTaxedPrice(TaxedPrice taxedPrice) {
+    this.taxedPrice = taxedPrice;
+  }
+
+  public Address getShippingAddress() {
+    return shippingAddress;
+  }
+
+  public void setShippingAddress(Address shippingAddress) {
+    this.shippingAddress = shippingAddress;
+  }
+
+  public Address getBillingAddress() {
+    return billingAddress;
+  }
+
+  public void setBillingAddress(Address billingAddress) {
+    this.billingAddress = billingAddress;
+  }
+
+  public TaxMode getTaxMode() {
+    return taxMode;
+  }
+
+  public void setTaxMode(TaxMode taxMode) {
+    this.taxMode = taxMode;
+  }
+
+  public Reference getCustomerGroup() {
+    return customerGroup;
+  }
+
+  public void setCustomerGroup(Reference customerGroup) {
+    this.customerGroup = customerGroup;
+  }
+
+  public String getCountry() {
+    return country;
+  }
+
+  public void setCountry(String country) {
+    this.country = country;
+  }
+
+  public OrderState getOrderState() {
+    return orderState;
+  }
+
+  public void setOrderState(OrderState orderState) {
+    this.orderState = orderState;
+  }
+
+  public Reference getState() {
+    return state;
+  }
+
+  public void setState(Reference state) {
+    this.state = state;
+  }
+
+  public ShipmentState getShipmentState() {
+    return shipmentState;
+  }
+
+  public void setShipmentState(ShipmentState shipmentState) {
+    this.shipmentState = shipmentState;
+  }
+
+  public PaymentState getPaymentState() {
+    return paymentState;
+  }
+
+  public void setPaymentState(PaymentState paymentState) {
+    this.paymentState = paymentState;
+  }
+
+  public ShippingInfo getShippingInfo() {
+    return shippingInfo;
+  }
+
+  public void setShippingInfo(ShippingInfo shippingInfo) {
+    this.shippingInfo = shippingInfo;
+  }
+
+  public Set<SyncInfo> getSyncInfo() {
+    return syncInfo;
+  }
+
+  public void setSyncInfo(Set<SyncInfo> syncInfo) {
+    this.syncInfo = syncInfo;
+  }
+
+  public Set<ReturnInfo> getReturnInfo() {
+    return returnInfo;
+  }
+
+  public void setReturnInfo(Set<ReturnInfo> returnInfo) {
+    this.returnInfo = returnInfo;
+  }
+
+  public List<DiscountCodeInfo> getDiscountCodes() {
+    return discountCodes;
+  }
+
+  public void setDiscountCodes(List<DiscountCodeInfo> discountCodes) {
+    this.discountCodes = discountCodes;
+  }
+
+  public Integer getLastMessageSequenceNumber() {
+    return lastMessageSequenceNumber;
+  }
+
+  public void setLastMessageSequenceNumber(Integer lastMessageSequenceNumber) {
+    this.lastMessageSequenceNumber = lastMessageSequenceNumber;
+  }
+
+  public Reference getCart() {
+    return cart;
+  }
+
+  public void setCart(Reference cart) {
+    this.cart = cart;
+  }
+
+  public CustomFields getCustom() {
+    return custom;
+  }
+
+  public void setCustom(CustomFields custom) {
+    this.custom = custom;
+  }
+
+  public PaymentInfo getPaymentInfo() {
+    return paymentInfo;
+  }
+
+  public void setPaymentInfo(PaymentInfo paymentInfo) {
+    this.paymentInfo = paymentInfo;
+  }
+
+  public String getLocale() {
+    return locale;
+  }
+
+  public void setLocale(String locale) {
+    this.locale = locale;
+  }
+
+  public InventoryMode getInventoryMode() {
+    return inventoryMode;
+  }
+
+  public void setInventoryMode(InventoryMode inventoryMode) {
+    this.inventoryMode = inventoryMode;
+  }
 }

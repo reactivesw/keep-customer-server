@@ -1,7 +1,7 @@
 package io.reactivesw.customer.server.catalog.entities;
 
 import io.reactivesw.customer.server.common.utils.JpaConverterJson;
-import io.reactivesw.customer.server.common.types.LocalizedString;
+import io.reactivesw.customer.server.common.models.LocalizedString;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Objects;

@@ -1,6 +1,6 @@
 package io.reactivesw.customer.server.cart.models;
 
-import io.reactivesw.customer.server.common.types.Money;
+import io.reactivesw.customer.server.common.models.Money;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -16,4 +16,19 @@ public class ShippingRate {
   @ApiModelProperty(required = false)
   private Money freeAbove;
 
+  public Money getPrice() {
+    return price;
+  }
+
+  public void setPrice(Money price) {
+    this.price = price;
+  }
+
+  public Money getFreeAbove() {
+    return freeAbove;
+  }
+
+  public void setFreeAbove(Money freeAbove) {
+    this.freeAbove = freeAbove;
+  }
 }

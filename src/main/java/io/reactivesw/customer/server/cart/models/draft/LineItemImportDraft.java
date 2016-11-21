@@ -2,10 +2,10 @@ package io.reactivesw.customer.server.cart.models.draft;
 
 import io.reactivesw.customer.server.cart.models.orders.ItemState;
 import io.reactivesw.customer.server.catalog.models.Price;
-import io.reactivesw.customer.server.common.types.LocalizedString;
-import io.reactivesw.customer.server.common.types.Reference;
-import io.reactivesw.customer.server.common.types.TaxRate;
-import io.reactivesw.customer.server.common.types.draft.CustomFieldsDraft;
+import io.reactivesw.customer.server.common.models.LocalizedString;
+import io.reactivesw.customer.server.common.models.Reference;
+import io.reactivesw.customer.server.common.models.TaxRate;
+import io.reactivesw.customer.server.common.models.draft.CustomFieldsDraft;
 
 import java.util.List;
 
@@ -67,4 +67,76 @@ public class LineItemImportDraft {
    * The custom fields.
    */
   private CustomFieldsDraft custom;
+
+  public String getProductId() {
+    return productId;
+  }
+
+  public void setProductId(String productId) {
+    this.productId = productId;
+  }
+
+  public LocalizedString getName() {
+    return name;
+  }
+
+  public void setName(LocalizedString name) {
+    this.name = name;
+  }
+
+  public ProductVariantImportDraft getVariant() {
+    return variant;
+  }
+
+  public void setVariant(ProductVariantImportDraft variant) {
+    this.variant = variant;
+  }
+
+  public Price getPrice() {
+    return price;
+  }
+
+  public void setPrice(Price price) {
+    this.price = price;
+  }
+
+  public Integer getQuantity() {
+    return quantity;
+  }
+
+  public void setQuantity(Integer quantity) {
+    this.quantity = quantity;
+  }
+
+  public List<ItemState> getState() {
+    return state;
+  }
+
+  public void setState(List<ItemState> state) {
+    this.state = state;
+  }
+
+  public Reference getSupplyChannel() {
+    return supplyChannel;
+  }
+
+  public void setSupplyChannel(Reference supplyChannel) {
+    this.supplyChannel = supplyChannel;
+  }
+
+  public TaxRate getTaxRate() {
+    return taxRate;
+  }
+
+  public void setTaxRate(TaxRate taxRate) {
+    this.taxRate = taxRate;
+  }
+
+  public CustomFieldsDraft getCustom() {
+    return custom;
+  }
+
+  public void setCustom(CustomFieldsDraft custom) {
+    this.custom = custom;
+  }
 }

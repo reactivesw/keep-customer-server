@@ -2,7 +2,7 @@ package io.reactivesw.customer.server.cart.models.carts;
 
 import java.util.List;
 
-import io.reactivesw.customer.server.common.types.Money;
+import io.reactivesw.customer.server.common.models.Money;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -21,4 +21,27 @@ public class TaxedPrice {
   @ApiModelProperty(required = true)
   private List<TaxPortion> taxPortions;
 
+  public Money getTotalNet() {
+    return totalNet;
+  }
+
+  public void setTotalNet(Money totalNet) {
+    this.totalNet = totalNet;
+  }
+
+  public Money getTotalGross() {
+    return totalGross;
+  }
+
+  public void setTotalGross(Money totalGross) {
+    this.totalGross = totalGross;
+  }
+
+  public List<TaxPortion> getTaxPortions() {
+    return taxPortions;
+  }
+
+  public void setTaxPortions(List<TaxPortion> taxPortions) {
+    this.taxPortions = taxPortions;
+  }
 }

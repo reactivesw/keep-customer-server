@@ -6,7 +6,7 @@ import java.time.ZonedDateTime;
 
 import io.reactivesw.customer.server.cart.enums.payments.TransactionState;
 import io.reactivesw.customer.server.cart.enums.payments.TransactionType;
-import io.reactivesw.customer.server.common.types.Money;
+import io.reactivesw.customer.server.common.models.Money;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -35,4 +35,43 @@ public class TransactionDraft {
           required = true)
   private TransactionState state;
 
+  public ZonedDateTime getTimestamp() {
+    return timestamp;
+  }
+
+  public void setTimestamp(ZonedDateTime timestamp) {
+    this.timestamp = timestamp;
+  }
+
+  public TransactionType getType() {
+    return type;
+  }
+
+  public void setType(TransactionType type) {
+    this.type = type;
+  }
+
+  public Money getAmount() {
+    return amount;
+  }
+
+  public void setAmount(Money amount) {
+    this.amount = amount;
+  }
+
+  public String getInteractionId() {
+    return interactionId;
+  }
+
+  public void setInteractionId(String interactionId) {
+    this.interactionId = interactionId;
+  }
+
+  public TransactionState getState() {
+    return state;
+  }
+
+  public void setState(TransactionState state) {
+    this.state = state;
+  }
 }

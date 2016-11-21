@@ -2,7 +2,7 @@ package io.reactivesw.customer.server.cart.models;
 
 import java.util.List;
 
-import io.reactivesw.customer.server.common.types.Reference;
+import io.reactivesw.customer.server.common.models.Reference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -18,6 +18,7 @@ public class ZoneRate {
   @ApiModelProperty(value = "The array does not contain two shipping rates with the same currency.",
           required = true)
   private List<ShippingRate> shippingRates;
+
 
 
 }

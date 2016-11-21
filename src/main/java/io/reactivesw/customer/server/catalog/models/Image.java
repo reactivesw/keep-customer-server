@@ -1,7 +1,6 @@
 package io.reactivesw.customer.server.catalog.models;
 
-import io.reactivesw.customer.server.common.types.AssetDimensions;
-import io.swagger.annotations.Api;
+import io.reactivesw.customer.server.common.models.AssetDimensions;
 import io.swagger.annotations.ApiModel;
 
 /**

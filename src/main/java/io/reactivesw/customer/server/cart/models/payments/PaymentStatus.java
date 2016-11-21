@@ -1,6 +1,6 @@
 package io.reactivesw.customer.server.cart.models.payments;
 
-import io.reactivesw.customer.server.common.types.Reference;
+import io.reactivesw.customer.server.common.models.Reference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -20,4 +20,28 @@ public class PaymentStatus {
 
   @ApiModelProperty(required = false)
   private Reference state;
+
+  public String getInterfaceCode() {
+    return interfaceCode;
+  }
+
+  public void setInterfaceCode(String interfaceCode) {
+    this.interfaceCode = interfaceCode;
+  }
+
+  public String getInterfaceText() {
+    return interfaceText;
+  }
+
+  public void setInterfaceText(String interfaceText) {
+    this.interfaceText = interfaceText;
+  }
+
+  public Reference getState() {
+    return state;
+  }
+
+  public void setState(Reference state) {
+    this.state = state;
+  }
 }

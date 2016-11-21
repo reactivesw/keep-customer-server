@@ -1,6 +1,6 @@
 package io.reactivesw.customer.server.catalog.models;
 
-import io.reactivesw.customer.server.common.types.LocalizedString;
+import io.reactivesw.customer.server.common.models.LocalizedString;
 
 /**
  * Created by umasuo on 16/11/18.

@@ -25,4 +25,43 @@ public class TrackingData {
           required = false)
   private Boolean isReturn;
 
+  public String getTrackingId() {
+    return trackingId;
+  }
+
+  public void setTrackingId(String trackingId) {
+    this.trackingId = trackingId;
+  }
+
+  public String getCarrier() {
+    return carrier;
+  }
+
+  public void setCarrier(String carrier) {
+    this.carrier = carrier;
+  }
+
+  public String getProvider() {
+    return provider;
+  }
+
+  public void setProvider(String provider) {
+    this.provider = provider;
+  }
+
+  public String getProviderTransaction() {
+    return providerTransaction;
+  }
+
+  public void setProviderTransaction(String providerTransaction) {
+    this.providerTransaction = providerTransaction;
+  }
+
+  public Boolean getReturn() {
+    return isReturn;
+  }
+
+  public void setReturn(Boolean aReturn) {
+    isReturn = aReturn;
+  }
 }

@@ -24,4 +24,35 @@ public class ReturnItemDraft {
   @ApiModelProperty(required = true)
   private ReturnShipmentState shipmentState;
 
+  public Integer getQuantity() {
+    return quantity;
+  }
+
+  public void setQuantity(Integer quantity) {
+    this.quantity = quantity;
+  }
+
+  public String getLineItemId() {
+    return lineItemId;
+  }
+
+  public void setLineItemId(String lineItemId) {
+    this.lineItemId = lineItemId;
+  }
+
+  public String getComment() {
+    return comment;
+  }
+
+  public void setComment(String comment) {
+    this.comment = comment;
+  }
+
+  public ReturnShipmentState getShipmentState() {
+    return shipmentState;
+  }
+
+  public void setShipmentState(ReturnShipmentState shipmentState) {
+    this.shipmentState = shipmentState;
+  }
 }

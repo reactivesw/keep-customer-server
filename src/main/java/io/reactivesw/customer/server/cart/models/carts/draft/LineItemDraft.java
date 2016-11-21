@@ -1,7 +1,7 @@
 package io.reactivesw.customer.server.cart.models.carts.draft;
 
-import io.reactivesw.customer.server.common.types.Reference;
-import io.reactivesw.customer.server.common.types.draft.CustomFieldsDraft;
+import io.reactivesw.customer.server.common.models.Reference;
+import io.reactivesw.customer.server.common.models.draft.CustomFieldsDraft;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 

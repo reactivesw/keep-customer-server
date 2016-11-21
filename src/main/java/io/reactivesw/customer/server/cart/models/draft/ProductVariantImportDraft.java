@@ -55,4 +55,44 @@ public class ProductVariantImportDraft {
    * Optional.
    */
   private List<Image> images;
+
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public String getSku() {
+    return sku;
+  }
+
+  public void setSku(String sku) {
+    this.sku = sku;
+  }
+
+  public List<Price> getPrices() {
+    return prices;
+  }
+
+  public void setPrices(List<Price> prices) {
+    this.prices = prices;
+  }
+
+  public List<Attribute> getAttributes() {
+    return attributes;
+  }
+
+  public void setAttributes(List<Attribute> attributes) {
+    this.attributes = attributes;
+  }
+
+  public List<Image> getImages() {
+    return images;
+  }
+
+  public void setImages(List<Image> images) {
+    this.images = images;
+  }
 }

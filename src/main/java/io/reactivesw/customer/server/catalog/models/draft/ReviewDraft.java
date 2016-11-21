@@ -1,7 +1,7 @@
 package io.reactivesw.customer.server.catalog.models.draft;
 
-import io.reactivesw.customer.server.common.types.CustomFields;
-import io.reactivesw.customer.server.common.types.ResourceIdentifier;
+import io.reactivesw.customer.server.common.models.CustomFields;
+import io.reactivesw.customer.server.common.models.ResourceIdentifier;
 
 /**
  * Created by Davis on 16/11/17.

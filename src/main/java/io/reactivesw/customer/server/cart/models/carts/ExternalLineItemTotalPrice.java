@@ -1,6 +1,6 @@
 package io.reactivesw.customer.server.cart.models.carts;
 
-import io.reactivesw.customer.server.common.types.Money;
+import io.reactivesw.customer.server.common.models.Money;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -15,4 +15,20 @@ public class ExternalLineItemTotalPrice {
 
   @ApiModelProperty(required = true)
   private Money totalPrice;
+
+  public Money getPrice() {
+    return price;
+  }
+
+  public void setPrice(Money price) {
+    this.price = price;
+  }
+
+  public Money getTotalPrice() {
+    return totalPrice;
+  }
+
+  public void setTotalPrice(Money totalPrice) {
+    this.totalPrice = totalPrice;
+  }
 }

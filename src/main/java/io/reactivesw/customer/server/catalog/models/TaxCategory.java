@@ -2,7 +2,7 @@ package io.reactivesw.customer.server.catalog.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import io.reactivesw.customer.server.common.types.TaxRate;
+import io.reactivesw.customer.server.common.models.TaxRate;
 
 import java.time.ZonedDateTime;
 import java.util.List;

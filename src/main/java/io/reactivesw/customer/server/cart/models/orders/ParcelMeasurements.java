@@ -20,4 +20,36 @@ public class ParcelMeasurements {
 
   @ApiModelProperty(required = true)
   private Float weightInGram;
+
+  public Float getHeightInMillimeter() {
+    return heightInMillimeter;
+  }
+
+  public void setHeightInMillimeter(Float heightInMillimeter) {
+    this.heightInMillimeter = heightInMillimeter;
+  }
+
+  public Float getLengthInMillimeter() {
+    return lengthInMillimeter;
+  }
+
+  public void setLengthInMillimeter(Float lengthInMillimeter) {
+    this.lengthInMillimeter = lengthInMillimeter;
+  }
+
+  public Float getWidthInMillimeter() {
+    return widthInMillimeter;
+  }
+
+  public void setWidthInMillimeter(Float widthInMillimeter) {
+    this.widthInMillimeter = widthInMillimeter;
+  }
+
+  public Float getWeightInGram() {
+    return weightInGram;
+  }
+
+  public void setWeightInGram(Float weightInGram) {
+    this.weightInGram = weightInGram;
+  }
 }

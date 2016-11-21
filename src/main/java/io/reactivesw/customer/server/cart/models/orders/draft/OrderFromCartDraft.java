@@ -23,4 +23,35 @@ public class OrderFromCartDraft {
   @ApiModelProperty(required = false)
   private PaymentState paymentState;
 
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public Integer getVersion() {
+    return version;
+  }
+
+  public void setVersion(Integer version) {
+    this.version = version;
+  }
+
+  public String getOrderNumber() {
+    return orderNumber;
+  }
+
+  public void setOrderNumber(String orderNumber) {
+    this.orderNumber = orderNumber;
+  }
+
+  public PaymentState getPaymentState() {
+    return paymentState;
+  }
+
+  public void setPaymentState(PaymentState paymentState) {
+    this.paymentState = paymentState;
+  }
 }

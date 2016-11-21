@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-import io.reactivesw.customer.server.common.types.LocalizedString;
-import io.reactivesw.customer.server.common.types.Reference;
+import io.reactivesw.customer.server.common.models.LocalizedString;
+import io.reactivesw.customer.server.common.models.Reference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -65,5 +65,107 @@ public class DiscountCode {
           required = true)
   private Integer maxApplicationsPerCustomer;
 
+  public String getId() {
+    return id;
+  }
 
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public Integer getVersion() {
+    return version;
+  }
+
+  public void setVersion(Integer version) {
+    this.version = version;
+  }
+
+  public ZonedDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(ZonedDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public ZonedDateTime getLastModifiedAt() {
+    return lastModifiedAt;
+  }
+
+  public void setLastModifiedAt(ZonedDateTime lastModifiedAt) {
+    this.lastModifiedAt = lastModifiedAt;
+  }
+
+  public LocalizedString getName() {
+    return name;
+  }
+
+  public void setName(LocalizedString name) {
+    this.name = name;
+  }
+
+  public LocalizedString getDescription() {
+    return description;
+  }
+
+  public void setDescription(LocalizedString description) {
+    this.description = description;
+  }
+
+  public String getCode() {
+    return code;
+  }
+
+  public void setCode(String code) {
+    this.code = code;
+  }
+
+  public List<Reference> getCartDiscounts() {
+    return cartDiscounts;
+  }
+
+  public void setCartDiscounts(List<Reference> cartDiscounts) {
+    this.cartDiscounts = cartDiscounts;
+  }
+
+  public CartDiscountPredicate getCartPredicate() {
+    return cartPredicate;
+  }
+
+  public void setCartPredicate(CartDiscountPredicate cartPredicate) {
+    this.cartPredicate = cartPredicate;
+  }
+
+  public Boolean getActive() {
+    return isActive;
+  }
+
+  public void setActive(Boolean active) {
+    isActive = active;
+  }
+
+  public List<Reference> getReferences() {
+    return references;
+  }
+
+  public void setReferences(List<Reference> references) {
+    this.references = references;
+  }
+
+  public Integer getMaxApplications() {
+    return maxApplications;
+  }
+
+  public void setMaxApplications(Integer maxApplications) {
+    this.maxApplications = maxApplications;
+  }
+
+  public Integer getMaxApplicationsPerCustomer() {
+    return maxApplicationsPerCustomer;
+  }
+
+  public void setMaxApplicationsPerCustomer(Integer maxApplicationsPerCustomer) {
+    this.maxApplicationsPerCustomer = maxApplicationsPerCustomer;
+  }
 }

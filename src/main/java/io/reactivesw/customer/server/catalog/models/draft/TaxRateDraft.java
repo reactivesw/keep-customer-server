@@ -1,6 +1,6 @@
 package io.reactivesw.customer.server.catalog.models.draft;
 
-import io.reactivesw.customer.server.common.types.SubRate;
+import io.reactivesw.customer.server.common.models.SubRate;
 
 import java.util.List;
 

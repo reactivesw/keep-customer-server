@@ -2,7 +2,7 @@ package io.reactivesw.customer.server.catalog.models;
 
 import java.util.List;
 
-import io.reactivesw.customer.server.common.types.Asset;
+import io.reactivesw.customer.server.common.models.Asset;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 

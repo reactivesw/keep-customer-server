@@ -1,6 +1,4 @@
-package io.reactivesw.customer.server.common.types;
-
-import io.reactivesw.customer.server.common.types.Reference;
+package io.reactivesw.customer.server.common.models;
 
 /**
  * Created by umasuo on 16/11/16.

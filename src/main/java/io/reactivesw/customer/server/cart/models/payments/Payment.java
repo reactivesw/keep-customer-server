@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-import io.reactivesw.customer.server.common.types.CustomFields;
-import io.reactivesw.customer.server.common.types.Money;
-import io.reactivesw.customer.server.common.types.Reference;
+import io.reactivesw.customer.server.common.models.CustomFields;
+import io.reactivesw.customer.server.common.models.Money;
+import io.reactivesw.customer.server.common.models.Reference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -80,4 +80,139 @@ public class Payment {
   @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime lastModifiedAt;
 
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public Integer getVersion() {
+    return version;
+  }
+
+  public void setVersion(Integer version) {
+    this.version = version;
+  }
+
+  public Reference getCustomer() {
+    return customer;
+  }
+
+  public void setCustomer(Reference customer) {
+    this.customer = customer;
+  }
+
+  public String getExternalId() {
+    return externalId;
+  }
+
+  public void setExternalId(String externalId) {
+    this.externalId = externalId;
+  }
+
+  public String getInterfaceId() {
+    return interfaceId;
+  }
+
+  public void setInterfaceId(String interfaceId) {
+    this.interfaceId = interfaceId;
+  }
+
+  public Money getAmountPlanned() {
+    return amountPlanned;
+  }
+
+  public void setAmountPlanned(Money amountPlanned) {
+    this.amountPlanned = amountPlanned;
+  }
+
+  public Money getAmountAuthorized() {
+    return amountAuthorized;
+  }
+
+  public void setAmountAuthorized(Money amountAuthorized) {
+    this.amountAuthorized = amountAuthorized;
+  }
+
+  public String getAuthorizedUntil() {
+    return authorizedUntil;
+  }
+
+  public void setAuthorizedUntil(String authorizedUntil) {
+    this.authorizedUntil = authorizedUntil;
+  }
+
+  public Money getAmountPaid() {
+    return amountPaid;
+  }
+
+  public void setAmountPaid(Money amountPaid) {
+    this.amountPaid = amountPaid;
+  }
+
+  public Money getAmountRefunded() {
+    return amountRefunded;
+  }
+
+  public void setAmountRefunded(Money amountRefunded) {
+    this.amountRefunded = amountRefunded;
+  }
+
+  public PaymentMethodInfo getPaymentMethodInfo() {
+    return paymentMethodInfo;
+  }
+
+  public void setPaymentMethodInfo(PaymentMethodInfo paymentMethodInfo) {
+    this.paymentMethodInfo = paymentMethodInfo;
+  }
+
+  public PaymentStatus getPaymentStatus() {
+    return paymentStatus;
+  }
+
+  public void setPaymentStatus(PaymentStatus paymentStatus) {
+    this.paymentStatus = paymentStatus;
+  }
+
+  public List<Transaction> getTransactions() {
+    return transactions;
+  }
+
+  public void setTransactions(List<Transaction> transactions) {
+    this.transactions = transactions;
+  }
+
+  public List<CustomFields> getInterfaceInteractions() {
+    return interfaceInteractions;
+  }
+
+  public void setInterfaceInteractions(List<CustomFields> interfaceInteractions) {
+    this.interfaceInteractions = interfaceInteractions;
+  }
+
+  public CustomFields getCustom() {
+    return custom;
+  }
+
+  public void setCustom(CustomFields custom) {
+    this.custom = custom;
+  }
+
+  public ZonedDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(ZonedDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public ZonedDateTime getLastModifiedAt() {
+    return lastModifiedAt;
+  }
+
+  public void setLastModifiedAt(ZonedDateTime lastModifiedAt) {
+    this.lastModifiedAt = lastModifiedAt;
+  }
 }

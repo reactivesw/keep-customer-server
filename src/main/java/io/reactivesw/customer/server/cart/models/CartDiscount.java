@@ -2,8 +2,8 @@ package io.reactivesw.customer.server.cart.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import io.reactivesw.customer.server.common.types.LocalizedString;
-import io.reactivesw.customer.server.common.types.Reference;
+import io.reactivesw.customer.server.common.models.LocalizedString;
+import io.reactivesw.customer.server.common.models.Reference;
 
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -95,4 +95,124 @@ public class CartDiscount {
    * It contains the references of all the resources that are addressed in the predicate.
    */
   private List<Reference> references;
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public Integer getVersion() {
+    return version;
+  }
+
+  public void setVersion(Integer version) {
+    this.version = version;
+  }
+
+  public ZonedDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(ZonedDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public ZonedDateTime getLastModifiedAt() {
+    return lastModifiedAt;
+  }
+
+  public void setLastModifiedAt(ZonedDateTime lastModifiedAt) {
+    this.lastModifiedAt = lastModifiedAt;
+  }
+
+  public LocalizedString getName() {
+    return name;
+  }
+
+  public void setName(LocalizedString name) {
+    this.name = name;
+  }
+
+  public LocalizedString getDescription() {
+    return description;
+  }
+
+  public void setDescription(LocalizedString description) {
+    this.description = description;
+  }
+
+  public CartDiscountValue getValue() {
+    return value;
+  }
+
+  public void setValue(CartDiscountValue value) {
+    this.value = value;
+  }
+
+  public String getCartPredicate() {
+    return cartPredicate;
+  }
+
+  public void setCartPredicate(String cartPredicate) {
+    this.cartPredicate = cartPredicate;
+  }
+
+  public CartDiscountTarget getTarget() {
+    return target;
+  }
+
+  public void setTarget(CartDiscountTarget target) {
+    this.target = target;
+  }
+
+  public String getSortOrder() {
+    return sortOrder;
+  }
+
+  public void setSortOrder(String sortOrder) {
+    this.sortOrder = sortOrder;
+  }
+
+  public Boolean getActive() {
+    return isActive;
+  }
+
+  public void setActive(Boolean active) {
+    isActive = active;
+  }
+
+  public ZonedDateTime getValidFrom() {
+    return validFrom;
+  }
+
+  public void setValidFrom(ZonedDateTime validFrom) {
+    this.validFrom = validFrom;
+  }
+
+  public ZonedDateTime getValidUntil() {
+    return validUntil;
+  }
+
+  public void setValidUntil(ZonedDateTime validUntil) {
+    this.validUntil = validUntil;
+  }
+
+  public Boolean getRequiresDiscountCode() {
+    return requiresDiscountCode;
+  }
+
+  public void setRequiresDiscountCode(Boolean requiresDiscountCode) {
+    this.requiresDiscountCode = requiresDiscountCode;
+  }
+
+  public List<Reference> getReferences() {
+    return references;
+  }
+
+  public void setReferences(List<Reference> references) {
+    this.references = references;
+  }
 }
