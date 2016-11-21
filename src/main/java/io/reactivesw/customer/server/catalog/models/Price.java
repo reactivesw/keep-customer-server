@@ -43,7 +43,7 @@ public class Price {
   private ZonedDateTime validUntil;
 
   @ApiModelProperty(value = "Set if a matching ProductDiscount exists. " +
-          "If set, the Cart will use the discounted value for the cart price calculation." +
+          "If set, the Cart will use the discounted value for the carts price calculation." +
           "When a relative discount is applied and the fraction part of the discounted price is 0.5, the discounted price is rounded in favor of the customer with the half down rounding.",
           required = false)
   private DiscountedPrice discounted;

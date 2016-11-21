@@ -7,8 +7,8 @@ import io.reactivesw.customer.server.catalog.entities.CategoryEntity;
  */
 public enum  ReferenceTypes {
   CATEGORY("category"),
-  CART("cart"),
-  CARTDISCOUNT("cart-discount");
+  CART("carts"),
+  CARTDISCOUNT("carts-discount");
   private String value;
 
   private ReferenceTypes(String value){

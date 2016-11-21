@@ -3,7 +3,7 @@ package io.reactivesw.customer.server.customer.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import io.reactivesw.customer.server.cart.models.Cart;
+import io.reactivesw.customer.server.cart.models.carts.Cart;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -18,7 +18,7 @@ public class CustomerSignInResult {
   @JsonProperty
   private Customer customer;
 
-  @ApiModelProperty(value = "A cart that is associated to the customer. Empty if the customer does not have a cart yet.", required = false)
+  @ApiModelProperty(value = "A carts that is associated to the customer. Empty if the customer does not have a carts yet.", required = false)
   private Cart cart;
 
 
