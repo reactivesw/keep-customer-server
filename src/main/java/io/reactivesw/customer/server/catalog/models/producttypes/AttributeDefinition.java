@@ -1,9 +1,7 @@
-package io.reactivesw.customer.server.catalog.models.draft;
+package io.reactivesw.customer.server.catalog.models.producttypes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.validation.constraints.NotNull;
-
 import io.reactivesw.customer.server.catalog.enums.AttributeConstraint;
 import io.reactivesw.customer.server.catalog.enums.TextInputHint;
 import io.reactivesw.customer.server.catalog.models.AttributeType;
@@ -12,44 +10,49 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Created by Davis on 16/11/17.
+ * Created by Davis on 16/11/16.
  */
 @ApiModel
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AttributeDefinitionDraft {
+public class AttributeDefinition {
 
   /**
-   * Describes the type of the attribute.
+   * Describes the type of the attribute. TODO
    */
   @ApiModelProperty(required = true)
-  @NotNull
   private AttributeType type;
 
   /**
-   * The unique name of the attribute used in the API.
-   * The name must be between two and 36 characters long and can contain
-   * the ASCII letters A to Z in lowercase or uppercase, digits, underscores (_)
+   * he unique name of the attribute used in the API.
+   * The name must be between two and 36 characters long
+   * and can contain the ASCII letters A to Z in lowercase or uppercase, digits, underscores (_)
    * and the hyphen-minus (-).
-   * It is allowed to have attributes with the same name in two or more ProductTypes.
-   * The important constraint is: all fields of the AttributeDefinition
-   * need to be the same across all attributes with the same name.
+   * It is allowed to have attributes with the same name in two or more productTypes.
+   * The important constraint is:
+   * all fields of the AttributeDefinition need to
+   * be the same across all attributes with the same name.
    */
   @ApiModelProperty(required = true)
-  @NotNull
   private String name;
 
   /**
    * A human-readable label for the attribute.
    */
-  @ApiModelProperty(required = true)
-  @NotNull
+  @JsonIgnore
   private LocalizedString label;
+
+  /**
+   * Additional information about the attribute that aids content managers
+   * when setting product details.
+   */
+  @JsonIgnore
+  @ApiModelProperty(required = false)
+  private LocalizedString inputTip;
 
   /**
    * Whether the attribute is required to have a value.
    */
   @ApiModelProperty(required = true)
-  @NotNull
   private Boolean isRequired;
 
   /**
@@ -57,7 +60,6 @@ public class AttributeDefinitionDraft {
    * should be validated across all variants of a product.
    */
   @ApiModelProperty(required = true)
-  @NotNull
   private AttributeConstraint attributeConstraint;
 
   /**
@@ -65,19 +67,21 @@ public class AttributeDefinitionDraft {
    * only relevant for text-based attribute models like TextType and LocalizableTextType.
    */
   //TODO String should be TextInputHint
-  @ApiModelProperty(required = true)
-  @NotNull
+  @ApiModelProperty(required = false)
   private TextInputHint inputHint;
 
   /**
-   * Whether the attribute’s values should generally be enabled in product search. This
-   * determines whether the value is stored in products for matching terms in the context of
-   * full-text search queries and can be used in facets & filters as part of product search
-   * queries. The exact features that are enabled/disabled with this flag depend on the concrete
-   * attribute type and are described there.
+   * Whether the attribute’s values should generally be enabled in product search.
+   * This determines whether the value is stored in products for matching terms in the context of
+   * full-text search queries and can be used in facets &
+   * filters as part of product search queries.
+   * The exact features that are enabled/disabled with this flag
+   * depend on the concrete attribute type and are described there.
+   * The max size of a searchable field is restricted to 10922 characters.
+   * This constraint is enforced at both product creation and product update.
+   * If the length of the input exceeds the maximum size an InvalidField error is returned.
    */
-  @ApiModelProperty(required = true)
-  @NotNull
+  @ApiModelProperty(required = false)
   private Boolean isSearchable;
 
   /**
@@ -132,6 +136,24 @@ public class AttributeDefinitionDraft {
    */
   public void setLabel(LocalizedString label) {
     this.label = label;
+  }
+
+  /**
+   * Gets input tip.
+   *
+   * @return the input tip
+   */
+  public LocalizedString getInputTip() {
+    return inputTip;
+  }
+
+  /**
+   * Sets input tip.
+   *
+   * @param inputTip the input tip
+   */
+  public void setInputTip(LocalizedString inputTip) {
+    this.inputTip = inputTip;
   }
 
   /**
@@ -213,10 +235,11 @@ public class AttributeDefinitionDraft {
    */
   @Override
   public String toString() {
-    return "AttributeDefinitionDraft{" +
+    return "AttributeDefinition{" +
             "type=" + type +
             ", name='" + name + '\'' +
             ", label=" + label +
+            ", inputTip=" + inputTip +
             ", isRequired=" + isRequired +
             ", attributeConstraint=" + attributeConstraint +
             ", inputHint='" + inputHint + '\'' +

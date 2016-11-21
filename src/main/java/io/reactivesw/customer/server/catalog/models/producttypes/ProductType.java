@@ -1,9 +1,8 @@
-package io.reactivesw.customer.server.catalog.models;
+package io.reactivesw.customer.server.catalog.models.producttypes;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import io.reactivesw.customer.server.catalog.models.AttributeDefinition;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 

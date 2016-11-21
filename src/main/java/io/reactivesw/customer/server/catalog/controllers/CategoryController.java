@@ -1,15 +1,14 @@
 package io.reactivesw.customer.server.catalog.controllers;
 
-import io.reactivesw.customer.server.catalog.models.Category;
-import io.reactivesw.customer.server.catalog.models.draft.CategoryDraft;
+import io.reactivesw.customer.server.catalog.models.categories.Category;
+import io.reactivesw.customer.server.catalog.models.categories.draft.CategoryDraft;
+import io.reactivesw.customer.server.common.models.QueryConditions;
 import io.reactivesw.customer.server.common.types.Field;
-import io.reactivesw.customer.server.common.types.QueryConditions;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.annotation.Id;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,8 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static io.reactivesw.customer.server.routes.Router.CATEGORY_ALL;
 import static io.reactivesw.customer.server.routes.Router.CATEGORIES_WITH_ID;
+import static io.reactivesw.customer.server.routes.Router.CATEGORY_ALL;
 import static io.reactivesw.customer.server.routes.Router.CATEGORY_ID;
 
 /**

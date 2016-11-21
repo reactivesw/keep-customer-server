@@ -1,6 +1,7 @@
-package io.reactivesw.customer.server.catalog.models.draft;
+package io.reactivesw.customer.server.catalog.models.products.draft;
 
 import io.reactivesw.customer.server.catalog.models.CategoryOrderHint;
+import io.reactivesw.customer.server.catalog.models.draft.ProductVariantDraft;
 import io.reactivesw.customer.server.common.models.LocalizedString;
 import io.reactivesw.customer.server.common.models.Reference;
 import io.reactivesw.customer.server.common.models.ResourceIdentifier;

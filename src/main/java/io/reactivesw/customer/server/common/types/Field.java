@@ -1,5 +1,7 @@
 package io.reactivesw.customer.server.common.types;
 
+import io.reactivesw.customer.server.common.models.UpdateAction;
+
 import java.util.List;
 
 /**
