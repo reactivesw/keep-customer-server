@@ -1,18 +1,23 @@
 package io.reactivesw.customer.server.catalog.models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.reactivesw.customer.server.common.types.CustomFields;
-import io.reactivesw.customer.server.common.types.Reference;
-import io.reactivesw.customer.server.common.utils.JpaConverterJson;
 import io.reactivesw.customer.server.common.types.LocalizedString;
+import io.reactivesw.customer.server.common.types.Reference;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
-import javax.persistence.Convert;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * category model.
@@ -20,90 +25,111 @@ import java.util.List;
  */
 @ApiModel
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Category {
   /**
    *  The unique ID of the category.
    */
+  @ApiModelProperty(value = "The unique ID of the category")
   private String id;
 
   /**
    *  The current version of the category.
    */
+  @ApiModelProperty(value = "The current version of the category")
   private Integer version;
 
   /**
    * create time.
    */
+  @ApiModelProperty(value = "Create Time")
   @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime createdAt;
 
   /**
    * last modified time.
    */
+  @ApiModelProperty(value = "Last Modified Time")
   @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime lastModifiedAt;
 
   /**
    * The Name.
    */
-  @JsonIgnore
+  @ApiModelProperty(value = "Category Name")
+  @JsonUnwrapped
   private LocalizedString name;
 
   /**
    * human-readable identifiers usually used as deep-link URL to the related category.
    * Each slug is unique across a project,
-   * but a category can have the same slug for different languages. TODO
+   * but a category can have the same slug for different languages.
+   * TODO write getter and setter method for String
    */
+  @ApiModelProperty(value = "Category Slug")
   @JsonIgnore
   private LocalizedString slug;
 
   /**
-   * The Description. TODO
+   * The Description.
+   * TODO write getter and setter method for String
    */
+  @ApiModelProperty(value = "Category Description")
   @JsonIgnore
   private LocalizedString description;
 
   /**
    *  Contains the parent path towards the root category.
    */
+  @ApiModelProperty(value = "Contains the parent path towards the root category")
   private List<Reference> ancestors;
 
   /**
    *  A category that is the parent of this category in the category tree.
    */
+  @ApiModelProperty(value = "A category that is the parent of this category in the category tree")
   private Reference parent;
 
   /**
    *  An attribute as base for a custom category order in one level.
    */
+  @ApiModelProperty(value = "An attribute as base for a custom category order in one level")
   private String orderHint;
 
   /**
    * externalId.
    */
+  @ApiModelProperty(value = "Category externalId")
   private String externalId;
 
   /**
-   * The Meta title. TODO
+   * The Meta title.
+   * TODO write getter and setter method for String
    */
+  @ApiModelProperty(value = "Category metaTitle")
   @JsonIgnore
   private LocalizedString metaTitle;
 
   /**
-   * The metaDescription. TODO
+   * The metaDescription.
+   * TODO write getter and setter method for String
    */
+  @ApiModelProperty(value = "Category metaDescription")
   @JsonIgnore
   private LocalizedString metaDescription;
 
   /**
-   * the metaKeywords. TODO
+   * the metaKeywords.
+   * TODO write getter and setter method for String
    */
+  @ApiModelProperty(value = "Category metaKeywords")
   @JsonIgnore
   private LocalizedString metaKeywords;
 
   /**
    * custom fields.
    */
+  @ApiModelProperty(value = "Category Custom Fields")
   private CustomFields custom;
 
   /**
@@ -374,6 +400,14 @@ public class Category {
    */
   public void setCustom(CustomFields custom) {
     this.custom = custom;
+  }
+
+  public Category() {
+    this.id = UUID.randomUUID().toString();
+    LocalizedString localizedString = new LocalizedString();
+    localizedString.addKeyValue("em", "testem");
+    localizedString.addKeyValue("cn", "testcn");
+    this.name = localizedString;
   }
 
   /**
