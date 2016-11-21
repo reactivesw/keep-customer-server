@@ -42,12 +42,12 @@ public class CartDiscountDraft {
   /**
    * The string must contain a number between 0 and 1.
    * A discount with greater sort order is prioritized higher than a discount with lower sort order.
-   * The sort order must be unambiguous among all cart discounts.
+   * The sort order must be unambiguous among all carts discounts.
    */
   private String sortOrder;
 
   /**
-   * Only active discount can be applied to the cart.
+   * Only active discount can be applied to the carts.
    */
   private Boolean isActive;
 

@@ -37,11 +37,11 @@ public class DiscountCode {
   private LocalizedString description;
 
   @ApiModelProperty(value = "Unique identifier of this discount code. " +
-          "This value is added to the cart to enable the related cart discounts in the cart.",
+          "This value is added to the carts to enable the related carts discounts in the carts.",
           required = true)
   private String code;
 
-  @ApiModelProperty(value = "The referenced matching cart discounts can be applied to the cart once the DiscountCode is added.",
+  @ApiModelProperty(value = "The referenced matching carts discounts can be applied to the carts once the DiscountCode is added.",
           required = true)
   private List<Reference> cartDiscounts;
 

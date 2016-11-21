@@ -1,9 +1,16 @@
 package io.reactivesw.customer.server.common.types;
 
 /**
- * Created by Davis on 16/11/21.
+ * Created by umasuo on 16/11/21.
  */
 public class UpdateAction {
   String action;
-  LocalizedString name;
+
+  public String getAction() {
+    return action;
+  }
+
+  public void setAction(String action) {
+    this.action = action;
+  }
 }

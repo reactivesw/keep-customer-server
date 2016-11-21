@@ -62,14 +62,14 @@ public class CartDiscount {
 
   /**
    * The string must contain a number between 0 and 1.
-   * All matching cart discounts are applied to a cart in the order defined by this field.
+   * All matching carts discounts are applied to a carts in the order defined by this field.
    * A discount with greater sort order is prioritized higher than a discount with lower sort order.
-   * The sort order is unambiguous among all cart discounts.
+   * The sort order is unambiguous among all carts discounts.
    */
   private String sortOrder;
 
   /**
-   * Only active discount can be applied to the cart.
+   * Only active discount can be applied to the carts.
    */
   private Boolean isActive;
 

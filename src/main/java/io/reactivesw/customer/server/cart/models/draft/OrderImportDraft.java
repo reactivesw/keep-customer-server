@@ -2,13 +2,13 @@ package io.reactivesw.customer.server.cart.models.draft;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import io.reactivesw.customer.server.cart.enums.InventoryMode;
-import io.reactivesw.customer.server.cart.models.CustomLineItem;
-import io.reactivesw.customer.server.cart.enums.OrderState;
-import io.reactivesw.customer.server.cart.enums.PaymentState;
-import io.reactivesw.customer.server.cart.enums.ShipmentState;
-import io.reactivesw.customer.server.cart.models.ShippingInfo;
-import io.reactivesw.customer.server.cart.models.TaxedPrice;
+import io.reactivesw.customer.server.cart.enums.carts.InventoryMode;
+import io.reactivesw.customer.server.cart.models.carts.CustomLineItem;
+import io.reactivesw.customer.server.cart.enums.orders.OrderState;
+import io.reactivesw.customer.server.cart.enums.orders.PaymentState;
+import io.reactivesw.customer.server.cart.enums.orders.ShipmentState;
+import io.reactivesw.customer.server.cart.models.carts.ShippingInfo;
+import io.reactivesw.customer.server.cart.models.carts.TaxedPrice;
 import io.reactivesw.customer.server.common.types.Address;
 import io.reactivesw.customer.server.common.types.Money;
 import io.reactivesw.customer.server.common.types.Reference;
