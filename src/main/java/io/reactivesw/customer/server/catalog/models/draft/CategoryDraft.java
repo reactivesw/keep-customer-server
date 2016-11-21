@@ -22,13 +22,11 @@ public class CategoryDraft {
   /**
    * the name.
    */
-  @JsonIgnore
   private LocalizedString name;
 
   /**
    * the description.
    */
-  @JsonIgnore
   private LocalizedString description;
 
   /**
@@ -44,7 +42,6 @@ public class CategoryDraft {
    * Must be unique across a project!
    * The same category can have the same slug for different languages.
    */
-  @JsonIgnore
   private LocalizedString slug;
 
   /**
@@ -60,19 +57,16 @@ public class CategoryDraft {
   /**
    * The Meta title.
    */
-  @JsonIgnore
   private LocalizedString metaTitle;
 
   /**
    * The Meta description.
    */
-  @JsonIgnore
   private LocalizedString metaDescription;
 
   /**
    * The Meta keywords.
    */
-  @JsonIgnore
   private LocalizedString metaKeywords;
 
   /**
@@ -85,8 +79,6 @@ public class CategoryDraft {
    *
    * @return the name
    */
-  @ApiModelProperty(required = true)
-  @NotNull
   public LocalizedString getName() {
     return name;
   }

@@ -1,11 +1,17 @@
 package io.reactivesw.customer.server.common.types;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.reactivesw.customer.server.common.utils.LocalizedStringSerializer;
+
+import javax.persistence.Embedded;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by Davis on 16/11/16.
  */
+@JsonSerialize(using = LocalizedStringSerializer.class)
 public class LocalizedString {
 
   /**
@@ -22,6 +28,11 @@ public class LocalizedString {
     }
   }
 
+  @JsonCreator
+  public LocalizedString(Map<String, String> localized) {
+    this.localized = localized;
+  }
+
   /**
    * Gets localized.
    *
@@ -36,6 +47,7 @@ public class LocalizedString {
    *
    * @param localized the localized
    */
+  @JsonCreator
   public void setLocalized(Map<String, String> localized) {
     this.localized = localized;
   }

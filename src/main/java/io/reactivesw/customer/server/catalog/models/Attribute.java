@@ -9,7 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel
 public class Attribute {
 
-  @ApiModelProperty(required = true)
+  @ApiModelProperty(value = "Attribute Name", required = true)
   private String name;
 
   @ApiModelProperty(value = "A valid JSON value, based on an AttributeDefinition.",required = true)
