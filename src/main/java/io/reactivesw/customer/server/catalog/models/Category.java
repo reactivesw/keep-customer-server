@@ -9,6 +9,7 @@ import io.reactivesw.customer.server.common.types.Reference;
 import io.reactivesw.customer.server.common.utils.JpaConverterJson;
 import io.reactivesw.customer.server.common.types.LocalizedString;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.Convert;
 import java.time.ZonedDateTime;
@@ -24,6 +25,7 @@ public class Category {
   /**
    *  The unique ID of the category.
    */
+  @ApiModelProperty(required = true)
   private String id;
 
   /**
