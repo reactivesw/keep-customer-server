@@ -36,7 +36,7 @@ public class ProductTypeEntity {
   @Column(name = "last_modified_at")
   private ZonedDateTime lastModifiedAt;
 
-  @Column
+  @Column(name = "product_type_key")
   private String key;
 
   @Column
