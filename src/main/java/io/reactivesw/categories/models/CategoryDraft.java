@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import io.reactivesw.common.models.LocalizedString;
 import io.reactivesw.common.models.Reference;
-import io.reactivesw.types.models.CustomFieldsDraft;
+import io.reactivesw.common.models.CustomFieldsDraft;
 import io.swagger.annotations.ApiModel;
 
 /**

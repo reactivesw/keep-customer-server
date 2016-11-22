@@ -1,4 +1,4 @@
-package io.reactivesw.types.models;
+package io.reactivesw.common.models;
 
 /**
  * Created by umasuo on 16/11/21.

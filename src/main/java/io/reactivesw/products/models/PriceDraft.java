@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.reactivesw.common.models.Money;
 import io.reactivesw.common.models.Reference;
-import io.reactivesw.types.models.CustomFieldsDraft;
+import io.reactivesw.common.models.CustomFieldsDraft;
 
 import java.time.ZonedDateTime;
 

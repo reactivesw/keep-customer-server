@@ -1,6 +1,6 @@
 package io.reactivesw.reviews.models;
 
-import io.reactivesw.types.models.CustomFields;
+import io.reactivesw.common.models.CustomFields;
 import io.reactivesw.common.models.ResourceIdentifier;
 
 /**

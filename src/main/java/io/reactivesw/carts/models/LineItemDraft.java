@@ -2,7 +2,7 @@ package io.reactivesw.carts.models;
 
 import io.reactivesw.taxcategories.models.ExternalTaxRateDraft;
 import io.reactivesw.common.models.Reference;
-import io.reactivesw.types.models.CustomFieldsDraft;
+import io.reactivesw.common.models.CustomFieldsDraft;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 

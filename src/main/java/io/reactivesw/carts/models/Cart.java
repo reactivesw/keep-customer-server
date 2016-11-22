@@ -10,7 +10,7 @@ import io.reactivesw.carts.enums.CartState;
 import io.reactivesw.carts.enums.InventoryMode;
 import io.reactivesw.carts.enums.TaxMode;
 import io.reactivesw.common.models.Address;
-import io.reactivesw.types.models.CustomFields;
+import io.reactivesw.common.models.CustomFields;
 import io.reactivesw.common.models.Money;
 import io.reactivesw.common.models.Reference;
 import io.swagger.annotations.ApiModel;

@@ -12,7 +12,7 @@ import io.reactivesw.carts.models.TaxedPrice;
 import io.reactivesw.common.models.Address;
 import io.reactivesw.common.models.Money;
 import io.reactivesw.common.models.Reference;
-import io.reactivesw.types.models.CustomFieldsDraft;
+import io.reactivesw.common.models.CustomFieldsDraft;
 
 import java.time.ZonedDateTime;
 import java.util.List;

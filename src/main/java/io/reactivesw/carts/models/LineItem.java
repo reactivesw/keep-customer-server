@@ -6,7 +6,7 @@ import io.reactivesw.cartdiscounts.models.DiscountedLineItemPriceForQuantity;
 import io.reactivesw.products.models.Price;
 import io.reactivesw.products.models.ProductVariant;
 import io.reactivesw.cartdiscounts.enums.LineItemPriceMode;
-import io.reactivesw.types.models.CustomFields;
+import io.reactivesw.common.models.CustomFields;
 import io.reactivesw.common.models.LocalizedString;
 import io.reactivesw.common.models.Money;
 import io.reactivesw.common.models.Reference;

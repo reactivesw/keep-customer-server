@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import io.reactivesw.common.models.Address;
-import io.reactivesw.types.models.CustomFields;
+import io.reactivesw.common.models.CustomFields;
 import io.reactivesw.common.models.Reference;
 import io.swagger.annotations.ApiModel;
 

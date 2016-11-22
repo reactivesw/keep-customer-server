@@ -1,4 +1,4 @@
-package io.reactivesw.types.models;
+package io.reactivesw.common.models;
 
 import io.reactivesw.common.models.Reference;
 

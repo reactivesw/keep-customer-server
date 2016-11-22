@@ -4,7 +4,7 @@ import java.time.ZonedDateTime;
 import java.util.List;
 
 import io.reactivesw.common.models.Address;
-import io.reactivesw.types.models.CustomFieldsDraft;
+import io.reactivesw.common.models.CustomFieldsDraft;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 

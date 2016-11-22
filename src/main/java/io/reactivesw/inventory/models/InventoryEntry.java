@@ -2,7 +2,7 @@ package io.reactivesw.inventory.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import io.reactivesw.types.models.CustomFields;
+import io.reactivesw.common.models.CustomFields;
 import io.reactivesw.common.models.Reference;
 
 import java.time.ZonedDateTime;

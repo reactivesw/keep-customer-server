@@ -5,7 +5,7 @@ import io.reactivesw.products.models.Price;
 import io.reactivesw.common.models.LocalizedString;
 import io.reactivesw.common.models.Reference;
 import io.reactivesw.taxcategories.models.TaxRate;
-import io.reactivesw.types.models.CustomFieldsDraft;
+import io.reactivesw.common.models.CustomFieldsDraft;
 
 import java.util.List;
 

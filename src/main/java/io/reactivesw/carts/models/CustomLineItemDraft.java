@@ -1,7 +1,7 @@
 package io.reactivesw.carts.models;
 
 import io.reactivesw.taxcategories.models.ExternalTaxRateDraft;
-import io.reactivesw.types.models.CustomFields;
+import io.reactivesw.common.models.CustomFields;
 import io.reactivesw.common.models.LocalizedString;
 import io.reactivesw.common.models.Money;
 import io.reactivesw.common.models.Reference;

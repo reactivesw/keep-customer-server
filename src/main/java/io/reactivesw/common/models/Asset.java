@@ -1,6 +1,5 @@
 package io.reactivesw.common.models;
 
-import io.reactivesw.types.models.CustomFields;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 

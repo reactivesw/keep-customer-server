@@ -14,7 +14,7 @@ import io.reactivesw.carts.models.LineItem;
 import io.reactivesw.carts.models.ShippingInfo;
 import io.reactivesw.carts.models.TaxedPrice;
 import io.reactivesw.common.models.Address;
-import io.reactivesw.types.models.CustomFields;
+import io.reactivesw.common.models.CustomFields;
 import io.reactivesw.common.models.Money;
 import io.reactivesw.common.models.Reference;
 

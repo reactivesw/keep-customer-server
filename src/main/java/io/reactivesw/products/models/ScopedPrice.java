@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.ZonedDateTime;
 
 import io.reactivesw.productdiscounts.models.DiscountedPrice;
-import io.reactivesw.types.models.CustomFields;
+import io.reactivesw.common.models.CustomFields;
 import io.reactivesw.common.models.Money;
 import io.reactivesw.common.models.Reference;
 import io.swagger.annotations.ApiModel;

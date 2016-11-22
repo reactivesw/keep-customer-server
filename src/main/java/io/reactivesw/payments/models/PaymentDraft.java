@@ -2,10 +2,10 @@ package io.reactivesw.payments.models;
 
 import java.util.List;
 
-import io.reactivesw.types.models.CustomFields;
+import io.reactivesw.common.models.CustomFields;
 import io.reactivesw.common.models.Money;
 import io.reactivesw.common.models.Reference;
-import io.reactivesw.types.models.CustomFieldsDraft;
+import io.reactivesw.common.models.CustomFieldsDraft;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
