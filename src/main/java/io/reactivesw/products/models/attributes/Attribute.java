@@ -16,15 +16,10 @@ public class Attribute {
   @ApiModelProperty(value = "Attribute Name", required = true)
   private String name;
 
-  @ApiModelProperty(value = "A valid JSON value, based on an AttributeDefinition.",required = true)
-  @JsonSerialize
+  @ApiModelProperty(value = "A valid JSON value, based on an AttributeDefinition.", required = true)
   private JsonNode value;
 
-
-  @JsonCreator
-  public Attribute(final String name, final JsonNode value) {
-    this.name = name;
-    this.value = value;
+  public Attribute() {
   }
 
   public String getName() {
@@ -33,5 +28,13 @@ public class Attribute {
 
   public JsonNode getValue() {
     return value;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public void setValue(JsonNode value) {
+    this.value = value;
   }
 }
