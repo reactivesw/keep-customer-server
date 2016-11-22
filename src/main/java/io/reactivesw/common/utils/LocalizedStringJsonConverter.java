@@ -12,7 +12,7 @@ import io.reactivesw.common.models.LocalizedString;
 /**
  * Created by Davis on 16/11/16.
  */
-public class JpaJsonConverter implements AttributeConverter<LocalizedString, String> {
+public class LocalizedStringJsonConverter implements AttributeConverter<LocalizedString, String> {
 
   private final static ObjectMapper objectMapper = new ObjectMapper();
 

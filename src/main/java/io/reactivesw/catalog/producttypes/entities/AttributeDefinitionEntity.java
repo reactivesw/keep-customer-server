@@ -5,7 +5,7 @@ import io.reactivesw.catalog.products.models.attributes.AttributeType;
 import io.reactivesw.common.models.LocalizedString;
 import io.reactivesw.common.models.TextInputHint;
 import io.reactivesw.common.utils.AttributeTypeJsonConverter;
-import io.reactivesw.common.utils.JpaJsonConverter;
+import io.reactivesw.common.utils.LocalizedStringJsonConverter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
@@ -38,11 +38,11 @@ public class AttributeDefinitionEntity {
   private String name;
 
   @Column(name = "label", nullable = false, columnDefinition = "JSON")
-  @Convert(converter = JpaJsonConverter.class)
+  @Convert(converter = LocalizedStringJsonConverter.class)
   private LocalizedString label;
 
   @Column(name = "input_tip", nullable = false, columnDefinition = "JSON")
-  @Convert(converter = JpaJsonConverter.class)
+  @Convert(converter = LocalizedStringJsonConverter.class)
   private LocalizedString inputTip;
 
   @Column
