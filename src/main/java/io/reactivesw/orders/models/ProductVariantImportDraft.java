@@ -1,8 +1,8 @@
 package io.reactivesw.orders.models;
 
-import io.reactivesw.products.models.attributes.Attribute;
-import io.reactivesw.products.models.Image;
-import io.reactivesw.products.models.Price;
+import io.reactivesw.catalog.products.models.attributes.Attribute;
+import io.reactivesw.catalog.products.models.Image;
+import io.reactivesw.catalog.products.models.Price;
 
 import java.util.List;
 

@@ -1,10 +1,10 @@
 package io.reactivesw.orders.models;
 
-import io.reactivesw.carts.models.ItemState;
-import io.reactivesw.products.models.Price;
+import io.reactivesw.orders.carts.models.ItemState;
+import io.reactivesw.catalog.products.models.Price;
 import io.reactivesw.common.models.LocalizedString;
 import io.reactivesw.common.models.Reference;
-import io.reactivesw.taxcategories.models.TaxRate;
+import io.reactivesw.catalog.taxcategories.models.TaxRate;
 import io.reactivesw.common.models.CustomFieldsDraft;
 
 import java.util.List;
