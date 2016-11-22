@@ -7,6 +7,7 @@ import io.reactivesw.common.models.LocalizedString
 import io.reactivesw.common.models.Reference
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.web.WebAppConfiguration
 import spock.lang.Specification
 
@@ -15,7 +16,7 @@ import java.time.ZonedDateTime
 /**
  * Created by umasuo on 16/11/22.
  */
-@WebAppConfiguration
+@ContextConfiguration
 @SpringBootTest
 class CategoryEntityTest extends Specification{
 
@@ -44,7 +45,8 @@ class CategoryEntityTest extends Specification{
         entity.setAncestors(list)
 
         when:
-        def ret = repository.save(entity)
+        def savedEntity = repository.save(entity)
+        def getEntity = repository.findOne(savedEntity.getId())
         then:
         ret != null
     }
