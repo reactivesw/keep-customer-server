@@ -48,6 +48,13 @@ class CategoryEntityTest extends Specification{
         def savedEntity = repository.save(entity)
         def getEntity = repository.findOne(savedEntity.getId())
         then:
-        ret != null
+        getEntity != null
+    }
+
+    def "test retrive entity" () {
+        when:
+        def entity = repository.findOne("00259975-484f-4ab2-b138-8480c15d865a")
+        then:
+        entity != null;
     }
 }

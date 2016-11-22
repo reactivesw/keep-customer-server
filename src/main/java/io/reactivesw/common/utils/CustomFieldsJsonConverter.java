@@ -1,6 +1,8 @@
 package io.reactivesw.common.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import io.reactivesw.common.models.CustomFields;
 import io.reactivesw.common.models.LocalizedString;
 
 import javax.persistence.AttributeConverter;
@@ -10,14 +12,14 @@ import java.util.Map;
 /**
  * Created by Davis on 16/11/16.
  */
-public class LocalizedStringConverter implements AttributeConverter<LocalizedString, String> {
+public class CustomFieldsJsonConverter implements AttributeConverter<CustomFields, String> {
 
   private final static ObjectMapper objectMapper = new ObjectMapper();
 
   @Override
-  public String convertToDatabaseColumn(LocalizedString meta) {
+  public String convertToDatabaseColumn(CustomFields meta) {
     try {
-      return objectMapper.writeValueAsString(meta.getLocalized());
+      return objectMapper.writeValueAsString(meta);
     } catch (Exception ex) {
       return null;
       // or throw an error
@@ -25,12 +27,10 @@ public class LocalizedStringConverter implements AttributeConverter<LocalizedStr
   }
 
   @Override
-  public LocalizedString convertToEntityAttribute(String dbData) {
+  public CustomFields convertToEntityAttribute(String dbData) {
     try {
-      LocalizedString localizedString = new LocalizedString();
-      Map<String, String> localized = objectMapper.readValue(dbData, Map.class);
-      localizedString.setLocalized(localized);
-      return localizedString;
+      CustomFields custom = objectMapper.readValue(dbData, CustomFields.class);
+      return custom;
     } catch (IOException ex) {
       return null;
     }
