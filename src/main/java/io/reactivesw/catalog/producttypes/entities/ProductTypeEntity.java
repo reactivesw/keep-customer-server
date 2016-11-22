@@ -1,26 +1,53 @@
-package io.reactivesw.catalog.producttypes.models.entities;
+package io.reactivesw.catalog.producttypes.entities;
 
+import io.reactivesw.common.utils.ListJsonConverter;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.ZonedDateTime;
 import java.util.List;
 
 /**
  * Created by Davis on 16/11/22.
  */
+@Entity
+@Table(name = "sw_product_type")
 public class ProductTypeEntity {
+  /**
+   * The Id.
+   */
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  @Column(name = "id")
   private String id;
 
+  @Column(name = "version")
   private Integer version;
 
+  @Column(name = "created_at")
   private ZonedDateTime createdAt;
 
+  @Column(name = "last_modified_at")
   private ZonedDateTime lastModifiedAt;
 
+  @Column
   private String key;
 
+  @Column
   private String name;
 
+  @Column
   private String description;
 
+  @Column(columnDefinition = "JSON")
+  @Convert(converter = ListJsonConverter.class)
+  //TODO ListJsonConverter可能不能正常工作,有问题需要写一个新的converter
   private List<AttributeDefinitionEntity> attributes;
 
   /**

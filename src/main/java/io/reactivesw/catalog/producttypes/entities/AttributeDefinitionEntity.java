@@ -1,28 +1,60 @@
-package io.reactivesw.catalog.producttypes.models.entities;
+package io.reactivesw.catalog.producttypes.entities;
 
 import io.reactivesw.catalog.products.models.attributes.AttributeConstraint;
 import io.reactivesw.catalog.products.models.attributes.AttributeType;
 import io.reactivesw.common.models.LocalizedString;
 import io.reactivesw.common.models.TextInputHint;
+import io.reactivesw.common.utils.AttributeTypeJsonConverter;
+import io.reactivesw.common.utils.JpaJsonConverter;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Created by Davis on 16/11/22.
  */
+@Entity
+@Table(name = "sw_product_type")
 public class AttributeDefinitionEntity {
+  /**
+   * The Id.
+   */
+  @Id
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  @Column(name = "id")
+  private String id;
+
+  @Column(name = "type", nullable = false, columnDefinition = "JSON")
+  @Convert(converter = AttributeTypeJsonConverter.class)
   private AttributeType type;
 
+  @Column
   private String name;
 
+  @Column(name = "label", nullable = false, columnDefinition = "JSON")
+  @Convert(converter = JpaJsonConverter.class)
   private LocalizedString label;
 
+  @Column(name = "input_tip", nullable = false, columnDefinition = "JSON")
+  @Convert(converter = JpaJsonConverter.class)
   private LocalizedString inputTip;
 
+  @Column
   private Boolean isRequired;
 
+  @Column
   private AttributeConstraint attributeConstraint;
 
+  @Column
   private TextInputHint inputHint;
 
+  @Column
   private Boolean isSearchable;
 
   /**
