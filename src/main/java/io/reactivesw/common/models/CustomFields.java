@@ -1,5 +1,7 @@
 package io.reactivesw.common.models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 /**
  * Created by umasuo on 16/11/16.
  */
@@ -11,6 +13,15 @@ public class CustomFields {
    * TODO
    */
   private String fields;
+
+  public CustomFields() {
+  }
+
+//  @JsonCreator
+  public CustomFields(Reference type, String fields) {
+    this.type = type;
+    this.fields = fields;
+  }
 
   @Override
   public String toString() {

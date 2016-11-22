@@ -14,7 +14,9 @@ import javax.persistence.Table;
 
 import io.reactivesw.common.models.CustomFields;
 import io.reactivesw.common.models.LocalizedString;
+import io.reactivesw.common.utils.CustomFieldsJsonConverter;
 import io.reactivesw.common.utils.JpaJsonConverter;
+import io.reactivesw.common.utils.ListJsonConverter;
 
 /**
  * Category Entity.
@@ -48,19 +50,19 @@ public class CategoryEntity {
   @Convert(converter = JpaJsonConverter.class)
   private LocalizedString name;
 
-  @Column(name = "slug",columnDefinition = "JSON")
+  @Column(name = "slug", columnDefinition = "JSON")
   @Convert(converter = JpaJsonConverter.class)
   private LocalizedString slug;
 
   /**
    * The Description.
    */
-  @Column(name = "description",columnDefinition = "JSON")
+  @Column(name = "description", columnDefinition = "JSON")
   @Convert(converter = JpaJsonConverter.class)
   private LocalizedString description;
 
   @Column(columnDefinition = "JSON")
-  @Convert(converter = JpaJsonConverter.class)
+  @Convert(converter = ListJsonConverter.class)
   private List<String> ancestors;
 
   @Column
@@ -72,11 +74,11 @@ public class CategoryEntity {
   @Column(name = "external_id")
   private String externalId;
 
-  @Column(name = "meta_title",columnDefinition = "JSON")
+  @Column(name = "meta_title", columnDefinition = "JSON")
   @Convert(converter = JpaJsonConverter.class)
   private LocalizedString metaTitle;
 
-  @Column(name = "meta_description",columnDefinition = "JSON")
+  @Column(name = "meta_description", columnDefinition = "JSON")
   @Convert(converter = JpaJsonConverter.class)
   private LocalizedString metaDescription;
 
@@ -85,7 +87,7 @@ public class CategoryEntity {
   private LocalizedString metaKeyWords;
 
   @Column(columnDefinition = "JSON")
-  @Convert(converter = JpaJsonConverter.class)
+  @Convert(converter = CustomFieldsJsonConverter.class)
   private CustomFields custom;
 
   public String getId() {

@@ -18,7 +18,7 @@ import java.time.ZonedDateTime
  */
 @ContextConfiguration
 @SpringBootTest
-class CategoryEntityTest extends Specification {
+class CategoryEntityTest extends Specification{
 
     @Autowired
     CategoryRepository repository;
@@ -46,18 +46,15 @@ class CategoryEntityTest extends Specification {
 
         when:
         def savedEntity = repository.save(entity)
-        then:
-        savedEntity != null
-    }
-
-    def "test find category"() {
-        given:
-        def id = "6c19fdd2-b1ec-4272-b0df-8ce75f3faa86"
-
-        when:
-        def getEntity = repository.findOne(id)
-
+        def getEntity = repository.findOne(savedEntity.getId())
         then:
         getEntity != null
+    }
+
+    def "test retrive entity" () {
+        when:
+        def entity = repository.findOne("00259975-484f-4ab2-b138-8480c15d865a")
+        then:
+        entity != null;
     }
 }
