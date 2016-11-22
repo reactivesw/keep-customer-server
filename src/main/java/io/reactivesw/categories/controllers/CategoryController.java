@@ -1,10 +1,11 @@
 package io.reactivesw.categories.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.reactivesw.categories.models.Category;
 import io.reactivesw.categories.models.CategoryDraft;
-import io.reactivesw.common.models.QueryConditions;
 import io.reactivesw.common.models.Field;
-import io.reactivesw.routes.Router;
+import io.reactivesw.common.models.LocalizedString;
+import io.reactivesw.common.models.QueryConditions;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -19,6 +20,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
+import static io.reactivesw.routes.Router.CATEGORIES_WITH_ID;
+import static io.reactivesw.routes.Router.CATEGORY_ALL;
+import static io.reactivesw.routes.Router.CATEGORY_ID;
 
 /**
  * Created by Davis on 16/11/18.
@@ -38,8 +43,8 @@ public class CategoryController {
    * @return the category by id
    */
   @ApiOperation(value = "Get Category By Id")
-  @GetMapping(Router.CATEGORIES_WITH_ID)
-  public Category getCategoryById(@PathVariable(value = Router.CATEGORY_ID)
+  @GetMapping(CATEGORIES_WITH_ID)
+  public Category getCategoryById(@PathVariable(value = CATEGORY_ID)
                                   @ApiParam(value = "Category ID", required = true) String id) {
     Category category = new Category();
     LOG.debug("get category : {}", category.toString());
@@ -52,17 +57,12 @@ public class CategoryController {
    * @return the list
    */
   @ApiOperation(value = "Get Categories")
-  @GetMapping(Router.CATEGORY_ALL)
+  @GetMapping(CATEGORY_ALL)
   /*TODO
   1. List<Category> should be PagedQueryResult
-  2. Query Parameters:
-    where - Predicate - Optional
-    sort - Sort - Optional
-    expand - Expansion - Optional
-    limit - Number - Optional
-    offset - Number - Optional
    */
-  public List<Category> queryCategories(@RequestBody QueryConditions query) {
+  public List<Category> queryCategories(QueryConditions query) {
+    LOG.debug("query parameters: {}", query.toString());
     return null;
   }
 
@@ -73,10 +73,10 @@ public class CategoryController {
    * @return the category
    */
   @ApiOperation(value = "Create Category")
-  @PostMapping(Router.CATEGORY_ALL)
+  @PostMapping(CATEGORY_ALL)
   public Category createCategory(@RequestBody
                                  @ApiParam(value = "Category Draft", required = true)
-                                         CategoryDraft draft) {
+                                     CategoryDraft draft) {
     LOG.debug("create category : {}", draft.toString());
     return null;
   }
@@ -89,14 +89,25 @@ public class CategoryController {
    * @return the category
    */
   @ApiOperation(value = "Update Category")
-  @PutMapping(Router.CATEGORIES_WITH_ID)
-  public Category updateCategory(@PathVariable(value = Router.CATEGORY_ID)
+  @PutMapping(CATEGORIES_WITH_ID)
+  public Category updateCategory(@PathVariable(value = CATEGORY_ID)
                                  @ApiParam(value = "Category ID", required = true)
                                      String id,
                                  @RequestBody
                                  @ApiParam(value = "Category Update Fields", required = true)
-                                         Field fields) {
+                                     Field fields) throws Exception{
     LOG.debug("update category : {}", fields.toString());
+    List<Object> objs = fields.getActions();
+    String loObj = objs.get(0).toString();
+    LOG.debug("action  : {}", loObj);
+
+
+    loObj = "{\"action\":\"changeName\",\"name\":{\"en\":\"asdasda\"}}";
+    ObjectMapper objectMapper = new ObjectMapper();
+    String loObjStr = objectMapper.writeValueAsString(objs.get(0));
+    LocalizedString localizedString = new LocalizedString();
+
+//    localizedString.setLocalized(localized);
     return null;
   }
 
@@ -106,8 +117,8 @@ public class CategoryController {
    * @param version the version
    */
   @ApiOperation(value = "Delete Category By Id")
-  @DeleteMapping(value = Router.CATEGORIES_WITH_ID)
-  public void deleteCategory(@PathVariable(value = Router.CATEGORY_ID)
+  @DeleteMapping(value = CATEGORIES_WITH_ID)
+  public void deleteCategory(@PathVariable(value = CATEGORY_ID)
                              @ApiParam(value = "Category ID", required = true)
                                  String id,
                              Integer version) {

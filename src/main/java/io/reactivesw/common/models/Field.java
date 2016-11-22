@@ -2,8 +2,6 @@ package io.reactivesw.common.models;
 
 import java.util.List;
 
-import io.reactivesw.common.models.UpdateAction;
-
 /**
  * Created by Davis on 16/11/21.
  */
@@ -16,10 +14,10 @@ public class Field {
 
   /**
    * Array of UpdateAction.
-   * The list of update updateactions to be performed on the category.
+   * The list of update actions to be performed on the category.
    * Required.
    */
-  List<UpdateAction> actions;
+  List<Object> actions;
 
   /**
    * Gets version.
@@ -40,20 +38,20 @@ public class Field {
   }
 
   /**
-   * Gets updateactions.
+   * Gets actions.
    *
-   * @return the updateactions
+   * @return the actions
    */
-  public List<UpdateAction> getActions() {
+  public List<Object> getActions() {
     return actions;
   }
 
   /**
-   * Sets updateactions.
+   * Sets actions.
    *
-   * @param actions the updateactions
+   * @param actions the actions
    */
-  public void setActions(List<UpdateAction> actions) {
+  public void setActions(List<Object> actions) {
     this.actions = actions;
   }
 
@@ -61,7 +59,7 @@ public class Field {
   public String toString() {
     return "Field{" +
         "version=" + version +
-        ", updateactions=" + actions +
+        ", actions=" + actions +
         '}';
   }
 }
