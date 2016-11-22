@@ -1,8 +1,8 @@
 package io.reactivesw.catalog.categories.entities;
 
+import io.reactivesw.common.entities.BaseEntity;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.time.ZonedDateTime;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -24,7 +24,7 @@ import io.reactivesw.common.utils.ListJsonConverter;
  */
 @Entity
 @Table(name = "sw_category")
-public class CategoryEntity {
+public class CategoryEntity extends BaseEntity {
   /**
    * The Id.
    */
@@ -36,12 +36,6 @@ public class CategoryEntity {
 
   @Column(name = "version")
   private Integer version;
-
-  @Column(name = "created_at")
-  private ZonedDateTime createdAt;
-
-  @Column(name = "last_modified_at")
-  private ZonedDateTime lastModifiedAt;
 
   /**
    * The Name.
@@ -104,22 +98,6 @@ public class CategoryEntity {
 
   public void setVersion(Integer version) {
     this.version = version;
-  }
-
-  public ZonedDateTime getCreatedAt() {
-    return createdAt;
-  }
-
-  public void setCreatedAt(ZonedDateTime createdAt) {
-    this.createdAt = createdAt;
-  }
-
-  public ZonedDateTime getLastModifiedAt() {
-    return lastModifiedAt;
-  }
-
-  public void setLastModifiedAt(ZonedDateTime lastModifiedAt) {
-    this.lastModifiedAt = lastModifiedAt;
   }
 
   public LocalizedString getName() {

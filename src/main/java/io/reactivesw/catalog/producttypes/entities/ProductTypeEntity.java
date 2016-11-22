@@ -1,5 +1,6 @@
 package io.reactivesw.catalog.producttypes.entities;
 
+import io.reactivesw.common.entities.BaseEntity;
 import io.reactivesw.common.utils.ListJsonConverter;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -9,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.time.ZonedDateTime;
 import java.util.List;
 
 /**
@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "sw_product_type")
-public class ProductTypeEntity {
+public class ProductTypeEntity extends BaseEntity{
   /**
    * The Id.
    */
@@ -29,12 +29,6 @@ public class ProductTypeEntity {
 
   @Column(name = "version")
   private Integer version;
-
-  @Column(name = "created_at")
-  private ZonedDateTime createdAt;
-
-  @Column(name = "last_modified_at")
-  private ZonedDateTime lastModifiedAt;
 
   @Column(name = "product_type_key")
   private String key;
@@ -84,42 +78,6 @@ public class ProductTypeEntity {
    */
   public void setVersion(Integer version) {
     this.version = version;
-  }
-
-  /**
-   * Gets created at.
-   *
-   * @return the created at
-   */
-  public ZonedDateTime getCreatedAt() {
-    return createdAt;
-  }
-
-  /**
-   * Sets created at.
-   *
-   * @param createdAt the created at
-   */
-  public void setCreatedAt(ZonedDateTime createdAt) {
-    this.createdAt = createdAt;
-  }
-
-  /**
-   * Gets last modified at.
-   *
-   * @return the last modified at
-   */
-  public ZonedDateTime getLastModifiedAt() {
-    return lastModifiedAt;
-  }
-
-  /**
-   * Sets last modified at.
-   *
-   * @param lastModifiedAt the last modified at
-   */
-  public void setLastModifiedAt(ZonedDateTime lastModifiedAt) {
-    this.lastModifiedAt = lastModifiedAt;
   }
 
   /**
