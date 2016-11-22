@@ -29,9 +29,8 @@ public class JpaJsonConverter implements AttributeConverter<Object, String> {
   @Override
   public Object convertToEntityAttribute(String dbData) {
     try {
-
-      return objectMapper.readValue(dbData, Object.class);
-
+      Object object = objectMapper.readValue(dbData, Object.class);
+      return object;
     } catch (IOException ex) {
       return null;
     }

@@ -14,7 +14,7 @@ public class Attribute {
   @ApiModelProperty(value = "Attribute Name", required = true)
   private String name;
 
-  @ApiModelProperty(value = "A valid JSON value, based on an AttributeDefinition.", required = true)
+  @ApiModelProperty(value = "A valid JSON value, based on an AttributeDefinitionEntity.", required = true)
   private JsonNode value;
 
   public Attribute() {

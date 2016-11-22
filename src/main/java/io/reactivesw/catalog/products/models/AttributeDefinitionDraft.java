@@ -31,7 +31,7 @@ public class AttributeDefinitionDraft {
    * the ASCII letters A to Z in lowercase or uppercase, digits, underscores (_)
    * and the hyphen-minus (-).
    * It is allowed to have attributes with the same name in two or more ProductTypes.
-   * The important constraint is: all fields of the AttributeDefinition
+   * The important constraint is: all fields of the AttributeDefinitionEntity
    * need to be the same across all attributes with the same name.
    */
   @ApiModelProperty(required = true)

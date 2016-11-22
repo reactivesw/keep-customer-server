@@ -28,7 +28,7 @@ public class AttributeDefinition {
    * and the hyphen-minus (-).
    * It is allowed to have attributes with the same name in two or more productTypes.
    * The important constraint is:
-   * all fields of the AttributeDefinition need to
+   * all fields of the AttributeDefinitionEntity need to
    * be the same across all attributes with the same name.
    */
   @ApiModelProperty(required = true)
@@ -234,7 +234,7 @@ public class AttributeDefinition {
    */
   @Override
   public String toString() {
-    return "AttributeDefinition{" +
+    return "AttributeDefinitionEntity{" +
             "type=" + type +
             ", name='" + name + '\'' +
             ", label=" + label +
