@@ -1,5 +1,9 @@
 package io.reactivesw.products.models.attributes;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -13,53 +17,21 @@ public class Attribute {
   private String name;
 
   @ApiModelProperty(value = "A valid JSON value, based on an AttributeDefinition.",required = true)
-  private String value;
+  @JsonSerialize
+  private JsonNode value;
 
-  /**
-   * Gets name.
-   *
-   * @return the name
-   */
+
+  @JsonCreator
+  public Attribute(final String name, final JsonNode value) {
+    this.name = name;
+    this.value = value;
+  }
+
   public String getName() {
     return name;
   }
 
-  /**
-   * Sets name.
-   *
-   * @param name the name
-   */
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  /**
-   * Gets value.
-   *
-   * @return the value
-   */
-  public String getValue() {
+  public JsonNode getValue() {
     return value;
-  }
-
-  /**
-   * Sets value.
-   *
-   * @param value the value
-   */
-  public void setValue(String value) {
-    this.value = value;
-  }
-
-  /**
-   * toString method.
-   * @return String
-   */
-  @Override
-  public String toString() {
-    return "Attribute{" +
-        "name='" + name + '\'' +
-        ", value='" + value + '\'' +
-        '}';
   }
 }
