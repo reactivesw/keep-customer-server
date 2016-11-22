@@ -1,14 +1,21 @@
 package io.reactivesw.catalog.categories.entities;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
+import io.reactivesw.common.models.CustomFields;
 import io.reactivesw.common.utils.JpaConverterJson;
 import io.reactivesw.common.models.LocalizedString;
+import springfox.documentation.spring.web.json.Json;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,7 +26,7 @@ import javax.persistence.Table;
  * Created by rai on 16/11/13.
  */
 @Entity
-@Table(name = "category")
+@Table(name = "sw_category")
 public class CategoryEntity {
   /**
    * The Id.
@@ -27,192 +34,175 @@ public class CategoryEntity {
   @Id
   @GeneratedValue(generator = "uuid")
   @GenericGenerator(name = "uuid", strategy = "uuid2")
-  @Column(name = "uuid", unique = true)
+  @Column(name = "id")
   private String id;
+
+  @Column(name = "version")
+  private Integer version;
+
+  @Column(name = "created_at")
+  private ZonedDateTime createdAt;
+
+  @Column(name = "last_modified_at")
+  private ZonedDateTime lastModifiedAt;
 
   /**
    * The Name.
    */
-  @Column(name = "name", length = 32, nullable = false)
-  private String name;
+  @Column(name = "name", nullable = false)
+  private LocalizedString name;
+
+  @Column(name = "slug")
+  private LocalizedString slug;
 
   /**
    * The Description.
    */
-  @Column(name = "description", length = 1024)
-  private String description;
+  @Column(name = "description")
+  private LocalizedString description;
 
-  /**
-   * The Sub categories.
-   */
-  @Column(name = "parent_id")
-  private String parentId;
+  @Column
+  @ElementCollection
+  private List<String> ancestors;
+
+  @Column
+  private String parent;
+
+  @Column(name = "order_hint")
+  private String orderHint;
+
+  @Column(name = "external_id")
+  private String externalId;
 
   @Column(name = "meta_title")
-  @Convert(converter = JpaConverterJson.class)
   private LocalizedString metaTitle;
 
+  @Column(name = "meta_description")
+  private LocalizedString metaDescription;
 
-  /**
-   * Instantiates a new Category entity.
-   */
-  public CategoryEntity() {
-    // The explicit constructor is here, so that it is possible to provide Javadoc.
-  }
+  @Column(name = "meta_key_words")
+  private LocalizedString metaKeyWords;
 
-  /**
-   * Instantiates a new Category entity.
-   *
-   * @param name        the name
-   * @param description the description
-   */
-  public CategoryEntity(String name, String description) {
-    this.name = name;
-    this.description = description;
-  }
+  @Column
+  private JsonNode custom;
 
-  /**
-   * Instantiates a new Category entity.
-   *
-   * @param name        the name
-   * @param description the description
-   * @param parentId    the parent id
-   */
-  public CategoryEntity(String name, String description, String parentId) {
-
-    this.name = name;
-    this.description = description;
-    this.parentId = parentId;
-  }
-
-  /**
-   * Gets id.
-   *
-   * @return the id
-   */
   public String getId() {
     return id;
   }
 
-  /**
-   * Sets id.
-   *
-   * @param id the id
-   */
   public void setId(String id) {
     this.id = id;
   }
 
-  /**
-   * Gets name.
-   *
-   * @return the name
-   */
-  public String getName() {
+  public Integer getVersion() {
+    return version;
+  }
+
+  public void setVersion(Integer version) {
+    this.version = version;
+  }
+
+  public ZonedDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(ZonedDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public ZonedDateTime getLastModifiedAt() {
+    return lastModifiedAt;
+  }
+
+  public void setLastModifiedAt(ZonedDateTime lastModifiedAt) {
+    this.lastModifiedAt = lastModifiedAt;
+  }
+
+  public LocalizedString getName() {
     return name;
   }
 
-  /**
-   * Sets name.
-   *
-   * @param name the name
-   */
-  public void setName(String name) {
+  public void setName(LocalizedString name) {
     this.name = name;
   }
 
-  /**
-   * Gets description.
-   *
-   * @return the description
-   */
-  public String getDescription() {
+  public LocalizedString getSlug() {
+    return slug;
+  }
+
+  public void setSlug(LocalizedString slug) {
+    this.slug = slug;
+  }
+
+  public LocalizedString getDescription() {
     return description;
   }
 
-  /**
-   * Sets description.
-   *
-   * @param description the description
-   */
-  public void setDescription(String description) {
+  public void setDescription(LocalizedString description) {
     this.description = description;
   }
 
-  /**
-   * Gets parent id.
-   *
-   * @return the parent id
-   */
-  public String getParentId() {
-    return parentId;
+  public List<String> getAncestors() {
+    return ancestors;
   }
 
-  /**
-   * Sets parent id.
-   *
-   * @param parentId the parent id
-   */
-  public void setParentId(String parentId) {
-    this.parentId = parentId;
+  public void setAncestors(List<String> ancestors) {
+    this.ancestors = ancestors;
   }
 
-  /**
-   * Gets meta title.
-   *
-   * @return the meta title
-   */
+  public String getParent() {
+    return parent;
+  }
+
+  public void setParent(String parent) {
+    this.parent = parent;
+  }
+
+  public String getOrderHint() {
+    return orderHint;
+  }
+
+  public void setOrderHint(String orderHint) {
+    this.orderHint = orderHint;
+  }
+
+  public String getExternalId() {
+    return externalId;
+  }
+
+  public void setExternalId(String externalId) {
+    this.externalId = externalId;
+  }
+
   public LocalizedString getMetaTitle() {
     return metaTitle;
   }
 
-  /**
-   * Sets meta title.
-   *
-   * @param metaTitle the meta title
-   */
   public void setMetaTitle(LocalizedString metaTitle) {
     this.metaTitle = metaTitle;
   }
 
-  /**
-   * toString method.
-   *
-   * @return String
-   */
-  @Override
-  public String toString() {
-    return "CategoryEntity{ id=" + id + ", name='" + name + ", description='"
-        + description + ", parentId=" + parentId + '}';
+  public LocalizedString getMetaDescription() {
+    return metaDescription;
   }
 
-  /**
-   * equals method.
-   *
-   * @param obj Object
-   * @return boolean
-   */
-  @Override
-  public boolean equals(Object obj) {
-    boolean equalsResult = false;
-    if (this == obj) {
-      equalsResult = true;
-    } else if (obj instanceof CategoryEntity) {
-      final CategoryEntity other = (CategoryEntity) obj;
-      equalsResult = Objects.equals(id, other.id) && Objects.equals(name, other.name)
-          && Objects.equals(description, other.description)
-          && Objects.equals(parentId, other.parentId);
-    }
-    return equalsResult;
+  public void setMetaDescription(LocalizedString metaDescription) {
+    this.metaDescription = metaDescription;
   }
 
-  /**
-   * hashCode method.
-   *
-   * @return int
-   */
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, name, description, parentId);
+  public LocalizedString getMetaKeyWords() {
+    return metaKeyWords;
+  }
+
+  public void setMetaKeyWords(LocalizedString metaKeyWords) {
+    this.metaKeyWords = metaKeyWords;
+  }
+
+  public JsonNode getCustom() {
+    return custom;
+  }
+
+  public void setCustom(JsonNode custom) {
+    this.custom = custom;
   }
 }
