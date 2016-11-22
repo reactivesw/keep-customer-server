@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * Created by Davis on 16/11/16.
  */
-public class JpaConverterJson implements AttributeConverter<LocalizedString, String> {
+public class LocalizedStringConverter implements AttributeConverter<LocalizedString, String> {
 
   private final static ObjectMapper objectMapper = new ObjectMapper();
 

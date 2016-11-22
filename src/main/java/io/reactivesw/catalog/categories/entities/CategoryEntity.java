@@ -1,25 +1,20 @@
 package io.reactivesw.catalog.categories.entities;
 
-import com.fasterxml.jackson.databind.JsonNode;
-
-import io.reactivesw.common.models.CustomFields;
-import io.reactivesw.common.utils.JpaConverterJson;
-import io.reactivesw.common.models.LocalizedString;
-import springfox.documentation.spring.web.json.Json;
-
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import io.reactivesw.common.models.CustomFields;
+import io.reactivesw.common.models.LocalizedString;
+import io.reactivesw.common.utils.JpaJsonConverter;
 
 /**
  * Category Entity.
@@ -49,20 +44,23 @@ public class CategoryEntity {
   /**
    * The Name.
    */
-  @Column(name = "name", nullable = false)
+  @Column(name = "name", nullable = false, columnDefinition = "JSON")
+  @Convert(converter = JpaJsonConverter.class)
   private LocalizedString name;
 
-  @Column(name = "slug")
+  @Column(name = "slug",columnDefinition = "JSON")
+  @Convert(converter = JpaJsonConverter.class)
   private LocalizedString slug;
 
   /**
    * The Description.
    */
-  @Column(name = "description")
+  @Column(name = "description",columnDefinition = "JSON")
+  @Convert(converter = JpaJsonConverter.class)
   private LocalizedString description;
 
-  @Column
-  @ElementCollection
+  @Column(columnDefinition = "JSON")
+  @Convert(converter = JpaJsonConverter.class)
   private List<String> ancestors;
 
   @Column
@@ -74,17 +72,21 @@ public class CategoryEntity {
   @Column(name = "external_id")
   private String externalId;
 
-  @Column(name = "meta_title")
+  @Column(name = "meta_title",columnDefinition = "JSON")
+  @Convert(converter = JpaJsonConverter.class)
   private LocalizedString metaTitle;
 
-  @Column(name = "meta_description")
+  @Column(name = "meta_description",columnDefinition = "JSON")
+  @Convert(converter = JpaJsonConverter.class)
   private LocalizedString metaDescription;
 
-  @Column(name = "meta_key_words")
+  @Column(name = "meta_key_words", columnDefinition = "JSON")
+  @Convert(converter = JpaJsonConverter.class)
   private LocalizedString metaKeyWords;
 
-  @Column
-  private JsonNode custom;
+  @Column(columnDefinition = "JSON")
+  @Convert(converter = JpaJsonConverter.class)
+  private CustomFields custom;
 
   public String getId() {
     return id;
@@ -198,11 +200,11 @@ public class CategoryEntity {
     this.metaKeyWords = metaKeyWords;
   }
 
-  public JsonNode getCustom() {
+  public CustomFields getCustom() {
     return custom;
   }
 
-  public void setCustom(JsonNode custom) {
+  public void setCustom(CustomFields custom) {
     this.custom = custom;
   }
 }

@@ -1,9 +1,5 @@
 package io.reactivesw.common.models;
 
-import com.fasterxml.jackson.databind.JsonNode;
-
-import io.reactivesw.common.models.Reference;
-
 /**
  * Created by umasuo on 16/11/16.
  */
@@ -14,7 +10,7 @@ public class CustomFields {
    * A valid JSON object, based on {@code FieldDefinition}.
    * TODO
    */
-  private JsonNode fields;
+  private String fields;
 
   @Override
   public String toString() {
@@ -32,11 +28,11 @@ public class CustomFields {
     this.type = type;
   }
 
-  public JsonNode getFields() {
+  public String getFields() {
     return fields;
   }
 
-  public void setFields(JsonNode fields) {
+  public void setFields(String fields) {
     this.fields = fields;
   }
 }
