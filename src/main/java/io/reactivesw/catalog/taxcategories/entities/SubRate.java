@@ -1,0 +1,65 @@
+package io.reactivesw.catalog.taxcategories.entities;
+
+import io.reactivesw.common.entities.BaseIdEntity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.math.BigDecimal;
+
+/**
+ * Created by Davis on 16/11/23.
+ */
+@Entity
+@Table(name = "sw_sub_rate")
+public class SubRate extends BaseIdEntity {
+  @Column(name = "name")
+  private String name;
+
+  @Column(name = "amount", precision = 8, scale = 7)
+  private BigDecimal amount;
+
+  /**
+   * Gets name.
+   *
+   * @return the name
+   */
+  public String getName() {
+    return name;
+  }
+
+  /**
+   * Sets name.
+   *
+   * @param name the name
+   */
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  /**
+   * Gets amount.
+   *
+   * @return the amount
+   */
+  public BigDecimal getAmount() {
+    return amount;
+  }
+
+  /**
+   * Sets amount.
+   *
+   * @param amount the amount
+   */
+  public void setAmount(BigDecimal amount) {
+    this.amount = amount;
+  }
+
+  @Override
+  public String toString() {
+    return "SubRate{" +
+        "name='" + name + '\'' +
+        ", amount=" + amount +
+        '}';
+  }
+}
