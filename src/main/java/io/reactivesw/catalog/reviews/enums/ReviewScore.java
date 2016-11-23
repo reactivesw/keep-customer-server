@@ -16,4 +16,8 @@ public enum ReviewScore {
   private ReviewScore(int score) {
     this.score = score;
   }
+
+  public int getScore() {
+    return this.score;
+  }
 }

@@ -1,5 +1,6 @@
 package io.reactivesw.catalog.reviews.entities;
 
+import io.reactivesw.catalog.reviews.enums.ReviewScore;
 import io.reactivesw.common.entities.BaseIdEntity;
 import io.reactivesw.common.utils.MapJsonConverter;
 
