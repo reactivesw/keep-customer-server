@@ -5,6 +5,7 @@ import io.reactivesw.catalog.products.models.ScopedPrice;
 import io.reactivesw.common.utils.ListJsonConverter;
 import io.reactivesw.common.utils.ProductVariantAvailabilityConverter;
 import io.reactivesw.common.utils.ScopedPriceJsonConverter;
+
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
@@ -14,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 import java.util.List;
 import java.util.Set;
 
@@ -51,15 +53,8 @@ public class ProductVariantEntity {
   @Convert(converter = ListJsonConverter.class)
   private List<String> assetIds;
 
-  @Column(name = "availability", columnDefinition = "JSON")
-  @Convert(converter = ProductVariantAvailabilityConverter.class)
-  private ProductVariantAvailability availability;
-
   @Column(name = "is_matching")
   private Boolean isMatchingVariant;
-
-  @Column(name = "scoped_price_discounted")
-  private Boolean scopedPriceDiscounted;
 
   /**
    * Gets variant id.
@@ -206,24 +201,6 @@ public class ProductVariantEntity {
   }
 
   /**
-   * Gets availability.
-   *
-   * @return the availability
-   */
-  public ProductVariantAvailability getAvailability() {
-    return availability;
-  }
-
-  /**
-   * Sets availability.
-   *
-   * @param availability the availability
-   */
-  public void setAvailability(ProductVariantAvailability availability) {
-    this.availability = availability;
-  }
-
-  /**
    * Gets matching variant.
    *
    * @return the matching variant
@@ -241,38 +218,18 @@ public class ProductVariantEntity {
     isMatchingVariant = matchingVariant;
   }
 
-  /**
-   * Gets scoped price discounted.
-   *
-   * @return the scoped price discounted
-   */
-  public Boolean getScopedPriceDiscounted() {
-    return scopedPriceDiscounted;
-  }
-
-  /**
-   * Sets scoped price discounted.
-   *
-   * @param scopedPriceDiscounted the scoped price discounted
-   */
-  public void setScopedPriceDiscounted(Boolean scopedPriceDiscounted) {
-    this.scopedPriceDiscounted = scopedPriceDiscounted;
-  }
-
   @Override
   public String toString() {
     return "ProductVariantEntity{" +
-        "variantId='" + variantId + '\'' +
-        ", id=" + id +
-        ", sku='" + sku + '\'' +
-        ", key='" + key + '\'' +
-        ", prices=" + prices +
-        ", attributes=" + attributes +
-        ", images=" + images +
-        ", assetIds=" + assetIds +
-        ", availability=" + availability +
-        ", isMatchingVariant=" + isMatchingVariant +
-        ", scopedPriceDiscounted=" + scopedPriceDiscounted +
-        '}';
+            "variantId='" + variantId + '\'' +
+            ", id=" + id +
+            ", sku='" + sku + '\'' +
+            ", key='" + key + '\'' +
+            ", prices=" + prices +
+            ", attributes=" + attributes +
+            ", images=" + images +
+            ", assetIds=" + assetIds +
+            ", isMatchingVariant=" + isMatchingVariant +
+            '}';
   }
 }

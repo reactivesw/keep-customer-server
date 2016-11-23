@@ -1,6 +1,6 @@
 package io.reactivesw.catalog.categories.entities;
 
-import io.reactivesw.common.entities.BaseEntity;
+import io.reactivesw.common.entities.BaseTimeEntity;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
@@ -24,7 +24,7 @@ import io.reactivesw.common.utils.ListJsonConverter;
  */
 @Entity
 @Table(name = "sw_category")
-public class CategoryEntity extends BaseEntity {
+public class CategoryEntity extends BaseTimeEntity {
   /**
    * The Id.
    */

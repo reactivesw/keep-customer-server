@@ -9,41 +9,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import io.reactivesw.common.entities.BaseIdEntity;
+
 /**
  * Created by Davis on 16/11/23.
  */
 @Entity
 @Table(name = "sw_variant_attribute")
-public class AttributeEntity {
-  @Id
-  @GeneratedValue(generator = "uuid")
-  @GenericGenerator(name = "uuid", strategy = "uuid2")
-  @Column(name = "id")
-  private String id;
+public class AttributeEntity extends BaseIdEntity {
 
-  @Column(name = "nama")
+  @Column(name = "name")
   private String name;
 
+  /**
+   * Json Object for attribute value.
+   */
   @Column(name = "value")
   private String value;
-
-  /**
-   * Gets id.
-   *
-   * @return the id
-   */
-  public String getId() {
-    return id;
-  }
-
-  /**
-   * Sets id.
-   *
-   * @param id the id
-   */
-  public void setId(String id) {
-    this.id = id;
-  }
 
   /**
    * Gets name.
@@ -84,9 +66,9 @@ public class AttributeEntity {
   @Override
   public String toString() {
     return "AttributeEntity{" +
-        "id='" + id + '\'' +
-        ", name='" + name + '\'' +
-        ", value='" + value + '\'' +
-        '}';
+            "id='" + id + '\'' +
+            ", name='" + name + '\'' +
+            ", value='" + value + '\'' +
+            '}';
   }
 }
