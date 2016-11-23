@@ -12,7 +12,7 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name = "sw_sub_rate")
-public class SubRate extends BaseIdEntity {
+public class SubRateEntity extends BaseIdEntity {
   @Column(name = "name")
   private String name;
 
@@ -57,7 +57,7 @@ public class SubRate extends BaseIdEntity {
 
   @Override
   public String toString() {
-    return "SubRate{" +
+    return "SubRateEntity{" +
         "name='" + name + '\'' +
         ", amount=" + amount +
         '}';

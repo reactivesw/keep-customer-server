@@ -26,7 +26,7 @@ public class TaxCategoryEntity extends BaseAllEntity {
   private String description;
 
   @OneToMany
-  private Set<TaxRate> rates;
+  private Set<TaxRateEntity> rates;
 
   public Integer getVersion() {
     return version;
@@ -52,11 +52,11 @@ public class TaxCategoryEntity extends BaseAllEntity {
     this.description = description;
   }
 
-  public Set<TaxRate> getRates() {
+  public Set<TaxRateEntity> getRates() {
     return rates;
   }
 
-  public void setRates(Set<TaxRate> rates) {
+  public void setRates(Set<TaxRateEntity> rates) {
     this.rates = rates;
   }
 }

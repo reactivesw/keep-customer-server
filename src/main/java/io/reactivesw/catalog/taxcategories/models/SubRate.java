@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * Created by umasuo on 16/11/17.
  */
-@ApiModel(description = "A SubRate is used to calculate the taxPortions field in a carts or order. It is useful if the total tax of a country is a combination of multiple taxes (e.g. state and local taxes).")
+@ApiModel(description = "A SubRateEntity is used to calculate the taxPortions field in a carts or order. It is useful if the total tax of a country is a combination of multiple taxes (e.g. state and local taxes).")
 public class SubRate {
 
 

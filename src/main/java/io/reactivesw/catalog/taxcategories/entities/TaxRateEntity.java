@@ -14,7 +14,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "sw_tax_rate")
-public class TaxRate extends BaseIdEntity {
+public class TaxRateEntity extends BaseIdEntity {
   @Column(name = "name")
   private String name;
 
@@ -31,7 +31,7 @@ public class TaxRate extends BaseIdEntity {
   private String state;
 
   @OneToMany
-  private Set<SubRate> subRates;
+  private Set<SubRateEntity> subRates;
 
   /**
    * Gets name.
@@ -128,7 +128,7 @@ public class TaxRate extends BaseIdEntity {
    *
    * @return the sub rates
    */
-  public Set<SubRate> getSubRates() {
+  public Set<SubRateEntity> getSubRates() {
     return subRates;
   }
 
@@ -137,13 +137,13 @@ public class TaxRate extends BaseIdEntity {
    *
    * @param subRates the sub rates
    */
-  public void setSubRates(Set<SubRate> subRates) {
+  public void setSubRates(Set<SubRateEntity> subRates) {
     this.subRates = subRates;
   }
 
   @Override
   public String toString() {
-    return "TaxRate{" +
+    return "TaxRateEntity{" +
         "name='" + name + '\'' +
         ", amount=" + amount +
         ", includedInPrice=" + includedInPrice +

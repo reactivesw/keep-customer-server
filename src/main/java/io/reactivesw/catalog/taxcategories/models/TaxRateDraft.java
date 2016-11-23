@@ -34,7 +34,7 @@ public class TaxRateDraft {
   private String state;
 
   /**
-   * Array of SubRate - Optional beta.
+   * Array of SubRateEntity - Optional beta.
    * For countries (e.g. the US) where the total tax is a combination of multiple taxes
    * (e.g. state and local taxes).
    */

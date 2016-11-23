@@ -169,7 +169,7 @@ public class TaxRate {
    */
   @Override
   public String toString() {
-    return "TaxRate{" +
+    return "TaxRateEntity{" +
         "id='" + id + '\'' +
         ", name='" + name + '\'' +
         ", amount=" + amount +
