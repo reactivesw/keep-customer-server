@@ -1,15 +1,10 @@
 package io.reactivesw.catalog.products.entities;
 
-import io.reactivesw.catalog.products.models.Image;
-import io.reactivesw.catalog.products.models.Price;
 import io.reactivesw.catalog.products.models.ProductVariantAvailability;
 import io.reactivesw.catalog.products.models.ScopedPrice;
-import io.reactivesw.catalog.products.models.attributes.Attribute;
-import io.reactivesw.common.models.Asset;
 import io.reactivesw.common.utils.ListJsonConverter;
 import io.reactivesw.common.utils.ProductVariantAvailabilityConverter;
 import io.reactivesw.common.utils.ScopedPriceJsonConverter;
-import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
@@ -54,7 +49,7 @@ public class ProductVariantEntity {
 
   @Column(name = "asset_id", columnDefinition = "JSON")
   @Convert(converter = ListJsonConverter.class)
-  private List<String> assetids;
+  private List<String> assetIds;
 
   @Column(name = "availability", columnDefinition = "JSON")
   @Convert(converter = ProductVariantAvailabilityConverter.class)
@@ -62,10 +57,6 @@ public class ProductVariantEntity {
 
   @Column(name = "is_matching")
   private Boolean isMatchingVariant;
-
-  @Column(name = "scoped_price", columnDefinition = "JSON")
-  @Convert(converter = ScopedPriceJsonConverter.class)
-  private ScopedPrice scopedPrice;
 
   @Column(name = "scoped_price_discounted")
   private Boolean scopedPriceDiscounted;
@@ -197,21 +188,21 @@ public class ProductVariantEntity {
   }
 
   /**
-   * Gets assetids.
+   * Gets assetIds.
    *
-   * @return the assetids
+   * @return the assetIds
    */
-  public List<String> getAssetids() {
-    return assetids;
+  public List<String> getAssetIds() {
+    return assetIds;
   }
 
   /**
-   * Sets assetids.
+   * Sets assetIds.
    *
-   * @param assetids the assetids
+   * @param assetIds the assetIds
    */
-  public void setAssetids(List<String> assetids) {
-    this.assetids = assetids;
+  public void setAssetIds(List<String> assetIds) {
+    this.assetIds = assetIds;
   }
 
   /**
@@ -251,24 +242,6 @@ public class ProductVariantEntity {
   }
 
   /**
-   * Gets scoped price.
-   *
-   * @return the scoped price
-   */
-  public ScopedPrice getScopedPrice() {
-    return scopedPrice;
-  }
-
-  /**
-   * Sets scoped price.
-   *
-   * @param scopedPrice the scoped price
-   */
-  public void setScopedPrice(ScopedPrice scopedPrice) {
-    this.scopedPrice = scopedPrice;
-  }
-
-  /**
    * Gets scoped price discounted.
    *
    * @return the scoped price discounted
@@ -296,10 +269,9 @@ public class ProductVariantEntity {
         ", prices=" + prices +
         ", attributes=" + attributes +
         ", images=" + images +
-        ", assetids=" + assetids +
+        ", assetIds=" + assetIds +
         ", availability=" + availability +
         ", isMatchingVariant=" + isMatchingVariant +
-        ", scopedPrice=" + scopedPrice +
         ", scopedPriceDiscounted=" + scopedPriceDiscounted +
         '}';
   }
