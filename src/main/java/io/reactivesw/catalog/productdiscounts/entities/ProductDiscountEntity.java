@@ -19,6 +19,7 @@ import javax.persistence.Table;
 @Table(name = "sw_product_discount")
 public class ProductDiscountEntity extends BaseAllEntity {
   @Column
+  @Convert(converter = LocalizedStringJsonConverter.class)
   private LocalizedString name;
 
   @Column(name = "description", columnDefinition = "JSON")
