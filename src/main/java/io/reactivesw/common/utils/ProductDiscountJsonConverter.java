@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import javax.persistence.AttributeConverter;
 
+import io.reactivesw.catalog.productdiscounts.models.ProductDiscountValue;
 import io.reactivesw.common.models.LocalizedString;
 
 /**
