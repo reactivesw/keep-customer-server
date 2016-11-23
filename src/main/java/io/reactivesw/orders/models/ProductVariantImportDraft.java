@@ -37,7 +37,7 @@ public class ProductVariantImportDraft {
   private List<Price> prices;
 
   /**
-   * Array of Attribute.
+   * Array of AttributeEntity.
    * If this property is defined,
    * then it will override the attributes property from the original product variant,
    * otherwise attributes property from the original product variant

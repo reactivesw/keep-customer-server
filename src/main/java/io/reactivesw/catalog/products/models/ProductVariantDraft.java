@@ -42,7 +42,7 @@ public class ProductVariantDraft {
   private List<AssetDraft> assets;
 
   /**
-   * Array of Attribute.
+   * Array of AttributeEntity.
    * Optional.
    */
   private List<Attribute> attributes;
