@@ -1,31 +1,20 @@
 package io.reactivesw.catalog.producttypes.entities;
 
-import io.reactivesw.common.entities.BaseTimeEntity;
-import io.reactivesw.common.utils.ListJsonConverter;
-import org.hibernate.annotations.GenericGenerator;
+import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.List;
+
+import io.reactivesw.common.entities.BaseAllEntity;
 
 /**
  * Created by Davis on 16/11/22.
  */
 @Entity
 @Table(name = "sw_product_type")
-public class ProductTypeEntity extends BaseTimeEntity {
-  /**
-   * The Id.
-   */
-  @Id
-  @GeneratedValue(generator = "uuid")
-  @GenericGenerator(name = "uuid", strategy = "uuid2")
-  @Column(name = "id")
-  private String id;
+public class ProductTypeEntity extends BaseAllEntity {
 
   @Column(name = "version")
   private Integer version;
@@ -39,28 +28,8 @@ public class ProductTypeEntity extends BaseTimeEntity {
   @Column
   private String description;
 
-  @Column(columnDefinition = "JSON")
-  @Convert(converter = ListJsonConverter.class)
-  //TODO ListJsonConverter可能不能正常工作,有问题需要写一个新的converter
+  @OneToMany
   private List<AttributeDefinitionEntity> attributes;
-
-  /**
-   * Gets id.
-   *
-   * @return the id
-   */
-  public String getId() {
-    return id;
-  }
-
-  /**
-   * Sets id.
-   *
-   * @param id the id
-   */
-  public void setId(String id) {
-    this.id = id;
-  }
 
   /**
    * Gets version.

@@ -1,34 +1,24 @@
 package io.reactivesw.catalog.producttypes.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import io.reactivesw.catalog.products.models.attributes.AttributeConstraint;
 import io.reactivesw.catalog.products.models.attributes.AttributeType;
+import io.reactivesw.common.entities.BaseAllEntity;
 import io.reactivesw.common.models.LocalizedString;
 import io.reactivesw.common.models.TextInputHint;
 import io.reactivesw.common.utils.AttributeTypeJsonConverter;
 import io.reactivesw.common.utils.LocalizedStringJsonConverter;
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.Column;
-import javax.persistence.Convert;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 /**
  * Created by Davis on 16/11/22.
  */
 @Entity
 @Table(name = "sw_product_type")
-public class AttributeDefinitionEntity {
-  /**
-   * The Id.
-   */
-  @Id
-  @GeneratedValue(generator = "uuid")
-  @GenericGenerator(name = "uuid", strategy = "uuid2")
-  @Column(name = "id")
-  private String id;
+public class AttributeDefinitionEntity extends BaseAllEntity{
 
   @Column(name = "type", nullable = false, columnDefinition = "JSON")
   @Convert(converter = AttributeTypeJsonConverter.class)
