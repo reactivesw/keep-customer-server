@@ -92,7 +92,7 @@ public class ProductProjection {
    */
   private Boolean published;
   /**
-   * variants - Array of ProductVariant
+   * variants - Array of ProductVariantEntity
    */
   private List<ProductVariant> masterVariant;
 

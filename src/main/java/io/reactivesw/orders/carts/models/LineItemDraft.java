@@ -15,7 +15,7 @@ public class LineItemDraft {
   @ApiModelProperty(value = "Product Id.", required = true)
   private String productId;
 
-  @ApiModelProperty(value = "ProductVariant id", required = true)
+  @ApiModelProperty(value = "ProductVariantEntity id", required = true)
   private Integer variantId;
 
   @ApiModelProperty(required = true)

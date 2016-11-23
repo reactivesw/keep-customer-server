@@ -34,7 +34,7 @@ public class LineItem {
           required = true)
   private LocalizedString productSlug;
 
-  @ApiModelProperty(value = "ProductVariant", required = true)
+  @ApiModelProperty(value = "ProductVariantEntity", required = true)
   private ProductVariant variant;
 
   @ApiModelProperty(value =
