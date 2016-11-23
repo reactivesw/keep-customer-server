@@ -2,6 +2,7 @@ package io.reactivesw.catalog.products.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.reactivesw.catalog.productdiscounts.models.DiscountedPrice;
+import io.reactivesw.common.entities.BaseIdEntity;
 import io.reactivesw.common.models.CustomFields;
 import io.reactivesw.common.models.Money;
 import io.reactivesw.common.models.Reference;
@@ -25,12 +26,7 @@ import java.time.ZonedDateTime;
  */
 @Entity
 @Table(name = "sw_price")
-public class PriceEntity {
-  @Id
-  @GeneratedValue(generator = "uuid")
-  @GenericGenerator(name = "uuid", strategy = "uuid2")
-  @Column(name = "id")
-  private String id;
+public class PriceEntity extends BaseIdEntity{
 
   @Column(name = "value", nullable = false, columnDefinition = "JSON")
   @Convert(converter = MoneyJsonConverter.class)

@@ -1,6 +1,6 @@
 package io.reactivesw.catalog.producttypes.entities;
 
-import io.reactivesw.common.entities.BaseEntity;
+import io.reactivesw.common.entities.BaseTimeEntity;
 import io.reactivesw.common.utils.ListJsonConverter;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "sw_product_type")
-public class ProductTypeEntity extends BaseEntity{
+public class ProductTypeEntity extends BaseTimeEntity {
   /**
    * The Id.
    */

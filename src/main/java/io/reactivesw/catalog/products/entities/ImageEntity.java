@@ -1,5 +1,6 @@
 package io.reactivesw.catalog.products.entities;
 
+import io.reactivesw.common.entities.BaseIdEntity;
 import io.reactivesw.common.models.AssetDimensions;
 import io.reactivesw.common.utils.AssetDimensionsJsonConverter;
 import org.hibernate.annotations.GenericGenerator;
@@ -16,18 +17,12 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "sw_image")
-public class ImageEntity {
-
-  @Id
-  @GeneratedValue(generator = "uuid")
-  @GenericGenerator(name = "uuid", strategy = "uuid2")
-  @Column(name = "id")
-  private String id;
+public class ImageEntity extends BaseIdEntity{
 
   @Column(name = "url")
   private String url;
 
-  @Column(name = "dimesions", columnDefinition = "JSON")
+  @Column(name = "dimensions", columnDefinition = "JSON")
   @Convert(converter = AssetDimensionsJsonConverter.class)
   private AssetDimensions dimensions;
 
