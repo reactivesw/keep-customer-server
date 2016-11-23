@@ -18,9 +18,12 @@ import io.reactivesw.common.entities.BaseIdEntity;
 @Table(name = "sw_variant_attribute")
 public class AttributeEntity extends BaseIdEntity {
 
-  @Column(name = "nama")
+  @Column(name = "name")
   private String name;
 
+  /**
+   * Json Object for attribute value.
+   */
   @Column(name = "value")
   private String value;
 
