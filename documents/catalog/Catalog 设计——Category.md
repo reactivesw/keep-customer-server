@@ -22,13 +22,17 @@ orderHint使用String类型，内容为大于等于0的Integer，初始值为0�
 1. where
   
   查询谓词，支持的属性包括：
+  
   name,slug,version,createdAt,lastModifiedAt
+  
   例子：name(en="Pro T-Shirt") and version > 12 and createdAt > "2016-11-08T07:10:58.000Z"
   
 2. sort
   
   排序谓词，支持的属性包括：
+  
   name,slug,version,createdAt,lastModifiedAt
+  
   注意：对name，slug这种LocalizedString，需要指定具体的语言，比如name.en
   
 3. expand
@@ -44,7 +48,9 @@ orderHint使用String类型，内容为大于等于0的Integer，初始值为0�
 ### 2.3 修改
 
 Category的修改不会影响外部信息，可以直接修改。
+
 所有的修改操作，都需要与当前的version一致，否则失败。
+
 提供了以下UpdateAction：
 
 1. Change Name
