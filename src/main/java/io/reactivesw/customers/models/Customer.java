@@ -76,7 +76,7 @@ public class Customer {
   private String title;
 
   @JsonProperty
-  private Date dateOfBirth;
+  private ZonedDateTime dateOfBirth;
 
   @JsonProperty
   private String companyName;
@@ -205,11 +205,11 @@ public class Customer {
     this.title = title;
   }
 
-  public Date getDateOfBirth() {
+  public ZonedDateTime getDateOfBirth() {
     return dateOfBirth;
   }
 
-  public void setDateOfBirth(Date dateOfBirth) {
+  public void setDateOfBirth(ZonedDateTime dateOfBirth) {
     this.dateOfBirth = dateOfBirth;
   }
 

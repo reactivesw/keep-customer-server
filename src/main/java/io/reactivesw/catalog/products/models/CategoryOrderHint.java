@@ -14,4 +14,40 @@ public class CategoryOrderHint {
    * number, values between [0...1]
    */
   String order;
+
+  /**
+   * Gets key.
+   *
+   * @return the key
+   */
+  public String getKey() {
+    return key;
+  }
+
+  /**
+   * Sets key.
+   *
+   * @param key the key
+   */
+  public void setKey(String key) {
+    this.key = key;
+  }
+
+  /**
+   * Gets order.
+   *
+   * @return the order
+   */
+  public String getOrder() {
+    return order;
+  }
+
+  /**
+   * Sets order.
+   *
+   * @param order the order
+   */
+  public void setOrder(String order) {
+    this.order = order;
+  }
 }

@@ -7,7 +7,9 @@ catalog_product_attribute
 ## 2. 业务流程
 ### 2.1 添加
 添加ProductType对外界没有影响，直接添加，设置version为1，ID为自动生成的UUID。
+
 ProductType的名字可以重复。
+
 可以一同添加attribute，也可以在修改中添加attribute。
 
 ### 2.2 查询
@@ -16,9 +18,11 @@ ProductType的名字可以重复。
 #### 2.2.3 根据条件查询
 查询参数包括：
 1. where
+
   查询谓词，支持的属性包括：
-  name,slug,version,createdAt,lastModifiedAt
+  name,slug,version,createdAt,lastModifiedAt  
   例子：name(en="Pro T-Shirt") and version > 12 and createdAt > "2016-11-08T07:10:58.000Z"
+
 2. sort
   排序谓词，支持的属性包括：
   name,slug,version,createdAt,lastModifiedAt
