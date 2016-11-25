@@ -7,8 +7,11 @@ catalog_category
 ### 2.1 添加
 
 添加Category对外界没有影响，直接添加，设置version为1，ID为自动生成的UUID。
+
 添加subCategory，需要设置parent和ancestors列表，ancestors列表由parent计算出来。
+
 在同一节点下的Category名字不能重复，任何语言都不能重复。
+
 orderHint使用String类型，内容为大于等于0的Integer，初始值为0，数字越大表示优先级越高，如果相同，则由创建时间先后决定，时间越早越优先。
 
 ### 2.2 查询
