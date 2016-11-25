@@ -10,7 +10,7 @@ import io.reactivesw.common.entities.BaseAllEntity;
 /**
  * Created by umasuo on 16/11/23.
  */
-@Table(name = "sw_product")
+@Table(name = "catalog_product")
 @Entity
 public class ProductEntity extends BaseAllEntity {
 

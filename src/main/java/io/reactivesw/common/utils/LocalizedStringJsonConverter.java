@@ -29,7 +29,6 @@ public class LocalizedStringJsonConverter implements AttributeConverter<Localize
   @Override
   public LocalizedString convertToEntityAttribute(String dbData) {
     try {
-
       LocalizedString string = objectMapper.readValue(dbData, LocalizedString.class);
       return string;
     } catch (IOException ex) {

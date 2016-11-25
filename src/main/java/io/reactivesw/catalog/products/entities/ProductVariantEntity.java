@@ -53,9 +53,6 @@ public class ProductVariantEntity {
   @Convert(converter = ListJsonConverter.class)
   private List<String> assetIds;
 
-  @Column(name = "is_matching")
-  private Boolean isMatchingVariant;
-
   /**
    * Gets variant id.
    *
@@ -200,36 +197,17 @@ public class ProductVariantEntity {
     this.assetIds = assetIds;
   }
 
-  /**
-   * Gets matching variant.
-   *
-   * @return the matching variant
-   */
-  public Boolean getMatchingVariant() {
-    return isMatchingVariant;
-  }
-
-  /**
-   * Sets matching variant.
-   *
-   * @param matchingVariant the matching variant
-   */
-  public void setMatchingVariant(Boolean matchingVariant) {
-    isMatchingVariant = matchingVariant;
-  }
-
   @Override
   public String toString() {
     return "ProductVariantEntity{" +
-            "variantId='" + variantId + '\'' +
-            ", id=" + id +
-            ", sku='" + sku + '\'' +
-            ", key='" + key + '\'' +
-            ", prices=" + prices +
-            ", attributes=" + attributes +
-            ", images=" + images +
-            ", assetIds=" + assetIds +
-            ", isMatchingVariant=" + isMatchingVariant +
-            '}';
+        "variantId='" + variantId + '\'' +
+        ", id=" + id +
+        ", sku='" + sku + '\'' +
+        ", key='" + key + '\'' +
+        ", prices=" + prices +
+        ", attributes=" + attributes +
+        ", images=" + images +
+        ", assetIds=" + assetIds +
+        '}';
   }
 }

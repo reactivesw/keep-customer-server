@@ -18,8 +18,8 @@ import io.reactivesw.common.utils.LocalizedStringJsonConverter;
 /**
  * Created by umasuo on 16/11/23.
  */
-@Table(name = "sw_product_data")
 @Entity
+@Table(name = "catalog_product_data")
 public class ProductDataEntity extends BaseIdEntity {
 
   @Column(name = "name", nullable = false, columnDefinition = "JSON")

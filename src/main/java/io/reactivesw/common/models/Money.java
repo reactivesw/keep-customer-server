@@ -10,6 +10,7 @@ public class Money {
    * The Currency code.
    */
   private String currencyCode;
+
   /**
    * The Cent amount.
    */

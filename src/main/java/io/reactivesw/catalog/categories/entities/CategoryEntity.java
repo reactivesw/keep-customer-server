@@ -1,5 +1,6 @@
 package io.reactivesw.catalog.categories.entities;
 
+import io.reactivesw.common.entities.BaseAllEntity;
 import io.reactivesw.common.entities.BaseTimeEntity;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -23,16 +24,8 @@ import io.reactivesw.common.utils.ListJsonConverter;
  * Created by rai on 16/11/13.
  */
 @Entity
-@Table(name = "sw_category")
-public class CategoryEntity extends BaseTimeEntity {
-  /**
-   * The Id.
-   */
-  @Id
-  @GeneratedValue(generator = "uuid")
-  @GenericGenerator(name = "uuid", strategy = "uuid2")
-  @Column(name = "id")
-  private String id;
+@Table(name = "catalog_category")
+public class CategoryEntity extends BaseAllEntity {
 
   @Column(name = "version")
   private Integer version;
@@ -83,14 +76,6 @@ public class CategoryEntity extends BaseTimeEntity {
   @Column(columnDefinition = "JSON")
   @Convert(converter = CustomFieldsJsonConverter.class)
   private CustomFields custom;
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
 
   public Integer getVersion() {
     return version;

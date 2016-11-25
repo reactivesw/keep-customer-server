@@ -13,12 +13,13 @@ import io.reactivesw.common.entities.BaseAllEntity;
  * Created by Davis on 16/11/22.
  */
 @Entity
-@Table(name = "sw_product_type")
+@Table(name = "catalog_product_type")
 public class ProductTypeEntity extends BaseAllEntity {
 
-  @Column(name = "version")
+  @Column
   private Integer version;
 
+  //database key word
   @Column(name = "product_type_key")
   private String key;
 

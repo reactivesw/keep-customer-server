@@ -1,6 +1,5 @@
 package io.reactivesw.catalog.productdiscounts.entities;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import io.reactivesw.catalog.productdiscounts.models.ProductDiscountValue;
 import io.reactivesw.common.entities.BaseAllEntity;
 import io.reactivesw.common.models.LocalizedString;

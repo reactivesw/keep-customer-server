@@ -17,8 +17,8 @@ import io.reactivesw.common.utils.LocalizedStringJsonConverter;
  * Created by Davis on 16/11/22.
  */
 @Entity
-@Table(name = "sw_product_type")
-public class AttributeDefinitionEntity extends BaseAllEntity{
+@Table(name = "catalog_product_attribute")
+public class AttributeDefinitionEntity extends BaseAllEntity {
 
   @Column(name = "type", nullable = false, columnDefinition = "JSON")
   @Convert(converter = AttributeTypeJsonConverter.class)
