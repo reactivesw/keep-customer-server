@@ -27,7 +27,7 @@ ProductType的名字可以重复。
   name,slug,version,createdAt,lastModifiedAt
 
   例子：name(en="Pro T-Shirt") and version > 12 and createdAt > "2016-11-08T07:10:58.000Z"
-
+  
 2. sort
   
   排序谓词，支持的属性包括：

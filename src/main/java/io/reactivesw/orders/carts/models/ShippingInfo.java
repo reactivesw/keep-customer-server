@@ -3,7 +3,7 @@ package io.reactivesw.orders.carts.models;
 import java.util.List;
 
 import io.reactivesw.orders.cartdiscounts.models.DiscountedLineItemPrice;
-import io.reactivesw.orders.models.Delivery;
+import io.reactivesw.orders.orders.models.Delivery;
 import io.reactivesw.orders.shippingmethods.models.ShippingRate;
 import io.reactivesw.common.models.Money;
 import io.reactivesw.common.models.Reference;
