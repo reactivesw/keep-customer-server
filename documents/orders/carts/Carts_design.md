@@ -23,6 +23,32 @@ TaxedItemPriceValue         |Value Object           |Taxed Item Price used in It
 TaxRateValue                |Value Object           |Tax Rate, used in Item for record tax rate.
 SubRateValue                |Value Object           |Sub Rate of tax rate.
 
+# 2. Business logic
+
+## 2.1 Get cart
+Get a cart by some conditions.
+
+### 2.1.1 Get cart by cart id
+Get a cart by the cart ID, and return the cart.
+
+### 2.1.2 Get cart by customer id
+Get a cart by the customer's id, return the one that has been modified most recently, and the cart's state should be `Active`.
+Normally, each customer should has only one cart.
+
+## 2.2 Query cart
+System can Use `where`,`sort`,`expand`,`limit`,`offset` to query carts.
+
+## 2.3 Create cart
+When the customer `add a product to cart`, and there is no cart in `Active` state, the the system auto create a new cart for the customer.
+ 
+## 2.4 Update cart
+Use update actions to update an existing cart.
+
+### 2.4.1 Merge cart
+Merge cart from anonymous customer to an registered customer, and no further operations on the cart are allowed.
+
+### 2.4.2 Checkout
+Checkout a cart, the cart's state will be set as `Ordered`, and no further operations on the cart are allowed.
 
 
 
