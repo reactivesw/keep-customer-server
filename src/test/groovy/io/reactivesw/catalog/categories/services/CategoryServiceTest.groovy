@@ -1,6 +1,7 @@
 package io.reactivesw.catalog.categories.services
 
 import io.reactivesw.catalog.categories.entities.CategoryEntity
+import io.reactivesw.catalog.categories.models.CategoryDraft
 import io.reactivesw.catalog.categories.repositories.CategoryRepository
 import io.reactivesw.common.exceptions.NotExistException
 import io.reactivesw.common.exceptions.ParametersException
@@ -77,5 +78,16 @@ class CategoryServiceTest extends Specification {
 
         then:
         true
+    }
+
+    def "test 6 : create Category"() {
+        given:
+        CategoryDraft categoryDraft = new CategoryDraft()
+
+        when:
+        def category = categoryService.createCategory(categoryDraft)
+
+        then:
+        category != null
     }
 }

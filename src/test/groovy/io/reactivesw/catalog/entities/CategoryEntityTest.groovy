@@ -8,10 +8,7 @@ import io.reactivesw.common.models.Reference
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ContextConfiguration
-import org.springframework.test.context.web.WebAppConfiguration
 import spock.lang.Specification
-
-import java.time.ZonedDateTime
 
 /**
  * Created by umasuo on 16/11/22.
@@ -19,15 +16,27 @@ import java.time.ZonedDateTime
 //@ContextConfiguration
 //@SpringBootTest
 class CategoryEntityTest extends Specification{
-//
+
 //    @Autowired
 //    CategoryRepository repository;
+//
+//    def "test 1 : query category id by ancestor id"() {
+//        given:
+//        def parentId = "first"
+//
+//        when:
+//        def result = repository.queryCategoryIdsByAncestorId(parentId)
+//
+//        then:
+//        result != null
+//    }
 //
 //    def "test entity"() {
 //        CategoryEntity entity = new CategoryEntity()
 //        LocalizedString str = new LocalizedString()
 //        str.addKeyValue("en", "en value")
 //        entity.setName(str)
+//        entity.parent = "111111111"
 //
 //        CustomFields custom = new CustomFields()
 //        Reference ref = new Reference()

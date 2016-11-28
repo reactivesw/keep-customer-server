@@ -58,13 +58,13 @@ public class ProductProjection {
    */
   private LocalizedString slug;
   /**
-   * Array of Reference to a Category.
+   * Array of Reference to a CategoryEntity.
    * References to categories the product is in.
    */
   private List<Reference> categories;
 
   /**
-   * The Category order hints.
+   * The CategoryEntity order hints.
    */
   private List<CategoryOrderHint> categoryOrderHints;
   /**

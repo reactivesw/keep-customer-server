@@ -44,7 +44,7 @@ public class ProductDraft {
 
   /**
    * categories that are assigned to the product.
-   * Array of Reference to a Category.
+   * Array of Reference to a CategoryEntity.
    * Optional.
    */
   private List<Reference> categories;

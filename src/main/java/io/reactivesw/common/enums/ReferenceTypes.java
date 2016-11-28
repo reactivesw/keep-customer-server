@@ -1,7 +1,5 @@
 package io.reactivesw.common.enums;
 
-import io.reactivesw.catalog.categories.entities.CategoryEntity;
-
 /**
  * Created by Davis on 16/11/16.
  */

@@ -25,7 +25,7 @@ public class CategoryDraft {
   private LocalizedString description;
 
   /**
-   * Reference to a Category.
+   * Reference to a CategoryEntity.
    * A category that is the parent of this category in the category tree.
    */
   private Reference parent;

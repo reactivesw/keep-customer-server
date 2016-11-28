@@ -30,7 +30,7 @@ public class Router {
 
   /*************** End Of Customer. *****************/
 
-  /*************** Category. *****************/
+  /*************** CategoryEntity. *****************/
   /**
    * for category.
    */
@@ -57,7 +57,7 @@ public class Router {
   public static final String CATEGORY_GET_BY_ID = CATEGORY_ROOT + "/{" + CATEGORY_ID + "}";
 
 
-  /*************** End Of Category. *****************/
+  /*************** End Of CategoryEntity. *****************/
 
 
   /*************** Cart & order. *****************/

@@ -2,6 +2,7 @@ package io.reactivesw.catalog.categories.services;
 
 import io.reactivesw.catalog.categories.entities.CategoryEntity;
 import io.reactivesw.catalog.categories.models.Category;
+import io.reactivesw.catalog.categories.models.CategoryDraft;
 import io.reactivesw.catalog.categories.models.mapper.CategoryMapper;
 import io.reactivesw.catalog.categories.repositories.CategoryRepository;
 import io.reactivesw.common.exceptions.NotExistException;
@@ -24,7 +25,7 @@ public class CategoryService {
   private static final Logger LOG = LoggerFactory.getLogger(CategoryService.class);
 
   /**
-   * Category Repository.
+   * CategoryEntity Repository.
    */
   @Autowired
   private transient CategoryRepository categoryRepository;
@@ -34,6 +35,7 @@ public class CategoryService {
    *
    * @param id the id
    * @return the category by id
+   * @throws NotExistException if the can not find CategoryEntity by the id
    */
   public Category getCategoryById(String id) {
     LOG.debug("enter getCategoryById, id is {}", id);
@@ -42,7 +44,8 @@ public class CategoryService {
       LOG.debug("fail getCategoryById, can not find category by id {}", id);
       throw new NotExistException();
     }
-    LOG.debug("end getCategoryById, id is {}, get Category {}", id, categoryEntity.toString());
+    LOG.debug("end getCategoryById, id is {}, get CategoryEntity {}",
+        id, categoryEntity.toString());
     return CategoryMapper.entityToCategory(categoryEntity);
   }
 
@@ -51,6 +54,8 @@ public class CategoryService {
    *
    * @param id      the id
    * @param version the version
+   * @throws NotExistException   if the can not find CategoryEntity by the id.
+   * @throws ParametersException if the version can not match.
    */
   public void deleteCategory(String id, Integer version) {
     LOG.debug("enter deleteCategory, id is {}, version is {}", id, version);
@@ -65,6 +70,22 @@ public class CategoryService {
       throw new ParametersException();
     }
     categoryRepository.delete(id);
+    //TODO delete subCategory
+    //TODO removed from all those products that had that category assigned in their ProductData
     LOG.debug("end deleteCategory, id is {}, version is {}", id, version);
+  }
+
+  /**
+   * Create category category.
+   *
+   * @param categoryDraft the category draft
+   * @return the category
+   */
+  public Category createCategory(CategoryDraft categoryDraft) {
+    Category category = new Category();
+    LOG.debug("enter createCategory, CategoryDraft is {}", categoryDraft.toString());
+    //TODO
+    LOG.debug("end createCategory, new CategoryEntity is {}", category.toString());
+    return category;
   }
 }

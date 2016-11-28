@@ -53,7 +53,7 @@ public class Category {
   /**
    * The Name.
    */
-  @ApiModelProperty(value = "Category Name")
+  @ApiModelProperty(value = "CategoryEntity Name")
   @JsonUnwrapped
   private LocalizedString name;
 
@@ -63,7 +63,7 @@ public class Category {
    * but a category can have the same slug for different languages.
    * TODO write getter and setter method for String
    */
-  @ApiModelProperty(value = "Category Slug")
+  @ApiModelProperty(value = "CategoryEntity Slug")
   @JsonIgnore
   private LocalizedString slug;
 
@@ -71,7 +71,7 @@ public class Category {
    * The Description.
    * TODO write getter and setter method for String
    */
-  @ApiModelProperty(value = "Category Description")
+  @ApiModelProperty(value = "CategoryEntity Description")
   @JsonIgnore
   private LocalizedString description;
 
@@ -96,14 +96,14 @@ public class Category {
   /**
    * externalId.
    */
-  @ApiModelProperty(value = "Category externalId")
+  @ApiModelProperty(value = "CategoryEntity externalId")
   private String externalId;
 
   /**
    * The Meta title.
    * TODO write getter and setter method for String
    */
-  @ApiModelProperty(value = "Category metaTitle")
+  @ApiModelProperty(value = "CategoryEntity metaTitle")
   @JsonIgnore
   private LocalizedString metaTitle;
 
@@ -111,7 +111,7 @@ public class Category {
    * The metaDescription.
    * TODO write getter and setter method for String
    */
-  @ApiModelProperty(value = "Category metaDescription")
+  @ApiModelProperty(value = "CategoryEntity metaDescription")
   @JsonIgnore
   private LocalizedString metaDescription;
 
@@ -119,14 +119,14 @@ public class Category {
    * the metaKeywords.
    * TODO write getter and setter method for String
    */
-  @ApiModelProperty(value = "Category metaKeywords")
+  @ApiModelProperty(value = "CategoryEntity metaKeywords")
   @JsonIgnore
   private LocalizedString metaKeywords;
 
   /**
    * custom fields.
    */
-  @ApiModelProperty(value = "Category Custom Fields")
+  @ApiModelProperty(value = "CategoryEntity Custom Fields")
   private CustomFields custom;
 
   /**
@@ -413,7 +413,7 @@ public class Category {
    */
   @Override
   public String toString() {
-    return "Category{" +
+    return "CategoryEntity{" +
         "id='" + id + '\'' +
         ", version=" + version +
         ", createdAt=" + createdAt +

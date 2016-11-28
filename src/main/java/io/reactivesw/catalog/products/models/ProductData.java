@@ -16,7 +16,7 @@ public class ProductData {
   private LocalizedString name;
 
   /**
-   * Array of Reference to a Category
+   * Array of Reference to a CategoryEntity
    * References to categories the product is in.
    */
   private List<Reference> categories;

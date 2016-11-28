@@ -15,7 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
- * Category Entity.
+ * CategoryEntity Entity.
  * Created by rai on 16/11/13.
  */
 @Entity
