@@ -68,9 +68,6 @@ public class CategoryController {
    */
   @ApiOperation(value = "Get Categories")
   @GetMapping(CATEGORY_ALL)
-  /*TODO
-  1. List<Category> should be PagedQueryResult
-   */
   public List<Category> queryCategories(QueryConditions query) {
     LOG.debug("query parameters: {}", query.toString());
     return null;
@@ -110,7 +107,7 @@ public class CategoryController {
     List<Object> objs = fields.getActions();
     String loObj = objs.get(0).toString();
     LOG.debug("action  : {}", loObj);
-    
+
     return null;
   }
 

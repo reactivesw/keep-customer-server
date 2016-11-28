@@ -19,13 +19,12 @@ import java.time.ZonedDateTime
 //@ContextConfiguration
 //@SpringBootTest
 class CategoryEntityTest extends Specification{
-
+//
 //    @Autowired
 //    CategoryRepository repository;
 //
 //    def "test entity"() {
 //        CategoryEntity entity = new CategoryEntity()
-//        entity.setCreatedAt(ZonedDateTime.now())
 //        LocalizedString str = new LocalizedString()
 //        str.addKeyValue("en", "en value")
 //        entity.setName(str)
@@ -50,7 +49,7 @@ class CategoryEntityTest extends Specification{
 //        then:
 //        getEntity != null
 //    }
-//
+
 //    def "test retrive entity" () {
 //        when:
 //        def entity = repository.findOne("00259975-484f-4ab2-b138-8480c15d865a")
