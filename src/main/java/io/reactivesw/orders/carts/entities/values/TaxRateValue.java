@@ -11,6 +11,7 @@ import io.reactivesw.common.entities.BaseIdEntity;
 
 /**
  * Created by umasuo on 16/11/17.
+ * //TODO should we keep this in snapshot?
  */
 @Entity
 @Table(name = "orders_carts_tax_rate")

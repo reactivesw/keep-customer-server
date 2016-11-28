@@ -1,5 +1,6 @@
 # Cart service design
 This micro-service provide services for handle cart requirements, such as create cart, merge cart, change cart etc.
+And cart should keep an snapshot of the product that added to it.
 
 # 1. DataBase
 

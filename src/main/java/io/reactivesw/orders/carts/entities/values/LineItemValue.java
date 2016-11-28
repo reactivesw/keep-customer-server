@@ -88,8 +88,8 @@ public class LineItemValue extends BaseIdEntity {
   /**
    * tax rate.
    */
-  @OneToOne
-  private TaxRateValue taxRate;
+  @Column(name = "tax_rate")
+  private String taxRate;
 
   /**
    * supplyChannel.
@@ -290,7 +290,7 @@ public class LineItemValue extends BaseIdEntity {
    *
    * @return the tax rate
    */
-  public TaxRateValue getTaxRate() {
+  public String getTaxRate() {
     return taxRate;
   }
 
@@ -299,7 +299,7 @@ public class LineItemValue extends BaseIdEntity {
    *
    * @param taxRate the tax rate
    */
-  public void setTaxRate(TaxRateValue taxRate) {
+  public void setTaxRate(String taxRate) {
     this.taxRate = taxRate;
   }
 

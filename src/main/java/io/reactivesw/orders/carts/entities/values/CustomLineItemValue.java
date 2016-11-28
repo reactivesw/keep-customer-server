@@ -79,10 +79,10 @@ public class CustomLineItemValue extends BaseIdEntity {
   private String taxCategory;
 
   /**
-   * tax rate.
+   * tax rate id.
    */
-  @OneToOne
-  private TaxRateValue taxRate;
+  @Column(name = "tax_rate")
+  private String taxRate;
 
   /**
    * DiscountedLineItemPriceForQuantity ids.
@@ -247,7 +247,7 @@ public class CustomLineItemValue extends BaseIdEntity {
    *
    * @return the tax rate
    */
-  public TaxRateValue getTaxRate() {
+  public String getTaxRate() {
     return taxRate;
   }
 
@@ -256,7 +256,7 @@ public class CustomLineItemValue extends BaseIdEntity {
    *
    * @param taxRate the tax rate
    */
-  public void setTaxRate(TaxRateValue taxRate) {
+  public void setTaxRate(String taxRate) {
     this.taxRate = taxRate;
   }
 

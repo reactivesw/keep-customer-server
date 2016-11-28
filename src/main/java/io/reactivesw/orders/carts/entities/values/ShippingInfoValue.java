@@ -49,8 +49,8 @@ public class ShippingInfoValue extends BaseIdEntity {
    * Will be set automatically in the Platform TaxMode once the shipping address is set is set. For
    * the External tax mode the tax rate has to be set explicitly with the ExternalTaxRateDraft.
    */
-  @OneToOne
-  private TaxRateValue taxRate;
+  @Column(name = "tax_rate")
+  private String taxRate;
 
   /**
    * tax category id.
@@ -155,7 +155,7 @@ public class ShippingInfoValue extends BaseIdEntity {
    *
    * @return the tax rate
    */
-  public TaxRateValue getTaxRate() {
+  public String getTaxRate() {
     return taxRate;
   }
 
@@ -164,7 +164,7 @@ public class ShippingInfoValue extends BaseIdEntity {
    *
    * @param taxRate the tax rate
    */
-  public void setTaxRate(TaxRateValue taxRate) {
+  public void setTaxRate(String taxRate) {
     this.taxRate = taxRate;
   }
 
