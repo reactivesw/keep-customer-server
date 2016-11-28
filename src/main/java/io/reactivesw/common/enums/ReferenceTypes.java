@@ -15,10 +15,11 @@ public enum  ReferenceTypes {
     this.value = value;
   }
 
-  public static String getType(Class clazz){
-    if (clazz.equals(CategoryEntity.class)){
-      return CATEGORY.value;
-    }
-    return CARTDISCOUNT.value;
+  /**
+   * get type id.
+   * @return String
+   */
+  public String getType(){
+    return this.value;
   }
 }
