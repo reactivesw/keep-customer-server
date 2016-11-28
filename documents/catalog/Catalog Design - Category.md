@@ -1,4 +1,4 @@
-#Catalog 设计——Category
+# Catalog 设计——Category
 
 ## 1. 数据库
 catalog_category
@@ -87,3 +87,75 @@ Category的修改不会影响外部信息，可以直接修改。
 ## 4. API定义
 
 API定义参照[CommerceTools](https://dev.commercetools.com/http-api-projects-categories.html)
+
+### 4.1 Get Category by ID
+
+url: /categories/{id}
+
+Method: GET
+
+Response Representation: Category
+
+exception:
+
+1. can not find Category by the id, return http status 404
+
+### 4.2 Query Categories
+
+url: /categories
+
+Method: GET
+
+Response Representation: PagedQueryResult with the results array of Category
+
+Query Parameters: QueryConditions with following parameters
+* where - Predicate - Optional
+* sort - Sort - Optional
+* expand - Expansion - Optional
+* limit - Number - Optional
+* offset - Number - Optional
+
+exception: 
+
+1. when parameters is invalid, return http status 400
+
+### 4.3 Create a Category
+url: /categories
+
+Method: POST
+
+Request Representation: CategoryDraft
+
+Response Representation: Category
+
+exception:
+1. when parameters is invalid, return http status 400
+
+### 4.4 Update Category
+
+url: /categories/{id}
+
+Method: POST
+
+Request Representation: Fields with version and update action list
+
+Response Representation: Category
+
+exception:
+
+1. when parameters is invalid, return http status 400
+
+### 4.5 Delete Category
+
+url: /categories/{id}
+
+Method: DELETE
+
+Query Parameters:
+
+* version - Number - Required
+
+exception:
+
+1. can not find Category by the id, return http status 404
+2. when version is not match , return http status 400
