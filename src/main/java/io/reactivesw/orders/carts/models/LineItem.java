@@ -2,6 +2,9 @@ package io.reactivesw.orders.carts.models;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 import io.reactivesw.orders.cartdiscounts.models.DiscountedLineItemPriceForQuantity;
 import io.reactivesw.catalog.products.models.Price;
 import io.reactivesw.catalog.products.models.ProductVariant;
@@ -21,6 +24,7 @@ import io.swagger.annotations.ApiModelProperty;
 public class LineItem {
 
   @ApiModelProperty(value = "The unique ID of this LineItem.", required = true)
+  @Id
   private String id;
 
   @ApiModelProperty(value = "Product Id.", required = true)

@@ -2,10 +2,14 @@ package io.reactivesw.common.models;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
+import javax.persistence.Entity;
+
+import io.reactivesw.common.entities.BaseIdEntity;
+
 /**
  * Created by umasuo on 16/11/16.
  */
-public class CustomFields {
+public class CustomFields extends BaseIdEntity{
 
   private Reference type;
   /**
