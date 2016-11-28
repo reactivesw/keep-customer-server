@@ -123,6 +123,7 @@ public class CategoryController {
                                  String id,
                              Integer version) {
     LOG.debug("enter deleteCategory, id is {}, version is {}", id, version);
+    categoryService.deleteCategory(id, version);
     LOG.debug("end deleteCategory, id is {}, version is {}", id, version);
   }
 }

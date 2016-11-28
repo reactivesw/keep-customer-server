@@ -17,7 +17,7 @@ public class AuditorAwareConfig {
    * @return the zoned date time auditor aware
    */
   @Bean
-  public ZonedDateTimeAuditorAware auditorProvider(){
+  public ZonedDateTimeAuditorAware auditorProvider() {
     return new ZonedDateTimeAuditorAware();
   }
 }
