@@ -3,13 +3,10 @@ package io.reactivesw.catalog.products.entities;
 import io.reactivesw.common.entities.BaseIdEntity;
 import io.reactivesw.common.models.AssetDimensions;
 import io.reactivesw.common.utils.AssetDimensionsJsonConverter;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -17,15 +14,24 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "sw_image")
-public class ImageEntity extends BaseIdEntity{
+public class ImageEntity extends BaseIdEntity {
 
+  /**
+   * url.
+   */
   @Column(name = "url")
   private String url;
 
+  /**
+   * dimensions.
+   */
   @Column(name = "dimensions", columnDefinition = "JSON")
   @Convert(converter = AssetDimensionsJsonConverter.class)
   private AssetDimensions dimensions;
 
+  /**
+   * label.
+   */
   @Column(name = "label")
   private String label;
 
@@ -101,13 +107,16 @@ public class ImageEntity extends BaseIdEntity{
     this.label = label;
   }
 
+  /**
+   * toString method.
+   * @return String
+   */
   @Override
   public String toString() {
-    return "ImageEntity{" +
-        "id='" + id + '\'' +
-        ", url='" + url + '\'' +
-        ", dimensions=" + dimensions +
-        ", label='" + label + '\'' +
-        '}';
+    return "ImageEntity{"
+        + "url='" + url + '\''
+        + ", dimensions=" + dimensions
+        + ", label='" + label + '\''
+        + '}';
   }
 }

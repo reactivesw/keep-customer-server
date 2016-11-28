@@ -1,15 +1,11 @@
 package io.reactivesw.catalog.products.entities;
 
-import org.hibernate.annotations.GenericGenerator;
+import io.reactivesw.common.entities.BaseIdEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import io.reactivesw.common.entities.BaseIdEntity;
 
 /**
  * Created by umasuo on 16/11/23.
@@ -30,42 +26,103 @@ public class ProductCatalogDataEntity extends BaseIdEntity {
   @Column(name = "staged_changed")
   private Boolean stagedChanged;
 
+  /**
+   * current data.
+   */
   @OneToOne
   private ProductDataEntity current;
 
+  /**
+   * staged data.
+   */
   @OneToOne
   private ProductDataEntity staged;
 
 
+  /**
+   * Gets published.
+   *
+   * @return the published
+   */
   public Boolean getPublished() {
     return published;
   }
 
+  /**
+   * Sets published.
+   *
+   * @param published the published
+   */
   public void setPublished(Boolean published) {
     this.published = published;
   }
 
+  /**
+   * Gets staged changed.
+   *
+   * @return the staged changed
+   */
   public Boolean getStagedChanged() {
     return stagedChanged;
   }
 
+  /**
+   * Sets staged changed.
+   *
+   * @param stagedChanged the staged changed
+   */
   public void setStagedChanged(Boolean stagedChanged) {
     this.stagedChanged = stagedChanged;
   }
 
+  /**
+   * Gets current.
+   *
+   * @return the current
+   */
   public ProductDataEntity getCurrent() {
     return current;
   }
 
+  /**
+   * Sets current.
+   *
+   * @param current the current
+   */
   public void setCurrent(ProductDataEntity current) {
     this.current = current;
   }
 
+  /**
+   * Gets staged.
+   *
+   * @return the staged
+   */
   public ProductDataEntity getStaged() {
     return staged;
   }
 
+  /**
+   * Sets staged.
+   *
+   * @param staged the staged
+   */
   public void setStaged(ProductDataEntity staged) {
     this.staged = staged;
+  }
+
+  /**
+   * toString method.
+   * @return String
+   */
+  @Override
+  public String toString() {
+    return "ProductCatalogDataEntity{"
+        + "id=" + id
+        + "published=" + published
+        + ", stagedChanged=" + stagedChanged
+        + ", current=" + current
+        + ", staged=" + staged
+        + '}';
   }
 }

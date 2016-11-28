@@ -17,24 +17,42 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "sw_product_discount")
 public class ProductDiscountEntity extends BaseAllEntity {
+  /**
+   * name.
+   */
   @Column
   @Convert(converter = LocalizedStringJsonConverter.class)
   private LocalizedString name;
 
+  /**
+   * description.
+   */
   @Column(name = "description", columnDefinition = "JSON")
   @Convert(converter = LocalizedStringJsonConverter.class)
   private LocalizedString description;
 
+  /**
+   * value.
+   */
   @Column(name = "value", columnDefinition = "JSON")
   @Convert(converter = ProductDiscountJsonConverter.class)
   private ProductDiscountValue value;
 
+  /**
+   * predicate.
+   */
   @Column
   private String predicate;
 
+  /**
+   * sort order.
+   */
   @Column(name = "sort_order")
   private String sortOrder;
 
+  /**
+   * active.
+   */
   @Column
   private Boolean active;
 
@@ -146,15 +164,20 @@ public class ProductDiscountEntity extends BaseAllEntity {
     this.active = active;
   }
 
+
+  /**
+   * toString method.
+   * @return String
+   */
   @Override
   public String toString() {
-    return "ProductDiscountEntity{" +
-        "name=" + name +
-        ", description=" + description +
-        ", value=" + value +
-        ", predicate='" + predicate + '\'' +
-        ", sortOrder='" + sortOrder + '\'' +
-        ", active=" + active +
-        '}';
+    return "ProductDiscountEntity{"
+        + "name=" + name
+        + ", description=" + description
+        + ", value=" + value
+        + ", predicate='" + predicate + '\''
+        + ", sortOrder='" + sortOrder + '\''
+        + ", active=" + active
+        + '}';
   }
 }

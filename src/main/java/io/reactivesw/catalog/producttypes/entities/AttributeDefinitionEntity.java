@@ -1,10 +1,5 @@
 package io.reactivesw.catalog.producttypes.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Convert;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 import io.reactivesw.catalog.products.models.attributes.AttributeConstraint;
 import io.reactivesw.catalog.products.models.attributes.AttributeType;
 import io.reactivesw.common.entities.BaseAllEntity;
@@ -13,6 +8,11 @@ import io.reactivesw.common.models.TextInputHint;
 import io.reactivesw.common.utils.AttributeTypeJsonConverter;
 import io.reactivesw.common.utils.LocalizedStringJsonConverter;
 
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * Created by Davis on 16/11/22.
  */
@@ -20,32 +20,56 @@ import io.reactivesw.common.utils.LocalizedStringJsonConverter;
 @Table(name = "catalog_product_attribute")
 public class AttributeDefinitionEntity extends BaseAllEntity {
 
+  /**
+   * The Type.
+   */
   @Column(name = "type", nullable = false, columnDefinition = "JSON")
   @Convert(converter = AttributeTypeJsonConverter.class)
   private AttributeType type;
 
+  /**
+   * The Name.
+   */
   @Column
   private String name;
 
+  /**
+   * The Label.
+   */
   @Column(name = "label", nullable = false, columnDefinition = "JSON")
   @Convert(converter = LocalizedStringJsonConverter.class)
   private LocalizedString label;
 
+  /**
+   * The Input tip.
+   */
   @Column(name = "input_tip", nullable = false, columnDefinition = "JSON")
   @Convert(converter = LocalizedStringJsonConverter.class)
   private LocalizedString inputTip;
 
+  /**
+   * The Is required.
+   */
   @Column
-  private Boolean isRequired;
+  private Boolean required;
 
+  /**
+   * The Attribute constraint.
+   */
   @Column
   private AttributeConstraint attributeConstraint;
 
+  /**
+   * The Input hint.
+   */
   @Column
   private TextInputHint inputHint;
 
+  /**
+   * The Is searchable.
+   */
   @Column
-  private Boolean isSearchable;
+  private Boolean searchable;
 
   /**
    * Gets type.
@@ -125,7 +149,7 @@ public class AttributeDefinitionEntity extends BaseAllEntity {
    * @return the required
    */
   public Boolean getRequired() {
-    return isRequired;
+    return required;
   }
 
   /**
@@ -134,7 +158,7 @@ public class AttributeDefinitionEntity extends BaseAllEntity {
    * @param required the required
    */
   public void setRequired(Boolean required) {
-    isRequired = required;
+    this.required = required;
   }
 
   /**
@@ -179,7 +203,7 @@ public class AttributeDefinitionEntity extends BaseAllEntity {
    * @return the searchable
    */
   public Boolean getSearchable() {
-    return isSearchable;
+    return searchable;
   }
 
   /**
@@ -188,6 +212,24 @@ public class AttributeDefinitionEntity extends BaseAllEntity {
    * @param searchable the searchable
    */
   public void setSearchable(Boolean searchable) {
-    isSearchable = searchable;
+    this.searchable = searchable;
+  }
+
+  /**
+   * toString method.
+   * @return String
+   */
+  @Override
+  public String toString() {
+    return "AttributeDefinitionEntity{"
+        + "type=" + type
+        + ", name='" + name + '\''
+        + ", label=" + label
+        + ", inputTip=" + inputTip
+        + ", required=" + required
+        + ", attributeConstraint=" + attributeConstraint
+        + ", inputHint=" + inputHint
+        + ", searchable=" + searchable
+        + '}';
   }
 }

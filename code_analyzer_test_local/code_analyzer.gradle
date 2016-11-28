@@ -6,9 +6,12 @@ apply plugin: 'findbugs'
 apply from:'code_analyzer_test/code_analyzer_config.gradle'
 
 ext {
-    application_java = 'io/reactivesw/customer/server/Application.java'
+    application_java = 'io/reactivesw/Application.java'
 
-    common_exception = 'io/reactivesw/customer/server/common/*'
+    common_exception = 'io/reactivesw/common/**'
+
+    model_exception = 'io/reactivesw/**/models/**'
+
     //TODO
     authentication = 'io/reactivesw/customer/server/authorization/*'
 
@@ -31,7 +34,7 @@ checkstyle{
     checkstyleMain.exclude customer_entity_folder_all
     checkstyleMain.exclude customer_model_folder_all
     checkstyleMain.exclude customer_repositories_folder_all
-
+    checkstyleMain.exclude model_exception
 }
 
 /*************PMD(Project Manager Design)***************/
@@ -43,7 +46,7 @@ tasks.withType(Pmd) {
     exclude customer_entity_folder_all
     exclude customer_model_folder_all
     exclude customer_repositories_folder_all
-
+    exclude model_exception
 }
 
 /*************find bug***************/

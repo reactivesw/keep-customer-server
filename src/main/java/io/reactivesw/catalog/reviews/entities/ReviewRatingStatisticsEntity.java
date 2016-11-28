@@ -1,14 +1,14 @@
 package io.reactivesw.catalog.reviews.entities;
 
-import io.reactivesw.catalog.reviews.enums.ReviewScore;
 import io.reactivesw.common.entities.BaseIdEntity;
 import io.reactivesw.common.utils.MapJsonConverter;
+
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.util.Map;
 
 /**
  * Created by Davis on 16/11/23.
@@ -16,18 +16,33 @@ import java.util.Map;
 @Entity
 @Table(name = "sw_review_rating_statistics")
 public class ReviewRatingStatisticsEntity extends BaseIdEntity {
+  /**
+   * The Average rating.
+   */
   @Column(name = "average_rating")
   private Float averageRating;
 
+  /**
+   * The Highest rating.
+   */
   @Column(name = "highest_rating")
   private Integer highestRating;
 
+  /**
+   * The Lowest rating.
+   */
   @Column(name = "lowest_Rating")
   private Integer lowestRating;
 
+  /**
+   * The Count.
+   */
   @Column
   private Integer count;
 
+  /**
+   * The Ratings distribution.
+   */
   @Column(name = "ratings_distribution", columnDefinition = "JSON")
   @Convert(converter = MapJsonConverter.class)
   private Map<String, Integer> ratingsDistribution;
@@ -122,14 +137,18 @@ public class ReviewRatingStatisticsEntity extends BaseIdEntity {
     this.ratingsDistribution = ratingsDistribution;
   }
 
+  /**
+   * toString method.
+   * @return String
+   */
   @Override
   public String toString() {
-    return "ReviewRatingStatisticsEntity{" +
-        "averageRating=" + averageRating +
-        ", highestRating=" + highestRating +
-        ", lowestRating=" + lowestRating +
-        ", count=" + count +
-        ", ratingsDistribution=" + ratingsDistribution +
-        '}';
+    return "ReviewRatingStatisticsEntity{"
+        + "averageRating=" + averageRating
+        + ", highestRating=" + highestRating
+        + ", lowestRating=" + lowestRating
+        + ", count=" + count
+        + ", ratingsDistribution=" + ratingsDistribution
+        + '}';
   }
 }

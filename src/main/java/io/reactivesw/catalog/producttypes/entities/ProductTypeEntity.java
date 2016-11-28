@@ -1,13 +1,13 @@
 package io.reactivesw.catalog.producttypes.entities;
 
+import io.reactivesw.common.entities.BaseAllEntity;
+
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import io.reactivesw.common.entities.BaseAllEntity;
 
 /**
  * Created by Davis on 16/11/22.
@@ -16,19 +16,33 @@ import io.reactivesw.common.entities.BaseAllEntity;
 @Table(name = "catalog_product_type")
 public class ProductTypeEntity extends BaseAllEntity {
 
+  /**
+   * version.
+   */
   @Column
   private Integer version;
 
-  //database key word
+  /**
+   * key word.
+   */
   @Column(name = "product_type_key")
   private String key;
 
+  /**
+   * name.
+   */
   @Column
   private String name;
 
+  /**
+   * description.
+   */
   @Column
   private String description;
 
+  /**
+   * attributes.
+   */
   @OneToMany
   private List<AttributeDefinitionEntity> attributes;
 
@@ -120,5 +134,21 @@ public class ProductTypeEntity extends BaseAllEntity {
    */
   public void setAttributes(List<AttributeDefinitionEntity> attributes) {
     this.attributes = attributes;
+  }
+
+  /**
+   * toString method.
+   * @return String
+   */
+  @Override
+  public String toString() {
+    return "ProductTypeEntity{"
+        + "id=" + id
+        + "version=" + version
+        + ", key='" + key + '\''
+        + ", name='" + name + '\''
+        + ", description='" + description + '\''
+        + ", attributes=" + attributes
+        + '}';
   }
 }

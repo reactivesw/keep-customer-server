@@ -17,7 +17,7 @@ public class CommonServiceRoutes {
   public static final String SWAGGER_API = "/v2/api-docs";
 
   /**
-   * SWAGGER_WEBJARS
+   * SWAGGER_WEBJARS.
    */
   public static final String SWAGGER_WEBJARS = "/webjars/springfox-swagger-ui";
 

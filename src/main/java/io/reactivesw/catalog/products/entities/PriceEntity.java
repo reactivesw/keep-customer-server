@@ -1,56 +1,74 @@
 package io.reactivesw.catalog.products.entities;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.reactivesw.catalog.productdiscounts.models.DiscountedPrice;
 import io.reactivesw.common.entities.BaseIdEntity;
 import io.reactivesw.common.models.CustomFields;
 import io.reactivesw.common.models.Money;
-import io.reactivesw.common.models.Reference;
 import io.reactivesw.common.utils.CustomFieldsJsonConverter;
 import io.reactivesw.common.utils.DiscountedPriceJsonConverter;
-import io.reactivesw.common.utils.LocalizedStringJsonConverter;
 import io.reactivesw.common.utils.MoneyJsonConverter;
-import io.swagger.annotations.ApiModelProperty;
-import org.hibernate.annotations.GenericGenerator;
+
+import java.time.ZonedDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Table;
-import java.time.ZonedDateTime;
 
 /**
  * Created by Davis on 16/11/23.
  */
 @Entity
 @Table(name = "sw_price")
-public class PriceEntity extends BaseIdEntity{
+public class PriceEntity extends BaseIdEntity {
 
+  /**
+   * value.
+   */
   @Column(name = "value", nullable = false, columnDefinition = "JSON")
   @Convert(converter = MoneyJsonConverter.class)
   private Money value;
 
+  /**
+   * country.
+   */
   @Column(name = "country")
   private String country;
 
+  /**
+   * customer group.
+   */
   @Column(name = "customer_group_id")
   private String customerGroup;
 
+  /**
+   * channel id.
+   */
   @Column(name = "chanel_id")
   private String channel;
 
+  /**
+   * valid from.
+   */
   @Column(name = "valid_from")
   private ZonedDateTime validFrom;
 
+  /**
+   * valid until.
+   */
   @Column(name = "valid_until")
   private ZonedDateTime validUntil;
 
+  /**
+   * discounted.
+   */
   @Column(name = "discounted", columnDefinition = "JSON")
   @Convert(converter = DiscountedPriceJsonConverter.class)
   private DiscountedPrice discounted;
 
+  /**
+   * custom.
+   */
   @Column(name = "custom", columnDefinition = "JSON")
   @Convert(converter = CustomFieldsJsonConverter.class)
   private CustomFields custom;
@@ -217,18 +235,22 @@ public class PriceEntity extends BaseIdEntity{
     this.custom = custom;
   }
 
+  /**
+   * toString method.
+   * @return String
+   */
   @Override
   public String toString() {
-    return "PriceEntity{" +
-        "id='" + id + '\'' +
-        ", value=" + value +
-        ", country='" + country + '\'' +
-        ", customerGroup='" + customerGroup + '\'' +
-        ", channel='" + channel + '\'' +
-        ", validFrom=" + validFrom +
-        ", validUntil=" + validUntil +
-        ", discounted=" + discounted +
-        ", custom=" + custom +
-        '}';
+    return "PriceEntity{"
+        + "id=" + id
+        + "value=" + value
+        + ", country='" + country + '\''
+        + ", customerGroup='" + customerGroup + '\''
+        + ", channel='" + channel + '\''
+        + ", validFrom=" + validFrom
+        + ", validUntil=" + validUntil
+        + ", discounted=" + discounted
+        + ", custom=" + custom
+        + '}';
   }
 }

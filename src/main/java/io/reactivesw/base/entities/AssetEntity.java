@@ -1,70 +1,65 @@
 package io.reactivesw.base.entities;
 
+import io.reactivesw.common.entities.BaseIdEntity;
 import io.reactivesw.common.models.CustomFields;
 import io.reactivesw.common.models.LocalizedString;
 import io.reactivesw.common.utils.CustomFieldsJsonConverter;
 import io.reactivesw.common.utils.ListJsonConverter;
 import io.reactivesw.common.utils.LocalizedStringJsonConverter;
-import org.hibernate.annotations.GenericGenerator;
+
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Davis on 16/11/23.
  */
 @Entity
 @Table(name = "sw_asset")
-public class AssetEntity {
-  @Id
-  @GeneratedValue(generator = "uuid")
-  @GenericGenerator(name = "uuid", strategy = "uuid2")
-  @Column(name = "id")
-  private String id;
+public class AssetEntity extends BaseIdEntity {
+  /**
+   * JSON TYPE.
+   */
+  private static final String JSONTYPE = "JSON";
 
+  /**
+   * sources.
+   */
   @OneToMany
   private Set<AssetSourceEntity> sources;
 
-  @Column(name = "name", columnDefinition = "JSON")
+  /**
+   * name.
+   */
+  @Column(name = "name", columnDefinition = JSONTYPE)
   @Convert(converter = LocalizedStringJsonConverter.class)
   private LocalizedString name;
 
-  @Column(name = "description", columnDefinition = "JSON")
+  /**
+   * description.
+   */
+  @Column(name = "description", columnDefinition = JSONTYPE)
   @Convert(converter = LocalizedStringJsonConverter.class)
   private LocalizedString description;
 
-  @Column(name = "tags", columnDefinition = "JSON")
+  /**
+   * tags.
+   */
+  @Column(name = "tags", columnDefinition = JSONTYPE)
   @Convert(converter = ListJsonConverter.class)
   private List<String> tags;
 
-  @Column(name = "custom", columnDefinition = "JSON")
+  /**
+   * custom.
+   */
+  @Column(name = "custom", columnDefinition = JSONTYPE)
   @Convert(converter = CustomFieldsJsonConverter.class)
   private CustomFields custom;
-
-  /**
-   * Gets id.
-   *
-   * @return the id
-   */
-  public String getId() {
-    return id;
-  }
-
-  /**
-   * Sets id.
-   *
-   * @param id the id
-   */
-  public void setId(String id) {
-    this.id = id;
-  }
 
   /**
    * Gets sources.
@@ -156,15 +151,20 @@ public class AssetEntity {
     this.custom = custom;
   }
 
+  /**
+   * toString method.
+   *
+   * @return String
+   */
   @Override
   public String toString() {
-    return "AssetEntity{" +
-        "id='" + id + '\'' +
-        ", sources=" + sources +
-        ", name=" + name +
-        ", description=" + description +
-        ", tags=" + tags +
-        ", custom=" + custom +
-        '}';
+    return "AssetEntity{"
+        + "id='" + id + '\''
+        + ", sources=" + sources
+        + ", name=" + name
+        + ", description=" + description
+        + ", tags=" + tags
+        + ", custom=" + custom
+        + '}';
   }
 }

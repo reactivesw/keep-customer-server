@@ -11,8 +11,8 @@ public enum CartState {
   Active,
 
   /**
-   * Anonymous carts whose content was merged into a customers carts on signin. No further operations
-   * on the carts are allowed.
+   * Anonymous carts whose content was merged into a customers carts on signin.
+   * No further operations on the carts are allowed.
    */
   Merged,
 

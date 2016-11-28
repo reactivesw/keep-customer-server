@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.reactivesw.common.utils.LocalizedStringSerializer;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**

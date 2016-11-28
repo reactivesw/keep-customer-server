@@ -1,15 +1,12 @@
 package io.reactivesw.base.entities;
 
+import io.reactivesw.common.entities.BaseIdEntity;
 import io.reactivesw.common.models.AssetDimensions;
 import io.reactivesw.common.utils.AssetDimensionsJsonConverter;
-import io.swagger.annotations.ApiModelProperty;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -17,43 +14,31 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "sw_asset_source")
-public class AssetSourceEntity {
-  @Id
-  @GeneratedValue(generator = "uuid")
-  @GenericGenerator(name = "uuid", strategy = "uuid2")
-  @Column(name = "id")
-  private String id;
-
+public class AssetSourceEntity extends BaseIdEntity {
+  /**
+   * uri.
+   */
   @Column(name = "uri")
   private String uri;
 
+  /**
+   * key.
+   */
   @Column(name = "asset_source_key")
   private String key;
 
+  /**
+   * dimesions.
+   */
   @Column(name = "dimensions", columnDefinition = "JSON")
   @Convert(converter = AssetDimensionsJsonConverter.class)
   private AssetDimensions dimensions;
 
+  /**
+   * content type.
+   */
   @Column(name = "content_type")
   private String contentType;
-
-  /**
-   * Gets id.
-   *
-   * @return the id
-   */
-  public String getId() {
-    return id;
-  }
-
-  /**
-   * Sets id.
-   *
-   * @param id the id
-   */
-  public void setId(String id) {
-    this.id = id;
-  }
 
   /**
    * Gets uri.
@@ -127,14 +112,19 @@ public class AssetSourceEntity {
     this.contentType = contentType;
   }
 
+  /**
+   * toString method.
+   *
+   * @return String
+   */
   @Override
   public String toString() {
-    return "AssetSourceEntity{" +
-        "id='" + id + '\'' +
-        ", uri='" + uri + '\'' +
-        ", key='" + key + '\'' +
-        ", dimensions=" + dimensions +
-        ", contentType='" + contentType + '\'' +
-        '}';
+    return "AssetSourceEntity{"
+        + "id='" + id + '\''
+        + ", uri='" + uri + '\''
+        + ", key='" + key + '\''
+        + ", dimensions=" + dimensions
+        + ", contentType='" + contentType + '\''
+        + '}';
   }
 }

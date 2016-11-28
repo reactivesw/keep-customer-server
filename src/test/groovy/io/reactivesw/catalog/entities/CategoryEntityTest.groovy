@@ -16,45 +16,45 @@ import java.time.ZonedDateTime
 /**
  * Created by umasuo on 16/11/22.
  */
-@ContextConfiguration
-@SpringBootTest
+//@ContextConfiguration
+//@SpringBootTest
 class CategoryEntityTest extends Specification{
 
-    @Autowired
-    CategoryRepository repository;
-
-    def "test entity"() {
-        CategoryEntity entity = new CategoryEntity()
-        entity.setCreatedAt(ZonedDateTime.now())
-        LocalizedString str = new LocalizedString()
-        str.addKeyValue("en", "en value")
-        entity.setName(str)
-
-        CustomFields custom = new CustomFields()
-        Reference ref = new Reference()
-        ref.setId("idddd")
-        ref.setTypeId("typeiddddd")
-        custom.setType(ref)
-        custom.setFields("{'asdasd':'adas'}")
-        entity.setCustom(custom)
-
-        List<String> list = new ArrayList<>()
-        list.add("first")
-        list.add("second")
-
-        entity.setAncestors(list)
-
-        when:
-        def savedEntity = repository.save(entity)
-        def getEntity = repository.findOne(savedEntity.getId())
-        then:
-        getEntity != null
-    }
-
-    def "test retrive entity" () {
-        when:
-        def entity = repository.findOne("00259975-484f-4ab2-b138-8480c15d865a")
-        then:
-        entity != null;
-    }
+//    @Autowired
+//    CategoryRepository repository;
+//
+//    def "test entity"() {
+//        CategoryEntity entity = new CategoryEntity()
+//        entity.setCreatedAt(ZonedDateTime.now())
+//        LocalizedString str = new LocalizedString()
+//        str.addKeyValue("en", "en value")
+//        entity.setName(str)
+//
+//        CustomFields custom = new CustomFields()
+//        Reference ref = new Reference()
+//        ref.setId("idddd")
+//        ref.setTypeId("typeiddddd")
+//        custom.setType(ref)
+//        custom.setFields("{'asdasd':'adas'}")
+//        entity.setCustom(custom)
+//
+//        List<String> list = new ArrayList<>()
+//        list.add("first")
+//        list.add("second")
+//
+//        entity.setAncestors(list)
+//
+//        when:
+//        def savedEntity = repository.save(entity)
+//        def getEntity = repository.findOne(savedEntity.getId())
+//        then:
+//        getEntity != null
+//    }
+//
+//    def "test retrive entity" () {
+//        when:
+//        def entity = repository.findOne("00259975-484f-4ab2-b138-8480c15d865a")
+//        then:
+//        entity != null;
+//    }
 }

@@ -2,10 +2,11 @@ package io.reactivesw.catalog.taxcategories.entities;
 
 import io.reactivesw.common.entities.BaseIdEntity;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.math.BigDecimal;
 
 /**
  * Created by Davis on 16/11/23.
@@ -13,9 +14,15 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "sw_sub_rate")
 public class SubRateEntity extends BaseIdEntity {
+  /**
+   * The Name.
+   */
   @Column(name = "name")
   private String name;
 
+  /**
+   * The Amount.
+   */
   @Column(name = "amount", precision = 8, scale = 7)
   private BigDecimal amount;
 
@@ -55,11 +62,15 @@ public class SubRateEntity extends BaseIdEntity {
     this.amount = amount;
   }
 
+  /**
+   * toString method.
+   * @return String
+   */
   @Override
   public String toString() {
-    return "SubRateEntity{" +
-        "name='" + name + '\'' +
-        ", amount=" + amount +
-        '}';
+    return "SubRateEntity{"
+        + "name='" + name + '\''
+        + ", amount=" + amount
+        + '}';
   }
 }

@@ -4,11 +4,12 @@ import io.reactivesw.common.entities.BaseAllEntity;
 import io.reactivesw.common.models.CustomFields;
 import io.reactivesw.common.utils.CustomFieldsJsonConverter;
 
+import java.time.ZonedDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.time.ZonedDateTime;
 
 /**
  * Created by Davis on 16/11/23.
@@ -16,24 +17,45 @@ import java.time.ZonedDateTime;
 @Entity
 @Table(name = "sw_inventory_entry")
 public class InventoryEntryEntity extends BaseAllEntity {
+  /**
+   * sku name.
+   */
   @Column(name = "sku_name")
   private String sku;
 
+  /**
+   * supply channel id.
+   */
   @Column(name = "supply_channel_id")
   private String supplyChannel;
 
+  /**
+   * quantity on stock.
+   */
   @Column(name = "quantity_on_stock")
   private Integer quantityOnStock;
 
+  /**
+   * available quantity.
+   */
   @Column(name = "available_quantity")
   private Integer availableQuantity;
 
+  /**
+   * restockable in days.
+   */
   @Column(name = "restockable_in_days")
   private Integer restockableInDays;
 
+  /**
+   * exapected dalivery.
+   */
   @Column(name = "expected_delivery")
   private ZonedDateTime expectedDelivery;
 
+  /**
+   * custom.
+   */
   @Column(name = "custom", columnDefinition = "JSON")
   @Convert(converter = CustomFieldsJsonConverter.class)
   private CustomFields custom;
@@ -164,16 +186,21 @@ public class InventoryEntryEntity extends BaseAllEntity {
     this.custom = custom;
   }
 
+
+  /**
+   * toString method.
+   * @return String
+   */
   @Override
   public String toString() {
-    return "InventoryEntryEntity{" +
-        "sku='" + sku + '\'' +
-        ", supplyChannel='" + supplyChannel + '\'' +
-        ", quantityOnStock=" + quantityOnStock +
-        ", availableQuantity=" + availableQuantity +
-        ", restockableInDays=" + restockableInDays +
-        ", expectedDelivery=" + expectedDelivery +
-        ", custom=" + custom +
-        '}';
+    return "InventoryEntryEntity{"
+        + "sku='" + sku + '\''
+        + ", supplyChannel='" + supplyChannel + '\''
+        + ", quantityOnStock=" + quantityOnStock
+        + ", availableQuantity=" + availableQuantity
+        + ", restockableInDays=" + restockableInDays
+        + ", expectedDelivery=" + expectedDelivery
+        + ", custom=" + custom
+        + '}';
   }
 }

@@ -6,6 +6,9 @@ package io.reactivesw.routes;
  */
 public class Router {
 
+  /**
+   * The constant URL_ROOT.
+   */
   public static final String URL_ROOT = "/{projectKey}/";
 
 
@@ -33,6 +36,9 @@ public class Router {
    */
   public static final String CATEGORY_ALL = "categories";
 
+  /**
+   * The constant CATEGORY_ROOT.
+   */
   public static final String CATEGORY_ROOT = "/categories";
 
   /**
@@ -45,6 +51,9 @@ public class Router {
    */
   public static final String CATEGORIES_WITH_ID = CATEGORY_ALL + "/{" + CATEGORY_ID + "}";
 
+  /**
+   * The constant CATEGORY_GET_BY_ID.
+   */
   public static final String CATEGORY_GET_BY_ID = CATEGORY_ROOT + "/{" + CATEGORY_ID + "}";
 
 
@@ -65,7 +74,7 @@ public class Router {
   /**
    * get cart by id.
    */
-  public static final String CART_GET_BY_ID = CARTS_ROOT + "/{" +CART_ID + "}";
+  public static final String CART_GET_BY_ID = CARTS_ROOT + "/{" + CART_ID + "}";
 
   /*************** End of Cart & order. *****************/
 

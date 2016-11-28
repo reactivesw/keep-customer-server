@@ -1,15 +1,10 @@
 package io.reactivesw.catalog.products.entities;
 
-import org.hibernate.annotations.GenericGenerator;
+import io.reactivesw.common.entities.BaseIdEntity;
 
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Table;
-
-import io.reactivesw.common.entities.BaseIdEntity;
 
 /**
  * Created by Davis on 16/11/23.
@@ -18,6 +13,9 @@ import io.reactivesw.common.entities.BaseIdEntity;
 @Table(name = "sw_variant_attribute")
 public class AttributeEntity extends BaseIdEntity {
 
+  /**
+   * name.
+   */
   @Column(name = "name")
   private String name;
 
@@ -63,12 +61,15 @@ public class AttributeEntity extends BaseIdEntity {
     this.value = value;
   }
 
+  /**
+   * toString method.
+   * @return String
+   */
   @Override
   public String toString() {
-    return "AttributeEntity{" +
-            "id='" + id + '\'' +
-            ", name='" + name + '\'' +
-            ", value='" + value + '\'' +
-            '}';
+    return "AttributeEntity{"
+        + "name='" + name + '\''
+        + ", value='" + value + '\''
+        + '}';
   }
 }
