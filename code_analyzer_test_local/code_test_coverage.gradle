@@ -34,14 +34,15 @@ jacocoTestReport {
     afterEvaluate {
         classDirectories = files(classDirectories.files.collect {
             fileTree(dir: it, exclude: [
-                    'io/reactivesw/customer/server/App*',
+                    'io/reactivesw/App*',
                     '**/entities/**',
                     '**/controllers/**',
                     '**/models/**',
                     '**/repositories/**',
                     '**/exceptions/**',
                     '**/enums/**',
-                    '**/routes/**'
+                    '**/routes/**',
+                    'io/reactivesw/common/utils/**'
             ])
         })
     }
