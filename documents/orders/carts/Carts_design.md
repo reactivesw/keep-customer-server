@@ -23,31 +23,36 @@ TaxedItemPriceValue         |Value Object           |Taxed Item Price used in It
 TaxRateValue                |Value Object           |Tax Rate, used in Item for record tax rate.
 SubRateValue                |Value Object           |Sub Rate of tax rate.
 
-# 2. Business logic
+# 2. CartState
+`Active` : only cart in this state can be update.
+`Merged` : this state means the cart is create by an anonymous customer, and be merged to a customer's cart. Cart in this state can not been changed.
+`Ordered`: this state means the cart had been checked out. Cart in this state can not been changed.
 
-## 2.1 Get cart
+# 3. Business logic
+
+## 3.1 Get cart
 Get a cart by some conditions.
 
-### 2.1.1 Get cart by cart id
+### 3.1.1 Get cart by cart id
 Get a cart by the cart ID, and return the cart.
 
-### 2.1.2 Get cart by customer id
+### 3.1.2 Get cart by customer id
 Get a cart by the customer's id, return the one that has been modified most recently, and the cart's state should be `Active`.
 Each customer should has only one cart that is active.
 
-## 2.2 Query cart
+## 3.2 Query cart
 System can Use `where`,`sort`,`expand`,`limit`,`offset` to query carts.
 
-## 2.3 Create cart
-When the customer `add a product to cart`, and there is no cart in `Active` state, the the system auto create a new cart for the customer.
+## 3.3 Create cart
+When the customer `add a product to cart`, and there is no cart in `Active` state, the system auto create a new cart for the customer.
  
-## 2.4 Update cart
+## 3.4 Update cart
 Use update actions to update an existing cart.
 
-### 2.4.1 Merge cart
+### 3.4.1 Merge cart
 Merge cart from anonymous customer to an registered customer, and no further operations on the cart are allowed.
 
-### 2.4.2 Checkout
+### 3.4.2 Checkout
 Checkout a cart, the cart's state will be set as `Ordered`, and no further operations on the cart are allowed.
 
 
