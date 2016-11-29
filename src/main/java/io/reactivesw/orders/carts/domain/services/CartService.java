@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import io.reactivesw.orders.carts.applications.models.Cart;
+import io.reactivesw.orders.carts.application.models.Cart;
 
 /**
  * Created by umasuo on 16/11/29.

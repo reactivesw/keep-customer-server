@@ -1,6 +1,6 @@
-package io.reactivesw.orders.carts.applications.controllers;
+package io.reactivesw.orders.carts.application.controllers;
 
-import io.reactivesw.orders.carts.applications.models.Cart;
+import io.reactivesw.orders.carts.application.models.Cart;
 import io.reactivesw.routes.Router;
 
 import io.swagger.annotations.ApiOperation;

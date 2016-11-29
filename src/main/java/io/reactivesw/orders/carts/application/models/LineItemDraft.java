@@ -1,4 +1,4 @@
-package io.reactivesw.orders.carts.applications.models;
+package io.reactivesw.orders.carts.application.models;
 
 import io.reactivesw.catalog.taxcategories.models.ExternalTaxRateDraft;
 import io.reactivesw.common.models.Reference;

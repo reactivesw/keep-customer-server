@@ -1,4 +1,4 @@
-package io.reactivesw.orders.carts.applications.models;
+package io.reactivesw.orders.carts.application.models;
 
 import java.util.List;
 

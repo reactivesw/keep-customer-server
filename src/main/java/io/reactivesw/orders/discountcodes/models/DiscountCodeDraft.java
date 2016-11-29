@@ -2,7 +2,7 @@ package io.reactivesw.orders.discountcodes.models;
 
 import java.util.List;
 
-import io.reactivesw.orders.carts.applications.models.CartPredicate;
+import io.reactivesw.orders.carts.application.models.CartPredicate;
 import io.reactivesw.common.models.LocalizedString;
 import io.reactivesw.common.models.Reference;
 import io.swagger.annotations.ApiModel;
