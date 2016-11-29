@@ -3,10 +3,8 @@ This micro-service provide services for handle cart requirements, such as create
 And cart should keep an snapshot of the product that added to it.
 
 # 1. DataBase
-
----|---|---
-
 TableName                   |Type                   |Description
+|---|---|---
 CartEntity                  |Entity Object          |The cart, hold all info of the cart.
 AddressValue                |Value Object           |The address used in cart, include shipping address and the billing address.
 ShippingInfoValue           |Value Object           |The shipping info of the cart.
