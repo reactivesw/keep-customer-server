@@ -27,6 +27,13 @@ public class LocalizedString {
     }
   }
 
+  @Override
+  public String toString() {
+    return "LocalizedString{" +
+            "localized=" + localized +
+            '}';
+  }
+
   @JsonCreator
   public LocalizedString(Map<String, String> localized) {
     this.localized = localized;

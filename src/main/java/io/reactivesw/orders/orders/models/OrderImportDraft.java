@@ -2,13 +2,13 @@ package io.reactivesw.orders.orders.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import io.reactivesw.orders.carts.enums.InventoryMode;
-import io.reactivesw.orders.carts.models.CustomLineItem;
+import io.reactivesw.orders.carts.common.enums.InventoryMode;
+import io.reactivesw.orders.carts.applications.models.CustomLineItem;
 import io.reactivesw.orders.orders.enums.OrderState;
 import io.reactivesw.orders.orders.enums.PaymentState;
 import io.reactivesw.orders.orders.enums.ShipmentState;
-import io.reactivesw.orders.carts.models.ShippingInfo;
-import io.reactivesw.orders.carts.models.TaxedPrice;
+import io.reactivesw.orders.carts.applications.models.ShippingInfo;
+import io.reactivesw.orders.carts.applications.models.TaxedPrice;
 import io.reactivesw.common.models.Address;
 import io.reactivesw.common.models.Money;
 import io.reactivesw.common.models.Reference;
