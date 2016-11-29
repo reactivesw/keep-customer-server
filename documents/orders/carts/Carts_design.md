@@ -5,6 +5,7 @@ And cart should keep an snapshot of the product that added to it.
 # 1. DataBase
 
 ---|---|---
+
 TableName                   |Type                   |Description
 CartEntity                  |Entity Object          |The cart, hold all info of the cart.
 AddressValue                |Value Object           |The address used in cart, include shipping address and the billing address.
@@ -34,7 +35,7 @@ Get a cart by the cart ID, and return the cart.
 
 ### 2.1.2 Get cart by customer id
 Get a cart by the customer's id, return the one that has been modified most recently, and the cart's state should be `Active`.
-Normally, each customer should has only one cart.
+Each customer should has only one cart that is active.
 
 ## 2.2 Query cart
 System can Use `where`,`sort`,`expand`,`limit`,`offset` to query carts.
