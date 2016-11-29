@@ -5,12 +5,15 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import io.reactivesw.orders.carts.common.enums.CartState;
 import io.reactivesw.orders.carts.domain.entities.CartEntity;
 
 /**
  * Created by umasuo on 16/11/29.
  */
+@Resource
 public interface CartRepository extends JpaRepository<CartEntity, String>, CrudRepository<CartEntity, String> {
 
   /**
