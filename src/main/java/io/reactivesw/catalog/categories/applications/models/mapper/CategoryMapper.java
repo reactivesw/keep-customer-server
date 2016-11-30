@@ -1,5 +1,6 @@
 package io.reactivesw.catalog.categories.applications.models.mapper;
 
+import io.reactivesw.catalog.categories.applications.models.CategoryDraft;
 import io.reactivesw.catalog.categories.domains.entities.CategoryEntity;
 import io.reactivesw.catalog.categories.applications.models.Category;
 import io.reactivesw.common.enums.ReferenceTypes;
@@ -34,6 +35,7 @@ public final class CategoryMapper {
     if (parentId != null) {
       category.setParent(new Reference(ReferenceTypes.CATEGORY.getType(), parentId));
     }
+    //TODO extract to other method
     category.setName(LocalizedStringMapper.convertToLocalizedStringDefaultNull(entity.getName()));
     category.setSlug(LocalizedStringMapper.convertToLocalizedStringDefaultNull(entity.getSlug()));
     category.setDescription(LocalizedStringMapper.convertToLocalizedStringDefaultNull(entity
@@ -45,6 +47,19 @@ public final class CategoryMapper {
     category.setMetaDescription(LocalizedStringMapper.convertToLocalizedStringDefaultNull(entity
         .getMetaDescription()));
     return category;
+  }
+
+
+  /**
+   * mapper Draft to category entity.
+   *
+   * @param draft the draft
+   * @return the category entity
+   */
+  //TODO
+  public static CategoryEntity draftToCategoryEntity(CategoryDraft draft) {
+    CategoryEntity entity = mapper.map(draft, CategoryEntity.class);
+    return entity;
   }
 
   /**

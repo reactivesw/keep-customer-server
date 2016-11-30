@@ -90,7 +90,9 @@ public class CategoryService {
   public Category createCategory(CategoryDraft categoryDraft) {
     Category category = new Category();
     LOG.debug("enter createCategory, CategoryDraft is {}", categoryDraft.toString());
-    //TODO
+
+
+
     LOG.debug("end createCategory, new CategoryEntity is {}", category.toString());
     return category;
   }

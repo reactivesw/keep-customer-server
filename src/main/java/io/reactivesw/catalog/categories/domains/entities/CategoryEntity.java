@@ -313,7 +313,7 @@ public class CategoryEntity extends BaseAllEntity {
   public void setCustom(CustomFields custom) {
     this.custom = custom;
   }
-
+  
   /**
    * toString method.
    *

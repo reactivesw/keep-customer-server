@@ -69,6 +69,7 @@ public class CategoryController {
    */
   @ApiOperation(value = "Get Categories")
   @GetMapping(CATEGORY_ALL)
+  //TODO
   public List<Category> queryCategories(QueryConditions query) {
     LOG.debug("query parameters: {}", query.toString());
     return null;
@@ -82,6 +83,7 @@ public class CategoryController {
    */
   @ApiOperation(value = "Create CategoryEntity")
   @PostMapping(CATEGORY_ALL)
+  //TODO
   public Category createCategory(@RequestBody
                                  @ApiParam(value = "CategoryEntity Draft", required = true)
                                      CategoryDraft draft) {
@@ -98,6 +100,7 @@ public class CategoryController {
    */
   @ApiOperation(value = "Update CategoryEntity")
   @PutMapping(CATEGORIES_WITH_ID)
+  //TODO
   public Category updateCategory(@PathVariable(value = CATEGORY_ID)
                                  @ApiParam(value = "CategoryEntity ID", required = true)
                                      String id,
