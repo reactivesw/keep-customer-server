@@ -19,7 +19,7 @@ dependencies {
     //security, like password encoder.
     compile('org.springframework.security:spring-security-crypto')
 
-    //mysql driver
+    //postgresql driver
     compile('org.postgresql:postgresql:9.4.1212')
 
     //commons-lang
