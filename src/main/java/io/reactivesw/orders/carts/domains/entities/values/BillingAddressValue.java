@@ -1,10 +1,10 @@
 package io.reactivesw.orders.carts.domains.entities.values;
 
+import io.reactivesw.common.entities.BaseIdEntity;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-import io.reactivesw.common.entities.BaseIdEntity;
 
 /**
  * Created by umasuo on 16/11/28.
@@ -153,35 +153,36 @@ public class BillingAddressValue extends BaseIdEntity {
 
   /**
    * to string method.
-   * @return
+   *
+   * @return String
    */
   @Override
   public String toString() {
-    return "ShippingAddressValue{" +
-            "title='" + title + '\'' +
-            ", salutation='" + salutation + '\'' +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
-            ", streetName='" + streetName + '\'' +
-            ", streetNumber='" + streetNumber + '\'' +
-            ", additionalStreetInfo='" + additionalStreetInfo + '\'' +
-            ", postalCode='" + postalCode + '\'' +
-            ", city='" + city + '\'' +
-            ", region='" + region + '\'' +
-            ", state='" + state + '\'' +
-            ", country='" + country + '\'' +
-            ", company='" + company + '\'' +
-            ", department='" + department + '\'' +
-            ", building='" + building + '\'' +
-            ", apartment='" + apartment + '\'' +
-            ", box='" + box + '\'' +
-            ", phone='" + phone + '\'' +
-            ", mobile='" + mobile + '\'' +
-            ", email='" + email + '\'' +
-            ", fax='" + fax + '\'' +
-            ", additionalAddressInfo='" + additionalAddressInfo + '\'' +
-            ", externalId='" + externalId + '\'' +
-            '}';
+    return "BillingAddressValue{"
+            + "title='" + title + '\''
+            + ", salutation='" + salutation + '\''
+            + ", firstName='" + firstName + '\''
+            + ", lastName='" + lastName + '\''
+            + ", streetName='" + streetName + '\''
+            + ", streetNumber='" + streetNumber + '\''
+            + ", additionalStreetInfo='" + additionalStreetInfo + '\''
+            + ", postalCode='" + postalCode + '\''
+            + ", city='" + city + '\''
+            + ", region='" + region + '\''
+            + ", state='" + state + '\''
+            + ", country='" + country + '\''
+            + ", company='" + company + '\''
+            + ", department='" + department + '\''
+            + ", building='" + building + '\''
+            + ", apartment='" + apartment + '\''
+            + ", box='" + box + '\''
+            + ", phone='" + phone + '\''
+            + ", mobile='" + mobile + '\''
+            + ", email='" + email + '\''
+            + ", fax='" + fax + '\''
+            + ", additionalAddressInfo='" + additionalAddressInfo + '\''
+            + ", externalId='" + externalId + '\''
+            + '}';
   }
 
   /**

@@ -1,13 +1,13 @@
 package io.reactivesw.orders.carts.domains.entities.values;
 
+import io.reactivesw.common.entities.BaseIdEntity;
+import io.reactivesw.common.models.AssetDimensions;
+import io.reactivesw.common.utils.AssetDimensionsJsonConverter;
+
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-import io.reactivesw.common.entities.BaseIdEntity;
-import io.reactivesw.common.models.AssetDimensions;
-import io.reactivesw.common.utils.AssetDimensionsJsonConverter;
 
 /**
  * Created by Davis on 16/11/23.
@@ -109,15 +109,14 @@ public class ImageValue extends BaseIdEntity{
 
   /**
    * to string method.
-   * @return
+   * @return String
    */
   @Override
   public String toString() {
-    return "ImageEntity{" +
-        "id='" + id + '\'' +
-        ", url='" + url + '\'' +
-        ", dimensions=" + dimensions +
-        ", label='" + label + '\'' +
-        '}';
+    return "ImageValue{"
+        + "url='" + url + '\''
+        + ", dimensions=" + dimensions
+        + ", label='" + label + '\''
+        + '}';
   }
 }

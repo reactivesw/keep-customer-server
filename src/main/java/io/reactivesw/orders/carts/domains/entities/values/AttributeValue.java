@@ -1,10 +1,10 @@
 package io.reactivesw.orders.carts.domains.entities.values;
 
+import io.reactivesw.common.entities.BaseIdEntity;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-import io.reactivesw.common.entities.BaseIdEntity;
 
 /**
  * Created by Davis on 16/11/23.
@@ -63,14 +63,13 @@ public class AttributeValue extends BaseIdEntity {
 
   /**
    * to string method.
-   * @return
+   * @return String
    */
   @Override
   public String toString() {
-    return "AttributeEntity{" +
-            "id='" + id + '\'' +
-            ", name='" + name + '\'' +
-            ", value='" + value + '\'' +
-            '}';
+    return "AttributeValue{"
+        + "name='" + name + '\''
+        + ", value='" + value + '\''
+        + '}';
   }
 }

@@ -1,13 +1,13 @@
 package io.reactivesw.orders.carts.domains.entities.values;
 
+import io.reactivesw.common.entities.BaseIdEntity;
+
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import io.reactivesw.common.entities.BaseIdEntity;
 
 /**
  * Created by umasuo on 16/11/17.
@@ -159,5 +159,21 @@ public class TaxRateValue extends BaseIdEntity {
    */
   public void setSubRates(Set<SubRateValue> subRates) {
     this.subRates = subRates;
+  }
+
+  /**
+   * to string method.
+   * @return String
+   */
+  @Override
+  public String toString() {
+    return "TaxRateValue{"
+        + "name='" + name + '\''
+        + ", amount=" + amount
+        + ", includedInPrice=" + includedInPrice
+        + ", country='" + country + '\''
+        + ", state='" + state + '\''
+        + ", subRates=" + subRates
+        + '}';
   }
 }
