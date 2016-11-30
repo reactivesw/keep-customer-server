@@ -4,42 +4,36 @@ import io.reactivesw.orders.carts.common.repositories.CartRepository
 import io.reactivesw.orders.carts.domain.entities.CartEntity
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
 
 /**
  * Created by umasuo on 16/11/29.
  */
-@SpringBootTest
-@ContextConfiguration
 class CartServiceTest extends Specification {
 
     Logger LOG = LoggerFactory.getLogger(CartServiceTest)
 
 
-    CartRepository cartRepository =  Mock(CartRepository)
+    CartRepository cartRepository = Mock(CartRepository)
 
-    @Autowired
-    CartService cartService
+    CartService cartService = new CartService(cartRepository: cartRepository)
 
     def customerId = "tmpCustomerId"
 
     def anonymousId = "tmpAnonymousId"
 
-    def carEntity
+    def cartEntity
 
     def setup() {
         LOG.info("init cart service test.")
         cartService.setCartRepository(cartRepository)
-        carEntity = new CartEntity(id: "id")
+        cartEntity = new CartEntity(id: "id")
     }
 
     def "Create new cart by customerId"() {
 
         when:
-        cartRepository.save(_) >> carEntity
+        cartRepository.save(_) >> cartEntity
         CartEntity entity = cartService.createCartWithCustomerId(customerId)
         then:
         entity != null
@@ -49,7 +43,7 @@ class CartServiceTest extends Specification {
     def "Create new cart by anonymousId"() {
 
         when:
-        cartRepository.save(_) >> carEntity
+        cartRepository.save(_) >> cartEntity
         CartEntity entity = cartService.createCartWithAnonymousId(anonymousId)
         then:
         entity != null

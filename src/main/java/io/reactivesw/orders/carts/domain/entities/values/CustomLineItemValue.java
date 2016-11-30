@@ -10,14 +10,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import io.reactivesw.common.models.Statics;
 import io.reactivesw.common.entities.BaseIdEntity;
+import io.reactivesw.common.entities.LocalizedStringEntity;
 import io.reactivesw.common.models.CustomFields;
-import io.reactivesw.common.models.LocalizedString;
 import io.reactivesw.common.models.Money;
+import io.reactivesw.common.models.Statics;
 import io.reactivesw.common.utils.CustomFieldsJsonConverter;
 import io.reactivesw.common.utils.ListJsonConverter;
-import io.reactivesw.common.utils.LocalizedStringJsonConverter;
 import io.reactivesw.common.utils.MoneyJsonConverter;
 
 /**
@@ -30,9 +29,8 @@ public class CustomLineItemValue extends BaseIdEntity {
   /**
    * name in localized string.
    */
-  @Column(name = "name", nullable = false, columnDefinition = Statics.JSON)
-  @Convert(converter = LocalizedStringJsonConverter.class)
-  private LocalizedString name;
+  @OneToMany
+  private Set<LocalizedStringEntity> name;
 
   /**
    * money.
@@ -103,7 +101,7 @@ public class CustomLineItemValue extends BaseIdEntity {
    *
    * @return the name
    */
-  public LocalizedString getName() {
+  public Set<LocalizedStringEntity> getName() {
     return name;
   }
 
@@ -112,7 +110,7 @@ public class CustomLineItemValue extends BaseIdEntity {
    *
    * @param name the name
    */
-  public void setName(LocalizedString name) {
+  public void setName(Set<LocalizedStringEntity> name) {
     this.name = name;
   }
 
