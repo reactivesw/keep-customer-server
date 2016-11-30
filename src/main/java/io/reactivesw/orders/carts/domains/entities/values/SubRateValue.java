@@ -1,10 +1,10 @@
 package io.reactivesw.orders.carts.domains.entities.values;
 
+import io.reactivesw.common.entities.BaseIdEntity;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-import io.reactivesw.common.entities.BaseIdEntity;
 
 /**
  * Created by umasuo on 16/11/17.
@@ -27,14 +27,14 @@ public class SubRateValue extends BaseIdEntity {
 
   /**
    * to string method.
-   * @return
+   * @return String
    */
   @Override
   public String toString() {
-    return "SubRateValue{" +
-            "name='" + name + '\'' +
-            ", amount=" + amount +
-            '}';
+    return "SubRateValue{"
+        + "name='" + name + '\''
+        + ", amount=" + amount
+        + '}';
   }
 
   /**

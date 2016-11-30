@@ -1,14 +1,14 @@
 package io.reactivesw.orders.carts.domains.entities.values;
 
+import io.reactivesw.common.entities.BaseIdEntity;
+import io.reactivesw.common.entities.MoneyEntity;
+
 import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import io.reactivesw.common.entities.BaseIdEntity;
-import io.reactivesw.common.entities.MoneyEntity;
 
 /**
  * Created by umasuo on 16/11/17.
@@ -37,15 +37,15 @@ public class TaxedPriceValue extends BaseIdEntity {
 
   /**
    * to string method.
-   * @return
+   * @return String
    */
   @Override
   public String toString() {
-    return "TaxedPriceValue{" +
-            "totalNet=" + totalNet +
-            ", totalGross=" + totalGross +
-            ", taxPortions=" + taxPortions +
-            '}';
+    return "TaxedPriceValue{"
+        + "totalNet=" + totalNet
+        + ", totalGross=" + totalGross
+        + ", taxPortions=" + taxPortions
+        + '}';
   }
 
   /**

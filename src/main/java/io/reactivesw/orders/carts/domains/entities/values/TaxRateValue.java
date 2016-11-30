@@ -160,4 +160,20 @@ public class TaxRateValue extends BaseIdEntity {
   public void setSubRates(Set<SubRateValue> subRates) {
     this.subRates = subRates;
   }
+
+  /**
+   * to string method.
+   * @return String
+   */
+  @Override
+  public String toString() {
+    return "TaxRateValue{"
+        + "name='" + name + '\''
+        + ", amount=" + amount
+        + ", includedInPrice=" + includedInPrice
+        + ", country='" + country + '\''
+        + ", state='" + state + '\''
+        + ", subRates=" + subRates
+        + '}';
+  }
 }

@@ -1,5 +1,12 @@
 package io.reactivesw.orders.carts.domains.entities.values;
 
+import io.reactivesw.catalog.productdiscounts.models.DiscountedPrice;
+import io.reactivesw.common.entities.BaseIdEntity;
+import io.reactivesw.common.entities.MoneyEntity;
+import io.reactivesw.common.models.CustomFields;
+import io.reactivesw.common.utils.CustomFieldsJsonConverter;
+import io.reactivesw.common.utils.DiscountedPriceJsonConverter;
+
 import java.time.ZonedDateTime;
 
 import javax.persistence.Column;
@@ -7,13 +14,6 @@ import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import io.reactivesw.catalog.productdiscounts.models.DiscountedPrice;
-import io.reactivesw.common.entities.BaseIdEntity;
-import io.reactivesw.common.entities.MoneyEntity;
-import io.reactivesw.common.models.CustomFields;
-import io.reactivesw.common.utils.CustomFieldsJsonConverter;
-import io.reactivesw.common.utils.DiscountedPriceJsonConverter;
 
 /**
  * Created by umasuo on 16/11/28.
@@ -74,19 +74,20 @@ public class PriceValue extends BaseIdEntity {
 
   /**
    * to string method.
+   * @return String
    */
   @Override
   public String toString() {
-    return "PriceValue{" +
-            "value=" + value +
-            ", country='" + country + '\'' +
-            ", customerGroup='" + customerGroup + '\'' +
-            ", channel='" + channel + '\'' +
-            ", validFrom=" + validFrom +
-            ", validUntil=" + validUntil +
-            ", discounted=" + discounted +
-            ", custom=" + custom +
-            '}';
+    return "PriceValue{"
+        + "value=" + value
+        + ", country='" + country + '\''
+        + ", customerGroup='" + customerGroup + '\''
+        + ", channel='" + channel + '\''
+        + ", validFrom=" + validFrom
+        + ", validUntil=" + validUntil
+        + ", discounted=" + discounted
+        + ", custom=" + custom
+        + '}';
   }
 
   /**

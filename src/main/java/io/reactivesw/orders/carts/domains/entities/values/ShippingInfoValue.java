@@ -1,5 +1,9 @@
 package io.reactivesw.orders.carts.domains.entities.values;
 
+import io.reactivesw.common.entities.BaseIdEntity;
+import io.reactivesw.common.entities.MoneyEntity;
+import io.reactivesw.common.utils.ListJsonConverter;
+
 import java.util.List;
 
 import javax.persistence.Column;
@@ -7,10 +11,6 @@ import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import io.reactivesw.common.entities.BaseIdEntity;
-import io.reactivesw.common.entities.MoneyEntity;
-import io.reactivesw.common.utils.ListJsonConverter;
 
 /**
  * Created by umasuo on 16/11/28.
@@ -236,5 +236,24 @@ public class ShippingInfoValue extends BaseIdEntity {
    */
   public void setDiscountedPrice(String discountedPrice) {
     this.discountedPrice = discountedPrice;
+  }
+
+  /**
+   * to string method.
+   * @return String
+   */
+  @Override
+  public String toString() {
+    return "ShippingInfoValue{"
+        + "shippingMethodName='" + shippingMethodName + '\''
+        + ", price=" + price
+        + ", shippingRate=" + shippingRate
+        + ", taxedPrice=" + taxedPrice
+        + ", taxRate=" + taxRate
+        + ", taxCategory='" + taxCategory + '\''
+        + ", shippingMethod='" + shippingMethod + '\''
+        + ", deliveries=" + deliveries
+        + ", discountedPrice='" + discountedPrice + '\''
+        + '}';
   }
 }

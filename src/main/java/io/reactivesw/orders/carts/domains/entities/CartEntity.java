@@ -1,15 +1,5 @@
 package io.reactivesw.orders.carts.domains.entities;
 
-import java.util.List;
-import java.util.Set;
-
-import javax.persistence.Column;
-import javax.persistence.Convert;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
 import io.reactivesw.common.entities.BaseAllEntity;
 import io.reactivesw.common.entities.MoneyEntity;
 import io.reactivesw.common.models.CustomFields;
@@ -25,6 +15,16 @@ import io.reactivesw.orders.carts.domains.entities.values.TaxedPriceValue;
 import io.reactivesw.orders.carts.infrastructures.enums.CartState;
 import io.reactivesw.orders.carts.infrastructures.enums.InventoryMode;
 import io.reactivesw.orders.carts.infrastructures.enums.TaxMode;
+
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  * cart entity.
@@ -519,5 +519,35 @@ public class CartEntity extends BaseAllEntity {
    */
   public void setLocale(String locale) {
     this.locale = locale;
+  }
+
+  /**
+   * to string method.
+   * @return String
+   */
+  @Override
+  public String toString() {
+    return "CartEntity{"
+            + "version=" + version
+            + ", customerId='" + customerId + '\''
+            + ", customerEmail='" + customerEmail + '\''
+            + ", anonymousId='" + anonymousId + '\''
+            + ", lineItems=" + lineItems
+            + ", customLineItems=" + customLineItems
+            + ", totalPrice=" + totalPrice
+            + ", taxedPrice=" + taxedPrice
+            + ", cartState=" + cartState
+            + ", shippingAddress=" + shippingAddress
+            + ", billingAddress=" + billingAddress
+            + ", inventoryMode=" + inventoryMode
+            + ", taxMode=" + taxMode
+            + ", customerGroup='" + customerGroup + '\''
+            + ", country='" + country + '\''
+            + ", shippingInfo=" + shippingInfo
+            + ", discountCodes=" + discountCodes
+            + ", custom=" + custom
+            + ", paymentInfo=" + paymentInfo
+            + ", locale='" + locale + '\''
+            + '}';
   }
 }

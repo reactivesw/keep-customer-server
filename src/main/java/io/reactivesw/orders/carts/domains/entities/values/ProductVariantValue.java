@@ -1,5 +1,6 @@
 package io.reactivesw.orders.carts.domains.entities.values;
 
+import io.reactivesw.common.utils.ListJsonConverter;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
@@ -12,8 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import io.reactivesw.common.utils.ListJsonConverter;
 
 /**
  * Created by Davis on 16/11/23.
@@ -216,5 +215,23 @@ public class ProductVariantValue {
    */
   public void setAssetIds(List<String> assetIds) {
     this.assetIds = assetIds;
+  }
+
+  /**
+   * to string method.
+   * @return String
+   */
+  @Override
+  public String toString() {
+    return "ProductVariantValue{"
+        + "variantId='" + variantId + '\''
+        + ", id=" + id
+        + ", sku='" + sku + '\''
+        + ", key='" + key + '\''
+        + ", prices=" + prices
+        + ", attributes=" + attributes
+        + ", images=" + images
+        + ", assetIds=" + assetIds
+        + '}';
   }
 }

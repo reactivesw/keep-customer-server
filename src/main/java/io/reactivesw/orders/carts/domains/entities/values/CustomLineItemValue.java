@@ -1,5 +1,13 @@
 package io.reactivesw.orders.carts.domains.entities.values;
 
+import io.reactivesw.common.entities.BaseIdEntity;
+import io.reactivesw.common.entities.LocalizedStringEntity;
+import io.reactivesw.common.entities.MoneyEntity;
+import io.reactivesw.common.models.CustomFields;
+import io.reactivesw.common.models.Statics;
+import io.reactivesw.common.utils.CustomFieldsJsonConverter;
+import io.reactivesw.common.utils.ListJsonConverter;
+
 import java.util.List;
 import java.util.Set;
 
@@ -9,14 +17,6 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import io.reactivesw.common.entities.BaseIdEntity;
-import io.reactivesw.common.entities.LocalizedStringEntity;
-import io.reactivesw.common.entities.MoneyEntity;
-import io.reactivesw.common.models.CustomFields;
-import io.reactivesw.common.models.Statics;
-import io.reactivesw.common.utils.CustomFieldsJsonConverter;
-import io.reactivesw.common.utils.ListJsonConverter;
 
 /**
  * Created by umasuo on 16/11/28.

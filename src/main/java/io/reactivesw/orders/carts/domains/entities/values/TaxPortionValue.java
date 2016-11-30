@@ -1,12 +1,12 @@
 package io.reactivesw.orders.carts.domains.entities.values;
 
+import io.reactivesw.common.entities.BaseIdEntity;
+import io.reactivesw.common.entities.MoneyEntity;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import io.reactivesw.common.entities.BaseIdEntity;
-import io.reactivesw.common.entities.MoneyEntity;
 
 /**
  * Created by umasuo on 16/11/17.
@@ -85,5 +85,18 @@ public class TaxPortionValue extends BaseIdEntity {
    */
   public void setAmount(MoneyEntity amount) {
     this.amount = amount;
+  }
+
+  /**
+   * to string method.
+   * @return String
+   */
+  @Override
+  public String toString() {
+    return "TaxPortionValue{"
+        + "name='" + name + '\''
+        + ", rate=" + rate
+        + ", amount=" + amount
+        + '}';
   }
 }
