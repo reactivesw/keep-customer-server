@@ -1,4 +1,4 @@
-package io.reactivesw.catalog.categories.models;
+package io.reactivesw.catalog.categories.applications.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

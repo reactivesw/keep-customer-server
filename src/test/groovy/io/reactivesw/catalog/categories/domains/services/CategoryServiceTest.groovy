@@ -1,8 +1,8 @@
-package io.reactivesw.catalog.categories.services
+package io.reactivesw.catalog.categories.domains.services
 
-import io.reactivesw.catalog.categories.entities.CategoryEntity
-import io.reactivesw.catalog.categories.models.CategoryDraft
-import io.reactivesw.catalog.categories.repositories.CategoryRepository
+import io.reactivesw.catalog.categories.domains.entities.CategoryEntity
+import io.reactivesw.catalog.categories.applications.models.CategoryDraft
+import io.reactivesw.catalog.categories.infrastructure.repositories.CategoryRepository
 import io.reactivesw.common.exceptions.NotExistException
 import io.reactivesw.common.exceptions.ParametersException
 import spock.lang.Specification

@@ -1,16 +1,5 @@
 package io.reactivesw.catalog.entities
 
-import io.reactivesw.catalog.categories.entities.CategoryEntity
-import io.reactivesw.catalog.categories.repositories.CategoryRepository
-import io.reactivesw.catalog.categories.repositories.CategorySpecs
-import io.reactivesw.common.models.CustomFields
-import io.reactivesw.common.models.LocalizedString
-import io.reactivesw.common.models.Reference
-
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.ContextConfiguration
-
 import spock.lang.Specification
 
 /**

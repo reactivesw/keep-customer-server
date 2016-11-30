@@ -27,10 +27,10 @@ buildscript {
 // init repository, java, wrapper
 apply from: 'application_build/init_build.gradle'
 
-// init application version settings
+// init applications version settings
 apply from: 'application_build/version.gradle'
 
-// application build script
+// applications build script
 apply from: 'application_build/application_build.gradle'
 
 // build docker image task

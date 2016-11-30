@@ -1,6 +1,6 @@
-package io.reactivesw.catalog.categories.repositories;
+package io.reactivesw.catalog.categories.infrastructure.repositories;
 
-import io.reactivesw.catalog.categories.entities.CategoryEntity;
+import io.reactivesw.catalog.categories.domains.entities.CategoryEntity;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.CriteriaBuilder;

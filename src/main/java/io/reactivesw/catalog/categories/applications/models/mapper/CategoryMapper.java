@@ -1,7 +1,7 @@
-package io.reactivesw.catalog.categories.models.mapper;
+package io.reactivesw.catalog.categories.applications.models.mapper;
 
-import io.reactivesw.catalog.categories.entities.CategoryEntity;
-import io.reactivesw.catalog.categories.models.Category;
+import io.reactivesw.catalog.categories.domains.entities.CategoryEntity;
+import io.reactivesw.catalog.categories.applications.models.Category;
 import io.reactivesw.common.enums.ReferenceTypes;
 import io.reactivesw.common.models.Reference;
 import org.modelmapper.ModelMapper;
@@ -24,8 +24,8 @@ public final class CategoryMapper {
    * @param entity the entity
    * @return the category
    */
-  public static io.reactivesw.catalog.categories.models.Category entityToCategory(CategoryEntity entity) {
-    Category category = mapper.map(entity, io.reactivesw.catalog.categories.models.Category.class);
+  public static io.reactivesw.catalog.categories.applications.models.Category entityToCategory(CategoryEntity entity) {
+    Category category = mapper.map(entity, io.reactivesw.catalog.categories.applications.models.Category.class);
     //add reference type.
     category.setAncestors(entityToReferenceList(entity.getAncestors()));
     String parentId = entity.getParent();

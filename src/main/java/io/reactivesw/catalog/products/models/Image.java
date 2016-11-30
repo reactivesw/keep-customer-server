@@ -16,7 +16,7 @@ public class Image {
 
   /**
    * Dimensions of the original image.
-   * This can be used by your application e.g. to determine
+   * This can be used by your applications e.g. to determine
    * whether the image is large enough to display a zoom view.
    */
   //TODO String may not ok?

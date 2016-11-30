@@ -1,4 +1,4 @@
-package io.reactivesw.catalog.categories.entities;
+package io.reactivesw.catalog.categories.domains.entities;
 
 import io.reactivesw.common.entities.BaseAllEntity;
 import io.reactivesw.common.entities.LocalizedStringEntity;
