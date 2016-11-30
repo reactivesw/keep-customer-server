@@ -1,15 +1,17 @@
 package io.reactivesw.common.entities;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Table;
 
 /**
  * Created by Davis on 16/11/16.
  */
-@MappedSuperclass
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Entity
+@Table(name = "common_localized_String")
 public class LocalizedStringEntity extends BaseIdEntity {
 
   /**
