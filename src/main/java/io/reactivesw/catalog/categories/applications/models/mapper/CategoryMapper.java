@@ -4,6 +4,7 @@ import io.reactivesw.catalog.categories.domains.entities.CategoryEntity;
 import io.reactivesw.catalog.categories.applications.models.Category;
 import io.reactivesw.common.enums.ReferenceTypes;
 import io.reactivesw.common.models.Reference;
+import io.reactivesw.common.models.mapper.LocalizedStringMapper;
 import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
@@ -33,6 +34,16 @@ public final class CategoryMapper {
     if (parentId != null) {
       category.setParent(new Reference(ReferenceTypes.CATEGORY.getType(), parentId));
     }
+    category.setName(LocalizedStringMapper.convertToLocalizedStringDefaultNull(entity.getName()));
+    category.setSlug(LocalizedStringMapper.convertToLocalizedStringDefaultNull(entity.getSlug()));
+    category.setDescription(LocalizedStringMapper.convertToLocalizedStringDefaultNull(entity
+        .getDescription()));
+    category.setMetaTitle(LocalizedStringMapper.convertToLocalizedStringDefaultNull(entity
+        .getMetaTitle()));
+    category.setMetaKeywords(LocalizedStringMapper.convertToLocalizedStringDefaultNull(entity
+        .getMetaKeyWords()));
+    category.setMetaDescription(LocalizedStringMapper.convertToLocalizedStringDefaultNull(entity
+        .getMetaDescription()));
     return category;
   }
 

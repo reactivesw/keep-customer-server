@@ -14,6 +14,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by Davis on 16/11/28.
  */
@@ -70,8 +72,12 @@ public class CategoryService {
       throw new ParametersException();
     }
     categoryRepository.delete(id);
-    //TODO delete subCategory
+    List<String> subCategoryIds = categoryRepository.queryCategoryIdsByAncestorId(id);
+    categoryRepository.deleteCategoryById(subCategoryIds);
+
     //TODO removed from all those products that had that category assigned in their ProductData
+    //delete by id and subCategoryIds
+
     LOG.debug("end deleteCategory, id is {}, version is {}", id, version);
   }
 

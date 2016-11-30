@@ -1,5 +1,9 @@
 package io.reactivesw.catalog.products.entities;
 
+import io.reactivesw.common.entities.BaseIdEntity;
+import io.reactivesw.common.models.LocalizedString;
+import io.reactivesw.common.utils.LocalizedStringJsonConverter;
+
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -8,10 +12,6 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import io.reactivesw.common.entities.BaseIdEntity;
-import io.reactivesw.common.models.LocalizedString;
-import io.reactivesw.common.utils.LocalizedStringJsonConverter;
 
 /**
  * Created by umasuo on 16/11/23.
