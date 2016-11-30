@@ -6,14 +6,9 @@ spring:
     url: jdbc:postgresql://localhost:5432/reactivesw
     username: postgres
     password: root
-    driverClassName: org.postgresql.Driver
+    driver-class-name: org.postgresql.Driver
   jpa:
-    database: MYSQL
+    database-platform: io.rai.jsonb.dialet.JSONBPostgreSQLDialect
+    show-sql: true
     hibernate:
       ddl-auto: update
-      dialect: org.hibernate.dialect.PostgreSQLDialect
-    show-sql: true
-    format_sql: true
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
