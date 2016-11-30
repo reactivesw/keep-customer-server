@@ -1,25 +1,16 @@
 package io.reactivesw.common.entities;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
-
-import io.reactivesw.common.utils.LocalizedStringSerializer;
 
 /**
  * Created by Davis on 16/11/16.
  */
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class LocalizedStringEntity extends BaseIdEntity{
+public class LocalizedStringEntity extends BaseIdEntity {
 
   /**
    * language.
@@ -30,7 +21,7 @@ public class LocalizedStringEntity extends BaseIdEntity{
   /**
    * text value.
    */
-  @Column
+  @Column(columnDefinition = "text")
   protected String text;
 
   /**
@@ -89,8 +80,8 @@ public class LocalizedStringEntity extends BaseIdEntity{
   @Override
   public String toString() {
     return "LocalizedStringEntity{"
-        + "language='" + language + '\''
-        + ", text='" + text + '\''
-        + '}';
+            + "language='" + language + '\''
+            + ", text='" + text + '\''
+            + '}';
   }
 }
