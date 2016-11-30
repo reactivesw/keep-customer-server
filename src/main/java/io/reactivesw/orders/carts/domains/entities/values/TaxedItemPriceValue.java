@@ -1,14 +1,11 @@
 package io.reactivesw.orders.carts.domains.entities.values;
 
-import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import io.reactivesw.common.models.Statics;
 import io.reactivesw.common.entities.BaseIdEntity;
-import io.reactivesw.common.models.Money;
-import io.reactivesw.common.utils.MoneyJsonConverter;
+import io.reactivesw.common.entities.MoneyEntity;
 
 /**
  * Created by umasuo on 16/11/17.
@@ -20,23 +17,21 @@ public class TaxedItemPriceValue  extends BaseIdEntity {
   /**
    * total net.
    */
-  @Column(name = "total_net", nullable = false, columnDefinition = Statics.JSON)
-  @Convert(converter = MoneyJsonConverter.class)
-  private Money totalNet;
+  @OneToOne
+  private MoneyEntity totalNet;
 
   /**
-   * tatal gross.
+   * total gross.
    */
-  @Column(name = "total_gross", nullable = false, columnDefinition = Statics.JSON)
-  @Convert(converter = MoneyJsonConverter.class)
-  private Money totalGross;
+  @OneToOne
+  private MoneyEntity totalGross;
 
   /**
    * Gets total net.
    *
    * @return the total net
    */
-  public Money getTotalNet() {
+  public MoneyEntity getTotalNet() {
     return totalNet;
   }
 
@@ -45,7 +40,7 @@ public class TaxedItemPriceValue  extends BaseIdEntity {
    *
    * @param totalNet the total net
    */
-  public void setTotalNet(Money totalNet) {
+  public void setTotalNet(MoneyEntity totalNet) {
     this.totalNet = totalNet;
   }
 
@@ -54,7 +49,7 @@ public class TaxedItemPriceValue  extends BaseIdEntity {
    *
    * @return the total gross
    */
-  public Money getTotalGross() {
+  public MoneyEntity getTotalGross() {
     return totalGross;
   }
 
@@ -63,7 +58,7 @@ public class TaxedItemPriceValue  extends BaseIdEntity {
    *
    * @param totalGross the total gross
    */
-  public void setTotalGross(Money totalGross) {
+  public void setTotalGross(MoneyEntity totalGross) {
     this.totalGross = totalGross;
   }
 }

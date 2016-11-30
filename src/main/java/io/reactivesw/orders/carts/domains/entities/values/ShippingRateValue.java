@@ -1,14 +1,11 @@
 package io.reactivesw.orders.carts.domains.entities.values;
 
-import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import io.reactivesw.common.models.Statics;
 import io.reactivesw.common.entities.BaseIdEntity;
-import io.reactivesw.common.models.Money;
-import io.reactivesw.common.utils.MoneyJsonConverter;
+import io.reactivesw.common.entities.MoneyEntity;
 
 /**
  * Created by umasuo on 16/11/17.
@@ -20,23 +17,21 @@ public class ShippingRateValue extends BaseIdEntity{
   /**
    * price in money.
    */
-  @Column(name = "price", nullable = false, columnDefinition = Statics.JSON)
-  @Convert(converter = MoneyJsonConverter.class)
-  private Money price;
+  @OneToOne
+  private MoneyEntity price;
 
   /**
    * free above in money.
    */
-  @Column(name = "free_above", nullable = false, columnDefinition = Statics.JSON)
-  @Convert(converter = MoneyJsonConverter.class)
-  private Money freeAbove;
+  @OneToOne
+  private MoneyEntity freeAbove;
 
   /**
    * Gets price.
    *
    * @return the price
    */
-  public Money getPrice() {
+  public MoneyEntity getPrice() {
     return price;
   }
 
@@ -45,7 +40,7 @@ public class ShippingRateValue extends BaseIdEntity{
    *
    * @param price the price
    */
-  public void setPrice(Money price) {
+  public void setPrice(MoneyEntity price) {
     this.price = price;
   }
 
@@ -54,7 +49,7 @@ public class ShippingRateValue extends BaseIdEntity{
    *
    * @return the free above
    */
-  public Money getFreeAbove() {
+  public MoneyEntity getFreeAbove() {
     return freeAbove;
   }
 
@@ -63,7 +58,7 @@ public class ShippingRateValue extends BaseIdEntity{
    *
    * @param freeAbove the free above
    */
-  public void setFreeAbove(Money freeAbove) {
+  public void setFreeAbove(MoneyEntity freeAbove) {
     this.freeAbove = freeAbove;
   }
 }

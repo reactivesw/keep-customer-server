@@ -5,15 +5,15 @@ import java.time.ZonedDateTime;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import io.reactivesw.catalog.productdiscounts.models.DiscountedPrice;
 import io.reactivesw.common.entities.BaseIdEntity;
+import io.reactivesw.common.entities.MoneyEntity;
 import io.reactivesw.common.models.CustomFields;
-import io.reactivesw.common.models.Money;
 import io.reactivesw.common.utils.CustomFieldsJsonConverter;
 import io.reactivesw.common.utils.DiscountedPriceJsonConverter;
-import io.reactivesw.common.utils.MoneyJsonConverter;
 
 /**
  * Created by umasuo on 16/11/28.
@@ -25,9 +25,8 @@ public class PriceValue extends BaseIdEntity {
   /**
    * value.
    */
-  @Column(name = "value", nullable = false, columnDefinition = "JSON")
-  @Convert(converter = MoneyJsonConverter.class)
-  private Money value;
+  @OneToOne
+  private MoneyEntity value;
 
   /**
    * country.
@@ -95,7 +94,7 @@ public class PriceValue extends BaseIdEntity {
    *
    * @return the value
    */
-  public Money getValue() {
+  public MoneyEntity getValue() {
     return value;
   }
 
@@ -104,7 +103,7 @@ public class PriceValue extends BaseIdEntity {
    *
    * @param value the value
    */
-  public void setValue(Money value) {
+  public void setValue(MoneyEntity value) {
     this.value = value;
   }
 
