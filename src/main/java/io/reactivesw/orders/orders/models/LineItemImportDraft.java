@@ -1,6 +1,6 @@
 package io.reactivesw.orders.orders.models;
 
-import io.reactivesw.orders.carts.application.models.ItemState;
+import io.reactivesw.orders.carts.applications.models.ItemState;
 import io.reactivesw.catalog.products.models.Price;
 import io.reactivesw.common.models.LocalizedString;
 import io.reactivesw.common.models.Reference;

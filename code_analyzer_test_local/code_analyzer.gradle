@@ -8,7 +8,7 @@ apply from:'code_analyzer_test/code_analyzer_config.gradle'
 ext {
     application_java = 'io/reactivesw/Application.java'
 
-    common_exception = 'io/reactivesw/infrastructure/**'
+    common_exception = 'io/reactivesw/infrastructures/**'
 
     model_exception = 'io/reactivesw/**/models/**'
 
