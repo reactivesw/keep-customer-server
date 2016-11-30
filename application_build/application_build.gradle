@@ -20,7 +20,7 @@ dependencies {
     compile('org.springframework.security:spring-security-crypto')
 
     //mysql driver
-    compile('mysql:mysql-connector-java:5.1.26')
+    compile('org.postgresql:postgresql:9.4.1212')
 
     //commons-lang
     compile('org.apache.commons:commons-lang3:3.4')
