@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import io.reactivesw.orders.carts.common.repositories.CartRepository;
+import io.reactivesw.orders.carts.infrastructure.repositories.CartRepository;
 import io.reactivesw.orders.carts.domain.entities.CartEntity;
 
 /**

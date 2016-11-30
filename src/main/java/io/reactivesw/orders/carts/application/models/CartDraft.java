@@ -2,8 +2,8 @@ package io.reactivesw.orders.carts.application.models;
 
 import java.util.List;
 
-import io.reactivesw.orders.carts.common.enums.InventoryMode;
-import io.reactivesw.orders.carts.common.enums.TaxMode;
+import io.reactivesw.orders.carts.infrastructure.enums.InventoryMode;
+import io.reactivesw.orders.carts.infrastructure.enums.TaxMode;
 import io.reactivesw.catalog.taxcategories.models.ExternalTaxRateDraft;
 import io.reactivesw.common.models.Address;
 import io.reactivesw.common.models.Reference;

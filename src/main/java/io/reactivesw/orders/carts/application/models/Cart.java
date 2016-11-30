@@ -6,9 +6,9 @@ import java.time.ZonedDateTime;
 import java.util.List;
 
 import io.reactivesw.orders.discountcodes.models.DiscountCodeInfo;
-import io.reactivesw.orders.carts.common.enums.CartState;
-import io.reactivesw.orders.carts.common.enums.InventoryMode;
-import io.reactivesw.orders.carts.common.enums.TaxMode;
+import io.reactivesw.orders.carts.infrastructure.enums.CartState;
+import io.reactivesw.orders.carts.infrastructure.enums.InventoryMode;
+import io.reactivesw.orders.carts.infrastructure.enums.TaxMode;
 import io.reactivesw.common.models.Address;
 import io.reactivesw.common.models.CustomFields;
 import io.reactivesw.common.models.Money;

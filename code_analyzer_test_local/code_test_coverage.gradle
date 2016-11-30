@@ -42,9 +42,9 @@ jacocoTestReport {
                     '**/exceptions/**',
                     '**/enums/**',
                     '**/routes/**',
-                    'io/reactivesw/common/utils/**',
+                    'io/reactivesw/infrastructure/utils/**',
                     //先去掉auth的检查,后面再加回来
-                    'io/reactivesw/common/auth/**'
+                    'io/reactivesw/infrastructure/auth/**'
             ])
         })
     }

@@ -1,7 +1,7 @@
 package io.reactivesw.routes;
 
 /**
- * common service routes.
+ * infrastructure service routes.
  * Created by BruceLiu on 16/11/15.
  */
 public class CommonServiceRoutes {
