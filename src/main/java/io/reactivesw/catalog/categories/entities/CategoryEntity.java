@@ -1,6 +1,7 @@
 package io.reactivesw.catalog.categories.entities;
 
 import io.reactivesw.common.entities.BaseAllEntity;
+import io.reactivesw.common.entities.LocalizedStringEntity;
 import io.reactivesw.common.models.CustomFields;
 import io.reactivesw.common.models.LocalizedString;
 import io.reactivesw.common.utils.CustomFieldsJsonConverter;
