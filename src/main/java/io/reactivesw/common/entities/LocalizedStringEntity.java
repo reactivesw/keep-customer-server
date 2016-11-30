@@ -21,9 +21,15 @@ import io.reactivesw.common.utils.LocalizedStringSerializer;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class LocalizedStringEntity extends BaseIdEntity{
 
+  /**
+   * language.
+   */
   @Column
   private String language;
 
+  /**
+   * text value.
+   */
   @Column
   private String text;
 
