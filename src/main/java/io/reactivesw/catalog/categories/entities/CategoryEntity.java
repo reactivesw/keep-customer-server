@@ -13,6 +13,7 @@ import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 /**
  * CategoryEntity Entity.
@@ -29,6 +30,7 @@ public class CategoryEntity extends BaseAllEntity {
   /**
    * version.
    */
+  @Version
   @Column(name = "version")
   private Integer version;
 
