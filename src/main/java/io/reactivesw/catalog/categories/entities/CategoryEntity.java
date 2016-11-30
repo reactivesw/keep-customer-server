@@ -11,11 +11,16 @@ import io.reactivesw.common.utils.LocalizedStringJsonConverter;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
 
 /**
@@ -41,14 +46,13 @@ public class CategoryEntity extends BaseAllEntity {
    * The Name.
    */
   @OneToMany
-  private Set<CategoryName> name;
+  private Set<LocalizedStringEntity> name;
 
   /**
    * slug.
    */
-  @Column(name = "slug", columnDefinition = JSONTYPE)
-  @Convert(converter = LocalizedStringJsonConverter.class)
-  private LocalizedString slug;
+  @OneToMany
+  private Set<LocalizedStringEntity> slug;
 
   /**
    * The Description.
@@ -133,7 +137,7 @@ public class CategoryEntity extends BaseAllEntity {
    *
    * @return the name
    */
-  public Set<CategoryName> getName() {
+  public Set<LocalizedStringEntity> getName() {
     return name;
   }
 
@@ -142,7 +146,7 @@ public class CategoryEntity extends BaseAllEntity {
    *
    * @param name the name
    */
-  public void setName(Set<CategoryName> name) {
+  public void setName(Set<LocalizedStringEntity> name) {
     this.name = name;
   }
 
@@ -151,7 +155,7 @@ public class CategoryEntity extends BaseAllEntity {
    *
    * @return the slug
    */
-  public LocalizedString getSlug() {
+  public Set<LocalizedStringEntity> getSlug() {
     return slug;
   }
 
@@ -160,7 +164,7 @@ public class CategoryEntity extends BaseAllEntity {
    *
    * @param slug the slug
    */
-  public void setSlug(LocalizedString slug) {
+  public void setSlug(Set<LocalizedStringEntity> slug) {
     this.slug = slug;
   }
 

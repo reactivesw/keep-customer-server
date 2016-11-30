@@ -24,22 +24,22 @@ public class LocalizedStringEntity extends BaseIdEntity {
   @Column(columnDefinition = "text")
   protected String text;
 
-  /**
-   * Instantiates a new Localized string entity.
-   */
-  public LocalizedStringEntity() {
-  }
-
-  /**
-   * Instantiates a new Localized string entity.
-   *
-   * @param language the language
-   * @param text     the text
-   */
-  public LocalizedStringEntity(String language, String text) {
-    this.language = language;
-    this.text = text;
-  }
+//  /**
+//   * Instantiates a new Localized string entity.
+//   */
+//  public LocalizedStringEntity() {
+//  }
+//
+//  /**
+//   * Instantiates a new Localized string entity.
+//   *
+//   * @param language the language
+//   * @param text     the text
+//   */
+//  public LocalizedStringEntity(String language, String text) {
+//    this.language = language;
+//    this.text = text;
+//  }
 
   /**
    * Gets language.
@@ -77,11 +77,11 @@ public class LocalizedStringEntity extends BaseIdEntity {
     this.text = text;
   }
 
-  @Override
-  public String toString() {
-    return "LocalizedStringEntity{"
-            + "language='" + language + '\''
-            + ", text='" + text + '\''
-            + '}';
-  }
+//  @Override
+//  public String toString() {
+//    return "LocalizedStringEntity{"
+//            + "language='" + language + '\''
+//            + ", text='" + text + '\''
+//            + '}';
+//  }
 }
