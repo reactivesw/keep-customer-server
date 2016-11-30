@@ -9,10 +9,12 @@ import io.reactivesw.common.utils.ListJsonConverter;
 import io.reactivesw.common.utils.LocalizedStringJsonConverter;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -38,9 +40,8 @@ public class CategoryEntity extends BaseAllEntity {
   /**
    * The Name.
    */
-  @Column(name = "name", nullable = false, columnDefinition = JSONTYPE)
-  @Convert(converter = LocalizedStringJsonConverter.class)
-  private LocalizedString name;
+  @OneToMany
+  private Set<CategoryName> name;
 
   /**
    * slug.
@@ -132,7 +133,7 @@ public class CategoryEntity extends BaseAllEntity {
    *
    * @return the name
    */
-  public LocalizedString getName() {
+  public Set<CategoryName> getName() {
     return name;
   }
 
@@ -141,7 +142,7 @@ public class CategoryEntity extends BaseAllEntity {
    *
    * @param name the name
    */
-  public void setName(LocalizedString name) {
+  public void setName(Set<CategoryName> name) {
     this.name = name;
   }
 
