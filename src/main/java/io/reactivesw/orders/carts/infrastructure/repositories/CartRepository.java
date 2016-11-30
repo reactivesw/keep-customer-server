@@ -1,4 +1,4 @@
-package io.reactivesw.orders.carts.common.repositories;
+package io.reactivesw.orders.carts.infrastructure.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
@@ -7,7 +7,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import io.reactivesw.orders.carts.common.enums.CartState;
+import io.reactivesw.orders.carts.infrastructure.enums.CartState;
 import io.reactivesw.orders.carts.domain.entities.CartEntity;
 
 /**

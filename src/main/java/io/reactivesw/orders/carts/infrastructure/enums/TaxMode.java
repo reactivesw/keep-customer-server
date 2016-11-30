@@ -1,4 +1,4 @@
-package io.reactivesw.orders.carts.common.enums;
+package io.reactivesw.orders.carts.infrastructure.enums;
 
 /**
  * Values of the TaxMode enumeration:

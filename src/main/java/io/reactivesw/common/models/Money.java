@@ -60,7 +60,7 @@ public class Money {
     } else if (obj instanceof Money) {
       final Money other = (Money) obj;
       equalsResult = Objects.equals(currencyCode, other.currencyCode)
-          && Objects.equals(centAmount, other.centAmount);
+              && Objects.equals(centAmount, other.centAmount);
     }
     return equalsResult;
 
@@ -74,8 +74,8 @@ public class Money {
   @Override
   public String toString() {
     return "Money{" +
-        "currencyCode='" + currencyCode + '\'' +
-        ", centAmount=" + centAmount +
-        '}';
+            "currencyCode='" + currencyCode + '\'' +
+            ", centAmount=" + centAmount +
+            '}';
   }
 }

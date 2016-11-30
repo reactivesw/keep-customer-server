@@ -10,14 +10,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import io.reactivesw.common.models.Statics;
 import io.reactivesw.common.entities.BaseIdEntity;
+import io.reactivesw.common.entities.LocalizedStringEntity;
 import io.reactivesw.common.models.CustomFields;
-import io.reactivesw.common.models.LocalizedString;
 import io.reactivesw.common.models.Money;
+import io.reactivesw.common.models.Statics;
 import io.reactivesw.common.utils.CustomFieldsJsonConverter;
 import io.reactivesw.common.utils.ListJsonConverter;
-import io.reactivesw.common.utils.LocalizedStringJsonConverter;
 import io.reactivesw.common.utils.MoneyJsonConverter;
 import io.reactivesw.orders.cartdiscounts.enums.LineItemPriceMode;
 
@@ -37,16 +36,14 @@ public class LineItemValue extends BaseIdEntity {
   /**
    * name in localized string.
    */
-  @Column(name = "name", nullable = false, columnDefinition = Statics.JSON)
-  @Convert(converter = LocalizedStringJsonConverter.class)
-  private LocalizedString name;
+  @OneToMany
+  private Set<LocalizedStringEntity> name;
 
   /**
    * product slug in localized string.
    */
-  @Column(name = "product_slug", nullable = false, columnDefinition = Statics.JSON)
-  @Convert(converter = LocalizedStringJsonConverter.class)
-  private LocalizedString productSlug;
+  @OneToMany
+  private Set<LocalizedStringEntity> productSlug;
 
   /**
    * product variant.
@@ -146,7 +143,7 @@ public class LineItemValue extends BaseIdEntity {
    *
    * @return the name
    */
-  public LocalizedString getName() {
+  public Set<LocalizedStringEntity> getName() {
     return name;
   }
 
@@ -155,7 +152,7 @@ public class LineItemValue extends BaseIdEntity {
    *
    * @param name the name
    */
-  public void setName(LocalizedString name) {
+  public void setName(Set<LocalizedStringEntity> name) {
     this.name = name;
   }
 
@@ -164,7 +161,7 @@ public class LineItemValue extends BaseIdEntity {
    *
    * @return the product slug
    */
-  public LocalizedString getProductSlug() {
+  public Set<LocalizedStringEntity> getProductSlug() {
     return productSlug;
   }
 
@@ -173,7 +170,7 @@ public class LineItemValue extends BaseIdEntity {
    *
    * @param productSlug the product slug
    */
-  public void setProductSlug(LocalizedString productSlug) {
+  public void setProductSlug(Set<LocalizedStringEntity> productSlug) {
     this.productSlug = productSlug;
   }
 

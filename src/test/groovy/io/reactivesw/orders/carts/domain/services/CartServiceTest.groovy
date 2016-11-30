@@ -1,6 +1,6 @@
 package io.reactivesw.orders.carts.domain.services
 
-import io.reactivesw.orders.carts.common.repositories.CartRepository
+import io.reactivesw.orders.carts.infrastructure.repositories.CartRepository
 import io.reactivesw.orders.carts.domain.entities.CartEntity
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
