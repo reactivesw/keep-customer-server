@@ -3,10 +3,8 @@ package io.reactivesw.catalog.categories.entities;
 import io.reactivesw.common.entities.BaseAllEntity;
 import io.reactivesw.common.entities.LocalizedStringEntity;
 import io.reactivesw.common.models.CustomFields;
-import io.reactivesw.common.models.LocalizedString;
 import io.reactivesw.common.utils.CustomFieldsJsonConverter;
 import io.reactivesw.common.utils.ListJsonConverter;
-import io.reactivesw.common.utils.LocalizedStringJsonConverter;
 
 import java.util.List;
 import java.util.Set;
@@ -25,11 +23,6 @@ import javax.persistence.Version;
 @Entity
 @Table(name = "catalog_category")
 public class CategoryEntity extends BaseAllEntity {
-  /**
-   * json type.
-   */
-  private static final String JSONTYPE = "JSON";
-
   /**
    * version.
    */
@@ -52,14 +45,13 @@ public class CategoryEntity extends BaseAllEntity {
   /**
    * The Description.
    */
-  @Column(name = "description", columnDefinition = JSONTYPE)
-  @Convert(converter = LocalizedStringJsonConverter.class)
-  private LocalizedString description;
+  @OneToMany
+  private Set<LocalizedStringEntity> description;
 
   /**
    * ancestors.
    */
-  @Column(columnDefinition = JSONTYPE)
+  @Column(columnDefinition = "jsonb")
   @Convert(converter = ListJsonConverter.class)
   private List<String> ancestors;
 
@@ -84,28 +76,25 @@ public class CategoryEntity extends BaseAllEntity {
   /**
    * meta title.
    */
-  @Column(name = "meta_title", columnDefinition = JSONTYPE)
-  @Convert(converter = LocalizedStringJsonConverter.class)
-  private LocalizedString metaTitle;
+  @OneToMany
+  private Set<LocalizedStringEntity> metaTitle;
 
   /**
    * meta description.
    */
-  @Column(name = "meta_description", columnDefinition = JSONTYPE)
-  @Convert(converter = LocalizedStringJsonConverter.class)
-  private LocalizedString metaDescription;
+  @OneToMany
+  private Set<LocalizedStringEntity> metaDescription;
 
   /**
    * meta key works.
    */
-  @Column(name = "meta_key_words", columnDefinition = JSONTYPE)
-  @Convert(converter = LocalizedStringJsonConverter.class)
-  private LocalizedString metaKeyWords;
+  @OneToMany
+  private Set<LocalizedStringEntity> metaKeyWords;
 
   /**
    * custom.
    */
-  @Column(columnDefinition = JSONTYPE)
+  @Column(columnDefinition = "jsonb")
   @Convert(converter = CustomFieldsJsonConverter.class)
   private CustomFields custom;
 
@@ -168,7 +157,7 @@ public class CategoryEntity extends BaseAllEntity {
    *
    * @return the description
    */
-  public LocalizedString getDescription() {
+  public Set<LocalizedStringEntity> getDescription() {
     return description;
   }
 
@@ -177,7 +166,7 @@ public class CategoryEntity extends BaseAllEntity {
    *
    * @param description the description
    */
-  public void setDescription(LocalizedString description) {
+  public void setDescription(Set<LocalizedStringEntity> description) {
     this.description = description;
   }
 
@@ -258,7 +247,7 @@ public class CategoryEntity extends BaseAllEntity {
    *
    * @return the meta title
    */
-  public LocalizedString getMetaTitle() {
+  public Set<LocalizedStringEntity> getMetaTitle() {
     return metaTitle;
   }
 
@@ -267,7 +256,7 @@ public class CategoryEntity extends BaseAllEntity {
    *
    * @param metaTitle the meta title
    */
-  public void setMetaTitle(LocalizedString metaTitle) {
+  public void setMetaTitle(Set<LocalizedStringEntity> metaTitle) {
     this.metaTitle = metaTitle;
   }
 
@@ -276,7 +265,7 @@ public class CategoryEntity extends BaseAllEntity {
    *
    * @return the meta description
    */
-  public LocalizedString getMetaDescription() {
+  public Set<LocalizedStringEntity> getMetaDescription() {
     return metaDescription;
   }
 
@@ -285,7 +274,7 @@ public class CategoryEntity extends BaseAllEntity {
    *
    * @param metaDescription the meta description
    */
-  public void setMetaDescription(LocalizedString metaDescription) {
+  public void setMetaDescription(Set<LocalizedStringEntity> metaDescription) {
     this.metaDescription = metaDescription;
   }
 
@@ -294,7 +283,7 @@ public class CategoryEntity extends BaseAllEntity {
    *
    * @return the meta key words
    */
-  public LocalizedString getMetaKeyWords() {
+  public Set<LocalizedStringEntity> getMetaKeyWords() {
     return metaKeyWords;
   }
 
@@ -303,7 +292,7 @@ public class CategoryEntity extends BaseAllEntity {
    *
    * @param metaKeyWords the meta key words
    */
-  public void setMetaKeyWords(LocalizedString metaKeyWords) {
+  public void setMetaKeyWords(Set<LocalizedStringEntity> metaKeyWords) {
     this.metaKeyWords = metaKeyWords;
   }
 
