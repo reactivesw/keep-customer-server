@@ -9,9 +9,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import io.reactivesw.common.entities.BaseIdEntity;
-import io.reactivesw.common.models.Money;
+import io.reactivesw.common.entities.MoneyEntity;
 import io.reactivesw.common.utils.ListJsonConverter;
-import io.reactivesw.common.utils.MoneyJsonConverter;
 
 /**
  * Created by umasuo on 16/11/28.
@@ -29,9 +28,8 @@ public class ShippingInfoValue extends BaseIdEntity {
   /**
    * price.
    */
-  @Column(name = "price", nullable = false, columnDefinition = "JSON")
-  @Convert(converter = MoneyJsonConverter.class)
-  private Money price;
+  @OneToOne
+  private MoneyEntity price;
 
   /**
    * shipping rate.
@@ -101,7 +99,7 @@ public class ShippingInfoValue extends BaseIdEntity {
    *
    * @return the price
    */
-  public Money getPrice() {
+  public MoneyEntity getPrice() {
     return price;
   }
 
@@ -110,7 +108,7 @@ public class ShippingInfoValue extends BaseIdEntity {
    *
    * @param price the price
    */
-  public void setPrice(Money price) {
+  public void setPrice(MoneyEntity price) {
     this.price = price;
   }
 

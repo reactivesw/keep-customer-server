@@ -12,12 +12,11 @@ import javax.persistence.Table;
 
 import io.reactivesw.common.entities.BaseIdEntity;
 import io.reactivesw.common.entities.LocalizedStringEntity;
+import io.reactivesw.common.entities.MoneyEntity;
 import io.reactivesw.common.models.CustomFields;
-import io.reactivesw.common.models.Money;
 import io.reactivesw.common.models.Statics;
 import io.reactivesw.common.utils.CustomFieldsJsonConverter;
 import io.reactivesw.common.utils.ListJsonConverter;
-import io.reactivesw.common.utils.MoneyJsonConverter;
 import io.reactivesw.orders.cartdiscounts.enums.LineItemPriceMode;
 
 /**
@@ -66,9 +65,8 @@ public class LineItemValue extends BaseIdEntity {
   /**
    * total price.
    */
-  @Column(name = "total_price", nullable = false, columnDefinition = Statics.JSON)
-  @Convert(converter = MoneyJsonConverter.class)
-  private Money totalPrice;
+  @OneToOne
+  private MoneyEntity totalPrice;
 
   /**
    * quantity.
@@ -233,7 +231,7 @@ public class LineItemValue extends BaseIdEntity {
    *
    * @return the total price
    */
-  public Money getTotalPrice() {
+  public MoneyEntity getTotalPrice() {
     return totalPrice;
   }
 
@@ -242,7 +240,7 @@ public class LineItemValue extends BaseIdEntity {
    *
    * @param totalPrice the total price
    */
-  public void setTotalPrice(Money totalPrice) {
+  public void setTotalPrice(MoneyEntity totalPrice) {
     this.totalPrice = totalPrice;
   }
 

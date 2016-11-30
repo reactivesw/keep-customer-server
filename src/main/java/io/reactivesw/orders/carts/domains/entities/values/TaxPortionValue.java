@@ -1,20 +1,19 @@
 package io.reactivesw.orders.carts.domains.entities.values;
 
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import io.reactivesw.common.entities.BaseIdEntity;
-import io.reactivesw.common.models.Money;
-import io.reactivesw.common.utils.MoneyJsonConverter;
+import io.reactivesw.common.entities.MoneyEntity;
 
 /**
  * Created by umasuo on 16/11/17.
  */
 @Entity
 @Table(name = "orders_carts_tax_portion")
-public class TaxPortionValue extends BaseIdEntity{
+public class TaxPortionValue extends BaseIdEntity {
 
   /**
    * name.
@@ -31,9 +30,8 @@ public class TaxPortionValue extends BaseIdEntity{
   /**
    * amount of money.
    */
-  @Column(name = "amount", nullable = false, columnDefinition = "JSON")
-  @Convert(converter = MoneyJsonConverter.class)
-  private Money amount;
+  @OneToOne
+  private MoneyEntity amount;
 
   /**
    * Gets name.
@@ -76,7 +74,7 @@ public class TaxPortionValue extends BaseIdEntity{
    *
    * @return the amount
    */
-  public Money getAmount() {
+  public MoneyEntity getAmount() {
     return amount;
   }
 
@@ -85,7 +83,7 @@ public class TaxPortionValue extends BaseIdEntity{
    *
    * @param amount the amount
    */
-  public void setAmount(Money amount) {
+  public void setAmount(MoneyEntity amount) {
     this.amount = amount;
   }
 }

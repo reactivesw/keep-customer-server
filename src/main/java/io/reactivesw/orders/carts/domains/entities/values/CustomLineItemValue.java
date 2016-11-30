@@ -12,12 +12,11 @@ import javax.persistence.Table;
 
 import io.reactivesw.common.entities.BaseIdEntity;
 import io.reactivesw.common.entities.LocalizedStringEntity;
+import io.reactivesw.common.entities.MoneyEntity;
 import io.reactivesw.common.models.CustomFields;
-import io.reactivesw.common.models.Money;
 import io.reactivesw.common.models.Statics;
 import io.reactivesw.common.utils.CustomFieldsJsonConverter;
 import io.reactivesw.common.utils.ListJsonConverter;
-import io.reactivesw.common.utils.MoneyJsonConverter;
 
 /**
  * Created by umasuo on 16/11/28.
@@ -35,9 +34,8 @@ public class CustomLineItemValue extends BaseIdEntity {
   /**
    * money.
    */
-  @Column(name = "money", nullable = false, columnDefinition = Statics.JSON)
-  @Convert(converter = MoneyJsonConverter.class)
-  private Money money;
+  @OneToOne
+  private MoneyEntity money;
 
   /**
    * taxed item price value.
@@ -48,9 +46,8 @@ public class CustomLineItemValue extends BaseIdEntity {
   /**
    * total price.
    */
-  @Column(name = "total_price", nullable = false, columnDefinition = Statics.JSON)
-  @Convert(converter = MoneyJsonConverter.class)
-  private Money totalPrice;
+  @OneToOne
+  private MoneyEntity totalPrice;
 
   /**
    * slug.
@@ -119,7 +116,7 @@ public class CustomLineItemValue extends BaseIdEntity {
    *
    * @return the money
    */
-  public Money getMoney() {
+  public MoneyEntity getMoney() {
     return money;
   }
 
@@ -128,7 +125,7 @@ public class CustomLineItemValue extends BaseIdEntity {
    *
    * @param money the money
    */
-  public void setMoney(Money money) {
+  public void setMoney(MoneyEntity money) {
     this.money = money;
   }
 
@@ -155,7 +152,7 @@ public class CustomLineItemValue extends BaseIdEntity {
    *
    * @return the total price
    */
-  public Money getTotalPrice() {
+  public MoneyEntity getTotalPrice() {
     return totalPrice;
   }
 
@@ -164,7 +161,7 @@ public class CustomLineItemValue extends BaseIdEntity {
    *
    * @param totalPrice the total price
    */
-  public void setTotalPrice(Money totalPrice) {
+  public void setTotalPrice(MoneyEntity totalPrice) {
     this.totalPrice = totalPrice;
   }
 

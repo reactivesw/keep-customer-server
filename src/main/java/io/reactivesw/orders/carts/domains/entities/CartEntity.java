@@ -11,21 +11,20 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import io.reactivesw.common.entities.BaseAllEntity;
+import io.reactivesw.common.entities.MoneyEntity;
 import io.reactivesw.common.models.CustomFields;
-import io.reactivesw.common.models.Money;
 import io.reactivesw.common.models.Statics;
 import io.reactivesw.common.utils.CustomFieldsJsonConverter;
 import io.reactivesw.common.utils.ListJsonConverter;
-import io.reactivesw.common.utils.MoneyJsonConverter;
-import io.reactivesw.orders.carts.infrastructures.enums.CartState;
-import io.reactivesw.orders.carts.infrastructures.enums.InventoryMode;
-import io.reactivesw.orders.carts.infrastructures.enums.TaxMode;
 import io.reactivesw.orders.carts.domains.entities.values.BillingAddressValue;
 import io.reactivesw.orders.carts.domains.entities.values.CustomLineItemValue;
 import io.reactivesw.orders.carts.domains.entities.values.LineItemValue;
 import io.reactivesw.orders.carts.domains.entities.values.ShippingAddressValue;
 import io.reactivesw.orders.carts.domains.entities.values.ShippingInfoValue;
 import io.reactivesw.orders.carts.domains.entities.values.TaxedPriceValue;
+import io.reactivesw.orders.carts.infrastructures.enums.CartState;
+import io.reactivesw.orders.carts.infrastructures.enums.InventoryMode;
+import io.reactivesw.orders.carts.infrastructures.enums.TaxMode;
 
 /**
  * cart entity.
@@ -74,9 +73,8 @@ public class CartEntity extends BaseAllEntity {
   /**
    * total price.
    */
-  @Column(name = "total_price", nullable = false, columnDefinition = Statics.JSON)
-  @Convert(converter = MoneyJsonConverter.class)
-  private Money totalPrice;
+  @OneToMany
+  private Set<MoneyEntity> totalPrice;
 
   /**
    * Not set until the shipping address is set. Will be set automatically in the Platform TaxMode.
@@ -276,7 +274,7 @@ public class CartEntity extends BaseAllEntity {
    *
    * @return the total price
    */
-  public Money getTotalPrice() {
+  public Set<MoneyEntity> getTotalPrice() {
     return totalPrice;
   }
 
@@ -285,7 +283,7 @@ public class CartEntity extends BaseAllEntity {
    *
    * @param totalPrice the total price
    */
-  public void setTotalPrice(Money totalPrice) {
+  public void setTotalPrice(Set<MoneyEntity> totalPrice) {
     this.totalPrice = totalPrice;
   }
 
