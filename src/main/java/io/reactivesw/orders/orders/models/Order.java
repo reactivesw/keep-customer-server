@@ -2,17 +2,17 @@ package io.reactivesw.orders.orders.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import io.reactivesw.orders.carts.enums.InventoryMode;
-import io.reactivesw.orders.carts.models.PaymentInfo;
+import io.reactivesw.orders.carts.common.enums.InventoryMode;
+import io.reactivesw.orders.carts.application.models.PaymentInfo;
 import io.reactivesw.orders.orders.enums.OrderState;
 import io.reactivesw.orders.orders.enums.PaymentState;
 import io.reactivesw.orders.orders.enums.ShipmentState;
-import io.reactivesw.orders.carts.enums.TaxMode;
-import io.reactivesw.orders.carts.models.CustomLineItem;
+import io.reactivesw.orders.carts.common.enums.TaxMode;
+import io.reactivesw.orders.carts.application.models.CustomLineItem;
 import io.reactivesw.orders.discountcodes.models.DiscountCodeInfo;
-import io.reactivesw.orders.carts.models.LineItem;
-import io.reactivesw.orders.carts.models.ShippingInfo;
-import io.reactivesw.orders.carts.models.TaxedPrice;
+import io.reactivesw.orders.carts.application.models.LineItem;
+import io.reactivesw.orders.carts.application.models.ShippingInfo;
+import io.reactivesw.orders.carts.application.models.TaxedPrice;
 import io.reactivesw.common.models.Address;
 import io.reactivesw.common.models.CustomFields;
 import io.reactivesw.common.models.Money;
