@@ -1,13 +1,13 @@
 package io.reactivesw.orders.carts.domains.entities.values;
 
+import io.reactivesw.common.entities.BaseIdEntity;
+
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import io.reactivesw.common.entities.BaseIdEntity;
 
 /**
  * Created by umasuo on 16/11/17.
