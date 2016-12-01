@@ -14,7 +14,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "orders_carts_image")
-public class ImageValue extends BaseIdEntity{
+public class ImageValue extends BaseIdEntity {
 
   /**
    * image url.
@@ -109,6 +109,7 @@ public class ImageValue extends BaseIdEntity{
 
   /**
    * to string method.
+   *
    * @return String
    */
   @Override

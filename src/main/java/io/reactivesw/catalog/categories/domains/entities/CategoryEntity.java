@@ -1,19 +1,26 @@
 package io.reactivesw.catalog.categories.domains.entities;
 
+import io.reactivesw.common.dialects.JSONBUserType;
 import io.reactivesw.common.entities.BaseAllEntity;
 import io.reactivesw.common.entities.LocalizedStringEntity;
 import io.reactivesw.common.models.CustomFields;
-import io.reactivesw.common.utils.CustomFieldsJsonConverter;
-import io.reactivesw.common.utils.ListJsonConverter;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Parameter;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 
 /**
@@ -22,6 +29,14 @@ import javax.persistence.Version;
  */
 @Entity
 @Table(name = "catalog_category")
+@TypeDefs({
+    @TypeDef(name = "List", typeClass = JSONBUserType.class, parameters = {
+        @Parameter(name = JSONBUserType.CLASS, value = "java.util.ArrayList")
+    }),
+    @TypeDef(name = "Custom", typeClass = JSONBUserType.class, parameters = {
+        @Parameter(name = JSONBUserType.CLASS, value = "io.reactivesw.common.models.CustomFields")
+    })
+})
 public class CategoryEntity extends BaseAllEntity {
   /**
    * version.
@@ -34,25 +49,27 @@ public class CategoryEntity extends BaseAllEntity {
    * The Name.
    */
   @OneToMany
+  @Cascade(value = CascadeType.ALL)
   private Set<LocalizedStringEntity> name;
 
   /**
    * slug.
    */
   @OneToMany
+  @Cascade(value = CascadeType.ALL)
   private Set<LocalizedStringEntity> slug;
 
   /**
    * The Description.
    */
   @OneToMany
+  @Cascade(value = CascadeType.ALL)
   private Set<LocalizedStringEntity> description;
 
   /**
    * ancestors.
    */
-  @Column(columnDefinition = "jsonb")
-  @Convert(converter = ListJsonConverter.class)
+  @Transient
   private List<String> ancestors;
 
   /**
@@ -77,25 +94,27 @@ public class CategoryEntity extends BaseAllEntity {
    * meta title.
    */
   @OneToMany
+  @Cascade(value = CascadeType.ALL)
   private Set<LocalizedStringEntity> metaTitle;
 
   /**
    * meta description.
    */
   @OneToMany
+  @Cascade(value = CascadeType.ALL)
   private Set<LocalizedStringEntity> metaDescription;
 
   /**
    * meta key works.
    */
   @OneToMany
+  @Cascade(value = CascadeType.ALL)
   private Set<LocalizedStringEntity> metaKeyWords;
 
   /**
    * custom.
    */
-  @Column(columnDefinition = "jsonb")
-  @Convert(converter = CustomFieldsJsonConverter.class)
+  @Type(type = "Custom")
   private CustomFields custom;
 
   /**
@@ -176,6 +195,9 @@ public class CategoryEntity extends BaseAllEntity {
    * @return the ancestors
    */
   public List<String> getAncestors() {
+    if (ancestors == null) {
+      ancestors = new ArrayList<>();
+    }
     return ancestors;
   }
 
@@ -313,7 +335,7 @@ public class CategoryEntity extends BaseAllEntity {
   public void setCustom(CustomFields custom) {
     this.custom = custom;
   }
-  
+
   /**
    * toString method.
    *

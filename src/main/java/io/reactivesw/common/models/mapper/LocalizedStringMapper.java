@@ -4,6 +4,10 @@ import io.reactivesw.common.entities.LocalizedStringEntity;
 import io.reactivesw.common.models.LocalizedString;
 import org.modelmapper.ModelMapper;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -57,5 +61,42 @@ public final class LocalizedStringMapper {
           .getText());
     }
     return localizedString;
+  }
+
+  /**
+   * Convert to Set of LocalizedStringEntity from LocalizedString.
+   *
+   * @param localizedString the LocalizedString
+   * @return Set of LocalizedStringEntity
+   */
+  public static Set<LocalizedStringEntity> convertToLocalizedStringEntity(LocalizedString
+                                                                               localizedString) {
+    Set<LocalizedStringEntity> localizedStringEntities = new HashSet<>();
+
+    if (localizedString != null && ! localizedString.getLocalized().isEmpty()) {
+      Set<Map.Entry<String, String>> localizeStrings = localizedString.getLocalized().entrySet();
+      for (Map.Entry localizedValue : localizeStrings) {
+        localizedStringEntities.add(new LocalizedStringEntity(localizedValue.getKey().toString(),
+            localizedValue.getValue().toString()));
+      }
+    }
+
+    return localizedStringEntities;
+  }
+
+  public static Set<LocalizedStringEntity> convertToLocalizedStringEntityDefaultNull(LocalizedString
+                                                                              localizedString) {
+    Set<LocalizedStringEntity> localizedStringEntities = null;
+
+    if (localizedString != null && ! localizedString.getLocalized().isEmpty()) {
+      localizedStringEntities = new HashSet<>();
+      Set<Map.Entry<String, String>> localizeStrings = localizedString.getLocalized().entrySet();
+      for (Map.Entry localizedValue : localizeStrings) {
+        localizedStringEntities.add(new LocalizedStringEntity(localizedValue.getKey().toString(),
+            localizedValue.getValue().toString()));
+      }
+    }
+
+    return localizedStringEntities;
   }
 }

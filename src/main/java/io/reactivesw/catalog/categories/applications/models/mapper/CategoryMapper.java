@@ -4,12 +4,15 @@ import io.reactivesw.catalog.categories.applications.models.CategoryDraft;
 import io.reactivesw.catalog.categories.domains.entities.CategoryEntity;
 import io.reactivesw.catalog.categories.applications.models.Category;
 import io.reactivesw.common.enums.ReferenceTypes;
+import io.reactivesw.common.models.LocalizedString;
 import io.reactivesw.common.models.Reference;
 import io.reactivesw.common.models.mapper.LocalizedStringMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Davis on 16/11/28.
@@ -32,7 +35,7 @@ public final class CategoryMapper {
     category.setAncestors(entityToReferenceList(entity.getAncestors()));
     String parentId = entity.getParent();
     //add reference type to parent.
-    if (parentId != null) {
+    if (StringUtils.isNotBlank(parentId)) {
       category.setParent(new Reference(ReferenceTypes.CATEGORY.getType(), parentId));
     }
     //TODO extract to other method
@@ -56,9 +59,24 @@ public final class CategoryMapper {
    * @param draft the draft
    * @return the category entity
    */
-  //TODO
   public static CategoryEntity draftToCategoryEntity(CategoryDraft draft) {
     CategoryEntity entity = mapper.map(draft, CategoryEntity.class);
+    entity.setName(LocalizedStringMapper.convertToLocalizedStringEntityDefaultNull(draft.getName
+        ()));
+    entity.setDescription(LocalizedStringMapper.convertToLocalizedStringEntityDefaultNull(draft
+        .getDescription()));
+    entity.setSlug(LocalizedStringMapper.convertToLocalizedStringEntityDefaultNull(draft.getSlug
+        ()));
+    entity.setMetaTitle(LocalizedStringMapper.convertToLocalizedStringEntityDefaultNull(draft
+        .getMetaTitle()));
+    entity.setMetaDescription(LocalizedStringMapper.convertToLocalizedStringEntityDefaultNull(draft
+        .getMetaDescription()));
+    entity.setMetaKeyWords(LocalizedStringMapper.convertToLocalizedStringEntityDefaultNull(draft
+        .getMetaKeywords()));
+    //TODO
+    if (draft.getCustom() == null) {
+      entity.setCustom(null);
+    }
     return entity;
   }
 
@@ -72,9 +90,9 @@ public final class CategoryMapper {
     List<Reference> result = new ArrayList<>();
     if (ancestors != null) {
       String typeId = ReferenceTypes.CATEGORY.getType();
-      for (String ancestorId : ancestors) {
-        result.add(new Reference(typeId, ancestorId));
-      }
+      result = ancestors.stream()
+          .map(ancestor -> new Reference(typeId, ancestor))
+          .collect(Collectors.toList());
     }
     return result;
   }

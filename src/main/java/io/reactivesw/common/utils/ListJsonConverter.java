@@ -29,9 +29,7 @@ public class ListJsonConverter implements AttributeConverter<ArrayList, String> 
   @Override
   public ArrayList<String> convertToEntityAttribute(String dbData) {
     try {
-
       return objectMapper.readValue(dbData, ArrayList.class);
-
     } catch (IOException ex) {
       return null;
     }

@@ -7,6 +7,7 @@ import static io.reactivesw.routes.Router.CATEGORY_ID;
 import io.reactivesw.catalog.categories.applications.models.Category;
 import io.reactivesw.catalog.categories.applications.models.CategoryDraft;
 import io.reactivesw.catalog.categories.domains.services.CategoryService;
+import io.reactivesw.common.exceptions.ParametersException;
 import io.reactivesw.common.models.Field;
 import io.reactivesw.common.models.QueryConditions;
 
@@ -78,17 +79,26 @@ public class CategoryController {
   /**
    * Create category category.
    *
-   * @param draft the draft
+   * @param categoryDraft the draft
    * @return the category
    */
   @ApiOperation(value = "Create CategoryEntity")
   @PostMapping(CATEGORY_ALL)
-  //TODO
   public Category createCategory(@RequestBody
                                  @ApiParam(value = "CategoryEntity Draft", required = true)
-                                     CategoryDraft draft) {
-    LOG.debug("create category : {}", draft.toString());
-    return null;
+                                     CategoryDraft categoryDraft) {
+    LOG.debug("create category : {}", categoryDraft.toString());
+    //TODO slug 判断规则
+    if (categoryDraft.getName() == null ||
+        categoryDraft.getName().getLocalized().isEmpty() ||
+        categoryDraft.getSlug() == null ||
+        categoryDraft.getSlug().getLocalized().isEmpty()
+        ) {
+        throw new ParametersException();
+    }
+    Category category = categoryService.createCategory(categoryDraft);
+    LOG.debug("end createCategory, saved category is {}", category.toString());
+    return category;
   }
 
   /**
