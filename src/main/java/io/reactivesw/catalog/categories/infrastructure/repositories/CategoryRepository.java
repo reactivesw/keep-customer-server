@@ -13,16 +13,19 @@ import java.util.List;
 /**
  * Created by umasuo on 16/11/22.
  */
-public interface CategoryRepository extends JpaRepository<CategoryEntity, String> , JpaSpecificationExecutor {
+public interface CategoryRepository extends JpaRepository<CategoryEntity, String>,
+    JpaSpecificationExecutor {
   /**
    * Query category ids by ancestor id list.
    *
    * @param ancestorId the ancestorid
    * @return the list
    */
-  @Query(value = "select c.id from json_category c where c.ancestors > ?1",
+  @Query(value = "select c.id from catalog_category c where c.ancestors > ?1\\:\\:jsonb",
       nativeQuery = true)
   List<String> queryCategoryIdsByAncestorId(String ancestorId);
+
+  List<CategoryEntity> queryCategoryByParent(String parentId);
 
   @Modifying
   @Transactional
