@@ -1,6 +1,7 @@
 package io.reactivesw.catalog.categories.domains.services;
 
 import com.google.common.collect.Lists;
+
 import io.reactivesw.catalog.categories.applications.models.Category;
 import io.reactivesw.catalog.categories.applications.models.CategoryDraft;
 import io.reactivesw.catalog.categories.applications.models.mapper.CategoryMapper;
@@ -9,9 +10,9 @@ import io.reactivesw.catalog.categories.infrastructure.repositories.CategoryRepo
 import io.reactivesw.common.entities.LocalizedStringEntity;
 import io.reactivesw.common.exceptions.NotExistException;
 import io.reactivesw.common.exceptions.ParametersException;
-
 import io.reactivesw.common.models.LocalizedString;
 import io.reactivesw.common.models.Reference;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
