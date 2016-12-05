@@ -40,6 +40,8 @@ class CartServiceTest extends Specification {
 
     def quantity = 1;
 
+    def lineItemId = "tmpLineItemId"
+
     CartEntity cartEntity
 
     def setup() {
@@ -228,4 +230,58 @@ class CartServiceTest extends Specification {
         noExceptionThrown()
     }
 
+    def "Update cart: remove LineItem "() {
+
+        Set<LineItemValue> lineItemValues = new HashSet<>()
+        LineItemValue lineItem = new LineItemValue()
+        lineItem.setProductId(productId)
+        lineItem.setDistributionChannel(distributionChannel)
+        lineItem.setSupplyChannel(supplyChannel)
+        lineItem.setQuantity(10)
+        lineItem.setId(lineItemId)
+        ProductVariantValue variant = new ProductVariantValue()
+        variant.setId(variantId)
+        lineItem.setVariant(variant)
+        lineItemValues.add(lineItem)
+        cartEntity.setLineItems(lineItemValues)
+        when:
+        cartRepository.findOne(cartId) >> cartEntity
+        cartService.removeLineItem(cartId, lineItemId, 5)
+        then:
+        noExceptionThrown()
+
+    }
+
+    def "Update cart: remove LineItem for reduce to many "() {
+
+        Set<LineItemValue> lineItemValues = new HashSet<>()
+        LineItemValue lineItem = new LineItemValue()
+        lineItem.setProductId(productId)
+        lineItem.setDistributionChannel(distributionChannel)
+        lineItem.setSupplyChannel(supplyChannel)
+        lineItem.setQuantity(5)
+        lineItem.setId(lineItemId)
+        ProductVariantValue variant = new ProductVariantValue()
+        variant.setId(variantId)
+        lineItem.setVariant(variant)
+        lineItemValues.add(lineItem)
+        cartEntity.setLineItems(lineItemValues)
+        when:
+        cartRepository.findOne(cartId) >> cartEntity
+        cartService.removeLineItem(cartId, lineItemId, 10)
+        then:
+        noExceptionThrown()
+
+    }
+    def "Update cart: remove not existing LineItem "() {
+
+        Set<LineItemValue> lineItemValues = new HashSet<>()
+        cartEntity.setLineItems(lineItemValues)
+        when:
+        cartRepository.findOne(cartId) >> cartEntity
+        cartService.removeLineItem(cartId, lineItemId, 5)
+        then:
+        thrown(NotExistException)
+
+    }
 }

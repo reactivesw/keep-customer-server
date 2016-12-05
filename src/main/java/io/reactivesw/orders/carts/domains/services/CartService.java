@@ -140,17 +140,6 @@ public class CartService {
     return entity;
   }
 
-
-  /**
-   * update an entity
-   *
-   * @param cart CartEntity
-   * @return CartEntity
-   */
-  public CartEntity updateCart(CartEntity cart) {
-    return null;
-  }
-
   /**
    * Update cart.
    * add line Item to the cart.
@@ -174,9 +163,39 @@ public class CartService {
     } else {
       lineItems.add(lineItem);
     }
+    return this.cartRepository.save(entity);
+  }
+
+  /**
+   * Decreases the quantity of the given LineItem. If after the update the quantity of the line
+   * item is not greater than 0 or the quantity is not specified, the line item is removed from
+   * the cart.
+   *
+   * @param cartId     String
+   * @param lineItemId String Id of an existing LineItem in the cart.
+   * @param quantity   int
+   * @return CartEntity
+   */
+  public CartEntity removeLineItem(String cartId, String lineItemId, int quantity) {
+    CartEntity entity = this.getCartByCartId(cartId);
+    Set<LineItemValue> lineItems = entity.getLineItems();
+    Optional<LineItemValue> item = lineItems.stream().filter(tmpItem -> tmpItem.getId() ==
+        lineItemId).findFirst();
+    if (item.isPresent()) {
+      LineItemValue itemValue = item.get();
+      Integer remainQuantity = itemValue.getQuantity() - quantity;
+      if (remainQuantity <= 0) {
+        lineItems.remove(itemValue);
+      } else {
+        itemValue.setQuantity(remainQuantity);
+      }
+    } else {
+      throw new NotExistException("Removing not existing line item.");
+    }
 
     return this.cartRepository.save(entity);
   }
+
 
   /**
    * setter of the cart repository.
