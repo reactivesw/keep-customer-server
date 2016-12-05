@@ -21,12 +21,23 @@ public interface CategoryRepository extends JpaRepository<CategoryEntity, String
    * @param ancestorId the ancestorid
    * @return the list
    */
-  @Query(value = "select c.id from catalog_category c where c.ancestors > ?1\\:\\:jsonb",
-      nativeQuery = true)
+  @Query(value = "select c.id from CategoryEntity c where c.ancestrosString like " +
+      "CONCAT('%', ?1 ,'%')")
   List<String> queryCategoryIdsByAncestorId(String ancestorId);
 
+  /**
+   * Query category by parent list.
+   *
+   * @param parentId the parent id
+   * @return the list
+   */
   List<CategoryEntity> queryCategoryByParent(String parentId);
 
+  /**
+   * Delete category by id.
+   *
+   * @param Ids the ids
+   */
   @Modifying
   @Transactional
   @Query(value = "delete from CategoryEntity c where c.id in ?1")

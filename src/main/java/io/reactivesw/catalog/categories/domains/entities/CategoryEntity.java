@@ -1,27 +1,34 @@
 package io.reactivesw.catalog.categories.domains.entities;
 
+import com.google.common.collect.Lists;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import io.reactivesw.common.dialects.JSONBUserType;
 import io.reactivesw.common.entities.BaseAllEntity;
 import io.reactivesw.common.entities.LocalizedStringEntity;
 import io.reactivesw.common.models.CustomFields;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
+import org.apache.commons.lang3.StringUtils;
+
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.TypeDefs;
+import org.springframework.data.annotation.Version;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.persistence.Version;
 
 /**
  * CategoryEntity Entity.
@@ -29,15 +36,17 @@ import javax.persistence.Version;
  */
 @Entity
 @Table(name = "catalog_category")
-@TypeDefs({
-    @TypeDef(name = "List", typeClass = JSONBUserType.class, parameters = {
-        @Parameter(name = JSONBUserType.CLASS, value = "java.util.ArrayList")
-    }),
-    @TypeDef(name = "Custom", typeClass = JSONBUserType.class, parameters = {
-        @Parameter(name = JSONBUserType.CLASS, value = "io.reactivesw.common.models.CustomFields")
-    })
-})
+@TypeDef(name = "Custom", typeClass = JSONBUserType.class, parameters = {
+    @Parameter(name = JSONBUserType.CLASS, value = "io.reactivesw.common.models.CustomFields")}
+)
 public class CategoryEntity extends BaseAllEntity {
+
+  /**
+   * ObjectMapper.
+   */
+  @Transient
+  private final transient ObjectMapper objectMapper = new ObjectMapper();
+
   /**
    * version.
    */
@@ -48,22 +57,19 @@ public class CategoryEntity extends BaseAllEntity {
   /**
    * The Name.
    */
-  @OneToMany
-  @Cascade(value = CascadeType.ALL)
+  @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
   private Set<LocalizedStringEntity> name;
 
   /**
    * slug.
    */
-  @OneToMany
-  @Cascade(value = CascadeType.ALL)
+  @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
   private Set<LocalizedStringEntity> slug;
 
   /**
    * The Description.
    */
-  @OneToMany
-  @Cascade(value = CascadeType.ALL)
+  @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
   private Set<LocalizedStringEntity> description;
 
   /**
@@ -71,6 +77,12 @@ public class CategoryEntity extends BaseAllEntity {
    */
   @Transient
   private List<String> ancestors;
+
+  /**
+   * ancestros string.
+   */
+  @Column
+  private String ancestrosString = "";
 
   /**
    * parent id.
@@ -93,22 +105,19 @@ public class CategoryEntity extends BaseAllEntity {
   /**
    * meta title.
    */
-  @OneToMany
-  @Cascade(value = CascadeType.ALL)
+  @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
   private Set<LocalizedStringEntity> metaTitle;
 
   /**
    * meta description.
    */
-  @OneToMany
-  @Cascade(value = CascadeType.ALL)
+  @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
   private Set<LocalizedStringEntity> metaDescription;
 
   /**
    * meta key works.
    */
-  @OneToMany
-  @Cascade(value = CascadeType.ALL)
+  @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
   private Set<LocalizedStringEntity> metaKeyWords;
 
   /**
@@ -195,10 +204,18 @@ public class CategoryEntity extends BaseAllEntity {
    * @return the ancestors
    */
   public List<String> getAncestors() {
-    if (ancestors == null) {
-      ancestors = new ArrayList<>();
+    List result = new ArrayList();
+    if (ancestors != null && !ancestors.isEmpty()) {
+      result = Lists.newArrayList(ancestors);
     }
-    return ancestors;
+    if (StringUtils.isNotBlank(getAncestrosString())) {
+      try {
+        result = objectMapper.readValue(ancestrosString, List.class);
+      } catch (IOException ex) {
+        result = new ArrayList<>();
+      }
+    }
+    return result;
   }
 
   /**
@@ -208,6 +225,31 @@ public class CategoryEntity extends BaseAllEntity {
    */
   public void setAncestors(List<String> ancestors) {
     this.ancestors = ancestors;
+    setAncestrosString();
+  }
+
+  /**
+   * Gets ancestros string.
+   *
+   * @return the ancestros string
+   */
+  private String getAncestrosString() {
+    return ancestrosString;
+  }
+
+  /**
+   * Sets ancestros string.
+   */
+  private void setAncestrosString() {
+    try {
+      if (ancestors == null || ancestors.isEmpty()) {
+        this.ancestrosString = "";
+      } else {
+        this.ancestrosString = objectMapper.writeValueAsString(ancestors);
+      }
+    } catch (JsonProcessingException jsonProcessingException) {
+      this.ancestrosString = "";
+    }
   }
 
   /**

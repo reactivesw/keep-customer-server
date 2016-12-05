@@ -89,12 +89,12 @@ public class CategoryController {
                                      CategoryDraft categoryDraft) {
     LOG.debug("create category : {}", categoryDraft.toString());
     //TODO slug 判断规则
-    if (categoryDraft.getName() == null ||
-        categoryDraft.getName().getLocalized().isEmpty() ||
-        categoryDraft.getSlug() == null ||
-        categoryDraft.getSlug().getLocalized().isEmpty()
+    if (categoryDraft.getName() == null
+        || categoryDraft.getName().getLocalized().isEmpty()
+        || categoryDraft.getSlug() == null
+        || categoryDraft.getSlug().getLocalized().isEmpty()
         ) {
-        throw new ParametersException();
+      throw new ParametersException();
     }
     Category category = categoryService.createCategory(categoryDraft);
     LOG.debug("end createCategory, saved category is {}", category.toString());
