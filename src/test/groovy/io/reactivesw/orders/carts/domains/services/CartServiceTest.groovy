@@ -1,7 +1,11 @@
 package io.reactivesw.orders.carts.domains.services
 
-import io.reactivesw.orders.carts.infrastructures.repositories.CartRepository
+import io.reactivesw.common.exceptions.AlreadyExistException
+import io.reactivesw.common.exceptions.NotExistException
+import io.reactivesw.common.exceptions.ParametersException
 import io.reactivesw.orders.carts.domains.entities.CartEntity
+import io.reactivesw.orders.carts.infrastructures.enums.CartState
+import io.reactivesw.orders.carts.infrastructures.repositories.CartRepository
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import spock.lang.Specification
@@ -22,7 +26,7 @@ class CartServiceTest extends Specification {
 
     def anonymousId = "tmpAnonymousId"
 
-    def cartEntity
+    CartEntity cartEntity
 
     def setup() {
         LOG.info("init cart service test.")
@@ -30,40 +34,142 @@ class CartServiceTest extends Specification {
         cartEntity = new CartEntity(id: "id")
     }
 
-    def "Create new cart by customerId"() {
+    def "Create new Active cart by customerId"() {
 
+        List<CartEntity> ret = new ArrayList<>()
+        ret.add(cartEntity)
         when:
         cartRepository.save(_) >> cartEntity
-        CartEntity entity = cartService.createCartWithCustomerId(customerId)
+        CartEntity entity = cartService.createActiveCartWithCustomerId(customerId)
         then:
         entity != null
 
     }
 
-    def "Create new cart by anonymousId"() {
+    def "Create new Active cart by anonymousId"() {
 
         when:
         cartRepository.save(_) >> cartEntity
-        CartEntity entity = cartService.createCartWithAnonymousId(anonymousId)
+        CartEntity entity = cartService.createActiveCartWithAnonymousId(anonymousId)
         then:
         entity != null
+    }
+
+    def "Create new cart with sample whose customer id set"() {
+        CartEntity param = new CartEntity()
+        param.setCustomerId(customerId)
+        when:
+        cartRepository.save(_) >> param
+        CartEntity entity = cartService.createActiveCartWithSample(param)
+        then:
+        noExceptionThrown()
+        entity != null
+        entity.getCustomerId() == customerId
+    }
+
+    def "Create new cart with Sample whose anonymous id set"() {
+        CartEntity param = new CartEntity()
+        param.setAnonymousId(anonymousId)
+        when:
+        cartRepository.save(_) >> param
+        CartEntity entity = cartService.createActiveCartWithSample(param)
+        then:
+        noExceptionThrown()
+        entity.getAnonymousId() == anonymousId
+    }
+
+    def "Create new cart with sample throw ParametersException"() {
+        CartEntity param = new CartEntity()
+        when:
+        cartRepository.save(_) >> cartEntity
+        cartService.createActiveCartWithSample(param)
+        then:
+        thrown(ParametersException)
+    }
+
+    def "Create new cart with sample throw AlreadyExistException"() {
+        CartEntity param = new CartEntity()
+        param.setCustomerId(customerId)
+        List<CartEntity> ret = new ArrayList<>()
+        ret.add(param)
+        when:
+        cartRepository.save(_) >> cartEntity
+        cartRepository.findByCustomerIdAndCartState(_, _) >> ret
+        cartService.createActiveCartWithSample(param)
+        then:
+        thrown(AlreadyExistException)
     }
 
     def "Get cart by cart id"() {
-        cartService.getCartByCartId("id")
         when:
-        def a = 0
+        cartRepository.findOne(_) >> cartEntity
+        CartEntity entity = cartService.getCartByCartId(customerId)
         then:
-        a == 0
+        entity != null
     }
 
-    def "Get cart By customer id"() {
-        cartService.getCartByCustomerId("id")
+    def "Get cart by cart id not exist"() {
         when:
-        def a = 0
+        cartRepository.findOne(_) >> null
+        cartService.getCartByCartId(customerId)
         then:
-        a == 0
+        thrown(NotExistException)
     }
 
+    def "Get Active cart By customer id"() {
+        List<CartEntity> ret = new ArrayList<>()
+        ret.add(cartEntity)
+        when:
+        cartRepository.findByCustomerIdAndCartState(customerId, CartState.Active) >> ret
+        CartEntity entity = cartService.getActiveCartByCustomerId(customerId)
+        then:
+        entity != null
+    }
 
+    def "Get Active cart By customer id with empty list"() {
+        List<CartEntity> ret = new ArrayList<>()
+        when:
+        cartRepository.findByCustomerIdAndCartState(customerId, CartState.Active) >> ret
+        cartRepository.save(_) >> cartEntity
+        CartEntity entity = cartService.getActiveCartByCustomerId(customerId)
+        then:
+        entity != null
+    }
+
+    def "Get Active cart By anonymous id "() {
+        List<CartEntity> ret = new ArrayList<>()
+        ret.add(cartEntity)
+        when:
+        cartRepository.findByCustomerIdAndCartState(anonymousId, CartState.Active) >> ret
+        CartEntity entity = cartService.getActiveCartByAnonymousId(anonymousId)
+        then:
+        entity != null
+    }
+
+    def "Get Active cart By anonymous id with empty list"() {
+        List<CartEntity> ret = new ArrayList<>()
+        when:
+        cartRepository.findByCustomerIdAndCartState(anonymousId, CartState.Active) >> ret
+        cartRepository.save(_) >> cartEntity
+        CartEntity entity = cartService.getActiveCartByAnonymousId(anonymousId)
+        then:
+        entity != null
+    }
+
+    def "Get cart by customer id and state"() {
+        List<CartEntity> ret = new ArrayList<>()
+        ret.add(cartEntity)
+        when:
+        cartRepository.findByCustomerIdAndCartState(customerId, CartState.Active) >> ret
+        List<CartEntity> entities = cartService.getCartByCustomerIdAndState(customerId, CartState.Active)
+        then:
+        !entities.isEmpty()
+    }
+
+    def "Update cart"() {
+        when:
+        cartService.updateCart(cartEntity)
+        then:
+        noExceptionThrown()
+    }
 }

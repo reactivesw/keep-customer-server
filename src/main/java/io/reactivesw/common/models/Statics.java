@@ -8,4 +8,6 @@ public class Statics {
    * json.
    */
   public static final String JSON = "JSON";
+
+  public static final int FIRST_VALUE_IN_ARRAY = 0;
 }
