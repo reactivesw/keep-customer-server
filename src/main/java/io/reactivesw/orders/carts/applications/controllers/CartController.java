@@ -20,6 +20,7 @@ public class CartController {
   /**
    * get cart by id.
    */
+  @ApiOperation(value = "Get cart by cart id.")
   @GetMapping(Router.CART_GET_BY_ID)
   public Cart getCartById(@ApiParam(required = true) @PathVariable(Router.CART_ID) String id) {
     return null;

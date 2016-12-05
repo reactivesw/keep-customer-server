@@ -176,23 +176,21 @@ public class CartService {
    * @param quantity   int
    * @return CartEntity
    */
-  public CartEntity removeLineItem(String cartId, String lineItemId, int quantity) {
+  public CartEntity removeLineItem(String cartId, String lineItemId, Integer quantity) {
     CartEntity entity = this.getCartByCartId(cartId);
     Set<LineItemValue> lineItems = entity.getLineItems();
     Optional<LineItemValue> item = lineItems.stream().filter(tmpItem -> tmpItem.getId() ==
         lineItemId).findFirst();
-    if (item.isPresent()) {
-      LineItemValue itemValue = item.get();
-      Integer remainQuantity = itemValue.getQuantity() - quantity;
-      if (remainQuantity <= 0) {
-        lineItems.remove(itemValue);
-      } else {
-        itemValue.setQuantity(remainQuantity);
-      }
-    } else {
+    if (!item.isPresent()) {
       throw new NotExistException("Removing not existing line item.");
     }
-
+    LineItemValue itemValue = item.get();
+    if (quantity == null || itemValue.getQuantity() >= quantity) {
+      lineItems.remove(itemValue);
+    } else {
+      Integer remainQuantity = itemValue.getQuantity() - quantity;
+      itemValue.setQuantity(remainQuantity);
+    }
     return this.cartRepository.save(entity);
   }
 
