@@ -1,11 +1,14 @@
 package io.reactivesw.catalog.entities
 
 import com.google.common.collect.Lists
+import com.google.common.collect.Sets
 import io.reactivesw.catalog.categories.domains.entities.CategoryEntity
 import io.reactivesw.catalog.categories.infrastructure.repositories.CategoryRepository
+import io.reactivesw.catalog.categories.infrastructure.repositories.CategorySpecs
 import io.reactivesw.common.entities.LocalizedStringEntity
 import io.reactivesw.common.models.CustomFields
 import io.reactivesw.common.models.LocalizedString
+import io.reactivesw.common.models.QueryConditions
 import io.reactivesw.common.models.Reference
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -18,7 +21,7 @@ import spock.lang.Specification
 //@ContextConfiguration
 //@SpringBootTest
 class CategoryEntityTest extends Specification {
-
+//
 //    @Autowired
 //    CategoryRepository repository;
 //
@@ -48,7 +51,7 @@ class CategoryEntityTest extends Specification {
 //        result != null
 //        println(result)
 //    }
-
+//
 //    def "test 2 : query category id by name"() {
 //        given:
 //        def langKey = "\$.en"
@@ -60,7 +63,7 @@ class CategoryEntityTest extends Specification {
 //        then:
 //        result != null
 //    }
-
+//
 //    def "test entity"() {
 //        CategoryEntity entity = new CategoryEntity()
 //        LocalizedString str = new LocalizedString()
@@ -90,23 +93,37 @@ class CategoryEntityTest extends Specification {
 //        println(getEntity.id)
 //        println(getEntity.version)
 //    }
-
+//
+//    def "test 3 : query predicate"() {
+//        given:
+//        def queryConditions = new QueryConditions()
+//        def versionCondition = "name(en=\"en value\") and version = 1 and id=\"159e9da4-22c7-4882-a734-80629cf528b1\""
+////        def versionCondition = "name(en=\"en value\")"
+//        queryConditions.setWhere(versionCondition)
+//
+//        when:
+//        def result = repository.findAll(CategorySpecs.queryPredicate(queryConditions))
+//
+//        then:
+//        result != null
+//        println(result)
+//    }
+//
 //    def "update entity"() {
 //        given:
-//        def id = "c32e199d-57e0-4ec3-85ff-df9bbe6ca81f"
-//        def parentId = "2222222222222"
+//        def id = "859a9f76-f7aa-4dea-beeb-30cd25af564c"
+//        def name = new LocalizedStringEntity(language: "en", text: "text")
+//        def names = Sets.newHashSet(name)
 //
 //        when:
 //        def entity = repository.findOne(id)
-//        entity.setParent(parentId)
+//        entity.setName(names)
 //        def version = entity.version
 //        def savedEntity = repository.save(entity)
 //
 //        then:
 //        savedEntity.id == id
-//        savedEntity.parent == parentId
 //        savedEntity.version == version + 1
-//        println(savedEntity.parent)
 //        println(savedEntity.version)
 //    }
 

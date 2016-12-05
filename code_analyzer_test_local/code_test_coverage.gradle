@@ -44,6 +44,7 @@ jacocoTestReport {
                     '**/routes/**',
                     'io/reactivesw/common/utils/**',
                     'io/reactivesw/common/dialects/**',
+                    'io/reactivesw/common/specifications/**',
                     //先去掉auth的检查,后面再加回来
                     'io/reactivesw/common/auth/**'
             ])
