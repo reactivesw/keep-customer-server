@@ -5,6 +5,7 @@ import io.reactivesw.common.exceptions.NotExistException;
 import io.reactivesw.common.exceptions.ParametersException;
 import io.reactivesw.common.models.Statics;
 import io.reactivesw.orders.carts.domains.entities.CartEntity;
+import io.reactivesw.orders.carts.domains.entities.values.LineItemValue;
 import io.reactivesw.orders.carts.infrastructures.enums.CartState;
 import io.reactivesw.orders.carts.infrastructures.repositories.CartRepository;
 import org.apache.commons.lang3.StringUtils;
@@ -14,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 /**
  * Created by umasuo on 16/11/29.
@@ -77,7 +80,7 @@ public class CartService {
     if (entity == null) {
       throw new NotExistException("Cart not exist with id: " + cartId);
     }
-    return this.cartRepository.findOne(cartId);
+    return entity;
   }
 
   /**
@@ -149,6 +152,33 @@ public class CartService {
   }
 
   /**
+   * Update cart.
+   * add line Item to the cart.
+   * Adds a product variant in the given quantity to the cart. If the cart already contains the
+   * product variant for the given supply and distribution channel, then only quantity of the
+   * LineItem is increased.
+   *
+   * @param cartId   String
+   * @param lineItem LineItemDraft
+   * @return CartEntity
+   */
+  public CartEntity addLineItem(String cartId, LineItemValue lineItem) {
+    CartEntity entity = this.getCartByCartId(cartId);
+    Set<LineItemValue> lineItems = entity.getLineItems();
+    Optional<LineItemValue> item = lineItems.stream().filter(tmpItem -> tmpItem.equals(lineItem))
+        .findFirst();
+
+    if (item.isPresent()) {
+      LineItemValue itemValue = item.get();
+      itemValue.setQuantity(itemValue.getQuantity() + lineItem.getQuantity());
+    } else {
+      lineItems.add(lineItem);
+    }
+
+    return this.cartRepository.save(entity);
+  }
+
+  /**
    * setter of the cart repository.
    *
    * @param cartRepository
@@ -190,4 +220,5 @@ public class CartService {
         .toString());
     return retEntity;
   }
+
 }

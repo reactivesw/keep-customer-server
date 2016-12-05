@@ -4,6 +4,8 @@ import io.reactivesw.common.exceptions.AlreadyExistException
 import io.reactivesw.common.exceptions.NotExistException
 import io.reactivesw.common.exceptions.ParametersException
 import io.reactivesw.orders.carts.domains.entities.CartEntity
+import io.reactivesw.orders.carts.domains.entities.values.LineItemValue
+import io.reactivesw.orders.carts.domains.entities.values.ProductVariantValue
 import io.reactivesw.orders.carts.infrastructures.enums.CartState
 import io.reactivesw.orders.carts.infrastructures.repositories.CartRepository
 import org.slf4j.Logger
@@ -26,12 +28,24 @@ class CartServiceTest extends Specification {
 
     def anonymousId = "tmpAnonymousId"
 
+    def cartId = "tmpCartId"
+
+    def productId = "tmpProductId"
+
+    def supplyChannel = "tmpSupplyChannel"
+
+    def distributionChannel = "tmpDistributionChannel"
+
+    def variantId = 1
+
+    def quantity = 1;
+
     CartEntity cartEntity
 
     def setup() {
         LOG.info("init cart service test.")
         cartService.setCartRepository(cartRepository)
-        cartEntity = new CartEntity(id: "id")
+        cartEntity = new CartEntity(id: cartId)
     }
 
     def "Create new Active cart by customerId"() {
@@ -166,10 +180,52 @@ class CartServiceTest extends Specification {
         !entities.isEmpty()
     }
 
-    def "Update cart"() {
+    def "Update cart: add LineItem to cart with non-existing items"() {
+        Set<LineItemValue> lineItemValues = new HashSet<>()
+        cartEntity.setLineItems(lineItemValues)
+
+        LineItemValue newItem = new LineItemValue()
+        newItem.setProductId(productId)
+        newItem.setDistributionChannel(distributionChannel)
+        newItem.setSupplyChannel(supplyChannel)
+        newItem.setQuantity(quantity)
+        ProductVariantValue newVariant = new ProductVariantValue()
+        newVariant.setId(variantId)
+        newItem.setVariant(newVariant)
         when:
-        cartService.updateCart(cartEntity)
+        cartRepository.findOne(cartId) >> cartEntity
+
+        cartService.addLineItem(cartId, newItem)
         then:
         noExceptionThrown()
     }
+
+    def "Update cart: add LineItem to cart with existing item"() {
+        Set<LineItemValue> lineItemValues = new HashSet<>()
+        LineItemValue lineItem = new LineItemValue()
+        lineItem.setProductId(productId)
+        lineItem.setDistributionChannel(distributionChannel)
+        lineItem.setSupplyChannel(supplyChannel)
+        lineItem.setQuantity(quantity)
+        ProductVariantValue variant = new ProductVariantValue()
+        variant.setId(variantId)
+        lineItem.setVariant(variant)
+        lineItemValues.add(lineItem)
+        cartEntity.setLineItems(lineItemValues)
+
+        LineItemValue newItem = new LineItemValue()
+        newItem.setProductId(productId)
+        newItem.setDistributionChannel(distributionChannel)
+        newItem.setSupplyChannel(supplyChannel)
+        newItem.setQuantity(quantity)
+        ProductVariantValue newVariant = new ProductVariantValue()
+        newVariant.setId(variantId)
+        newItem.setVariant(newVariant)
+        when:
+        cartRepository.findOne(cartId) >> cartEntity
+        cartService.addLineItem(cartId, newItem)
+        then:
+        noExceptionThrown()
+    }
+
 }

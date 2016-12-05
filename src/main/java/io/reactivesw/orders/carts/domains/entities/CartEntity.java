@@ -550,4 +550,5 @@ public class CartEntity extends BaseAllEntity {
             + ", locale='" + locale + '\''
             + '}';
   }
+
 }

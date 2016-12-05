@@ -10,6 +10,7 @@ import io.reactivesw.common.utils.ListJsonConverter;
 import io.reactivesw.orders.cartdiscounts.enums.LineItemPriceMode;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -386,5 +387,71 @@ public class LineItemValue extends BaseIdEntity {
    */
   public void setCustom(CustomFields custom) {
     this.custom = custom;
+  }
+
+  /**
+   * to string method.
+   *
+   * @return
+   */
+  @Override
+  public String toString() {
+    return "LineItemValue{"
+        + "productId='" + productId + '\''
+        + ", name=" + name
+        + ", productSlug=" + productSlug
+        + ", variant=" + variant
+        + ", price=" + price
+        + ", taxedPrice=" + taxedPrice
+        + ", totalPrice=" + totalPrice
+        + ", quantity=" + quantity
+        + ", state=" + state
+        + ", taxRate=" + taxRate
+        + ", supplyChannel='" + supplyChannel + '\''
+        + ", distributionChannel='" + distributionChannel + '\''
+        + ", discountedPriceForQuantity=" + discountedPriceForQuantity
+        + ", priceMode=" + priceMode
+        + ", custom=" + custom
+        + '}';
+  }
+
+  /**
+   * hashcode method.
+   * Use productId, variantId,supplyChannel,DistributionChannel to generate hashCode.
+   *
+   * @return int
+   */
+  @Override
+  public int hashCode() {
+    return Objects.hash(
+        this.productId,
+        this.variant.getId(),
+        this.supplyChannel,
+        this.distributionChannel
+    );
+  }
+
+  /**
+   * equals method.
+   * Fellow hashcode.
+   *
+   * @param obj Object, should be LineItemValue
+   * @return boolean
+   */
+  @Override
+  public boolean equals(Object obj) {
+    boolean result = false;
+    if (this == obj) {
+      result = true;
+    } else if (obj != null && getClass() == obj.getClass()) {
+
+      LineItemValue other = (LineItemValue) obj;
+
+      result = Objects.equals(this.productId, other.productId)
+          && Objects.equals(this.variant.getId(), other.variant.getId())
+          && Objects.equals(this.supplyChannel, other.supplyChannel)
+          && Objects.equals(this.distributionChannel, other.distributionChannel);
+    }
+    return result;
   }
 }
