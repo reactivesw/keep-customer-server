@@ -120,11 +120,11 @@ public class CategoryController {
     LOG.debug("enter updateCategory,id is {}, update request is {}", id, updateRequest.toString());
     //TODO judge request
     Integer version = updateRequest.getVersion();
-    List<UpdateAction> updateActions = updateRequest.getActions();
     if (version <= 0) {
       LOG.debug("version must be greater than 0");
       throw new ParametersException();
     }
+    List<UpdateAction> updateActions = updateRequest.getActions();
     if (updateActions == null || updateActions.isEmpty()) {
       LOG.debug("update actions must not be null");
       throw new ParametersException();

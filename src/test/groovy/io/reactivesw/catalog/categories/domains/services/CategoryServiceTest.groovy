@@ -1,6 +1,8 @@
 package io.reactivesw.catalog.categories.domains.services
 
 import com.google.common.collect.Lists
+import com.google.common.collect.Maps
+import io.reactivesw.catalog.categories.applications.models.actions.ChangeName
 import io.reactivesw.catalog.categories.domains.entities.CategoryEntity
 import io.reactivesw.catalog.categories.applications.models.CategoryDraft
 import io.reactivesw.catalog.categories.infrastructure.repositories.CategoryRepository
@@ -10,6 +12,7 @@ import io.reactivesw.common.exceptions.NotExistException
 import io.reactivesw.common.exceptions.ParametersException
 import io.reactivesw.common.models.LocalizedString
 import io.reactivesw.common.models.Reference
+import io.reactivesw.common.models.UpdateAction
 import spock.lang.Specification
 
 /**
@@ -27,7 +30,7 @@ class CategoryServiceTest extends Specification {
         categoryEntity.parent = "000000000000"
     }
 
-    def "test 1 : query Category by id and get entity"() {
+    def "test 1.1 : query Category by id and get entity"() {
         given:
         categoryRepository.findOne(_) >> categoryEntity
 
@@ -38,7 +41,7 @@ class CategoryServiceTest extends Specification {
         result.id == categoryEntity.id
     }
 
-    def "test 2 : query Category by id and get null entity"() {
+    def "test 1.2 : query Category by id and get null entity"() {
         given:
         categoryRepository.findOne(_) >> null
 
@@ -49,7 +52,7 @@ class CategoryServiceTest extends Specification {
         thrown(NotExistException)
     }
 
-    def "test 3 : delete Category and get null entity"() {
+    def "test 2.1 : delete Category and get null entity"() {
         given:
         categoryRepository.findOne(_) >> null
 
@@ -60,7 +63,7 @@ class CategoryServiceTest extends Specification {
         thrown(NotExistException)
     }
 
-    def "test 4 : delete Category and can not match version"() {
+    def "test 2.2 : delete Category and can not match version"() {
         given:
         categoryEntity.version = 2
         categoryRepository.findOne(_) >> categoryEntity
@@ -72,7 +75,7 @@ class CategoryServiceTest extends Specification {
         thrown(ParametersException)
     }
 
-    def "test 5 : delete Category"() {
+    def "test 2.3 : delete Category"() {
         given:
         categoryEntity.version = version
         categoryRepository.findOne(_) >> categoryEntity
@@ -84,7 +87,20 @@ class CategoryServiceTest extends Specification {
         true
     }
 
-    def "test 6 : create Category"() {
+    def "test 2.4 : delete Category and get subCategory"() {
+        given:
+        categoryEntity.version = version
+        categoryRepository.findOne(_) >> categoryEntity
+        categoryRepository.queryCategoryIdsByAncestorId(_) >> Lists.newArrayList(categoryEntity)
+
+        when:
+        categoryService.deleteCategory(id, version)
+
+        then:
+        true
+    }
+
+    def "test 3.1 : create Category"() {
         given:
         CategoryDraft categoryDraft = new CategoryDraft()
         LocalizedString name = new LocalizedString()
@@ -100,7 +116,7 @@ class CategoryServiceTest extends Specification {
         category != null
     }
 
-    def "test 7 : create Category with parent and subCategory with difference name"() {
+    def "test 3.2 : create Category with parent and subCategory with difference name"() {
         given:
         CategoryDraft categoryDraft = new CategoryDraft()
         LocalizedString name = new LocalizedString()
@@ -127,7 +143,7 @@ class CategoryServiceTest extends Specification {
         category != null
     }
 
-    def "test 8 : create Category with parent and subCategory with same name"() {
+    def "test 3.3 : create Category with parent and subCategory with same name"() {
         given:
         CategoryDraft categoryDraft = new CategoryDraft()
         LocalizedString name = new LocalizedString()
@@ -152,5 +168,24 @@ class CategoryServiceTest extends Specification {
 
         then:
         thrown(ParametersException)
+    }
+
+    def "test 4.1 : update Category"() {
+        given:
+        def updateActions = new ArrayList<UpdateAction>()
+        Map<String, String> map = new HashMap<>()
+        map.put("en", "value")
+        def changeName = new ChangeName(name: new LocalizedString(localized: map))
+        updateActions.add(changeName)
+        categoryEntity.version = version
+        categoryRepository.findOne(_) >> categoryEntity
+        categoryRepository.save(_) >> categoryEntity
+
+        when:
+        def category = categoryService.updateCategory(id, version, updateActions)
+
+        then:
+        category != null
+
     }
 }
