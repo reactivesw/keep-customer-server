@@ -57,9 +57,11 @@ public class CartController {
    */
   @ApiOperation(value = "get carts by customer id")
   @GetMapping(value = Router.CARTS_ROOT, params = "customerId")
-  public Cart getCartByCustomerId(@ApiParam(value = "customerId", required = false)
-                                      String customerId) {
-    return null;
+  public Cart getActiveCartByCustomerId(@ApiParam(value = "customerId", required = false)
+                                            String customerId) {
+    CartEntity entity = this.cartService.getActiveCartByCustomerId(customerId);
+
+    return CartMapper.convertEntityToModel(entity);
   }
 
   /**

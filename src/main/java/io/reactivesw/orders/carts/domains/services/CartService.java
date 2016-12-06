@@ -163,6 +163,7 @@ public class CartService {
     } else {
       lineItems.add(lineItem);
     }
+    //TODO calculate price
     return this.cartRepository.save(entity);
   }
 
@@ -191,6 +192,7 @@ public class CartService {
       Integer remainQuantity = itemValue.getQuantity() - quantity;
       itemValue.setQuantity(remainQuantity);
     }
+    //TODO calculate price
     return this.cartRepository.save(entity);
   }
 
