@@ -111,19 +111,28 @@ public class CategoryController {
    */
   @ApiOperation(value = "Update CategoryEntity")
   @PutMapping(CATEGORIES_WITH_ID)
-  //TODO
   public Category updateCategory(@PathVariable(value = CATEGORY_ID)
                                  @ApiParam(value = "CategoryEntity ID", required = true)
                                      String id,
                                  @RequestBody
                                  @ApiParam(value = "CategoryEntity Update Fields", required = true)
                                      UpdateRequest updateRequest) throws Exception {
-    LOG.debug("update category : {}", updateRequest.toString());
-    List<UpdateAction> objs = updateRequest.getActions();
-    String loObj = objs.get(0).toString();
-    LOG.debug("action  : {}", loObj);
+    LOG.debug("enter updateCategory,id is {}, update request is {}", id, updateRequest.toString());
+    //TODO judge request
+    Integer version = updateRequest.getVersion();
+    List<UpdateAction> updateActions = updateRequest.getActions();
+    if (version <= 0) {
+      LOG.debug("version must be greater than 0");
+      throw new ParametersException();
+    }
+    if (updateActions == null || updateActions.isEmpty()) {
+      LOG.debug("update actions must not be null");
+      throw new ParametersException();
+    }
 
-    return null;
+    Category result = categoryService.updateCategory(id, version, updateActions);
+    LOG.debug("end updateCategory, updated Category is {}", result.toString());
+    return result;
   }
 
   /**

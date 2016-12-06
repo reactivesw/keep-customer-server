@@ -75,7 +75,6 @@ class CategoryServiceTest extends Specification {
     def "test 5 : delete Category"() {
         given:
         categoryEntity.version = version
-
         categoryRepository.findOne(_) >> categoryEntity
 
         when:
