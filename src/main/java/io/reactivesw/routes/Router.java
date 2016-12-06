@@ -9,7 +9,7 @@ public class Router {
   /**
    * The constant URL_ROOT.
    */
-  public static final String URL_ROOT = "/{projectKey}/";
+  public static final String URL_ROOT = "";
 
 
   /*************** Customer. *****************/
@@ -18,28 +18,15 @@ public class Router {
    */
   public static final String CUSTOMER_ID = "customerId";
 
-  /**
-   * create customer, sign up.
-   */
-  public static final String CUSTOMER_CREATE = "/customers/";
-
-  /**
-   * get customer by id.
-   */
-  public static final String CUSTOMER_GET_BY_ID = "/customers/{" + CUSTOMER_ID + "}";
 
   /*************** End Of Customer. *****************/
 
   /*************** CategoryEntity. *****************/
-  /**
-   * for category.
-   */
-  public static final String CATEGORY_ALL = "categories";
 
   /**
    * The constant CATEGORY_ROOT.
    */
-  public static final String CATEGORY_ROOT = "/categories";
+  public static final String CATEGORY_ROOT = URL_ROOT + "/categories";
 
   /**
    * categoryId.
@@ -49,13 +36,7 @@ public class Router {
   /**
    * category url with id.
    */
-  public static final String CATEGORIES_WITH_ID = CATEGORY_ALL + "/{" + CATEGORY_ID + "}";
-
-  /**
-   * The constant CATEGORY_GET_BY_ID.
-   */
-  public static final String CATEGORY_GET_BY_ID = CATEGORY_ROOT + "/{" + CATEGORY_ID + "}";
-
+  public static final String CATEGORY_WITH_ID = CATEGORY_ROOT + "/{" + CATEGORY_ID + "}";
 
   /*************** End Of CategoryEntity. *****************/
 

@@ -21,7 +21,7 @@ public interface CategoryRepository extends JpaRepository<CategoryEntity, String
    * @param ancestorId the ancestorid
    * @return the list
    */
-  @Query(value = "select c.id from CategoryEntity c where c.ancestrosString like " +
+  @Query(value = "select c.id from CategoryEntity c where c.ancestorsString like " +
       "CONCAT('%', ?1 ,'%')")
   List<String> queryCategoryIdsByAncestorId(String ancestorId);
 

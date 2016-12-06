@@ -17,6 +17,7 @@ import io.reactivesw.common.models.mapper.LocalizedStringMapper;
  * Created by Davis on 16/12/6.
  */
 public final class CategoryUpdateMapper {
+
   /**
    * Update category entity.
    *
@@ -26,36 +27,30 @@ public final class CategoryUpdateMapper {
    */
   public static CategoryEntity updateCategoryEntity(UpdateAction updateAction, CategoryEntity
       entity) {
+
     if (updateAction instanceof ChangeName) {
       entity.setName(LocalizedStringMapper.convertToLocalizedStringEntity(((ChangeName)
           updateAction).getName()));
-    }
-    if (updateAction instanceof ChangeSlug) {
+    } else if (updateAction instanceof ChangeSlug
+        && ((ChangeSlug) updateAction).getSlug() != null) {
       entity.setSlug(LocalizedStringMapper.convertToLocalizedStringEntity(((ChangeSlug)
           updateAction).getSlug()));
-    }
-    if (updateAction instanceof SetDescription) {
+    } else if (updateAction instanceof SetDescription) {
       entity.setDescription(LocalizedStringMapper.convertToLocalizedStringEntity((
           (SetDescription) updateAction).getDescription()));
-    }
-    if (updateAction instanceof ChangeParent) {
+    } else if (updateAction instanceof ChangeParent) {
       entity.setParent(((ChangeParent) updateAction).getParent().getId());
-    }
-    if (updateAction instanceof ChangeOrderHint) {
+    } else if (updateAction instanceof ChangeOrderHint) {
       entity.setOrderHint(((ChangeOrderHint) updateAction).getOrderHint());
-    }
-    if (updateAction instanceof SetExternalID) {
+    } else if (updateAction instanceof SetExternalID) {
       entity.setExternalId(((SetExternalID) updateAction).getExternalId());
-    }
-    if (updateAction instanceof SetMetaTitle) {
+    } else if (updateAction instanceof SetMetaTitle) {
       entity.setMetaTitle(LocalizedStringMapper.convertToLocalizedStringEntity(((SetMetaTitle)
           updateAction).getMetaTitle()));
-    }
-    if (updateAction instanceof SetMetaDescription) {
+    } else if (updateAction instanceof SetMetaDescription) {
       entity.setMetaDescription(LocalizedStringMapper.convertToLocalizedStringEntity((
           (SetMetaDescription) updateAction).getMetaDescription()));
-    }
-    if (updateAction instanceof SetMetaKeywords) {
+    } else if (updateAction instanceof SetMetaKeywords) {
       entity.setMetaKeyWords(LocalizedStringMapper.convertToLocalizedStringEntity((
           (SetMetaKeywords) updateAction).getMetaKeywords()));
     }

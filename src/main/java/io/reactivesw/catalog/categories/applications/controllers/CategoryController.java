@@ -1,8 +1,8 @@
 package io.reactivesw.catalog.categories.applications.controllers;
 
-import static io.reactivesw.routes.Router.CATEGORIES_WITH_ID;
-import static io.reactivesw.routes.Router.CATEGORY_ALL;
 import static io.reactivesw.routes.Router.CATEGORY_ID;
+import static io.reactivesw.routes.Router.CATEGORY_ROOT;
+import static io.reactivesw.routes.Router.CATEGORY_WITH_ID;
 
 import io.reactivesw.catalog.categories.applications.models.Category;
 import io.reactivesw.catalog.categories.applications.models.CategoryDraft;
@@ -53,7 +53,7 @@ public class CategoryController {
    * @return the category by id
    */
   @ApiOperation(value = "Get CategoryEntity By Id")
-  @GetMapping(CATEGORIES_WITH_ID)
+  @GetMapping(CATEGORY_WITH_ID)
   public Category getCategoryById(@PathVariable(value = CATEGORY_ID)
                                   @ApiParam(value = "CategoryEntity ID", required = true)
                                       String id) {
@@ -69,7 +69,7 @@ public class CategoryController {
    * @return the list
    */
   @ApiOperation(value = "Get Categories")
-  @GetMapping(CATEGORY_ALL)
+  @GetMapping(CATEGORY_ROOT)
   //TODO
   public List<Category> queryCategories(QueryConditions query) {
     LOG.debug("query parameters: {}", query.toString());
@@ -83,14 +83,18 @@ public class CategoryController {
    * @return the category
    */
   @ApiOperation(value = "Create CategoryEntity")
-  @PostMapping(CATEGORY_ALL)
+  @PostMapping(CATEGORY_ROOT)
   public Category createCategory(@RequestBody
                                  @ApiParam(value = "CategoryEntity Draft", required = true)
                                      CategoryDraft categoryDraft) {
     LOG.debug("create category : {}", categoryDraft.toString());
+
     CategoryValidator.validateCategoryDraft(categoryDraft);
+
     Category category = categoryService.createCategory(categoryDraft);
+
     LOG.debug("end createCategory, saved category is {}", category.toString());
+
     return category;
   }
 
@@ -102,18 +106,20 @@ public class CategoryController {
    * @return the category
    */
   @ApiOperation(value = "Update CategoryEntity")
-  @PutMapping(CATEGORIES_WITH_ID)
+  @PutMapping(CATEGORY_WITH_ID)
   public Category updateCategory(@PathVariable(value = CATEGORY_ID)
                                  @ApiParam(value = "CategoryEntity ID", required = true)
                                      String id,
                                  @RequestBody
                                  @ApiParam(value = "CategoryEntity Update Fields", required = true)
-                                     UpdateRequest updateRequest) throws Exception {
+                                     UpdateRequest updateRequest) {
     LOG.debug("enter updateCategory,id is {}, update request is {}", id, updateRequest.toString());
-    CategoryValidator.validateUpdateRequest(updateRequest);
+
     Category result = categoryService.updateCategory(id, updateRequest.getVersion(),
         updateRequest.getActions());
+
     LOG.debug("end updateCategory, updated Category is {}", result.toString());
+
     return result;
   }
 
@@ -123,14 +129,15 @@ public class CategoryController {
    * @param version the version
    */
   @ApiOperation(value = "Delete CategoryEntity By Id")
-  @DeleteMapping(value = CATEGORIES_WITH_ID)
+  @DeleteMapping(value = CATEGORY_WITH_ID)
   public void deleteCategory(@PathVariable(value = CATEGORY_ID)
                              @ApiParam(value = "CategoryEntity ID", required = true)
                                  String id,
                              Integer version) {
     LOG.debug("enter deleteCategory, id is {}, version is {}", id, version);
-    CategoryValidator.validateVersion(version);
+
     categoryService.deleteCategory(id, version);
+
     LOG.debug("end deleteCategory, id is {}, version is {}", id, version);
   }
 }

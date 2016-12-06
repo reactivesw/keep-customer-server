@@ -47,21 +47,6 @@ public final class LocalizedStringMapper {
     return localizedString;
   }
 
-  /**
-   * Convert to localized string.
-   *
-   * @param localizedStringEntities localizedStringEntities
-   * @return LocalizedString
-   */
-  private static LocalizedString convertToLocalizedString(Set<LocalizedStringEntity>
-                                                              localizedStringEntities) {
-    LocalizedString localizedString = new LocalizedString();
-    for (LocalizedStringEntity localizedStringEntity : localizedStringEntities) {
-      localizedString.addKeyValue(localizedStringEntity.getLanguage(), localizedStringEntity
-          .getText());
-    }
-    return localizedString;
-  }
 
   /**
    * Convert to Set of LocalizedStringEntity from LocalizedString.
@@ -74,8 +59,8 @@ public final class LocalizedStringMapper {
     Set<LocalizedStringEntity> localizedStringEntities = new HashSet<>();
 
     if (localizedString != null && ! localizedString.getLocalized().isEmpty()) {
-      Set<Map.Entry<String, String>> localizeStrings = localizedString.getLocalized().entrySet();
-      for (Map.Entry localizedValue : localizeStrings) {
+      Set<Map.Entry<String, String>> localizedStrings = localizedString.getLocalized().entrySet();
+      for (Map.Entry localizedValue : localizedStrings) {
         localizedStringEntities.add(new LocalizedStringEntity(localizedValue.getKey().toString(),
             localizedValue.getValue().toString()));
       }
@@ -99,4 +84,21 @@ public final class LocalizedStringMapper {
 
     return localizedStringEntities;
   }
+
+  /**
+   * Convert to localized string.
+   *
+   * @param localizedStringEntities localizedStringEntities
+   * @return LocalizedString
+   */
+  private static LocalizedString convertToLocalizedString(Set<LocalizedStringEntity>
+                                                              localizedStringEntities) {
+    LocalizedString localizedString = new LocalizedString();
+    for (LocalizedStringEntity localizedStringEntity : localizedStringEntities) {
+      localizedString.addKeyValue(localizedStringEntity.getLanguage(), localizedStringEntity
+          .getText());
+    }
+    return localizedString;
+  }
+
 }

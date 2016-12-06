@@ -26,6 +26,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.transaction.Transactional;
 
@@ -51,27 +52,30 @@ public class CategoryService {
    * @param categoryDraft the category draft
    * @return the category
    */
+  @Transactional
   public Category createCategory(CategoryDraft categoryDraft) {
     LOG.debug("enter createCategory, CategoryDraft is {}", categoryDraft.toString());
 
-    Reference parentReference = categoryDraft.getParent();
     String parentId = "";
     List<String> ancestors = new ArrayList<>();
 
-    if (parentReference != null && !StringUtils.isBlank(parentReference.getId())) {
+    Reference parentReference = categoryDraft.getParent();
+    if (parentReference != null && StringUtils.isNotBlank(parentReference.getId())) {
       parentId = parentReference.getId();
       CategoryEntity parent = getParentCategory(parentId);
       ancestors = setAncestors(parentId, parent);
     }
-    validatorCategoryName(categoryDraft.getName(), parentId);
+    validateCategoryName(categoryDraft.getName(), parentId);
 
-    CategoryEntity entity = CategoryMapper.draftToCategoryEntity(categoryDraft);
+    CategoryEntity entity = CategoryMapper.modelToEntity(categoryDraft);
     entity.setParent(parentId);
     entity.setAncestors(ancestors);
-    CategoryEntity savedCategory = categoryRepository.save(entity);
-    Category category = CategoryMapper.entityToCategory(savedCategory);
 
-    LOG.debug("end createCategory, new CategoryEntity is {}", category.toString());
+    CategoryEntity savedEntity = categoryRepository.save(entity);
+
+    Category category = CategoryMapper.entityToModel(savedEntity);
+    LOG.debug("end createCategory, new CategoryEntity is: {}", category.toString());
+    //TODO send message
     return category;
   }
 
@@ -85,9 +89,11 @@ public class CategoryService {
    */
   @Transactional
   public void deleteCategory(String id, Integer version) {
-    LOG.debug("enter deleteCategory, id is {}, version is {}", id, version);
-    CategoryEntity entity = categoryRepository.findOne(id);
-    validateCategoryVersion(id, entity, version);
+    LOG.debug("enter deleteCategory, id:{}, version:{}", id, version);
+
+    CategoryEntity entity = this.getById(id);
+    validateVersion(entity, version);
+
     List<String> subCategoryIds = categoryRepository.queryCategoryIdsByAncestorId(id);
     List<String> totalCategoryIds = Lists.newArrayList(id);
     if (subCategoryIds != null && !subCategoryIds.isEmpty()) {
@@ -95,10 +101,10 @@ public class CategoryService {
     }
     categoryRepository.deleteCategoryById(totalCategoryIds);
 
-    //TODO remove from all those products that had that category assigned in their ProductData
-    //delete by id and subCategoryIds
+    //TODO send message for:
+    // remove from all those products that had that category assigned in their ProductData
 
-    LOG.debug("end deleteCategory, id is {}, version is {}", id, version);
+    LOG.debug("end deleteCategory, id:{}, version:{}", id, version);
   }
 
   /**
@@ -109,17 +115,21 @@ public class CategoryService {
    * @param updateActions the update actions
    * @return the category
    */
+  @Transactional
   public Category updateCategory(String id, Integer version, List<UpdateAction> updateActions) {
     LOG.debug("enter updateCategory, id is {}, version is {}, update actions is {}",
         id, version, updateActions);
-    CategoryEntity entity = categoryRepository.findOne(id);
-    validateCategoryVersion(id, entity, version);
+
+    CategoryEntity entity = getById(id);
+    validateVersion(entity, version);
+
     for (UpdateAction updateAction : updateActions) {
       entity = CategoryUpdateMapper.updateCategoryEntity(updateAction, entity);
     }
-
     CategoryEntity updatedEntity = categoryRepository.save(entity);
-    Category result = CategoryMapper.entityToCategory(updatedEntity);
+    //TODO send message, if slug be updated
+    Category result = CategoryMapper.entityToModel(updatedEntity);
+
     LOG.debug("end updateCategory, updated Category is {}", result);
     return result;
   }
@@ -133,35 +143,47 @@ public class CategoryService {
    */
   public Category getCategoryById(String id) {
     LOG.debug("enter getCategoryById, id is {}", id);
+    return CategoryMapper.entityToModel(getById(id));
+  }
+
+  /**
+   * Gets category by id.
+   *
+   * @param id the id
+   * @return the category by id
+   * @throws NotExistException if the can not find CategoryEntity by the id
+   */
+  private CategoryEntity getById(String id) {
+    LOG.debug("enter getById, id is {}", id);
+
     CategoryEntity categoryEntity = categoryRepository.findOne(id);
+
     if (categoryEntity == null) {
-      LOG.debug("fail getCategoryById, can not find category by id {}", id);
+      LOG.debug("fail getById, can not find category by id:{}", id);
       throw new NotExistException();
     }
-    LOG.debug("end getCategoryById, id is {}, get CategoryEntity {}",
+
+    LOG.debug("end getById, id is {}, get CategoryEntity:{}",
         id, categoryEntity.toString());
-    return CategoryMapper.entityToCategory(categoryEntity);
+    return categoryEntity;
   }
 
   /**
    * judge entity and version.
    *
-   * @param id      the id
    * @param entity  the CategoryEntity
    * @param version the version
    * @throws NotExistException   when entity is null
    * @throws ParametersException when version not match
    */
-  private void validateCategoryVersion(String id, CategoryEntity entity, Integer version) {
-    if (entity == null) {
-      LOG.debug("fail deleteCategory, can not find category by id {}", id);
-      throw new NotExistException();
-    }
-    if (!version.equals(entity.getVersion())) {
-      LOG.debug("fail deleteCategory, version not match,delete version is {}, entity version is {}",
+  private void validateVersion(CategoryEntity entity, Integer version) {
+
+    if (!Objects.equals(version, entity.getVersion())) {
+      LOG.debug("Version not match, input version:{}, entity version:{}",
           version, entity.getVersion());
-      throw new ParametersException();
+      throw new ParametersException("");
     }
+
   }
 
   /**
@@ -185,7 +207,7 @@ public class CategoryService {
    */
   private List<String> setAncestors(String parentId, CategoryEntity parent) {
     List<String> ancestors = Lists.newArrayList();
-    if (parent.getAncestors() != null && !parent.getAncestors().isEmpty()) {
+    if (parent.getAncestors() != null) {
       ancestors = Lists.newArrayList(parent.getAncestors());
     }
     ancestors.add(parentId);
@@ -213,7 +235,7 @@ public class CategoryService {
    * @param parentId the parent id
    * @throws ParametersException if name has exist
    */
-  private void validatorCategoryName(LocalizedString name, String parentId) {
+  private void validateCategoryName(LocalizedString name, String parentId) {
     List<CategoryEntity> sameRootCategories = categoryRepository.queryCategoryByParent(parentId);
     List<LocalizedStringEntity> categoryNames = getAllCategoryNames(sameRootCategories);
     Map<String, String> localizedName = name.getLocalized();
@@ -222,7 +244,7 @@ public class CategoryService {
       String value = entry.getValue().toString();
       for (LocalizedStringEntity categoryName : categoryNames) {
         if (key.equals(categoryName.getLanguage()) && value.equals(categoryName.getText())) {
-          LOG.debug("can not create category with same name : {}", name.toString());
+          LOG.debug("can not create category with same name : {}, key: {}", value, key);
           throw new ParametersException();
         }
       }

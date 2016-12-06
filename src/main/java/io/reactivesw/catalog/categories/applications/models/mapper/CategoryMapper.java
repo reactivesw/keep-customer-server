@@ -4,7 +4,6 @@ import io.reactivesw.catalog.categories.applications.models.CategoryDraft;
 import io.reactivesw.catalog.categories.domains.entities.CategoryEntity;
 import io.reactivesw.catalog.categories.applications.models.Category;
 import io.reactivesw.common.enums.ReferenceTypes;
-import io.reactivesw.common.models.LocalizedString;
 import io.reactivesw.common.models.Reference;
 import io.reactivesw.common.models.mapper.LocalizedStringMapper;
 import org.apache.commons.lang3.StringUtils;
@@ -24,15 +23,21 @@ public final class CategoryMapper {
   private static ModelMapper mapper = new ModelMapper();
 
   /**
+   * constructor.
+   */
+  private CategoryMapper() {
+  }
+
+  /**
    * Map entity to category category.
    *
    * @param entity the entity
    * @return the category
    */
-  public static Category entityToCategory(CategoryEntity entity) {
+  public static Category entityToModel(CategoryEntity entity) {
     Category category = mapper.map(entity, Category.class);
     //add reference type.
-    category.setAncestors(entityToReferenceList(entity.getAncestors()));
+    category.setAncestors(convertToReferenceList(entity.getAncestors()));
     String parentId = entity.getParent();
     //add reference type to parent.
     if (StringUtils.isNotBlank(parentId)) {
@@ -59,7 +64,7 @@ public final class CategoryMapper {
    * @param draft the draft
    * @return the category entity
    */
-  public static CategoryEntity draftToCategoryEntity(CategoryDraft draft) {
+  public static CategoryEntity modelToEntity(CategoryDraft draft) {
     CategoryEntity entity = mapper.map(draft, CategoryEntity.class);
     entity.setName(LocalizedStringMapper.convertToLocalizedStringEntityDefaultNull(draft.getName
         ()));
@@ -73,7 +78,7 @@ public final class CategoryMapper {
         .getMetaDescription()));
     entity.setMetaKeyWords(LocalizedStringMapper.convertToLocalizedStringEntityDefaultNull(draft
         .getMetaKeywords()));
-    //TODO
+    //TODO set custom fields
     if (draft.getCustom() == null) {
       entity.setCustom(null);
     }
@@ -86,7 +91,7 @@ public final class CategoryMapper {
    * @param ancestors list of ancestor ids
    * @return list of Reference
    */
-  private static List<Reference> entityToReferenceList(List<String> ancestors) {
+  private static List<Reference> convertToReferenceList(List<String> ancestors) {
     List<Reference> result = new ArrayList<>();
     if (ancestors != null) {
       String typeId = ReferenceTypes.CATEGORY.getType();

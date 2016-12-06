@@ -79,10 +79,10 @@ public class CategoryEntity extends BaseAllEntity {
   private List<String> ancestors;
 
   /**
-   * ancestros string.
+   * ancestors string.
    */
   @Column
-  private String ancestrosString = "";
+  private String ancestorsString = "";
 
   /**
    * parent id.
@@ -208,9 +208,9 @@ public class CategoryEntity extends BaseAllEntity {
     if (ancestors != null && !ancestors.isEmpty()) {
       result = Lists.newArrayList(ancestors);
     }
-    if (StringUtils.isNotBlank(getAncestrosString())) {
+    if (StringUtils.isNotBlank(getAncestorsString())) {
       try {
-        result = objectMapper.readValue(ancestrosString, List.class);
+        result = objectMapper.readValue(ancestorsString, List.class);
       } catch (IOException ex) {
         result = new ArrayList<>();
       }
@@ -225,7 +225,7 @@ public class CategoryEntity extends BaseAllEntity {
    */
   public void setAncestors(List<String> ancestors) {
     this.ancestors = ancestors;
-    setAncestrosString();
+    setAncestorsString();
   }
 
   /**
@@ -233,22 +233,22 @@ public class CategoryEntity extends BaseAllEntity {
    *
    * @return the ancestros string
    */
-  private String getAncestrosString() {
-    return ancestrosString;
+  private String getAncestorsString() {
+    return ancestorsString;
   }
 
   /**
    * Sets ancestros string.
    */
-  private void setAncestrosString() {
+  private void setAncestorsString() {
     try {
       if (ancestors == null || ancestors.isEmpty()) {
-        this.ancestrosString = "";
+        this.ancestorsString = "";
       } else {
-        this.ancestrosString = objectMapper.writeValueAsString(ancestors);
+        this.ancestorsString = objectMapper.writeValueAsString(ancestors);
       }
     } catch (JsonProcessingException jsonProcessingException) {
-      this.ancestrosString = "";
+      this.ancestorsString = "";
     }
   }
 

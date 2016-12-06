@@ -1,17 +1,25 @@
 package io.reactivesw.common.models;
 
+import io.swagger.annotations.ApiModel;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.mapstruct.Qualifier;
 
 import java.util.List;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by Davis on 16/11/21.
  */
+@ApiModel
 public class UpdateRequest {
   /**
    * The expected version of the category on which the changes should be applied.
    * If the expected version does not match the actual version, a 409 Conflict will be returned.
    */
+  @NotNull
+  @Min(0)
   Integer version;
 
   /**
@@ -19,6 +27,7 @@ public class UpdateRequest {
    * The list of update actions to be performed on the category.
    * Required.
    */
+  @NotNull
   List<UpdateAction> actions;
 
   /**
