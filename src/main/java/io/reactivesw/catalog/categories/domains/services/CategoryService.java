@@ -4,6 +4,17 @@ import com.google.common.collect.Lists;
 
 import io.reactivesw.catalog.categories.applications.models.Category;
 import io.reactivesw.catalog.categories.applications.models.CategoryDraft;
+import io.reactivesw.catalog.categories.applications.models.actions.ChangeName;
+import io.reactivesw.catalog.categories.applications.models.actions.ChangeOrderHint;
+import io.reactivesw.catalog.categories.applications.models.actions.ChangeParent;
+import io.reactivesw.catalog.categories.applications.models.actions.ChangeSlug;
+import io.reactivesw.catalog.categories.applications.models.actions.SetCustomField;
+import io.reactivesw.catalog.categories.applications.models.actions.SetCustomType;
+import io.reactivesw.catalog.categories.applications.models.actions.SetDescription;
+import io.reactivesw.catalog.categories.applications.models.actions.SetExternalID;
+import io.reactivesw.catalog.categories.applications.models.actions.SetMetaDescription;
+import io.reactivesw.catalog.categories.applications.models.actions.SetMetaKeywords;
+import io.reactivesw.catalog.categories.applications.models.actions.SetMetaTitle;
 import io.reactivesw.catalog.categories.applications.models.mapper.CategoryMapper;
 import io.reactivesw.catalog.categories.domains.entities.CategoryEntity;
 import io.reactivesw.catalog.categories.infrastructure.repositories.CategoryRepository;
@@ -13,6 +24,8 @@ import io.reactivesw.common.exceptions.ParametersException;
 import io.reactivesw.common.models.LocalizedString;
 import io.reactivesw.common.models.Reference;
 
+import io.reactivesw.common.models.UpdateAction;
+import io.reactivesw.common.models.mapper.LocalizedStringMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,6 +86,99 @@ public class CategoryService {
   public void deleteCategory(String id, Integer version) {
     LOG.debug("enter deleteCategory, id is {}, version is {}", id, version);
     CategoryEntity entity = categoryRepository.findOne(id);
+    judgeCategoryVersion(id, entity, version);
+//    categoryRepository.delete(id);
+    List<String> subCategoryIds = categoryRepository.queryCategoryIdsByAncestorId(id);
+    List<String> totalCategoryIds = Lists.newArrayList(id);
+    totalCategoryIds.addAll(subCategoryIds);
+    categoryRepository.deleteCategoryById(totalCategoryIds);
+
+    //TODO remove from all those products that had that category assigned in their ProductData
+    //delete by id and subCategoryIds
+
+    LOG.debug("end deleteCategory, id is {}, version is {}", id, version);
+  }
+
+
+  /**
+   * Update category.
+   *
+   * @param id            the id
+   * @param version       the update request
+   * @param updateActions
+   * @return the category
+   */
+  public Category updateCategory(String id, Integer version, List<UpdateAction> updateActions) {
+    LOG.debug("enter updateCategory, id is {}, version is {}, update actions is {}",
+        id, version, updateActions);
+    CategoryEntity entity = categoryRepository.findOne(id);
+    CategoryEntity entity1;
+    judgeCategoryVersion(id, entity, version);
+    for (UpdateAction updateAction : updateActions) {
+      entity = update(updateAction, entity);
+    }
+
+    CategoryEntity updatedEntity = categoryRepository.save(entity);
+    Category result = CategoryMapper.entityToCategory(updatedEntity);
+    LOG.debug("end updateCategory, updated Category is {}", result);
+    return result;
+  }
+
+  /**
+   * update.
+   *
+   * @param updateAction
+   * @param entity
+   */
+  private CategoryEntity update(UpdateAction updateAction, CategoryEntity entity) {
+    CategoryEntity result = null;
+    if (updateAction instanceof ChangeName) {
+      entity.setName(LocalizedStringMapper.convertToLocalizedStringEntity(((ChangeName)
+          updateAction).getName()));
+    }
+    if (updateAction instanceof ChangeSlug) {
+      entity.setSlug(LocalizedStringMapper.convertToLocalizedStringEntity(((ChangeSlug)
+          updateAction).getSlug()));
+    }
+    if (updateAction instanceof SetDescription) {
+      entity.setDescription(LocalizedStringMapper.convertToLocalizedStringEntity((
+          (SetDescription) updateAction).getDescription()));
+    }
+    if (updateAction instanceof ChangeParent) {
+      entity.setParent(((ChangeParent) updateAction).getParent().getId());
+    }
+    if (updateAction instanceof ChangeOrderHint) {
+      entity.setOrderHint(((ChangeOrderHint) updateAction).getOrderHint());
+    }
+    if (updateAction instanceof SetExternalID) {
+     entity.setExternalId(((SetExternalID) updateAction).getExternalId());
+    }
+    if (updateAction instanceof SetMetaTitle) {
+      entity.setMetaTitle(LocalizedStringMapper.convertToLocalizedStringEntity(((SetMetaTitle)
+          updateAction).getMetaTitle()));
+    }
+    if (updateAction instanceof SetMetaDescription) {
+      entity.setMetaDescription(LocalizedStringMapper.convertToLocalizedStringEntity((
+          (SetMetaDescription) updateAction).getMetaDescription()));
+    }
+    if (updateAction instanceof SetMetaKeywords) {
+      entity.setMetaKeyWords(LocalizedStringMapper.convertToLocalizedStringEntity((
+          (SetMetaKeywords) updateAction).getMetaKeywords()));
+    }
+    // TODO: SetCustomType and SetCustomField
+    return entity;
+  }
+
+  /**
+   * judge entity and version.
+   *
+   * @param id      the id
+   * @param entity  the CategoryEntity
+   * @param version the version
+   * @throws NotExistException   when entity is null
+   * @throws ParametersException when version not match
+   */
+  private void judgeCategoryVersion(String id, CategoryEntity entity, Integer version) {
     if (entity == null) {
       LOG.debug("fail deleteCategory, can not find category by id {}", id);
       throw new NotExistException();
@@ -82,15 +188,6 @@ public class CategoryService {
           version, entity.getVersion());
       throw new ParametersException();
     }
-    categoryRepository.delete(id);
-    String queryId = "\"" + id + "\"";
-    List<String> subCategoryIds = categoryRepository.queryCategoryIdsByAncestorId(queryId);
-    categoryRepository.deleteCategoryById(subCategoryIds);
-
-    //TODO remove from all those products that had that category assigned in their ProductData
-    //delete by id and subCategoryIds
-
-    LOG.debug("end deleteCategory, id is {}, version is {}", id, version);
   }
 
   /**
