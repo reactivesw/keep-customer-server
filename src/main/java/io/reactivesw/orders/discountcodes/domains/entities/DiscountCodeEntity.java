@@ -13,12 +13,14 @@ import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  * Created by umasuo on 16/12/6.
  */
 @Entity
-@Table(name = "orders_discount_codes_discount_code")
+@Table(name = "orders_discount_codes_discount_code", uniqueConstraints = {@UniqueConstraint
+    (columnNames = {"code"})})
 public class DiscountCodeEntity extends BaseAllEntity {
 
   /**

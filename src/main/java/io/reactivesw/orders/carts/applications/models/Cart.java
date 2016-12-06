@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-import io.reactivesw.orders.discountcodes.models.DiscountCodeInfo;
+import io.reactivesw.orders.discountcodes.applications.models.DiscountCodeInfo;
 import io.reactivesw.orders.carts.infrastructures.enums.CartState;
 import io.reactivesw.orders.carts.infrastructures.enums.InventoryMode;
 import io.reactivesw.orders.carts.infrastructures.enums.TaxMode;
