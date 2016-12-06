@@ -392,7 +392,7 @@ public class LineItemValue extends BaseIdEntity {
   /**
    * to string method.
    *
-   * @return
+   * @return String
    */
   @Override
   public String toString() {

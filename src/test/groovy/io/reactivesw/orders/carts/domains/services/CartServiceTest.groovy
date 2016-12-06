@@ -3,7 +3,12 @@ package io.reactivesw.orders.carts.domains.services
 import io.reactivesw.common.exceptions.AlreadyExistException
 import io.reactivesw.common.exceptions.NotExistException
 import io.reactivesw.common.exceptions.ParametersException
+import io.reactivesw.common.models.Address
+import io.reactivesw.orders.carts.applications.models.Cart
+import io.reactivesw.orders.carts.applications.models.mapper.AddressMapper
+import io.reactivesw.orders.carts.applications.models.mapper.CartMapper
 import io.reactivesw.orders.carts.domains.entities.CartEntity
+import io.reactivesw.orders.carts.domains.entities.values.BillingAddressValue
 import io.reactivesw.orders.carts.domains.entities.values.LineItemValue
 import io.reactivesw.orders.carts.domains.entities.values.ProductVariantValue
 import io.reactivesw.orders.carts.infrastructures.enums.CartState
@@ -284,4 +289,7 @@ class CartServiceTest extends Specification {
         thrown(NotExistException)
 
     }
+
+
+
 }

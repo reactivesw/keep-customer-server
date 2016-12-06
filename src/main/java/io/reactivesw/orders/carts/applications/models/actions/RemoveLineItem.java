@@ -10,7 +10,7 @@ import io.swagger.annotations.ApiModel;
  * Created by umasuo on 16/12/5.
  */
 @ApiModel
-public class RemoveLineItem extends UpdateAction {
+public class RemoveLineItem implements UpdateAction {
 
   /**
    * line item id.

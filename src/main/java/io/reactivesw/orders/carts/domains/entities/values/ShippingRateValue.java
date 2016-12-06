@@ -12,7 +12,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "orders_carts_shipping_rate_value")
-public class ShippingRateValue extends BaseIdEntity{
+public class ShippingRateValue extends BaseIdEntity {
 
   /**
    * price in money.
@@ -64,13 +64,14 @@ public class ShippingRateValue extends BaseIdEntity{
 
   /**
    * to string method.
+   *
    * @return String
    */
   @Override
   public String toString() {
     return "ShippingRateValue{"
-            + "price=" + price
-            + ", freeAbove=" + freeAbove
-            + '}';
+        + "price=" + price
+        + ", freeAbove=" + freeAbove
+        + '}';
   }
 }

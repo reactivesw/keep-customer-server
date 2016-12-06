@@ -74,7 +74,7 @@ public class Router {
   /**
    * get cart by id.
    */
-  public static final String CART_GET_BY_ID = CARTS_ROOT + "/{" + CART_ID + "}";
+  public static final String CART_WITH_ID = CARTS_ROOT + "/{" + CART_ID + "}";
 
   /*************** End of Cart & order. *****************/
 

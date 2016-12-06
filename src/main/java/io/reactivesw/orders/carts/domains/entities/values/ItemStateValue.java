@@ -20,7 +20,7 @@ public class ItemStateValue extends BaseIdEntity {
   private Integer quantity;
 
   /**
-   * an state Id
+   * an state Id.
    */
   @Column
   private String state;
@@ -63,6 +63,7 @@ public class ItemStateValue extends BaseIdEntity {
 
   /**
    * to string method.
+   *
    * @return String
    */
   @Override

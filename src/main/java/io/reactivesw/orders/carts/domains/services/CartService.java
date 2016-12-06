@@ -179,8 +179,8 @@ public class CartService {
   public CartEntity removeLineItem(String cartId, String lineItemId, Integer quantity) {
     CartEntity entity = this.getCartByCartId(cartId);
     Set<LineItemValue> lineItems = entity.getLineItems();
-    Optional<LineItemValue> item = lineItems.stream().filter(tmpItem -> tmpItem.getId() ==
-        lineItemId).findFirst();
+    Optional<LineItemValue> item = lineItems.stream().filter(tmpItem -> tmpItem.getId()
+        == lineItemId).findFirst();
     if (!item.isPresent()) {
       throw new NotExistException("Removing not existing line item.");
     }
@@ -198,7 +198,7 @@ public class CartService {
   /**
    * setter of the cart repository.
    *
-   * @param cartRepository
+   * @param cartRepository CartRepository
    */
   protected void setCartRepository(CartRepository cartRepository) {
     this.cartRepository = cartRepository;

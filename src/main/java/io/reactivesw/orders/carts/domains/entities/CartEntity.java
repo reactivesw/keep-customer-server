@@ -73,8 +73,8 @@ public class CartEntity extends BaseAllEntity {
   /**
    * total price.
    */
-  @OneToMany
-  private Set<MoneyEntity> totalPrice;
+  @OneToOne
+  private MoneyEntity totalPrice;
 
   /**
    * Not set until the shipping address is set. Will be set automatically in the Platform TaxMode.
@@ -274,7 +274,7 @@ public class CartEntity extends BaseAllEntity {
    *
    * @return the total price
    */
-  public Set<MoneyEntity> getTotalPrice() {
+  public MoneyEntity getTotalPrice() {
     return totalPrice;
   }
 
@@ -283,7 +283,7 @@ public class CartEntity extends BaseAllEntity {
    *
    * @param totalPrice the total price
    */
-  public void setTotalPrice(Set<MoneyEntity> totalPrice) {
+  public void setTotalPrice(MoneyEntity totalPrice) {
     this.totalPrice = totalPrice;
   }
 

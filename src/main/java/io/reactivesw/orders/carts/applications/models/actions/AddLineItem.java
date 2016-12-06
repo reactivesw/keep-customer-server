@@ -11,10 +11,7 @@ import io.swagger.annotations.ApiModelProperty;
  * Created by umasuo on 16/12/1.
  */
 @ApiModel
-public class AddLineItem extends UpdateAction {
-  @ApiModelProperty(required = true)
-  private String action;
-
+public class AddLineItem implements UpdateAction {
   /**
    * Id of an existing Product.
    */
@@ -58,24 +55,6 @@ public class AddLineItem extends UpdateAction {
    */
   @ApiModelProperty(required = false)
   CustomFieldsDraft custom;
-
-  /**
-   * Gets action.
-   *
-   * @return the action
-   */
-  public String getAction() {
-    return action;
-  }
-
-  /**
-   * Sets action.
-   *
-   * @param action the action
-   */
-  public void setAction(String action) {
-    this.action = action;
-  }
 
   /**
    * Gets product id.
@@ -211,7 +190,6 @@ public class AddLineItem extends UpdateAction {
   @Override
   public String toString() {
     return "AddLineItem{"
-        + "action='" + action + '\''
         + ", productId='" + productId + '\''
         + ", variantId=" + variantId
         + ", quantity=" + quantity
