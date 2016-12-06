@@ -5,6 +5,8 @@ import io.reactivesw.orders.discountcodes.domains.entities.DiscountCodeEntity;
 import io.reactivesw.orders.discountcodes.repositories.DiscountCodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.UUID;
+
 /**
  * Created by umasuo on 16/12/6.
  */
@@ -38,7 +40,25 @@ public class DiscountCodeService {
    * @param sample DiscountCodeEntity
    * @return DiscountCodeEntity created
    */
+<<<<<<< Updated upstream
   public DiscountCodeEntity createDiscountCode(DiscountCodeEntity sample) {
+=======
+  public DiscountCodeEntity createDiscountCode(DiscountCodeEntity sample){
+    sample.setCode(UUID.randomUUID().toString());
+>>>>>>> Stashed changes
     return this.discountCodeRepository.save(sample);
+  }
+
+  /**
+   * update discount code entity.
+   * @param version Integer
+   * @param entity DiscountCodeEntity
+   * @return DiscountCodeEntity
+   */
+  public DiscountCodeEntity update(Integer version,DiscountCodeEntity entity){
+
+    DiscountCodeEntity valueInDb = this.getById(entity.getId());
+
+    return this.discountCodeRepository.save(entity);
   }
 }

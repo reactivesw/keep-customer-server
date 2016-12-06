@@ -1,8 +1,7 @@
 package io.reactivesw.catalog.categories.domains.services
 
 import com.google.common.collect.Lists
-import com.google.common.collect.Maps
-import io.reactivesw.catalog.categories.applications.models.actions.ChangeName
+import io.reactivesw.common.models.updateactions.ChangeName
 import io.reactivesw.catalog.categories.domains.entities.CategoryEntity
 import io.reactivesw.catalog.categories.applications.models.CategoryDraft
 import io.reactivesw.catalog.categories.infrastructure.repositories.CategoryRepository

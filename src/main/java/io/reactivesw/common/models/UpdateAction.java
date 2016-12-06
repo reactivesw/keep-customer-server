@@ -2,7 +2,6 @@ package io.reactivesw.common.models;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import io.reactivesw.catalog.categories.applications.models.actions.ChangeName;
 import io.reactivesw.catalog.categories.applications.models.actions.ChangeOrderHint;
 import io.reactivesw.catalog.categories.applications.models.actions.ChangeParent;
 import io.reactivesw.catalog.categories.applications.models.actions.ChangeSlug;
@@ -13,6 +12,7 @@ import io.reactivesw.catalog.categories.applications.models.actions.SetExternalI
 import io.reactivesw.catalog.categories.applications.models.actions.SetMetaDescription;
 import io.reactivesw.catalog.categories.applications.models.actions.SetMetaKeywords;
 import io.reactivesw.catalog.categories.applications.models.actions.SetMetaTitle;
+import io.reactivesw.common.models.updateactions.ChangeName;
 import io.reactivesw.orders.carts.applications.models.actions.AddLineItem;
 import io.reactivesw.orders.carts.applications.models.actions.RemoveLineItem;
 

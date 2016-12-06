@@ -1,6 +1,6 @@
 package io.reactivesw.catalog.categories.applications.models.mapper;
 
-import io.reactivesw.catalog.categories.applications.models.actions.ChangeName;
+import io.reactivesw.common.models.updateactions.ChangeName;
 import io.reactivesw.catalog.categories.applications.models.actions.ChangeOrderHint;
 import io.reactivesw.catalog.categories.applications.models.actions.ChangeParent;
 import io.reactivesw.catalog.categories.applications.models.actions.ChangeSlug;

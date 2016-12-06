@@ -1,4 +1,4 @@
-package io.reactivesw.catalog.categories.applications.models.actions;
+package io.reactivesw.common.models.updateactions;
 
 import io.reactivesw.common.models.LocalizedString;
 import io.reactivesw.common.models.UpdateAction;

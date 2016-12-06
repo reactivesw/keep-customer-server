@@ -24,7 +24,7 @@ public class UpdateRequest {
 
   /**
    * Array of UpdateAction.
-   * The list of update actions to be performed on the category.
+   * The list of update updateactions to be performed on the category.
    * Required.
    */
   @NotNull
@@ -49,18 +49,18 @@ public class UpdateRequest {
   }
 
   /**
-   * Gets actions.
+   * Gets updateactions.
    *
-   * @return the actions
+   * @return the updateactions
    */
   public List<UpdateAction> getActions() {
     return actions;
   }
 
   /**
-   * Sets actions.
+   * Sets updateactions.
    *
-   * @param actions the actions
+   * @param actions the updateactions
    */
   public void setActions(List<UpdateAction> actions) {
     this.actions = actions;
@@ -70,7 +70,7 @@ public class UpdateRequest {
   public String toString() {
     return "UpdateRequest{" +
         "version=" + version +
-        ", actions=" + actions +
+        ", updateactions=" + actions +
         '}';
   }
 }

@@ -112,12 +112,12 @@ public class CategoryService {
    *
    * @param id            the id
    * @param version       the update request
-   * @param updateActions the update actions
+   * @param updateActions the update updateactions
    * @return the category
    */
   @Transactional
   public Category updateCategory(String id, Integer version, List<UpdateAction> updateActions) {
-    LOG.debug("enter updateCategory, id is {}, version is {}, update actions is {}",
+    LOG.debug("enter updateCategory, id is {}, version is {}, update updateactions is {}",
         id, version, updateActions);
 
     CategoryEntity entity = getById(id);
