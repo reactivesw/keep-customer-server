@@ -28,9 +28,11 @@ class DiscountCodeServiceTest extends Specification {
 
     DiscountCodeService discountCodeService
 
+    DiscountCodeEntity discountCodeEntity
+
     def discountCodeId = "tmpDiscountCodeId"
 
-    DiscountCodeEntity discountCodeEntity
+    def version = 1
 
     def setup() {
         LOG.info("init discount code service test.")
@@ -39,7 +41,7 @@ class DiscountCodeServiceTest extends Specification {
         discountCodeEntity = new DiscountCodeEntity(id: discountCodeId, version: 1, code: "ERTYUIJHGFDCVBN", active: true, cartPredicate: "customerId=QWEYUIOJH")
     }
 
-    def "Create new DiscountCode "() {
+    def "Test 1.1: Create new DiscountCode "() {
         when:
         discountCodeRepository.save(_) >> discountCodeEntity
         DiscountCodeEntity entity = discountCodeService.createDiscountCode(discountCodeEntity)
@@ -47,7 +49,7 @@ class DiscountCodeServiceTest extends Specification {
         entity != null
     }
 
-    def "Get DiscountCode by Id"() {
+    def "Test 2.1: Get DiscountCode by Id"() {
         when:
         discountCodeRepository.findOne(_) >> discountCodeEntity
         DiscountCodeEntity entity = discountCodeService.getById(discountCodeId)
@@ -55,12 +57,21 @@ class DiscountCodeServiceTest extends Specification {
         entity != null
     }
 
-    def "Get DiscountCode by Id with not exist"() {
+    def "Test 2.2: Get DiscountCode by Id with not exist"() {
         when:
         discountCodeRepository.findOne(_) >> null
         discountCodeService.getById(discountCodeId)
         then:
         thrown(NotExistException)
+    }
+
+    def "Test 3.1: Update DiscountCode"() {
+        when:
+        discountCodeRepository.findOne(_) >> discountCodeEntity
+        discountCodeRepository.save(_) >> discountCodeEntity
+        discountCodeService.update(version, discountCodeEntity)
+        then:
+        noExceptionThrown()
     }
 
 }
