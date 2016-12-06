@@ -9,7 +9,7 @@ import io.reactivesw.orders.orders.enums.PaymentState;
 import io.reactivesw.orders.orders.enums.ShipmentState;
 import io.reactivesw.orders.carts.infrastructures.enums.TaxMode;
 import io.reactivesw.orders.carts.applications.models.CustomLineItem;
-import io.reactivesw.orders.discountcodes.models.DiscountCodeInfo;
+import io.reactivesw.orders.discountcodes.applications.models.DiscountCodeInfo;
 import io.reactivesw.orders.carts.applications.models.LineItem;
 import io.reactivesw.orders.carts.applications.models.ShippingInfo;
 import io.reactivesw.orders.carts.applications.models.TaxedPrice;

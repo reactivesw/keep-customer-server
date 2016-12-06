@@ -1,4 +1,4 @@
-package io.reactivesw.orders.discountcodes.models;
+package io.reactivesw.orders.discountcodes.applications.models;
 
 import io.reactivesw.common.models.Reference;
 import io.swagger.annotations.ApiModel;

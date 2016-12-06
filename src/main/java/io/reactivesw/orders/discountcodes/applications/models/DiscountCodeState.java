@@ -1,4 +1,4 @@
-package io.reactivesw.orders.discountcodes.models;
+package io.reactivesw.orders.discountcodes.applications.models;
 
 /**
  * Values of the DiscountCodeState enumeration:
