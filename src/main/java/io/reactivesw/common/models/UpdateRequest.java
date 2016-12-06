@@ -1,11 +1,13 @@
 package io.reactivesw.common.models;
 
+import org.mapstruct.Qualifier;
+
 import java.util.List;
 
 /**
  * Created by Davis on 16/11/21.
  */
-public class Field {
+public class UpdateRequest {
   /**
    * The expected version of the category on which the changes should be applied.
    * If the expected version does not match the actual version, a 409 Conflict will be returned.
@@ -17,7 +19,7 @@ public class Field {
    * The list of update actions to be performed on the category.
    * Required.
    */
-  List<Object> actions;
+  List<UpdateAction> actions;
 
   /**
    * Gets version.
@@ -42,7 +44,7 @@ public class Field {
    *
    * @return the actions
    */
-  public List<Object> getActions() {
+  public List<UpdateAction> getActions() {
     return actions;
   }
 
@@ -51,13 +53,13 @@ public class Field {
    *
    * @param actions the actions
    */
-  public void setActions(List<Object> actions) {
+  public void setActions(List<UpdateAction> actions) {
     this.actions = actions;
   }
 
   @Override
   public String toString() {
-    return "Field{" +
+    return "UpdateRequest{" +
         "version=" + version +
         ", actions=" + actions +
         '}';
