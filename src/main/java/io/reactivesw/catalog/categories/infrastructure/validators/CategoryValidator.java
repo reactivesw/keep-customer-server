@@ -4,6 +4,7 @@ import io.reactivesw.catalog.categories.applications.models.CategoryDraft;
 import io.reactivesw.common.exceptions.ParametersException;
 import io.reactivesw.common.models.UpdateAction;
 import io.reactivesw.common.models.UpdateRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

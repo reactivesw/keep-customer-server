@@ -34,10 +34,11 @@ public class DiscountCodeService {
 
   /**
    * create an new discount code.
+   *
    * @param sample DiscountCodeEntity
    * @return DiscountCodeEntity created
    */
-  public DiscountCodeEntity createDiscountCode(DiscountCodeEntity sample){
+  public DiscountCodeEntity createDiscountCode(DiscountCodeEntity sample) {
     return this.discountCodeRepository.save(sample);
   }
 }
