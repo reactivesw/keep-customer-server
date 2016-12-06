@@ -1,5 +1,9 @@
 package io.reactivesw.catalog.categories.applications.controllers;
 
+import static io.reactivesw.routes.Router.CATEGORIES_WITH_ID;
+import static io.reactivesw.routes.Router.CATEGORY_ALL;
+import static io.reactivesw.routes.Router.CATEGORY_ID;
+
 import io.reactivesw.catalog.categories.applications.models.Category;
 import io.reactivesw.catalog.categories.applications.models.CategoryDraft;
 import io.reactivesw.catalog.categories.domains.services.CategoryService;
@@ -24,10 +28,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
-import static io.reactivesw.routes.Router.CATEGORIES_WITH_ID;
-import static io.reactivesw.routes.Router.CATEGORY_ALL;
-import static io.reactivesw.routes.Router.CATEGORY_ID;
 
 /**
  * Created by Davis on 16/11/18.
