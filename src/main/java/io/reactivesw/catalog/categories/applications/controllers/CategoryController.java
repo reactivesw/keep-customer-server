@@ -1,15 +1,10 @@
 package io.reactivesw.catalog.categories.applications.controllers;
 
-import static io.reactivesw.routes.Router.CATEGORIES_WITH_ID;
-import static io.reactivesw.routes.Router.CATEGORY_ALL;
-import static io.reactivesw.routes.Router.CATEGORY_ID;
-
 import io.reactivesw.catalog.categories.applications.models.Category;
 import io.reactivesw.catalog.categories.applications.models.CategoryDraft;
 import io.reactivesw.catalog.categories.domains.services.CategoryService;
 import io.reactivesw.common.exceptions.ParametersException;
 import io.reactivesw.common.models.QueryConditions;
-import io.reactivesw.common.models.UpdateAction;
 import io.reactivesw.common.models.UpdateRequest;
 
 import io.swagger.annotations.ApiModel;
@@ -29,6 +24,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
+import static io.reactivesw.routes.Router.CATEGORIES_WITH_ID;
+import static io.reactivesw.routes.Router.CATEGORY_ALL;
+import static io.reactivesw.routes.Router.CATEGORY_ID;
 
 /**
  * Created by Davis on 16/11/18.
@@ -119,9 +118,6 @@ public class CategoryController {
                                  @ApiParam(value = "CategoryEntity Update Fields", required = true)
                                      UpdateRequest updateRequest) throws Exception {
     LOG.debug("update category : {}", updateRequest.toString());
-    List<UpdateAction> objs = updateRequest.getActions();
-    String loObj = objs.get(0).toString();
-    LOG.debug("action  : {}", loObj);
 
     return null;
   }
