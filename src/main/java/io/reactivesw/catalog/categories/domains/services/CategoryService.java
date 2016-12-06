@@ -90,7 +90,9 @@ public class CategoryService {
 //    categoryRepository.delete(id);
     List<String> subCategoryIds = categoryRepository.queryCategoryIdsByAncestorId(id);
     List<String> totalCategoryIds = Lists.newArrayList(id);
-    totalCategoryIds.addAll(subCategoryIds);
+    if (subCategoryIds != null && !subCategoryIds.isEmpty()) {
+      totalCategoryIds.addAll(subCategoryIds);
+    }
     categoryRepository.deleteCategoryById(totalCategoryIds);
 
     //TODO remove from all those products that had that category assigned in their ProductData
@@ -151,7 +153,7 @@ public class CategoryService {
       entity.setOrderHint(((ChangeOrderHint) updateAction).getOrderHint());
     }
     if (updateAction instanceof SetExternalID) {
-     entity.setExternalId(((SetExternalID) updateAction).getExternalId());
+      entity.setExternalId(((SetExternalID) updateAction).getExternalId());
     }
     if (updateAction instanceof SetMetaTitle) {
       entity.setMetaTitle(LocalizedStringMapper.convertToLocalizedStringEntity(((SetMetaTitle)
