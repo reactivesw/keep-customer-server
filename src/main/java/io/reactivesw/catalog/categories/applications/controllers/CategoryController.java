@@ -8,7 +8,7 @@ import io.reactivesw.catalog.categories.applications.models.Category;
 import io.reactivesw.catalog.categories.applications.models.CategoryDraft;
 import io.reactivesw.catalog.categories.domains.services.CategoryService;
 import io.reactivesw.common.exceptions.ParametersException;
-import io.reactivesw.common.models.Field;
+import io.reactivesw.common.models.UpdateRequest;
 import io.reactivesw.common.models.QueryConditions;
 
 import io.swagger.annotations.ApiModel;
@@ -105,7 +105,7 @@ public class CategoryController {
    * Update category category.
    *
    * @param id     the id
-   * @param fields the fields
+   * @param updateRequest the fields
    * @return the category
    */
   @ApiOperation(value = "Update CategoryEntity")
@@ -116,9 +116,9 @@ public class CategoryController {
                                      String id,
                                  @RequestBody
                                  @ApiParam(value = "CategoryEntity Update Fields", required = true)
-                                     Field fields) throws Exception {
-    LOG.debug("update category : {}", fields.toString());
-    List<Object> objs = fields.getActions();
+                                     UpdateRequest updateRequest) throws Exception {
+    LOG.debug("update category : {}", updateRequest.toString());
+    List<Object> objs = updateRequest.getActions();
     String loObj = objs.get(0).toString();
     LOG.debug("action  : {}", loObj);
 
