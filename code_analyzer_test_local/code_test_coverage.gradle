@@ -37,6 +37,7 @@ jacocoTestReport {
                     'io/reactivesw/App*',
                     '**/entities/**',
                     '**/controllers/**',
+                    '**/validators/**',
                     '**/models/**',
                     '**/repositories/**',
                     '**/exceptions/**',

@@ -7,9 +7,8 @@ import static io.reactivesw.routes.Router.CATEGORY_ID;
 import io.reactivesw.catalog.categories.applications.models.Category;
 import io.reactivesw.catalog.categories.applications.models.CategoryDraft;
 import io.reactivesw.catalog.categories.domains.services.CategoryService;
-import io.reactivesw.common.exceptions.ParametersException;
+import io.reactivesw.catalog.categories.infrastructure.validators.CategoryValidator;
 import io.reactivesw.common.models.QueryConditions;
-import io.reactivesw.common.models.UpdateAction;
 import io.reactivesw.common.models.UpdateRequest;
 
 import io.swagger.annotations.ApiModel;
@@ -89,14 +88,7 @@ public class CategoryController {
                                  @ApiParam(value = "CategoryEntity Draft", required = true)
                                      CategoryDraft categoryDraft) {
     LOG.debug("create category : {}", categoryDraft.toString());
-    //TODO slug 判断规则
-    if (categoryDraft.getName() == null
-        || categoryDraft.getName().getLocalized().isEmpty()
-        || categoryDraft.getSlug() == null
-        || categoryDraft.getSlug().getLocalized().isEmpty()
-        ) {
-      throw new ParametersException();
-    }
+    CategoryValidator.validateCategoryDraft(categoryDraft);
     Category category = categoryService.createCategory(categoryDraft);
     LOG.debug("end createCategory, saved category is {}", category.toString());
     return category;
@@ -118,19 +110,9 @@ public class CategoryController {
                                  @ApiParam(value = "CategoryEntity Update Fields", required = true)
                                      UpdateRequest updateRequest) throws Exception {
     LOG.debug("enter updateCategory,id is {}, update request is {}", id, updateRequest.toString());
-    //TODO judge request
-    Integer version = updateRequest.getVersion();
-    if (version <= 0) {
-      LOG.debug("version must be greater than 0");
-      throw new ParametersException();
-    }
-    List<UpdateAction> updateActions = updateRequest.getActions();
-    if (updateActions == null || updateActions.isEmpty()) {
-      LOG.debug("update actions must not be null");
-      throw new ParametersException();
-    }
-
-    Category result = categoryService.updateCategory(id, version, updateActions);
+    CategoryValidator.validateUpdateRequest(updateRequest);
+    Category result = categoryService.updateCategory(id, updateRequest.getVersion(),
+        updateRequest.getActions());
     LOG.debug("end updateCategory, updated Category is {}", result.toString());
     return result;
   }
@@ -147,6 +129,7 @@ public class CategoryController {
                                  String id,
                              Integer version) {
     LOG.debug("enter deleteCategory, id is {}, version is {}", id, version);
+    CategoryValidator.validateVersion(version);
     categoryService.deleteCategory(id, version);
     LOG.debug("end deleteCategory, id is {}, version is {}", id, version);
   }
