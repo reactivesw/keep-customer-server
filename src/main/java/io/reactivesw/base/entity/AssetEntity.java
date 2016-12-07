@@ -22,6 +22,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "sw_asset")
 public class AssetEntity extends BaseIdEntity {
+
   /**
    * JSON TYPE.
    */
