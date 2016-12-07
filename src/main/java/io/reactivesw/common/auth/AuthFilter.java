@@ -15,8 +15,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import io.reactivesw.common.exceptions.AuthenticationFailedException;
-import io.reactivesw.common.exceptions.handler.ExceptionHandler;
+import io.reactivesw.common.exception.AuthenticationFailedException;
+import io.reactivesw.common.exception.handler.ExceptionHandler;
 
 /**
  * Created by Bruce on 16/11/15.

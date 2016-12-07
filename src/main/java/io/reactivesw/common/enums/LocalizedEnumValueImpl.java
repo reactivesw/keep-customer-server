@@ -1,8 +1,8 @@
 package io.reactivesw.common.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.reactivesw.common.models.Base;
-import io.reactivesw.common.models.LocalizedString;
+import io.reactivesw.common.model.Base;
+import io.reactivesw.common.model.LocalizedString;
 
 final class LocalizedEnumValueImpl extends Base implements LocalizedEnumValue {
   private final String key;

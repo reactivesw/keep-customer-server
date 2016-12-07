@@ -2,7 +2,7 @@ package io.reactivesw.common.enums;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.reactivesw.common.models.LocalizedString;
+import io.reactivesw.common.model.LocalizedString;
 
 @JsonDeserialize(as = LocalizedEnumValueImpl.class)
 public interface LocalizedEnumValue extends WithKey {

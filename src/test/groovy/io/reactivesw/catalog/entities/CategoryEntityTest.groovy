@@ -1,18 +1,5 @@
 package io.reactivesw.catalog.entities
 
-import com.google.common.collect.Lists
-import com.google.common.collect.Sets
-import io.reactivesw.catalog.categories.domains.entities.CategoryEntity
-import io.reactivesw.catalog.categories.infrastructure.repositories.CategoryRepository
-import io.reactivesw.catalog.categories.infrastructure.repositories.CategorySpecs
-import io.reactivesw.common.entities.LocalizedStringEntity
-import io.reactivesw.common.models.CustomFields
-import io.reactivesw.common.models.LocalizedString
-import io.reactivesw.common.models.QueryConditions
-import io.reactivesw.common.models.Reference
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
 
 /**

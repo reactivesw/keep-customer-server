@@ -10,21 +10,21 @@ ext {
 
     common_exception = 'io/reactivesw/common/**'
 
-    model_exception = 'io/reactivesw/**/models/**'
+    model_exception = 'io/reactivesw/**/model/**'
 
-    repositories_exception = 'io/reactivesw/**/repositories/**'
+    repositories_exception = 'io/reactivesw/**/repository/**'
 
     //TODO
     authentication = 'io/reactivesw/customer/server/authorization/*'
 
     //customer entity
-    customer_entity_folder = 'io/reactivesw/customer/server/customer/entities/'
+    customer_entity_folder = 'io/reactivesw/customer/server/customer/entity/'
     customer_entity_folder_all = customer_entity_folder + '*'
 
-    customer_model_folder = 'io/reactivesw/customer/server/customer/models/'
+    customer_model_folder = 'io/reactivesw/customer/server/customer/model/'
     customer_model_folder_all = customer_model_folder + '*'
 
-    customer_repositories_folder = 'io/reactivesw/customer/server/customer/repositories/'
+    customer_repositories_folder = 'io/reactivesw/customer/server/customer/repository/'
     customer_repositories_folder_all = customer_repositories_folder + '*'
 }
 

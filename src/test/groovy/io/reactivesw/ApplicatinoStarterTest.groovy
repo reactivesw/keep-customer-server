@@ -18,7 +18,7 @@ class ApplicatinoStarterTest extends Specification {
     WebApplicationContext context
 
     def "should boot up without errors"() {
-        expect: "web applications context exists"
+        expect: "web application context exists"
         context != null
     }
 }

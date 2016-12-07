@@ -1,0 +1,183 @@
+package io.reactivesw.catalog.productdiscount.entity;
+
+import io.reactivesw.catalog.productdiscount.model.ProductDiscountValue;
+import io.reactivesw.common.entity.BaseAllEntity;
+import io.reactivesw.common.model.LocalizedString;
+import io.reactivesw.common.util.LocalizedStringJsonConverter;
+import io.reactivesw.common.util.ProductDiscountJsonConverter;
+
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+/**
+ * Created by Davis on 16/11/23.
+ */
+@Entity
+@Table(name = "catalog_product_product_discount")
+public class ProductDiscountEntity extends BaseAllEntity {
+  /**
+   * name.
+   */
+  @Column
+  @Convert(converter = LocalizedStringJsonConverter.class)
+  private LocalizedString name;
+
+  /**
+   * description.
+   */
+  @Column(name = "description", columnDefinition = "JSON")
+  @Convert(converter = LocalizedStringJsonConverter.class)
+  private LocalizedString description;
+
+  /**
+   * value.
+   */
+  @Column(name = "value", columnDefinition = "JSON")
+  @Convert(converter = ProductDiscountJsonConverter.class)
+  private ProductDiscountValue value;
+
+  /**
+   * predicate.
+   */
+  @Column
+  private String predicate;
+
+  /**
+   * sort order.
+   */
+  @Column(name = "sort_order")
+  private String sortOrder;
+
+  /**
+   * active.
+   */
+  @Column
+  private Boolean active;
+
+  /**
+   * Gets name.
+   *
+   * @return the name
+   */
+  public LocalizedString getName() {
+    return name;
+  }
+
+  /**
+   * Sets name.
+   *
+   * @param name the name
+   */
+  public void setName(LocalizedString name) {
+    this.name = name;
+  }
+
+  /**
+   * Gets description.
+   *
+   * @return the description
+   */
+  public LocalizedString getDescription() {
+    return description;
+  }
+
+  /**
+   * Sets description.
+   *
+   * @param description the description
+   */
+  public void setDescription(LocalizedString description) {
+    this.description = description;
+  }
+
+  /**
+   * Gets value.
+   *
+   * @return the value
+   */
+  public ProductDiscountValue getValue() {
+    return value;
+  }
+
+  /**
+   * Sets value.
+   *
+   * @param value the value
+   */
+  public void setValue(ProductDiscountValue value) {
+    this.value = value;
+  }
+
+  /**
+   * Gets predicate.
+   *
+   * @return the predicate
+   */
+  public String getPredicate() {
+    return predicate;
+  }
+
+  /**
+   * Sets predicate.
+   *
+   * @param predicate the predicate
+   */
+  public void setPredicate(String predicate) {
+    this.predicate = predicate;
+  }
+
+  /**
+   * Gets sort order.
+   *
+   * @return the sort order
+   */
+  public String getSortOrder() {
+    return sortOrder;
+  }
+
+  /**
+   * Sets sort order.
+   *
+   * @param sortOrder the sort order
+   */
+  public void setSortOrder(String sortOrder) {
+    this.sortOrder = sortOrder;
+  }
+
+  /**
+   * Gets active.
+   *
+   * @return the active
+   */
+  public Boolean getActive() {
+    return active;
+  }
+
+  /**
+   * Sets active.
+   *
+   * @param active the active
+   */
+  public void setActive(Boolean active) {
+    this.active = active;
+  }
+
+
+  /**
+   * toString method.
+   * @return String
+   */
+  @Override
+  public String toString() {
+    return "ProductDiscountEntity{"
+        + "name=" + name
+        + ", description=" + description
+        + ", value=" + value
+        + ", predicate='" + predicate + '\''
+        + ", sortOrder='" + sortOrder + '\''
+        + ", active=" + active
+        + '}';
+  }
+}

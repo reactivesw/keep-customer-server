@@ -5,8 +5,8 @@ package io.reactivesw.common.enums;
  */
 public enum  ReferenceTypes {
   CATEGORY("category"),
-  CART("carts"),
-  CARTDISCOUNT("carts-discount");
+  CART("cart"),
+  CARTDISCOUNT("cart-discount");
   private String value;
 
   private ReferenceTypes(String value){

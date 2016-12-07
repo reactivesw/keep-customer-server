@@ -10,7 +10,7 @@ apply plugin: 'com.palantir.jacoco-coverage'
 apply from: 'code_analyzer_test/test_coverage_config.gradle'
 
 test {
-    //  exclude 'io/reactivesw/customerweb/customerauthentication/controllers/*'
+    //  exclude 'io/reactivesw/customerweb/customerauthentication/controller/*'
     exclude '**/*IT*'
     exclude 'io/reactivesw/customer/server/ApplicatinoStarterTest.class'
 }
@@ -35,17 +35,17 @@ jacocoTestReport {
         classDirectories = files(classDirectories.files.collect {
             fileTree(dir: it, exclude: [
                     'io/reactivesw/App*',
-                    '**/entities/**',
-                    '**/controllers/**',
-                    '**/validators/**',
-                    '**/models/**',
-                    '**/repositories/**',
-                    '**/exceptions/**',
+                    '**/entity/**',
+                    '**/controller/**',
+                    '**/validator/**',
+                    '**/model/**',
+                    '**/repository/**',
+                    '**/exception/**',
                     '**/enums/**',
-                    '**/routes/**',
-                    'io/reactivesw/common/utils/**',
-                    'io/reactivesw/common/dialects/**',
-                    'io/reactivesw/common/specifications/**',
+                    '**/route/**',
+                    'io/reactivesw/common/util/**',
+                    'io/reactivesw/common/dialect/**',
+                    'io/reactivesw/common/specification/**',
                     //先去掉auth的检查,后面再加回来
                     'io/reactivesw/common/auth/**'
             ])

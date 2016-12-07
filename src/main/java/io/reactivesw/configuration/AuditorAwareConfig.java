@@ -1,6 +1,6 @@
 package io.reactivesw.configuration;
 
-import io.reactivesw.common.utils.ZonedDateTimeAuditorAware;
+import io.reactivesw.common.util.ZonedDateTimeAuditorAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;

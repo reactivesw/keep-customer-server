@@ -1,7 +1,7 @@
 package io.reactivesw.common.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.reactivesw.common.models.Base;
+import io.reactivesw.common.model.Base;
 
 final class EnumValueImpl extends Base implements EnumValue {
   private final String key;

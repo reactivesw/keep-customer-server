@@ -8,7 +8,7 @@ spring:
     password: root
     driver-class-name: org.postgresql.Driver
   jpa:
-    database-platform: io.reactivesw.common.dialects.JSONBPostgreSQLDialect
+    database-platform: io.reactivesw.common.dialect.JSONBPostgreSQLDialect
     show-sql: true
     hibernate:
       ddl-auto: update
