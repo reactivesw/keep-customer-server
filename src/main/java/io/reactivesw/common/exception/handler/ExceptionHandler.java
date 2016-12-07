@@ -44,7 +44,7 @@ public class ExceptionHandler implements HandlerExceptionResolver {
    * exception that do not log.
    */
   private static final ImmutableList<?> OMITTED_EXCEPTIONS = ImmutableList
-          .of(AlreadyExistException.class, AuthenticationFailedException.class);
+      .of(AlreadyExistException.class, AuthenticationFailedException.class);
 
   static {
     EXCEPTION_MAP.put(AlreadyExistException.class, HttpStatus.CONFLICT);
@@ -77,7 +77,8 @@ public class ExceptionHandler implements HandlerExceptionResolver {
 
     if (shouldLogException(ex)) {
       // only log those ones that are real failures
-      LOG.error("request {}, response {}, obj {}, status {}", request, response, obj, status, throwable);
+      LOG.error("request {}, response {}, obj {}, status {}", request, response, obj, status,
+          throwable);
     }
 
     response.setStatus(status.value());
