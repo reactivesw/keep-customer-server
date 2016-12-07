@@ -138,6 +138,7 @@ public class ProductTypeEntity extends BaseAllEntity {
 
   /**
    * toString method.
+   *
    * @return String
    */
   @Override
