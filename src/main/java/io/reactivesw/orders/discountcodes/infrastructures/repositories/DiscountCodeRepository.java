@@ -1,4 +1,4 @@
-package io.reactivesw.orders.discountcodes.repositories;
+package io.reactivesw.orders.discountcodes.infrastructures.repositories;
 
 import io.reactivesw.orders.discountcodes.domains.entities.DiscountCodeEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

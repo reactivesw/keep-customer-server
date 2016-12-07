@@ -1,15 +1,14 @@
-package io.reactivesw.catalog.categories.applications.models.actions;
+package io.reactivesw.common.models.updateactions;
 
 import io.reactivesw.common.models.LocalizedString;
 import io.reactivesw.common.models.UpdateAction;
 
 /**
- * Created by Davis on 16/12/6.
+ * Created by Bruce on 16/12/7.
  */
-public class SetDescription implements UpdateAction {
-
+public class SetLocalizedDescription implements UpdateAction {
   /**
-   * The Description.
+   * If the description parameter is not included, the field will be emptied.
    */
   private LocalizedString description;
 

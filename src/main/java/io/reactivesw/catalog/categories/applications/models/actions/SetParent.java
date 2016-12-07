@@ -5,7 +5,7 @@ import io.reactivesw.common.models.Reference;
 /**
  * Created by Davis on 16/12/6.
  */
-public class ChangeParent {
+public class SetParent {
   /**
    * The Parent.
    */

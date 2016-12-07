@@ -1,7 +1,7 @@
 package io.reactivesw.catalog.categories.domains.services
 
 import com.google.common.collect.Lists
-import io.reactivesw.common.models.updateactions.ChangeName
+import io.reactivesw.common.models.updateactions.SetLocalizedName
 import io.reactivesw.catalog.categories.domains.entities.CategoryEntity
 import io.reactivesw.catalog.categories.applications.models.CategoryDraft
 import io.reactivesw.catalog.categories.infrastructure.repositories.CategoryRepository
@@ -174,7 +174,7 @@ class CategoryServiceTest extends Specification {
         def updateActions = new ArrayList<UpdateAction>()
         Map<String, String> map = new HashMap<>()
         map.put("en", "value")
-        def changeName = new ChangeName(name: new LocalizedString(localized: map))
+        def changeName = new SetLocalizedName(name: new LocalizedString(localized: map))
         updateActions.add(changeName)
         categoryEntity.version = version
         categoryRepository.findOne(_) >> categoryEntity

@@ -6,7 +6,7 @@ import io.reactivesw.common.models.UpdateAction;
 /**
  * Created by Davis on 16/12/6.
  */
-public class ChangeName implements UpdateAction {
+public class SetLocalizedName implements UpdateAction {
   /**
    * name.
    */

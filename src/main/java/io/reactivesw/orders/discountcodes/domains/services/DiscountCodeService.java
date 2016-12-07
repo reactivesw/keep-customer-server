@@ -2,7 +2,7 @@ package io.reactivesw.orders.discountcodes.domains.services;
 
 import io.reactivesw.common.exceptions.NotExistException;
 import io.reactivesw.orders.discountcodes.domains.entities.DiscountCodeEntity;
-import io.reactivesw.orders.discountcodes.repositories.DiscountCodeRepository;
+import io.reactivesw.orders.discountcodes.infrastructures.repositories.DiscountCodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.UUID;

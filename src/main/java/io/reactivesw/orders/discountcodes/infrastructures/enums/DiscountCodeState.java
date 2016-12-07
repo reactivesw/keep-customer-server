@@ -1,4 +1,4 @@
-package io.reactivesw.orders.discountcodes.applications.models;
+package io.reactivesw.orders.discountcodes.infrastructures.enums;
 
 /**
  * Values of the DiscountCodeState enumeration:
@@ -29,6 +29,6 @@ public enum DiscountCodeState {
   /**
    * maxApplications or maxApplicationsPerCustomer for discountCode has been reached.
    */
-  MaxApplicationReached;
+  MaxApplicationReached
 
 }
