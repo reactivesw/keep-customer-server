@@ -1,4 +1,4 @@
-package io.reactivesw.catalog.producttype.entity;
+package io.reactivesw.catalog.producttype.domain.entity;
 
 import io.reactivesw.catalog.product.model.attributes.AttributeConstraint;
 import io.reactivesw.catalog.product.model.attributes.AttributeType;

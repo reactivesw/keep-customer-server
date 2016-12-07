@@ -47,36 +47,6 @@ public class CategoryController {
   private transient CategoryService categoryService;
 
   /**
-   * Gets category by id.
-   *
-   * @param id the id
-   * @return the category by id
-   */
-  @ApiOperation(value = "Get CategoryEntity By Id")
-  @GetMapping(CATEGORY_WITH_ID)
-  public Category getCategoryById(@PathVariable(value = CATEGORY_ID)
-                                  @ApiParam(value = "CategoryEntity ID", required = true)
-                                      String id) {
-    LOG.debug("enter getCategoryById, id is {}", id);
-    Category category = categoryService.getCategoryById(id);
-    LOG.debug("end getCategoryById, get category : {}", category.toString());
-    return category;
-  }
-
-  /**
-   * Query category list.
-   *
-   * @return the list
-   */
-  @ApiOperation(value = "Get Categories")
-  @GetMapping(CATEGORY_ROOT)
-  //TODO
-  public List<Category> queryCategories(QueryConditions query) {
-    LOG.debug("query parameters: {}", query.toString());
-    return null;
-  }
-
-  /**
    * Create category category.
    *
    * @param categoryDraft the draft
@@ -96,6 +66,24 @@ public class CategoryController {
     LOG.debug("end createCategory, saved category is {}", category.toString());
 
     return category;
+  }
+
+  /**
+   * Delete category.
+   *
+   * @param version the version
+   */
+  @ApiOperation(value = "Delete CategoryEntity By Id")
+  @DeleteMapping(value = CATEGORY_WITH_ID)
+  public void deleteCategory(@PathVariable(value = CATEGORY_ID)
+                             @ApiParam(value = "CategoryEntity ID", required = true)
+                                 String id,
+                             Integer version) {
+    LOG.debug("enter deleteCategory, id is {}, version is {}", id, version);
+
+    categoryService.deleteCategory(id, version);
+
+    LOG.debug("end deleteCategory, id is {}, version is {}", id, version);
   }
 
   /**
@@ -124,20 +112,32 @@ public class CategoryController {
   }
 
   /**
-   * Delete category.
+   * Gets category by id.
    *
-   * @param version the version
+   * @param id the id
+   * @return the category by id
    */
-  @ApiOperation(value = "Delete CategoryEntity By Id")
-  @DeleteMapping(value = CATEGORY_WITH_ID)
-  public void deleteCategory(@PathVariable(value = CATEGORY_ID)
-                             @ApiParam(value = "CategoryEntity ID", required = true)
-                                 String id,
-                             Integer version) {
-    LOG.debug("enter deleteCategory, id is {}, version is {}", id, version);
+  @ApiOperation(value = "Get CategoryEntity By Id")
+  @GetMapping(CATEGORY_WITH_ID)
+  public Category getCategoryById(@PathVariable(value = CATEGORY_ID)
+                                  @ApiParam(value = "CategoryEntity ID", required = true)
+                                      String id) {
+    LOG.debug("enter getCategoryById, id is {}", id);
+    Category category = categoryService.getCategoryById(id);
+    LOG.debug("end getCategoryById, get category : {}", category.toString());
+    return category;
+  }
 
-    categoryService.deleteCategory(id, version);
-
-    LOG.debug("end deleteCategory, id is {}, version is {}", id, version);
+  /**
+   * Query category list.
+   *
+   * @return the list
+   */
+  @ApiOperation(value = "Get Categories")
+  @GetMapping(CATEGORY_ROOT)
+  //TODO
+  public List<Category> queryCategories(QueryConditions query) {
+    LOG.debug("query parameters: {}", query.toString());
+    return null;
   }
 }

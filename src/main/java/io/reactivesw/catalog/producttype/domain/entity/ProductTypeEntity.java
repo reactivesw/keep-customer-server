@@ -1,4 +1,4 @@
-package io.reactivesw.catalog.producttype.entity;
+package io.reactivesw.catalog.producttype.domain.entity;
 
 import io.reactivesw.common.entity.BaseAllEntity;
 
