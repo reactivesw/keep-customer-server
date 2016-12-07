@@ -19,11 +19,11 @@ public final class LocalizedStringMapper {
    * @param localizedStringEntities the localized string entity
    * @return the localized string
    */
-  public static LocalizedString convertToLocalizedStringDefaultNew(Set<LocalizedStringEntity>
+  public static LocalizedString entityToModelDefaultNew(Set<LocalizedStringEntity>
                                                                        localizedStringEntities) {
     LocalizedString localizedString = new LocalizedString();
     if (localizedStringEntities != null) {
-      localizedString = convertToLocalizedString(localizedStringEntities);
+      localizedString = entityToModel(localizedStringEntities);
     }
     return localizedString;
   }
@@ -35,11 +35,11 @@ public final class LocalizedStringMapper {
    * @param localizedStringEntities the localized string entity
    * @return the localized string
    */
-  public static LocalizedString convertToLocalizedStringDefaultNull(Set<LocalizedStringEntity>
+  public static LocalizedString entityToModelDefaultNull(Set<LocalizedStringEntity>
                                                                         localizedStringEntities) {
     LocalizedString localizedString = null;
     if (localizedStringEntities != null) {
-      localizedString = convertToLocalizedString(localizedStringEntities);
+      localizedString = entityToModel(localizedStringEntities);
     }
     return localizedString;
   }
@@ -51,7 +51,7 @@ public final class LocalizedStringMapper {
    * @param localizedString the LocalizedString
    * @return Set of LocalizedStringEntity
    */
-  public static Set<LocalizedStringEntity> convertToLocalizedStringEntity(LocalizedString
+  public static Set<LocalizedStringEntity> modelToEntityDefaultNew(LocalizedString
                                                                                localizedString) {
     Set<LocalizedStringEntity> localizedStringEntities = new HashSet<>();
 
@@ -66,7 +66,7 @@ public final class LocalizedStringMapper {
     return localizedStringEntities;
   }
 
-  public static Set<LocalizedStringEntity> convertToLocalizedStringEntityDefaultNull(LocalizedString
+  public static Set<LocalizedStringEntity> modelToEntityDefaultNull(LocalizedString
                                                                               localizedString) {
     Set<LocalizedStringEntity> localizedStringEntities = null;
 
@@ -88,7 +88,7 @@ public final class LocalizedStringMapper {
    * @param localizedStringEntities localizedStringEntities
    * @return LocalizedString
    */
-  private static LocalizedString convertToLocalizedString(Set<LocalizedStringEntity>
+  private static LocalizedString entityToModel(Set<LocalizedStringEntity>
                                                               localizedStringEntities) {
     LocalizedString localizedString = new LocalizedString();
     for (LocalizedStringEntity localizedStringEntity : localizedStringEntities) {

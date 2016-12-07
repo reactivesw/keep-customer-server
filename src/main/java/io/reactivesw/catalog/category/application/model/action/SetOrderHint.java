@@ -5,7 +5,8 @@ import io.reactivesw.common.model.UpdateAction;
 /**
  * Created by Davis on 16/12/6.
  */
-public class SetOrderHint implements UpdateAction {
+public class SetOrderHint
+    implements UpdateAction {
   /**
    * The Order hint.
    */

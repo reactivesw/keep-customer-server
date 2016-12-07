@@ -16,12 +16,11 @@ import io.reactivesw.common.model.Reference;
 import io.reactivesw.common.model.UpdateAction;
 
 import org.apache.commons.lang3.StringUtils;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,22 +109,22 @@ public class CategoryService {
   /**
    * Update category.
    *
-   * @param id            the id
-   * @param version       the update request
-   * @param updateActions the update action
+   * @param id      the id
+   * @param version the update request
+   * @param actions the update action
    * @return the category
    */
   @Transactional
-  public Category updateCategory(String id, Integer version, List<UpdateAction> updateActions) {
+  public Category updateCategory(String id, Integer version, List<UpdateAction> actions) {
     LOG.debug("enter updateCategory, id is {}, version is {}, update action is {}",
-        id, version, updateActions);
+        id, version, actions);
 
     CategoryEntity entity = getById(id);
     validateVersion(entity, version);
 
-    for (UpdateAction updateAction : updateActions) {
-      entity = CategoryUpdateMapper.updateCategoryEntity(updateAction, entity);
-    }
+    actions.parallelStream().forEach(action -> CategoryUpdateMapper.getMapper(action.getClass())
+        .setAction(entity, action));
+
     CategoryEntity updatedEntity = categoryRepository.save(entity);
     //TODO send message, if slug be updated
     Category result = CategoryMapper.entityToModel(updatedEntity);

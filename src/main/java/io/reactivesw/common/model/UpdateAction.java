@@ -2,12 +2,13 @@ package io.reactivesw.common.model;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+import io.reactivesw.catalog.category.application.model.action.SetExternalID;
 import io.reactivesw.catalog.category.application.model.action.SetOrderHint;
 import io.reactivesw.catalog.category.application.model.action.SetParent;
 import io.reactivesw.catalog.category.application.model.action.SetSlug;
 import io.reactivesw.catalog.category.application.model.action.SetCustomField;
 import io.reactivesw.catalog.category.application.model.action.SetCustomType;
-import io.reactivesw.catalog.category.application.model.action.SetExternalID;
 import io.reactivesw.catalog.category.application.model.action.SetMetaDescription;
 import io.reactivesw.catalog.category.application.model.action.SetMetaKeywords;
 import io.reactivesw.catalog.category.application.model.action.SetMetaTitle;

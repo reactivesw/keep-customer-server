@@ -21,9 +21,9 @@ public class LineItemMapper {
 
     item.setProductId(entity.getProductId());
 
-    item.setName(LocalizedStringMapper.convertToLocalizedStringDefaultNew(entity.getName()));
+    item.setName(LocalizedStringMapper.entityToModelDefaultNew(entity.getName()));
 
-    item.setProductSlug(LocalizedStringMapper.convertToLocalizedStringDefaultNew(entity.getProductSlug()));
+    item.setProductSlug(LocalizedStringMapper.entityToModelDefaultNew(entity.getProductSlug()));
 
 //    private ProductVariant variant;
 //
