@@ -10,7 +10,7 @@ import io.reactivesw.order.discountcode.domain.entity.DiscountCodeEntity;
 public class ActiveMapper implements DiscountCodeUpdateMapper<DiscountCodeEntity> {
 
   /**
-   *
+   *  set active state of the code.
    * @param entity DiscountCodeEntity
    * @param action UpdateAction
    */
