@@ -44,15 +44,15 @@ public final class CategoryMapper {
       category.setParent(new Reference(ReferenceTypes.CATEGORY.getType(), parentId));
     }
     //TODO extract to other method
-    category.setName(LocalizedStringMapper.convertToLocalizedStringDefaultNull(entity.getName()));
-    category.setSlug(LocalizedStringMapper.convertToLocalizedStringDefaultNull(entity.getSlug()));
-    category.setDescription(LocalizedStringMapper.convertToLocalizedStringDefaultNull(entity
+    category.setName(LocalizedStringMapper.entityToModelDefaultNull(entity.getName()));
+    category.setSlug(LocalizedStringMapper.entityToModelDefaultNull(entity.getSlug()));
+    category.setDescription(LocalizedStringMapper.entityToModelDefaultNull(entity
         .getDescription()));
-    category.setMetaTitle(LocalizedStringMapper.convertToLocalizedStringDefaultNull(entity
+    category.setMetaTitle(LocalizedStringMapper.entityToModelDefaultNull(entity
         .getMetaTitle()));
-    category.setMetaKeywords(LocalizedStringMapper.convertToLocalizedStringDefaultNull(entity
+    category.setMetaKeywords(LocalizedStringMapper.entityToModelDefaultNull(entity
         .getMetaKeyWords()));
-    category.setMetaDescription(LocalizedStringMapper.convertToLocalizedStringDefaultNull(entity
+    category.setMetaDescription(LocalizedStringMapper.entityToModelDefaultNull(entity
         .getMetaDescription()));
     return category;
   }
@@ -66,17 +66,17 @@ public final class CategoryMapper {
    */
   public static CategoryEntity modelToEntity(CategoryDraft draft) {
     CategoryEntity entity = mapper.map(draft, CategoryEntity.class);
-    entity.setName(LocalizedStringMapper.convertToLocalizedStringEntityDefaultNull(draft.getName
+    entity.setName(LocalizedStringMapper.modelToEntityDefaultNull(draft.getName
         ()));
-    entity.setDescription(LocalizedStringMapper.convertToLocalizedStringEntityDefaultNull(draft
+    entity.setDescription(LocalizedStringMapper.modelToEntityDefaultNull(draft
         .getDescription()));
-    entity.setSlug(LocalizedStringMapper.convertToLocalizedStringEntityDefaultNull(draft.getSlug
+    entity.setSlug(LocalizedStringMapper.modelToEntityDefaultNull(draft.getSlug
         ()));
-    entity.setMetaTitle(LocalizedStringMapper.convertToLocalizedStringEntityDefaultNull(draft
+    entity.setMetaTitle(LocalizedStringMapper.modelToEntityDefaultNull(draft
         .getMetaTitle()));
-    entity.setMetaDescription(LocalizedStringMapper.convertToLocalizedStringEntityDefaultNull(draft
+    entity.setMetaDescription(LocalizedStringMapper.modelToEntityDefaultNull(draft
         .getMetaDescription()));
-    entity.setMetaKeyWords(LocalizedStringMapper.convertToLocalizedStringEntityDefaultNull(draft
+    entity.setMetaKeyWords(LocalizedStringMapper.modelToEntityDefaultNull(draft
         .getMetaKeywords()));
     //TODO set custom fields
     if (draft.getCustom() == null) {

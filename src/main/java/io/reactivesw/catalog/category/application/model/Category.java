@@ -61,7 +61,6 @@ public class Category {
    * human-readable identifiers usually used as deep-link URL to the related category.
    * Each slug is unique across a project,
    * but a category can have the same slug for different languages.
-   * TODO write getter and setter method for String
    */
   @ApiModelProperty(value = "CategoryEntity Slug")
   @JsonIgnore
@@ -69,7 +68,6 @@ public class Category {
 
   /**
    * The Description.
-   * TODO write getter and setter method for String
    */
   @ApiModelProperty(value = "CategoryEntity Description")
   @JsonIgnore
@@ -101,7 +99,6 @@ public class Category {
 
   /**
    * The Meta title.
-   * TODO write getter and setter method for String
    */
   @ApiModelProperty(value = "CategoryEntity metaTitle")
   @JsonIgnore
@@ -109,7 +106,6 @@ public class Category {
 
   /**
    * The metaDescription.
-   * TODO write getter and setter method for String
    */
   @ApiModelProperty(value = "CategoryEntity metaDescription")
   @JsonIgnore
@@ -117,7 +113,6 @@ public class Category {
 
   /**
    * the metaKeywords.
-   * TODO write getter and setter method for String
    */
   @ApiModelProperty(value = "CategoryEntity metaKeywords")
   @JsonIgnore

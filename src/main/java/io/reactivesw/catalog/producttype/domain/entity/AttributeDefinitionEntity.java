@@ -3,14 +3,18 @@ package io.reactivesw.catalog.producttype.domain.entity;
 import io.reactivesw.catalog.product.model.attributes.AttributeConstraint;
 import io.reactivesw.catalog.product.model.attributes.AttributeType;
 import io.reactivesw.common.entity.BaseAllEntity;
-import io.reactivesw.common.model.LocalizedString;
+import io.reactivesw.common.entity.LocalizedStringEntity;
 import io.reactivesw.common.model.TextInputHint;
 import io.reactivesw.common.util.AttributeTypeJsonConverter;
-import io.reactivesw.common.util.LocalizedStringJsonConverter;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -36,16 +40,14 @@ public class AttributeDefinitionEntity extends BaseAllEntity {
   /**
    * The Label.
    */
-  @Column(name = "label", nullable = false, columnDefinition = "JSON")
-  @Convert(converter = LocalizedStringJsonConverter.class)
-  private LocalizedString label;
+  @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+  private Set<LocalizedStringEntity> label;
 
   /**
    * The Input tip.
    */
-  @Column(name = "input_tip", nullable = false, columnDefinition = "JSON")
-  @Convert(converter = LocalizedStringJsonConverter.class)
-  private LocalizedString inputTip;
+  @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+  private Set<LocalizedStringEntity> inputTip;
 
   /**
    * The Is required.
@@ -112,7 +114,7 @@ public class AttributeDefinitionEntity extends BaseAllEntity {
    *
    * @return the label
    */
-  public LocalizedString getLabel() {
+  public Set<LocalizedStringEntity> getLabel() {
     return label;
   }
 
@@ -121,7 +123,7 @@ public class AttributeDefinitionEntity extends BaseAllEntity {
    *
    * @param label the label
    */
-  public void setLabel(LocalizedString label) {
+  public void setLabel(Set<LocalizedStringEntity> label) {
     this.label = label;
   }
 
@@ -130,7 +132,7 @@ public class AttributeDefinitionEntity extends BaseAllEntity {
    *
    * @return the input tip
    */
-  public LocalizedString getInputTip() {
+  public Set<LocalizedStringEntity> getInputTip() {
     return inputTip;
   }
 
@@ -139,7 +141,7 @@ public class AttributeDefinitionEntity extends BaseAllEntity {
    *
    * @param inputTip the input tip
    */
-  public void setInputTip(LocalizedString inputTip) {
+  public void setInputTip(Set<LocalizedStringEntity> inputTip) {
     this.inputTip = inputTip;
   }
 

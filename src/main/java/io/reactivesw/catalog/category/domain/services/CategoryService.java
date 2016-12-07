@@ -16,12 +16,11 @@ import io.reactivesw.common.model.Reference;
 import io.reactivesw.common.model.UpdateAction;
 
 import org.apache.commons.lang3.StringUtils;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,22 +109,22 @@ public class CategoryService {
   /**
    * Update category.
    *
-   * @param id            the id
-   * @param version       the update request
-   * @param updateActions the update action
+   * @param id      the id
+   * @param version the update request
+   * @param actions the update action
    * @return the category
    */
   @Transactional
-  public Category updateCategory(String id, Integer version, List<UpdateAction> updateActions) {
+  public Category updateCategory(String id, Integer version, List<UpdateAction> actions) {
     LOG.debug("enter updateCategory, id is {}, version is {}, update action is {}",
-        id, version, updateActions);
+        id, version, actions);
 
     CategoryEntity entity = getById(id);
     validateVersion(entity, version);
 
-    for (UpdateAction updateAction : updateActions) {
-      entity = CategoryUpdateMapper.updateCategoryEntity(updateAction, entity);
-    }
+    actions.parallelStream().forEach(action -> CategoryUpdateMapper.getMapper(action.getClass())
+        .setAction(entity, action));
+
     CategoryEntity updatedEntity = categoryRepository.save(entity);
     //TODO send message, if slug be updated
     Category result = CategoryMapper.entityToModel(updatedEntity);
@@ -160,7 +159,7 @@ public class CategoryService {
 
     if (categoryEntity == null) {
       LOG.debug("fail getById, can not find category by id:{}", id);
-      throw new NotExistException();
+      throw new NotExistException("can not find category by id:" + id);
     }
 
     LOG.debug("end getById, id is {}, get CategoryEntity:{}",
@@ -181,7 +180,7 @@ public class CategoryService {
     if (!Objects.equals(version, entity.getVersion())) {
       LOG.debug("Version not match, input version:{}, entity version:{}",
           version, entity.getVersion());
-      throw new ParametersException("");
+      throw new ParametersException("Version not match");
     }
 
   }
@@ -223,8 +222,8 @@ public class CategoryService {
    */
   private void validateParentCategory(String parentId, CategoryEntity parent) {
     if (parent == null) {
-      LOG.debug("can not find parent category by id {}", parentId);
-      throw new ParametersException();
+      LOG.debug("can not find parent category by id:{}", parentId);
+      throw new ParametersException("Can not find parent category by id:" + parentId);
     }
   }
 
@@ -245,7 +244,7 @@ public class CategoryService {
       for (LocalizedStringEntity categoryName : categoryNames) {
         if (key.equals(categoryName.getLanguage()) && value.equals(categoryName.getText())) {
           LOG.debug("can not create category with same name : {}, key: {}", value, key);
-          throw new ParametersException();
+          throw new ParametersException("Can not create category with same name");
         }
       }
     }
