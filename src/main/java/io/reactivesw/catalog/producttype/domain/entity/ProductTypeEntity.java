@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 /**
  * Created by Davis on 16/11/22.
@@ -19,6 +20,7 @@ public class ProductTypeEntity extends BaseAllEntity {
   /**
    * version.
    */
+  @Version
   @Column
   private Integer version;
 

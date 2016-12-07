@@ -160,7 +160,7 @@ public class CategoryService {
 
     if (categoryEntity == null) {
       LOG.debug("fail getById, can not find category by id:{}", id);
-      throw new NotExistException();
+      throw new NotExistException("can not find category by id:" + id);
     }
 
     LOG.debug("end getById, id is {}, get CategoryEntity:{}",
@@ -181,7 +181,7 @@ public class CategoryService {
     if (!Objects.equals(version, entity.getVersion())) {
       LOG.debug("Version not match, input version:{}, entity version:{}",
           version, entity.getVersion());
-      throw new ParametersException("");
+      throw new ParametersException("Version not match");
     }
 
   }
@@ -223,8 +223,8 @@ public class CategoryService {
    */
   private void validateParentCategory(String parentId, CategoryEntity parent) {
     if (parent == null) {
-      LOG.debug("can not find parent category by id {}", parentId);
-      throw new ParametersException();
+      LOG.debug("can not find parent category by id:{}", parentId);
+      throw new ParametersException("Can not find parent category by id:" + parentId);
     }
   }
 
@@ -245,7 +245,7 @@ public class CategoryService {
       for (LocalizedStringEntity categoryName : categoryNames) {
         if (key.equals(categoryName.getLanguage()) && value.equals(categoryName.getText())) {
           LOG.debug("can not create category with same name : {}, key: {}", value, key);
-          throw new ParametersException();
+          throw new ParametersException("Can not create category with same name");
         }
       }
     }
