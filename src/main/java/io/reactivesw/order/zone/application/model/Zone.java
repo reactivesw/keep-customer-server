@@ -1,4 +1,4 @@
-package io.reactivesw.order.zone.model;
+package io.reactivesw.order.zone.application.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

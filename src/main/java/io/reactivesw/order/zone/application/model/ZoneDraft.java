@@ -1,4 +1,4 @@
-package io.reactivesw.order.zone.model;
+package io.reactivesw.order.zone.application.model;
 
 import java.util.List;
 

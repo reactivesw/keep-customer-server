@@ -1,4 +1,4 @@
-package io.reactivesw.order.zone.model;
+package io.reactivesw.order.zone.application.model;
 
 /**
  * Created by Davis on 16/11/17.
