@@ -1,4 +1,4 @@
-package io.reactivesw.order.shippingmethod.model;
+package io.reactivesw.order.shippingmethod.application.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

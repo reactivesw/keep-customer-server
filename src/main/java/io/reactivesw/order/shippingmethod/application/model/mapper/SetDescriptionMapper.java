@@ -1,14 +1,13 @@
-package io.reactivesw.order.zone.application.model.mapper;
+package io.reactivesw.order.shippingmethod.application.model.mapper;
 
 import io.reactivesw.common.model.UpdateAction;
 import io.reactivesw.common.model.action.SetDescription;
-import io.reactivesw.order.zone.application.model.mapper.ZoneUpdateMapper;
-import io.reactivesw.order.zone.domain.entity.ZoneEntity;
+import io.reactivesw.order.shippingmethod.domain.entity.ShippingMethodEntity;
 
 /**
  * Created by umasuo on 16/12/8.
  */
-public class SetDescriptionMapper implements ZoneUpdateMapper {
+public class SetDescriptionMapper implements ShippingMethodUpdateMapper {
 
   /**
    * set description.
@@ -17,7 +16,7 @@ public class SetDescriptionMapper implements ZoneUpdateMapper {
    * @param action UpdateAction
    */
   @Override
-  public void setAction(ZoneEntity entity, UpdateAction action) {
+  public void setAction(ShippingMethodEntity entity, UpdateAction action) {
     entity.setDescription(((SetDescription) action).getDescription());
   }
 }
