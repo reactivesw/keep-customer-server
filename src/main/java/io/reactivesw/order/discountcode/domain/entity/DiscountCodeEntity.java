@@ -68,13 +68,6 @@ public class DiscountCodeEntity extends BaseAllEntity {
   private Boolean active;
 
   /**
-   * references.
-   */
-  @Column(name = "reference", columnDefinition = Statics.JSON)
-  @Convert(converter = ListJsonConverter.class)
-  private List<String> references;
-
-  /**
    * max application.
    */
   @Column(name = "max_applications")
@@ -213,24 +206,6 @@ public class DiscountCodeEntity extends BaseAllEntity {
   }
 
   /**
-   * Gets references.
-   *
-   * @return the references
-   */
-  public List<String> getReferences() {
-    return references;
-  }
-
-  /**
-   * Sets references.
-   *
-   * @param references the references
-   */
-  public void setReferences(List<String> references) {
-    this.references = references;
-  }
-
-  /**
    * Gets max application.
    *
    * @return the max application
@@ -281,7 +256,6 @@ public class DiscountCodeEntity extends BaseAllEntity {
         + ", cartDiscounts=" + cartDiscounts
         + ", cartPredicate='" + cartPredicate + '\''
         + ", isActive=" + active
-        + ", references=" + references
         + ", maxApplications=" + maxApplications
         + ", maxApplicationsPerCustomer=" + maxApplicationsPerCustomer
         + '}';

@@ -20,26 +20,52 @@ import javax.persistence.MappedSuperclass;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseAllEntity  extends BaseIdEntity{
 
+  /**
+   * The Created at.
+   */
   @CreatedDate
   @Column(name = "created_at")
   protected ZonedDateTime createdAt;
 
+  /**
+   * The Last modified at.
+   */
   @LastModifiedDate
   @Column(name = "last_modified_at")
   protected ZonedDateTime lastModifiedAt;
 
+  /**
+   * Gets created at.
+   *
+   * @return the created at
+   */
   public ZonedDateTime getCreatedAt() {
     return createdAt;
   }
 
+  /**
+   * Sets created at.
+   *
+   * @param createdAt the created at
+   */
   public void setCreatedAt(ZonedDateTime createdAt) {
     this.createdAt = createdAt;
   }
 
+  /**
+   * Gets last modified at.
+   *
+   * @return the last modified at
+   */
   public ZonedDateTime getLastModifiedAt() {
     return lastModifiedAt;
   }
 
+  /**
+   * Sets last modified at.
+   *
+   * @param lastModifiedAt the last modified at
+   */
   public void setLastModifiedAt(ZonedDateTime lastModifiedAt) {
     this.lastModifiedAt = lastModifiedAt;
   }

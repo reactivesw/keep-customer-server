@@ -1,5 +1,7 @@
 package io.reactivesw.common.entity;
 
+import java.util.Objects;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -71,5 +73,41 @@ public class MoneyEntity extends BaseIdEntity {
    */
   public void setCentAmount(Integer centAmount) {
     this.centAmount = centAmount;
+  }
+
+  /**
+   * equals method.
+   * if the currency and the currency code is the same, so the two object is equals.
+   *
+   * @param obj
+   * @return
+   */
+  @Override
+  public boolean equals(Object obj) {
+    boolean result = false;
+
+    if (this == obj) {
+      result = true;
+    }
+
+    if (this != obj && obj instanceof MoneyEntity) {
+      MoneyEntity that = (MoneyEntity) obj;
+      result = Objects.equals(this.getCentAmount(), that.getCentAmount())
+          && Objects.equals(this.getCurrencyCode(), that.getCurrencyCode());
+    }
+
+    return result;
+  }
+
+  /**
+   * hash code.
+   *
+   * @return
+   */
+  @Override
+  public int hashCode() {
+    int result = getCurrencyCode() == null ? 0 : getCurrencyCode().hashCode();
+    result = 31 * result + (getCentAmount() == null ? 0 : getCentAmount().hashCode());
+    return result;
   }
 }

@@ -9,11 +9,12 @@ import javax.annotation.Resource;
 
 import io.reactivesw.order.cart.infrastructure.enums.CartState;
 import io.reactivesw.order.cart.domain.entity.CartEntity;
+import org.springframework.stereotype.Repository;
 
 /**
  * Created by umasuo on 16/11/29.
  */
-@Resource
+@Repository
 public interface CartRepository extends JpaRepository<CartEntity, String>, CrudRepository<CartEntity, String> {
 
   /**
