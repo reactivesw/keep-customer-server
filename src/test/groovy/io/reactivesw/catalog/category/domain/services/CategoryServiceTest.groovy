@@ -1,6 +1,7 @@
 package io.reactivesw.catalog.category.domain.services
 
 import com.google.common.collect.Lists
+import io.reactivesw.catalog.category.application.model.action.SetSlug
 import io.reactivesw.common.model.action.SetLocalizedName
 import io.reactivesw.catalog.category.domain.entities.CategoryEntity
 import io.reactivesw.catalog.category.application.model.CategoryDraft
@@ -175,7 +176,9 @@ class CategoryServiceTest extends Specification {
         Map<String, String> map = new HashMap<>()
         map.put("en", "value")
         def changeName = new SetLocalizedName(name: new LocalizedString(localized: map))
+        def changeSlug = new SetSlug(slug: new LocalizedString(localized: map))
         updateActions.add(changeName)
+        updateActions.add(changeSlug)
         categoryEntity.version = version
         categoryRepository.findOne(_) >> categoryEntity
         categoryRepository.save(_) >> categoryEntity

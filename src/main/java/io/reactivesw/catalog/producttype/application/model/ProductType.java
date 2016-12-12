@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -64,7 +65,7 @@ public class ProductType {
   /**
    * The Attributes.
    */
-  private Set<AttributeDefinition> attributes;
+  private List<AttributeDefinition> attributes;
 
   /**
    * Gets id.
@@ -197,7 +198,7 @@ public class ProductType {
    *
    * @return the attributes
    */
-  public Set<AttributeDefinition> getAttributes() {
+  public List<AttributeDefinition> getAttributes() {
     return attributes;
   }
 
@@ -206,7 +207,7 @@ public class ProductType {
    *
    * @param attributes the attributes
    */
-  public void setAttributes(Set<AttributeDefinition> attributes) {
+  public void setAttributes(List<AttributeDefinition> attributes) {
     this.attributes = attributes;
   }
 

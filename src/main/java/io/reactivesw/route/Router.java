@@ -63,7 +63,34 @@ public class Router {
   public static final String PRODUCT_TYPE_WITH_ID = PRODUCT_TYPE_ROOT
       + "/{" + PRODUCT_TYPE_ID + "}";
 
+
+  /**
+   * product type url with key.
+   */
+  public static final String PRODUCT_TYPE_WITH_KEY = PRODUCT_TYPE_ROOT + "/key={"
+      + PRODUCT_TYPE_KEY + "}";
+
   /*************** End Product Type. **********************/
+
+  /*************** TaxCategory. ***************************/
+
+  /**
+   * tax category root.
+   */
+  public static final String TAX_CATEGORY_ROOT = URL_ROOT + "/tax-categories";
+
+  /**
+   * tax category id.
+   */
+  public static final String TAX_CATEGORY_ID = "taxCategoryId";
+
+  /**
+   * tax category with id.
+   */
+  public static final String TAX_CATEGORY_WITH_ID = TAX_CATEGORY_ROOT
+      + "/{" + TAX_CATEGORY_ID + "}";
+
+  /*************** End TaxCategory. ***********************/
 
 
   /*************** Cart & order. *****************/

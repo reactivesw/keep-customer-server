@@ -7,7 +7,7 @@ import io.reactivesw.order.order.model.Delivery;
 import io.reactivesw.order.shippingmethod.model.ShippingRate;
 import io.reactivesw.common.model.Money;
 import io.reactivesw.common.model.Reference;
-import io.reactivesw.catalog.taxcategory.model.TaxRate;
+import io.reactivesw.catalog.taxcategory.application.model.TaxRate;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 

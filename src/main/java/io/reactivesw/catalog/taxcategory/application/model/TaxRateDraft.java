@@ -1,56 +1,44 @@
-package io.reactivesw.catalog.taxcategory.entity;
+package io.reactivesw.catalog.taxcategory.application.model;
 
-import io.reactivesw.common.entity.BaseIdEntity;
-
-import java.math.BigDecimal;
-import java.util.Set;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import java.util.List;
 
 /**
- * Created by Davis on 16/11/23.
+ * Created by Davis on 16/11/17.
  */
-@Entity
-@Table(name = "catalog_tax_category_tax_rate")
-public class TaxRateEntity extends BaseIdEntity {
+public class TaxRateDraft {
+
   /**
    * The Name.
    */
-  @Column(name = "name")
   private String name;
-
   /**
-   * The Amount.
+   * Percentage in the range of [0..1]. Must be supplied if no subRates are specified.
+   * If subRates are specified then the amount can be omitted or
+   * it must be the sum of the amounts of all subRates.
    */
-  @Column(name = "amount", precision = 8, scale = 7)
-  private BigDecimal amount;
+  private Float amount;
 
   /**
    * The Included in price.
    */
-  @Column(name = "included_in_price")
   private Boolean includedInPrice;
 
   /**
-   * The Country.
+   * A two-digit country code as per ↗ ISO 3166-1 alpha-2 .
    */
-  @Column(name = "country")
   private String country;
 
   /**
-   * The State.
+   * The state in the country
    */
-  @Column(name = "state")
   private String state;
 
   /**
-   * The Sub rates.
+   * Array of SubRateEntity - Optional beta.
+   * For countries (e.g. the US) where the total tax is a combination of multiple taxes
+   * (e.g. state and local taxes).
    */
-  @OneToMany
-  private Set<SubRateEntity> subRates;
+  private List<SubRate> subRates;
 
   /**
    * Gets name.
@@ -75,7 +63,7 @@ public class TaxRateEntity extends BaseIdEntity {
    *
    * @return the amount
    */
-  public BigDecimal getAmount() {
+  public Float getAmount() {
     return amount;
   }
 
@@ -84,7 +72,7 @@ public class TaxRateEntity extends BaseIdEntity {
    *
    * @param amount the amount
    */
-  public void setAmount(BigDecimal amount) {
+  public void setAmount(Float amount) {
     this.amount = amount;
   }
 
@@ -147,7 +135,7 @@ public class TaxRateEntity extends BaseIdEntity {
    *
    * @return the sub rates
    */
-  public Set<SubRateEntity> getSubRates() {
+  public List<SubRate> getSubRates() {
     return subRates;
   }
 
@@ -156,7 +144,7 @@ public class TaxRateEntity extends BaseIdEntity {
    *
    * @param subRates the sub rates
    */
-  public void setSubRates(Set<SubRateEntity> subRates) {
+  public void setSubRates(List<SubRate> subRates) {
     this.subRates = subRates;
   }
 
@@ -167,14 +155,13 @@ public class TaxRateEntity extends BaseIdEntity {
    */
   @Override
   public String toString() {
-    return "TaxRateEntity{"
-        + "id=" + id
-        + "name='" + name + '\''
-        + ", amount=" + amount
-        + ", includedInPrice=" + includedInPrice
-        + ", country='" + country + '\''
-        + ", state='" + state + '\''
-        + ", subRates=" + subRates
-        + '}';
+    return "TaxRateDraft{" +
+        "name='" + name + '\'' +
+        ", amount=" + amount +
+        ", includedInPrice=" + includedInPrice +
+        ", country='" + country + '\'' +
+        ", state='" + state + '\'' +
+        ", subRates=" + subRates +
+        '}';
   }
 }

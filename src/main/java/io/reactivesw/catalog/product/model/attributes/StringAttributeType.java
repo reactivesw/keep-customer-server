@@ -1,12 +1,14 @@
 package io.reactivesw.catalog.product.model.attributes;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 //TOOD copy from sdk, should be TextType
 public final class StringAttributeType extends AttributeTypeBase {
+//    @JsonCreator
     private StringAttributeType() {}
 
-    @JsonIgnore
+    @JsonCreator
     public static StringAttributeType of() {
         return new StringAttributeType();
     }

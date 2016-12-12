@@ -1,4 +1,4 @@
-package io.reactivesw.catalog.taxcategory.entity;
+package io.reactivesw.catalog.taxcategory.domain.entity;
 
 import io.reactivesw.common.entity.BaseIdEntity;
 

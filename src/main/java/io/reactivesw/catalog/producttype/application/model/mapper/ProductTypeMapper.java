@@ -16,6 +16,10 @@ public final class ProductTypeMapper {
    */
   public static ProductTypeEntity modelToEntity(ProductTypeDraft draft) {
     ProductTypeEntity entity = new ProductTypeEntity();
+    entity.setName(draft.getName());
+    entity.setKey(draft.getKey());
+    entity.setDescription(draft.getDescription());
+    entity.setAttributes(AttributeDefinitionMapper.modelToEntity(draft.getAttributes()));
     return entity;
   }
 
@@ -26,7 +30,15 @@ public final class ProductTypeMapper {
    * @return the product type
    */
   public static ProductType entityToModel(ProductTypeEntity entity) {
-    ProductType productType = new ProductType();
-    return productType;
+    ProductType model = new ProductType();
+    model.setName(entity.getName());
+    model.setDescription(entity.getDescription());
+    model.setCreatedAt(entity.getCreatedAt());
+    model.setLastModifiedAt(entity.getLastModifiedAt());
+    model.setId(entity.getId());
+    model.setKey(entity.getKey());
+    model.setVersion(entity.getVersion());
+    model.setAttributes(AttributeDefinitionMapper.entityToModel(entity.getAttributes()));
+    return model;
   }
 }

@@ -1,4 +1,4 @@
-package io.reactivesw.catalog.taxcategory.model;
+package io.reactivesw.catalog.taxcategory.application.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

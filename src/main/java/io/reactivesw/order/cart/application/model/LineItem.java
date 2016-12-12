@@ -12,7 +12,7 @@ import io.reactivesw.common.model.CustomFields;
 import io.reactivesw.common.model.LocalizedString;
 import io.reactivesw.common.model.Money;
 import io.reactivesw.common.model.Reference;
-import io.reactivesw.catalog.taxcategory.model.TaxRate;
+import io.reactivesw.catalog.taxcategory.application.model.TaxRate;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 

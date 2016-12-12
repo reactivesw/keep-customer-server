@@ -25,6 +25,9 @@ dependencies {
     //commons-lang
     compile('org.apache.commons:commons-lang3:3.4')
 
+    //lombok
+    compile('org.projectlombok:lombok:1.16.12')
+
     //cglib for Spock
     compile('cglib:cglib-nodep:3.1')
 

@@ -4,7 +4,7 @@ import java.util.List;
 
 import io.reactivesw.order.cart.infrastructure.enums.InventoryMode;
 import io.reactivesw.order.cart.infrastructure.enums.TaxMode;
-import io.reactivesw.catalog.taxcategory.model.ExternalTaxRateDraft;
+import io.reactivesw.catalog.taxcategory.application.model.ExternalTaxRateDraft;
 import io.reactivesw.common.model.Address;
 import io.reactivesw.common.model.Reference;
 import io.reactivesw.common.model.CustomFieldsDraft;

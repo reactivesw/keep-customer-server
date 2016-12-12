@@ -4,7 +4,7 @@ import io.reactivesw.order.cart.application.model.ItemState;
 import io.reactivesw.catalog.product.model.Price;
 import io.reactivesw.common.model.LocalizedString;
 import io.reactivesw.common.model.Reference;
-import io.reactivesw.catalog.taxcategory.model.TaxRate;
+import io.reactivesw.catalog.taxcategory.application.model.TaxRate;
 import io.reactivesw.common.model.CustomFieldsDraft;
 
 import java.util.List;

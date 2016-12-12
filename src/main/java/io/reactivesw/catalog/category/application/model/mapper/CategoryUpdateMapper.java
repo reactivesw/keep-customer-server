@@ -7,6 +7,7 @@ import io.reactivesw.catalog.category.application.model.action.SetMetaTitle;
 import io.reactivesw.catalog.category.application.model.action.SetOrderHint;
 import io.reactivesw.catalog.category.application.model.action.SetParent;
 import io.reactivesw.catalog.category.application.model.action.SetSlug;
+import io.reactivesw.common.model.UpdateAction;
 import io.reactivesw.common.model.action.SetLocalizedDescription;
 import io.reactivesw.common.model.action.SetLocalizedName;
 import io.reactivesw.common.model.mapper.UpdateMapper;

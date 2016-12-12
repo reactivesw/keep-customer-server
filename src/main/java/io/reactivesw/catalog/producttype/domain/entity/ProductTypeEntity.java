@@ -2,10 +2,12 @@ package io.reactivesw.catalog.producttype.domain.entity;
 
 import io.reactivesw.common.entity.BaseAllEntity;
 
-import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
@@ -45,8 +47,8 @@ public class ProductTypeEntity extends BaseAllEntity {
   /**
    * attributes.
    */
-  @OneToMany
-  private List<AttributeDefinitionEntity> attributes;
+  @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+  private Set<AttributeDefinitionEntity> attributes;
 
   /**
    * Gets version.
@@ -125,7 +127,7 @@ public class ProductTypeEntity extends BaseAllEntity {
    *
    * @return the attributes
    */
-  public List<AttributeDefinitionEntity> getAttributes() {
+  public Set<AttributeDefinitionEntity> getAttributes() {
     return attributes;
   }
 
@@ -134,7 +136,7 @@ public class ProductTypeEntity extends BaseAllEntity {
    *
    * @param attributes the attributes
    */
-  public void setAttributes(List<AttributeDefinitionEntity> attributes) {
+  public void setAttributes(Set<AttributeDefinitionEntity> attributes) {
     this.attributes = attributes;
   }
 

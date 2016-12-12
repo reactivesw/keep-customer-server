@@ -12,8 +12,11 @@ import io.reactivesw.catalog.category.application.model.action.SetCustomType;
 import io.reactivesw.catalog.category.application.model.action.SetMetaDescription;
 import io.reactivesw.catalog.category.application.model.action.SetMetaKeywords;
 import io.reactivesw.catalog.category.application.model.action.SetMetaTitle;
+import io.reactivesw.catalog.producttype.application.model.action.SetKey;
+import io.reactivesw.common.model.action.SetDescription;
 import io.reactivesw.common.model.action.SetLocalizedName;
 import io.reactivesw.common.model.action.SetLocalizedDescription;
+import io.reactivesw.common.model.action.SetName;
 import io.reactivesw.order.cart.application.model.action.AddLineItem;
 import io.reactivesw.order.cart.application.model.action.RemoveLineItem;
 import io.reactivesw.order.discountcode.application.model.action.SetActive;
@@ -48,6 +51,9 @@ import io.reactivesw.order.discountcode.application.model.action
     @JsonSubTypes.Type(value = SetCartPredicate.class, name = "setCartPredicate"),
     @JsonSubTypes.Type(value = SetMaxApplications.class, name = "setMaxApplications"),
     @JsonSubTypes.Type(value = SetMaxApplicationsPerCustomer.class, name = "setMaxApplicationsPerCustomer"),
+    @JsonSubTypes.Type(value = SetKey.class, name = "setDescription"),
+    @JsonSubTypes.Type(value = SetName.class, name = "setName"),
+    @JsonSubTypes.Type(value = SetDescription.class, name = "setDescription"),
 })
 public interface UpdateAction {
 }

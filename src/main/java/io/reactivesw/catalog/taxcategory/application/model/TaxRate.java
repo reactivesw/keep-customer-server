@@ -1,44 +1,59 @@
-package io.reactivesw.catalog.taxcategory.model;
+package io.reactivesw.catalog.taxcategory.application.model;
 
 import java.util.List;
 
-/**
- * Created by Davis on 16/11/17.
- */
-public class TaxRateDraft {
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
-  /**
-   * The Name.
-   */
+/**
+ * Created by umasuo on 16/11/17.
+ */
+@ApiModel
+public class TaxRate {
+
+  @ApiModelProperty(value = "The id is always set if the tax rate is part of a TaxCategory. The external tax rates in a Cart do not contain an id.",
+          required = false)
+  private String id;
+
+  @ApiModelProperty(required = true)
   private String name;
-  /**
-   * Percentage in the range of [0..1]. Must be supplied if no subRates are specified.
-   * If subRates are specified then the amount can be omitted or
-   * it must be the sum of the amounts of all subRates.
-   */
+
+  @ApiModelProperty(value = "Number Percentage in the range of [0..1]. The sum of the amounts of all subRates, if there are any.",
+          required = true)
   private Float amount;
 
-  /**
-   * The Included in price.
-   */
+  @ApiModelProperty(required = true)
   private Boolean includedInPrice;
 
-  /**
-   * A two-digit country code as per ↗ ISO 3166-1 alpha-2 .
-   */
+  @ApiModelProperty(value = "A two-digit country code as per ↗ ISO 3166-1 alpha-2 .",
+          required = true)
   private String country;
 
-  /**
-   * The state in the country
-   */
+  @ApiModelProperty(value = "The state in the country",
+          required = false)
   private String state;
 
-  /**
-   * Array of SubRateEntity - Optional beta.
-   * For countries (e.g. the US) where the total tax is a combination of multiple taxes
-   * (e.g. state and local taxes).
-   */
+  @ApiModelProperty(value = "For countries (e.g. the US) where the total tax is a combination of multiple taxes (e.g. state and local taxes).",
+          required = true)
   private List<SubRate> subRates;
+
+  /**
+   * Gets id.
+   *
+   * @return the id
+   */
+  public String getId() {
+    return id;
+  }
+
+  /**
+   * Sets id.
+   *
+   * @param id the id
+   */
+  public void setId(String id) {
+    this.id = id;
+  }
 
   /**
    * Gets name.
@@ -63,7 +78,7 @@ public class TaxRateDraft {
    *
    * @return the amount
    */
-  public Float getAmount() {
+  public float getAmount() {
     return amount;
   }
 
@@ -72,7 +87,7 @@ public class TaxRateDraft {
    *
    * @param amount the amount
    */
-  public void setAmount(Float amount) {
+  public void setAmount(float amount) {
     this.amount = amount;
   }
 
@@ -150,13 +165,13 @@ public class TaxRateDraft {
 
   /**
    * toString method.
-   *
    * @return String
    */
   @Override
   public String toString() {
-    return "TaxRateDraft{" +
-        "name='" + name + '\'' +
+    return "TaxRateEntity{" +
+        "id='" + id + '\'' +
+        ", name='" + name + '\'' +
         ", amount=" + amount +
         ", includedInPrice=" + includedInPrice +
         ", country='" + country + '\'' +

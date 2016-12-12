@@ -1,6 +1,6 @@
 package io.reactivesw.order.cart.application.model;
 
-import io.reactivesw.catalog.taxcategory.model.ExternalTaxRateDraft;
+import io.reactivesw.catalog.taxcategory.application.model.ExternalTaxRateDraft;
 import io.reactivesw.common.model.CustomFields;
 import io.reactivesw.common.model.LocalizedString;
 import io.reactivesw.common.model.Money;

@@ -62,7 +62,7 @@ public class DiscountCodeService {
    * update discount code entity.
    *
    * @param version Integer
-   * @param actions List<UpdateAction> list of UpdateActions
+   * @param actions list of UpdateActions
    * @return DiscountCodeEntity
    */
 

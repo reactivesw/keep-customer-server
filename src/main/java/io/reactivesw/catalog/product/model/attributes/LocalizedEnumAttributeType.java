@@ -2,11 +2,12 @@ package io.reactivesw.catalog.product.model.attributes;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.reactivesw.common.enums.LocalizedEnumValue;
 
 import java.util.List;
 
 import static io.reactivesw.common.util.ReactiveswInternalUtils.listOf;
+
+import io.reactivesw.common.model.LocalizedEnumValue;
 
 public final class LocalizedEnumAttributeType extends AttributeTypeBase {
     private final List<LocalizedEnumValue> values;

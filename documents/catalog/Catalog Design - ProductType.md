@@ -54,7 +54,7 @@ ProductType的名字可以重复。
 
 根据ID来修改的URL为：`/product-types/{id}`
 
-根据Key来修改的URL为：`/product-types/key={key}`
+根据Key来修改的URL为：`/product-types/name={name}`
 
 所有的修改操作，都需要与当前的version一致，否则失败。
 
@@ -82,7 +82,7 @@ ProductType的名字可以重复。
 
 根据ID来删除的URL为：`/product-types/{id}`
 
-根据Key来删除的URL为：`/product-types/key={key}`
+根据Key来删除的URL为：`/product-types/name={name}`
 
 不允许删除与Product有关联关系的ProductType。
 
