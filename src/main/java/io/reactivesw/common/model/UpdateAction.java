@@ -50,10 +50,12 @@ import io.reactivesw.order.discountcode.application.model.action
     @JsonSubTypes.Type(value = SetActive.class, name = "setActive"),
     @JsonSubTypes.Type(value = SetCartPredicate.class, name = "setCartPredicate"),
     @JsonSubTypes.Type(value = SetMaxApplications.class, name = "setMaxApplications"),
-    @JsonSubTypes.Type(value = SetMaxApplicationsPerCustomer.class, name = "setMaxApplicationsPerCustomer"),
+    @JsonSubTypes.Type(value = SetMaxApplicationsPerCustomer.class, name =
+        "setMaxApplicationsPerCustomer"),
     @JsonSubTypes.Type(value = SetKey.class, name = "setDescription"),
     @JsonSubTypes.Type(value = SetName.class, name = "setName"),
     @JsonSubTypes.Type(value = SetDescription.class, name = "setDescription"),
 })
 public interface UpdateAction {
+
 }

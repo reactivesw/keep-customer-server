@@ -2,6 +2,7 @@ package io.reactivesw.order.cart.application.model.mapper;
 
 import io.reactivesw.common.model.mapper.LocalizedStringMapper;
 import io.reactivesw.order.cart.application.model.LineItem;
+import io.reactivesw.order.cart.application.model.LineItemDraft;
 import io.reactivesw.order.cart.domain.entity.value.LineItemValue;
 
 /**
@@ -52,4 +53,12 @@ public class LineItemMapper {
     return item;
   }
 
+  /**
+   * 
+   * @param model
+   * @return
+   */
+  public static LineItemValue convertModelToEntity(LineItemDraft model) {
+    return null;
+  }
 }

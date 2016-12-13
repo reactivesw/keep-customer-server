@@ -1,4 +1,4 @@
-package io.reactivesw.order.cartdiscount.model;
+package io.reactivesw.order.cartdiscount.application.model;
 
 import io.reactivesw.common.model.Money;
 import io.reactivesw.common.model.Reference;

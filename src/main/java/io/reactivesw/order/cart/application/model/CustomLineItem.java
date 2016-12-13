@@ -2,7 +2,7 @@ package io.reactivesw.order.cart.application.model;
 
 import java.util.List;
 
-import io.reactivesw.order.cartdiscount.model.DiscountedLineItemPriceForQuantity;
+import io.reactivesw.order.cartdiscount.application.model.DiscountedLineItemPriceForQuantity;
 import io.reactivesw.common.model.CustomFields;
 import io.reactivesw.common.model.LocalizedString;
 import io.reactivesw.common.model.Money;

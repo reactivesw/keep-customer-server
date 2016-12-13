@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-import io.reactivesw.order.cartdiscount.model.CartDiscountPredicate;
+import io.reactivesw.order.cartdiscount.application.model.CartDiscountPredicate;
 import io.reactivesw.common.model.LocalizedString;
 import io.reactivesw.common.model.Reference;
 import io.swagger.annotations.ApiModel;

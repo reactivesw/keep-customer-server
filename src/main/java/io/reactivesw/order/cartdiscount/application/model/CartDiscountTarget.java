@@ -1,4 +1,4 @@
-package io.reactivesw.order.cartdiscount.model;
+package io.reactivesw.order.cartdiscount.application.model;
 
 /**
  * Created by Davis on 16/11/17.

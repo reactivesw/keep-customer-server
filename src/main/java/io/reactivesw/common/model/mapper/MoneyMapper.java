@@ -14,4 +14,12 @@ public class MoneyMapper {
     entity.setCurrencyCode(model.getCurrencyCode());
     return entity;
   }
+
+  public static Money convertEntityToModel(MoneyEntity entity) {
+    Money model = new Money();
+    model.setCentAmount(entity.getCentAmount());
+    model.setCurrencyCode(entity.getCurrencyCode());
+    return model;
+  }
+
 }

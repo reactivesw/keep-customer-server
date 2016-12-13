@@ -6,10 +6,8 @@ import io.reactivesw.common.entity.MoneyEntity;
 import io.reactivesw.common.model.CustomFields;
 import io.reactivesw.common.model.Statics;
 import io.reactivesw.common.util.CustomFieldsJsonConverter;
-import io.reactivesw.common.util.ListJsonConverter;
-import io.reactivesw.order.cartdiscount.enums.LineItemPriceMode;
+import io.reactivesw.order.cartdiscount.infrastructure.enums.LineItemPriceMode;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -47,6 +45,7 @@ public class LineItemValue extends BaseIdEntity {
 
   /**
    * product variant.
+   * a snap shop for variant.
    */
   @OneToOne
   private ProductVariantValue variant;
@@ -64,7 +63,10 @@ public class LineItemValue extends BaseIdEntity {
   private TaxedItemPriceValue taxedPrice;
 
   /**
-   * total price.
+   * The total price of this line item. If the line item is discounted, then the totalPrice is
+   * the DiscountedLineItemPriceForQuantity multiplied by quantity. Otherwise the total price is
+   * the product price multiplied by the quantity. totalPrice may or may not include the taxes:
+   * it depends on the taxRate.includedInPrice property.
    */
   @OneToOne
   private MoneyEntity totalPrice;
@@ -101,10 +103,10 @@ public class LineItemValue extends BaseIdEntity {
 
   /**
    * DiscountedLineItemPriceForQuantity ids.
+   * TODO we will use this later.
    */
-  @Column(name = "discount_codes", columnDefinition = Statics.JSON)
-  @Convert(converter = ListJsonConverter.class)
-  private List<String> discountedPriceForQuantity;
+  @Column(name = "discounted_price_for_quantity")
+  private String discountedPriceForQuantity;
 
   /**
    * price mode.
@@ -336,20 +338,20 @@ public class LineItemValue extends BaseIdEntity {
   }
 
   /**
-   * Gets discounted price per quantity.
+   * Gets discounted price for quantity.
    *
-   * @return the discounted price per quantity
+   * @return the discounted price for quantity
    */
-  public List<String> getDiscountedPriceForQuantity() {
+  public String getDiscountedPriceForQuantity() {
     return discountedPriceForQuantity;
   }
 
   /**
-   * Sets discounted price per quantity.
+   * Sets discounted price for quantity.
    *
-   * @param discountedPriceForQuantity the discounted price per quantity
+   * @param discountedPriceForQuantity the discounted price for quantity
    */
-  public void setDiscountedPriceForQuantity(List<String> discountedPriceForQuantity) {
+  public void setDiscountedPriceForQuantity(String discountedPriceForQuantity) {
     this.discountedPriceForQuantity = discountedPriceForQuantity;
   }
 

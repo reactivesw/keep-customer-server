@@ -119,7 +119,7 @@ class CartServiceTest extends Specification {
     def "Get cart by cart id"() {
         when:
         cartRepository.findOne(_) >> cartEntity
-        CartEntity entity = cartService.getCartByCartId(customerId)
+        CartEntity entity = cartService.getById(customerId)
         then:
         entity != null
     }
@@ -127,7 +127,7 @@ class CartServiceTest extends Specification {
     def "Get cart by cart id not exist"() {
         when:
         cartRepository.findOne(_) >> null
-        cartService.getCartByCartId(customerId)
+        cartService.getById(customerId)
         then:
         thrown(NotExistException)
     }

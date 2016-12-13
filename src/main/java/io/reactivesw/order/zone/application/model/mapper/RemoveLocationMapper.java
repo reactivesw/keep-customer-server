@@ -1,5 +1,6 @@
 package io.reactivesw.order.zone.application.model.mapper;
 
+import io.reactivesw.common.exception.NotExistException;
 import io.reactivesw.common.model.UpdateAction;
 import io.reactivesw.order.zone.application.model.action.AddLocation;
 import io.reactivesw.order.zone.domain.entity.ZoneEntity;
@@ -18,6 +19,11 @@ public class RemoveLocationMapper implements ZoneUpdateMapper {
   @Override
   public void setAction(ZoneEntity entity, UpdateAction action) {
     AddLocation location = (AddLocation) action;
-    entity.getLocation().remove(LocationMapper.convertModelToEntity(location.getLocation()));
+    boolean result = entity.getLocation().remove(LocationMapper.convertModelToEntity(location
+        .getLocation()));
+
+    if (!result) {
+      throw new NotExistException("Zone not exist.");
+    }
   }
 }

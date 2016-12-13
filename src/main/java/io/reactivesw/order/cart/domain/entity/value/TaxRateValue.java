@@ -30,7 +30,7 @@ public class TaxRateValue extends BaseIdEntity {
   private Float amount;
 
   /**
-   * if inclued in price.
+   * if included in price.
    */
   @Column
   private Boolean includedInPrice;

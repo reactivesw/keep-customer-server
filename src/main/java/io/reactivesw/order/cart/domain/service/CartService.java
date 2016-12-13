@@ -35,6 +35,12 @@ public class CartService {
   private transient CartRepository cartRepository;
 
   /**
+   * Line item service.
+   */
+//  @Autowired
+//  private transient LineItemService lineItemService;
+
+  /**
    * Create an new active cart with sample.
    * Either customer id or anonymous id must be set.
    * Each customer(include anonymous customer) can only have one active cart.
@@ -64,6 +70,7 @@ public class CartService {
       throw new AlreadyExistException("The customer already has an active cart. ");
     }
 
+    //TODO recalculate the cart
     return this.cartRepository.save(sample);
   }
 
@@ -73,7 +80,7 @@ public class CartService {
    * @param cartId String
    * @return CartEntity
    */
-  public CartEntity getCartByCartId(String cartId) {
+  public CartEntity getById(String cartId) {
     LOG.debug("CartId:{}", cartId);
     CartEntity entity = this.cartRepository.findOne(cartId);
 
@@ -109,7 +116,7 @@ public class CartService {
         CartState.Active);
     CartEntity entity;
     if (result.isEmpty()) {
-      //each customer should
+      //each customer should have one
       entity = this.createActiveCartWithCustomerId(customerId);
     } else {
       entity = result.get(Statics.FIRST_VALUE_IN_ARRAY);
@@ -152,7 +159,7 @@ public class CartService {
    * @return CartEntity
    */
   public CartEntity addLineItem(String cartId, LineItemValue lineItem) {
-    CartEntity entity = this.getCartByCartId(cartId);
+    CartEntity entity = this.getById(cartId);
     Set<LineItemValue> lineItems = entity.getLineItems();
     Optional<LineItemValue> item = lineItems.stream().filter(tmpItem -> tmpItem.equals(lineItem))
         .findFirst();
@@ -163,7 +170,7 @@ public class CartService {
     } else {
       lineItems.add(lineItem);
     }
-    //TODO calculate price
+    //TODO recalculate the cart
     return this.cartRepository.save(entity);
   }
 
@@ -178,7 +185,7 @@ public class CartService {
    * @return CartEntity
    */
   public CartEntity removeLineItem(String cartId, String lineItemId, Integer quantity) {
-    CartEntity entity = this.getCartByCartId(cartId);
+    CartEntity entity = this.getById(cartId);
     Set<LineItemValue> lineItems = entity.getLineItems();
     Optional<LineItemValue> item = lineItems.stream().filter(tmpItem -> tmpItem.getId()
         == lineItemId).findFirst();
@@ -239,5 +246,27 @@ public class CartService {
         .toString());
     return retEntity;
   }
+
+  /**
+   * calculate cart price.
+   *
+   * @param cart CartEntity
+   */
+//  private void calculateCartPrice(CartEntity cart) {
+//    //first, get all product price and get a sum, do the same to shipping method
+//    //second, get all cart discounts that match this cart, if needed, we also need to get all
+//    // discount code.
+//    //third, calculate the cart price
+//    MoneyEntity totalPrice = cart.getTotalPrice();
+//    cart.getLineItems().parallelStream().forEach(
+//        lineItemValue -> {
+//          lineItemService.calculateTotalPrice(lineItemValue);
+//          totalPrice.setCentAmount(
+//              totalPrice.getCentAmount() + lineItemValue.getTotalPrice().getCentAmount()
+//          );
+//        }
+//    );
+//
+//  }
 
 }

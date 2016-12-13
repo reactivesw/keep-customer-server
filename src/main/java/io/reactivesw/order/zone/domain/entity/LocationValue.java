@@ -81,7 +81,6 @@ public class LocationValue extends BaseIdEntity {
           && Objects.equals(this.getState(), that.getState());
     }
 
-
     return result;
 
   }

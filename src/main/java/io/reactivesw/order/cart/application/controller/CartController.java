@@ -44,7 +44,7 @@ public class CartController {
   @GetMapping(Router.CART_WITH_ID)
   public Cart getCartById(@ApiParam(required = true) @PathVariable(Router.CART_ID) String id) {
 
-    CartEntity entity = this.cartService.getCartByCartId(id);
+    CartEntity entity = this.cartService.getById(id);
 
     return CartMapper.convertEntityToModel(entity);
   }

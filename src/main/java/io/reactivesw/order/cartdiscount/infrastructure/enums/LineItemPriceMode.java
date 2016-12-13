@@ -1,4 +1,4 @@
-package io.reactivesw.order.cartdiscount.enums;
+package io.reactivesw.order.cartdiscount.infrastructure.enums;
 
 /**
  * Created by umasuo on 16/11/17.

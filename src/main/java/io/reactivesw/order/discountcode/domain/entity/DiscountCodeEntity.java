@@ -48,7 +48,7 @@ public class DiscountCodeEntity extends BaseAllEntity {
   private String code;
 
   /**
-   * cart discounts.
+   * cart discount ids.
    */
   @Column(name = "cart_discounts", columnDefinition = Statics.JSON)
   @Convert(converter = ListJsonConverter.class)
@@ -57,6 +57,7 @@ public class DiscountCodeEntity extends BaseAllEntity {
   /**
    * CartDiscountPredicate.
    * TODO we should implement an simple one for the first edition.
+   * we only accept product.id for first edition.
    */
   @Column(name = "cart_predicate")
   private String cartPredicate;

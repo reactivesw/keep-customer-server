@@ -1,4 +1,4 @@
-package io.reactivesw.order.cartdiscount.model;
+package io.reactivesw.order.cartdiscount.application.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.persistence.Id;
 
-import io.reactivesw.order.cartdiscount.model.DiscountedLineItemPriceForQuantity;
+import io.reactivesw.order.cartdiscount.application.model.DiscountedLineItemPriceForQuantity;
 import io.reactivesw.catalog.product.model.Price;
 import io.reactivesw.catalog.product.model.ProductVariant;
-import io.reactivesw.order.cartdiscount.enums.LineItemPriceMode;
+import io.reactivesw.order.cartdiscount.infrastructure.enums.LineItemPriceMode;
 import io.reactivesw.common.model.CustomFields;
 import io.reactivesw.common.model.LocalizedString;
 import io.reactivesw.common.model.Money;
