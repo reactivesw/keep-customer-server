@@ -1,6 +1,10 @@
 package io.reactivesw.catalog.producttype.application.controller;
 
-import static io.reactivesw.route.Router.*;
+import static io.reactivesw.route.Router.PRODUCT_TYPE_ID;
+import static io.reactivesw.route.Router.PRODUCT_TYPE_KEY;
+import static io.reactivesw.route.Router.PRODUCT_TYPE_ROOT;
+import static io.reactivesw.route.Router.PRODUCT_TYPE_WITH_ID;
+import static io.reactivesw.route.Router.PRODUCT_TYPE_WITH_KEY;
 
 import io.reactivesw.catalog.producttype.application.model.ProductType;
 import io.reactivesw.catalog.producttype.application.model.ProductTypeDraft;
