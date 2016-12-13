@@ -128,6 +128,7 @@ public class TaxCategoryService {
    * @param queryConditions the query conditions
    * @return the paged query result
    */
+  // TODO: 16/12/13 queryconditions
   public PagedQueryResult<TaxCategory> queryTaxCategories(QueryConditions queryConditions) {
     LOG.debug("enter queryTaxCategories, QueryConditions is : {}", queryConditions.toString());
     PagedQueryResult result = new PagedQueryResult<TaxCategory>();
@@ -135,7 +136,6 @@ public class TaxCategoryService {
     List<TaxCategoryEntity> allTaxCategoryEntities = taxCategoryRepository.findAll();
 
     List<TaxCategory> allTaxCategories = TaxCategoryMapper.entityToModel(allTaxCategoryEntities);
-
     result.setResults(allTaxCategories);
     result.setTotal(allTaxCategories.size());
 

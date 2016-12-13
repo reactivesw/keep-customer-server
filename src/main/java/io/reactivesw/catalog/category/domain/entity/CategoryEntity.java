@@ -1,4 +1,4 @@
-package io.reactivesw.catalog.category.domain.entities;
+package io.reactivesw.catalog.category.domain.entity;
 
 import com.google.common.collect.Lists;
 

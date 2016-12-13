@@ -8,6 +8,8 @@ import io.reactivesw.catalog.producttype.domain.entity.ProductTypeEntity;
 import io.reactivesw.catalog.producttype.infrastructure.repository.ProductTypeRepository;
 import io.reactivesw.common.exception.ConflictException;
 import io.reactivesw.common.exception.NotExistException;
+import io.reactivesw.common.model.PagedQueryResult;
+import io.reactivesw.common.model.QueryConditions;
 import io.reactivesw.common.model.UpdateAction;
 
 import org.slf4j.Logger;
@@ -115,7 +117,7 @@ public class ProductTypeService {
   /**
    * Update ProductType by key.
    *
-   * @param key      the key
+   * @param key     the key
    * @param version the version
    * @param actions the actions
    * @return the updated ProductType
@@ -155,6 +157,28 @@ public class ProductTypeService {
     ProductTypeEntity entity = getProductTypeEntityByKey(key);
     ProductType result = ProductTypeMapper.entityToModel(entity);
     LOG.debug("end getProductTypeByKey, get ProductType : {}", result.toString());
+    return result;
+  }
+
+  /**
+   * Query ProductType.
+   *
+   * @param queryConditions the query conditions
+   * @return the paged query result
+   */
+  // TODO: 16/12/13 queryconditions
+  public PagedQueryResult<ProductType> queryProductTypes(QueryConditions queryConditions) {
+    LOG.debug("enter queryProductTypes, QueryConditions is : {}", queryConditions.toString());
+
+    List<ProductTypeEntity> entities = productTypeRepository.findAll();
+    List<ProductType> productTypes = ProductTypeMapper.entityToModel(entities);
+
+    PagedQueryResult<ProductType> result = new PagedQueryResult<>();
+    result.setResults(productTypes);
+    result.setTotal(productTypes.size());
+
+    LOG.debug("end queryProductTypes, result is : {}", result.toString());
+
     return result;
   }
 
@@ -204,13 +228,14 @@ public class ProductTypeService {
 
   /**
    * update ProductTypeEntity.
+   *
    * @param version the version
    * @param actions the update actions
-   * @param entity the entity
+   * @param entity  the entity
    * @return updated ProductType
    */
   private ProductType updateProductTypeEntity(Integer version, List<UpdateAction> actions,
-                                                    ProductTypeEntity entity) {
+                                              ProductTypeEntity entity) {
     validateVersion(version, entity);
     actions.parallelStream().forEach(action -> ProductTypeUpdateMapper.getMapper(action.getClass())
         .setAction(entity, action));

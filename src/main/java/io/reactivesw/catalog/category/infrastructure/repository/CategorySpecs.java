@@ -1,6 +1,6 @@
 package io.reactivesw.catalog.category.infrastructure.repository;
 
-import io.reactivesw.catalog.category.domain.entities.CategoryEntity;
+import io.reactivesw.catalog.category.domain.entity.CategoryEntity;
 import io.reactivesw.common.model.QueryConditions;
 import io.reactivesw.common.specification.PredicateSpecs;
 import org.springframework.data.jpa.domain.Specification;

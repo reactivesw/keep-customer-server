@@ -12,7 +12,7 @@ import javax.persistence.Table;
  * Created by Davis on 16/11/23.
  */
 @Entity
-@Table(name = "catalog_tax_category_sub_rate")
+@Table(name = "catalog_sub_rate")
 public class SubRateEntity extends BaseIdEntity {
   /**
    * The Name.

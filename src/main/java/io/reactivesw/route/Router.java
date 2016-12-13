@@ -26,7 +26,7 @@ public class Router {
   /**
    * The constant CATEGORY_ROOT.
    */
-  public static final String CATEGORY_ROOT = URL_ROOT + "/category";
+  public static final String CATEGORY_ROOT = URL_ROOT + "/categories";
 
   /**
    * categoryId.

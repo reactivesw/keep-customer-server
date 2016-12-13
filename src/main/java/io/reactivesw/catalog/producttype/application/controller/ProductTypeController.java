@@ -9,15 +9,15 @@ import static io.reactivesw.route.Router.PRODUCT_TYPE_WITH_KEY;
 import io.reactivesw.catalog.producttype.application.model.ProductType;
 import io.reactivesw.catalog.producttype.application.model.ProductTypeDraft;
 import io.reactivesw.catalog.producttype.domain.service.ProductTypeService;
+import io.reactivesw.common.model.PagedQueryResult;
+import io.reactivesw.common.model.QueryConditions;
 import io.reactivesw.common.model.UpdateRequest;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -199,6 +199,24 @@ public class ProductTypeController {
     LOG.debug("enter getProductTypeByKey, key is : {}", key);
     ProductType result = productTypeService.getProductTypeByKey(key);
     LOG.debug("end getProductTypeById, get ProductType : {}", result.toString());
+    return result;
+  }
+
+  /**
+   * Query ProductType.
+   *
+   * @param queryConditions the query conditions
+   * @return the paged query result
+   */
+  @ApiOperation(value = "query ProductType")
+  @GetMapping(PRODUCT_TYPE_ROOT)
+  public PagedQueryResult<ProductType> queryProductTypes(QueryConditions queryConditions) {
+    LOG.debug("enter queryProductTypes, QueryConditions is : {}", queryConditions.toString());
+
+    PagedQueryResult<ProductType> result = productTypeService.queryProductTypes(queryConditions);
+
+    LOG.debug("end queryProductTypes, result is : {}", result.toString());
+
     return result;
   }
 }

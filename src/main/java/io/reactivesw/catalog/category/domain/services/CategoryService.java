@@ -6,12 +6,14 @@ import io.reactivesw.catalog.category.application.model.Category;
 import io.reactivesw.catalog.category.application.model.CategoryDraft;
 import io.reactivesw.catalog.category.application.model.mapper.CategoryMapper;
 import io.reactivesw.catalog.category.application.model.mapper.CategoryUpdateMapper;
-import io.reactivesw.catalog.category.domain.entities.CategoryEntity;
+import io.reactivesw.catalog.category.domain.entity.CategoryEntity;
 import io.reactivesw.catalog.category.infrastructure.repository.CategoryRepository;
 import io.reactivesw.common.entity.LocalizedStringEntity;
 import io.reactivesw.common.exception.NotExistException;
 import io.reactivesw.common.exception.ParametersException;
 import io.reactivesw.common.model.LocalizedString;
+import io.reactivesw.common.model.PagedQueryResult;
+import io.reactivesw.common.model.QueryConditions;
 import io.reactivesw.common.model.Reference;
 import io.reactivesw.common.model.UpdateAction;
 
@@ -142,6 +144,29 @@ public class CategoryService {
   public Category getCategoryById(String id) {
     LOG.debug("enter getCategoryById, id is {}", id);
     return CategoryMapper.entityToModel(getById(id));
+  }
+
+
+  /**
+   * Query category.
+   *
+   * @param queryConditions the QueryConditions
+   * @return the paged query result
+   */
+  // TODO: 16/12/13 queryconditions
+  public PagedQueryResult<Category> queryCategories(QueryConditions queryConditions) {
+    LOG.debug("enter queryCategories, QueryConditions is : {}", queryConditions.toString());
+
+    List<CategoryEntity> entities = categoryRepository.findAll();
+
+    List<Category> result = CategoryMapper.entityToModel(entities);
+
+    LOG.debug("end queryCategories, get Categories : {}", result);
+
+    PagedQueryResult<Category> pagedQueryResult = new PagedQueryResult<>();
+    pagedQueryResult.setResults(result);
+
+    return pagedQueryResult;
   }
 
   /**

@@ -66,7 +66,7 @@ public final class AttributeDefinitionMapper {
   /**
    * Entity to model list.
    *
-   * @param entities the entities
+   * @param entities the entity
    * @return the list
    */
   public static List<AttributeDefinition> entityToModel(Set<AttributeDefinitionEntity> entities) {

@@ -144,6 +144,8 @@ public class TaxCategoryController {
    * @param queryConditions the query conditions
    * @return the paged query result
    */
+  @ApiOperation(value = "query TaxCategories")
+  @GetMapping(TAX_CATEGORY_ROOT)
   public PagedQueryResult<TaxCategory> queryTaxCategories(QueryConditions queryConditions) {
     LOG.debug("enter queryTaxCategories, queryConditions is : {}", queryConditions.toString());
 
