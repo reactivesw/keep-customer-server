@@ -1,16 +1,13 @@
 package io.reactivesw.order.cart.domain.service;
 
 import io.reactivesw.common.entity.MoneyEntity;
-import io.reactivesw.configuration.ApplicationConfig;
 import io.reactivesw.order.cart.domain.entity.value.LineItemValue;
 import io.reactivesw.order.cart.domain.entity.value.PriceValue;
 import io.reactivesw.order.cart.domain.entity.value.TaxedItemPriceValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.Objects;
 
@@ -34,10 +31,10 @@ public class LineItemService {
   /**
    * REST template.
    */
-  private RestTemplate restTemplate = new RestTemplateBuilder().build();
+//  private RestTemplate restTemplate = new RestTemplateBuilder().build();
 
-  @Autowired
-  private ApplicationConfig config;
+//  @Autowired
+//  private ApplicationConfig config;
 
   /**
    * fill item's product data for this snapshot.
