@@ -2,8 +2,9 @@ package io.reactivesw.catalog.category.domain.services
 
 import com.google.common.collect.Lists
 import io.reactivesw.catalog.category.application.model.action.SetSlug
+import io.reactivesw.common.model.QueryConditions
 import io.reactivesw.common.model.action.SetLocalizedName
-import io.reactivesw.catalog.category.domain.entities.CategoryEntity
+import io.reactivesw.catalog.category.domain.entity.CategoryEntity
 import io.reactivesw.catalog.category.application.model.CategoryDraft
 import io.reactivesw.catalog.category.infrastructure.repository.CategoryRepository
 import io.reactivesw.common.entity.LocalizedStringEntity
@@ -50,6 +51,20 @@ class CategoryServiceTest extends Specification {
 
         then:
         thrown(NotExistException)
+    }
+
+    def "test 1.3 : query Category by QueryConditions"() {
+        given:
+        QueryConditions queryConditions = new QueryConditions()
+        List<CategoryEntity> entities = Lists.newArrayList(categoryEntity)
+        categoryRepository.findAll() >> entities
+
+        when:
+        def result = categoryService.queryCategories(queryConditions)
+
+        then:
+        result != null
+        result.results.size() == entities.size()
     }
 
     def "test 2.1 : delete Category and get null entity"() {

@@ -14,7 +14,7 @@ import javax.persistence.Table;
  * Created by Davis on 16/11/23.
  */
 @Entity
-@Table(name = "catalog_tax_category_tax_rate")
+@Table(name = "catalog_tax_rate")
 public class TaxRateEntity extends BaseIdEntity {
   /**
    * The Name.

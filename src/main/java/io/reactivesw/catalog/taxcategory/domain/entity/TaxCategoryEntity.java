@@ -8,17 +8,19 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 /**
  * Created by umasuo on 16/11/23.
  */
-@Table(name = "catalog_tax_category_tax_category_entity")
 @Entity
+@Table(name = "catalog_tax_category")
 public class TaxCategoryEntity extends BaseAllEntity {
 
   /**
    * The Version.
    */
+  @Version
   @Column
   private Integer version;
 

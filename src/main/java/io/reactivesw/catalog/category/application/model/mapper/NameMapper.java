@@ -1,6 +1,6 @@
 package io.reactivesw.catalog.category.application.model.mapper;
 
-import io.reactivesw.catalog.category.domain.entities.CategoryEntity;
+import io.reactivesw.catalog.category.domain.entity.CategoryEntity;
 import io.reactivesw.common.model.UpdateAction;
 import io.reactivesw.common.model.action.SetLocalizedName;
 import io.reactivesw.common.model.mapper.LocalizedStringMapper;

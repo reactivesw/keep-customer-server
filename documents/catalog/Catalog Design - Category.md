@@ -6,7 +6,7 @@ catalog_category
 ## 2. 业务流程
 ### 2.1 添加
 
-添加Category对外界没有影响，直接添加，version自动生成为1，ID为自动生成的UUID。
+添加Category对外界没有影响，直接添加，version自动生成为0，ID为自动生成的UUID。
 
 添加subCategory，需要设置parent和ancestors列表，ancestors列表由parent计算出来。
 
@@ -135,7 +135,7 @@ exception:
 
 url: /categories/{id}
 
-Method: POST
+Method: PUT
 
 Request Representation: Fields with version and update action list
 

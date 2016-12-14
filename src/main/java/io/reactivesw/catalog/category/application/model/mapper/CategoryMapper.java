@@ -1,7 +1,7 @@
 package io.reactivesw.catalog.category.application.model.mapper;
 
 import io.reactivesw.catalog.category.application.model.CategoryDraft;
-import io.reactivesw.catalog.category.domain.entities.CategoryEntity;
+import io.reactivesw.catalog.category.domain.entity.CategoryEntity;
 import io.reactivesw.catalog.category.application.model.Category;
 import io.reactivesw.common.enums.ReferenceTypes;
 import io.reactivesw.common.model.Reference;
@@ -83,6 +83,21 @@ public final class CategoryMapper {
       entity.setCustom(null);
     }
     return entity;
+  }
+
+
+  /**
+   * convert List of CategoryEntity to List of Category.
+   *
+   * @param entities the List of CategoryEntity
+   * @return the List of Category
+   */
+  public static List<Category> entityToModel(List<CategoryEntity> entities) {
+    return entities.stream().map(
+        entity -> {
+          return entityToModel(entity);
+        }
+    ).collect(Collectors.toList());
   }
 
   /**

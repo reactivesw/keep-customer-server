@@ -1,6 +1,6 @@
 package io.reactivesw.catalog.category.infrastructure.repository;
 
-import io.reactivesw.catalog.category.domain.entities.CategoryEntity;
+import io.reactivesw.catalog.category.domain.entity.CategoryEntity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

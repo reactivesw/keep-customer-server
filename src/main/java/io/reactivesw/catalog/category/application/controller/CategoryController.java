@@ -8,6 +8,7 @@ import io.reactivesw.catalog.category.application.model.Category;
 import io.reactivesw.catalog.category.application.model.CategoryDraft;
 import io.reactivesw.catalog.category.domain.services.CategoryService;
 import io.reactivesw.catalog.category.infrastructure.validator.CategoryValidator;
+import io.reactivesw.common.model.PagedQueryResult;
 import io.reactivesw.common.model.QueryConditions;
 import io.reactivesw.common.model.UpdateRequest;
 
@@ -26,8 +27,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * Created by Davis on 16/11/18.
@@ -136,9 +135,13 @@ public class CategoryController {
    */
   @ApiOperation(value = "Get Categories")
   @GetMapping(CATEGORY_ROOT)
-  //TODO
-  public List<Category> queryCategories(QueryConditions query) {
-    LOG.debug("query parameters: {}", query.toString());
-    return null;
+  public PagedQueryResult<Category> queryCategories(QueryConditions query) {
+    LOG.debug("enter queryCategories, query parameters: {}", query.toString());
+
+    PagedQueryResult<Category> result = categoryService.queryCategories(query);
+
+    LOG.debug("end queryCategories, query result is : {}", result.toString());
+
+    return result;
   }
 }

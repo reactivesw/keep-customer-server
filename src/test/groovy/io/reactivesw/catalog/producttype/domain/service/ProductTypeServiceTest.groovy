@@ -1,11 +1,13 @@
 package io.reactivesw.catalog.producttype.domain.service
 
+import com.google.common.collect.Lists
 import io.reactivesw.catalog.producttype.application.model.ProductTypeDraft
 import io.reactivesw.catalog.producttype.application.model.mapper.ProductTypeMapper
 import io.reactivesw.catalog.producttype.domain.entity.ProductTypeEntity
 import io.reactivesw.catalog.producttype.infrastructure.repository.ProductTypeRepository
 import io.reactivesw.common.exception.ConflictException
 import io.reactivesw.common.exception.NotExistException
+import io.reactivesw.common.model.QueryConditions
 import io.reactivesw.common.model.UpdateAction
 import io.reactivesw.common.model.action.SetName
 import spock.lang.Specification
@@ -158,5 +160,19 @@ class ProductTypeServiceTest extends Specification {
         then:
         result != null
         result.key == key
+    }
+
+    def "test 4.3 : query ProductType by QueryConditions"() {
+        given:
+        QueryConditions queryConditions = new QueryConditions()
+        List<ProductTypeEntity> entities = Lists.newArrayList(entity)
+        productTypeRepository.findAll() >> entities
+
+        when:
+        def result = productTypeService.queryProductTypes(queryConditions)
+
+        then:
+        result != null
+        result.results.size() == entities.size()
     }
 }

@@ -8,6 +8,7 @@ import java.util.List;
 /**
  * Created by Davis on 16/11/17.
  */
+// TODO: 16/12/13 subClass
 public interface ProductDiscountValue {
   static AbsoluteProductDiscountValue ofAbsolute(final List<Money> money) {
     return AbsoluteProductDiscountValue.of(money);
