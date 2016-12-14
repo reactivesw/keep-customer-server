@@ -11,6 +11,7 @@ public class AssetDimensions {
 
   @ApiModelProperty(value = "The width of the asset source", required = true)
   private float w;
+  
   @ApiModelProperty(value = "The height of the asset source", required = true)
   private float h;
 
