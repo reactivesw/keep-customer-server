@@ -3,6 +3,7 @@ package io.reactivesw.order.cart.domain.service;
 import io.reactivesw.common.entity.MoneyEntity;
 import io.reactivesw.order.cart.domain.entity.value.LineItemValue;
 import io.reactivesw.order.cart.domain.entity.value.PriceValue;
+import io.reactivesw.order.cart.domain.entity.value.TaxRateValue;
 import io.reactivesw.order.cart.domain.entity.value.TaxedItemPriceValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +28,13 @@ public class LineItemService {
    */
   @Autowired
   private transient PriceService priceService;
+
+  /**
+   * taxed item price.
+   */
+  @Autowired
+  private transient TaxedItemPriceService taxedItemPriceService;
+
 
   /**
    * REST template.
@@ -57,15 +65,19 @@ public class LineItemService {
    * @param item LineItem.
    */
   public void calculateTotalPrice(LineItemValue item) {
+
     //TODO check the money currency, and then calculate the total price.
     PriceValue price = item.getPrice();
     Integer quantity = item.getQuantity();
     Integer totalPrice = priceService.getPriceValue(price).getCentAmount() * quantity;
-    if (item.getTaxRate().getIncludedInPrice()) {
+    //TODO use the discounted price
+    TaxRateValue taxRateValue = item.getTaxRate();
+    if (taxRateValue != null && taxRateValue.getIncludedInPrice()) {
       //TODO should we check the round-off ?
       LOG.debug("Add tax into total price, itemId: {}", item.getId());
       totalPrice += Math.round(totalPrice * item.getTaxRate().getAmount());
     }
+
     MoneyEntity total = item.getTotalPrice();
     if (Objects.isNull(total)) {
       total = new MoneyEntity();
@@ -82,22 +94,15 @@ public class LineItemService {
    */
   public void calculateTaxedPrice(LineItemValue item) {
     PriceValue price = item.getPrice();
-    Integer quantity = item.getQuantity();
-    Integer totalPrice = priceService.getPriceValue(price).getCentAmount() * quantity;
+    int quantity = item.getQuantity();
+    int totalPrice = priceService.getPriceValue(price).getCentAmount() * quantity;
     //TODO should we check the round-off ?
-    Integer taxedPrice = totalPrice + Math.round(totalPrice * item.getTaxRate().getAmount());
+    int taxedPrice = totalPrice + Math.round(totalPrice * item.getTaxRate().getAmount());
 
     TaxedItemPriceValue taxedItemPrice = item.getTaxedPrice();
     if (Objects.isNull(taxedItemPrice)) {
-      taxedItemPrice = new TaxedItemPriceValue();
-
-      MoneyEntity net = new MoneyEntity();
-      net.setCurrencyCode(price.getValue().getCurrencyCode());
-      MoneyEntity gross = new MoneyEntity();
-      gross.setCurrencyCode(price.getValue().getCurrencyCode());
-      taxedItemPrice.setTotalNet(net);
-      taxedItemPrice.setTotalGross(gross);
-
+      taxedItemPrice = taxedItemPriceService.createWithCurrencyCode(price.getValue()
+          .getCurrencyCode());
       item.setTaxedPrice(taxedItemPrice);
     }
 

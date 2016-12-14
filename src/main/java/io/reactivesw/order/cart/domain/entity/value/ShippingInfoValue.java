@@ -3,6 +3,7 @@ package io.reactivesw.order.cart.domain.entity.value;
 import io.reactivesw.common.entity.BaseIdEntity;
 import io.reactivesw.common.entity.MoneyEntity;
 import io.reactivesw.common.util.ListJsonConverter;
+import lombok.Data;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "order_cart_shipping_info")
+@Data
 public class ShippingInfoValue extends BaseIdEntity {
 
   /**
@@ -27,6 +29,7 @@ public class ShippingInfoValue extends BaseIdEntity {
 
   /**
    * price.
+   * Determined based on the ShippingRate and address.
    */
   @OneToOne
   private MoneyEntity price;
@@ -59,7 +62,7 @@ public class ShippingInfoValue extends BaseIdEntity {
   /**
    * shipping method.
    */
-  @Column(name = "shipping_method")
+  @Column(name = "shipping_method_id")
   private String shippingMethod;
 
   /**
@@ -69,191 +72,10 @@ public class ShippingInfoValue extends BaseIdEntity {
   @Convert(converter = ListJsonConverter.class)
   private List<String> deliveries;
 
-
   /**
    * DiscountedLineItemPrice id.
    */
   @Column
   private String discountedPrice;
 
-  /**
-   * Gets shipping method name.
-   *
-   * @return the shipping method name
-   */
-  public String getShippingMethodName() {
-    return shippingMethodName;
-  }
-
-  /**
-   * Sets shipping method name.
-   *
-   * @param shippingMethodName the shipping method name
-   */
-  public void setShippingMethodName(String shippingMethodName) {
-    this.shippingMethodName = shippingMethodName;
-  }
-
-  /**
-   * Gets price.
-   *
-   * @return the price
-   */
-  public MoneyEntity getPrice() {
-    return price;
-  }
-
-  /**
-   * Sets price.
-   *
-   * @param price the price
-   */
-  public void setPrice(MoneyEntity price) {
-    this.price = price;
-  }
-
-  /**
-   * Gets shipping rate.
-   *
-   * @return the shipping rate
-   */
-  public ShippingRateValue getShippingRate() {
-    return shippingRate;
-  }
-
-  /**
-   * Sets shipping rate.
-   *
-   * @param shippingRate the shipping rate
-   */
-  public void setShippingRate(ShippingRateValue shippingRate) {
-    this.shippingRate = shippingRate;
-  }
-
-  /**
-   * Gets taxed price.
-   *
-   * @return the taxed price
-   */
-  public TaxedItemPriceValue getTaxedPrice() {
-    return taxedPrice;
-  }
-
-  /**
-   * Sets taxed price.
-   *
-   * @param taxedPrice the taxed price
-   */
-  public void setTaxedPrice(TaxedItemPriceValue taxedPrice) {
-    this.taxedPrice = taxedPrice;
-  }
-
-  /**
-   * Gets tax rate.
-   *
-   * @return the tax rate
-   */
-  public TaxRateValue getTaxRate() {
-    return taxRate;
-  }
-
-  /**
-   * Sets tax rate.
-   *
-   * @param taxRate the tax rate
-   */
-  public void setTaxRate(TaxRateValue taxRate) {
-    this.taxRate = taxRate;
-  }
-
-  /**
-   * Gets tax category.
-   *
-   * @return the tax category
-   */
-  public String getTaxCategory() {
-    return taxCategory;
-  }
-
-  /**
-   * Sets tax category.
-   *
-   * @param taxCategory the tax category
-   */
-  public void setTaxCategory(String taxCategory) {
-    this.taxCategory = taxCategory;
-  }
-
-  /**
-   * Gets shipping method.
-   *
-   * @return the shipping method
-   */
-  public String getShippingMethod() {
-    return shippingMethod;
-  }
-
-  /**
-   * Sets shipping method.
-   *
-   * @param shippingMethod the shipping method
-   */
-  public void setShippingMethod(String shippingMethod) {
-    this.shippingMethod = shippingMethod;
-  }
-
-  /**
-   * Gets deliveries.
-   *
-   * @return the deliveries
-   */
-  public List<String> getDeliveries() {
-    return deliveries;
-  }
-
-  /**
-   * Sets deliveries.
-   *
-   * @param deliveries the deliveries
-   */
-  public void setDeliveries(List<String> deliveries) {
-    this.deliveries = deliveries;
-  }
-
-  /**
-   * Gets discounted price.
-   *
-   * @return the discounted price
-   */
-  public String getDiscountedPrice() {
-    return discountedPrice;
-  }
-
-  /**
-   * Sets discounted price.
-   *
-   * @param discountedPrice the discounted price
-   */
-  public void setDiscountedPrice(String discountedPrice) {
-    this.discountedPrice = discountedPrice;
-  }
-
-  /**
-   * to string method.
-   * @return String
-   */
-  @Override
-  public String toString() {
-    return "ShippingInfoValue{"
-        + "shippingMethodName='" + shippingMethodName + '\''
-        + ", price=" + price
-        + ", shippingRate=" + shippingRate
-        + ", taxedPrice=" + taxedPrice
-        + ", taxRate=" + taxRate
-        + ", taxCategory='" + taxCategory + '\''
-        + ", shippingMethod='" + shippingMethod + '\''
-        + ", deliveries=" + deliveries
-        + ", discountedPrice='" + discountedPrice + '\''
-        + '}';
-  }
 }

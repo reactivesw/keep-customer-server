@@ -1,11 +1,13 @@
 package io.reactivesw.order.cart.domain.service;
 
+import io.reactivesw.common.entity.MoneyEntity;
 import io.reactivesw.common.exception.AlreadyExistException;
 import io.reactivesw.common.exception.NotExistException;
 import io.reactivesw.common.exception.ParametersException;
 import io.reactivesw.common.model.Statics;
 import io.reactivesw.order.cart.domain.entity.CartEntity;
 import io.reactivesw.order.cart.domain.entity.value.LineItemValue;
+import io.reactivesw.order.cart.domain.entity.value.ShippingInfoValue;
 import io.reactivesw.order.cart.infrastructure.enums.CartState;
 import io.reactivesw.order.cart.infrastructure.repository.CartRepository;
 import org.apache.commons.lang3.StringUtils;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -34,14 +37,23 @@ public class CartService {
   @Autowired
   private transient CartRepository cartRepository;
 
-//  @Autowired
-//  private transient LineItemService lineItemService;
+  /**
+   * line item service.
+   */
+  @Autowired
+  private transient LineItemService lineItemService;
 
   /**
-   * Line item service.
+   * custom item service.
    */
-//  @Autowired
-//  private transient LineItemService lineItemService;
+  @Autowired
+  private transient CustomLineItemService customLineItemService;
+
+  /**
+   * shipping info service.
+   */
+  @Autowired
+  private transient ShippingInfoService shippingInfoService;
 
   /**
    * Create an new active cart with sample.
@@ -173,7 +185,7 @@ public class CartService {
     } else {
       lineItems.add(lineItem);
     }
-    //TODO recalculate the cart
+    this.calculateCartPrice(entity);
     return this.cartRepository.save(entity);
   }
 
@@ -202,10 +214,49 @@ public class CartService {
       Integer remainQuantity = itemValue.getQuantity() - quantity;
       itemValue.setQuantity(remainQuantity);
     }
-    //TODO calculate price
+
+    this.calculateCartPrice(entity);
     return this.cartRepository.save(entity);
   }
 
+
+  /**
+   * calculate cart price.
+   * TODO split the method.
+   *
+   * @param cart CartEntity
+   */
+  protected void calculateCartPrice(CartEntity cart) {
+
+    int lineItemTotalPrice = cart.getLineItems().parallelStream().mapToInt(
+        lineItemValue -> {
+          lineItemService.calculateTotalPrice(lineItemValue);
+          return lineItemValue.getTotalPrice().getCentAmount();
+        }
+    ).sum();
+
+    int customItemTotalPrice = cart.getCustomLineItems().parallelStream().mapToInt(
+        customLineItemValue -> {
+          customLineItemService.calculateTotalPrice(customLineItemValue);
+          return customLineItemValue.getTotalPrice().getCentAmount();
+        }
+    ).sum();
+
+    ShippingInfoValue shippingInfo = cart.getShippingInfo();
+    shippingInfoService.calculateTotalPrice(shippingInfo, lineItemTotalPrice);
+    int shippingTotalPrice = shippingInfo.getPrice().getCentAmount();
+
+    //TODO use discount to calculate the cart price
+    int totalPrice = lineItemTotalPrice + customItemTotalPrice + shippingTotalPrice;
+
+    MoneyEntity cartTotalPrice = cart.getTotalPrice();
+    if (Objects.isNull(cartTotalPrice)) {
+      cartTotalPrice = new MoneyEntity();
+      cart.setTotalPrice(cartTotalPrice);
+    }
+    cartTotalPrice.setCentAmount(totalPrice);
+
+  }
 
   /**
    * setter of the cart repository.
@@ -250,26 +301,5 @@ public class CartService {
     return retEntity;
   }
 
-  /**
-   * calculate cart price.
-   *
-   * @param cart CartEntity
-   */
-//  private void calculateCartPrice(CartEntity cart) {
-//    //first, get all product price and get a sum, do the same to shipping method
-//    //second, get all cart discounts that match this cart, if needed, we also need to get all
-//    // discount code.
-//    //third, calculate the cart price
-//    MoneyEntity totalPrice = cart.getTotalPrice();
-//    cart.getLineItems().parallelStream().forEach(
-//        lineItemValue -> {
-//          lineItemService.calculateTotalPrice(lineItemValue);
-//          totalPrice.setCentAmount(
-//              totalPrice.getCentAmount() + lineItemValue.getTotalPrice().getCentAmount()
-//          );
-//        }
-//    );
-//
-//  }
 
 }

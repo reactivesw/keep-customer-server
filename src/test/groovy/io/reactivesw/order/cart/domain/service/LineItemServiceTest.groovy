@@ -16,6 +16,8 @@ class LineItemServiceTest extends Specification {
 
     PriceService priceService
 
+    TaxedItemPriceService taxedItemPriceService
+
     MoneyEntity moneyEntity
 
     PriceValue priceValue
@@ -26,7 +28,8 @@ class LineItemServiceTest extends Specification {
 
     def setup() {
         priceService = new PriceService()
-        lineItemService = new LineItemService(priceService: priceService)
+        taxedItemPriceService = new TaxedItemPriceService()
+        lineItemService = new LineItemService(priceService: priceService, taxedItemPriceService: taxedItemPriceService)
         moneyEntity = new MoneyEntity(currencyCode: "RMB", centAmount: 12)
         priceValue = new PriceValue(value: moneyEntity)
         taxRateValue = new TaxRateValue(includedInPrice: false, amount: 0.1,)
@@ -61,6 +64,17 @@ class LineItemServiceTest extends Specification {
 
     }
 
+    def "Test 1.3: Calculate Total Price with out tax rate."() {
+
+        lineItemValue.setTaxRate(null)
+        when:
+        lineItemService.calculateTotalPrice(lineItemValue)
+        then:
+        lineItemValue.getTotalPrice() != null
+        lineItemValue.getTotalPrice().getCentAmount() == 120
+
+    }
+
     def "Test 2.1: Calculate taxed price at first time."() {
         lineItemValue.setTaxedPrice(null)
         when:
@@ -71,7 +85,7 @@ class LineItemServiceTest extends Specification {
         lineItemValue.getTaxedPrice().getTotalGross().getCentAmount() == 132
     }
 
-    def "Test 2.1: Calculate taxed price."() {
+    def "Test 2.2: Calculate taxed price."() {
 
 
         MoneyEntity net = new MoneyEntity();
