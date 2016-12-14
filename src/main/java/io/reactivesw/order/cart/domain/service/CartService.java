@@ -1,5 +1,6 @@
 package io.reactivesw.order.cart.domain.service;
 
+import io.reactivesw.common.entity.MoneyEntity;
 import io.reactivesw.common.exception.AlreadyExistException;
 import io.reactivesw.common.exception.NotExistException;
 import io.reactivesw.common.exception.ParametersException;
@@ -14,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -33,6 +35,9 @@ public class CartService {
    */
   @Autowired
   private transient CartRepository cartRepository;
+
+  @Autowired
+  private transient LineItemService lineItemService;
 
   /**
    * Line item service.

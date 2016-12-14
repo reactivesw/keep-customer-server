@@ -12,3 +12,7 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+
+app:
+  domain:
+    name: http://localhost:8088
