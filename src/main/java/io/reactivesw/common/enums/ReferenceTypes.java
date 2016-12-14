@@ -4,9 +4,13 @@ package io.reactivesw.common.enums;
  * Created by Davis on 16/11/16.
  */
 public enum  ReferenceTypes {
+  CUSTOMERGROUP("customer-group"),
+  CHANNEL("channel"),
+  PRODUCTTYPE("product-type"),
   CATEGORY("category"),
   CART("cart"),
-  CARTDISCOUNT("cart-discount");
+  CARTDISCOUNT("cart-discount"),
+  TAXCATEGORY("tax-category");
   private String value;
 
   private ReferenceTypes(String value){

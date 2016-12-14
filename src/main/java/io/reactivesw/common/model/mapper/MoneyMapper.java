@@ -8,14 +8,14 @@ import io.reactivesw.common.model.Money;
  */
 public class MoneyMapper {
 
-  public static MoneyEntity convertModelToEntity(Money model) {
+  public static MoneyEntity modelToEntity(Money model) {
     MoneyEntity entity = new MoneyEntity();
     entity.setCentAmount(model.getCentAmount());
     entity.setCurrencyCode(model.getCurrencyCode());
     return entity;
   }
 
-  public static Money convertEntityToModel(MoneyEntity entity) {
+  public static Money entityToModel(MoneyEntity entity) {
     Money model = new Money();
     model.setCentAmount(entity.getCentAmount());
     model.setCurrencyCode(entity.getCurrencyCode());

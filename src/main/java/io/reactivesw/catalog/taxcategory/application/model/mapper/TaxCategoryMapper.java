@@ -3,6 +3,8 @@ package io.reactivesw.catalog.taxcategory.application.model.mapper;
 import io.reactivesw.catalog.taxcategory.application.model.TaxCategory;
 import io.reactivesw.catalog.taxcategory.application.model.TaxCategoryDraft;
 import io.reactivesw.catalog.taxcategory.domain.entity.TaxCategoryEntity;
+import io.reactivesw.common.enums.ReferenceTypes;
+import io.reactivesw.common.model.Reference;
 
 import java.util.List;
 import java.util.Set;
@@ -64,5 +66,9 @@ public final class TaxCategoryMapper {
         }
     ).collect(Collectors.toList());
     return result;
+  }
+
+  public static Reference entityToReference(String taxCategoryId) {
+    return new Reference(ReferenceTypes.TAXCATEGORY.getType(), taxCategoryId);
   }
 }

@@ -5,11 +5,12 @@ import io.reactivesw.common.dialect.JSONBUserType;
 import io.reactivesw.common.entity.BaseAllEntity;
 import io.reactivesw.common.entity.LocalizedStringEntity;
 
+import lombok.Data;
+
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
-import lombok.Data;
 
 import java.util.Set;
 

@@ -1,12 +1,11 @@
 package io.reactivesw.catalog.producttype.application.model.mapper;
 
-import io.reactivesw.catalog.product.model.AttributeDefinitionDraft;
-import io.reactivesw.catalog.product.model.attributes.AttributeDefinition;
-import io.reactivesw.catalog.product.model.attributes.AttributeType;
+import io.reactivesw.catalog.product.application.model.AttributeDefinitionDraft;
+import io.reactivesw.catalog.product.application.model.attributes.AttributeDefinition;
+import io.reactivesw.catalog.product.application.model.attributes.AttributeType;
 import io.reactivesw.catalog.producttype.domain.entity.AttributeDefinitionEntity;
 import io.reactivesw.common.model.mapper.LocalizedStringMapper;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

@@ -1,6 +1,6 @@
 package io.reactivesw.catalog.producttype.application.model.mapper;
 
-import io.reactivesw.catalog.product.model.attributes.LocalizedEnumAttributeType;
+import io.reactivesw.catalog.product.application.model.attributes.LocalizedEnumAttributeType;
 import io.reactivesw.catalog.producttype.application.model.action.AddLocalizedEnumValue;
 import io.reactivesw.catalog.producttype.domain.entity.ProductTypeEntity;
 import io.reactivesw.common.model.LocalizedEnumValue;

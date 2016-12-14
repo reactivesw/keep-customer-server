@@ -1,6 +1,6 @@
 package io.reactivesw.catalog.producttype.application.model.action;
 
-import io.reactivesw.catalog.product.model.attributes.AttributeDefinition;
+import io.reactivesw.catalog.product.application.model.attributes.AttributeDefinition;
 import io.reactivesw.common.model.UpdateAction;
 
 import java.util.List;

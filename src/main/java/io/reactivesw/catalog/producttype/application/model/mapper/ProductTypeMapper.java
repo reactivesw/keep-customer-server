@@ -3,6 +3,8 @@ package io.reactivesw.catalog.producttype.application.model.mapper;
 import io.reactivesw.catalog.producttype.application.model.ProductType;
 import io.reactivesw.catalog.producttype.application.model.ProductTypeDraft;
 import io.reactivesw.catalog.producttype.domain.entity.ProductTypeEntity;
+import io.reactivesw.common.enums.ReferenceTypes;
+import io.reactivesw.common.model.Reference;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -56,5 +58,9 @@ public final class ProductTypeMapper {
         .map(entity -> {
           return entityToModel(entity);
         }).collect(Collectors.toList());
+  }
+
+  public static Reference entityToReference(String productTypeId) {
+    return new Reference(ReferenceTypes.PRODUCTTYPE.getType(), productTypeId);
   }
 }

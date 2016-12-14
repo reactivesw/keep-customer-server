@@ -28,7 +28,7 @@ class PriceServiceTest extends Specification {
         priceService = new PriceService()
         value = new MoneyEntity(centAmount: 12, currencyCode: "RMB")
         reference = new Reference(typeId: "typeId", id: "id")
-        discountedPrice = new DiscountedPrice(value: MoneyMapper.convertEntityToModel(value), discount: reference)
+        discountedPrice = new DiscountedPrice(value: MoneyMapper.entityToModel(value), discount: reference)
         entity = new PriceValue(id: id, value: value, discounted: discountedPrice)
 
     }

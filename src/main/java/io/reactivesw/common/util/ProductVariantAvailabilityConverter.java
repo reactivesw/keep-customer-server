@@ -1,7 +1,7 @@
 package io.reactivesw.common.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.reactivesw.catalog.product.model.ProductVariantAvailability;
+import io.reactivesw.catalog.product.application.model.ProductVariantAvailability;
 
 import javax.persistence.AttributeConverter;
 import java.io.IOException;

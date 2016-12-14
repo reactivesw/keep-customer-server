@@ -3,13 +3,12 @@ package io.reactivesw.catalog.producttype.application.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import io.reactivesw.catalog.product.model.attributes.AttributeDefinition;
+import io.reactivesw.catalog.product.application.model.attributes.AttributeDefinition;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Davis on 16/11/16.

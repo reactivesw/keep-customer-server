@@ -17,7 +17,11 @@ catalog_product_image
 
 在新增Product的过程中，需要校验以下问题：
 
-1. 
+1. name, slug, productType是必填属性
+2. productType的id是否存在，如果不存在则失败
+3. 如果taxCategory不为空，则需要校验taxCategory是否存在
+4. 如果state不为空，则需要校验state是否存在
+
 
 
 

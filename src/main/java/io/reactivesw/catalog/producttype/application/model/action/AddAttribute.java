@@ -1,6 +1,6 @@
 package io.reactivesw.catalog.producttype.application.model.action;
 
-import io.reactivesw.catalog.product.model.AttributeDefinitionDraft;
+import io.reactivesw.catalog.product.application.model.AttributeDefinitionDraft;
 import io.reactivesw.common.model.UpdateAction;
 
 import lombok.Getter;

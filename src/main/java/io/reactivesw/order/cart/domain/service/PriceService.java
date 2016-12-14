@@ -34,7 +34,7 @@ public class PriceService {
       money = price.getValue();
     } else {
       LOG.debug("Use DiscountedPrice, priceId: {}", price.getId());
-      money = MoneyMapper.convertModelToEntity(discountedPrice.getValue());
+      money = MoneyMapper.modelToEntity(discountedPrice.getValue());
     }
     return money;
   }

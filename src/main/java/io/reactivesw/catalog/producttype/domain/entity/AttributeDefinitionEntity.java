@@ -1,7 +1,7 @@
 package io.reactivesw.catalog.producttype.domain.entity;
 
-import io.reactivesw.catalog.product.model.attributes.AttributeConstraint;
-import io.reactivesw.catalog.product.model.attributes.AttributeType;
+import io.reactivesw.catalog.product.application.model.attributes.AttributeConstraint;
+import io.reactivesw.catalog.product.application.model.attributes.AttributeType;
 import io.reactivesw.common.dialect.JSONBUserType;
 import io.reactivesw.common.entity.BaseAllEntity;
 import io.reactivesw.common.entity.LocalizedStringEntity;
@@ -27,7 +27,7 @@ import javax.persistence.Table;
 @Table(name = "catalog_product_type_attribute_definition")
 @TypeDef(name = "attributeType", typeClass = JSONBUserType.class, parameters = {
     @Parameter(name = JSONBUserType.CLASS,
-        value = "io.reactivesw.catalog.product.model.attributes.AttributeType")}
+        value = "io.reactivesw.catalog.product.application.model.attributes.AttributeType")}
 )
 public class AttributeDefinitionEntity extends BaseAllEntity {
 

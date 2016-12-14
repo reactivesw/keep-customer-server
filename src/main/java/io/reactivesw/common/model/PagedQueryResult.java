@@ -6,7 +6,7 @@ import lombok.Value;
 import java.util.List;
 
 /**
- * Created by rai on 16/12/10.
+ * Created by Davis on 16/12/10.
  */
 @Data
 public class PagedQueryResult<T> {

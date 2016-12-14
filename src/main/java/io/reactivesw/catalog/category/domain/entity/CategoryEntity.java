@@ -32,7 +32,7 @@ import javax.persistence.Version;
 
 /**
  * CategoryEntity Entity.
- * Created by rai on 16/11/13.
+ * Created by Davis on 16/11/13.
  */
 @Entity
 @Table(name = "catalog_category")

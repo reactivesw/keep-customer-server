@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
 
-import io.reactivesw.catalog.product.model.AttributeDefinitionDraft;
+import io.reactivesw.catalog.product.application.model.AttributeDefinitionDraft;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 

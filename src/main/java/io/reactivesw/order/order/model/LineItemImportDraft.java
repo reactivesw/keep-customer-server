@@ -1,7 +1,7 @@
 package io.reactivesw.order.order.model;
 
 import io.reactivesw.order.cart.application.model.ItemState;
-import io.reactivesw.catalog.product.model.Price;
+import io.reactivesw.catalog.product.application.model.Price;
 import io.reactivesw.common.model.LocalizedString;
 import io.reactivesw.common.model.Reference;
 import io.reactivesw.catalog.taxcategory.application.model.TaxRate;
