@@ -1,19 +1,22 @@
 package io.reactivesw.catalog.product.application.model;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
-import io.reactivesw.common.model.Asset;
 import io.reactivesw.catalog.product.application.model.attributes.Attribute;
+import io.reactivesw.common.model.Asset;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import lombok.Data;
+
+import java.util.List;
 
 /**
  * Created by umasuo on 16/11/17.
  */
 @Data
 @ApiModel
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProductVariant {
 
   @ApiModelProperty(value = "The sequential ID of the variant within the product.", required = true)

@@ -11,10 +11,10 @@ public class ProductCatalogDataMapper {
   public static ProductCatalogDataEntity modelToEntity(ProductDraft model) {
     ProductCatalogDataEntity entity = new ProductCatalogDataEntity();
 
-    entity.setPublished(model.getPublish());
+    entity.setPublished(false);
     entity.setStagedChanged(false);
-    entity.setCurrent(null);
-    entity.setStagedChanged(null);
+    entity.setCurrent(ProductDataMapper.modelToEntity(model));
+    entity.setStaged(ProductDataMapper.modelToEntity(model));
 
     return entity;
   }

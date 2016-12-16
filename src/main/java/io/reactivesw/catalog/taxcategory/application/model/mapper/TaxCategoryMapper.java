@@ -6,9 +6,13 @@ import io.reactivesw.catalog.taxcategory.domain.entity.TaxCategoryEntity;
 import io.reactivesw.common.enums.ReferenceTypes;
 import io.reactivesw.common.model.Reference;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import jdk.nashorn.internal.ir.annotations.Ignore;
 
 /**
  * Created by Davis on 16/12/10.
@@ -69,6 +73,10 @@ public final class TaxCategoryMapper {
   }
 
   public static Reference entityToReference(String taxCategoryId) {
-    return new Reference(ReferenceTypes.TAXCATEGORY.getType(), taxCategoryId);
+    Reference reference = null;
+    if (StringUtils.isNotBlank(taxCategoryId)) {
+      reference = new Reference(ReferenceTypes.TAXCATEGORY.getType(), taxCategoryId);
+    }
+    return reference;
   }
 }

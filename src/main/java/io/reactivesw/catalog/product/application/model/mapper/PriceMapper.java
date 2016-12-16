@@ -55,7 +55,7 @@ public class PriceMapper {
 //    model.setDiscounted(DiscountedPriceMapper.entityToModel(entity.getDiscounted()));
     model.setCustom(entity.getCustom());
 
-    return null;
+    return model;
   }
 
   public static List<Price> entityToModel(Set<PriceEntity> entities) {

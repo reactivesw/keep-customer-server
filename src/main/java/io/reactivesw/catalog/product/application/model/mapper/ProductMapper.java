@@ -1,9 +1,7 @@
 package io.reactivesw.catalog.product.application.model.mapper;
 
 import io.reactivesw.catalog.product.application.model.Product;
-import io.reactivesw.catalog.product.application.model.ProductCatalogData;
 import io.reactivesw.catalog.product.application.model.ProductDraft;
-import io.reactivesw.catalog.product.domain.entity.ProductCatalogDataEntity;
 import io.reactivesw.catalog.product.domain.entity.ProductEntity;
 import io.reactivesw.catalog.producttype.application.model.mapper.ProductTypeMapper;
 import io.reactivesw.catalog.taxcategory.application.model.mapper.TaxCategoryMapper;
@@ -23,9 +21,13 @@ public final class ProductMapper {
     ProductEntity entity = new ProductEntity();
 
     entity.setKey(model.getKey());
-    entity.setState(model.getState().getId());
+    if (model.getState() != null) {
+      entity.setState(model.getState().getId());
+    }
     entity.setProductType(model.getProductType().getId());
-    entity.setTaxCategory(model.getTaxCategory().getId());
+    if (model.getTaxCategory() != null) {
+      entity.setTaxCategory(model.getTaxCategory().getId());
+    }
     entity.setMasterData(ProductCatalogDataMapper.modelToEntity(model));
 
     return entity;

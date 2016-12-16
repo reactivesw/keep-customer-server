@@ -92,6 +92,24 @@ public class Router {
 
   /*************** End TaxCategory. ***********************/
 
+  /*************** Product. *******************************/
+
+  /**
+   * product root.
+   */
+  public static final String PRODUCT_ROOT = URL_ROOT + "/products";
+
+  /**
+   * product id.
+   */
+  public static final String PRODUCT_ID = "productId";
+
+  /**
+   * product with id.
+   */
+  public static final String PRODUCT_WITH_ID = PRODUCT_ROOT + "/{" + PRODUCT_ID + "}";
+
+  /*************** End Product. ***************************/
 
   /*************** Cart & order. *****************/
   /**

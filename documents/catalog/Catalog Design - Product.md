@@ -15,6 +15,9 @@ catalog_product_image
 
 新增Product对外界没有影响，可以直接添加，version自动生成为0，ID为自动生成的UUID字符串。
 
+新增masterVariant, id为1
+
+
 在新增Product的过程中，需要校验以下问题：
 
 1. name, slug, productType是必填属性

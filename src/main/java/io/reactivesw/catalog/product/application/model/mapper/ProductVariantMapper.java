@@ -28,8 +28,12 @@ public class ProductVariantMapper {
     entity.setKey(model.getKey());
     entity.setSku(model.getSku());
 //    entity.setImages(model.getImages());
-    entity.setPrices(PriceMapper.modelToEntity(model.getPrices()));
-    entity.setAttributes(AttributeMapper.modelToEntity(model.getAttributes()));
+    if (model.getPrices() != null) {
+      entity.setPrices(PriceMapper.modelToEntity(model.getPrices()));
+    }
+    if (model.getAttributes() != null) {
+      entity.setAttributes(AttributeMapper.modelToEntity(model.getAttributes()));
+    }
 
     return entity;
   }
@@ -40,9 +44,15 @@ public class ProductVariantMapper {
     model.setId(entity.getId());
     model.setKey(entity.getKey());
     model.setSku(entity.getSku());
-    model.setPrices(PriceMapper.entityToModel(entity.getPrices()));
-    model.setAttributes(AttributeMapper.entityToModel(entity.getAttributes()));
-    model.setImages(ImageMapper.entityToModel(entity.getImages()));
+    if (entity.getPrices() != null) {
+      model.setPrices(PriceMapper.entityToModel(entity.getPrices()));
+    }
+    if (entity.getAttributes() != null) {
+      model.setAttributes(AttributeMapper.entityToModel(entity.getAttributes()));
+    }
+    if (entity.getImages() != null) {
+      model.setImages(ImageMapper.entityToModel(entity.getImages()));
+    }
 //    model.setIsMatchingVariant();
 //    model.setAvailability();
 //    model.setPrice();

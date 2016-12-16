@@ -123,8 +123,10 @@ public class CategoryService {
     CategoryEntity entity = getById(id);
     validateVersion(entity, version);
 
-    actions.parallelStream().forEach(action -> CategoryUpdateMapper.getMapper(action.getClass())
-        .setAction(entity, action));
+    actions.parallelStream().forEach(action -> {
+      CategoryUpdateMapper.getMapper(action.getClass())
+        .setAction(entity, action);
+    });
 
     CategoryEntity updatedEntity = categoryRepository.save(entity);
     //TODO send message, if slug be updated

@@ -5,9 +5,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import lombok.Data;
+
 /**
  * Created by umasuo on 16/11/17.
  */
+@Data
 @ApiModel
 public class Attribute {
 
@@ -16,23 +19,4 @@ public class Attribute {
 
   @ApiModelProperty(value = "A valid JSON value, based on an AttributeDefinitionEntity.", required = true)
   private JsonNode value;
-
-  public Attribute() {
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public JsonNode getValue() {
-    return value;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public void setValue(JsonNode value) {
-    this.value = value;
-  }
 }

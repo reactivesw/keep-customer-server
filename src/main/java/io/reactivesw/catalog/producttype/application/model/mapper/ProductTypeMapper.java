@@ -6,6 +6,8 @@ import io.reactivesw.catalog.producttype.domain.entity.ProductTypeEntity;
 import io.reactivesw.common.enums.ReferenceTypes;
 import io.reactivesw.common.model.Reference;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -61,6 +63,10 @@ public final class ProductTypeMapper {
   }
 
   public static Reference entityToReference(String productTypeId) {
-    return new Reference(ReferenceTypes.PRODUCTTYPE.getType(), productTypeId);
+    Reference reference = null;
+    if (StringUtils.isNotBlank(productTypeId)) {
+      reference = new Reference(ReferenceTypes.PRODUCTTYPE.getType(), productTypeId);
+    }
+    return reference;
   }
 }

@@ -5,11 +5,11 @@ import io.reactivesw.catalog.product.application.model.ProductDraft;
 import io.reactivesw.catalog.product.application.model.mapper.ProductMapper;
 import io.reactivesw.catalog.product.domain.entity.ProductEntity;
 import io.reactivesw.catalog.product.infrastructure.repository.ProductRepository;
-import io.reactivesw.catalog.producttype.domain.entity.ProductTypeEntity;
 import io.reactivesw.common.exception.NotExistException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -25,6 +25,7 @@ public class ProductService {
   /**
    * ProductRepository.
    */
+  @Autowired
   private transient ProductRepository productRepository;
 
   /**
@@ -47,6 +48,13 @@ public class ProductService {
     return result;
   }
 
+
+  /**
+   * Gets product by id.
+   *
+   * @param id the id
+   * @return the product by id
+   */
   public Product getProductById(String id) {
     LOG.debug("enter getProductById, id is : {}", id);
 
@@ -59,10 +67,17 @@ public class ProductService {
     return result;
   }
 
+
+  /**
+   * Gets product entity by id.
+   *
+   * @param id the id
+   * @return the product entity by id
+   */
   private ProductEntity getProductEntityById(String id) {
     ProductEntity entity = productRepository.findOne(id);
     if (entity == null) {
-      LOG.debug("can not find product by id : " + id);
+      LOG.debug("can not find product by id : {}", id);
       throw new NotExistException("Product Not Found");
     }
     return entity;

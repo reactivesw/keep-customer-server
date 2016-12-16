@@ -1,6 +1,8 @@
 package io.reactivesw.catalog.product.application.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.time.ZonedDateTime;
 
@@ -18,6 +20,7 @@ import lombok.Data;
  */
 @Data
 @ApiModel
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Price {
 
   @ApiModelProperty(value = "The unique ID of this price.",
