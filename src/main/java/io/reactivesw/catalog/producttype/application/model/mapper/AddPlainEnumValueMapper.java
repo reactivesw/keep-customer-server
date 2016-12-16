@@ -4,7 +4,6 @@ import io.reactivesw.catalog.product.application.model.attributes.EnumAttributeT
 import io.reactivesw.catalog.producttype.application.model.action.AddPlainEnumValue;
 import io.reactivesw.catalog.producttype.domain.entity.ProductTypeEntity;
 import io.reactivesw.common.enums.EnumValue;
-import io.reactivesw.common.enums.EnumValueImpl;
 import io.reactivesw.common.model.UpdateAction;
 import io.reactivesw.common.model.mapper.EnumValueMapper;
 
@@ -18,7 +17,7 @@ public class AddPlainEnumValueMapper implements ProductTypeUpdateMapper<ProductT
   public void setAction(ProductTypeEntity entity, UpdateAction action) {
     AddPlainEnumValue setAttributeInputTip = (AddPlainEnumValue) action;
     String attributeName = setAttributeInputTip.getAttributeName();
-    EnumValueImpl enumValue = EnumValueMapper.modelToEntity(setAttributeInputTip.getValue());
+    EnumValue enumValue = EnumValueMapper.modelToEntity(setAttributeInputTip.getValue());
 
     entity.getAttributes()
         .stream().map(

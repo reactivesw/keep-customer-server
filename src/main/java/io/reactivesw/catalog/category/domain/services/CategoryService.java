@@ -202,13 +202,11 @@ public class CategoryService {
    * @throws ParametersException when version not match
    */
   private void validateVersion(CategoryEntity entity, Integer version) {
-
     if (!Objects.equals(version, entity.getVersion())) {
       LOG.debug("Version not match, input version:{}, entity version:{}",
           version, entity.getVersion());
       throw new ParametersException("Version not match");
     }
-
   }
 
   /**
