@@ -2,21 +2,25 @@ package io.reactivesw.catalog.product.application.model.attributes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import io.reactivesw.common.model.TextInputHint;
 import io.reactivesw.common.model.LocalizedString;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import lombok.Data;
+
 /**
  * Created by Davis on 16/11/16.
  */
+@Data
 @ApiModel
-@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class AttributeDefinition {
 
   /**
-   * Describes the type of the attribute. TODO
+   * Describes the type of the attribute.
    */
   @ApiModelProperty(required = true)
   private AttributeType type;
@@ -37,14 +41,12 @@ public class AttributeDefinition {
   /**
    * A human-readable label for the attribute.
    */
-  @JsonIgnore
   private LocalizedString label;
 
   /**
    * Additional information about the attribute that aids content managers
    * when setting product details.
    */
-  @JsonIgnore
   @ApiModelProperty(required = false)
   private LocalizedString inputTip;
 
@@ -65,7 +67,6 @@ public class AttributeDefinition {
    * Provides a visual representation type for this attribute.
    * only relevant for text-based attribute model like TextType and LocalizableTextType.
    */
-  //TODO String should be TextInputHint
   @ApiModelProperty(required = false)
   private TextInputHint inputHint;
 
@@ -82,167 +83,4 @@ public class AttributeDefinition {
    */
   @ApiModelProperty(required = false)
   private Boolean isSearchable;
-
-  /**
-   * Gets type.
-   *
-   * @return the type
-   */
-  public AttributeType getType() {
-    return type;
-  }
-
-  /**
-   * Sets type.
-   *
-   * @param type the type
-   */
-  public void setType(AttributeType type) {
-    this.type = type;
-  }
-
-  /**
-   * Gets name.
-   *
-   * @return the name
-   */
-  public String getName() {
-    return name;
-  }
-
-  /**
-   * Sets name.
-   *
-   * @param name the name
-   */
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  /**
-   * Gets label.
-   *
-   * @return the label
-   */
-  public LocalizedString getLabel() {
-    return label;
-  }
-
-  /**
-   * Sets label.
-   *
-   * @param label the label
-   */
-  public void setLabel(LocalizedString label) {
-    this.label = label;
-  }
-
-  /**
-   * Gets input tip.
-   *
-   * @return the input tip
-   */
-  public LocalizedString getInputTip() {
-    return inputTip;
-  }
-
-  /**
-   * Sets input tip.
-   *
-   * @param inputTip the input tip
-   */
-  public void setInputTip(LocalizedString inputTip) {
-    this.inputTip = inputTip;
-  }
-
-  /**
-   * Gets required.
-   *
-   * @return the required
-   */
-  public Boolean getRequired() {
-    return isRequired;
-  }
-
-  /**
-   * Sets required.
-   *
-   * @param required the required
-   */
-  public void setRequired(Boolean required) {
-    isRequired = required;
-  }
-
-  /**
-   * Gets attribute constraint.
-   *
-   * @return the attribute constraint
-   */
-  public AttributeConstraint getAttributeConstraint() {
-    return attributeConstraint;
-  }
-
-  /**
-   * Sets attribute constraint.
-   *
-   * @param attributeConstraint the attribute constraint
-   */
-  public void setAttributeConstraint(AttributeConstraint attributeConstraint) {
-    this.attributeConstraint = attributeConstraint;
-  }
-
-  /**
-   * Gets input hint.
-   *
-   * @return the input hint
-   */
-  public TextInputHint getInputHint() {
-    return inputHint;
-  }
-
-  /**
-   * Sets input hint.
-   *
-   * @param inputHint the input hint
-   */
-  public void setInputHint(TextInputHint inputHint) {
-    this.inputHint = inputHint;
-  }
-
-  /**
-   * Gets searchable.
-   *
-   * @return the searchable
-   */
-  public Boolean getSearchable() {
-    return isSearchable;
-  }
-
-  /**
-   * Sets searchable.
-   *
-   * @param searchable the searchable
-   */
-  public void setSearchable(Boolean searchable) {
-    isSearchable = searchable;
-  }
-
-  /**
-   * toString method.
-   *
-   * @return String
-   */
-  @Override
-  public String toString() {
-    return "AttributeDefinitionEntity{" +
-            "type=" + type +
-            ", name='" + name + '\'' +
-            ", label=" + label +
-            ", inputTip=" + inputTip +
-            ", isRequired=" + isRequired +
-            ", attributeConstraint=" + attributeConstraint +
-            ", inputHint='" + inputHint + '\'' +
-            ", isSearchable=" + isSearchable +
-            '}';
-  }
 }
