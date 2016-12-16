@@ -7,7 +7,9 @@ import io.reactivesw.common.model.CustomFields;
 import io.reactivesw.common.model.Statics;
 import io.reactivesw.common.util.CustomFieldsJsonConverter;
 import io.reactivesw.order.cartdiscount.infrastructure.enums.LineItemPriceMode;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Set;
 
@@ -23,8 +25,9 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "order_cart_line_item")
-@Data
-//TODO specify the equal and hashcode method
+@Getter
+@Setter
+@EqualsAndHashCode(of = {"productId", "supplyChannel", "distributionChannel"})
 public class LineItemValue extends BaseIdEntity {
 
   /**

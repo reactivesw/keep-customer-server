@@ -202,13 +202,9 @@ public class CartService {
   public CartEntity removeLineItem(String cartId, String lineItemId, Integer quantity) {
     CartEntity entity = this.getById(cartId);
     Set<LineItemValue> lineItems = entity.getLineItems();
-    Optional<LineItemValue> item = lineItems.stream().filter(tmpItem -> tmpItem.getId()
-        == lineItemId).findFirst();
-    if (!item.isPresent()) {
-      throw new NotExistException("Removing not existing line item.");
-    }
-    LineItemValue itemValue = item.get();
-    if (quantity == null || itemValue.getQuantity() >= quantity) {
+    LineItemValue itemValue = this.getLineItem(entity, lineItemId);
+
+    if (quantity == null || itemValue.getQuantity() <= quantity) {
       lineItems.remove(itemValue);
     } else {
       Integer remainQuantity = itemValue.getQuantity() - quantity;
@@ -219,6 +215,30 @@ public class CartService {
     return this.cartRepository.save(entity);
   }
 
+  /**
+   * set the line item's quantity to an value.
+   * Sets the quantity of the given LineItem. If quantity is 0, line item is removed from the cart.
+   * @param cartId String
+   * @param lineItemId String
+   * @param quantity Integer
+   * @return CartEntity
+   */
+  public CartEntity changeLineItemQuantity(String cartId, String lineItemId, Integer quantity) {
+    CartEntity entity = this.getById(cartId);
+
+    Set<LineItemValue> lineItems = entity.getLineItems();
+
+    LineItemValue itemValue = this.getLineItem(entity, lineItemId);
+
+    if (quantity == null || quantity == 0) {
+      lineItems.remove(itemValue);
+    } else {
+      itemValue.setQuantity(quantity);
+    }
+
+    this.calculateCartPrice(entity);
+    return this.cartRepository.save(entity);
+  }
 
   /**
    * calculate cart price.
@@ -302,4 +322,13 @@ public class CartService {
   }
 
 
+  private LineItemValue getLineItem(CartEntity cart, String lineItemId) {
+    Set<LineItemValue> lineItems = cart.getLineItems();
+    Optional<LineItemValue> item = lineItems.stream().filter(tmpItem -> tmpItem.getId()
+        == lineItemId).findFirst();
+    if (!item.isPresent()) {
+      throw new NotExistException("Removing not existing line item.");
+    }
+    return item.get();
+  }
 }

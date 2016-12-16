@@ -239,13 +239,13 @@ class CartServiceTest extends Specification {
 
         when:
         cartRepository.findOne(cartId) >> cartEntity
-        cartService.removeLineItem(cartId, lineItemId, 5)
+        cartService.removeLineItem(cartId, lineItemId, 2)
         then:
         noExceptionThrown()
 
     }
 
-    def "Test 3.4: Update cart: remove LineItem for reduce to many "() {
+    def "Test 3.4: Update cart: remove LineItem for reduce too many "() {
 
         when:
         cartRepository.findOne(cartId) >> cartEntity
@@ -266,6 +266,36 @@ class CartServiceTest extends Specification {
         thrown(NotExistException)
 
     }
+
+    def "Test 3.6: Update cart: change Line item quantity remove item "() {
+
+        when:
+        cartRepository.findOne(cartId) >> cartEntity
+        cartService.changeLineItemQuantity(cartId, lineItemId, 0)
+        then:
+        noExceptionThrown()
+    }
+
+    def "Test 3.7: Update cart: change Line item quantity "() {
+
+        when:
+        cartRepository.findOne(cartId) >> cartEntity
+        cartService.changeLineItemQuantity(cartId, lineItemId, 3)
+        then:
+        noExceptionThrown()
+
+    }
+
+    def "Test 3.8: Update cart: change Line item quantity "() {
+
+        when:
+        cartRepository.findOne(cartId) >> cartEntity
+        cartService.changeLineItemQuantity(cartId, lineItemId, null)
+        then:
+        noExceptionThrown()
+
+    }
+
 
     def "Test 4.1: Recalculate total price"() {
 
