@@ -1,6 +1,7 @@
 package io.reactivesw.order.cart.domain.entity.value;
 
 import io.reactivesw.common.util.ListJsonConverter;
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
@@ -19,6 +20,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "order_cart_product_variant")
+@Data
 public class ProductVariantValue {
 
   /**
@@ -73,165 +75,4 @@ public class ProductVariantValue {
   @Convert(converter = ListJsonConverter.class)
   private List<String> assetIds;
 
-  /**
-   * Gets variant id.
-   *
-   * @return the variant id
-   */
-  public String getVariantId() {
-    return variantId;
-  }
-
-  /**
-   * Sets variant id.
-   *
-   * @param variantId the variant id
-   */
-  public void setVariantId(String variantId) {
-    this.variantId = variantId;
-  }
-
-  /**
-   * Gets id.
-   *
-   * @return the id
-   */
-  public Integer getId() {
-    return id;
-  }
-
-  /**
-   * Sets id.
-   *
-   * @param id the id
-   */
-  public void setId(Integer id) {
-    this.id = id;
-  }
-
-  /**
-   * Gets sku.
-   *
-   * @return the sku
-   */
-  public String getSku() {
-    return sku;
-  }
-
-  /**
-   * Sets sku.
-   *
-   * @param sku the sku
-   */
-  public void setSku(String sku) {
-    this.sku = sku;
-  }
-
-  /**
-   * Gets key.
-   *
-   * @return the key
-   */
-  public String getKey() {
-    return key;
-  }
-
-  /**
-   * Sets key.
-   *
-   * @param key the key
-   */
-  public void setKey(String key) {
-    this.key = key;
-  }
-
-  /**
-   * Gets prices.
-   *
-   * @return the prices
-   */
-  public Set<PriceValue> getPrices() {
-    return prices;
-  }
-
-  /**
-   * Sets prices.
-   *
-   * @param prices the prices
-   */
-  public void setPrices(Set<PriceValue> prices) {
-    this.prices = prices;
-  }
-
-  /**
-   * Gets attributes.
-   *
-   * @return the attributes
-   */
-  public Set<AttributeValue> getAttributes() {
-    return attributes;
-  }
-
-  /**
-   * Sets attributes.
-   *
-   * @param attributes the attributes
-   */
-  public void setAttributes(Set<AttributeValue> attributes) {
-    this.attributes = attributes;
-  }
-
-  /**
-   * Gets images.
-   *
-   * @return the images
-   */
-  public Set<ImageValue> getImages() {
-    return images;
-  }
-
-  /**
-   * Sets images.
-   *
-   * @param images the images
-   */
-  public void setImages(Set<ImageValue> images) {
-    this.images = images;
-  }
-
-  /**
-   * Gets asset ids.
-   *
-   * @return the asset ids
-   */
-  public List<String> getAssetIds() {
-    return assetIds;
-  }
-
-  /**
-   * Sets asset ids.
-   *
-   * @param assetIds the asset ids
-   */
-  public void setAssetIds(List<String> assetIds) {
-    this.assetIds = assetIds;
-  }
-
-  /**
-   * to string method.
-   * @return String
-   */
-  @Override
-  public String toString() {
-    return "ProductVariantValue{"
-        + "variantId='" + variantId + '\''
-        + ", id=" + id
-        + ", sku='" + sku + '\''
-        + ", key='" + key + '\''
-        + ", prices=" + prices
-        + ", attributes=" + attributes
-        + ", images=" + images
-        + ", assetIds=" + assetIds
-        + '}';
-  }
 }

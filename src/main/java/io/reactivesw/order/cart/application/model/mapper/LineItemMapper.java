@@ -1,9 +1,11 @@
 package io.reactivesw.order.cart.application.model.mapper;
 
+import io.reactivesw.catalog.taxcategory.application.model.ExternalTaxRateDraft;
 import io.reactivesw.common.model.mapper.LocalizedStringMapper;
 import io.reactivesw.order.cart.application.model.LineItem;
 import io.reactivesw.order.cart.application.model.LineItemDraft;
 import io.reactivesw.order.cart.domain.entity.value.LineItemValue;
+import io.reactivesw.order.cart.domain.entity.value.ProductVariantValue;
 
 /**
  * Created by umasuo on 16/12/5.
@@ -16,7 +18,7 @@ public class LineItemMapper {
    * @param entity LineItemValue
    * @return LineItem
    */
-  public static LineItem convertEntityToModel(LineItemValue entity) {
+  public static LineItem entityToModel(LineItemValue entity) {
     LineItem item = new LineItem();
     item.setId(entity.getId());
 
@@ -54,11 +56,22 @@ public class LineItemMapper {
   }
 
   /**
-   * 
-   * @param model
-   * @return
+   *
+   * convert model to entity.
+   * @param model LineItemDraft
+   * @return LineItemValue
    */
-  public static LineItemValue convertModelToEntity(LineItemDraft model) {
-    return null;
+  public static LineItemValue modelToEntity(LineItemDraft model) {
+    LineItemValue entity = new LineItemValue();
+    entity.setProductId(model.getProductId());
+    entity.setQuantity(model.getQuantity());
+    ProductVariantValue variantValue = new ProductVariantValue();
+    variantValue.setId(model.getVariantId());
+    entity.setVariant(variantValue);
+    entity.setSupplyChannel(model.getSupplyChannel().getId());
+    entity.setDistributionChannel(model.getDistributionChannel().getId());
+
+//    ExternalTaxRateDraft externalTaxRate = model.getExternalTaxRate();
+    return entity;
   }
 }

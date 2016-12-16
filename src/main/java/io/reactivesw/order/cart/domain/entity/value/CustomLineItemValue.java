@@ -33,12 +33,14 @@ public class CustomLineItemValue extends BaseIdEntity {
 
   /**
    * money.
+   * The cost to add to the cart. The amount can be negative.
    */
   @OneToOne
   private MoneyEntity money;
 
   /**
    * taxed item price value.
+   * Set once the taxRate is set.
    */
   @OneToOne
   private TaxedItemPriceValue taxedPrice;

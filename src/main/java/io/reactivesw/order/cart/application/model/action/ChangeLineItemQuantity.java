@@ -12,7 +12,7 @@ import lombok.Data;
  */
 @ApiModel
 @Data
-public class RemoveLineItem implements UpdateAction {
+public class ChangeLineItemQuantity implements UpdateAction {
 
   /**
    * line item id.

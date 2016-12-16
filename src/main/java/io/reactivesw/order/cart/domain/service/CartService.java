@@ -1,11 +1,13 @@
 package io.reactivesw.order.cart.domain.service;
 
+import io.reactivesw.common.entity.MoneyEntity;
 import io.reactivesw.common.exception.AlreadyExistException;
 import io.reactivesw.common.exception.NotExistException;
 import io.reactivesw.common.exception.ParametersException;
 import io.reactivesw.common.model.Statics;
 import io.reactivesw.order.cart.domain.entity.CartEntity;
 import io.reactivesw.order.cart.domain.entity.value.LineItemValue;
+import io.reactivesw.order.cart.domain.entity.value.ShippingInfoValue;
 import io.reactivesw.order.cart.infrastructure.enums.CartState;
 import io.reactivesw.order.cart.infrastructure.repository.CartRepository;
 import org.apache.commons.lang3.StringUtils;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -35,10 +38,22 @@ public class CartService {
   private transient CartRepository cartRepository;
 
   /**
-   * Line item service.
+   * line item service.
    */
-//  @Autowired
-//  private transient LineItemService lineItemService;
+  @Autowired
+  private transient LineItemService lineItemService;
+
+  /**
+   * custom item service.
+   */
+  @Autowired
+  private transient CustomLineItemService customLineItemService;
+
+  /**
+   * shipping info service.
+   */
+  @Autowired
+  private transient ShippingInfoService shippingInfoService;
 
   /**
    * Create an new active cart with sample.
@@ -170,7 +185,7 @@ public class CartService {
     } else {
       lineItems.add(lineItem);
     }
-    //TODO recalculate the cart
+    this.calculateCartPrice(entity);
     return this.cartRepository.save(entity);
   }
 
@@ -187,22 +202,81 @@ public class CartService {
   public CartEntity removeLineItem(String cartId, String lineItemId, Integer quantity) {
     CartEntity entity = this.getById(cartId);
     Set<LineItemValue> lineItems = entity.getLineItems();
-    Optional<LineItemValue> item = lineItems.stream().filter(tmpItem -> tmpItem.getId()
-        == lineItemId).findFirst();
-    if (!item.isPresent()) {
-      throw new NotExistException("Removing not existing line item.");
-    }
-    LineItemValue itemValue = item.get();
-    if (quantity == null || itemValue.getQuantity() >= quantity) {
+    LineItemValue itemValue = this.getLineItem(entity, lineItemId);
+
+    if (quantity == null || itemValue.getQuantity() <= quantity) {
       lineItems.remove(itemValue);
     } else {
       Integer remainQuantity = itemValue.getQuantity() - quantity;
       itemValue.setQuantity(remainQuantity);
     }
-    //TODO calculate price
+
+    this.calculateCartPrice(entity);
     return this.cartRepository.save(entity);
   }
 
+  /**
+   * set the line item's quantity to an value.
+   * Sets the quantity of the given LineItem. If quantity is 0, line item is removed from the cart.
+   * @param cartId String
+   * @param lineItemId String
+   * @param quantity Integer
+   * @return CartEntity
+   */
+  public CartEntity changeLineItemQuantity(String cartId, String lineItemId, Integer quantity) {
+    CartEntity entity = this.getById(cartId);
+
+    Set<LineItemValue> lineItems = entity.getLineItems();
+
+    LineItemValue itemValue = this.getLineItem(entity, lineItemId);
+
+    if (quantity == null || quantity == 0) {
+      lineItems.remove(itemValue);
+    } else {
+      itemValue.setQuantity(quantity);
+    }
+
+    this.calculateCartPrice(entity);
+    return this.cartRepository.save(entity);
+  }
+
+  /**
+   * calculate cart price.
+   * TODO split the method.
+   *
+   * @param cart CartEntity
+   */
+  protected void calculateCartPrice(CartEntity cart) {
+
+    int lineItemTotalPrice = cart.getLineItems().parallelStream().mapToInt(
+        lineItemValue -> {
+          lineItemService.calculateTotalPrice(lineItemValue);
+          return lineItemValue.getTotalPrice().getCentAmount();
+        }
+    ).sum();
+
+    int customItemTotalPrice = cart.getCustomLineItems().parallelStream().mapToInt(
+        customLineItemValue -> {
+          customLineItemService.calculateTotalPrice(customLineItemValue);
+          return customLineItemValue.getTotalPrice().getCentAmount();
+        }
+    ).sum();
+
+    ShippingInfoValue shippingInfo = cart.getShippingInfo();
+    shippingInfoService.calculateTotalPrice(shippingInfo, lineItemTotalPrice);
+    int shippingTotalPrice = shippingInfo.getPrice().getCentAmount();
+
+    //TODO use discount to calculate the cart price
+    int totalPrice = lineItemTotalPrice + customItemTotalPrice + shippingTotalPrice;
+
+    MoneyEntity cartTotalPrice = cart.getTotalPrice();
+    if (Objects.isNull(cartTotalPrice)) {
+      cartTotalPrice = new MoneyEntity();
+      cart.setTotalPrice(cartTotalPrice);
+    }
+    cartTotalPrice.setCentAmount(totalPrice);
+
+  }
 
   /**
    * setter of the cart repository.
@@ -247,26 +321,14 @@ public class CartService {
     return retEntity;
   }
 
-  /**
-   * calculate cart price.
-   *
-   * @param cart CartEntity
-   */
-//  private void calculateCartPrice(CartEntity cart) {
-//    //first, get all product price and get a sum, do the same to shipping method
-//    //second, get all cart discounts that match this cart, if needed, we also need to get all
-//    // discount code.
-//    //third, calculate the cart price
-//    MoneyEntity totalPrice = cart.getTotalPrice();
-//    cart.getLineItems().parallelStream().forEach(
-//        lineItemValue -> {
-//          lineItemService.calculateTotalPrice(lineItemValue);
-//          totalPrice.setCentAmount(
-//              totalPrice.getCentAmount() + lineItemValue.getTotalPrice().getCentAmount()
-//          );
-//        }
-//    );
-//
-//  }
 
+  private LineItemValue getLineItem(CartEntity cart, String lineItemId) {
+    Set<LineItemValue> lineItems = cart.getLineItems();
+    Optional<LineItemValue> item = lineItems.stream().filter(tmpItem -> tmpItem.getId()
+        == lineItemId).findFirst();
+    if (!item.isPresent()) {
+      throw new NotExistException("Removing not existing line item.");
+    }
+    return item.get();
+  }
 }

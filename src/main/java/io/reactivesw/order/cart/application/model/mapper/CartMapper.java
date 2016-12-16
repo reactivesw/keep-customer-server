@@ -55,12 +55,18 @@ public class CartMapper {
   private static List<LineItem> getLineItems(Set<LineItemValue> itemValues) {
     List<LineItem> items = new ArrayList<>();
     if (itemValues != null) {
-      items = itemValues.parallelStream().map(item -> LineItemMapper.convertEntityToModel(item))
+      items = itemValues.parallelStream().map(item -> LineItemMapper.entityToModel(item))
           .collect(Collectors.toList());
     }
     return items;
   }
 
+  /**
+   * get custom line item.
+   *
+   * @param itemValues Set<CustomLineItemValue>
+   * @return List<CustomLineItem>
+   */
   private static List<CustomLineItem> getCustomLineItem(Set<CustomLineItemValue> itemValues) {
     List<CustomLineItem> items = new ArrayList<>();
     if (itemValues != null) {
