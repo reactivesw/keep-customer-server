@@ -77,6 +77,7 @@ public class CategoryController {
   public void deleteCategory(@PathVariable(value = CATEGORY_ID)
                              @ApiParam(value = "CategoryEntity ID", required = true)
                                  String id,
+                             @RequestBody
                              @ApiParam(value = "CategoryEntity Version", required = true)
                              Integer version) {
     LOG.debug("enter deleteCategory, id is {}, version is {}", id, version);

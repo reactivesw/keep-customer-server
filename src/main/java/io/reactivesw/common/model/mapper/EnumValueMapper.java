@@ -8,7 +8,7 @@ import io.reactivesw.common.model.PlainEnumValue;
  * Created by Davis on 16/12/12.
  */
 public final class EnumValueMapper {
-  public static EnumValue modelToEntity(PlainEnumValue plainEnumValue) {
+  public static EnumValueImpl modelToEntity(PlainEnumValue plainEnumValue) {
     return new EnumValueImpl(plainEnumValue.getKey(), plainEnumValue.getLabel());
   }
 }

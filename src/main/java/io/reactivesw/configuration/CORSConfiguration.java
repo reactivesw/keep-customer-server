@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 /**
  * Created by Davis on 16/12/16.
  */
-// TODO: 16/12/16 add for CORS, if somethis wrong, should remove
+// TODO: 16/12/16 add for CORS, if somethings wrong, should remove
 @Configuration
 public class CORSConfiguration {
   /**
