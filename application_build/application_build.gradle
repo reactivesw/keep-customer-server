@@ -25,6 +25,9 @@ dependencies {
     //commons-lang
     compile('org.apache.commons:commons-lang3:3.4')
 
+    //commons-collections
+    compile('org.apache.commons:commons-collections4:4.1')
+
     //lombok
     compile('org.projectlombok:lombok:1.16.12')
 
