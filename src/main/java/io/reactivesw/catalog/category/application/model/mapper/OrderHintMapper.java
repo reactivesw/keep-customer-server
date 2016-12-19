@@ -10,7 +10,7 @@ import io.reactivesw.common.model.UpdateAction;
 public class OrderHintMapper implements CategoryUpdateMapper<CategoryEntity> {
 
   @Override
-  public void setAction(CategoryEntity entity, UpdateAction action) {
+  public void handle(CategoryEntity entity, UpdateAction action) {
     SetOrderHint setOrderHint = (SetOrderHint) action;
     entity.setOrderHint(setOrderHint.getOrderHint());
   }

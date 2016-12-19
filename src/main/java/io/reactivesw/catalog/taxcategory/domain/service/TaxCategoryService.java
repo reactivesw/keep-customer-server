@@ -93,7 +93,7 @@ public class TaxCategoryService {
     validateVersion(entity, version);
 
     actions.parallelStream().forEach(action -> TaxCategoryUpdateMapper.getMapper(action.getClass())
-        .setAction(entity, action));
+        .handle(entity, action));
 
     TaxCategoryEntity updatedEntity = taxCategoryRepository.save(entity);
 

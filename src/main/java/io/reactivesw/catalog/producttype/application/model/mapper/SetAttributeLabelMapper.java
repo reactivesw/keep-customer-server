@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  */
 public class SetAttributeLabelMapper implements ProductTypeUpdateMapper<ProductTypeEntity> {
   @Override
-  public void setAction(ProductTypeEntity entity, UpdateAction action) {
+  public void handle(ProductTypeEntity entity, UpdateAction action) {
     SetAttributeLabel setAttributeLabel = (SetAttributeLabel) action;
     String attributeName = setAttributeLabel.getAttributeName();
     Set<LocalizedStringEntity> label = LocalizedStringMapper.modelToEntityDefaultNew(setAttributeLabel

@@ -11,7 +11,7 @@ import io.reactivesw.common.model.mapper.LocalizedStringMapper;
 public class MetaDescriptionMapper implements CategoryUpdateMapper<CategoryEntity> {
 
   @Override
-  public void setAction(CategoryEntity entity, UpdateAction action) {
+  public void handle(CategoryEntity entity, UpdateAction action) {
     SetMetaDescription setMetaDescription = (SetMetaDescription) action;
     entity.setMetaTitle(LocalizedStringMapper.modelToEntityDefaultNew(setMetaDescription
         .getMetaDescription()));

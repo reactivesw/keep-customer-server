@@ -17,7 +17,7 @@ public class RemoveLocationMapper implements ZoneUpdateMapper {
    * @param action UpdateAction
    */
   @Override
-  public void setAction(ZoneEntity entity, UpdateAction action) {
+  public void handle(ZoneEntity entity, UpdateAction action) {
     AddLocation location = (AddLocation) action;
     boolean result = entity.getLocation().remove(LocationMapper.convertModelToEntity(location
         .getLocation()));

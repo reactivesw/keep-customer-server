@@ -17,7 +17,7 @@ public class SetNameMapper implements ZoneUpdateMapper {
    * @param action UpdateAction
    */
   @Override
-  public void setAction(ZoneEntity entity, UpdateAction action) {
+  public void handle(ZoneEntity entity, UpdateAction action) {
     entity.setName(((SetName) action).getName());
   }
 }

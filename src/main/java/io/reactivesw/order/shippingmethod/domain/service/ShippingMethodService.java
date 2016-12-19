@@ -85,7 +85,7 @@ public class ShippingMethodService {
 
     actions.parallelStream().forEach(action -> ShippingMethodUpdateMapper.getMapper(action
         .getClass())
-        .setAction(valueInDb, action));
+        .handle(valueInDb, action));
 
     return this.repository.save(valueInDb);
   }

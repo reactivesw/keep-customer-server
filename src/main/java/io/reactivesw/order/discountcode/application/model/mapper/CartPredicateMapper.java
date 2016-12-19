@@ -16,7 +16,7 @@ public class CartPredicateMapper implements DiscountCodeUpdateMapper<DiscountCod
    * @param action UpdateAction
    */
   @Override
-  public void setAction(DiscountCodeEntity entity, UpdateAction action) {
+  public void handle(DiscountCodeEntity entity, UpdateAction action) {
     SetCartPredicate predicate = (SetCartPredicate) action;
     //TODO how to receive the cart predicate
     entity.setCartPredicate(predicate.getCartPredicate());

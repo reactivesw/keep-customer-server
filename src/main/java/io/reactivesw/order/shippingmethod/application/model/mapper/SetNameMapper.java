@@ -16,7 +16,7 @@ public class SetNameMapper implements ShippingMethodUpdateMapper {
    * @param action UpdateAction
    */
   @Override
-  public void setAction(ShippingMethodEntity entity, UpdateAction action) {
+  public void handle(ShippingMethodEntity entity, UpdateAction action) {
     entity.setName(((SetName) action).getName());
   }
 }

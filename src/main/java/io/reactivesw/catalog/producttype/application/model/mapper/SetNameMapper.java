@@ -10,7 +10,7 @@ import io.reactivesw.common.model.action.SetName;
 public class SetNameMapper implements ProductTypeUpdateMapper<ProductTypeEntity> {
 
   @Override
-  public void setAction(ProductTypeEntity entity, UpdateAction action) {
+  public void handle(ProductTypeEntity entity, UpdateAction action) {
     SetName setName = (SetName)action;
     entity.setKey(setName.getName());
   }

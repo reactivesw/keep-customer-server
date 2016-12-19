@@ -22,7 +22,7 @@ import lombok.Data;
  */
 public class SetAttributeInputTipMapper implements ProductTypeUpdateMapper<ProductTypeEntity> {
   @Override
-  public void setAction(ProductTypeEntity entity, UpdateAction action) {
+  public void handle(ProductTypeEntity entity, UpdateAction action) {
     SetAttributeInputTip setAttributeInputTip = (SetAttributeInputTip) action;
     String attributeName = setAttributeInputTip.getAttributeName();
     LocalizedString inputTip = setAttributeInputTip.getInputTip();

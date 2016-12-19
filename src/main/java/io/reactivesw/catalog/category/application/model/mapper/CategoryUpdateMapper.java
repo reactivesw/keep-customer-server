@@ -7,22 +7,18 @@ import io.reactivesw.catalog.category.application.model.action.SetMetaTitle;
 import io.reactivesw.catalog.category.application.model.action.SetOrderHint;
 import io.reactivesw.catalog.category.application.model.action.SetParent;
 import io.reactivesw.catalog.category.application.model.action.SetSlug;
-import io.reactivesw.common.model.UpdateAction;
 import io.reactivesw.common.model.action.SetLocalizedDescription;
 import io.reactivesw.common.model.action.SetLocalizedName;
-import io.reactivesw.common.model.mapper.UpdateMapper;
+import io.reactivesw.common.model.Update;
 
-import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by Davis on 16/12/7.
  */
-public interface CategoryUpdateMapper<E> extends UpdateMapper<E> {
+public interface CategoryUpdateMapper<E> extends Update<E> {
   /**
    * ImmutableMap for discount code update mapper.
    */

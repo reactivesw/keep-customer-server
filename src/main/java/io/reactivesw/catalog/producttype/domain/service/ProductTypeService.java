@@ -238,7 +238,7 @@ public class ProductTypeService {
                                               ProductTypeEntity entity) {
     validateVersion(version, entity);
     actions.parallelStream().forEach(action -> ProductTypeUpdateMapper.getMapper(action.getClass())
-        .setAction(entity, action));
+        .handle(entity, action));
     ProductTypeEntity updatedEntity = productTypeRepository.save(entity);
     return ProductTypeMapper.entityToModel(updatedEntity);
   }

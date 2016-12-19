@@ -76,7 +76,7 @@ public class DiscountCodeService {
     checkVersion(version, valueInDb.getVersion());
 
     actions.parallelStream().forEach(action -> DiscountCodeUpdateMapper.getMapper(action.getClass())
-        .setAction(valueInDb, action));
+        .handle(valueInDb, action));
 
     return this.discountCodeRepository.save(valueInDb);
   }

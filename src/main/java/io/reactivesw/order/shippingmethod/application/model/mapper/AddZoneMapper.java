@@ -11,7 +11,7 @@ import io.reactivesw.order.shippingmethod.domain.entity.ZoneRateValue;
 public class AddZoneMapper implements ShippingMethodUpdateMapper {
 
   @Override
-  public void setAction(ShippingMethodEntity entity, UpdateAction action) {
+  public void handle(ShippingMethodEntity entity, UpdateAction action) {
     AddZone zone = (AddZone) action;
     ZoneRateValue value = new ZoneRateValue();
     value.setZone(zone.getZone().getId());

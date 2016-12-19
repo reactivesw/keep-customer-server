@@ -19,12 +19,10 @@ import java.util.stream.Collectors;
  * Created by umasuo on 16/12/5.
  */
 public class CartMapper {
-  private static final Logger LOG = LoggerFactory.getLogger(CartMapper.class);
-
   /**
-   * model mapper.
+   * logger.
    */
-  private static ModelMapper mapper = new ModelMapper();
+  private static final Logger LOG = LoggerFactory.getLogger(CartMapper.class);
 
   /**
    * convert entity to model.
@@ -32,7 +30,7 @@ public class CartMapper {
    * @param entity CartEntity
    * @return Cart
    */
-  public static Cart convertEntityToModel(CartEntity entity) {
+  public static Cart entityToModel(CartEntity entity) {
     Cart cart = new Cart();
     cart.setId(entity.getId());
     cart.setVersion(entity.getVersion());
@@ -43,8 +41,23 @@ public class CartMapper {
     cart.setAnonymousId(entity.getAnonymousId());
     cart.setLineItems(getLineItems(entity.getLineItems()));
     cart.setCustomLineItems(getCustomLineItem(entity.getCustomLineItems()));
-
+    cart.setCountry(entity.getCountry());
+//    cart.setBillingAddress();
+    //TODO finish entity to model.
     return cart;
+  }
+
+
+  /**
+   * convert Cart to CartEntity.
+   * TODO we may do not need this function.
+   *
+   * @param cart Cart
+   * @return CartEntity.
+   */
+  public static CartEntity modelToEntity(Cart cart) {
+    //TODO finish model to entity.
+    return null;
   }
 
   /**
@@ -70,7 +83,7 @@ public class CartMapper {
   private static List<CustomLineItem> getCustomLineItem(Set<CustomLineItemValue> itemValues) {
     List<CustomLineItem> items = new ArrayList<>();
     if (itemValues != null) {
-//      items = itemValues.parallelStream().map()
+      //TODO set the custom line items.
     }
     return items;
   }

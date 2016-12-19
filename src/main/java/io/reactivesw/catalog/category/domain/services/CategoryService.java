@@ -125,7 +125,7 @@ public class CategoryService {
 
     actions.parallelStream().forEach(action -> {
       CategoryUpdateMapper.getMapper(action.getClass())
-        .setAction(entity, action);
+        .handle(entity, action);
     });
 
     CategoryEntity updatedEntity = categoryRepository.save(entity);

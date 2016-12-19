@@ -17,7 +17,7 @@ public class NameMapper implements DiscountCodeUpdateMapper<DiscountCodeEntity> 
    * @param action UpdateAction
    */
   @Override
-  public void setAction(DiscountCodeEntity entity, UpdateAction action) {
+  public void handle(DiscountCodeEntity entity, UpdateAction action) {
     SetLocalizedName setLocalizedName = (SetLocalizedName) action;
     entity.setName(LocalizedStringMapper.modelToEntityDefaultNew(setLocalizedName.getName
         ()));

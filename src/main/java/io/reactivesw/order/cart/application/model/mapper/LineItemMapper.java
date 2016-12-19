@@ -56,22 +56,33 @@ public class LineItemMapper {
   }
 
   /**
-   *
    * convert model to entity.
+   *
    * @param model LineItemDraft
    * @return LineItemValue
    */
   public static LineItemValue modelToEntity(LineItemDraft model) {
     LineItemValue entity = new LineItemValue();
+
     entity.setProductId(model.getProductId());
+
     entity.setQuantity(model.getQuantity());
+
     ProductVariantValue variantValue = new ProductVariantValue();
     variantValue.setId(model.getVariantId());
     entity.setVariant(variantValue);
+
     entity.setSupplyChannel(model.getSupplyChannel().getId());
+
     entity.setDistributionChannel(model.getDistributionChannel().getId());
 
-//    ExternalTaxRateDraft externalTaxRate = model.getExternalTaxRate();
+    ExternalTaxRateDraft externalTaxRate = model.getExternalTaxRate();
+    if (externalTaxRate != null) {
+      entity.setTaxRate(ExternalTaxRateMapper.draftToEntity(externalTaxRate));
+    }
+
+    //TODO set custom fields.
+
     return entity;
   }
 }

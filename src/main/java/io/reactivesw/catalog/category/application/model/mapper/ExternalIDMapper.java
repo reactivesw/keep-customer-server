@@ -10,7 +10,7 @@ import io.reactivesw.common.model.UpdateAction;
 public class ExternalIDMapper implements CategoryUpdateMapper<CategoryEntity> {
 
   @Override
-  public void setAction(CategoryEntity entity, UpdateAction action) {
+  public void handle(CategoryEntity entity, UpdateAction action) {
     SetExternalID setExternalID = (SetExternalID) action;
     entity.setExternalId(setExternalID.getExternalId());
   }

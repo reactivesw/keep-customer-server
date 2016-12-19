@@ -70,7 +70,7 @@ public class ZoneService {
     checkVersion(version, valueInDb.getVersion());
 
     actions.parallelStream().forEach(action -> ZoneUpdateMapper.getMapper(action.getClass())
-        .setAction(valueInDb, action));
+        .handle(valueInDb, action));
 
     return this.zoneRepository.save(valueInDb);
   }

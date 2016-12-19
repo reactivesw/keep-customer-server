@@ -11,7 +11,7 @@ import java.util.TreeSet;
  */
 public class ChangeAttributeOrderMapper implements ProductTypeUpdateMapper<ProductTypeEntity> {
   @Override
-  public void setAction(ProductTypeEntity entity, UpdateAction action) {
+  public void handle(ProductTypeEntity entity, UpdateAction action) {
     // The attributes must be equal to the product type attributes (except for the order).
   }
 }
