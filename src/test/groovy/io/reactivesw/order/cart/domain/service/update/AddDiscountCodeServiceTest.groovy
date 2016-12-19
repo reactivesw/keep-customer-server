@@ -1,7 +1,6 @@
 package io.reactivesw.order.cart.domain.service.update
 
 import io.reactivesw.order.cart.application.model.action.AddDiscountCode
-import io.reactivesw.order.cart.application.model.action.SetCustomerEmail
 import io.reactivesw.order.cart.domain.entity.CartEntity
 import spock.lang.Specification
 
@@ -30,6 +29,7 @@ class AddDiscountCodeServiceTest extends Specification {
         addDiscountCode = new AddDiscountCode(code: discountCode)
 
         service = new AddDiscountCodeService()
+
     }
 
     def "Test 1.1: add discount code"() {
