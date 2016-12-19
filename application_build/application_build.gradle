@@ -33,7 +33,8 @@ dependencies {
 
     // model mapper for data
     compile('org.modelmapper:modelmapper:0.7.6')
-//    compile('com.google.code.gson:gson:2.8.0')
+
+    compile('org.apache.commons:commons-collections4:4.1')
 
     //for zoneddatetime
     compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.8.5')

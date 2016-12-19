@@ -1,7 +1,6 @@
 package io.reactivesw.order.cart.domain.service.update
 
 import io.reactivesw.common.model.Address
-import io.reactivesw.order.cart.application.model.action.SetCustomerEmail
 import io.reactivesw.order.cart.application.model.action.SetShippingAddress
 import io.reactivesw.order.cart.domain.entity.CartEntity
 import io.reactivesw.order.cart.domain.entity.value.ShippingAddressValue
