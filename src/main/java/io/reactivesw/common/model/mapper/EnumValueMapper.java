@@ -1,7 +1,6 @@
 package io.reactivesw.common.model.mapper;
 
 import io.reactivesw.common.enums.EnumValue;
-import io.reactivesw.common.enums.EnumValueImpl;
 import io.reactivesw.common.model.PlainEnumValue;
 
 /**
@@ -9,6 +8,6 @@ import io.reactivesw.common.model.PlainEnumValue;
  */
 public final class EnumValueMapper {
   public static EnumValue modelToEntity(PlainEnumValue plainEnumValue) {
-    return new EnumValueImpl(plainEnumValue.getKey(), plainEnumValue.getLabel());
+    return new EnumValue(plainEnumValue.getKey(), plainEnumValue.getLabel());
   }
 }

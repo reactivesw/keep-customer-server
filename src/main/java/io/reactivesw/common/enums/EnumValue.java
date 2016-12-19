@@ -1,30 +1,15 @@
 package io.reactivesw.common.enums;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.reactivesw.common.model.Base;
 
-@JsonDeserialize(as = EnumValueImpl.class)
-public interface EnumValue extends WithKey {
-  String getKey();
+import com.fasterxml.jackson.annotation.JsonCreator;
 
-  String getLabel();
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-  /**
-   * @param key   The key of the value used as a programmatic identifier, e.g. in facets &amp;
-   *              filters.
-   * @param label A descriptive label of the value.
-   * @return EnumValue
-   */
-  static EnumValue of(final String key, final String label) {
-    return new EnumValueImpl(key, label);
-  }
-
-  static TypeReference<EnumValue> typeReference() {
-    return new TypeReference<EnumValue>() {
-      @Override
-      public String toString() {
-        return "TypeReference<EnumValue>";
-      }
-    };
-  }
+@Data
+@AllArgsConstructor
+public final class EnumValue {
+  private String key;
+  private String label;
 }
