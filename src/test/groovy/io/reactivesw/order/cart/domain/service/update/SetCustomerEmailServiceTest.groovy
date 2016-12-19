@@ -1,17 +1,7 @@
 package io.reactivesw.order.cart.domain.service.update
 
-import io.reactivesw.common.entity.MoneyEntity
-import io.reactivesw.common.model.UpdateAction
-import io.reactivesw.order.cart.application.model.action.RemoveLineItem
 import io.reactivesw.order.cart.application.model.action.SetCustomerEmail
 import io.reactivesw.order.cart.domain.entity.CartEntity
-import io.reactivesw.order.cart.domain.entity.value.CustomLineItemValue
-import io.reactivesw.order.cart.domain.entity.value.LineItemValue
-import io.reactivesw.order.cart.domain.entity.value.PriceValue
-import io.reactivesw.order.cart.domain.entity.value.ProductVariantValue
-import io.reactivesw.order.cart.domain.entity.value.ShippingInfoValue
-import io.reactivesw.order.cart.domain.entity.value.ShippingRateValue
-import io.reactivesw.order.cart.domain.entity.value.TaxRateValue
 import spock.lang.Specification
 
 /**
