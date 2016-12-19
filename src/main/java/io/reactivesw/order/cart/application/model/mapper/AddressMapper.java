@@ -123,4 +123,63 @@ public class AddressMapper {
 
     return value;
   }
+
+    /**
+   * convert model to billing address.
+   *
+   * @return BillingAddressValue
+   */
+  public static BillingAddressValue modelToBillingAddress(Address address) {
+    BillingAddressValue value = new BillingAddressValue();
+
+    value.setTitle(address.getTitle());
+
+    value.setSalutation(address.getSalutation());
+
+    value.setFirstName(address.getFirstName());
+
+    value.setLastName(address.getLastName());
+
+    value.setStreetName(address.getStreetName());
+
+    value.setStreetNumber(address.getStreetNumber());
+
+    value.setAdditionalStreetInfo(address.getAdditionalStreetInfo());
+
+    value.setPostalCode(address.getPostalCode());
+
+    value.setCity(address.getCity());
+
+    value.setRegion(address.getRegion());
+
+    value.setState(address.getState());
+
+    value.setCountry(address.getCountry());
+
+    value.setCompany(address.getCompany());
+
+    value.setDepartment(address.getDepartment());
+
+    value.setBuilding(address.getBuilding());
+
+    value.setApartment(address.getApartment());
+
+    value.setBox(address.getpOBox());
+
+    value.setPhone(address.getPhone());
+
+    value.setMobile(address.getMobile());
+
+    value.setEmail(address.getEmail());
+
+    value.setFax(address.getFax());
+
+    value.setAdditionalAddressInfo(address.getAdditionalAddressInfo());
+
+    value.setExternalId(address.getExternalId());
+
+    return value;
+  }
+
+
 }
