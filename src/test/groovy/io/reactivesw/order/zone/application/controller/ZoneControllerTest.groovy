@@ -44,4 +44,17 @@ class ZoneControllerTest extends Specification {
         result.getId() == zone.getId()
 
     }
+
+    def "Test 1.2: get by location"() {
+
+        List<ZoneEntity> zones = new ArrayList<>()
+        zones.add(zoneEntity)
+        when:
+        service.getByLocation(_, _) >> zones
+        List<Zone> result = controller.getByLocation("CN", "SZ")
+        then:
+        noExceptionThrown()
+        result.size() == zones.size()
+
+    }
 }
