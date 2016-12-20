@@ -106,6 +106,26 @@ class ShippingMethodServiceTest extends Specification {
         result.size() == 0
     }
 
+    def "Test 2.5: Get ShippingMethod by location id and currency"() {
+
+        when:
+        repository.findAll() >> allMethods
+        List<ShippingMethodEntity> result = service.getByLocation(locationId1,"RMB")
+        then:
+        noExceptionThrown()
+        result.size() == 2
+    }
+
+    def "Test 2.6: Get ShippingMethod by location id and wrong currency"() {
+
+        when:
+        repository.findAll() >> allMethods
+        List<ShippingMethodEntity> result = service.getByLocation(locationId1,"fakeCurrency")
+        then:
+        noExceptionThrown()
+        result.size() == 0
+    }
+
     def "Test 3.1: Update ShippingMethod"() {
         SetName setName = new SetName(name: "tmpName")
         actions.add(setName)

@@ -4,7 +4,7 @@ package io.reactivesw.route;
  * infrastructure service route.
  * Created by BruceLiu on 16/11/15.
  */
-public class CommonServiceRoutes {
+public class CommonServiceRouter extends BaseRouter {
 
   /**
    * SWAGGER_UI.

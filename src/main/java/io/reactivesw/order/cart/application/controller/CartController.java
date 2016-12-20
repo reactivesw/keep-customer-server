@@ -5,7 +5,7 @@ import io.reactivesw.order.cart.application.model.Cart;
 import io.reactivesw.order.cart.application.model.mapper.CartMapper;
 import io.reactivesw.order.cart.domain.entity.CartEntity;
 import io.reactivesw.order.cart.domain.service.CartService;
-import io.reactivesw.route.Router;
+import io.reactivesw.route.CartRouter;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
@@ -41,8 +41,8 @@ public class CartController {
    * @return the cart by id
    */
   @ApiOperation(value = "Get cart by cart id.")
-  @GetMapping(Router.CART_WITH_ID)
-  public Cart getCartById(@ApiParam(required = true) @PathVariable(Router.CART_ID) String id) {
+  @GetMapping(CartRouter.CART_WITH_ID)
+  public Cart getCartById(@ApiParam(required = true) @PathVariable(CartRouter.CART_ID) String id) {
 
     CartEntity entity = this.cartService.getById(id);
 
@@ -56,7 +56,7 @@ public class CartController {
    * @return the cart by customer id
    */
   @ApiOperation(value = "get cart by customer id")
-  @GetMapping(value = Router.CARTS_ROOT, params = "customerId")
+  @GetMapping(value = CartRouter.CARTS_ROOT, params = "customerId")
   public Cart getActiveCartByCustomerId(@ApiParam(value = "customerId", required = false)
                                             String customerId) {
     CartEntity entity = this.cartService.getActiveCartByCustomerId(customerId);
@@ -70,8 +70,8 @@ public class CartController {
    * @param id String
    * @return Cart
    */
-  @PutMapping(Router.CART_WITH_ID)
-  public Cart updateCart(@ApiParam(required = true) @PathVariable(Router.CART_ID) String id,
+  @PutMapping(CartRouter.CART_WITH_ID)
+  public Cart updateCart(@ApiParam(required = true) @PathVariable(CartRouter.CART_ID) String id,
                          @RequestBody UpdateRequest updateRequest) {
     LOG.info("id:{}", id);
     return null;
