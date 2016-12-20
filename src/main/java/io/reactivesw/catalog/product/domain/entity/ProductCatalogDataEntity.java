@@ -2,7 +2,8 @@ package io.reactivesw.catalog.product.domain.entity;
 
 import io.reactivesw.common.entity.BaseIdEntity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,11 +15,12 @@ import javax.persistence.Table;
 /**
  * Created by umasuo on 16/11/23.
  */
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "catalog_product_catalog_data")
 public class ProductCatalogDataEntity extends BaseIdEntity {
-
+  
   /**
    * is the product been published.
    */
