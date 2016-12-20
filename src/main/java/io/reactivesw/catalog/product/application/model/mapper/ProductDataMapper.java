@@ -5,10 +5,14 @@ import io.reactivesw.catalog.product.application.model.ProductDraft;
 import io.reactivesw.catalog.product.application.model.ProductVariant;
 import io.reactivesw.catalog.product.domain.entity.ProductDataEntity;
 import io.reactivesw.catalog.product.domain.entity.ProductVariantEntity;
+import io.reactivesw.common.enums.ReferenceTypes;
+import io.reactivesw.common.model.Reference;
 import io.reactivesw.common.model.SearchKeyword;
 import io.reactivesw.common.model.mapper.LocalizedStringMapper;
 
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.stream.Collectors;
 
 /**
  * Created by Davis on 16/12/14.
@@ -33,15 +37,31 @@ public class ProductDataMapper {
     if (model.getSearchKeyword() != null) {
       entity.setSearchKeyWords(model.getSearchKeyword().getText());
     }
-      ProductVariantEntity masterVariant = new ProductVariantEntity();
+    ProductVariantEntity masterVariant = new ProductVariantEntity();
     if (model.getMasterVariant() != null) {
-      masterVariant = ProductVariantMapper.modelToEntity(MASTER_VARIANT_ID, model.getMasterVariant());
+      masterVariant = ProductVariantMapper.modelToEntity(MASTER_VARIANT_ID, model
+          .getMasterVariant());
     }
     masterVariant.setId(MASTER_VARIANT_ID);
     entity.setMasterVariant(masterVariant);
 
-    if (model.getVariants() != null) {
+    if (model.getVariants() != null && !model.getVariants().isEmpty()) {
       entity.setVariants(ProductVariantMapper.modelToEntity(model.getVariants()));
+    }
+
+    if (model.getCategories() != null && !model.getCategories().isEmpty()) {
+      entity.setCategories(
+          model.getCategories().stream().map(
+              category -> {
+                return category.getId();
+              }
+          ).collect(Collectors.toList())
+      );
+    }
+
+    if (model.getCategoryOrderHints() != null && !model.getCategoryOrderHints().isEmpty()) {
+      entity.setCategoryOrderHints(CategoryOrderHintsMapper.modelToEntity(
+          model.getCategoryOrderHints()));
     }
 
     return entity;
@@ -66,7 +86,17 @@ public class ProductDataMapper {
     if (entity.getVariants() != null) {
       model.setVariants(ProductVariantMapper.entityToModel(entity.getVariants()));
     }
-
+    if (entity.getCategories() != null) {
+      model.setCategories(entity.getCategories().stream().map(
+          category -> {
+            return new Reference(ReferenceTypes.CATEGORY.getType(), category);
+          }
+      ).collect(Collectors.toList()));
+    }
+    if (entity.getCategoryOrderHints() != null) {
+      model.setCategoryOrderHints(CategoryOrderHintsMapper.entityToModel(
+          entity.getCategoryOrderHints()));
+    }
     return model;
   }
 

@@ -5,10 +5,14 @@ import io.reactivesw.common.entity.LocalizedStringEntity;
 
 import lombok.Data;
 
+import org.hibernate.annotations.Type;
+
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -77,4 +81,13 @@ public class ProductDataEntity extends BaseIdEntity {
    */
   @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
   private Set<ProductVariantEntity> variants;
+
+  /**
+   * categoryOrderHints.
+   */
+  @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+  private List<CategoryOrderHintEntity> categoryOrderHints;
+
+  @ElementCollection
+  private List<String> categories;
 }

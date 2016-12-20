@@ -8,9 +8,11 @@ import io.reactivesw.catalog.product.infrastructure.repository.ProductRepository
 import io.reactivesw.common.exception.NotExistException;
 import io.reactivesw.common.exception.ParametersException;
 
+import org.postgresql.util.PSQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.PersistenceException;
@@ -45,7 +47,7 @@ public class ProductService {
     ProductEntity savedEntity = null;
     try {
       savedEntity = productRepository.save(entity);
-    } catch (PersistenceException ex) {
+    } catch (DataIntegrityViolationException ex) {
       // TODO: 16/12/20 thrown exception when sku name is same
       LOG.debug("sku name should be unique");
       throw new ParametersException("sku name should be unique");

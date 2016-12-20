@@ -7,5 +7,5 @@ public class BaseRouter {
   /**
    * root url.
    */
-  public static final String URL_ROOT = "http://localhost:8088";
+  public static final String URL_ROOT = "";
 }

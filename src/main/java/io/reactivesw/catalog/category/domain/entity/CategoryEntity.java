@@ -10,6 +10,9 @@ import io.reactivesw.common.entity.BaseAllEntity;
 import io.reactivesw.common.entity.LocalizedStringEntity;
 import io.reactivesw.common.model.CustomFields;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import org.apache.commons.lang3.StringUtils;
 
 import org.hibernate.annotations.Parameter;
