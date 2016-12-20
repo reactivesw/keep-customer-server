@@ -69,8 +69,8 @@ public class ZoneService {
 
     List<ZoneEntity> result = all.parallelStream().filter(
         zoneEntity -> {
-          Set<LocationValue> ls = zoneEntity.getLocations();
-          return ls.parallelStream().filter(
+          Set<LocationValue> locations = zoneEntity.getLocations();
+          return locations.parallelStream().filter(
               locationValue -> {
                 boolean matchCountry = false;
                 if (locationValue.getCountry().equals(country)) {
