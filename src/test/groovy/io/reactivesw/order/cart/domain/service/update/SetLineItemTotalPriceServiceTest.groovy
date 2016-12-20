@@ -3,15 +3,11 @@ package io.reactivesw.order.cart.domain.service.update
 import io.reactivesw.common.entity.MoneyEntity
 import io.reactivesw.common.exception.NotExistException
 import io.reactivesw.common.model.Money
-import io.reactivesw.common.model.Reference
 import io.reactivesw.order.cart.application.model.ExternalLineItemTotalPrice
-import io.reactivesw.order.cart.application.model.action.AddLineItem
 import io.reactivesw.order.cart.application.model.action.SetLineItemTotalPrice
 import io.reactivesw.order.cart.domain.entity.CartEntity
 import io.reactivesw.order.cart.domain.entity.value.LineItemValue
 import io.reactivesw.order.cart.domain.entity.value.PriceValue
-import io.reactivesw.order.cart.domain.entity.value.ProductVariantValue
-import io.reactivesw.order.cart.domain.service.LineItemService
 import io.reactivesw.order.cartdiscount.infrastructure.enums.LineItemPriceMode
 import spock.lang.Specification
 

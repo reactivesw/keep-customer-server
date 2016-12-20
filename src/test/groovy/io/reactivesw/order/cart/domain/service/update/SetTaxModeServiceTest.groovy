@@ -1,6 +1,5 @@
 package io.reactivesw.order.cart.domain.service.update
 
-import io.reactivesw.order.cart.application.model.action.RemovePayment
 import io.reactivesw.order.cart.application.model.action.SetTaxMode
 import io.reactivesw.order.cart.domain.entity.CartEntity
 import io.reactivesw.order.cart.infrastructure.enums.TaxMode
