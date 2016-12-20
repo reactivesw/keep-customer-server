@@ -8,14 +8,11 @@ import io.reactivesw.catalog.product.infrastructure.repository.ProductRepository
 import io.reactivesw.common.exception.NotExistException;
 import io.reactivesw.common.exception.ParametersException;
 
-import org.postgresql.util.PSQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-
-import javax.persistence.PersistenceException;
 
 /**
  * Created by Davis on 16/12/14.

@@ -1,20 +1,15 @@
 package io.reactivesw.catalog.category.domain.entity;
 
-import com.google.common.collect.Lists;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Lists;
 
 import io.reactivesw.common.dialect.JSONBUserType;
 import io.reactivesw.common.entity.BaseAllEntity;
 import io.reactivesw.common.entity.LocalizedStringEntity;
 import io.reactivesw.common.model.CustomFields;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
 import org.apache.commons.lang3.StringUtils;
-
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;

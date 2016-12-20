@@ -5,8 +5,6 @@ import io.reactivesw.common.entity.LocalizedStringEntity;
 
 import lombok.Data;
 
-import org.hibernate.annotations.Type;
-
 import java.util.List;
 import java.util.Set;
 
@@ -88,6 +86,9 @@ public class ProductDataEntity extends BaseIdEntity {
   @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
   private List<CategoryOrderHintEntity> categoryOrderHints;
 
+  /**
+   * categories.
+   */
   @ElementCollection
   private List<String> categories;
 }
