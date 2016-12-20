@@ -2,8 +2,10 @@ package io.reactivesw.order.zone.domain.service;
 
 import io.reactivesw.common.exception.ConflictException;
 import io.reactivesw.common.exception.NotExistException;
+import io.reactivesw.common.exception.ParametersException;
 import io.reactivesw.common.model.UpdateAction;
 import io.reactivesw.order.zone.application.model.mapper.ZoneUpdateMapper;
+import io.reactivesw.order.zone.domain.entity.LocationValue;
 import io.reactivesw.order.zone.domain.entity.ZoneEntity;
 import io.reactivesw.order.zone.infrastructure.repository.ZoneRepository;
 import org.slf4j.Logger;
@@ -13,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by umasuo on 16/12/8.
@@ -43,6 +47,48 @@ public class ZoneService {
       throw new NotExistException("Zone not exist for id:" + id);
     }
     return entity;
+  }
+
+  /**
+   * get zones by location.
+   * this.zoneRepository.findAll(example) is slower than filter the data by self.
+   *
+   * @param country String required
+   * @param state   String optional
+   * @return List of ZoneEntity
+   */
+  public List<ZoneEntity> getByLocation(String country, String state) {
+    LOG.debug("enter: country: {}, state: {}", country, state);
+
+    if (country == null) {
+      throw new ParametersException("country must set");
+    }
+
+    List<ZoneEntity> all = this.zoneRepository.findAll();
+    LOG.debug("data: all ZoneEntity: {}", all);
+
+    List<ZoneEntity> result = all.parallelStream().filter(
+        zoneEntity -> {
+          Set<LocationValue> ls = zoneEntity.getLocations();
+          return ls.parallelStream().filter(
+              locationValue -> {
+                boolean matchCountry = false;
+                if (locationValue.getCountry().equals(country)) {
+                  matchCountry = true;
+                }
+                boolean matchState = false;
+                if (state == null || locationValue.getState().equals(state)) {
+                  matchState = true;
+                }
+                return matchCountry & matchState;
+              }
+          ).findAny().isPresent();
+        }
+    ).collect(Collectors.toList());
+
+
+    LOG.debug("exit: selected ZoneEntity: {}", result);
+    return result;
   }
 
   /**
