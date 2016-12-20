@@ -48,6 +48,7 @@ public final class AttributeDefinitionMapper {
     entity.setType(draft.getType());
     entity.setAttributeConstraint(draft.getAttributeConstraint());
     entity.setLabel(LocalizedStringMapper.modelToEntityDefaultNew(draft.getLabel()));
+    entity.setInputTip(LocalizedStringMapper.modelToEntityDefaultNew(draft.getInputTip()));
     return entity;
   }
 

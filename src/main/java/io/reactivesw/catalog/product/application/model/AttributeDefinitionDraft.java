@@ -81,4 +81,6 @@ public class AttributeDefinitionDraft {
   @ApiModelProperty(required = true)
   @NotNull
   private Boolean isSearchable;
+
+  private LocalizedString inputTip;
 }

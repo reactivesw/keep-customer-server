@@ -51,7 +51,6 @@ public class ProductDraft {
   /**
    * CategoryOrderHints.
    */
-  //TODO String should be CategoryOrderHints.
   private List<CategoryOrderHint> categoryOrderHints;
 
   /**

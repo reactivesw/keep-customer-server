@@ -17,6 +17,9 @@ catalog_product_image
 
 新增masterVariant, id为1
 
+获取ProductType以及对应的Attribute,根据获取到的信息填充Product的数据
+
+如果包含Category的信息,需要建立关联关系
 
 在新增Product的过程中，需要校验以下问题：
 
@@ -24,15 +27,7 @@ catalog_product_image
 2. productType的id是否存在，如果不存在则失败
 3. 如果taxCategory不为空，则需要校验taxCategory是否存在
 4. 如果state不为空，则需要校验state是否存在
-
-
-
-
-
-
-
-
-
+5. 如果Category不为空,则需要校验Category是否存在
 
 ### 2.2 delete Product
 

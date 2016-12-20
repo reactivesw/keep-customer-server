@@ -177,7 +177,7 @@ public class ProductTypeService {
     result.setResults(productTypes);
     result.setTotal(productTypes.size());
 
-    LOG.debug("end queryProductTypes, result is : {}", result.toString());
+    LOG.debug("end queryProductTypes, product number is : {}", productTypes.size());
 
     return result;
   }

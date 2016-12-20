@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  */
 // TODO: 16/12/16 add for CORS, if somethings wrong, should remove
 @Configuration
-public class CORSConfiguration {
+public class CorsConfiguration {
   /**
    * Cors configurer web mvc configurer.
    *
@@ -22,7 +22,7 @@ public class CORSConfiguration {
     return new WebMvcConfigurerAdapter() {
       /**
        * add Cors rule.
-       * @param registry
+       * @param registry resigtry
        */
       @Override
       public void addCorsMappings(CorsRegistry registry) {

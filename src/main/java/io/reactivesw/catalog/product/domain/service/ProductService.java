@@ -48,7 +48,6 @@ public class ProductService {
     return result;
   }
 
-
   /**
    * Gets product by id.
    *

@@ -3,6 +3,8 @@ package io.reactivesw.catalog.product.application.model;
 import io.reactivesw.catalog.product.application.model.attributes.Attribute;
 import io.reactivesw.common.model.AssetDraft;
 
+import lombok.Data;
+
 import java.util.List;
 
 /**

@@ -16,7 +16,11 @@ public class AttributeMapper {
   public static Set<AttributeEntity> modelToEntity(List<Attribute> models) {
     return models.stream().map(
         model -> {
-          return new AttributeEntity(model.getName(), model.getValue().toString());
+          AttributeEntity entity = new AttributeEntity();
+          entity.setName(model.getName());
+          entity.setValue(model.getValue());
+          return entity;
+//          return new AttributeEntity(model.getName(), model.getValue());
         }
     ).collect(Collectors.toSet());
   }
@@ -33,8 +37,7 @@ public class AttributeMapper {
     Attribute model = new Attribute();
     
     model.setName(entity.getName());
-    // TODO: 16/12/14 JsonNode should be string
-//    model.setValue();
+    model.setValue(entity.getValue());
 
     return model;
   }

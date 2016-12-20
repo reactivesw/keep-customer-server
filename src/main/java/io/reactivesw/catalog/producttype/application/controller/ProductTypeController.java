@@ -215,7 +215,7 @@ public class ProductTypeController {
 
     PagedQueryResult<ProductType> result = productTypeService.queryProductTypes(queryConditions);
 
-    LOG.debug("end queryProductTypes, result is : {}", result.toString());
+    LOG.debug("end queryProductTypes, productType number is : {}", result.getResults().size());
 
     return result;
   }
