@@ -5,6 +5,7 @@ import io.reactivesw.common.exception.NotExistException;
 import io.reactivesw.common.model.UpdateAction;
 import io.reactivesw.order.shippingmethod.application.model.mapper.ShippingMethodUpdateMapper;
 import io.reactivesw.order.shippingmethod.domain.entity.ShippingMethodEntity;
+import io.reactivesw.order.shippingmethod.domain.entity.ShippingRateValue;
 import io.reactivesw.order.shippingmethod.domain.entity.ZoneRateValue;
 import io.reactivesw.order.shippingmethod.infrastructure.repository.ShippingMethodRepository;
 import org.apache.commons.lang3.StringUtils;
@@ -61,7 +62,7 @@ public class ShippingMethodService {
    * TODO use cache
    *
    * @param locationId String
-   * @return ShippingMethodEntity
+   * @return List<ShippingMethodEntity>
    */
   public List<ShippingMethodEntity> getByLocation(String locationId) {
     LOG.debug("enter: locationId: {}", locationId);
@@ -80,6 +81,37 @@ public class ShippingMethodService {
           if (optional.isPresent()) {
             result = true;
           }
+          return result;
+        }
+    ).collect(Collectors.toList());
+
+    LOG.debug("exit: selected methods: {}", methods);
+    return methods;
+  }
+
+  /**
+   * find all the shipping method that support the location.
+   * TODO use cache
+   *
+   * @param locationId String
+   * @param currency   currency code in String
+   * @return List<ShippingMethodEntity>
+   */
+  public List<ShippingMethodEntity> getByLocation(String locationId, String currency) {
+    LOG.debug("enter: locationId: {}, currency: {}", locationId, currency);
+
+    List<ShippingMethodEntity> allMethods = this.repository.findAll();
+
+    LOG.debug("data: all shipping methods: {}", allMethods);
+
+    List<ShippingMethodEntity> methods = allMethods.parallelStream().filter(
+        shippingMethodEntity -> {
+          Set<ZoneRateValue> zoneRateValues = shippingMethodEntity.getZoneRates();
+
+          boolean result = zoneRateValues.parallelStream().filter(
+              zoneRateValue -> checkZoneRate(zoneRateValue, locationId, currency)
+          ).findFirst().isPresent();
+
           return result;
         }
     ).collect(Collectors.toList());
@@ -154,4 +186,17 @@ public class ShippingMethodService {
     }
   }
 
+  private boolean checkZoneRate(ZoneRateValue zoneRate, String zoneRateId, String currency) {
+    boolean result = false;
+    if (StringUtils.equals(zoneRate.getZone(), zoneRateId)) {
+      Set<ShippingRateValue> shippingRates = zoneRate.getShippingRates();
+      result |= shippingRates.parallelStream().filter(
+          shippingRateValue -> {
+            String currencyCode = shippingRateValue.getPrice().getCurrencyCode();
+            return StringUtils.equals(currency, currencyCode);
+          }
+      ).findAny().isPresent();
+    }
+    return result;
+  }
 }
