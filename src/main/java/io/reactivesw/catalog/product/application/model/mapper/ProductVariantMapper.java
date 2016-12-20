@@ -1,5 +1,7 @@
 package io.reactivesw.catalog.product.application.model.mapper;
 
+import com.google.common.collect.Sets;
+
 import io.reactivesw.catalog.product.application.model.ProductDraft;
 import io.reactivesw.catalog.product.application.model.ProductVariant;
 import io.reactivesw.catalog.product.application.model.ProductVariantDraft;
@@ -15,18 +17,22 @@ import java.util.stream.Collectors;
 public class ProductVariantMapper {
 
   public static Set<ProductVariantEntity> modelToEntity(List<ProductVariantDraft> models) {
-    return models.stream().map(
-        model -> {
-          return modelToEntity(model);
-        }
-    ).collect(Collectors.toSet());
+    Set entities = Sets.newHashSet();
+    for (int i = 0; i <= models.size(); i ++) {
+      int id = i + 2;
+      ProductVariantEntity entity = modelToEntity(id, models.get(i));
+      entities.add(entity);
+    }
+    return entities;
   }
 
-  public static ProductVariantEntity modelToEntity(ProductVariantDraft model) {
+  public static ProductVariantEntity modelToEntity(int id, ProductVariantDraft model) {
     ProductVariantEntity entity = new ProductVariantEntity();
 
+    entity.setId(id);
     entity.setKey(model.getKey());
     entity.setSku(model.getSku());
+    // TODO: 16/12/20  
 //    entity.setImages(model.getImages());
     if (model.getPrices() != null) {
       entity.setPrices(PriceMapper.modelToEntity(model.getPrices()));
@@ -53,6 +59,7 @@ public class ProductVariantMapper {
     if (entity.getImages() != null) {
       model.setImages(ImageMapper.entityToModel(entity.getImages()));
     }
+    // TODO: 16/12/20
 //    model.setIsMatchingVariant();
 //    model.setAvailability();
 //    model.setPrice();

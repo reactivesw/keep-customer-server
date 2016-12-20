@@ -50,7 +50,7 @@ public class ProductApplication {
 
     ProductType productType = getProductType(productTypeId);
 
-    AttributeConstraintValidator.validateAttribute(productType.getAttributes(), productDraft);
+    AttributeConstraintValidator.validate(productType.getAttributes(), productDraft);
 
     Product result = productService.createProduct(productDraft);
 

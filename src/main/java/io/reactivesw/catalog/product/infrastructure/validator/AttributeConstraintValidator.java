@@ -22,14 +22,13 @@ public final class AttributeConstraintValidator {
    * @param attributeDefinitions the attribute definitions
    * @param productDraft         the product draft
    */
-  public static void validateAttribute(List<AttributeDefinition> attributeDefinitions,
-                                       ProductDraft productDraft) {
+  public static void validate(List<AttributeDefinition> attributeDefinitions,
+                              ProductDraft productDraft) {
     if (attributeDefinitions != null) {
       //1. require的attribute
       RequireAttributeValidator.validate(attributeDefinitions, productDraft);
       //2. attribute name
       AttributeNameValidator.validate(attributeDefinitions, productDraft);
-      // TODO: 16/12/20 null attribute value???
       //3. unique 比对一下所有都不相同
       UniqueAttributeValidator.validate(attributeDefinitions, productDraft);
       //4. combination unique 组合不相同,需要比对
