@@ -7,6 +7,7 @@ import io.reactivesw.common.model.LocalizedString;
 import io.reactivesw.common.model.UpdateAction;
 import io.reactivesw.common.model.mapper.LocalizedStringMapper;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -22,14 +23,14 @@ public class SetAttributeLabelMapper implements ProductTypeUpdateMapper<ProductT
     Set<LocalizedStringEntity> label = LocalizedStringMapper.modelToEntityDefaultNew(setAttributeLabel
         .getLabel());
 
-    Set attributes = entity.getAttributes().stream().map(
+    List attributes = entity.getAttributes().stream().map(
         attribute -> {
           if (Objects.equals(attribute.getName(), attributeName)) {
             attribute.setLabel(label);
           }
           return attribute;
         }
-    ).collect(Collectors.toSet());
+    ).collect(Collectors.toList());
 
     entity.setAttributes(attributes);
   }

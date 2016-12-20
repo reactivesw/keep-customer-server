@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "catalog_product_catalog_data")
 public class ProductCatalogDataEntity extends BaseIdEntity {
-  
+
   /**
    * is the product been published.
    */
