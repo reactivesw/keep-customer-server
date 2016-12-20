@@ -42,10 +42,15 @@ public class ZoneService {
    * @return ZoneEntity
    */
   public ZoneEntity getById(String id) {
+    LOG.debug("enter: id: {}", id);
+
     ZoneEntity entity = this.zoneRepository.findOne(id);
     if (Objects.isNull(entity)) {
+      LOG.warn("Zone not exist : id: {}", id);
       throw new NotExistException("Zone not exist for id:" + id);
     }
+
+    LOG.debug("exit: entity: {}", entity);
     return entity;
   }
 
@@ -98,6 +103,7 @@ public class ZoneService {
    * @return Zone entity
    */
   public ZoneEntity createZone(ZoneEntity entity) {
+    LOG.debug("save: entity: {}", entity);
     return this.zoneRepository.save(entity);
   }
 
@@ -110,14 +116,16 @@ public class ZoneService {
    * @return ZoneEntity
    */
   public ZoneEntity updateZone(String id, Integer version, List<UpdateAction> actions) {
+    LOG.debug("enter: id: {}, version: {}, actions: {}", id, version, actions);
 
     ZoneEntity valueInDb = this.getById(id);
-
+    LOG.debug("data in db: {}", valueInDb);
     checkVersion(version, valueInDb.getVersion());
 
     actions.parallelStream().forEach(action -> ZoneUpdateMapper.getMapper(action.getClass())
         .handle(valueInDb, action));
 
+    LOG.debug("data updated: {}", valueInDb);
     return this.zoneRepository.save(valueInDb);
   }
 
@@ -128,6 +136,7 @@ public class ZoneService {
    * @param version Integer.
    */
   public void deleteById(String id, Integer version) {
+    LOG.debug("enter: id: {}, version: {}", id, version);
 
     ZoneEntity valueInDb = this.getById(id);
 
@@ -144,7 +153,7 @@ public class ZoneService {
    */
   private void checkVersion(Integer inputVersion, Integer savedVersion) {
     if (!Objects.equals(inputVersion, savedVersion)) {
-      LOG.debug("Zone version is not correct. inputVersion:{}, savedVersion:{}",
+      LOG.warn("Zone version is not correct. inputVersion:{}, savedVersion:{}",
           inputVersion, savedVersion);
       throw new ConflictException("Zone version is not correct.");
     }
