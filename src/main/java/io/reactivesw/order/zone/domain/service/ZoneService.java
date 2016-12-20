@@ -2,8 +2,10 @@ package io.reactivesw.order.zone.domain.service;
 
 import io.reactivesw.common.exception.ConflictException;
 import io.reactivesw.common.exception.NotExistException;
+import io.reactivesw.common.exception.ParametersException;
 import io.reactivesw.common.model.UpdateAction;
 import io.reactivesw.order.zone.application.model.mapper.ZoneUpdateMapper;
+import io.reactivesw.order.zone.domain.entity.LocationValue;
 import io.reactivesw.order.zone.domain.entity.ZoneEntity;
 import io.reactivesw.order.zone.infrastructure.repository.ZoneRepository;
 import org.slf4j.Logger;
@@ -13,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by umasuo on 16/12/8.
@@ -38,11 +42,58 @@ public class ZoneService {
    * @return ZoneEntity
    */
   public ZoneEntity getById(String id) {
+    LOG.debug("enter: id: {}", id);
+
     ZoneEntity entity = this.zoneRepository.findOne(id);
     if (Objects.isNull(entity)) {
+      LOG.warn("Zone not exist : id: {}", id);
       throw new NotExistException("Zone not exist for id:" + id);
     }
+
+    LOG.debug("exit: entity: {}", entity);
     return entity;
+  }
+
+  /**
+   * get zones by location.
+   * this.zoneRepository.findAll(example) is slower than filter the data by self.
+   *
+   * @param country String required
+   * @param state   String optional
+   * @return List of ZoneEntity
+   */
+  public List<ZoneEntity> getByLocation(String country, String state) {
+    LOG.debug("enter: country: {}, state: {}", country, state);
+
+    if (country == null) {
+      throw new ParametersException("country must set");
+    }
+
+    List<ZoneEntity> all = this.zoneRepository.findAll();
+    LOG.debug("data: all ZoneEntity: {}", all);
+
+    List<ZoneEntity> result = all.parallelStream().filter(
+        zoneEntity -> {
+          Set<LocationValue> locations = zoneEntity.getLocations();
+          return locations.parallelStream().filter(
+              locationValue -> {
+                boolean matchCountry = false;
+                if (locationValue.getCountry().equals(country)) {
+                  matchCountry = true;
+                }
+                boolean matchState = false;
+                if (state == null || locationValue.getState().equals(state)) {
+                  matchState = true;
+                }
+                return matchCountry & matchState;
+              }
+          ).findAny().isPresent();
+        }
+    ).collect(Collectors.toList());
+
+
+    LOG.debug("exit: selected ZoneEntity: {}", result);
+    return result;
   }
 
   /**
@@ -52,6 +103,7 @@ public class ZoneService {
    * @return Zone entity
    */
   public ZoneEntity createZone(ZoneEntity entity) {
+    LOG.debug("save: entity: {}", entity);
     return this.zoneRepository.save(entity);
   }
 
@@ -64,14 +116,16 @@ public class ZoneService {
    * @return ZoneEntity
    */
   public ZoneEntity updateZone(String id, Integer version, List<UpdateAction> actions) {
+    LOG.debug("enter: id: {}, version: {}, actions: {}", id, version, actions);
 
     ZoneEntity valueInDb = this.getById(id);
-
+    LOG.debug("data in db: {}", valueInDb);
     checkVersion(version, valueInDb.getVersion());
 
     actions.parallelStream().forEach(action -> ZoneUpdateMapper.getMapper(action.getClass())
         .handle(valueInDb, action));
 
+    LOG.debug("data updated: {}", valueInDb);
     return this.zoneRepository.save(valueInDb);
   }
 
@@ -82,6 +136,7 @@ public class ZoneService {
    * @param version Integer.
    */
   public void deleteById(String id, Integer version) {
+    LOG.debug("enter: id: {}, version: {}", id, version);
 
     ZoneEntity valueInDb = this.getById(id);
 
@@ -98,7 +153,7 @@ public class ZoneService {
    */
   private void checkVersion(Integer inputVersion, Integer savedVersion) {
     if (!Objects.equals(inputVersion, savedVersion)) {
-      LOG.debug("Zone version is not correct. inputVersion:{}, savedVersion:{}",
+      LOG.warn("Zone version is not correct. inputVersion:{}, savedVersion:{}",
           inputVersion, savedVersion);
       throw new ConflictException("Zone version is not correct.");
     }

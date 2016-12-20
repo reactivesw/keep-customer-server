@@ -17,10 +17,23 @@ public class LocationMapper {
    * @param model
    * @return
    */
-  public static LocationValue convertModelToEntity(Location model) {
+  public static LocationValue modelToEntity(Location model) {
     LocationValue entity = new LocationValue();
     entity.setCountry(model.getCountry());
     entity.setState(model.getState());
     return entity;
+  }
+
+  /**
+   * convert Location to  LocationValue
+   *
+   * @param entity
+   * @return
+   */
+  public static Location entityToModel(LocationValue entity) {
+    Location model = new Location();
+    model.setCountry(entity.getCountry());
+    model.setState(entity.getState());
+    return model;
   }
 }

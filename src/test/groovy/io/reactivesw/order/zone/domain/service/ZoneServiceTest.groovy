@@ -2,8 +2,11 @@ package io.reactivesw.order.zone.domain.service
 
 import io.reactivesw.common.exception.ConflictException
 import io.reactivesw.common.exception.NotExistException
+import io.reactivesw.common.exception.ParametersException
 import io.reactivesw.common.model.UpdateAction
 import io.reactivesw.common.model.action.SetName
+import io.reactivesw.order.zone.application.model.Location
+import io.reactivesw.order.zone.domain.entity.LocationValue
 import io.reactivesw.order.zone.domain.entity.ZoneEntity
 import io.reactivesw.order.zone.infrastructure.repository.ZoneRepository
 import spock.lang.Specification
@@ -17,9 +20,15 @@ class ZoneServiceTest extends Specification {
 
     ZoneService zoneService
 
+    LocationValue location
+
     ZoneEntity zoneEntity
 
     def zoneId = "tmpZoneId"
+
+    def country = "CN"
+
+    def state = "SZ"
 
     def version = 1
 
@@ -28,7 +37,12 @@ class ZoneServiceTest extends Specification {
     def setup() {
         repository = Mock(ZoneRepository)
         zoneService = new ZoneService(zoneRepository: repository)
-        zoneEntity = new ZoneEntity(id: zoneId, version: version)
+
+        location = new LocationValue(country: country, state: state)
+        Set<LocationValue> locations = new HashSet<>()
+        locations.add(location)
+        zoneEntity = new ZoneEntity(id: zoneId, version: version, locations: locations)
+
         actions = new ArrayList<>()
     }
 
@@ -55,6 +69,56 @@ class ZoneServiceTest extends Specification {
         zoneService.getById(zoneId)
         then:
         thrown(NotExistException)
+    }
+
+    def "Test 2.3: Get Zone By location."() {
+        List<ZoneEntity> zones = new ArrayList<>()
+        zones.add(zoneEntity)
+        when:
+        repository.findAll() >> zones
+        zoneService.getByLocation(country, state)
+        then:
+        noExceptionThrown()
+    }
+
+    def "Test 2.4: Get Zone By country."() {
+        List<ZoneEntity> zones = new ArrayList<>()
+        zones.add(zoneEntity)
+        when:
+        repository.findAll() >> zones
+        zoneService.getByLocation(country, null)
+        then:
+        noExceptionThrown()
+    }
+
+    def "Test 2.5: Get Zone By state."() {
+        List<ZoneEntity> zones = new ArrayList<>()
+        zones.add(zoneEntity)
+        when:
+        repository.findAll() >> zones
+        zoneService.getByLocation(null, state)
+        then:
+        thrown(ParametersException)
+    }
+
+    def "Test 2.6: Get Zone By wrong country."() {
+        List<ZoneEntity> zones = new ArrayList<>()
+        zones.add(zoneEntity)
+        when:
+        repository.findAll() >> zones
+        zoneService.getByLocation("fakeCountry", state)
+        then:
+        noExceptionThrown()
+    }
+
+    def "Test 2.7: Get Zone By wrong state."() {
+        List<ZoneEntity> zones = new ArrayList<>()
+        zones.add(zoneEntity)
+        when:
+        repository.findAll() >> zones
+        zoneService.getByLocation(country, "fakeState")
+        then:
+        noExceptionThrown()
     }
 
     def "Test 3.1: Update Zone."() {
