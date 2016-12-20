@@ -10,7 +10,7 @@ import io.reactivesw.common.model.action.SetName;
 public class SetNameMapper implements TaxCategoryUpdateMapper<TaxCategoryEntity> {
 
   @Override
-  public void setAction(TaxCategoryEntity entity, UpdateAction action) {
+  public void handle(TaxCategoryEntity entity, UpdateAction action) {
     SetName setName = (SetName) action;
     entity.setName(setName.getName());
   }

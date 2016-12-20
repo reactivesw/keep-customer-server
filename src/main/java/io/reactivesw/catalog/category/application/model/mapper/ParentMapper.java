@@ -10,7 +10,7 @@ import io.reactivesw.common.model.UpdateAction;
 public class ParentMapper implements CategoryUpdateMapper<CategoryEntity> {
 
   @Override
-  public void setAction(CategoryEntity entity, UpdateAction action) {
+  public void handle(CategoryEntity entity, UpdateAction action) {
     SetParent setParent = (SetParent)action;
     entity.setParent(setParent.getParent().getId());
   }

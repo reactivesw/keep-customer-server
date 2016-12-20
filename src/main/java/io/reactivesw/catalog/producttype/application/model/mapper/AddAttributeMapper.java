@@ -14,7 +14,7 @@ import java.util.Set;
  */
 public class AddAttributeMapper implements ProductTypeUpdateMapper<ProductTypeEntity> {
   @Override
-  public void setAction(ProductTypeEntity entity, UpdateAction action) {
+  public void handle(ProductTypeEntity entity, UpdateAction action) {
     AddAttribute addAttributeDefinition = (AddAttribute) action;
     AttributeDefinitionEntity attributeDefinitionEntity = AttributeDefinitionMapper.modelToEntity
         (addAttributeDefinition.getAttribute());

@@ -10,7 +10,7 @@ import io.reactivesw.order.shippingmethod.domain.entity.ShippingMethodEntity;
 public class SetDefaultMapper implements ShippingMethodUpdateMapper {
 
   @Override
-  public void setAction(ShippingMethodEntity entity, UpdateAction action) {
+  public void handle(ShippingMethodEntity entity, UpdateAction action) {
     entity.setAsDefault(((SetDefault)action).getDefault());
   }
 }

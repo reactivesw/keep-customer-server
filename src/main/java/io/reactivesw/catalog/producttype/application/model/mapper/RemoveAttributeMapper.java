@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  */
 public class RemoveAttributeMapper implements ProductTypeUpdateMapper<ProductTypeEntity> {
   @Override
-  public void setAction(ProductTypeEntity entity, UpdateAction action) {
+  public void handle(ProductTypeEntity entity, UpdateAction action) {
     String attributeName = ((RemoveAttribute) action).getName();
 
     Set updateAttributes = entity.getAttributes().stream().filter(

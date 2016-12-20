@@ -19,7 +19,7 @@ public class CartDiscountsMapper implements DiscountCodeUpdateMapper<DiscountCod
    * @param action UpdateAction
    */
   @Override
-  public void setAction(DiscountCodeEntity entity, UpdateAction action) {
+  public void handle(DiscountCodeEntity entity, UpdateAction action) {
     SetCartDiscounts discounts = (SetCartDiscounts) action;
     List<String> references = new ArrayList<>();
     discounts.getCartDiscounts().parallelStream().forEach(reference -> {

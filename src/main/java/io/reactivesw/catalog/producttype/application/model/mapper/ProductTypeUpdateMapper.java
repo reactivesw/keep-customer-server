@@ -9,7 +9,7 @@ import io.reactivesw.catalog.producttype.application.model.action.SetAttributeLa
 import io.reactivesw.catalog.producttype.application.model.action.SetKey;
 import io.reactivesw.common.model.action.SetDescription;
 import io.reactivesw.common.model.action.SetName;
-import io.reactivesw.common.model.mapper.UpdateMapper;
+import io.reactivesw.common.model.Update;
 
 import com.google.common.collect.ImmutableMap;
 
@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * Created by Davis on 16/12/7.
  */
-public interface ProductTypeUpdateMapper<E> extends UpdateMapper<E> {
+public interface ProductTypeUpdateMapper<E> extends Update<E> {
   /**
    * ImmutableMap for discount code update mapper.
    */

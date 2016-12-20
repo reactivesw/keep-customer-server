@@ -17,7 +17,7 @@ public class DescriptionMapper implements DiscountCodeUpdateMapper<DiscountCodeE
    * @param action UpdateAction
    */
   @Override
-  public void setAction(DiscountCodeEntity entity, UpdateAction action) {
+  public void handle(DiscountCodeEntity entity, UpdateAction action) {
     SetLocalizedDescription description = (SetLocalizedDescription) action;
     entity.setDescription(LocalizedStringMapper.modelToEntityDefaultNew(description
         .getDescription()));

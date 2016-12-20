@@ -10,7 +10,7 @@ import io.reactivesw.common.model.action.SetDescription;
 public class SetDescriptionMapper implements ProductTypeUpdateMapper<ProductTypeEntity> {
 
   @Override
-  public void setAction(ProductTypeEntity entity, UpdateAction action) {
+  public void handle(ProductTypeEntity entity, UpdateAction action) {
     SetDescription setDescription = (SetDescription) action;
     entity.setDescription(setDescription.getDescription());
   }

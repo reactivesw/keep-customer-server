@@ -5,7 +5,7 @@ import io.reactivesw.catalog.taxcategory.application.model.action.RemoveTaxRate;
 import io.reactivesw.catalog.taxcategory.application.model.action.ReplaceTaxRate;
 import io.reactivesw.common.model.action.SetDescription;
 import io.reactivesw.common.model.action.SetName;
-import io.reactivesw.common.model.mapper.UpdateMapper;
+import io.reactivesw.common.model.Update;
 
 import com.google.common.collect.ImmutableMap;
 
@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * Created by Davis on 16/12/11.
  */
-public interface TaxCategoryUpdateMapper<E> extends UpdateMapper<E> {
+public interface TaxCategoryUpdateMapper<E> extends Update<E> {
   /**
    * ImmutableMap for discount code update mapper.
    */

@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class ReplaceTaxRateMapper implements TaxCategoryUpdateMapper<TaxCategoryEntity> {
 
   @Override
-  public void setAction(TaxCategoryEntity entity, UpdateAction action) {
+  public void handle(TaxCategoryEntity entity, UpdateAction action) {
     ReplaceTaxRate replaceTaxRate = (ReplaceTaxRate) action;
 
     String taxRateId = replaceTaxRate.getTaxRateId();

@@ -9,7 +9,7 @@ import io.reactivesw.common.model.action.SetDescription;
  */
 public class SetDescriptionMapper implements TaxCategoryUpdateMapper<TaxCategoryEntity> {
   @Override
-  public void setAction(TaxCategoryEntity entity, UpdateAction action) {
+  public void handle(TaxCategoryEntity entity, UpdateAction action) {
     SetDescription setDescription = (SetDescription) action;
     entity.setDescription(setDescription.getDescription());
   }

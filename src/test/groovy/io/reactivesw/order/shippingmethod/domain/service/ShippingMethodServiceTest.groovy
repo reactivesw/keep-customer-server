@@ -1,10 +1,13 @@
 package io.reactivesw.order.shippingmethod.domain.service
 
+import io.reactivesw.common.entity.MoneyEntity
 import io.reactivesw.common.exception.ConflictException
 import io.reactivesw.common.exception.NotExistException
 import io.reactivesw.common.model.UpdateAction
 import io.reactivesw.common.model.action.SetName
 import io.reactivesw.order.shippingmethod.domain.entity.ShippingMethodEntity
+import io.reactivesw.order.shippingmethod.domain.entity.ShippingRateValue
+import io.reactivesw.order.shippingmethod.domain.entity.ZoneRateValue
 import io.reactivesw.order.shippingmethod.infrastructure.repository.ShippingMethodRepository
 import spock.lang.Specification
 
@@ -21,17 +24,42 @@ class ShippingMethodServiceTest extends Specification {
 
     def shippingMethodId = "tmpShippingMethodId"
 
-    def locationId = "tmpLocationId"
 
     List<UpdateAction> actions
 
     def version = 1
+
+    def locationId1 = "tmpLocationId1"
+    def locationId2 = "tmpLocationId2"
+    List<ShippingMethodEntity> allMethods
+    ShippingMethodEntity method1
+    ShippingMethodEntity method2
+    ZoneRateValue zoneRate1
+    ZoneRateValue zoneRate2
+    ShippingRateValue shippingRate1
+    ShippingRateValue shippingRate2
 
     def setup() {
         repository = Mock(ShippingMethodRepository)
         service = new ShippingMethodService(repository: repository)
         entity = new ShippingMethodEntity(id: shippingMethodId, version: version)
         actions = new ArrayList<>()
+
+        shippingRate1 = new ShippingRateValue(price: new MoneyEntity("RMB", 12), freeAbove: new MoneyEntity("RMB", 120))
+        shippingRate2 = new ShippingRateValue(price: new MoneyEntity("RMB", 12), freeAbove: new MoneyEntity("RMB", 120))
+        Set<ShippingRateValue> shippingRates = new HashSet<>()
+        shippingRates.add(shippingRate1)
+        shippingRates.add(shippingRate2)
+        zoneRate1 = new ZoneRateValue(zone: locationId1, shippingRates: shippingRates)
+        zoneRate2 = new ZoneRateValue(zone: locationId2, shippingRates: shippingRates)
+        Set<ZoneRateValue> zoneRates = new HashSet<>()
+        zoneRates.add(zoneRate1)
+        zoneRates.add(zoneRate2)
+        method1 = new ShippingMethodEntity(id: "method1", version: version, zoneRates: zoneRates)
+        method2 = new ShippingMethodEntity(id: "method2", version: version, zoneRates: zoneRates)
+        allMethods = new ArrayList<>()
+        allMethods.add(method1)
+        allMethods.add(method2)
     }
 
     def "Test 1.1: Create ShippingMethod"() {
@@ -61,9 +89,21 @@ class ShippingMethodServiceTest extends Specification {
     def "Test 2.3: Get ShippingMethod by location"() {
 
         when:
-        service.getByLocation(locationId)
+        repository.findAll() >> allMethods
+        List<ShippingMethodEntity> result = service.getByLocation(locationId1)
         then:
         noExceptionThrown()
+        result.size() == 2
+    }
+
+    def "Test 2.4: Get ShippingMethod by location id, that not exist"() {
+
+        when:
+        repository.findAll() >> allMethods
+        List<ShippingMethodEntity> result = service.getByLocation("fakeId")
+        then:
+        noExceptionThrown()
+        result.size() == 0
     }
 
     def "Test 3.1: Update ShippingMethod"() {

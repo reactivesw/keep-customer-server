@@ -10,7 +10,7 @@ import io.reactivesw.common.model.UpdateAction;
 public class SetKeyMapper implements ProductTypeUpdateMapper<ProductTypeEntity> {
 
   @Override
-  public void setAction(ProductTypeEntity entity, UpdateAction action) {
+  public void handle(ProductTypeEntity entity, UpdateAction action) {
     SetKey setKey = (SetKey)action;
     entity.setKey(setKey.getKey());
   }

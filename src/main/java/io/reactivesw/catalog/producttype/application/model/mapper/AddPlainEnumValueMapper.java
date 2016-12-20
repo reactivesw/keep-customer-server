@@ -14,7 +14,7 @@ import java.util.Objects;
  */
 public class AddPlainEnumValueMapper implements ProductTypeUpdateMapper<ProductTypeEntity>{
   @Override
-  public void setAction(ProductTypeEntity entity, UpdateAction action) {
+  public void handle(ProductTypeEntity entity, UpdateAction action) {
     AddPlainEnumValue setAttributeInputTip = (AddPlainEnumValue) action;
     String attributeName = setAttributeInputTip.getAttributeName();
     EnumValue enumValue = EnumValueMapper.modelToEntity(setAttributeInputTip.getValue());

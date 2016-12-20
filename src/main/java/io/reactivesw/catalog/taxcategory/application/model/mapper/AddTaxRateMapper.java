@@ -15,7 +15,7 @@ import java.util.Set;
 public class AddTaxRateMapper implements TaxCategoryUpdateMapper<TaxCategoryEntity> {
 
   @Override
-  public void setAction(TaxCategoryEntity entity, UpdateAction action) {
+  public void handle(TaxCategoryEntity entity, UpdateAction action) {
     AddTaxRate addTaxRate = (AddTaxRate) action;
 
     TaxRateDraft taxRateDraft = addTaxRate.getTaxRate();

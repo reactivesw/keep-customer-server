@@ -17,7 +17,7 @@ public class MaxApplicationsPerCustomerMapper implements DiscountCodeUpdateMappe
    * @param action UpdateAction
    */
   @Override
-  public void setAction(DiscountCodeEntity entity, UpdateAction action) {
+  public void handle(DiscountCodeEntity entity, UpdateAction action) {
     entity.setMaxApplicationsPerCustomer(((SetMaxApplicationsPerCustomer) action)
         .getMaxApplicationsPerCustomer());
   }

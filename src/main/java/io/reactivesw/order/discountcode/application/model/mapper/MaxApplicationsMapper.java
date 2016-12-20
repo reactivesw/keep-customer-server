@@ -17,7 +17,7 @@ public class MaxApplicationsMapper implements DiscountCodeUpdateMapper<DiscountC
    * @param action UpdateAction
    */
   @Override
-  public void setAction(DiscountCodeEntity entity, UpdateAction action) {
+  public void handle(DiscountCodeEntity entity, UpdateAction action) {
     entity.setMaxApplications(((SetMaxApplications) action).getMaxApplications());
   }
 }

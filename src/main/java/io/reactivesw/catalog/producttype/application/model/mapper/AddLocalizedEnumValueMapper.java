@@ -13,7 +13,7 @@ import java.util.Objects;
  */
 public class AddLocalizedEnumValueMapper implements ProductTypeUpdateMapper<ProductTypeEntity> {
   @Override
-  public void setAction(ProductTypeEntity entity, UpdateAction action) {
+  public void handle(ProductTypeEntity entity, UpdateAction action) {
     AddLocalizedEnumValue addLocalizedEnumValue = (AddLocalizedEnumValue) action;
     String attributeName = addLocalizedEnumValue.getAttributeName();
     LocalizedEnumValue value = addLocalizedEnumValue.getValue();

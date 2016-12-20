@@ -15,7 +15,7 @@ public class ActiveMapper implements DiscountCodeUpdateMapper<DiscountCodeEntity
    * @param action UpdateAction
    */
   @Override
-  public void setAction(DiscountCodeEntity entity, UpdateAction action) {
+  public void handle(DiscountCodeEntity entity, UpdateAction action) {
     entity.setActive(((SetActive) action).getActive());
   }
 }

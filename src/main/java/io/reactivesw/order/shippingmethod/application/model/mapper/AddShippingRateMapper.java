@@ -19,7 +19,7 @@ public class AddShippingRateMapper implements ShippingMethodUpdateMapper {
    * @param action UpdateAction
    */
   @Override
-  public void setAction(ShippingMethodEntity entity, UpdateAction action) {
+  public void handle(ShippingMethodEntity entity, UpdateAction action) {
     AddShippingRate shippingRate = (AddShippingRate) action;
 
     ShippingRateValue value = ShippingRateMapper.convertModelToEntity(shippingRate

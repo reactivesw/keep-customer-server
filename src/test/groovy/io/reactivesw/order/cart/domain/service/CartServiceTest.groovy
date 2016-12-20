@@ -2,10 +2,14 @@ package io.reactivesw.order.cart.domain.service
 
 import io.reactivesw.common.entity.MoneyEntity
 import io.reactivesw.common.exception.AlreadyExistException
+import io.reactivesw.common.exception.ConflictException
+import io.reactivesw.common.exception.ImmutableException
 import io.reactivesw.common.exception.NotExistException
 import io.reactivesw.common.exception.ParametersException
+import io.reactivesw.common.model.UpdateAction
 import io.reactivesw.order.cart.domain.entity.CartEntity
 import io.reactivesw.order.cart.domain.entity.value.*
+import io.reactivesw.order.cart.domain.service.update.CartUpdateService
 import io.reactivesw.order.cart.infrastructure.enums.CartState
 import io.reactivesw.order.cart.infrastructure.repository.CartRepository
 import spock.lang.Specification
@@ -17,15 +21,9 @@ class CartServiceTest extends Specification {
 
     CartRepository cartRepository = Mock(CartRepository)
 
-    PriceService priceService = new PriceService()
+    CartUpdateService cartUpdateService = Mock(CartUpdateService)
 
-    LineItemService lineItemService = new LineItemService(priceService: priceService)
-
-    CustomLineItemService customLineItemService = new CustomLineItemService()
-
-    ShippingInfoService shippingInfoService = new ShippingInfoService()
-
-    CartService cartService = new CartService(cartRepository: cartRepository, lineItemService: lineItemService, customLineItemService: customLineItemService, shippingInfoService: shippingInfoService)
+    CartService cartService = new CartService(cartRepository: cartRepository, cartUpdateService: cartUpdateService)
 
     def customerId = "tmpCustomerId"
 
@@ -41,15 +39,19 @@ class CartServiceTest extends Specification {
 
     def variantId = 1
 
-    def quantity = 1;
+    def quantity = 5
 
     def lineItemId = "tmpLineItemId"
 
+    def version = 1
+
     CartEntity cartEntity
+
+    List<UpdateAction> actions
 
     def setup() {
         Set<LineItemValue> lineItems = new HashSet()
-        LineItemValue lineItem = new LineItemValue(id: lineItemId, quantity: 5, supplyChannel: supplyChannel, distributionChannel: distributionChannel, productId: productId)
+        LineItemValue lineItem = new LineItemValue(id: lineItemId, quantity: quantity, supplyChannel: supplyChannel, distributionChannel: distributionChannel, productId: productId)
         lineItem.setVariant(new ProductVariantValue(id: variantId))
         lineItem.setPrice(new PriceValue(id: "priceId", value: new MoneyEntity(centAmount: 12, currencyCode: "RMB")))
         lineItems.add(lineItem)
@@ -63,7 +65,11 @@ class CartServiceTest extends Specification {
 
         ShippingInfoValue shippingInfoValue = new ShippingInfoValue(price: new MoneyEntity("RMB", 12), shippingRate: new ShippingRateValue(price: new MoneyEntity("RMB", 12), freeAbove: new MoneyEntity("RMB", 120)), taxRate: new TaxRateValue(amount: 0.1, includedInPrice: false))
 
-        cartEntity = new CartEntity(lineItems: lineItems, customLineItems: customItems, shippingInfo: shippingInfoValue)
+        cartEntity = new CartEntity(id: cartId, version: version, lineItems: lineItems, customLineItems: customItems, shippingInfo: shippingInfoValue)
+
+
+        actions = new ArrayList<>()
+
     }
 
     def "Test 1.1: Create new Active cart by customerId"() {
@@ -198,132 +204,70 @@ class CartServiceTest extends Specification {
         !entities.isEmpty()
     }
 
-    def "Test 3.1: Update cart: add LineItem to cart with non-existing items"() {
-        Set<LineItemValue> lineItemValues = new HashSet<>()
-        cartEntity.setLineItems(lineItemValues)
 
-        LineItemValue newItem = new LineItemValue()
-        newItem.setProductId(productId)
-        newItem.setDistributionChannel(distributionChannel)
-        newItem.setSupplyChannel(supplyChannel)
-        newItem.setQuantity(quantity)
-        newItem.setVariant(new ProductVariantValue(id: variantId))
-        newItem.setPrice(new PriceValue(id: "priceId", value: new MoneyEntity(centAmount: 12, currencyCode: "RMB")))
+    def "Test 3.1: Update cart"() {
+
+        cartEntity.setCartState(CartState.Active)
         when:
         cartRepository.findOne(cartId) >> cartEntity
-
-        cartService.addLineItem(cartId, newItem)
+        cartRepository.save(_) >> cartEntity
+        cartService.updateCart(cartId, version, actions)
         then:
         noExceptionThrown()
     }
 
-    def "Test 3.2: Update cart: add LineItem to cart with existing item"() {
+    def "Test 3.2: Update non-active cart"() {
 
-        LineItemValue newItem = new LineItemValue()
-        newItem.setProductId(productId)
-        newItem.setDistributionChannel(distributionChannel)
-        newItem.setSupplyChannel(supplyChannel)
-        newItem.setQuantity(quantity)
-        ProductVariantValue newVariant = new ProductVariantValue()
-        newVariant.setId(variantId)
-        newItem.setVariant(newVariant)
-        newItem.setPrice(new PriceValue(id: "priceId", value: new MoneyEntity(centAmount: 12, currencyCode: "RMB")))
+        cartEntity.setCartState(CartState.Merged)
         when:
         cartRepository.findOne(cartId) >> cartEntity
-        cartService.addLineItem(cartId, newItem)
+        cartService.updateCart(cartId, version, actions)
+        then:
+        thrown(ImmutableException)
+    }
+
+    def "Test 3.3: Update cart with wrong version"() {
+
+        cartEntity.setVersion(version + 1)
+        when:
+        cartRepository.findOne(cartId) >> cartEntity
+        cartService.updateCart(cartId, version, actions)
+        then:
+        thrown(ConflictException)
+    }
+
+    def "Test 4.1: Delete cart"() {
+
+        cartEntity.setVersion(version)
+        cartEntity.setCartState(CartState.Active)
+        when:
+        cartRepository.findOne(cartId) >> cartEntity
+        cartService.deleteCart(cartId, version)
         then:
         noExceptionThrown()
     }
 
-    def "Test 3.3: Update cart: remove LineItem "() {
 
+    def "Test 4.2: Delete cart with non-active cart"() {
+
+        cartEntity.setVersion(version)
+        cartEntity.setCartState(CartState.Merged)
         when:
         cartRepository.findOne(cartId) >> cartEntity
-        cartService.removeLineItem(cartId, lineItemId, 2)
+        cartService.deleteCart(cartId, version)
         then:
-        noExceptionThrown()
-
+        thrown(ImmutableException)
     }
 
-    def "Test 3.4: Update cart: remove LineItem for reduce too many "() {
+    def "Test 4.3: Delete cart with wrong version"() {
 
+        cartEntity.setVersion(version + 1)
+        cartEntity.setCartState(CartState.Active)
         when:
         cartRepository.findOne(cartId) >> cartEntity
-        cartService.removeLineItem(cartId, lineItemId, 10)
+        cartService.deleteCart(cartId, version)
         then:
-        noExceptionThrown()
-
-    }
-
-    def "Test 3.5: Update cart: remove not existing LineItem "() {
-
-        Set<LineItemValue> lineItemValues = new HashSet<>()
-        cartEntity.setLineItems(lineItemValues)
-        when:
-        cartRepository.findOne(cartId) >> cartEntity
-        cartService.removeLineItem(cartId, lineItemId, 5)
-        then:
-        thrown(NotExistException)
-
-    }
-
-    def "Test 3.6: Update cart: change Line item quantity remove item "() {
-
-        when:
-        cartRepository.findOne(cartId) >> cartEntity
-        cartService.changeLineItemQuantity(cartId, lineItemId, 0)
-        then:
-        noExceptionThrown()
-    }
-
-    def "Test 3.7: Update cart: change Line item quantity "() {
-
-        when:
-        cartRepository.findOne(cartId) >> cartEntity
-        cartService.changeLineItemQuantity(cartId, lineItemId, 3)
-        then:
-        noExceptionThrown()
-
-    }
-
-    def "Test 3.8: Update cart: change Line item quantity "() {
-
-        when:
-        cartRepository.findOne(cartId) >> cartEntity
-        cartService.changeLineItemQuantity(cartId, lineItemId, null)
-        then:
-        noExceptionThrown()
-
-    }
-
-
-    def "Test 4.1: Recalculate total price"() {
-
-        Set<LineItemValue> lineItems = new HashSet()
-        LineItemValue lineItem = new LineItemValue()
-        lineItem.setProductId(productId)
-        lineItem.setDistributionChannel(distributionChannel)
-        lineItem.setSupplyChannel(supplyChannel)
-        lineItem.setQuantity(5)
-        lineItem.setId(lineItemId)
-        lineItem.setPrice(new PriceValue(id: "priceId", value: new MoneyEntity(centAmount: 12, currencyCode: "RMB")))
-        lineItems.add(lineItem)
-
-
-        Set<CustomLineItemValue> customItems = new HashSet()
-        CustomLineItemValue customItem = new CustomLineItemValue()
-        customItem.setMoney(new MoneyEntity("RMB", 12))
-        customItem.setQuantity(5)
-        customItems.add(customItem)
-
-        ShippingInfoValue shippingInfoValue = new ShippingInfoValue(price: new MoneyEntity("RMB", 12), shippingRate: new ShippingRateValue(price: new MoneyEntity("RMB", 12), freeAbove: new MoneyEntity("RMB", 120)), taxRate: new TaxRateValue(amount: 0.1, includedInPrice: false))
-
-        CartEntity cart = new CartEntity(lineItems: lineItems, customLineItems: customItems, shippingInfo: shippingInfoValue)
-
-        when:
-        cartService.calculateCartPrice(cart)
-        then:
-        noExceptionThrown()
+        thrown(ConflictException)
     }
 
 

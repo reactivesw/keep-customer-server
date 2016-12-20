@@ -46,7 +46,7 @@ public class CartController {
 
     CartEntity entity = this.cartService.getById(id);
 
-    return CartMapper.convertEntityToModel(entity);
+    return CartMapper.entityToModel(entity);
   }
 
   /**
@@ -61,7 +61,7 @@ public class CartController {
                                             String customerId) {
     CartEntity entity = this.cartService.getActiveCartByCustomerId(customerId);
 
-    return CartMapper.convertEntityToModel(entity);
+    return CartMapper.entityToModel(entity);
   }
 
   /**

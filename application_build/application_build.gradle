@@ -32,11 +32,12 @@ dependencies {
     compile('org.projectlombok:lombok:1.16.12')
 
     //cglib for Spock
-    compile('cglib:cglib-nodep:3.1')
+    compile('cglib:cglib-nodep:3.2.4')
 
     // model mapper for data
     compile('org.modelmapper:modelmapper:0.7.6')
-    compile('com.google.code.gson:gson:2.8.0')
+
+    compile('org.apache.commons:commons-collections4:4.1')
 
     //for zoneddatetime
     compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.8.5')
@@ -45,11 +46,11 @@ dependencies {
     testCompile('org.springframework.boot:spring-boot-starter-test:1.4.0.RELEASE')
 
     //groovy for spock
-    testCompile('org.codehaus.groovy:groovy-all:2.3.10')
+    testCompile('org.codehaus.groovy:groovy-all:2.4.1')
 
     //spock core
-    testCompile('org.spockframework:spock-core:1.0-groovy-2.3')
+    testCompile('org.spockframework:spock-core:1.0-groovy-2.4')
 
     //spock spring
-    testCompile('org.spockframework:spock-spring:1.0-groovy-2.3')
+    testCompile('org.spockframework:spock-spring:1.0-groovy-2.4')
 }

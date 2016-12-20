@@ -18,7 +18,7 @@ public class AddLocationMapper implements ZoneUpdateMapper {
    * @param action UpdateAction
    */
   @Override
-  public void setAction(ZoneEntity entity, UpdateAction action) {
+  public void handle(ZoneEntity entity, UpdateAction action) {
     AddLocation location = (AddLocation) action;
     entity.getLocation().add(LocationMapper.convertModelToEntity(location.getLocation()));
   }

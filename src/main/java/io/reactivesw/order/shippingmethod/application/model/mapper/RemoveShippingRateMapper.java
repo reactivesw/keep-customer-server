@@ -14,7 +14,7 @@ import java.util.Objects;
 public class RemoveShippingRateMapper implements ShippingMethodUpdateMapper {
 
   @Override
-  public void setAction(ShippingMethodEntity entity, UpdateAction action) {
+  public void handle(ShippingMethodEntity entity, UpdateAction action) {
     AddShippingRate shippingRate = (AddShippingRate) action;
 
     ShippingRateValue value = ShippingRateMapper.convertModelToEntity(shippingRate

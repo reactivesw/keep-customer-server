@@ -2,7 +2,7 @@ package io.reactivesw.order.discountcode.application.model.mapper;
 
 
 import com.google.common.collect.ImmutableMap;
-import io.reactivesw.common.model.mapper.UpdateMapper;
+import io.reactivesw.common.model.Update;
 import io.reactivesw.order.discountcode.application.model.action.SetActive;
 import io.reactivesw.order.discountcode.application.model.action.SetCartDiscounts;
 import io.reactivesw.order.discountcode.application.model.action.SetCartPredicate;
@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * Created by umasuo on 16/12/7.
  */
-public interface DiscountCodeUpdateMapper<E> extends UpdateMapper<E> {
+public interface DiscountCodeUpdateMapper<E> extends Update<E> {
 
   /**
    * ImmutableMap for discount code update mapper.

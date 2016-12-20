@@ -1,13 +1,14 @@
 package io.reactivesw.order.cart.domain.service;
 
-import io.reactivesw.common.entity.MoneyEntity;
 import io.reactivesw.common.exception.AlreadyExistException;
+import io.reactivesw.common.exception.ConflictException;
+import io.reactivesw.common.exception.ImmutableException;
 import io.reactivesw.common.exception.NotExistException;
 import io.reactivesw.common.exception.ParametersException;
 import io.reactivesw.common.model.Statics;
+import io.reactivesw.common.model.UpdateAction;
 import io.reactivesw.order.cart.domain.entity.CartEntity;
-import io.reactivesw.order.cart.domain.entity.value.LineItemValue;
-import io.reactivesw.order.cart.domain.entity.value.ShippingInfoValue;
+import io.reactivesw.order.cart.domain.service.update.CartUpdateService;
 import io.reactivesw.order.cart.infrastructure.enums.CartState;
 import io.reactivesw.order.cart.infrastructure.repository.CartRepository;
 import org.apache.commons.lang3.StringUtils;
@@ -18,10 +19,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
 
 /**
+ * TODO we should refine these codes.
  * Created by umasuo on 16/11/29.
  */
 @Service
@@ -38,22 +38,10 @@ public class CartService {
   private transient CartRepository cartRepository;
 
   /**
-   * line item service.
+   * cart update service.
    */
   @Autowired
-  private transient LineItemService lineItemService;
-
-  /**
-   * custom item service.
-   */
-  @Autowired
-  private transient CustomLineItemService customLineItemService;
-
-  /**
-   * shipping info service.
-   */
-  @Autowired
-  private transient ShippingInfoService shippingInfoService;
+  private transient CartUpdateService cartUpdateService;
 
   /**
    * Create an new active cart with sample.
@@ -163,119 +151,31 @@ public class CartService {
   }
 
   /**
-   * Update cart.
-   * add line Item to the cart.
-   * Adds a product variant in the given quantity to the cart. If the cart already contains the
-   * product variant for the given supply and distribution channel, then only quantity of the
-   * LineItem is increased.
+   * update cart for with action list.
    *
-   * @param cartId   String
-   * @param lineItem LineItemDraft
+   * @param id      String of cart id
+   * @param version Integer
+   * @param actions list of actions
    * @return CartEntity
    */
-  public CartEntity addLineItem(String cartId, LineItemValue lineItem) {
-    CartEntity entity = this.getById(cartId);
-    Set<LineItemValue> lineItems = entity.getLineItems();
-    Optional<LineItemValue> item = lineItems.stream().filter(tmpItem -> tmpItem.equals(lineItem))
-        .findFirst();
+  public CartEntity updateCart(String id, Integer version, List<UpdateAction> actions) {
+    CartEntity cart = this.getById(id);
 
-    if (item.isPresent()) {
-      LineItemValue itemValue = item.get();
-      itemValue.setQuantity(itemValue.getQuantity() + lineItem.getQuantity());
-    } else {
-      lineItems.add(lineItem);
-    }
-    this.calculateCartPrice(entity);
-    return this.cartRepository.save(entity);
-  }
+    this.checkVersion(version, cart.getVersion());
 
-  /**
-   * Decreases the quantity of the given LineItem. If after the update the quantity of the line
-   * item is not greater than 0 or the quantity is not specified, the line item is removed from
-   * the cart.
-   *
-   * @param cartId     String
-   * @param lineItemId String Id of an existing LineItem in the cart.
-   * @param quantity   int
-   * @return CartEntity
-   */
-  public CartEntity removeLineItem(String cartId, String lineItemId, Integer quantity) {
-    CartEntity entity = this.getById(cartId);
-    Set<LineItemValue> lineItems = entity.getLineItems();
-    LineItemValue itemValue = this.getLineItem(entity, lineItemId);
-
-    if (quantity == null || itemValue.getQuantity() <= quantity) {
-      lineItems.remove(itemValue);
-    } else {
-      Integer remainQuantity = itemValue.getQuantity() - quantity;
-      itemValue.setQuantity(remainQuantity);
+    if (cart.getCartState() != CartState.Active) {
+      LOG.debug("Only active Cart can be changed, id:{}", id);
+      throw new ImmutableException("Only active Cart can be changed");
     }
 
-    this.calculateCartPrice(entity);
-    return this.cartRepository.save(entity);
-  }
-
-  /**
-   * set the line item's quantity to an value.
-   * Sets the quantity of the given LineItem. If quantity is 0, line item is removed from the cart.
-   * @param cartId String
-   * @param lineItemId String
-   * @param quantity Integer
-   * @return CartEntity
-   */
-  public CartEntity changeLineItemQuantity(String cartId, String lineItemId, Integer quantity) {
-    CartEntity entity = this.getById(cartId);
-
-    Set<LineItemValue> lineItems = entity.getLineItems();
-
-    LineItemValue itemValue = this.getLineItem(entity, lineItemId);
-
-    if (quantity == null || quantity == 0) {
-      lineItems.remove(itemValue);
-    } else {
-      itemValue.setQuantity(quantity);
-    }
-
-    this.calculateCartPrice(entity);
-    return this.cartRepository.save(entity);
-  }
-
-  /**
-   * calculate cart price.
-   * TODO split the method.
-   *
-   * @param cart CartEntity
-   */
-  protected void calculateCartPrice(CartEntity cart) {
-
-    int lineItemTotalPrice = cart.getLineItems().parallelStream().mapToInt(
-        lineItemValue -> {
-          lineItemService.calculateTotalPrice(lineItemValue);
-          return lineItemValue.getTotalPrice().getCentAmount();
+    //update data from action
+    actions.parallelStream().forEach(
+        action -> {
+          cartUpdateService.handle(cart, action);
         }
-    ).sum();
+    );
 
-    int customItemTotalPrice = cart.getCustomLineItems().parallelStream().mapToInt(
-        customLineItemValue -> {
-          customLineItemService.calculateTotalPrice(customLineItemValue);
-          return customLineItemValue.getTotalPrice().getCentAmount();
-        }
-    ).sum();
-
-    ShippingInfoValue shippingInfo = cart.getShippingInfo();
-    shippingInfoService.calculateTotalPrice(shippingInfo, lineItemTotalPrice);
-    int shippingTotalPrice = shippingInfo.getPrice().getCentAmount();
-
-    //TODO use discount to calculate the cart price
-    int totalPrice = lineItemTotalPrice + customItemTotalPrice + shippingTotalPrice;
-
-    MoneyEntity cartTotalPrice = cart.getTotalPrice();
-    if (Objects.isNull(cartTotalPrice)) {
-      cartTotalPrice = new MoneyEntity();
-      cart.setTotalPrice(cartTotalPrice);
-    }
-    cartTotalPrice.setCentAmount(totalPrice);
-
+    return this.cartRepository.save(cart);
   }
 
   /**
@@ -321,14 +221,35 @@ public class CartService {
     return retEntity;
   }
 
+  /**
+   * delete cart.
+   * @param id String
+   * @param version Integer
+   */
+  public void deleteCart(String id, Integer version) {
+    CartEntity cart = this.getById(id);
 
-  private LineItemValue getLineItem(CartEntity cart, String lineItemId) {
-    Set<LineItemValue> lineItems = cart.getLineItems();
-    Optional<LineItemValue> item = lineItems.stream().filter(tmpItem -> tmpItem.getId()
-        == lineItemId).findFirst();
-    if (!item.isPresent()) {
-      throw new NotExistException("Removing not existing line item.");
+    this.checkVersion(version, cart.getVersion());
+
+    if (cart.getCartState() != CartState.Active) {
+      LOG.debug("Only active Cart can be changed, id:{}", id);
+      throw new ImmutableException("Only active Cart can be changed");
     }
-    return item.get();
+
+    this.cartRepository.delete(id);
+  }
+
+  /**
+   * check the version of the discount.
+   *
+   * @param inputVersion Integer
+   * @param savedVersion Integer
+   */
+  private void checkVersion(Integer inputVersion, Integer savedVersion) {
+    if (!Objects.equals(inputVersion, savedVersion)) {
+      LOG.debug("Cart version is not correct. inputVersion:{}, savedVersion:{}",
+          inputVersion, savedVersion);
+      throw new ConflictException("Cart version is not correct.");
+    }
   }
 }

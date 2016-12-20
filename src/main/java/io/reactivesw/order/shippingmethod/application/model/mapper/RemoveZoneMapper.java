@@ -13,7 +13,7 @@ import java.util.Objects;
 public class RemoveZoneMapper implements ShippingMethodUpdateMapper {
 
   @Override
-  public void setAction(ShippingMethodEntity entity, UpdateAction action) {
+  public void handle(ShippingMethodEntity entity, UpdateAction action) {
     AddZone zone = (AddZone) action;
     ZoneRateValue value = new ZoneRateValue();
     value.setZone(zone.getZone().getId());
