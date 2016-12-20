@@ -1,4 +1,4 @@
-package io.reactivesw.order.shippingmethod.application;
+package io.reactivesw.order.shippingmethod.application.service;
 
 import io.reactivesw.order.shippingmethod.domain.entity.ShippingMethodEntity;
 import io.reactivesw.order.shippingmethod.domain.service.ShippingMethodService;
@@ -13,6 +13,11 @@ import java.util.List;
  */
 @Service
 public class ShippingMethodApplication {
+
+  /**
+   * rest caller.
+   */
+//  private transient RestTemplate restTemplate = new RestTemplate();
 
   /**
    * shipping method domain service.
@@ -32,6 +37,7 @@ public class ShippingMethodApplication {
    */
   public List<ShippingMethodEntity> getByLocation(String country, String state, String currency) {
     //TODO get all locations by country
+//    List<Zone> zones = restTemplate.getForObject("", List.class, country, state);
     String locationId = "";
 
     //TODO get shipping method for each location

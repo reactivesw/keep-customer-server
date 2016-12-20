@@ -1,8 +1,8 @@
 package io.reactivesw.catalog.category.application.controller;
 
-import static io.reactivesw.route.Router.CATEGORY_ID;
-import static io.reactivesw.route.Router.CATEGORY_ROOT;
-import static io.reactivesw.route.Router.CATEGORY_WITH_ID;
+import static io.reactivesw.route.CategoryRouter.CATEGORY_ID;
+import static io.reactivesw.route.CategoryRouter.CATEGORY_ROOT;
+import static io.reactivesw.route.CategoryRouter.CATEGORY_WITH_ID;
 
 import io.reactivesw.catalog.category.application.model.Category;
 import io.reactivesw.catalog.category.application.model.CategoryDraft;

@@ -1,6 +1,5 @@
 package io.reactivesw.order.shippingmethod.application.service
 
-import io.reactivesw.order.shippingmethod.application.ShippingMethodApplication
 import io.reactivesw.order.shippingmethod.domain.service.ShippingMethodService
 import spock.lang.Specification
 
