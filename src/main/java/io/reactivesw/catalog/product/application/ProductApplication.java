@@ -3,7 +3,7 @@ package io.reactivesw.catalog.product.application;
 import io.reactivesw.catalog.product.application.model.Product;
 import io.reactivesw.catalog.product.application.model.ProductDraft;
 import io.reactivesw.catalog.product.domain.service.ProductService;
-import io.reactivesw.catalog.product.infrastructure.validator.UniqueAttributeValidator;
+import io.reactivesw.catalog.product.infrastructure.validator.AttributeConstraintValidator;
 import io.reactivesw.catalog.producttype.application.model.ProductType;
 import io.reactivesw.common.exception.NotExistException;
 
@@ -50,7 +50,7 @@ public class ProductApplication {
 
     ProductType productType = getProductType(productTypeId);
 
-    UniqueAttributeValidator.validateAttribute(productType.getAttributes(), productDraft);
+    AttributeConstraintValidator.validateAttribute(productType.getAttributes(), productDraft);
 
     Product result = productService.createProduct(productDraft);
 
