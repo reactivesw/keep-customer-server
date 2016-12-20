@@ -6,11 +6,14 @@ import io.reactivesw.catalog.product.application.model.mapper.ProductMapper;
 import io.reactivesw.catalog.product.domain.entity.ProductEntity;
 import io.reactivesw.catalog.product.infrastructure.repository.ProductRepository;
 import io.reactivesw.common.exception.NotExistException;
+import io.reactivesw.common.exception.ParametersException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.PersistenceException;
 
 /**
  * Created by Davis on 16/12/14.
@@ -39,7 +42,14 @@ public class ProductService {
 
     ProductEntity entity = ProductMapper.modelToEntity(productDraft);
 
-    ProductEntity savedEntity = productRepository.save(entity);
+    ProductEntity savedEntity = null;
+    try {
+      savedEntity = productRepository.save(entity);
+    } catch (PersistenceException ex) {
+      // TODO: 16/12/20 thrown exception when sku name is same
+      LOG.debug("sku name should be unique");
+      throw new ParametersException("sku name should be unique");
+    }
 
     Product result = ProductMapper.entityToModel(savedEntity);
 

@@ -5,8 +5,10 @@ import io.reactivesw.catalog.producttype.domain.entity.AttributeDefinitionEntity
 import io.reactivesw.catalog.producttype.domain.entity.ProductTypeEntity;
 import io.reactivesw.common.model.UpdateAction;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -19,9 +21,9 @@ public class AddAttributeMapper implements ProductTypeUpdateMapper<ProductTypeEn
     AttributeDefinitionEntity attributeDefinitionEntity = AttributeDefinitionMapper.modelToEntity
         (addAttributeDefinition.getAttribute());
 
-    Set<AttributeDefinitionEntity> attributes = entity.getAttributes();
+    List<AttributeDefinitionEntity> attributes = entity.getAttributes();
     if (attributes == null) {
-      attributes = Sets.newHashSet();
+      attributes = Lists.newArrayList();
     }
     attributes.add(attributeDefinitionEntity);
 

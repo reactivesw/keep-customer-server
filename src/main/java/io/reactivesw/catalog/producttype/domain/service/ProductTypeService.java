@@ -6,6 +6,7 @@ import io.reactivesw.catalog.producttype.application.model.mapper.ProductTypeMap
 import io.reactivesw.catalog.producttype.application.model.mapper.ProductTypeUpdateMapper;
 import io.reactivesw.catalog.producttype.domain.entity.ProductTypeEntity;
 import io.reactivesw.catalog.producttype.infrastructure.repository.ProductTypeRepository;
+import io.reactivesw.catalog.producttype.infrastructure.validator.AttributeDefinitionNameValidator;
 import io.reactivesw.common.exception.ConflictException;
 import io.reactivesw.common.exception.NotExistException;
 import io.reactivesw.common.model.PagedQueryResult;
@@ -44,6 +45,8 @@ public class ProductTypeService {
    */
   public ProductType createProductType(ProductTypeDraft productTypeDraft) {
     LOG.debug("enter createProductType, product type draft is:{}", productTypeDraft.toString());
+
+    AttributeDefinitionNameValidator.validate(productTypeDraft);
 
     ProductTypeEntity entity = ProductTypeMapper.modelToEntity(productTypeDraft);
 

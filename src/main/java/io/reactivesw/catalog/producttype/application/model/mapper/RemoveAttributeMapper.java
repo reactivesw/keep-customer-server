@@ -5,6 +5,7 @@ import io.reactivesw.catalog.producttype.domain.entity.ProductTypeEntity;
 import io.reactivesw.common.exception.NotExistException;
 import io.reactivesw.common.model.UpdateAction;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -17,9 +18,9 @@ public class RemoveAttributeMapper implements ProductTypeUpdateMapper<ProductTyp
   public void handle(ProductTypeEntity entity, UpdateAction action) {
     String attributeName = ((RemoveAttribute) action).getName();
 
-    Set updateAttributes = entity.getAttributes().stream().filter(
+    List updateAttributes = entity.getAttributes().stream().filter(
         attribute -> !Objects.equals(attribute.getName(), attributeName)
-    ).collect(Collectors.toSet());
+    ).collect(Collectors.toList());
 
     if (updateAttributes.size() == entity.getAttributes().size()) {
       throw new NotExistException("can not find attribute by name : " + attributeName);

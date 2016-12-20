@@ -14,6 +14,9 @@ import org.apache.commons.lang3.StringUtils;
  * Created by Davis on 16/12/14.
  */
 public class ProductDataMapper {
+
+  private static int MASTER_VARIANT_ID = 1;
+
   public static ProductDataEntity modelToEntity(ProductDraft model) {
     ProductDataEntity entity = new ProductDataEntity();
 
@@ -32,9 +35,9 @@ public class ProductDataMapper {
     }
       ProductVariantEntity masterVariant = new ProductVariantEntity();
     if (model.getMasterVariant() != null) {
-      masterVariant = ProductVariantMapper.modelToEntity(model.getMasterVariant());
+      masterVariant = ProductVariantMapper.modelToEntity(MASTER_VARIANT_ID, model.getMasterVariant());
     }
-    masterVariant.setId(1);
+    masterVariant.setId(MASTER_VARIANT_ID);
     entity.setMasterVariant(masterVariant);
 
     if (model.getVariants() != null) {

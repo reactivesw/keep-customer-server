@@ -1,5 +1,9 @@
 package io.reactivesw.catalog.taxcategory.application.controller;
 
+import static io.reactivesw.route.TaxCategoryRouter.TAX_CATEGORY_ID;
+import static io.reactivesw.route.TaxCategoryRouter.TAX_CATEGORY_ROOT;
+import static io.reactivesw.route.TaxCategoryRouter.TAX_CATEGORY_WITH_ID;
+
 import io.reactivesw.catalog.taxcategory.application.model.TaxCategory;
 import io.reactivesw.catalog.taxcategory.application.model.TaxCategoryDraft;
 import io.reactivesw.catalog.taxcategory.domain.service.TaxCategoryService;
@@ -9,6 +13,7 @@ import io.reactivesw.common.model.UpdateRequest;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +26,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
-
-import static io.reactivesw.route.TaxCategoryRouter.TAX_CATEGORY_ID;
-import static io.reactivesw.route.TaxCategoryRouter.TAX_CATEGORY_ROOT;
-import static io.reactivesw.route.TaxCategoryRouter.TAX_CATEGORY_WITH_ID;
 
 
 /**

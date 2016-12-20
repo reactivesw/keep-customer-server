@@ -27,7 +27,7 @@ public class SetAttributeInputTipMapper implements ProductTypeUpdateMapper<Produ
     String attributeName = setAttributeInputTip.getAttributeName();
     LocalizedString inputTip = setAttributeInputTip.getInputTip();
 
-    Set<AttributeDefinitionEntity> attributes = entity.getAttributes().stream()
+    List<AttributeDefinitionEntity> attributes = entity.getAttributes().stream()
         .map(
             attribute -> {
               if (Objects.equals(attributeName, attribute.getName())) {
@@ -35,7 +35,7 @@ public class SetAttributeInputTipMapper implements ProductTypeUpdateMapper<Produ
               }
               return attribute;
             }
-        ).collect(Collectors.toSet());
+        ).collect(Collectors.toList());
 
     entity.setAttributes(attributes);
   }

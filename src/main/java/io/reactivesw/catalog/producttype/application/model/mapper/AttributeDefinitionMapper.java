@@ -1,14 +1,14 @@
 package io.reactivesw.catalog.producttype.application.model.mapper;
 
+import com.google.common.collect.Lists;
+
 import io.reactivesw.catalog.product.application.model.AttributeDefinitionDraft;
 import io.reactivesw.catalog.product.application.model.attributes.AttributeDefinition;
 import io.reactivesw.catalog.product.application.model.attributes.AttributeType;
 import io.reactivesw.catalog.producttype.domain.entity.AttributeDefinitionEntity;
 import io.reactivesw.common.model.mapper.LocalizedStringMapper;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -22,13 +22,13 @@ public final class AttributeDefinitionMapper {
    * @param attributeDefinitionList the attribute definition list
    * @return the set
    */
-  public static Set<AttributeDefinitionEntity> modelToEntity(List<AttributeDefinitionDraft>
+  public static List<AttributeDefinitionEntity> modelToEntity(List<AttributeDefinitionDraft>
                                                                  attributeDefinitionList) {
-    Set<AttributeDefinitionEntity> entities = new HashSet<>();
+    List<AttributeDefinitionEntity> entities = Lists.newArrayList();
     if (attributeDefinitionList != null) {
       entities = attributeDefinitionList.stream().map(attributedefinition -> {
         return modelToEntity(attributedefinition);
-      }).collect(Collectors.toSet());
+      }).collect(Collectors.toList());
     }
     return entities;
   }
@@ -69,7 +69,7 @@ public final class AttributeDefinitionMapper {
    * @param entities the entity
    * @return the list
    */
-  public static List<AttributeDefinition> entityToModel(Set<AttributeDefinitionEntity> entities) {
+  public static List<AttributeDefinition> entityToModel(List<AttributeDefinitionEntity> entities) {
     List<AttributeDefinition> models = entities.stream().map(entity -> {
       return entityToModel(entity);
     }).collect(Collectors.toList());
