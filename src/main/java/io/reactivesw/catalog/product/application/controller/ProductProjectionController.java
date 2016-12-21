@@ -6,7 +6,6 @@ import io.reactivesw.catalog.product.application.ProductApplication;
 import io.reactivesw.catalog.product.application.model.ProductProjection;
 import io.reactivesw.common.model.PagedQueryResult;
 import io.reactivesw.common.model.QueryConditions;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 
 import org.slf4j.Logger;
@@ -20,7 +19,6 @@ import java.util.List;
 /**
  * Created by Davis on 16/12/21.
  */
-@ApiModel
 @RestController
 public class ProductProjectionController {
   /**
