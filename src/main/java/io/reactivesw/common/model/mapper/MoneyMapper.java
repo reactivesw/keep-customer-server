@@ -9,16 +9,23 @@ import io.reactivesw.common.model.Money;
 public class MoneyMapper {
 
   public static MoneyEntity modelToEntity(Money model) {
-    MoneyEntity entity = new MoneyEntity();
-    entity.setCentAmount(model.getCentAmount());
-    entity.setCurrencyCode(model.getCurrencyCode());
+    MoneyEntity entity = null;
+    if (model != null) {
+      entity = new MoneyEntity();
+      entity.setCentAmount(model.getCentAmount());
+      entity.setCurrencyCode(model.getCurrencyCode());
+    }
     return entity;
   }
 
   public static Money entityToModel(MoneyEntity entity) {
-    Money model = new Money();
-    model.setCentAmount(entity.getCentAmount());
-    model.setCurrencyCode(entity.getCurrencyCode());
+    Money model = null;
+    if (entity != null) {
+      model = new Money();
+
+      model.setCentAmount(entity.getCentAmount());
+      model.setCurrencyCode(entity.getCurrencyCode());
+    }
     return model;
   }
 

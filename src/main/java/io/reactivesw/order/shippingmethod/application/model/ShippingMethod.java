@@ -8,18 +8,23 @@ import java.util.List;
 import io.reactivesw.common.model.Reference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 /**
- * A shipping method defines a specific way of shipping, with different rates for different geographic locations. Example shipping methods are “DHL”, “DHL Express” and “UPS”.
+ * A shipping method defines a specific way of shipping, with different rates for different
+ * geographic locations. Example shipping methods are “DHL”, “DHL Express” and “UPS”.
  * Created by umasuo on 16/11/17.
  */
-@ApiModel(description = "A shipping method defines a specific way of shipping, with different rates for different geographic locations. Example shipping methods are “DHL”, “DHL Express” and “UPS”.")
+@ApiModel(description = "A shipping method defines a specific way of shipping, with different " +
+    "rates for different geographic locations. Example shipping methods are “DHL”, “DHL Express” " +
+    "and “UPS”.")
+@Data
 public class ShippingMethod {
 
   @ApiModelProperty(value = "The unique ID of the shipping method.", required = true)
   private String id;
 
-  @ApiModelProperty(value = "The current version of the shipping method.",required = true)
+  @ApiModelProperty(value = "The current version of the shipping method.", required = true)
   private Integer version;
 
   @ApiModelProperty(required = true)
@@ -45,75 +50,4 @@ public class ShippingMethod {
   @ApiModelProperty(value = "One shipping method in a project can be default.", required = true)
   private Boolean isDefault;
 
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public Integer getVersion() {
-    return version;
-  }
-
-  public void setVersion(Integer version) {
-    this.version = version;
-  }
-
-  public ZonedDateTime getCreatedAt() {
-    return createdAt;
-  }
-
-  public void setCreatedAt(ZonedDateTime createdAt) {
-    this.createdAt = createdAt;
-  }
-
-  public ZonedDateTime getLastModifiedAt() {
-    return lastModifiedAt;
-  }
-
-  public void setLastModifiedAt(ZonedDateTime lastModifiedAt) {
-    this.lastModifiedAt = lastModifiedAt;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public Reference getTaxCategory() {
-    return taxCategory;
-  }
-
-  public void setTaxCategory(Reference taxCategory) {
-    this.taxCategory = taxCategory;
-  }
-
-  public List<ZoneRate> getZoneRates() {
-    return zoneRates;
-  }
-
-  public void setZoneRates(List<ZoneRate> zoneRates) {
-    this.zoneRates = zoneRates;
-  }
-
-  public Boolean getDefault() {
-    return isDefault;
-  }
-
-  public void setDefault(Boolean aDefault) {
-    isDefault = aDefault;
-  }
 }
