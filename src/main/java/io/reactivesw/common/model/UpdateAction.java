@@ -14,6 +14,7 @@ import io.reactivesw.catalog.category.application.model.action.SetMetaKeywords;
 import io.reactivesw.catalog.category.application.model.action.SetMetaTitle;
 import io.reactivesw.catalog.inventory.application.model.action.AddQuantityAction;
 import io.reactivesw.catalog.inventory.application.model.action.RemoveQuantityAction;
+import io.reactivesw.catalog.inventory.application.model.action.SetQuantityAction;
 import io.reactivesw.catalog.producttype.application.model.action.SetKey;
 import io.reactivesw.common.model.action.SetDescription;
 import io.reactivesw.common.model.action.SetLocalizedName;
@@ -59,6 +60,7 @@ import io.reactivesw.order.discountcode.application.model.action
     @JsonSubTypes.Type(value = SetDescription.class, name = "setDescription"),
     @JsonSubTypes.Type(value = AddQuantityAction.class, name = "addQuantity"),
     @JsonSubTypes.Type(value = RemoveQuantityAction.class, name = "removeQuantity"),
+    @JsonSubTypes.Type(value = SetQuantityAction.class, name = "setQuantity"),
 })
 public interface UpdateAction {
 

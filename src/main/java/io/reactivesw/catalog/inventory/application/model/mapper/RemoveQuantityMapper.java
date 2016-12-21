@@ -14,7 +14,6 @@ public class RemoveQuantityMapper implements InventoryEntryUpdateMapper<Inventor
     int removeQuantity = ((RemoveQuantityAction) action).getQuantity();
     int quantityOnStock = entity.getQuantityOnStock();
     int availableQuantity = entity.getAvailableQuantity();
-    int reservedQuantity = entity.getReservedQuantity();
 
     if (removeQuantity > quantityOnStock || removeQuantity > availableQuantity) {
       throw new ParametersException(
