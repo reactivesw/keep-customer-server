@@ -2,7 +2,7 @@ package io.reactivesw.catalog.inventory.entity;
 
 import io.reactivesw.common.entity.BaseAllEntity;
 import io.reactivesw.common.model.CustomFields;
-import io.reactivesw.common.util.CustomFieldsJsonConverter;
+import io.reactivesw.common.util.converter.CustomFieldsJsonConverter;
 
 import java.time.ZonedDateTime;
 

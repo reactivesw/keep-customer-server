@@ -1,6 +1,6 @@
 package io.reactivesw.order.cart.domain.entity.value;
 
-import io.reactivesw.common.util.ListJsonConverter;
+import io.reactivesw.common.util.converter.ListJsonConverter;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 

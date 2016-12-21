@@ -1,7 +1,7 @@
-package io.reactivesw.common.util;
+package io.reactivesw.common.util.converter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.reactivesw.catalog.product.application.model.ScopedPrice;
+import io.reactivesw.catalog.productdiscount.model.DiscountedPrice;
 
 import javax.persistence.AttributeConverter;
 import java.io.IOException;
@@ -9,12 +9,12 @@ import java.io.IOException;
 /**
  * Created by Davis on 16/11/23.
  */
-public class ScopedPriceJsonConverter implements AttributeConverter<ScopedPrice, String> {
+public class DiscountedPriceJsonConverter implements AttributeConverter<DiscountedPrice, String> {
 
   private final static ObjectMapper objectMapper = new ObjectMapper();
 
   @Override
-  public String convertToDatabaseColumn(ScopedPrice meta) {
+  public String convertToDatabaseColumn(DiscountedPrice meta) {
     try {
       return objectMapper.writeValueAsString(meta);
     } catch (Exception ex) {
@@ -24,9 +24,9 @@ public class ScopedPriceJsonConverter implements AttributeConverter<ScopedPrice,
   }
 
   @Override
-  public ScopedPrice convertToEntityAttribute(String dbData) {
+  public DiscountedPrice convertToEntityAttribute(String dbData) {
     try {
-      ScopedPrice custom = objectMapper.readValue(dbData, ScopedPrice.class);
+      DiscountedPrice custom = objectMapper.readValue(dbData, DiscountedPrice.class);
       return custom;
     } catch (IOException ex) {
       return null;

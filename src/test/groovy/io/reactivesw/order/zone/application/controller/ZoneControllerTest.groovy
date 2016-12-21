@@ -1,5 +1,8 @@
 package io.reactivesw.order.zone.application.controller
 
+import io.reactivesw.common.model.UpdateAction
+import io.reactivesw.common.model.UpdateRequest
+import io.reactivesw.common.model.action.SetName
 import io.reactivesw.order.zone.application.model.Zone
 import io.reactivesw.order.zone.application.model.mapper.ZoneMapper
 import io.reactivesw.order.zone.domain.entity.LocationValue
@@ -42,7 +45,6 @@ class ZoneControllerTest extends Specification {
         then:
         noExceptionThrown()
         result.getId() == zone.getId()
-
     }
 
     def "Test 1.2: get by location"() {
@@ -55,6 +57,29 @@ class ZoneControllerTest extends Specification {
         then:
         noExceptionThrown()
         result.size() == zones.size()
+
+    }
+
+    def "Test 1.3: update zone"() {
+
+        SetName setName = new SetName(name: "newName")
+        List<UpdateAction> actions = new ArrayList<>()
+        actions.add(setName)
+        UpdateRequest updateRequest = new UpdateRequest(version: 1, actions: actions)
+        when:
+        service.updateZone(_, _, _) >> zoneEntity
+        Zone zone = controller.updateZone(zoneId, updateRequest)
+        then:
+        noExceptionThrown()
+
+    }
+
+    def "Test 1.4: get by location"() {
+
+        when:
+        controller.deleteZone(zoneId, 1)
+        then:
+        noExceptionThrown()
 
     }
 }

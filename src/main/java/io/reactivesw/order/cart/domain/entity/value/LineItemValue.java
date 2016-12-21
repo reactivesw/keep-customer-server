@@ -5,7 +5,7 @@ import io.reactivesw.common.entity.LocalizedStringEntity;
 import io.reactivesw.common.entity.MoneyEntity;
 import io.reactivesw.common.model.CustomFields;
 import io.reactivesw.common.model.Statics;
-import io.reactivesw.common.util.CustomFieldsJsonConverter;
+import io.reactivesw.common.util.converter.CustomFieldsJsonConverter;
 import io.reactivesw.order.cartdiscount.infrastructure.enums.LineItemPriceMode;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

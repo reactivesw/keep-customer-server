@@ -5,8 +5,8 @@ import io.reactivesw.common.entity.LocalizedStringEntity;
 import io.reactivesw.common.entity.MoneyEntity;
 import io.reactivesw.common.model.CustomFields;
 import io.reactivesw.common.model.Statics;
-import io.reactivesw.common.util.CustomFieldsJsonConverter;
-import io.reactivesw.common.util.ListJsonConverter;
+import io.reactivesw.common.util.converter.CustomFieldsJsonConverter;
+import io.reactivesw.common.util.converter.ListJsonConverter;
 
 import java.util.List;
 import java.util.Set;

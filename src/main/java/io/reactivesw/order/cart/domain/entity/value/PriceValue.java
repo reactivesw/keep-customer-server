@@ -4,8 +4,8 @@ import io.reactivesw.catalog.productdiscount.model.DiscountedPrice;
 import io.reactivesw.common.entity.BaseIdEntity;
 import io.reactivesw.common.entity.MoneyEntity;
 import io.reactivesw.common.model.CustomFields;
-import io.reactivesw.common.util.CustomFieldsJsonConverter;
-import io.reactivesw.common.util.DiscountedPriceJsonConverter;
+import io.reactivesw.common.util.converter.CustomFieldsJsonConverter;
+import io.reactivesw.common.util.converter.DiscountedPriceJsonConverter;
 
 import java.time.ZonedDateTime;
 

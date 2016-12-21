@@ -2,7 +2,7 @@ package io.reactivesw.order.cart.domain.entity.value;
 
 import io.reactivesw.common.entity.BaseIdEntity;
 import io.reactivesw.common.model.AssetDimensions;
-import io.reactivesw.common.util.AssetDimensionsJsonConverter;
+import io.reactivesw.common.util.converter.AssetDimensionsJsonConverter;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;

@@ -1,20 +1,20 @@
-package io.reactivesw.common.util;
+package io.reactivesw.common.util.converter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.reactivesw.catalog.product.application.model.attributes.AttributeType;
 
 import javax.persistence.AttributeConverter;
 import java.io.IOException;
-import java.util.Map;
 
 /**
- * Created by Davis on 16/11/23.
+ * Created by Davis on 16/11/22.
  */
-public class MapJsonConverter implements AttributeConverter<Map, String> {
+public class AttributeTypeJsonConverter implements AttributeConverter<AttributeType, String> {
 
   private final static ObjectMapper objectMapper = new ObjectMapper();
 
   @Override
-  public String convertToDatabaseColumn(Map meta) {
+  public String convertToDatabaseColumn(AttributeType meta) {
     try {
       return objectMapper.writeValueAsString(meta);
     } catch (Exception ex) {
@@ -24,10 +24,9 @@ public class MapJsonConverter implements AttributeConverter<Map, String> {
   }
 
   @Override
-  public Map convertToEntityAttribute(String dbData) {
+  public AttributeType convertToEntityAttribute(String dbData) {
     try {
-      Map custom = objectMapper.readValue(dbData, Map.class);
-      return custom;
+      return objectMapper.readValue(dbData, AttributeType.class);
     } catch (IOException ex) {
       return null;
     }

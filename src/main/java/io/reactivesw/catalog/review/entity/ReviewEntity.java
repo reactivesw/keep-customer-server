@@ -2,7 +2,7 @@ package io.reactivesw.catalog.review.entity;
 
 import io.reactivesw.common.entity.BaseAllEntity;
 import io.reactivesw.common.model.CustomFields;
-import io.reactivesw.common.util.CustomFieldsJsonConverter;
+import io.reactivesw.common.util.converter.CustomFieldsJsonConverter;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;

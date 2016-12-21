@@ -1,20 +1,21 @@
-package io.reactivesw.common.util;
+package io.reactivesw.common.util.converter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.reactivesw.catalog.product.application.model.attributes.AttributeType;
+
+import io.reactivesw.common.model.CustomFields;
 
 import javax.persistence.AttributeConverter;
 import java.io.IOException;
 
 /**
- * Created by Davis on 16/11/22.
+ * Created by Davis on 16/11/16.
  */
-public class AttributeTypeJsonConverter implements AttributeConverter<AttributeType, String> {
+public class CustomFieldsJsonConverter implements AttributeConverter<CustomFields, String> {
 
   private final static ObjectMapper objectMapper = new ObjectMapper();
 
   @Override
-  public String convertToDatabaseColumn(AttributeType meta) {
+  public String convertToDatabaseColumn(CustomFields meta) {
     try {
       return objectMapper.writeValueAsString(meta);
     } catch (Exception ex) {
@@ -24,9 +25,10 @@ public class AttributeTypeJsonConverter implements AttributeConverter<AttributeT
   }
 
   @Override
-  public AttributeType convertToEntityAttribute(String dbData) {
+  public CustomFields convertToEntityAttribute(String dbData) {
     try {
-      return objectMapper.readValue(dbData, AttributeType.class);
+      CustomFields custom = objectMapper.readValue(dbData, CustomFields.class);
+      return custom;
     } catch (IOException ex) {
       return null;
     }

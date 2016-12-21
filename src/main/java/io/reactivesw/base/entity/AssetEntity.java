@@ -3,9 +3,9 @@ package io.reactivesw.base.entity;
 import io.reactivesw.common.entity.BaseIdEntity;
 import io.reactivesw.common.model.CustomFields;
 import io.reactivesw.common.model.LocalizedString;
-import io.reactivesw.common.util.CustomFieldsJsonConverter;
-import io.reactivesw.common.util.ListJsonConverter;
-import io.reactivesw.common.util.LocalizedStringJsonConverter;
+import io.reactivesw.common.util.converter.CustomFieldsJsonConverter;
+import io.reactivesw.common.util.converter.ListJsonConverter;
+import io.reactivesw.common.util.converter.LocalizedStringJsonConverter;
 
 import java.util.List;
 import java.util.Set;
