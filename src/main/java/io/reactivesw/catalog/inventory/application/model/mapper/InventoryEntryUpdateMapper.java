@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 
 import io.reactivesw.catalog.category.application.model.mapper.CategoryUpdateMapper;
 import io.reactivesw.catalog.inventory.application.model.action.AddQuantityAction;
+import io.reactivesw.catalog.inventory.application.model.action.RemoveQuantityAction;
 import io.reactivesw.common.model.Update;
 
 import org.apache.commons.collections4.Put;
@@ -16,7 +17,9 @@ import java.util.Map;
 public interface InventoryEntryUpdateMapper<E> extends Update<E> {
   Map<Class<?>, InventoryEntryUpdateMapper> updateMappers = ImmutableMap.<Class<?>,
       InventoryEntryUpdateMapper>builder()
-      .put(AddQuantityAction.class, new AddQuantityMapper()).build();
+      .put(AddQuantityAction.class, new AddQuantityMapper())
+      .put(RemoveQuantityAction.class, new RemoveQuantityMapper())
+      .build();
 
   /**
    * @param clazz
