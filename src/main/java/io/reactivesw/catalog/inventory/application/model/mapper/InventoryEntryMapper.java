@@ -15,6 +15,11 @@ import org.apache.commons.lang3.StringUtils;
 public final class InventoryEntryMapper {
 
   /**
+   * DEFAULT_RESERVED_QUANTITY.
+   */
+  private static final int DEFAULT_RESERVED_QUANTITY = 0;
+
+  /**
    * private constructor.
    */
   private InventoryEntryMapper() {
@@ -34,16 +39,13 @@ public final class InventoryEntryMapper {
       entity.setSupplyChannel(model.getSupplyChannel().getId());
     }
     entity.setQuantityOnStock(model.getQuantityOnStock());
+    entity.setAvailableQuantity(model.getQuantityOnStock() - DEFAULT_RESERVED_QUANTITY);
+    entity.setReservedQuantity(DEFAULT_RESERVED_QUANTITY);
     entity.setRestockableInDays(model.getRestockableInDays());
     entity.setExpectedDelivery(model.getExpectedDelivery());
     if (model.getCustom() != null) {
       entity.setCustom(CustomFieldsMapper.modelToEntity(model.getCustom()));
     }
-    /*
-     * create an inventoryentry, availablequantity is same to quantityonstock.
-     * Available amount of stock. (available means: quantityOnStock - reserved quantity)
-     */
-    entity.setAvailableQuantity(model.getQuantityOnStock());
     return entity;
   }
 
