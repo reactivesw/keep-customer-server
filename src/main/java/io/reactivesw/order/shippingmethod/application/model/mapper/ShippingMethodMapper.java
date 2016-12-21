@@ -7,6 +7,7 @@ import io.reactivesw.order.shippingmethod.application.model.ZoneRate;
 import io.reactivesw.order.shippingmethod.domain.entity.ShippingMethodEntity;
 import io.reactivesw.order.shippingmethod.domain.entity.ZoneRateValue;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -41,6 +42,14 @@ public class ShippingMethodMapper {
       model.setZoneRates(rates);
     }
     return model;
+  }
+
+
+  public static List<ShippingMethod> listEntityToListModel(Collection<ShippingMethodEntity>
+                                                               entities) {
+    return entities.parallelStream().map(
+        shippingMethodEntity -> ShippingMethodMapper.entityToModel(shippingMethodEntity)
+    ).collect(Collectors.toList());
   }
 
 }

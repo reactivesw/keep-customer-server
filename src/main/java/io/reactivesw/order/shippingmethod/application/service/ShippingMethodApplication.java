@@ -100,10 +100,11 @@ public class ShippingMethodApplication {
    * @return List of ShippingMethodEntity
    */
   public List<ShippingMethodEntity> getShippingMethodsForCart(String cartId) {
-    //TODO get the cart from cart service, and get the shipping address, if shipping address not
+    LOG.debug("enter: cartId: {}", cartId);
     Address address = restTemplate.getForObject(buildUrl(cartId), Address.class);
     if (address == null) {
-      throw new NotExistException("The shipping address of the cart muset been set.");
+      LOG.warn("The shipping address of the cart must been set: cartId: {}", cartId);
+      throw new NotExistException("The shipping address of the cart must been set.");
     }
     String country = address.getCountry();
     String state = address.getState();
