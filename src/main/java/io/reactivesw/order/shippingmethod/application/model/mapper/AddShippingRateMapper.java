@@ -22,7 +22,7 @@ public class AddShippingRateMapper implements ShippingMethodUpdateMapper {
   public void handle(ShippingMethodEntity entity, UpdateAction action) {
     AddShippingRate shippingRate = (AddShippingRate) action;
 
-    ShippingRateValue value = ShippingRateMapper.convertModelToEntity(shippingRate
+    ShippingRateValue value = ShippingRateMapper.modelToEntity(shippingRate
         .getShippingRate());
 
     entity.getZoneRates().parallelStream().peek(zoneRateValue -> {

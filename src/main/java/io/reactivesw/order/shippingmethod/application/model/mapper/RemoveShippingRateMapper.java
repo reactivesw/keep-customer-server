@@ -5,7 +5,6 @@ import io.reactivesw.order.shippingmethod.application.model.action.AddShippingRa
 import io.reactivesw.order.shippingmethod.domain.entity.ShippingMethodEntity;
 import io.reactivesw.order.shippingmethod.domain.entity.ShippingRateValue;
 
-import java.util.HashSet;
 import java.util.Objects;
 
 /**
@@ -17,7 +16,7 @@ public class RemoveShippingRateMapper implements ShippingMethodUpdateMapper {
   public void handle(ShippingMethodEntity entity, UpdateAction action) {
     AddShippingRate shippingRate = (AddShippingRate) action;
 
-    ShippingRateValue value = ShippingRateMapper.convertModelToEntity(shippingRate
+    ShippingRateValue value = ShippingRateMapper.modelToEntity(shippingRate
         .getShippingRate());
 
     entity.getZoneRates().parallelStream().peek(zoneRateValue -> {

@@ -15,7 +15,17 @@ public class CartRouter extends BaseRouter {
   public static final String CART_ID = "cartId";
 
   /**
+   *  id pattern.
+   */
+  public static final String ID_PATTERN = "{" + CART_ID + "}";
+
+  /**
    * get cart by id.
    */
-  public static final String CART_WITH_ID = CARTS_ROOT + "/{" + CART_ID + "}";
+  public static final String CART_WITH_ID = CARTS_ROOT + "/" + ID_PATTERN;
+
+  /**
+   * get one cart's shipping address.
+   */
+  public static final String CART_SHIPPING_ADDRESS = CART_WITH_ID + "/shipping-address";
 }
