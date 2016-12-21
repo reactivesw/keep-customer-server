@@ -8,6 +8,7 @@ import io.reactivesw.catalog.inventory.application.model.action.RemoveQuantityAc
 import io.reactivesw.catalog.inventory.application.model.action.SetExpectedDelivery;
 import io.reactivesw.catalog.inventory.application.model.action.SetQuantityAction;
 import io.reactivesw.catalog.inventory.application.model.action.SetRestockableInDays;
+import io.reactivesw.catalog.inventory.application.model.action.SetSupplyChannel;
 import io.reactivesw.common.model.Update;
 
 import org.apache.commons.collections4.Put;
@@ -25,6 +26,7 @@ public interface InventoryEntryUpdateMapper<E> extends Update<E> {
       .put(SetQuantityAction.class, new SetQuantityMappper())
       .put(SetRestockableInDays.class, new SetRestockableInDaysMapper())
       .put(SetExpectedDelivery.class, new SetExpectedDeliveryMapper())
+      .put(SetSupplyChannel.class, new SetSupplyChannelMapper())
       .build();
 
   /**
