@@ -1,7 +1,7 @@
 package io.reactivesw.catalog.review.entity;
 
 import io.reactivesw.common.entity.BaseIdEntity;
-import io.reactivesw.common.util.MapJsonConverter;
+import io.reactivesw.common.util.converter.MapJsonConverter;
 
 import java.util.Map;
 

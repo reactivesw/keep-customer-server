@@ -1,4 +1,4 @@
-package io.reactivesw.common.util;
+package io.reactivesw.common.util.converter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.reactivesw.common.model.AssetDimensions;

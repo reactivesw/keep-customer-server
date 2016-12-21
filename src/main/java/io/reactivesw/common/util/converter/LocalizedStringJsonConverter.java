@@ -1,4 +1,4 @@
-package io.reactivesw.common.util;
+package io.reactivesw.common.util.converter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -6,17 +6,17 @@ import java.io.IOException;
 
 import javax.persistence.AttributeConverter;
 
-import io.reactivesw.catalog.productdiscount.model.ProductDiscountValue;
+import io.reactivesw.common.model.LocalizedString;
 
 /**
  * Created by Davis on 16/11/16.
  */
-public class ProductDiscountJsonConverter implements AttributeConverter<ProductDiscountValue, String> {
+public class LocalizedStringJsonConverter implements AttributeConverter<LocalizedString, String> {
 
   private final static ObjectMapper objectMapper = new ObjectMapper();
 
   @Override
-  public String convertToDatabaseColumn(ProductDiscountValue meta) {
+  public String convertToDatabaseColumn(LocalizedString meta) {
     try {
       return objectMapper.writeValueAsString(meta);
     } catch (Exception ex) {
@@ -26,10 +26,10 @@ public class ProductDiscountJsonConverter implements AttributeConverter<ProductD
   }
 
   @Override
-  public ProductDiscountValue convertToEntityAttribute(String dbData) {
+  public LocalizedString convertToEntityAttribute(String dbData) {
     try {
-
-      return objectMapper.readValue(dbData, ProductDiscountValue.class);
+      LocalizedString string = objectMapper.readValue(dbData, LocalizedString.class);
+      return string;
     } catch (IOException ex) {
       //TODO throws the exception
       return null;
