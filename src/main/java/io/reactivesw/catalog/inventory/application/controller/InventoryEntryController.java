@@ -13,9 +13,11 @@ import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -40,7 +42,7 @@ public class InventoryEntryController {
    * @param draft the draft
    * @return the inventory entry
    */
-  @ApiOperation("Create InventoryEntry")
+  @ApiOperation("create InventoryEntry")
   @PostMapping(INVENTORY_ENTRY_ROOT)
   public InventoryEntry createInventoryEntry(InventoryEntryDraft draft) {
     LOG.debug("enter createInventoryEntry, inventory entry draft is : {}", draft.toString());
@@ -50,6 +52,27 @@ public class InventoryEntryController {
     LOG.debug("end createInventoryEntry, new InventoryEntry is : {}", result.toString());
 
     return result;
+  }
+
+  /**
+   * Delete inventory entry.
+   *
+   * @param id      the id
+   * @param version the version
+   */
+  @ApiOperation("delete InventoryEntry")
+  @DeleteMapping(INVENTORY_ENTRY_WITH_ID)
+  public void deleteInventoryEntry(@PathVariable(value = INVENTORY_ENTRY_ID)
+                                   @ApiParam(value = "InventoryEntry Id", required = true)
+                                       String id,
+                                   @RequestBody
+                                   @ApiParam(value = "InventoryEntry Version", required = true)
+                                       Integer version) {
+    LOG.debug("enter deleteInventoryEntry, id is : {}, version is : {}", id, version);
+
+    inventoryEntryService.deleteInventoryEntry(id, version);
+
+    LOG.debug("end deleteInventoryEntry, id is : {}, version is : {}", id, version);
   }
 
   /**
