@@ -122,8 +122,9 @@ public class ZoneService {
     LOG.debug("data in db: {}", valueInDb);
     checkVersion(version, valueInDb.getVersion());
 
-    actions.parallelStream().forEach(action -> ZoneUpdateMapper.getMapper(action.getClass())
-        .handle(valueInDb, action));
+    actions.parallelStream().forEach(
+        action -> ZoneUpdateMapper.getMapper(action.getClass()).handle(valueInDb, action)
+    );
 
     LOG.debug("data updated: {}", valueInDb);
     return this.zoneRepository.save(valueInDb);
