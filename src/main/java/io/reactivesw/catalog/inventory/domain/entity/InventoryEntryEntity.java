@@ -62,6 +62,12 @@ public class InventoryEntryEntity extends BaseAllEntity {
   private Integer availableQuantity;
 
   /**
+   * reserved quantity.
+   */
+  @Column(name = "reserved_quantity")
+  private Integer reservedQuantity;
+
+  /**
    * restockable in days.
    */
   @Column(name = "restockable_in_days")
