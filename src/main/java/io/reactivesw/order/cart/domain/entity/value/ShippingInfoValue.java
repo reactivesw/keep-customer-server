@@ -3,7 +3,9 @@ package io.reactivesw.order.cart.domain.entity.value;
 import io.reactivesw.common.entity.BaseIdEntity;
 import io.reactivesw.common.entity.MoneyEntity;
 import io.reactivesw.common.util.converter.ListJsonConverter;
+
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
@@ -19,6 +21,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "order_cart_shipping_info")
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class ShippingInfoValue extends BaseIdEntity {
 
   /**

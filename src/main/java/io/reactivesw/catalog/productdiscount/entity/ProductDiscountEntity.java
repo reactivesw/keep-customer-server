@@ -26,7 +26,7 @@ import javax.persistence.Table;
  * Created by Davis on 16/11/23.
  */
 @Data
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper=false)
 @Entity
 @Table(name = "catalog_product_product_discount")
 @TypeDef(name = "ProductDiscountValue", typeClass = JSONBUserType.class, parameters = {
