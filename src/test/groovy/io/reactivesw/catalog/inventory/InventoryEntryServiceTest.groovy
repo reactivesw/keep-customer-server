@@ -6,6 +6,7 @@ import io.reactivesw.catalog.inventory.domain.entity.InventoryEntryEntity
 import io.reactivesw.catalog.inventory.domain.service.InventoryEntryService
 import io.reactivesw.catalog.inventory.infrastructure.repository.InventoryEntryRepository
 import io.reactivesw.common.enums.ReferenceTypes
+import io.reactivesw.common.exception.NotExistException
 import io.reactivesw.common.model.Reference
 import spock.lang.Specification
 
@@ -19,6 +20,7 @@ class InventoryEntryServiceTest extends Specification {
     def inventoryEntryService = new InventoryEntryService(inventoryEntryRepository: inventoryEntryRepository)
     def inventoryEntryDraft = new InventoryEntryDraft()
     def inventoryEntryEntity = new InventoryEntryEntity()
+    def id = "1234566"
 
     def setup() {
         inventoryEntryDraft.sku = "sku"
@@ -29,6 +31,7 @@ class InventoryEntryServiceTest extends Specification {
         inventoryEntryDraft.custom = null
 
         inventoryEntryEntity = InventoryEntryMapper.modelToEntity(inventoryEntryDraft)
+        inventoryEntryEntity.id = id
     }
 
     def "test 1 : create inventory entry"() {
@@ -40,5 +43,28 @@ class InventoryEntryServiceTest extends Specification {
 
         then:
         result != null
+    }
+
+    def "test 4.1 : get inventory entry by id"() {
+        given:
+        inventoryEntryRepository.findOne(id) >> inventoryEntryEntity
+
+        when:
+        def result = inventoryEntryService.getInventoryEntryById(id)
+
+        then:
+        result != null
+        result.id == id
+    }
+
+    def "test 4.2 : get inventory entry by id and get null entity"() {
+        given:
+        inventoryEntryRepository.findOne(id) >> null
+
+        when:
+        def result = inventoryEntryService.getInventoryEntryById(id)
+
+        then:
+        thrown(NotExistException)
     }
 }

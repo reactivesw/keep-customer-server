@@ -5,6 +5,7 @@ import io.reactivesw.catalog.inventory.application.model.InventoryEntryDraft;
 import io.reactivesw.catalog.inventory.application.model.mapper.InventoryEntryMapper;
 import io.reactivesw.catalog.inventory.domain.entity.InventoryEntryEntity;
 import io.reactivesw.catalog.inventory.infrastructure.repository.InventoryEntryRepository;
+import io.reactivesw.common.exception.NotExistException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,5 +45,38 @@ public class InventoryEntryService {
     LOG.debug("end createInventoryEntry, new InventoryEntry is : {}", result.toString());
 
     return result;
+  }
+
+  /**
+   * Gets inventory entry by id.
+   *
+   * @param id the id
+   * @return the inventory entry by id
+   */
+  public InventoryEntry getInventoryEntryById(String id) {
+    LOG.debug("enter getInventoryEntryById, id is : {}", id);
+
+    InventoryEntryEntity entity = getInventoryEntryEntity(id);
+
+    InventoryEntry result = InventoryEntryMapper.entityToModel(entity);
+
+    LOG.debug("end getInventoryEntryById, get result is : {}", result.toString());
+
+    return result;
+  }
+
+  /**
+   * Gets inventoryentry.
+   *
+   * @param id the id
+   * @return the inventory entry entity
+   */
+  protected InventoryEntryEntity getInventoryEntryEntity(String id) {
+    InventoryEntryEntity entity = inventoryEntryRepository.findOne(id);
+    if (entity == null) {
+      LOG.debug("can not find inventoryentry by id : {}", id);
+      throw new NotExistException("InventoryEntry Not Found");
+    }
+    return entity;
   }
 }
