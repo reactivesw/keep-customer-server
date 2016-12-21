@@ -11,9 +11,11 @@ import io.reactivesw.common.exception.ParametersException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.PersistenceException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Davis on 16/12/14.
@@ -45,7 +47,7 @@ public class ProductService {
     ProductEntity savedEntity = null;
     try {
       savedEntity = productRepository.save(entity);
-    } catch (PersistenceException ex) {
+    } catch (DataIntegrityViolationException ex) {
       // TODO: 16/12/20 thrown exception when sku name is same
       LOG.debug("sku name should be unique");
       throw new ParametersException("sku name should be unique");
@@ -55,6 +57,26 @@ public class ProductService {
 
     LOG.debug("end createProduct, created Product is : {}", result.toString());
 
+    return result;
+  }
+
+  /**
+   * Query product by category list.
+   *
+   * @param categoryId the category id
+   * @return the list
+   */
+  public List<ProductEntity> queryProductByCategory(String categoryId) {
+    LOG.debug("enter queryProductByCategory, categoryId is : {}", categoryId);
+
+    List<ProductEntity> productEntities = productRepository.findAll();
+
+    List<ProductEntity> result = productEntities.stream().filter(
+        productEntity ->
+            productEntity.getMasterData().getCurrent().getCategories().contains(categoryId)
+    ).collect(Collectors.toList());
+
+    LOG.debug("end queryProductByCategory, get product number is : {}", result.size());
     return result;
   }
 

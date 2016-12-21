@@ -49,7 +49,7 @@ public class ProductVariantEntity {
   /**
    * sku name.
    */
-  @Column(name = "sku_name", unique = true)
+  @Column(name = "sku_name")
   private String sku;
 
   /**

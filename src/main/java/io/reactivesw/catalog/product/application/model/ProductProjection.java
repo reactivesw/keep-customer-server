@@ -7,12 +7,17 @@ import io.reactivesw.common.model.LocalizedString;
 import io.reactivesw.common.model.Reference;
 import io.reactivesw.common.model.SearchKeyword;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import java.time.ZonedDateTime;
 import java.util.List;
 
 /**
  * Created by Davis on 16/11/17.
  */
+@Data
+@EqualsAndHashCode
 public class ProductProjection {
 
   /**
@@ -94,8 +99,11 @@ public class ProductProjection {
   /**
    * variants - Array of ProductVariantEntity
    */
-  private List<ProductVariant> masterVariant;
+  private ProductVariant masterVariant;
 
+  /**
+   * variants
+   */
   private List<ProductVariant> variants;
   /**
    * Reference to a TaxCategory.
@@ -113,180 +121,4 @@ public class ProductProjection {
    * Statistics about the review ratings taken into account for this product.
    */
   private ReviewRatingStatistics reviewRatingStatistics;
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getKey() {
-    return key;
-  }
-
-  public void setKey(String key) {
-    this.key = key;
-  }
-
-  public Integer getVersion() {
-    return version;
-  }
-
-  public void setVersion(Integer version) {
-    this.version = version;
-  }
-
-  public ZonedDateTime getCreatedAt() {
-    return createdAt;
-  }
-
-  public void setCreatedAt(ZonedDateTime createdAt) {
-    this.createdAt = createdAt;
-  }
-
-  public ZonedDateTime getLastModifiedAt() {
-    return lastModifiedAt;
-  }
-
-  public void setLastModifiedAt(ZonedDateTime lastModifiedAt) {
-    this.lastModifiedAt = lastModifiedAt;
-  }
-
-  public Reference getProductType() {
-    return productType;
-  }
-
-  public void setProductType(Reference productType) {
-    this.productType = productType;
-  }
-
-  public LocalizedString getName() {
-    return name;
-  }
-
-  public void setName(LocalizedString name) {
-    this.name = name;
-  }
-
-  public LocalizedString getDescription() {
-    return description;
-  }
-
-  public void setDescription(LocalizedString description) {
-    this.description = description;
-  }
-
-  public LocalizedString getSlug() {
-    return slug;
-  }
-
-  public void setSlug(LocalizedString slug) {
-    this.slug = slug;
-  }
-
-  public List<Reference> getCategories() {
-    return categories;
-  }
-
-  public void setCategories(List<Reference> categories) {
-    this.categories = categories;
-  }
-
-  public List<CategoryOrderHint> getCategoryOrderHints() {
-    return categoryOrderHints;
-  }
-
-  public void setCategoryOrderHints(List<CategoryOrderHint> categoryOrderHints) {
-    this.categoryOrderHints = categoryOrderHints;
-  }
-
-  public LocalizedString getMetaTitle() {
-    return metaTitle;
-  }
-
-  public void setMetaTitle(LocalizedString metaTitle) {
-    this.metaTitle = metaTitle;
-  }
-
-  public LocalizedString getMetaDescription() {
-    return metaDescription;
-  }
-
-  public void setMetaDescription(LocalizedString metaDescription) {
-    this.metaDescription = metaDescription;
-  }
-
-  public LocalizedString getMetaKeywords() {
-    return metaKeywords;
-  }
-
-  public void setMetaKeywords(LocalizedString metaKeywords) {
-    this.metaKeywords = metaKeywords;
-  }
-
-  public List<SearchKeyword> getSearchKeyword() {
-    return searchKeyword;
-  }
-
-  public void setSearchKeyword(List<SearchKeyword> searchKeyword) {
-    this.searchKeyword = searchKeyword;
-  }
-
-  public Boolean getHasStagedChanges() {
-    return hasStagedChanges;
-  }
-
-  public void setHasStagedChanges(Boolean hasStagedChanges) {
-    this.hasStagedChanges = hasStagedChanges;
-  }
-
-  public Boolean getPublished() {
-    return published;
-  }
-
-  public void setPublished(Boolean published) {
-    this.published = published;
-  }
-
-  public List<ProductVariant> getMasterVariant() {
-    return masterVariant;
-  }
-
-  public void setMasterVariant(List<ProductVariant> masterVariant) {
-    this.masterVariant = masterVariant;
-  }
-
-  public List<ProductVariant> getVariants() {
-    return variants;
-  }
-
-  public void setVariants(List<ProductVariant> variants) {
-    this.variants = variants;
-  }
-
-  public Reference getTaxCategory() {
-    return taxCategory;
-  }
-
-  public void setTaxCategory(Reference taxCategory) {
-    this.taxCategory = taxCategory;
-  }
-
-  public Reference getState() {
-    return state;
-  }
-
-  public void setState(Reference state) {
-    this.state = state;
-  }
-
-  public ReviewRatingStatistics getReviewRatingStatistics() {
-    return reviewRatingStatistics;
-  }
-
-  public void setReviewRatingStatistics(ReviewRatingStatistics reviewRatingStatistics) {
-    this.reviewRatingStatistics = reviewRatingStatistics;
-  }
 }

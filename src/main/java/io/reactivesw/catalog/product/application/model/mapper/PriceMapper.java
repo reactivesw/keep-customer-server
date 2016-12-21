@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import antlr.StringUtils;
+
 /**
  * Created by Davis on 16/12/14.
  */
@@ -31,11 +33,21 @@ public class PriceMapper {
 
     entity.setCountry(model.getCountry());
     entity.setValue(MoneyMapper.modelToEntity(model.getValue()));
-    entity.setChannel(model.getChannel().getId());
-    entity.setValidFrom(model.getValidFrom());
-    entity.setValidUntil(model.getValidUntil());
-    entity.setCustomerGroup(model.getCustomerGroup().getId());
-    entity.setCustom(CustomFieldsMapper.modelToEntity(model.getCustom()));
+    if (model.getChannel() != null) {
+      entity.setChannel(model.getChannel().getId());
+    }
+    if (model.getValidFrom() != null) {
+      entity.setValidFrom(model.getValidFrom());
+    }
+    if (model.getValidUntil() != null) {
+      entity.setValidUntil(model.getValidUntil());
+    }
+    if (model.getCustomerGroup() != null) {
+      entity.setCustomerGroup(model.getCustomerGroup().getId());
+    }
+    if (model.getCustom() != null) {
+      entity.setCustom(CustomFieldsMapper.modelToEntity(model.getCustom()));
+    }
 
     return entity;
   }
@@ -43,14 +55,18 @@ public class PriceMapper {
   public static Price entityToModel(PriceEntity entity) {
     Price model = new Price();
 
-    model.setChannel(new Reference(ReferenceTypes.CHANNEL.getType(), entity.getChannel()));
+    if (model.getChannel() != null) {
+      model.setChannel(new Reference(ReferenceTypes.CHANNEL.getType(), entity.getChannel()));
+    }
     model.setCountry(entity.getCountry());
     model.setId(entity.getId());
     model.setValidFrom(entity.getValidFrom());
     model.setValidUntil(entity.getValidUntil());
     model.setValue(MoneyMapper.entityToModel(entity.getValue()));
-    model.setCustomerGroup(new Reference(ReferenceTypes.CUSTOMERGROUP.getType(), entity
-        .getCustomerGroup()));
+    if (model.getCustomerGroup() != null) {
+      model.setCustomerGroup(new Reference(ReferenceTypes.CUSTOMERGROUP.getType(), entity
+          .getCustomerGroup()));
+    }
     // TODO: 16/12/14 discount should calculate
 //    model.setDiscounted(DiscountedPriceMapper.entityToModel(entity.getDiscounted()));
     model.setCustom(entity.getCustom());

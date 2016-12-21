@@ -1,7 +1,10 @@
 package io.reactivesw.catalog.product
 
+import com.google.common.collect.Lists
 import io.reactivesw.catalog.product.application.model.ProductDraft
 import io.reactivesw.catalog.product.application.model.mapper.ProductMapper
+import io.reactivesw.catalog.product.domain.entity.ProductCatalogDataEntity
+import io.reactivesw.catalog.product.domain.entity.ProductDataEntity
 import io.reactivesw.catalog.product.domain.entity.ProductEntity
 import io.reactivesw.catalog.product.domain.service.ProductService
 import io.reactivesw.catalog.product.infrastructure.repository.ProductRepository
@@ -10,6 +13,7 @@ import io.reactivesw.common.exception.NotExistException
 import io.reactivesw.common.model.LocalizedString
 import io.reactivesw.common.model.Reference
 import io.reactivesw.common.model.ResourceIdentifier
+import org.apache.log4j.Category
 import spock.lang.Specification
 
 import java.time.ZonedDateTime
@@ -75,5 +79,22 @@ class ProductServiceTest extends Specification {
 
         then:
         thrown(NotExistException)
+    }
+
+    def "test 5.1 : get product by category id"() {
+        given:
+        def categoryId = "111111111111"
+        ProductCatalogDataEntity masterData = new ProductCatalogDataEntity();
+        ProductDataEntity currentData = new ProductDataEntity()
+        currentData.categories = Lists.newArrayList(categoryId)
+        masterData.current = currentData
+        productEntity.masterData = masterData
+        productRepository.findAll() >> Lists.newArrayList(productEntity)
+
+        when:
+        def result = productService.queryProductByCategory(categoryId)
+
+        then:
+        result != null
     }
 }

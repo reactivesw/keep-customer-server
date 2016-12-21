@@ -4,6 +4,8 @@ import io.reactivesw.catalog.product.domain.entity.ProductEntity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 /**
  * Created by Davis on 16/12/14.
  */

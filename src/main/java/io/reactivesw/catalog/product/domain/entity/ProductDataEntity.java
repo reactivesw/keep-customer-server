@@ -9,6 +9,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -77,4 +78,16 @@ public class ProductDataEntity extends BaseIdEntity {
    */
   @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
   private Set<ProductVariantEntity> variants;
+
+  /**
+   * categoryOrderHints.
+   */
+  @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+  private Set<CategoryOrderHintEntity> categoryOrderHints;
+
+  /**
+   * categories.
+   */
+  @ElementCollection
+  private Set<String> categories;
 }
