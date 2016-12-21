@@ -28,4 +28,22 @@ public class ImageMapper {
 
     return model;
   }
+
+  public static Set<ImageEntity> modelToEntity(List<Image> models) {
+    return models.stream().map(
+        model -> {
+          return modelToEntity(model);
+        }
+    ).collect(Collectors.toSet());
+  }
+
+  public static ImageEntity modelToEntity(Image model) {
+    ImageEntity entity = new ImageEntity();
+
+    entity.setUrl(model.getUrl());
+    entity.setLabel(model.getLabel());
+    entity.setDimensions(model.getDimensions());
+
+    return entity;
+  }
 }

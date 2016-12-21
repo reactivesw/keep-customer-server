@@ -14,6 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * Created by Davis on 16/12/14.
  */
@@ -54,6 +57,26 @@ public class ProductService {
 
     LOG.debug("end createProduct, created Product is : {}", result.toString());
 
+    return result;
+  }
+
+  /**
+   * Query product by category list.
+   *
+   * @param categoryId the category id
+   * @return the list
+   */
+  public List<ProductEntity> queryProductByCategory(String categoryId) {
+    LOG.debug("enter queryProductByCategory, categoryId is : {}", categoryId);
+
+    List<ProductEntity> productEntities = productRepository.findAll();
+
+    List<ProductEntity> result = productEntities.stream().filter(
+        productEntity ->
+            productEntity.getMasterData().getCurrent().getCategories().contains(categoryId)
+    ).collect(Collectors.toList());
+
+    LOG.debug("end queryProductByCategory, get product number is : {}", result.size());
     return result;
   }
 

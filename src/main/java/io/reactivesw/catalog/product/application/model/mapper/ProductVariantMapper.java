@@ -32,8 +32,7 @@ public class ProductVariantMapper {
     entity.setId(id);
     entity.setKey(model.getKey());
     entity.setSku(model.getSku());
-    // TODO: 16/12/20  
-//    entity.setImages(model.getImages());
+    entity.setImages(ImageMapper.modelToEntity(model.getImages()));
     if (model.getPrices() != null) {
       entity.setPrices(PriceMapper.modelToEntity(model.getPrices()));
     }
