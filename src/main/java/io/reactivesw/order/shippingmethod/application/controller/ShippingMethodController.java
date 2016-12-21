@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by umasuo on 16/12/21.
@@ -51,13 +50,34 @@ public class ShippingMethodController {
    * @param cartId
    * @return
    */
-  @GetMapping(ShippingMethodRouter.SHIPPING_METHOD_BASE_URL)
-  public List<ShippingMethod> getShippingMethodForCart(@RequestParam String cartId) {
+  @GetMapping(value = ShippingMethodRouter.SHIPPING_METHOD_BASE_URL, params = "cartId")
+  public List<ShippingMethod> getForCart(@RequestParam String cartId) {
 
-    List<ShippingMethodEntity> result = application.getShippingMethodsForCart(cartId);
+    List<ShippingMethodEntity> entities = application.getShippingMethodsForCart(cartId);
 
-    return result.parallelStream().map(
-        shippingMethodEntity -> ShippingMethodMapper.entityToModel(shippingMethodEntity)
-    ).collect(Collectors.toList());
+    return ShippingMethodMapper.listEntityToListModel(entities);
+  }
+
+  /**
+   * get shipping methods for location
+   *
+   * @param country
+   * @param state
+   * @param currency
+   * @return
+   */
+  @GetMapping(value = ShippingMethodRouter.SHIPPING_METHOD_BASE_URL, params = "country")
+  public List<ShippingMethod> getForLocation(@RequestParam String country,
+                                             @RequestParam(required = false) String state,
+                                             @RequestParam(required = false) String currency) {
+
+    List<ShippingMethodEntity> entities = null;
+    if (currency == null) {
+      entities = application.getByLocation(country, state);
+    } else {
+      entities = application.getByLocation(country, state, currency);
+    }
+
+    return ShippingMethodMapper.listEntityToListModel(entities);
   }
 }
