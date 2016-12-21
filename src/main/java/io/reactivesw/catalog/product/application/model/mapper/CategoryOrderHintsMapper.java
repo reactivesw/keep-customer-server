@@ -4,6 +4,7 @@ import io.reactivesw.catalog.product.application.model.CategoryOrderHint;
 import io.reactivesw.catalog.product.domain.entity.CategoryOrderHintEntity;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -16,12 +17,12 @@ public final class CategoryOrderHintsMapper {
    * @param models the models
    * @return the list
    */
-  public static List<CategoryOrderHintEntity> modelToEntity(List<CategoryOrderHint> models) {
+  public static Set<CategoryOrderHintEntity> modelToEntity(List<CategoryOrderHint> models) {
     return models.stream().map(
         model -> {
           return new CategoryOrderHintEntity(model.getKey(), model.getOrder());
         }
-    ).collect(Collectors.toList());
+    ).collect(Collectors.toSet());
   }
 
   /**
@@ -30,7 +31,7 @@ public final class CategoryOrderHintsMapper {
    * @param entities the entities
    * @return the list
    */
-  public static List<CategoryOrderHint> entityToModel(List<CategoryOrderHintEntity> entities) {
+  public static List<CategoryOrderHint> entityToModel(Set<CategoryOrderHintEntity> entities) {
     return entities.stream().map(
         entity -> {
           return new CategoryOrderHint(entity.getCategoryId(), entity.getOrderHint());

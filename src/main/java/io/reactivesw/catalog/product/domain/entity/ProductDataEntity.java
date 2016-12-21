@@ -5,7 +5,6 @@ import io.reactivesw.common.entity.LocalizedStringEntity;
 
 import lombok.Data;
 
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -84,11 +83,11 @@ public class ProductDataEntity extends BaseIdEntity {
    * categoryOrderHints.
    */
   @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-  private List<CategoryOrderHintEntity> categoryOrderHints;
+  private Set<CategoryOrderHintEntity> categoryOrderHints;
 
   /**
    * categories.
    */
   @ElementCollection
-  private List<String> categories;
+  private Set<String> categories;
 }

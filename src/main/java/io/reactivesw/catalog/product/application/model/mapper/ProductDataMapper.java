@@ -2,7 +2,6 @@ package io.reactivesw.catalog.product.application.model.mapper;
 
 import io.reactivesw.catalog.product.application.model.ProductData;
 import io.reactivesw.catalog.product.application.model.ProductDraft;
-import io.reactivesw.catalog.product.application.model.ProductVariant;
 import io.reactivesw.catalog.product.domain.entity.ProductDataEntity;
 import io.reactivesw.catalog.product.domain.entity.ProductVariantEntity;
 import io.reactivesw.common.enums.ReferenceTypes;
@@ -55,7 +54,7 @@ public class ProductDataMapper {
               category -> {
                 return category.getId();
               }
-          ).collect(Collectors.toList())
+          ).collect(Collectors.toSet())
       );
     }
 
