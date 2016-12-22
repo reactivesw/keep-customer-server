@@ -2,7 +2,7 @@ package io.reactivesw.order.cart.domain.service.update
 
 import io.reactivesw.common.entity.MoneyEntity
 import io.reactivesw.common.exception.NotExistException
-import io.reactivesw.order.cart.application.model.action.ChangeLineItemQuantity
+import io.reactivesw.order.cart.application.model.action.SetLineItemQuantity
 import io.reactivesw.order.cart.domain.entity.CartEntity
 import io.reactivesw.order.cart.domain.entity.value.CustomLineItemValue
 import io.reactivesw.order.cart.domain.entity.value.LineItemValue
@@ -40,7 +40,7 @@ class ChangeLineItemQuantityServiceTest extends Specification {
 
     CartEntity cartEntity
 
-    ChangeLineItemQuantity changeLineItemQuantity
+    SetLineItemQuantity changeLineItemQuantity
 
     def setup() {
         Set<LineItemValue> lineItems = new HashSet()
@@ -60,7 +60,7 @@ class ChangeLineItemQuantityServiceTest extends Specification {
 
         cartEntity = new CartEntity(id: cartId, version: version, lineItems: lineItems, customLineItems: customItems, shippingInfo: shippingInfoValue)
 
-        changeLineItemQuantity = new ChangeLineItemQuantity(lineItemId: lineItemId, quantity: quantity)
+        changeLineItemQuantity = new SetLineItemQuantity(lineItemId: lineItemId, quantity: quantity)
 
         service = new ChangeLineItemQuantityService(recalculateService: recalculateService)
     }

@@ -7,6 +7,7 @@ import static io.reactivesw.route.InventoryEntryRouter.INVENTORY_ENTRY_WITH_ID;
 import io.reactivesw.catalog.inventory.application.model.InventoryEntry;
 import io.reactivesw.catalog.inventory.application.model.InventoryEntryDraft;
 import io.reactivesw.catalog.inventory.domain.service.InventoryEntryService;
+import io.reactivesw.common.model.UpdateRequest;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -73,6 +75,33 @@ public class InventoryEntryController {
     inventoryEntryService.deleteInventoryEntry(id, version);
 
     LOG.debug("end deleteInventoryEntry, id is : {}, version is : {}", id, version);
+  }
+
+  /**
+   * Update InventoryEntry.
+   *
+   * @param id            the id
+   * @param updateRequest the update request
+   * @return the inventory entry
+   */
+  @ApiOperation(value = "Update InventoryEntry")
+  @PutMapping(INVENTORY_ENTRY_WITH_ID)
+  public InventoryEntry updateInventoryEntry(@PathVariable(value = INVENTORY_ENTRY_ID)
+                                             @ApiParam(value = "InventoryEntry ID", required = true)
+                                                 String id,
+                                             @RequestBody
+                                             @ApiParam(value = "InventoryEntry Update Request",
+                                                 required = true)
+                                                 UpdateRequest updateRequest) {
+    LOG.debug("enter updateInventoryEntry, id is {}, update InventoryEntry is {}",
+        id, updateRequest.toString());
+
+    InventoryEntry result = inventoryEntryService.updateInventoryEntry(id,
+        updateRequest.getVersion(), updateRequest.getActions());
+
+    LOG.debug("end updateInventoryEntry, updated InventoryEntry is {}", result.toString());
+
+    return result;
   }
 
   /**

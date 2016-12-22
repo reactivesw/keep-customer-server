@@ -1,6 +1,8 @@
 package io.reactivesw.catalog.inventory
 
+import com.google.common.collect.Lists
 import io.reactivesw.catalog.inventory.application.model.InventoryEntryDraft
+import io.reactivesw.catalog.inventory.application.model.action.SetExpectedDelivery
 import io.reactivesw.catalog.inventory.application.model.mapper.InventoryEntryMapper
 import io.reactivesw.catalog.inventory.domain.entity.InventoryEntryEntity
 import io.reactivesw.catalog.inventory.domain.service.InventoryEntryService
@@ -9,6 +11,7 @@ import io.reactivesw.common.enums.ReferenceTypes
 import io.reactivesw.common.exception.ConflictException
 import io.reactivesw.common.exception.NotExistException
 import io.reactivesw.common.model.Reference
+import io.reactivesw.common.model.UpdateAction
 import spock.lang.Specification
 
 import java.time.ZonedDateTime
@@ -34,6 +37,7 @@ class InventoryEntryServiceTest extends Specification {
 
         inventoryEntryEntity = InventoryEntryMapper.modelToEntity(inventoryEntryDraft)
         inventoryEntryEntity.id = id
+        inventoryEntryEntity.version = version
     }
 
     def "test 1 : create inventory entry"() {
@@ -69,6 +73,20 @@ class InventoryEntryServiceTest extends Specification {
 
         then:
         thrown(ConflictException)
+    }
+
+    def "test 3.1 : update inventory entry"() {
+        given:
+        inventoryEntryRepository.findOne(id) >> inventoryEntryEntity
+        inventoryEntryRepository.save(_) >> inventoryEntryEntity
+        SetExpectedDelivery action = new SetExpectedDelivery(expectedDelivery: ZonedDateTime.now())
+        List<UpdateAction> actions = Lists.newArrayList(action)
+
+        when:
+        def result = inventoryEntryService.updateInventoryEntry(id, version, actions)
+
+        then:
+        result != null
     }
 
     def "test 4.1 : get inventory entry by id"() {

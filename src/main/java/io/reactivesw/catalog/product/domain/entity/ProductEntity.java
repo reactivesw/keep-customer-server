@@ -3,6 +3,7 @@ package io.reactivesw.catalog.product.domain.entity;
 import io.reactivesw.common.entity.BaseAllEntity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,6 +17,7 @@ import javax.persistence.Version;
  * Created by umasuo on 16/11/23.
  */
 @Data
+@EqualsAndHashCode
 @Entity
 @Table(name = "catalog_product")
 public class ProductEntity extends BaseAllEntity {

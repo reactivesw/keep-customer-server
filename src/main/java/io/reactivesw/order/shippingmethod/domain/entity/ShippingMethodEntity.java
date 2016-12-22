@@ -2,6 +2,7 @@ package io.reactivesw.order.shippingmethod.domain.entity;
 
 import io.reactivesw.common.entity.BaseAllEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Set;
 
@@ -16,6 +17,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "order_shipping_method")
 @Data
+@EqualsAndHashCode
 public class ShippingMethodEntity extends BaseAllEntity {
 
   /**

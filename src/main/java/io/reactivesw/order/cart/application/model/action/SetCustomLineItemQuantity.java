@@ -1,13 +1,12 @@
 package io.reactivesw.order.cart.application.model.action;
 
-import io.reactivesw.common.model.Money;
 import lombok.Data;
 
 /**
  * Created by umasuo on 16/12/15.
  */
 @Data
-public class ChangeCustomLineItemMoney {
+public class SetCustomLineItemQuantity {
 
   /**
    * custom line item id.
@@ -15,7 +14,7 @@ public class ChangeCustomLineItemMoney {
   private String customLineItemId;
 
   /**
-   * money.
+   * quantity.
    */
-  private Money money;
+  private Integer quantity;
 }

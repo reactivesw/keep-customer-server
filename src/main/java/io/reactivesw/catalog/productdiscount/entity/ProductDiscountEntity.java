@@ -6,6 +6,7 @@ import io.reactivesw.common.entity.BaseAllEntity;
 import io.reactivesw.common.entity.LocalizedStringEntity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
@@ -25,6 +26,7 @@ import javax.persistence.Table;
  * Created by Davis on 16/11/23.
  */
 @Data
+@EqualsAndHashCode(callSuper=false)
 @Entity
 @Table(name = "catalog_product_product_discount")
 @TypeDef(name = "ProductDiscountValue", typeClass = JSONBUserType.class, parameters = {

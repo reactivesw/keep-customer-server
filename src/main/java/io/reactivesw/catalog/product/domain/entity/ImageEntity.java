@@ -5,6 +5,7 @@ import io.reactivesw.common.entity.BaseIdEntity;
 import io.reactivesw.common.model.AssetDimensions;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
@@ -18,6 +19,7 @@ import javax.persistence.Table;
  * Created by Davis on 16/11/23.
  */
 @Data
+@EqualsAndHashCode
 @Entity
 @Table(name = "catalog_product_image")
 @TypeDef(name = "Dimensions", typeClass = JSONBUserType.class, parameters = {

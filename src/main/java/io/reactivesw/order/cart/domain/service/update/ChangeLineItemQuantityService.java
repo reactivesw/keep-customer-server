@@ -2,7 +2,7 @@ package io.reactivesw.order.cart.domain.service.update;
 
 import io.reactivesw.common.exception.NotExistException;
 import io.reactivesw.common.model.UpdateAction;
-import io.reactivesw.order.cart.application.model.action.ChangeLineItemQuantity;
+import io.reactivesw.order.cart.application.model.action.SetLineItemQuantity;
 import io.reactivesw.order.cart.domain.entity.CartEntity;
 import io.reactivesw.order.cart.domain.entity.value.LineItemValue;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class ChangeLineItemQuantityService extends CartUpdateService {
    */
   @Override
   public void handle(CartEntity entity, UpdateAction action) {
-    ChangeLineItemQuantity quantityAction = (ChangeLineItemQuantity) action;
+    SetLineItemQuantity quantityAction = (SetLineItemQuantity) action;
     Integer quantity = quantityAction.getQuantity();
     String lineItemId = quantityAction.getLineItemId();
 
