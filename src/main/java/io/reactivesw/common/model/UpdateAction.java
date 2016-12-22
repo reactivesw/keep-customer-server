@@ -13,7 +13,9 @@ import io.reactivesw.catalog.category.application.model.action.SetMetaDescriptio
 import io.reactivesw.catalog.category.application.model.action.SetMetaKeywords;
 import io.reactivesw.catalog.category.application.model.action.SetMetaTitle;
 import io.reactivesw.catalog.inventory.application.model.action.AddQuantityAction;
+import io.reactivesw.catalog.inventory.application.model.action.AddReservedQuantityAction;
 import io.reactivesw.catalog.inventory.application.model.action.RemoveQuantityAction;
+import io.reactivesw.catalog.inventory.application.model.action.RemoveReservedQuantityAction;
 import io.reactivesw.catalog.inventory.application.model.action.SetExpectedDelivery;
 import io.reactivesw.catalog.inventory.application.model.action.SetQuantityAction;
 import io.reactivesw.catalog.inventory.application.model.action.SetRestockableInDays;
@@ -67,6 +69,8 @@ import io.reactivesw.order.discountcode.application.model.action
     @JsonSubTypes.Type(value = SetRestockableInDays.class, name = "setRestockableInDays"),
     @JsonSubTypes.Type(value = SetExpectedDelivery.class, name = "setExpectedDelivery"),
     @JsonSubTypes.Type(value = SetSupplyChannel.class, name = "setSupplyChannel"),
+    @JsonSubTypes.Type(value = RemoveReservedQuantityAction.class, name = "removeReserved"),
+    @JsonSubTypes.Type(value = AddReservedQuantityAction.class, name = "addReserved"),
 })
 public interface UpdateAction {
 
