@@ -58,7 +58,7 @@ public class CategoryController {
                                      CategoryDraft categoryDraft) {
     LOG.debug("create category : {}", categoryDraft.toString());
 
-    CategoryValidator.validateCategoryDraft(categoryDraft);
+    CategoryValidator.validate(categoryDraft);
 
     Category category = categoryService.createCategory(categoryDraft);
 
