@@ -3,6 +3,7 @@ package io.reactivesw.order.cartdiscount.domain.entity;
 import io.reactivesw.common.entity.BaseIdEntity;
 import io.reactivesw.common.entity.MoneyEntity;
 import io.reactivesw.order.cartdiscount.infrastructure.enums.CartDiscountType;
+import lombok.Data;
 
 import java.util.Set;
 
@@ -16,6 +17,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "order_cart_discount_value")
+@Data
 public class CartDiscountValue extends BaseIdEntity {
 
   /**
@@ -37,57 +39,4 @@ public class CartDiscountValue extends BaseIdEntity {
   @OneToMany
   private Set<MoneyEntity> money;
 
-  /**
-   * Gets type.
-   *
-   * @return the type
-   */
-  public CartDiscountType getType() {
-    return type;
-  }
-
-  /**
-   * Sets type.
-   *
-   * @param type the type
-   */
-  public void setType(CartDiscountType type) {
-    this.type = type;
-  }
-
-  /**
-   * Gets permyriad.
-   *
-   * @return the permyriad
-   */
-  public Integer getPermyriad() {
-    return permyriad;
-  }
-
-  /**
-   * Sets permyriad.
-   *
-   * @param permyriad the permyriad
-   */
-  public void setPermyriad(Integer permyriad) {
-    this.permyriad = permyriad;
-  }
-
-  /**
-   * Gets money.
-   *
-   * @return the money
-   */
-  public Set<MoneyEntity> getMoney() {
-    return money;
-  }
-
-  /**
-   * Sets money.
-   *
-   * @param money the money
-   */
-  public void setMoney(Set<MoneyEntity> money) {
-    this.money = money;
-  }
 }

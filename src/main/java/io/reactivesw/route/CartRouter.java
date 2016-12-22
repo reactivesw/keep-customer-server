@@ -7,7 +7,7 @@ public class CartRouter extends BaseRouter {
   /**
    * root url of cart.
    */
-  public static final String CARTS_ROOT = URL_ROOT + "cart";
+  public static final String CARTS_ROOT = URL_ROOT + "/carts";
 
   /**
    * cart id.

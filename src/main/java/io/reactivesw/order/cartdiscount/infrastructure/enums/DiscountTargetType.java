@@ -5,5 +5,19 @@ package io.reactivesw.order.cartdiscount.infrastructure.enums;
  */
 public enum DiscountTargetType {
 
-  lineItems, customLineItems, shipping;
+  /**
+   * use lien item for discount.
+   */
+  LINE_ITEM,
+
+  /**
+   * use custom line item for discount.
+   */
+  CUSTOM_LINE_ITEM,
+
+  /**
+   * use shipping for discount.
+   */
+  SHIPPING;
+
 }

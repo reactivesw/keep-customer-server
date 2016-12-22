@@ -9,9 +9,9 @@ import io.reactivesw.catalog.taxcategory.infrastructure.repository.TaxCategoryRe
 import io.reactivesw.common.exception.ConflictException;
 import io.reactivesw.common.exception.NotExistException;
 import io.reactivesw.common.exception.ParametersException;
+import io.reactivesw.common.model.UpdateAction;
 import io.reactivesw.common.model.PagedQueryResult;
 import io.reactivesw.common.model.QueryConditions;
-import io.reactivesw.common.model.UpdateAction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

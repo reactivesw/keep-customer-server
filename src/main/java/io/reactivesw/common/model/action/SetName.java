@@ -10,7 +10,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class SetName implements UpdateAction{
+public class SetName implements UpdateAction {
   /**
    * The Name.
    */

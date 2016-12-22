@@ -2,7 +2,6 @@ package io.reactivesw.order.zone.application.model.mapper;
 
 import io.reactivesw.common.model.UpdateAction;
 import io.reactivesw.common.model.action.SetDescription;
-import io.reactivesw.order.zone.application.model.mapper.ZoneUpdateMapper;
 import io.reactivesw.order.zone.domain.entity.ZoneEntity;
 
 /**

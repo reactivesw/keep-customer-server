@@ -1,7 +1,7 @@
 package io.reactivesw.catalog.category.application.model.action;
 
-import io.reactivesw.common.model.LocalizedString;
 import io.reactivesw.common.model.UpdateAction;
+import io.reactivesw.common.model.LocalizedString;
 
 /**
  * Created by Davis on 16/12/6.

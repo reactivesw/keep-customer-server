@@ -1,6 +1,5 @@
 package io.reactivesw.order.cart.application.model.action;
 
-import io.reactivesw.common.model.Reference;
 import io.reactivesw.common.model.UpdateAction;
 import lombok.Data;
 

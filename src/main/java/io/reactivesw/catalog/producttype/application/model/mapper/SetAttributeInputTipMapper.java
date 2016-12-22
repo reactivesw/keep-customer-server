@@ -7,15 +7,9 @@ import io.reactivesw.common.model.LocalizedString;
 import io.reactivesw.common.model.UpdateAction;
 import io.reactivesw.common.model.mapper.LocalizedStringMapper;
 
-import com.google.common.collect.Lists;
-
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.stream.Collectors;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
 
 /**
  * Created by Davis on 16/12/12.

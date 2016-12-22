@@ -9,9 +9,9 @@ import io.reactivesw.catalog.producttype.infrastructure.repository.ProductTypeRe
 import io.reactivesw.catalog.producttype.infrastructure.validator.AttributeDefinitionNameValidator;
 import io.reactivesw.common.exception.ConflictException;
 import io.reactivesw.common.exception.NotExistException;
+import io.reactivesw.common.model.UpdateAction;
 import io.reactivesw.common.model.PagedQueryResult;
 import io.reactivesw.common.model.QueryConditions;
-import io.reactivesw.common.model.UpdateAction;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

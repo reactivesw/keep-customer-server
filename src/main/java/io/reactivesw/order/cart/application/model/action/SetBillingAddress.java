@@ -8,7 +8,7 @@ import lombok.Data;
  * Created by umasuo on 16/12/15.
  */
 @Data
-public class SetBillingAddress implements UpdateAction{
+public class SetBillingAddress implements UpdateAction {
 
   /**
    * billing address.

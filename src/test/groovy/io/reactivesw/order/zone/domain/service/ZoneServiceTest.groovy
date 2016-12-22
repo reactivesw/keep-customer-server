@@ -5,7 +5,6 @@ import io.reactivesw.common.exception.NotExistException
 import io.reactivesw.common.exception.ParametersException
 import io.reactivesw.common.model.UpdateAction
 import io.reactivesw.common.model.action.SetName
-import io.reactivesw.order.zone.application.model.Location
 import io.reactivesw.order.zone.domain.entity.LocationValue
 import io.reactivesw.order.zone.domain.entity.ZoneEntity
 import io.reactivesw.order.zone.infrastructure.repository.ZoneRepository

@@ -7,8 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
-
 /**
  * Created by umasuo on 16/12/9.
  */
@@ -32,25 +30,29 @@ public class CartDiscountService {
    * @return cart discount.
    */
   public CartDiscountEntity getById(String id) {
-
+    LOG.debug("enter: id: {}", id);
     CartDiscountEntity entity = this.repository.findOne(id);
 
-    if (Objects.isNull(entity)) {
-      LOG.debug("The cart discount do not exist, id : {}", id);
+    if (entity == null) {
+      LOG.warn("The cart discount do not exist, id : {}", id);
       throw new NotExistException("The cart discount do not exist, id:" + id);
     }
 
+    LOG.debug("exit: CartDiscountEntity: {}", entity);
     return entity;
   }
 
   /**
    * create cart discount.
+   *
    * @param value cart discount
    * @return cart discount
    */
-  public CartDiscountEntity create(CartDiscountEntity value){
+  public CartDiscountEntity create(CartDiscountEntity value) {
+    LOG.debug("enter: value: {}", value);
     return this.repository.save(value);
   }
+
 
 
 }

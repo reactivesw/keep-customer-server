@@ -14,7 +14,7 @@ import lombok.Data;
  * Created by umasuo on 16/12/15.
  */
 @Data
-public class SetShippingAddress implements UpdateAction{
+public class SetShippingAddress implements UpdateAction {
   /**
    * shipping address.
    */

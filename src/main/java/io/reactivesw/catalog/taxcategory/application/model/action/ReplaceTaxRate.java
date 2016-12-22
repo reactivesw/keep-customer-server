@@ -10,7 +10,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class ReplaceTaxRate implements UpdateAction{
+public class ReplaceTaxRate implements UpdateAction {
   /**
    * The Tax rate id.
    */

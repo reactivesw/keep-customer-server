@@ -6,10 +6,8 @@ import io.reactivesw.catalog.producttype.domain.entity.ProductTypeEntity;
 import io.reactivesw.common.model.UpdateAction;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Davis on 16/12/12.

@@ -3,6 +3,7 @@ package io.reactivesw.common.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
+import lombok.Data;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import javax.validation.constraints.NotNull;
  * Created by Davis on 16/11/21.
  */
 @ApiModel
+@Data
 public class UpdateRequest {
   /**
    * The expected version of the category on which the changes should be applied.
@@ -30,47 +32,4 @@ public class UpdateRequest {
   @NotNull
   List<UpdateAction> actions;
 
-  /**
-   * Gets version.
-   *
-   * @return the version
-   */
-  public Integer getVersion() {
-    return version;
-  }
-
-  /**
-   * Sets version.
-   *
-   * @param version the version
-   */
-  public void setVersion(Integer version) {
-    this.version = version;
-  }
-
-  /**
-   * Gets action.
-   *
-   * @return the action
-   */
-  public List<UpdateAction> getActions() {
-    return actions;
-  }
-
-  /**
-   * Sets action.
-   *
-   * @param actions the action
-   */
-  public void setActions(List<UpdateAction> actions) {
-    this.actions = actions;
-  }
-
-  @Override
-  public String toString() {
-    return "UpdateRequest{" +
-        "version=" + version +
-        ", action=" + actions +
-        '}';
-  }
 }

@@ -12,7 +12,7 @@ import lombok.Data;
  * Created by umasuo on 16/12/15.
  */
 @Data
-public class SetTaxMode implements UpdateAction{
+public class SetTaxMode implements UpdateAction {
 
   TaxMode taxMode;
 }

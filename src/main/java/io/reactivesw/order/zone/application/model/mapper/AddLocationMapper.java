@@ -1,9 +1,7 @@
 package io.reactivesw.order.zone.application.model.mapper;
 
 import io.reactivesw.common.model.UpdateAction;
-import io.reactivesw.order.zone.application.model.Location;
 import io.reactivesw.order.zone.application.model.action.AddLocation;
-import io.reactivesw.order.zone.domain.entity.LocationValue;
 import io.reactivesw.order.zone.domain.entity.ZoneEntity;
 
 /**
