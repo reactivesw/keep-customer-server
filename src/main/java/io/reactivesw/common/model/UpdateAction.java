@@ -17,7 +17,7 @@ import io.reactivesw.order.shippingmethod.application.model.action.ShippingMetho
 import io.reactivesw.order.zone.application.model.action.ZoneUpdateAction;
 
 /**
- * configurations for common update actions that will be used in more thant one services
+ * configurations for common update actions that will be used in more thant one service
  * and this action also extends other action configure in each service.
  * Created by umasuo on 16/11/21.
  * TODO this should be split to different class in each micro-service.
