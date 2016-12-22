@@ -2,6 +2,10 @@ package io.reactivesw.common.model;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+import io.reactivesw.catalog.category.application.model.action.CategoryUpdateAction;
+import io.reactivesw.catalog.inventory.application.model.action.InventoryEntryUpdateAction;
+import io.reactivesw.catalog.producttype.application.model.action.ProductTypeUpdateAction;
 import io.reactivesw.common.model.action.SetDescription;
 import io.reactivesw.common.model.action.SetLocalizedDescription;
 import io.reactivesw.common.model.action.SetLocalizedName;
@@ -32,6 +36,9 @@ public interface UpdateAction
     CartUpdateAction,
     DiscountCodeUpdateAction,
     ShippingMethodUpdateAction,
-    ZoneUpdateAction {
+    ZoneUpdateAction,
+    CategoryUpdateAction,
+    InventoryEntryUpdateAction,
+    ProductTypeUpdateAction {
 
 }
