@@ -14,4 +14,5 @@ public final class CartDiscountPredicate extends Base {
   public CartDiscountPredicate(final String predicate) {
     this.predicate = predicate;
   }
+
 }

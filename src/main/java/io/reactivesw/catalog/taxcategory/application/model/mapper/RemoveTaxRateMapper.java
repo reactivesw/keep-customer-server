@@ -4,11 +4,7 @@ import io.reactivesw.catalog.taxcategory.application.model.action.RemoveTaxRate;
 import io.reactivesw.catalog.taxcategory.domain.entity.TaxCategoryEntity;
 import io.reactivesw.catalog.taxcategory.domain.entity.TaxRateEntity;
 import io.reactivesw.common.model.UpdateAction;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;

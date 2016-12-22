@@ -12,7 +12,6 @@ import io.reactivesw.order.cart.domain.entity.value.ProductVariantValue
 import io.reactivesw.order.cart.domain.entity.value.ShippingInfoValue
 import io.reactivesw.order.cart.domain.entity.value.ShippingRateValue
 import io.reactivesw.order.cart.domain.entity.value.TaxRateValue
-import org.mockito.Mock
 import spock.lang.Specification
 
 /**

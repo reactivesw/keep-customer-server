@@ -3,7 +3,6 @@ package io.reactivesw.catalog.producttype.application.model.mapper;
 import io.reactivesw.catalog.producttype.application.model.action.SetAttributeLabel;
 import io.reactivesw.catalog.producttype.domain.entity.ProductTypeEntity;
 import io.reactivesw.common.entity.LocalizedStringEntity;
-import io.reactivesw.common.model.LocalizedString;
 import io.reactivesw.common.model.UpdateAction;
 import io.reactivesw.common.model.mapper.LocalizedStringMapper;
 

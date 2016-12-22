@@ -2,6 +2,7 @@ package io.reactivesw.order.cartdiscount.domain.entity;
 
 import io.reactivesw.common.entity.BaseIdEntity;
 import io.reactivesw.order.cartdiscount.infrastructure.enums.DiscountTargetType;
+import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -11,6 +12,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "order_cart_discount_target")
+@Data
 public class CartDiscountTargetValue extends BaseIdEntity {
 
   /**
@@ -25,40 +27,4 @@ public class CartDiscountTargetValue extends BaseIdEntity {
    * * For now, we only support all.
    */
   private String predicate;
-
-  /**
-   * Gets type.
-   *
-   * @return the type
-   */
-  public DiscountTargetType getType() {
-    return type;
-  }
-
-  /**
-   * Sets type.
-   *
-   * @param type the type
-   */
-  public void setType(DiscountTargetType type) {
-    this.type = type;
-  }
-
-  /**
-   * Gets predicate.
-   *
-   * @return the predicate
-   */
-  public String getPredicate() {
-    return predicate;
-  }
-
-  /**
-   * Sets predicate.
-   *
-   * @param predicate the predicate
-   */
-  public void setPredicate(String predicate) {
-    this.predicate = predicate;
-  }
 }

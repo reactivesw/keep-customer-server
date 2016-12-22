@@ -1,8 +1,8 @@
 package io.reactivesw.order.cart.application.model.action;
 
 import io.reactivesw.catalog.taxcategory.application.model.ExternalTaxRateDraft;
-import io.reactivesw.common.model.Reference;
 import io.reactivesw.common.model.UpdateAction;
+import io.reactivesw.common.model.Reference;
 import lombok.Data;
 
 /**

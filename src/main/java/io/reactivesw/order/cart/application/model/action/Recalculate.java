@@ -7,7 +7,7 @@ import lombok.Data;
  * Created by umasuo on 16/12/15.
  */
 @Data
-public class Recalculate implements UpdateAction{
+public class Recalculate implements UpdateAction {
 
   /**
    * If set to true, the line item product data (name, variant and productType) will also be

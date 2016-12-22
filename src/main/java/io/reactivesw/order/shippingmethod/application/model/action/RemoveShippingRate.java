@@ -1,7 +1,7 @@
 package io.reactivesw.order.shippingmethod.application.model.action;
 
-import io.reactivesw.common.model.Reference;
 import io.reactivesw.common.model.UpdateAction;
+import io.reactivesw.common.model.Reference;
 import io.reactivesw.order.shippingmethod.application.model.ShippingRate;
 
 /**

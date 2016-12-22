@@ -5,8 +5,6 @@ import io.reactivesw.order.shippingmethod.application.model.action.AddZone;
 import io.reactivesw.order.shippingmethod.domain.entity.ShippingMethodEntity;
 import io.reactivesw.order.shippingmethod.domain.entity.ZoneRateValue;
 
-import java.util.Objects;
-
 /**
  * Created by umasuo on 16/12/8.
  */

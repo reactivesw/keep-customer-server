@@ -1,7 +1,7 @@
 package io.reactivesw.catalog.producttype.application.model.action;
 
-import io.reactivesw.common.model.LocalizedString;
 import io.reactivesw.common.model.UpdateAction;
+import io.reactivesw.common.model.LocalizedString;
 
 import lombok.Getter;
 import lombok.Setter;

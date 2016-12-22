@@ -1,5 +1,6 @@
 package io.reactivesw.order.cart.application.model.action;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Data;
 
 /**
@@ -9,7 +10,7 @@ import lombok.Data;
 @Data
 public class SetCustomField {
 
-  String name;
+  private String name;
 
-  //TODO value;
+  private JsonNode value;
 }
