@@ -4,7 +4,9 @@ import com.google.common.collect.ImmutableMap;
 
 import io.reactivesw.catalog.category.application.model.mapper.CategoryUpdateMapper;
 import io.reactivesw.catalog.inventory.application.model.action.AddQuantityAction;
+import io.reactivesw.catalog.inventory.application.model.action.AddReservedQuantityAction;
 import io.reactivesw.catalog.inventory.application.model.action.RemoveQuantityAction;
+import io.reactivesw.catalog.inventory.application.model.action.RemoveReservedQuantityAction;
 import io.reactivesw.catalog.inventory.application.model.action.SetExpectedDelivery;
 import io.reactivesw.catalog.inventory.application.model.action.SetQuantityAction;
 import io.reactivesw.catalog.inventory.application.model.action.SetRestockableInDays;
@@ -28,6 +30,8 @@ public interface InventoryEntryUpdateMapper<E> extends Update<E> {
       .put(SetRestockableInDays.class, new SetRestockableInDaysMapper())
       .put(SetExpectedDelivery.class, new SetExpectedDeliveryMapper())
       .put(SetSupplyChannel.class, new SetSupplyChannelMapper())
+      .put(AddReservedQuantityAction.class, new AddReservedQuantityMapper())
+      .put(RemoveReservedQuantityAction.class, new RemoveReservedQuantityMapper())
       .build();
 
   /**
