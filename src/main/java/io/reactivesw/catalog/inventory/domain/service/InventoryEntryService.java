@@ -3,17 +3,22 @@ package io.reactivesw.catalog.inventory.domain.service;
 import io.reactivesw.catalog.inventory.application.model.InventoryEntry;
 import io.reactivesw.catalog.inventory.application.model.InventoryEntryDraft;
 import io.reactivesw.catalog.inventory.application.model.mapper.InventoryEntryMapper;
+import io.reactivesw.catalog.inventory.application.model.mapper.InventoryEntryUpdateMapper;
 import io.reactivesw.catalog.inventory.domain.entity.InventoryEntryEntity;
 import io.reactivesw.catalog.inventory.infrastructure.repository.InventoryEntryRepository;
 import io.reactivesw.common.exception.ConflictException;
 import io.reactivesw.common.exception.NotExistException;
+import io.reactivesw.common.model.UpdateAction;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
+
+import javax.transaction.Transactional;
 
 /**
  * Created by Davis on 16/12/21.
@@ -62,6 +67,35 @@ public class InventoryEntryService {
     validateVersion(entity, version);
     inventoryEntryRepository.delete(id);
     LOG.debug("end deleteInventoryEntry, id is : {}, version is : {}", id, version);
+  }
+
+  /**
+   * Update InventoryEntry.
+   *
+   * @param id      the id
+   * @param version the version
+   * @param actions the actions
+   * @return the inventory entry
+   */
+  @Transactional
+  public InventoryEntry updateInventoryEntry(String id, Integer version, List<UpdateAction> actions) {
+    LOG.debug("enter updateInventoryEntry, id is {}, version is {}, update action is {}",
+        id, version, actions);
+
+    InventoryEntryEntity entity = getInventoryEntryEntity(id);
+    validateVersion(entity, version);
+
+    actions.parallelStream().forEach(action -> {
+      InventoryEntryUpdateMapper.getMapper(action.getClass())
+          .handle(entity, action);
+    });
+
+    InventoryEntryEntity updatedEntity = inventoryEntryRepository.save(entity);
+    //TODO send message, if slug be updated
+    InventoryEntry result = InventoryEntryMapper.entityToModel(updatedEntity);
+
+    LOG.debug("end updateInventoryEntry, updated InventoryEntry is {}", result);
+    return result;
   }
 
   /**
