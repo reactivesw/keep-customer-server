@@ -8,4 +8,9 @@ public class BaseRouter {
    * root url.
    */
   public static final String URL_ROOT = "";
+
+  /**
+   * search word,
+   */
+  public static final String SEARCH = "searches";
 }

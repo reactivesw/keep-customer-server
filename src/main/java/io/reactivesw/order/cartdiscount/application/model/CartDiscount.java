@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.reactivesw.common.model.LocalizedString;
 import io.reactivesw.common.model.Reference;
-import io.reactivesw.order.cartdiscount.infrastructure.enums.DiscountTargetType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -63,7 +62,7 @@ public class CartDiscount {
   /**
    * The Target.
    */
-  private DiscountTargetType target;
+  private CartDiscountTarget target;
 
   /**
    * The string must contain a number between 0 and 1.

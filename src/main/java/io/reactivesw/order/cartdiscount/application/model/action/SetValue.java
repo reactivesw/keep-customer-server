@@ -1,6 +1,7 @@
 package io.reactivesw.order.cartdiscount.application.model.action;
 
 import io.reactivesw.common.model.UpdateAction;
+import io.reactivesw.order.cartdiscount.application.model.CartDiscountValue;
 import lombok.Data;
 
 /**
@@ -9,6 +10,6 @@ import lombok.Data;
 @Data
 public class SetValue implements UpdateAction {
 
-  private transient Integer value;
+  private CartDiscountValue value;
 
 }
