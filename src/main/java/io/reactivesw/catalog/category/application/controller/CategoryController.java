@@ -6,7 +6,7 @@ import static io.reactivesw.route.CategoryRouter.CATEGORY_WITH_ID;
 
 import io.reactivesw.catalog.category.application.model.Category;
 import io.reactivesw.catalog.category.application.model.CategoryDraft;
-import io.reactivesw.catalog.category.domain.services.CategoryService;
+import io.reactivesw.catalog.category.domain.service.CategoryService;
 import io.reactivesw.catalog.category.infrastructure.validator.CategoryValidator;
 import io.reactivesw.common.model.PagedQueryResult;
 import io.reactivesw.common.model.QueryConditions;
@@ -58,7 +58,7 @@ public class CategoryController {
                                      CategoryDraft categoryDraft) {
     LOG.debug("create category : {}", categoryDraft.toString());
 
-    CategoryValidator.validateCategoryDraft(categoryDraft);
+    CategoryValidator.validate(categoryDraft);
 
     Category category = categoryService.createCategory(categoryDraft);
 

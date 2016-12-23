@@ -1,4 +1,4 @@
-package io.reactivesw.catalog.category.domain.services;
+package io.reactivesw.catalog.category.domain.service;
 
 import com.google.common.collect.Lists;
 

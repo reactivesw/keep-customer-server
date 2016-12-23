@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * application services.
+ * application service.
  * Created by umasuo on 16/12/20.
  */
 @Service

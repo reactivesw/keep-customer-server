@@ -2,6 +2,10 @@ package io.reactivesw.common.model;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+import io.reactivesw.catalog.category.application.model.action.CategoryUpdateAction;
+import io.reactivesw.catalog.inventory.application.model.action.InventoryEntryUpdateAction;
+import io.reactivesw.catalog.producttype.application.model.action.ProductTypeUpdateAction;
 import io.reactivesw.common.model.action.SetDescription;
 import io.reactivesw.common.model.action.SetLocalizedDescription;
 import io.reactivesw.common.model.action.SetLocalizedName;
@@ -13,7 +17,7 @@ import io.reactivesw.order.shippingmethod.application.model.action.ShippingMetho
 import io.reactivesw.order.zone.application.model.action.ZoneUpdateAction;
 
 /**
- * configurations for common update actions that will be used in more thant one services
+ * configurations for common update actions that will be used in more thant one service
  * and this action also extends other action configure in each service.
  * Created by umasuo on 16/11/21.
  * TODO this should be split to different class in each micro-service.
@@ -32,6 +36,9 @@ public interface UpdateAction
     CartUpdateAction,
     DiscountCodeUpdateAction,
     ShippingMethodUpdateAction,
-    ZoneUpdateAction {
+    ZoneUpdateAction,
+    CategoryUpdateAction,
+    InventoryEntryUpdateAction,
+    ProductTypeUpdateAction {
 
 }

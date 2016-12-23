@@ -26,7 +26,7 @@ public final class CategoryValidator {
    *
    * @param draft the draft
    */
-  public static void validateCategoryDraft(CategoryDraft draft) {
+  public static void validate(CategoryDraft draft) {
 
     if (draft.getName() == null
         || draft.getName().getLocalized() == null
