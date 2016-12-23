@@ -10,6 +10,9 @@ import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 /**
  * Created by Davis on 16/11/17.
  */
@@ -22,6 +25,7 @@ public class CategoryDraft {
   /**
    * the name.
    */
+  @NotNull
   private LocalizedString name;
 
   /**
@@ -42,7 +46,9 @@ public class CategoryDraft {
    * Must be unique across a project!
    * The same category can have the same slug for different languages.
    */
-  private LocalizedString slug;
+  @NotNull
+  @Pattern(regexp = "[-a-zA-Z0-9_]{2,256}", message = "category slug can not match")
+  private String slug;
 
   /**
    * An attribute as base for a custom category order in one level.

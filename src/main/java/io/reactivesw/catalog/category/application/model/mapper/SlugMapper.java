@@ -13,6 +13,6 @@ public class SlugMapper implements CategoryUpdateMapper<CategoryEntity> {
   @Override
   public void handle(CategoryEntity entity, UpdateAction action) {
     SetSlug setSlug = (SetSlug) action;
-    entity.setSlug(LocalizedStringMapper.modelToEntityDefaultNew(setSlug.getSlug()));
+    entity.setSlug(setSlug.getSlug());
   }
 }

@@ -41,8 +41,8 @@ public class ProductDataEntity extends BaseIdEntity {
   /**
    * slug.
    */
-  @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-  private Set<LocalizedStringEntity> slug;
+  @Column(unique = true)
+  private String slug;
 
   /**
    * meta title.

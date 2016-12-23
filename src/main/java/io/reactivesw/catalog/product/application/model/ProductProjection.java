@@ -61,7 +61,7 @@ public class ProductProjection {
   /**
    * The Slug.
    */
-  private LocalizedString slug;
+  private String slug;
   /**
    * Array of Reference to a CategoryEntity.
    * References to category the product is in.

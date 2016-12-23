@@ -66,7 +66,7 @@ public class Category {
    * but a category can have the same slug for different languages.
    */
   @ApiModelProperty(value = "CategoryEntity Slug")
-  private LocalizedString slug;
+  private String slug;
 
   /**
    * The Description.

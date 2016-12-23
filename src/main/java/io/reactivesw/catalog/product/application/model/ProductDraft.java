@@ -10,6 +10,10 @@ import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 /**
  * Created by Davis on 16/11/17.
  */
@@ -24,6 +28,7 @@ public class ProductDraft {
   /**
    * the name.
    */
+  @NotNull(message = "product name can not bu null")
   private LocalizedString name;
 
   /**
@@ -39,7 +44,9 @@ public class ProductDraft {
    * languages. Allowed are alphabetic, numeric, underscore (_) and hyphen (-) characters.
    * Maximum size is 256.
    */
-  private LocalizedString slug;
+  @NotNull(message = "product slug can not be null")
+  @Pattern(regexp = "[-a-zA-Z0-9_]{2,256}", message = "product slug not match")
+  private String slug;
 
   /**
    * the description.

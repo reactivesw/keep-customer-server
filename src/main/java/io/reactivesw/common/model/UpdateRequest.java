@@ -2,11 +2,14 @@ package io.reactivesw.common.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import io.swagger.annotations.ApiModel;
+
 import lombok.Data;
 
 import java.util.List;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -30,6 +33,7 @@ public class UpdateRequest {
    * Required.
    */
   @NotNull
+  @Valid
   List<UpdateAction> actions;
 
 }

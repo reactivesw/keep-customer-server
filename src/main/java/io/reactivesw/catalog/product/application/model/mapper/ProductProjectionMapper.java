@@ -53,7 +53,7 @@ public final class ProductProjectionMapper {
     model.setId(entity.getId());
     model.setKey(entity.getKey());
     model.setName(LocalizedStringMapper.entityToModelDefaultNull(currentData.getName()));
-    model.setSlug(LocalizedStringMapper.entityToModelDefaultNull(currentData.getSlug()));
+    model.setSlug(currentData.getSlug());
     model.setDescription(LocalizedStringMapper.entityToModelDefaultNull(
         currentData.getDescription()));
     model.setCreatedAt(entity.getCreatedAt());

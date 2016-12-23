@@ -28,6 +28,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 /**
  * Created by Davis on 16/11/18.
  */
@@ -55,7 +57,7 @@ public class CategoryController {
   @PostMapping(CATEGORY_ROOT)
   public Category createCategory(@RequestBody
                                  @ApiParam(value = "CategoryEntity Draft", required = true)
-                                     CategoryDraft categoryDraft) {
+                                 @Valid CategoryDraft categoryDraft) {
     LOG.debug("create category : {}", categoryDraft.toString());
 
     CategoryValidator.validate(categoryDraft);
@@ -79,7 +81,7 @@ public class CategoryController {
                                  String id,
                              @RequestBody
                              @ApiParam(value = "CategoryEntity Version", required = true)
-                             Integer version) {
+                                 Integer version) {
     LOG.debug("enter deleteCategory, id is {}, version is {}", id, version);
 
     categoryService.deleteCategory(id, version);
@@ -101,7 +103,7 @@ public class CategoryController {
                                      String id,
                                  @RequestBody
                                  @ApiParam(value = "CategoryEntity Update Fields", required = true)
-                                     UpdateRequest updateRequest) {
+                                 @Valid UpdateRequest updateRequest) {
     LOG.debug("enter updateCategory,id is {}, update request is {}", id, updateRequest.toString());
 
     Category result = categoryService.updateCategory(id, updateRequest.getVersion(),

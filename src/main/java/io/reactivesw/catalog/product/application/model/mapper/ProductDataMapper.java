@@ -24,7 +24,7 @@ public class ProductDataMapper {
     ProductDataEntity entity = new ProductDataEntity();
 
     entity.setName(LocalizedStringMapper.modelToEntityDefaultNew(model.getName()));
-    entity.setSlug(LocalizedStringMapper.modelToEntityDefaultNew(model.getSlug()));
+    entity.setSlug(model.getSlug());
     entity.setDescription(LocalizedStringMapper.modelToEntityDefaultNew(model
         .getDescription()));
     entity.setMetaDescription(LocalizedStringMapper.modelToEntityDefaultNew(model
@@ -70,7 +70,7 @@ public class ProductDataMapper {
     ProductData model = new ProductData();
 
     model.setName(LocalizedStringMapper.entityToModelDefaultNull(entity.getName()));
-    model.setSlug(LocalizedStringMapper.entityToModelDefaultNull(entity.getSlug()));
+    model.setSlug(entity.getSlug());
     model.setDescription(LocalizedStringMapper.entityToModelDefaultNull(entity.getDescription()));
     model.setMetaTitle(LocalizedStringMapper.entityToModelDefaultNull(entity.getMetaTitle()));
     model.setMetaDescription(LocalizedStringMapper.entityToModelDefaultNull(entity

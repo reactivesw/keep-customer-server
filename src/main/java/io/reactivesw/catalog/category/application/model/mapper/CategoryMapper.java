@@ -45,7 +45,7 @@ public final class CategoryMapper {
     }
     //TODO extract to other method
     category.setName(LocalizedStringMapper.entityToModelDefaultNull(entity.getName()));
-    category.setSlug(LocalizedStringMapper.entityToModelDefaultNull(entity.getSlug()));
+    category.setSlug(entity.getSlug());
     category.setDescription(LocalizedStringMapper.entityToModelDefaultNull(entity
         .getDescription()));
     category.setMetaTitle(LocalizedStringMapper.entityToModelDefaultNull(entity
@@ -61,25 +61,24 @@ public final class CategoryMapper {
   /**
    * mapper Draft to category entity.
    *
-   * @param draft the draft
+   * @param model the draft
    * @return the category entity
    */
-  public static CategoryEntity modelToEntity(CategoryDraft draft) {
-    CategoryEntity entity = mapper.map(draft, CategoryEntity.class);
-    entity.setName(LocalizedStringMapper.modelToEntityDefaultNull(draft.getName
+  public static CategoryEntity modelToEntity(CategoryDraft model) {
+    CategoryEntity entity = mapper.map(model, CategoryEntity.class);
+    entity.setName(LocalizedStringMapper.modelToEntityDefaultNull(model.getName
         ()));
-    entity.setDescription(LocalizedStringMapper.modelToEntityDefaultNull(draft
+    entity.setDescription(LocalizedStringMapper.modelToEntityDefaultNull(model
         .getDescription()));
-    entity.setSlug(LocalizedStringMapper.modelToEntityDefaultNull(draft.getSlug
-        ()));
-    entity.setMetaTitle(LocalizedStringMapper.modelToEntityDefaultNull(draft
+    entity.setSlug(model.getSlug());
+    entity.setMetaTitle(LocalizedStringMapper.modelToEntityDefaultNull(model
         .getMetaTitle()));
-    entity.setMetaDescription(LocalizedStringMapper.modelToEntityDefaultNull(draft
+    entity.setMetaDescription(LocalizedStringMapper.modelToEntityDefaultNull(model
         .getMetaDescription()));
-    entity.setMetaKeyWords(LocalizedStringMapper.modelToEntityDefaultNull(draft
+    entity.setMetaKeyWords(LocalizedStringMapper.modelToEntityDefaultNull(model
         .getMetaKeywords()));
     //TODO set custom fields
-    if (draft.getCustom() == null) {
+    if (model.getCustom() == null) {
       entity.setCustom(null);
     }
     return entity;

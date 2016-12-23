@@ -62,8 +62,8 @@ public class CategoryEntity extends BaseAllEntity {
   /**
    * slug.
    */
-  @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-  private Set<LocalizedStringEntity> slug;
+  @Column(unique = true)
+  private String slug;
 
   /**
    * The Description.

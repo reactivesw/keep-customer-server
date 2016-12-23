@@ -7,6 +7,7 @@ import io.reactivesw.common.model.Reference;
 import io.reactivesw.common.model.SearchKeyword;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import java.util.List;
  * Created by Davis on 16/11/17.
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProductData {
   /**
@@ -42,7 +44,7 @@ public class ProductData {
    * Each slug is unique across a project,
    * but a product can have the same slug for different languages.
    */
-  private LocalizedString slug;
+  private String slug;
 
   /**
    * the meta title.

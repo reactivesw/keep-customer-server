@@ -1,6 +1,7 @@
 package io.reactivesw.catalog.category.application.model.action;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import io.reactivesw.common.model.action.SetLocalizedDescription;
 import io.reactivesw.common.model.action.SetLocalizedName;
@@ -10,8 +11,10 @@ import io.reactivesw.order.cart.application.model.action.SetCustomType;
 /**
  * Created by Davis on 16/12/22.
  */
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property =
+    "action")
 @JsonSubTypes( {
-    @JsonSubTypes.Type(value = SetSlug.class, name = "setLocalizedSlug"),
+    @JsonSubTypes.Type(value = SetSlug.class, name = "setSlug"),
     @JsonSubTypes.Type(value = SetParent.class, name = "setParent"),
     @JsonSubTypes.Type(value = SetOrderHint.class, name = "setOrderHint"),
     @JsonSubTypes.Type(value = SetExternalID.class, name = "setExternalID"),

@@ -34,14 +34,5 @@ public final class CategoryValidator {
       LOG.debug("Category name can not be null");
       throw new ParametersException("Category name can not be null");
     }
-
-    if (draft.getSlug() == null
-        || draft.getSlug().getLocalized() == null
-        || draft.getSlug().getLocalized().isEmpty()) {
-      LOG.debug("Category slug can not be null");
-      throw new ParametersException("Category slug can not be null");
-    }
-    //TODO slug 判断规则
   }
-
 }

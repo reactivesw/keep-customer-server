@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import io.reactivesw.catalog.category.application.model.action.CategoryUpdateAction;
+import io.reactivesw.catalog.category.application.model.action.SetSlug;
 import io.reactivesw.catalog.inventory.application.model.action.InventoryEntryUpdateAction;
 import io.reactivesw.catalog.producttype.application.model.action.ProductTypeUpdateAction;
 import io.reactivesw.common.model.action.SetDescription;
@@ -28,7 +29,8 @@ import io.reactivesw.order.zone.application.model.action.ZoneUpdateAction;
     @JsonSubTypes.Type(value = SetName.class, name = "setName"),
     @JsonSubTypes.Type(value = SetDescription.class, name = "setDescription"),
     @JsonSubTypes.Type(value = SetLocalizedName.class, name = "setLocalizedName"),
-    @JsonSubTypes.Type(value = SetLocalizedDescription.class, name = "setLocalizedDescription")
+    @JsonSubTypes.Type(value = SetLocalizedDescription.class, name = "setLocalizedDescription"),
+    @JsonSubTypes.Type(value = SetSlug.class, name = "setSlug"),
 })
 public interface UpdateAction
     extends
