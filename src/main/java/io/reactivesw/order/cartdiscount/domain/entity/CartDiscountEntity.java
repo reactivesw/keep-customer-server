@@ -43,7 +43,7 @@ public class CartDiscountEntity extends BaseAllEntity {
    * The Value.
    */
   @OneToOne
-  private CartDiscountValue value;
+  private CartDiscountValueValue value;
 
   /**
    * The Cart predicate.

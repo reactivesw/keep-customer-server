@@ -1,6 +1,9 @@
 package io.reactivesw.order.cartdiscount.domain.service
 
 import io.reactivesw.common.exception.NotExistException
+import io.reactivesw.common.model.UpdateAction
+import io.reactivesw.order.cartdiscount.application.model.action.SetCartPredicate
+import io.reactivesw.order.cartdiscount.application.model.action.SetTarget
 import io.reactivesw.order.cartdiscount.domain.entity.CartDiscountEntity
 import io.reactivesw.order.cartdiscount.infrastructure.repository.CartDiscountRepository
 import spock.lang.Specification
@@ -56,4 +59,22 @@ class CartDiscountServiceTest extends Specification {
         noExceptionThrown()
         result != null
     }
+
+
+    def "Test 3.1: update cart discount"() {
+        List<UpdateAction> actions = new ArrayList<>()
+        SetCartPredicate setCartPredicate = new SetCartPredicate()
+        setCartPredicate.setCartPredicate("id=111")
+        actions.add(setCartPredicate)
+
+        when:
+        cartDiscountRepository.findOne(_) >> entity
+        cartDiscountRepository.save(_) >> entity
+        CartDiscountEntity result = cartDiscountService.update(id, version, actions)
+        then:
+        noExceptionThrown()
+        result != null
+    }
+
+
 }

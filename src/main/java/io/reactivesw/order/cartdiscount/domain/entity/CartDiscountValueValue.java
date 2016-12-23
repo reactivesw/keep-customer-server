@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "order_cart_discount_value")
 @Data
-public class CartDiscountValue extends BaseIdEntity {
+public class CartDiscountValueValue extends BaseIdEntity {
 
   /**
    * The Type.reactive or absolute.

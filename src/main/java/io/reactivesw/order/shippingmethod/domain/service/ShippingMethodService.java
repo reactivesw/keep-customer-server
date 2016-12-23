@@ -173,7 +173,7 @@ public class ShippingMethodService {
   }
 
   /**
-   * check the version of the discount.
+   * check the version.
    *
    * @param inputVersion Integer
    * @param savedVersion Integer

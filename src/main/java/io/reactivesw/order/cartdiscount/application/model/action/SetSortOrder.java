@@ -1,12 +1,13 @@
 package io.reactivesw.order.cartdiscount.application.model.action;
 
+import io.reactivesw.common.model.UpdateAction;
 import lombok.Data;
 
 /**
  * Created by umasuo on 16/12/22.
  */
 @Data
-public class SetSortOrder implements CartDiscountUpdateAction {
+public class SetSortOrder implements UpdateAction {
   /**
    * new sort order.
    * The string must contain a number between 0 and 1.

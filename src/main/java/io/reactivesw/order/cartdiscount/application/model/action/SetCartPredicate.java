@@ -1,5 +1,6 @@
 package io.reactivesw.order.cartdiscount.application.model.action;
 
+import io.reactivesw.common.model.UpdateAction;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
@@ -8,7 +9,7 @@ import lombok.Data;
  */
 @ApiModel
 @Data
-public class SetCartPredicate implements CartDiscountUpdateAction {
+public class SetCartPredicate implements UpdateAction {
 
   /**
    * A valid CartDiscount predicate.

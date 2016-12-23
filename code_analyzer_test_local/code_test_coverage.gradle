@@ -51,7 +51,8 @@ jacocoTestReport {
                     'io/reactivesw/catalog/product/application/**Client**',
                     'io/reactivesw/catalog/product/infrastructure/utils/**',
                     //先去掉auth的检查,后面再加回来
-                    'io/reactivesw/common/auth/**'
+                    'io/reactivesw/common/auth/**',
+                    '**/cartdiscount/**'
             ])
         })
     }
