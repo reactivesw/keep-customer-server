@@ -17,7 +17,7 @@ import javax.persistence.Version;
  * Created by umasuo on 16/11/23.
  */
 @Data
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "catalog_product")
 public class ProductEntity extends BaseAllEntity {

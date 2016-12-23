@@ -9,6 +9,9 @@ import io.reactivesw.common.model.mapper.CustomFieldsMapper;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * Created by Davis on 16/12/21.
  */
@@ -75,5 +78,13 @@ public final class InventoryEntryMapper {
     model.setExpectedDelivery(entity.getExpectedDelivery());
 
     return model;
+  }
+
+  public static List<InventoryEntry> entityToModel(List<InventoryEntryEntity> entities) {
+    return entities.parallelStream().map(
+        entity -> {
+          return entityToModel(entity);
+        }
+    ).collect(Collectors.toList());
   }
 }

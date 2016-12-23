@@ -3,6 +3,7 @@ package io.reactivesw.order.cartdiscount.domain.entity;
 import io.reactivesw.common.entity.BaseIdEntity;
 import io.reactivesw.order.cartdiscount.infrastructure.enums.DiscountTargetType;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -13,6 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "order_cart_discount_target")
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class CartDiscountTargetValue extends BaseIdEntity {
 
   /**

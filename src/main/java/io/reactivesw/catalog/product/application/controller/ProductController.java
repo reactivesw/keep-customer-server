@@ -7,7 +7,6 @@ import static io.reactivesw.route.ProductRouter.PRODUCT_WITH_ID;
 import io.reactivesw.catalog.product.application.ProductApplication;
 import io.reactivesw.catalog.product.application.model.Product;
 import io.reactivesw.catalog.product.application.model.ProductDraft;
-import io.reactivesw.catalog.product.domain.service.ProductService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
@@ -29,12 +28,6 @@ public class ProductController {
    * log.
    */
   private static final Logger LOG = LoggerFactory.getLogger(ProductController.class);
-
-  /**
-   * The Product service.
-   */
-  @Autowired
-  private transient ProductService productService;
 
   /**
    * Product Application.
@@ -75,7 +68,7 @@ public class ProductController {
                                       String id) {
     LOG.debug("enter getProductById, id is : {}", id);
 
-    Product result = productService.getProductById(id);
+    Product result = productApplication.getProductById(id);
 
     LOG.debug("end getProductById, get product is : {}", result.toString());
 

@@ -16,7 +16,7 @@ import javax.persistence.Table;
  * Created by umasuo on 16/11/23.
  */
 @Data
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "catalog_product_catalog_data")
 public class ProductCatalogDataEntity extends BaseIdEntity {

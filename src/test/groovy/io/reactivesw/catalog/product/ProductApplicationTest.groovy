@@ -3,7 +3,9 @@ package io.reactivesw.catalog.product
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.google.common.collect.Lists
+import io.reactivesw.catalog.inventory.application.model.InventoryEntry
 import io.reactivesw.catalog.product.application.ProductApplication
+import io.reactivesw.catalog.product.application.ProductRestClient
 import io.reactivesw.catalog.product.application.model.Product
 import io.reactivesw.catalog.product.application.model.ProductDraft
 import io.reactivesw.catalog.product.application.model.ProductVariantDraft
@@ -29,9 +31,9 @@ import java.time.ZonedDateTime
  */
 class ProductApplicationTest extends Specification {
 
-    RestTemplate restTemplate = Mock()
+    ProductRestClient productRestClient = Mock()
     ProductService productService = Mock()
-    def productApplication = new ProductApplication(restTemplate: restTemplate, productService: productService)
+    def productApplication = new ProductApplication(productRestClient: productRestClient, productService: productService)
     def productDraft = new ProductDraft()
     def productEntity = new ProductEntity()
     def id = "12345678"
@@ -99,7 +101,7 @@ class ProductApplicationTest extends Specification {
 
     def "test 1.1 : create product without require attribute"() {
         given:
-        restTemplate.getForObject(_, _) >> productType
+        productRestClient.getProductType(_) >> productType
         productService.createProduct(productDraft) >> product
 
         when:
@@ -118,7 +120,7 @@ class ProductApplicationTest extends Specification {
         List<Attribute> attributes = Lists.newArrayList(attribute)
         masterVariant.attributes = attributes
         productDraft.masterVariant = masterVariant
-        restTemplate.getForObject(_, _) >> productType
+        productRestClient.getProductType(_) >> productType
         productService.createProduct(productDraft) >> product
 
         when:
@@ -138,7 +140,7 @@ class ProductApplicationTest extends Specification {
         List<Attribute> attributes = Lists.newArrayList(attribute, attribute1)
         masterVariant.attributes = attributes
         productDraft.masterVariant = masterVariant
-        restTemplate.getForObject(_, _) >> productType
+        productRestClient.getProductType(_) >> productType
         productService.createProduct(productDraft) >> product
 
         when:
@@ -168,7 +170,7 @@ class ProductApplicationTest extends Specification {
 
         productDraft.masterVariant = masterVariant
         productDraft.variants = variantDrafts
-        restTemplate.getForObject(_, _) >> productType
+        productRestClient.getProductType(_) >> productType
         productService.createProduct(productDraft) >> product
 
         when:
@@ -199,7 +201,7 @@ class ProductApplicationTest extends Specification {
 
         productDraft.masterVariant = masterVariant
         productDraft.variants = variantDrafts
-        restTemplate.getForObject(_, _) >> productType
+        productRestClient.getProductType(_) >> productType
         productService.createProduct(productDraft) >> product
 
         when:
@@ -232,7 +234,7 @@ class ProductApplicationTest extends Specification {
 
         productDraft.masterVariant = masterVariant
         productDraft.variants = variantDrafts
-        restTemplate.getForObject(_, _) >> productType
+        productRestClient.getProductType(_) >> productType
         productService.createProduct(productDraft) >> product
 
         when:
@@ -265,7 +267,7 @@ class ProductApplicationTest extends Specification {
 
         productDraft.masterVariant = masterVariant
         productDraft.variants = variantDrafts
-        restTemplate.getForObject(_, _) >> productType
+        productRestClient.getProductType(_) >> productType
         productService.createProduct(productDraft) >> product
 
         when:
@@ -277,7 +279,7 @@ class ProductApplicationTest extends Specification {
 
     def "test 1.8 : create product and get null product type by resttemplate"() {
         given:
-        restTemplate.getForObject(_, _) >> null
+        productRestClient.getProductType(_) >> null
         productService.createProduct(productDraft) >> product
 
         when:
@@ -290,7 +292,7 @@ class ProductApplicationTest extends Specification {
     def "test 1.9 : create product when product type has no attributedefinition"() {
         given:
         productType.attributes = null
-        restTemplate.getForObject(_, _) >> productType
+        productRestClient.getProductType(_) >> productType
         productService.createProduct(productDraft) >> product
 
         when:
@@ -325,7 +327,7 @@ class ProductApplicationTest extends Specification {
 
         productDraft.masterVariant = masterVariant
         productDraft.variants = variantDrafts
-        restTemplate.getForObject(_, _) >> productType
+        productRestClient.getProductType(_) >> productType
         productService.createProduct(productDraft) >> product
 
         when:
@@ -360,7 +362,7 @@ class ProductApplicationTest extends Specification {
 
         productDraft.masterVariant = masterVariant
         productDraft.variants = variantDrafts
-        restTemplate.getForObject(_, _) >> productType
+        productRestClient.getProductType(_) >> productType
         productService.createProduct(productDraft) >> product
 
         when:
@@ -372,7 +374,7 @@ class ProductApplicationTest extends Specification {
 
     def "test 1.11 : create product with require attribute but have no masterVariant"() {
         given:
-        restTemplate.getForObject(_, _) >> productType
+        productRestClient.getProductType(_) >> productType
         productService.createProduct(productDraft) >> product
 
         when:
@@ -397,7 +399,7 @@ class ProductApplicationTest extends Specification {
 
         productDraft.masterVariant = masterVariant
         productDraft.variants = variantDrafts
-        restTemplate.getForObject(_, _) >> productType
+        productRestClient.getProductType(_) >> productType
         productService.createProduct(productDraft) >> product
 
         when:
@@ -428,7 +430,7 @@ class ProductApplicationTest extends Specification {
 
         productDraft.masterVariant = masterVariant
         productDraft.variants = variantDrafts
-        restTemplate.getForObject(_, _) >> productType
+        productRestClient.getProductType(_) >> productType
         productService.createProduct(productDraft) >> product
 
         when:
@@ -463,7 +465,7 @@ class ProductApplicationTest extends Specification {
 
         productDraft.masterVariant = masterVariant
         productDraft.variants = variantDrafts
-        restTemplate.getForObject(_, _) >> productType
+        productRestClient.getProductType(_) >> productType
         productService.createProduct(productDraft) >> product
 
         when:
@@ -477,11 +479,36 @@ class ProductApplicationTest extends Specification {
         given:
         attributeDefinitions = Lists.newArrayList(noneAttribute)
         productType.attributes = attributeDefinitions
-        restTemplate.getForObject(_, _) >> productType
+        productRestClient.getProductType(_) >> productType
         productService.createProduct(productDraft) >> product
 
         when:
         def result = productApplication.createProduct(productDraft)
+
+        then:
+        result != null
+    }
+
+    def "test 2.1 : get Product by Id"() {
+        given:
+        List<InventoryEntry> inventoryEntries = Lists.newArrayList()
+        productService.getProductById(_) >> product
+        productRestClient.getInventoryEntry(_) >> inventoryEntries
+
+        when:
+        def result = productApplication.getProductById(id)
+
+        then:
+        result != null
+    }
+
+    def "test 2.2 : get Product by Id and get null inventory entry"() {
+        given:
+        productService.getProductById(_) >> product
+        productRestClient.getInventoryEntry(_) >> null
+
+        when:
+        def result = productApplication.getProductById(id)
 
         then:
         result != null

@@ -1,5 +1,7 @@
 package io.reactivesw.catalog.inventory.domain.service;
 
+import com.google.common.collect.Lists;
+
 import io.reactivesw.catalog.inventory.application.model.InventoryEntry;
 import io.reactivesw.catalog.inventory.application.model.InventoryEntryDraft;
 import io.reactivesw.catalog.inventory.application.model.mapper.InventoryEntryMapper;
@@ -112,6 +114,27 @@ public class InventoryEntryService {
     InventoryEntry result = InventoryEntryMapper.entityToModel(entity);
 
     LOG.debug("end getInventoryEntryById, get result is : {}", result.toString());
+
+    return result;
+  }
+
+  /**
+   * Query by sku names.
+   *
+   * @param skuNames the sku names
+   * @return the list
+   */
+  public List<InventoryEntry> queryBySkuNames(List<String> skuNames) {
+    LOG.debug("enter queryBySkuNames, sku names is : {}", skuNames);
+    List<InventoryEntryEntity> inventoryEntryEntities = inventoryEntryRepository.queryBySkuNames(skuNames);
+
+    List<InventoryEntry> result = Lists.newArrayList();
+
+    if (inventoryEntryEntities != null) {
+      result = InventoryEntryMapper.entityToModel(inventoryEntryEntities);
+    }
+
+    LOG.debug("end queryBySkuNames, get InventoryEntries number is : {}", result.size());
 
     return result;
   }

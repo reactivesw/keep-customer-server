@@ -5,9 +5,14 @@ import java.util.Map;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 /**
  * Created by umasuo on 16/11/17.
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
 @ApiModel
 public class ProductVariantAvailability {
 

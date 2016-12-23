@@ -4,6 +4,7 @@ import io.reactivesw.common.entity.BaseIdEntity;
 import io.reactivesw.common.entity.LocalizedStringEntity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Set;
 
@@ -20,6 +21,7 @@ import javax.persistence.Table;
  * Created by umasuo on 16/11/23.
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "catalog_product_data")
 public class ProductDataEntity extends BaseIdEntity {

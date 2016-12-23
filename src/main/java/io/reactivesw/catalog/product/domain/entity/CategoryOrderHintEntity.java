@@ -15,7 +15,7 @@ import javax.persistence.Table;
  * Created by Davis on 16/12/20.
  */
 @Data
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity

@@ -26,9 +26,10 @@ class InventoryEntryServiceTest extends Specification {
     def inventoryEntryEntity = new InventoryEntryEntity()
     def id = "1234566"
     def version = 1
+    def skuName = "sku"
 
     def setup() {
-        inventoryEntryDraft.sku = "sku"
+        inventoryEntryDraft.sku = skuName
         inventoryEntryDraft.expectedDelivery = ZonedDateTime.now()
         inventoryEntryDraft.supplyChannel = new Reference(ReferenceTypes.CHANNEL.getType(), "q.ksfdkhsdfdf")
         inventoryEntryDraft.quantityOnStock = 120
@@ -110,5 +111,32 @@ class InventoryEntryServiceTest extends Specification {
 
         then:
         thrown(NotExistException)
+    }
+
+    def "test 5.1 : query inventory entry by sku names"() {
+        given:
+        def skuNames = Lists.newArrayList(skuName)
+        def inventoryList = Lists.newArrayList(inventoryEntryEntity)
+        inventoryEntryRepository.queryBySkuNames(skuNames) >> inventoryList
+
+        when:
+        def result = inventoryEntryService.queryBySkuNames(skuNames)
+
+        then:
+        result != null
+        result.size() == inventoryList.size()
+    }
+
+    def "test 5.2 : query inventory entry by sku names and get null result"() {
+        given:
+        def skuNames = Lists.newArrayList(skuName)
+        inventoryEntryRepository.queryBySkuNames(skuNames) >> null
+
+        when:
+        def result = inventoryEntryService.queryBySkuNames(skuNames)
+
+        then:
+        result != null
+        result.size() == 0
     }
 }

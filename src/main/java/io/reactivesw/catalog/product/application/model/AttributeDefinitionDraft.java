@@ -3,6 +3,7 @@ package io.reactivesw.catalog.product.application.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import io.reactivesw.catalog.product.application.model.attributes.AttributeConstraint;
 import io.reactivesw.common.model.TextInputHint;
@@ -39,6 +40,7 @@ public class AttributeDefinitionDraft {
    */
   @ApiModelProperty(required = true)
   @NotNull
+  @Pattern(regexp="[-a-zA-Z0-9_]{2,256}", message = "can not match attribute name")
   private String name;
 
   /**
@@ -82,5 +84,9 @@ public class AttributeDefinitionDraft {
   @NotNull
   private Boolean isSearchable;
 
+  /**
+   * inputTip.
+   */
+  @ApiModelProperty(required = false)
   private LocalizedString inputTip;
 }

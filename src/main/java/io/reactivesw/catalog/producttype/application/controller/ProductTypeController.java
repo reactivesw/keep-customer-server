@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -61,7 +62,7 @@ public class ProductTypeController {
   @PostMapping(PRODUCT_TYPE_ROOT)
   public ProductType createProductType(@RequestBody
                                        @ApiParam(value = "ProductType Draft", required = true)
-                                           ProductTypeDraft productTypeDraft) {
+                                         @Valid ProductTypeDraft productTypeDraft) {
     LOG.debug("enter createProductType, draft is:{}", productTypeDraft.toString());
 
     ProductType result = productTypeService.createProductType(productTypeDraft);
@@ -82,6 +83,7 @@ public class ProductTypeController {
   public void deleteProductTypeById(@PathVariable(value = PRODUCT_TYPE_ID)
                                     @ApiParam(value = PRODUCT_TYPE_ID_STRING, required = true)
                                         String id,
+                                    @RequestBody
                                     @ApiParam(value = "ProductType Version", required = true)
                                     @NotNull Integer version) {
     LOG.debug("enter deleteProductTypeById, id is : {}, version is : {}", id, version);
@@ -102,6 +104,7 @@ public class ProductTypeController {
   public void deleteProductTypeByKey(@PathVariable(value = PRODUCT_TYPE_KEY)
                                      @ApiParam(value = "ProductType Key", required = true)
                                          String key,
+                                     @RequestBody
                                      @ApiParam(value = "ProductType Version", required = true)
                                      @NotNull Integer version) {
     LOG.debug("enter deleteProductTypeById, key is : {}, version is : {}", key, version);
