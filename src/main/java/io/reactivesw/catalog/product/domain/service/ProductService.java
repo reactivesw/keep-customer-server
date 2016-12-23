@@ -6,10 +6,9 @@ import io.reactivesw.catalog.product.application.model.mapper.ProductMapper;
 import io.reactivesw.catalog.product.domain.entity.ProductEntity;
 import io.reactivesw.catalog.product.infrastructure.repository.ProductRepository;
 import io.reactivesw.catalog.product.infrastructure.validator.SkuNameValidator;
-import io.reactivesw.common.exception.ConflictException;
+import io.reactivesw.catalog.product.infrastructure.validator.SlugValidator;
 import io.reactivesw.common.exception.NotExistException;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +45,7 @@ public class ProductService {
     LOG.debug("enter createProduct, ProductDraft is : {}", productDraft.toString());
 
     List<ProductEntity> products = productRepository.findAll();
-    validateSlug(productDraft.getSlug(), products);
+    SlugValidator.validate(productDraft.getSlug(), products);
     SkuNameValidator.validate(productDraft, products);
 
     ProductEntity entity = ProductMapper.modelToEntity(productDraft);
@@ -112,35 +111,5 @@ public class ProductService {
       throw new NotExistException("Product Not Found");
     }
     return entity;
-  }
-
-  /**
-   * validate slug.
-   *
-   * @param slug     the slug.
-   * @param products the products.
-   */
-  private void validateSlug(String slug, List<ProductEntity> products) {
-    if (products != null) {
-      products.parallelStream().forEach(
-          product -> {
-            validateSlug(slug, product);
-          }
-      );
-    }
-  }
-
-  /**
-   * validate slug.
-   *
-   * @param slug    the slug
-   * @param product the product
-   */
-  private void validateSlug(String slug, ProductEntity product) {
-    if (StringUtils.equals(slug, product.getMasterData().getCurrent().getSlug())
-        || StringUtils.equals(slug, product.getMasterData().getStaged().getSlug())) {
-      LOG.debug("slug : {} has already exists", slug);
-      throw new ConflictException("slug has already exists");
-    }
   }
 }
