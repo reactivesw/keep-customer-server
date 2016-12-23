@@ -10,6 +10,7 @@ import io.reactivesw.catalog.product.domain.service.ProductService;
 import io.reactivesw.catalog.product.infrastructure.utils.ProductInventoryUtils;
 import io.reactivesw.catalog.product.infrastructure.utils.QueryConditionUtils;
 import io.reactivesw.catalog.product.infrastructure.validator.AttributeConstraintValidator;
+import io.reactivesw.catalog.product.infrastructure.validator.SkuNameValidator;
 import io.reactivesw.catalog.producttype.application.model.ProductType;
 import io.reactivesw.common.exception.NotExistException;
 import io.reactivesw.common.model.QueryConditions;
@@ -62,6 +63,7 @@ public class ProductApplication {
     }
 
     AttributeConstraintValidator.validate(productType.getAttributes(), productDraft);
+    SkuNameValidator.validate(productDraft);
 
     Product result = productService.createProduct(productDraft);
 

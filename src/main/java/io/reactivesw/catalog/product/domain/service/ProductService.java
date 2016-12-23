@@ -5,6 +5,7 @@ import io.reactivesw.catalog.product.application.model.ProductDraft;
 import io.reactivesw.catalog.product.application.model.mapper.ProductMapper;
 import io.reactivesw.catalog.product.domain.entity.ProductEntity;
 import io.reactivesw.catalog.product.infrastructure.repository.ProductRepository;
+import io.reactivesw.catalog.product.infrastructure.validator.SkuNameValidator;
 import io.reactivesw.common.exception.ConflictException;
 import io.reactivesw.common.exception.NotExistException;
 
@@ -46,6 +47,7 @@ public class ProductService {
 
     List<ProductEntity> products = productRepository.findAll();
     validateSlug(productDraft.getSlug(), products);
+    SkuNameValidator.validate(productDraft, products);
 
     ProductEntity entity = ProductMapper.modelToEntity(productDraft);
 
