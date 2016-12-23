@@ -41,7 +41,7 @@ public class ProductDataEntity extends BaseIdEntity {
   /**
    * slug.
    */
-  @Column(unique = true)
+  @Column
   private String slug;
 
   /**

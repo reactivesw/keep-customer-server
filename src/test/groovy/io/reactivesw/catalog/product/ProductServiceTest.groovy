@@ -9,6 +9,7 @@ import io.reactivesw.catalog.product.domain.entity.ProductEntity
 import io.reactivesw.catalog.product.domain.service.ProductService
 import io.reactivesw.catalog.product.infrastructure.repository.ProductRepository
 import io.reactivesw.common.enums.ReferenceTypes
+import io.reactivesw.common.exception.ConflictException
 import io.reactivesw.common.exception.NotExistException
 import io.reactivesw.common.model.LocalizedString
 import io.reactivesw.common.model.Reference
@@ -27,15 +28,14 @@ class ProductServiceTest extends Specification {
     def productDraft = new ProductDraft()
     def productEntity = new ProductEntity()
     def id = "12345678"
+    def slug = "cup1111111"
 
     def setup() {
         def name = new LocalizedString()
         name.addKeyValue("en", "cup")
         productDraft.name = name
 
-        def slug = new LocalizedString()
-        slug.addKeyValue("en", "cup-111111")
-        productDraft.slug
+        productDraft.slug = slug
 
         def reference = new ResourceIdentifier(ReferenceTypes.PRODUCTTYPE.getType(), "123343434343434")
         productDraft.productType = reference
@@ -46,8 +46,36 @@ class ProductServiceTest extends Specification {
         productEntity.lastModifiedAt = ZonedDateTime.now()
     }
 
-    def "test 1.1 create product"() {
+    def "test 1.1 : create product"() {
         given:
+        productRepository.save(_) >> productEntity
+
+        when:
+        def result = productService.createProduct(productDraft)
+
+        then:
+        result != null
+        result.id != null
+    }
+
+    def "test 1.2 : create product and slug is same"() {
+        given:
+        productRepository.findAll() >> Lists.newArrayList(productEntity)
+        productRepository.save(_) >> productEntity
+
+        when:
+        def result = productService.createProduct(productDraft)
+
+        then:
+        thrown(ConflictException)
+    }
+
+    def "test 1.3 : create product and slug is same"() {
+        given:
+        ProductEntity slugProduct = productEntity
+        slugProduct.masterData.current.slug = slug + "current"
+        slugProduct.masterData.staged.slug = slug + "staged"
+        productRepository.findAll() >> Lists.newArrayList(slugProduct)
         productRepository.save(_) >> productEntity
 
         when:

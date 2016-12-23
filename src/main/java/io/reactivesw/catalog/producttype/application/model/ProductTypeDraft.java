@@ -21,7 +21,6 @@ import javax.validation.constraints.Pattern;
 @Data
 @ApiModel
 @JsonIgnoreProperties(ignoreUnknown = true)
-
 public class ProductTypeDraft {
   /**
    * The Name.

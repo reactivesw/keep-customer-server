@@ -1,7 +1,5 @@
 package io.reactivesw.catalog.category.domain.entity;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import io.reactivesw.common.dialect.JSONBUserType;
 import io.reactivesw.common.entity.BaseAllEntity;
 import io.reactivesw.common.entity.LocalizedStringEntity;
@@ -24,7 +22,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.persistence.Version;
 
 /**
@@ -39,13 +36,6 @@ import javax.persistence.Version;
     @Parameter(name = JSONBUserType.CLASS, value = "io.reactivesw.common.model.CustomFields")}
 )
 public class CategoryEntity extends BaseAllEntity {
-
-  /**
-   * ObjectMapper.
-   */
-  @Transient
-  private final transient ObjectMapper objectMapper = new ObjectMapper();
-
   /**
    * version.
    */
