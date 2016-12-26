@@ -19,6 +19,8 @@ public enum ReferenceTypes {
 
   CARTDISCOUNT("cart-discount"),
 
+  SHIPPING_METHOD("shipping-method"),
+
   TAXCATEGORY("tax-category");
 
   private String value;

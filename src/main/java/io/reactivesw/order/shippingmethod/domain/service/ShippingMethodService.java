@@ -139,7 +139,8 @@ public class ShippingMethodService {
    * @param actions UpdateAction list
    * @return ZoneEntity
    */
-  public ShippingMethodEntity update(String id, Integer version, List<UpdateAction> actions) {
+  public ShippingMethodEntity update(String id, Integer version, List<UpdateAction>
+      actions) {
     LOG.debug("enter: id: {}, version: {}, actions: {}", id, version, actions);
 
     ShippingMethodEntity valueInDb = this.getById(id);

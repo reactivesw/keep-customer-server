@@ -1,12 +1,14 @@
 package io.reactivesw.order.cart.application.model.mapper;
 
+import io.reactivesw.common.enums.ReferenceTypes;
+import io.reactivesw.common.model.Reference;
+import io.reactivesw.common.model.mapper.MoneyMapper;
 import io.reactivesw.order.cart.application.model.Cart;
 import io.reactivesw.order.cart.application.model.CustomLineItem;
 import io.reactivesw.order.cart.application.model.LineItem;
 import io.reactivesw.order.cart.domain.entity.CartEntity;
 import io.reactivesw.order.cart.domain.entity.value.CustomLineItemValue;
 import io.reactivesw.order.cart.domain.entity.value.LineItemValue;
-import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,9 +43,18 @@ public class CartMapper {
     cart.setAnonymousId(entity.getAnonymousId());
     cart.setLineItems(getLineItems(entity.getLineItems()));
     cart.setCustomLineItems(getCustomLineItem(entity.getCustomLineItems()));
+    cart.setTotalPrice(MoneyMapper.entityToModel(entity.getTotalPrice()));
+    cart.setCartState(entity.getCartState());
+    cart.setShippingAddress(AddressMapper.entityToModel(entity.getShippingAddress()));
+    cart.setBillingAddress(AddressMapper.entityToModel(entity.getBillingAddress()));
+    cart.setInventoryMode(entity.getInventoryMode());
+    cart.setTaxMode(entity.getTaxMode());
+    cart.setCustomerGroup(new Reference(ReferenceTypes.CUSTOMERGROUP.getType(), entity
+        .getCustomerGroup()));
     cart.setCountry(entity.getCountry());
-//    cart.setBillingAddress();
-    //TODO finish entity to model.
+    cart.setShippingInfo(ShippingInfoMapper.entityToModel(entity.getShippingInfo()));
+    cart.setLocale(entity.getLocale());
+    //TODO finish entity to model. discount code, payment
     return cart;
   }
 

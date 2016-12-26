@@ -1,8 +1,9 @@
 package io.reactivesw.order.cart.application.model.mapper;
 
-import io.reactivesw.catalog.taxcategory.application.model.SubRate;
+import io.reactivesw.order.cart.application.model.SubRate;
 import io.reactivesw.order.cart.domain.entity.value.SubRateValue;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,6 +26,16 @@ public class SubRateMapper {
     return entity;
   }
 
+  public static SubRate entityToModel(SubRateValue entity) {
+    SubRate model = null;
+    if (entity != null) {
+      model = new SubRate();
+      model.setName(entity.getName());
+      model.setAmount(entity.getAmount());
+    }
+    return model;
+  }
+
   /**
    * convert list of SubRate to set of SubRateValue.
    *
@@ -39,5 +50,15 @@ public class SubRateMapper {
         }
     );
     return entities;
+  }
+
+  public static List<SubRate> entityToModel(Set<SubRateValue> entities) {
+    List<SubRate> models = new ArrayList<>();
+    entities.parallelStream().forEach(
+        subRateValue -> {
+          models.add(entityToModel(subRateValue));
+        }
+    );
+    return models;
   }
 }

@@ -15,55 +15,119 @@ public class AddressMapper {
    * @param entity BillingAddressValue
    * @return Address
    */
-  public static Address convertEntityToModel(BillingAddressValue entity) {
-    Address address = new Address();
-    address.setId(entity.getId());
+  public static Address entityToModel(BillingAddressValue entity) {
+    Address address = null;
+    if (entity != null) {
+      address = new Address();
+      address.setId(entity.getId());
 
-    address.setTitle(entity.getTitle());
+      address.setTitle(entity.getTitle());
 
-    address.setSalutation(entity.getSalutation());
+      address.setSalutation(entity.getSalutation());
 
-    address.setFirstName(entity.getFirstName());
+      address.setFirstName(entity.getFirstName());
 
-    address.setLastName(entity.getLastName());
+      address.setLastName(entity.getLastName());
 
-    address.setStreetName(entity.getStreetName());
+      address.setStreetName(entity.getStreetName());
 
-    address.setStreetNumber(entity.getStreetNumber());
+      address.setStreetNumber(entity.getStreetNumber());
 
-    address.setAdditionalStreetInfo(entity.getAdditionalStreetInfo());
+      address.setAdditionalStreetInfo(entity.getAdditionalStreetInfo());
 
-    address.setPostalCode(entity.getPostalCode());
+      address.setPostalCode(entity.getPostalCode());
 
-    address.setCity(entity.getCity());
+      address.setCity(entity.getCity());
 
-    address.setRegion(entity.getRegion());
+      address.setRegion(entity.getRegion());
 
-    address.setState(entity.getState());
+      address.setState(entity.getState());
 
-    address.setCountry(entity.getCountry());
+      address.setCountry(entity.getCountry());
 
-    address.setCompany(entity.getCompany());
+      address.setCompany(entity.getCompany());
 
-    address.setDepartment(entity.getDepartment());
+      address.setDepartment(entity.getDepartment());
 
-    address.setBuilding(entity.getBuilding());
+      address.setBuilding(entity.getBuilding());
 
-    address.setApartment(entity.getApartment());
+      address.setApartment(entity.getApartment());
 
-    address.setpOBox(entity.getBox());
+      address.setpOBox(entity.getBox());
 
-    address.setPhone(entity.getPhone());
+      address.setPhone(entity.getPhone());
 
-    address.setMobile(entity.getMobile());
+      address.setMobile(entity.getMobile());
 
-    address.setEmail(entity.getEmail());
+      address.setEmail(entity.getEmail());
 
-    address.setFax(entity.getFax());
+      address.setFax(entity.getFax());
 
-    address.setAdditionalAddressInfo(entity.getAdditionalAddressInfo());
+      address.setAdditionalAddressInfo(entity.getAdditionalAddressInfo());
 
-    address.setExternalId(entity.getExternalId());
+      address.setExternalId(entity.getExternalId());
+    }
+    return address;
+  }
+
+  /**
+   * convert entity to model.
+   *
+   * @param entity BillingAddressValue
+   * @return Address
+   */
+  public static Address entityToModel(ShippingAddressValue entity) {
+    Address address = null;
+    if (entity != null) {
+      address = new Address();
+      address.setId(entity.getId());
+
+      address.setTitle(entity.getTitle());
+
+      address.setSalutation(entity.getSalutation());
+
+      address.setFirstName(entity.getFirstName());
+
+      address.setLastName(entity.getLastName());
+
+      address.setStreetName(entity.getStreetName());
+
+      address.setStreetNumber(entity.getStreetNumber());
+
+      address.setAdditionalStreetInfo(entity.getAdditionalStreetInfo());
+
+      address.setPostalCode(entity.getPostalCode());
+
+      address.setCity(entity.getCity());
+
+      address.setRegion(entity.getRegion());
+
+      address.setState(entity.getState());
+
+      address.setCountry(entity.getCountry());
+
+      address.setCompany(entity.getCompany());
+
+      address.setDepartment(entity.getDepartment());
+
+      address.setBuilding(entity.getBuilding());
+
+      address.setApartment(entity.getApartment());
+
+      address.setpOBox(entity.getBox());
+
+      address.setPhone(entity.getPhone());
+
+      address.setMobile(entity.getMobile());
+
+      address.setEmail(entity.getEmail());
+
+      address.setFax(entity.getFax());
+
+      address.setAdditionalAddressInfo(entity.getAdditionalAddressInfo());
+
+      address.setExternalId(entity.getExternalId());
+    }
     return address;
   }
 
@@ -124,7 +188,7 @@ public class AddressMapper {
     return value;
   }
 
-    /**
+  /**
    * convert model to billing address.
    *
    * @return BillingAddressValue

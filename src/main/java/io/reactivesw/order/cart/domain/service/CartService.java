@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * TODO we should refine these codes.
  * Created by umasuo on 16/11/29.
  */
 @Service

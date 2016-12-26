@@ -140,8 +140,7 @@ public class ShippingMethodController {
   @PutMapping(ShippingMethodRouter.SHIPPING_METHOD_WITH_ID)
   public ShippingMethod update(
       @PathVariable @ApiParam(required = true) String id,
-      @RequestBody @ApiParam(required = true) UpdateRequest
-          updateRequest) {
+      @RequestBody @ApiParam(required = true) UpdateRequest updateRequest) {
     LOG.info("enter: id: {}, UpdateRequest: {}", id, updateRequest);
 
     ShippingMethodEntity entity = service.update(id, updateRequest.getVersion(), updateRequest
@@ -165,4 +164,5 @@ public class ShippingMethodController {
 
     service.deleteById(id, version);
   }
+
 }

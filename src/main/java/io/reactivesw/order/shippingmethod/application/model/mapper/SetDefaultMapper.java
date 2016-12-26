@@ -11,6 +11,6 @@ public class SetDefaultMapper implements ShippingMethodUpdateMapper {
 
   @Override
   public void handle(ShippingMethodEntity entity, UpdateAction action) {
-    entity.setAsDefault(((SetDefault)action).getDefault());
+    entity.setAsDefault(((SetDefault) action).getIsDefault());
   }
 }
