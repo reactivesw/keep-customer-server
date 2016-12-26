@@ -1,10 +1,10 @@
-package io.reactivesw.catalog.taxcategory.application.model;
-
-import java.util.List;
+package io.reactivesw.order.cart.application.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+import java.util.List;
 
 /**
  * Created by umasuo on 16/11/17.

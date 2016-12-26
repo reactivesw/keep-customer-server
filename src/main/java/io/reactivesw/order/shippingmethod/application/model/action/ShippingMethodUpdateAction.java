@@ -2,6 +2,7 @@ package io.reactivesw.order.shippingmethod.application.model.action;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import io.reactivesw.common.model.UpdateAction;
 
 /**
  * Created by umasuo on 16/12/22.

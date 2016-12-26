@@ -74,15 +74,11 @@ public class CartController {
   public Cart updateCart(@ApiParam(required = true) @PathVariable(CartRouter.CART_ID) String id,
                          @RequestBody UpdateRequest updateRequest) {
     LOG.info("id:{}", id);
-    return null;
+
+    CartEntity entity = this.cartService.updateCart(id, updateRequest.getVersion(), updateRequest
+        .getActions());
+
+    return CartMapper.entityToModel(entity);
   }
 
-  /**
-   * Sets cart service.
-   *
-   * @param cartService the cart service
-   */
-  protected void setCartService(CartService cartService) {
-    this.cartService = cartService;
-  }
 }

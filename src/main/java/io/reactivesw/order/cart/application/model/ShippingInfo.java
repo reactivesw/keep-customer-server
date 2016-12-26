@@ -4,16 +4,18 @@ import java.util.List;
 
 import io.reactivesw.order.cartdiscount.application.model.DiscountedLineItemPrice;
 import io.reactivesw.order.order.model.Delivery;
-import io.reactivesw.order.shippingmethod.application.model.ShippingRate;
 import io.reactivesw.common.model.Money;
 import io.reactivesw.common.model.Reference;
-import io.reactivesw.catalog.taxcategory.application.model.TaxRate;
+import io.reactivesw.order.shippingmethod.application.model.ShippingRate;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 /**
  * Created by umasuo on 16/11/17.
- */@ApiModel
+ */
+@Data
+@ApiModel
 public class ShippingInfo {
 
   @ApiModelProperty(required = true)

@@ -22,7 +22,7 @@ public class ExternalTaxRateMapper {
     taxRate.setAmount(draft.getAmount());
     taxRate.setCountry(draft.getCountry());
     taxRate.setState(draft.getState());
-    taxRate.setSubRates(SubRateMapper.modelListToEntitySet(draft.getSubRates()));
+//TODO    taxRate.setSubRates(SubRateMapper.modelListToEntitySet(draft.getSubRates()));
     return taxRate;
   }
 }
