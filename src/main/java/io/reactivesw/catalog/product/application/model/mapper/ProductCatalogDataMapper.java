@@ -11,7 +11,7 @@ public class ProductCatalogDataMapper {
   public static ProductCatalogDataEntity modelToEntity(ProductDraft model) {
     ProductCatalogDataEntity entity = new ProductCatalogDataEntity();
 
-    entity.setPublished(false);
+    entity.setPublished(model.getPublish());
     entity.setStagedChanged(false);
     entity.setCurrent(ProductDataMapper.modelToEntity(model));
     entity.setStaged(ProductDataMapper.modelToEntity(model));
