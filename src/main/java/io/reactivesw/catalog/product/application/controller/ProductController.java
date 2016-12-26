@@ -3,7 +3,7 @@ package io.reactivesw.catalog.product.application.controller;
 import static io.reactivesw.route.ProductRouter.PRODUCT_ID;
 import static io.reactivesw.route.ProductRouter.PRODUCT_ROOT;
 import static io.reactivesw.route.ProductRouter.PRODUCT_SLUG;
-import static io.reactivesw.route.ProductRouter.PRODUCT_WITH_ID;
+import static io.reactivesw.route.ProductRouter.PRODUCT_WITH_SLUG;
 
 import io.reactivesw.catalog.product.application.ProductApplication;
 import io.reactivesw.catalog.product.application.model.Product;
@@ -53,7 +53,7 @@ public class ProductController {
   @PostMapping(PRODUCT_ROOT)
   public Product createProduct(@RequestBody
                                @ApiParam(value = "Product Draft", required = true)
-                                ProductDraft productDraft) {
+                                   ProductDraft productDraft) {
     LOG.debug("enter createProduct, ProductDraft is : {}", productDraft.toString());
 
     Product result = productApplication.createProduct(productDraft);
@@ -69,11 +69,11 @@ public class ProductController {
    * @param id the id
    * @return the Product
    */
-  @ApiOperation(value = "Get Product By Id")
-  @GetMapping(PRODUCT_WITH_ID)
+//  @ApiOperation(value = "Get Product By Id")
+//  @GetMapping(PRODUCT_WITH_ID)
   public Product getProductById(@PathVariable(value = PRODUCT_ID)
-                                  @ApiParam(value = "Product ID", required = true)
-                                      String id) {
+                                @ApiParam(value = "Product ID", required = true)
+                                    String id) {
     LOG.debug("enter getProductById, id is : {}", id);
 
     Product result = productApplication.getProductById(id);
@@ -89,9 +89,11 @@ public class ProductController {
    * @param slug the slug
    * @return the product by slug
    */
+  @ApiOperation(value = "Get Product By Slug")
+  @GetMapping(PRODUCT_WITH_SLUG)
   public Product getProductBySlug(@PathVariable(value = PRODUCT_SLUG)
                                   @ApiParam(value = "Product Slug", required = true)
-                                  String slug) {
+                                      String slug) {
     LOG.debug("enter getProductBySlug, slug is : {}", slug);
 
     Product result = productService.getProductBySlug(slug);
