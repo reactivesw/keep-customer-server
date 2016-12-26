@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "order_shipping_method")
 @Data
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 public class ShippingMethodEntity extends BaseAllEntity {
 
   /**

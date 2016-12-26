@@ -9,6 +9,7 @@ import io.reactivesw.catalog.product.infrastructure.validator.SkuNameValidator;
 import io.reactivesw.catalog.product.infrastructure.validator.SlugValidator;
 import io.reactivesw.common.exception.NotExistException;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -93,6 +95,30 @@ public class ProductService {
     Product result = ProductMapper.entityToModel(entity);
 
     LOG.debug("end getProductById, get Product is : {}", result.toString());
+
+    return result;
+  }
+
+  /**
+   * Gets product by slug.
+   *
+   * @param slug the slug
+   * @return the product by slug
+   */
+  public Product getProductBySlug(String slug) {
+    LOG.debug("enter getProductBySlug, slug is : {}", slug);
+
+    List<ProductEntity> products = productRepository.findAll();
+    Optional<ProductEntity> optional = products.parallelStream().filter(
+        product -> StringUtils.equals(slug, product.getMasterData().getCurrent().getSlug())
+    ).findAny();
+
+    Product result = new Product();
+    if (optional.isPresent()) {
+      result = ProductMapper.entityToModel(optional.get());
+    }
+
+    LOG.debug("end getProductBySlug, get product : {}", result.toString());
 
     return result;
   }

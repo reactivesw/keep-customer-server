@@ -27,7 +27,7 @@ import javax.persistence.Table;
 @Table(name = "order_cart_line_item")
 @Getter
 @Setter
-@EqualsAndHashCode(of = {"productId", "supplyChannel", "distributionChannel"})
+@EqualsAndHashCode(callSuper = false, of = {"productId", "supplyChannel", "distributionChannel"})
 public class LineItemValue extends BaseIdEntity {
 
   /**

@@ -3,6 +3,7 @@ package io.reactivesw.order.cartdiscount.domain.entity;
 import io.reactivesw.common.entity.BaseAllEntity;
 import io.reactivesw.common.entity.LocalizedStringEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.ZonedDateTime;
 import java.util.Set;
@@ -19,6 +20,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "order_cart_discount_discount")
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class CartDiscountEntity extends BaseAllEntity {
 
   /**

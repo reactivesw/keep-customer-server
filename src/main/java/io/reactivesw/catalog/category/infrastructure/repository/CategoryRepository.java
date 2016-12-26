@@ -41,4 +41,12 @@ public interface CategoryRepository extends JpaRepository<CategoryEntity, String
   @Transactional
   @Query(value = "delete from CategoryEntity c where c.id in ?1")
   void deleteCategoryById(List<String> Ids);
+
+  /**
+   * Find category by slug.
+   *
+   * @param slug the slug
+   * @return the category entity
+   */
+  CategoryEntity findCategoryBySlug(String slug);
 }

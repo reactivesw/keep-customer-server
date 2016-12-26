@@ -24,6 +24,9 @@ dependencies {
     //postgresql driver
     compile('org.postgresql:postgresql:9.4.1212')
 
+    //h2
+    compile('com.h2database:h2:1.4.193')
+
     //commons-lang
     compile('org.apache.commons:commons-lang3:3.4')
 

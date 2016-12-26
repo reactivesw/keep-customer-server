@@ -2,6 +2,7 @@ package io.reactivesw.order.zone.domain.entity;
 
 import io.reactivesw.common.entity.BaseAllEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Set;
 
@@ -18,6 +19,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "order_zone")
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class ZoneEntity extends BaseAllEntity {
 
   /**

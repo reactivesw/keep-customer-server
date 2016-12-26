@@ -22,7 +22,7 @@ import javax.persistence.Version;
  * Created by Davis on 16/11/23.
  */
 @Data
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "catalog_inventory_entry")
 @TypeDef(name = "Custom", typeClass = JSONBUserType.class, parameters = {

@@ -125,4 +125,30 @@ class ProductServiceTest extends Specification {
         then:
         result != null
     }
+
+    def "test 6.1 : get product by slug"() {
+        given:
+        def productSlug = slug
+        List<ProductEntity> products = Lists.newArrayList(productEntity)
+        productRepository.findAll() >> products
+
+        when:
+        def result = productService.getProductBySlug(productSlug)
+
+        then:
+        result != null
+    }
+
+    def "test 6.1 : get product by slug and can not match slug"() {
+        given:
+        def productSlug = slug + "11"
+        List<ProductEntity> products = Lists.newArrayList(productEntity)
+        productRepository.findAll() >> products
+
+        when:
+        def result = productService.getProductBySlug(productSlug)
+
+        then:
+        result != null
+    }
 }

@@ -148,14 +148,13 @@ public class CategoryService {
     return CategoryMapper.entityToModel(getById(id));
   }
 
-
   /**
    * Query category.
    *
    * @param queryConditions the QueryConditions
    * @return the paged query result
    */
-  // TODO: 16/12/13 queryconditions
+// TODO: 16/12/13 queryconditions
   public PagedQueryResult<Category> queryCategories(QueryConditions queryConditions) {
     LOG.debug("enter queryCategories, QueryConditions is : {}", queryConditions.toString());
 

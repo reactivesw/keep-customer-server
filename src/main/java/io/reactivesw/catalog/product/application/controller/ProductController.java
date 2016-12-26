@@ -2,11 +2,13 @@ package io.reactivesw.catalog.product.application.controller;
 
 import static io.reactivesw.route.ProductRouter.PRODUCT_ID;
 import static io.reactivesw.route.ProductRouter.PRODUCT_ROOT;
+import static io.reactivesw.route.ProductRouter.PRODUCT_SLUG;
 import static io.reactivesw.route.ProductRouter.PRODUCT_WITH_ID;
 
 import io.reactivesw.catalog.product.application.ProductApplication;
 import io.reactivesw.catalog.product.application.model.Product;
 import io.reactivesw.catalog.product.application.model.ProductDraft;
+import io.reactivesw.catalog.product.domain.service.ProductService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
@@ -34,6 +36,12 @@ public class ProductController {
    */
   @Autowired
   private transient ProductApplication productApplication;
+
+  /**
+   * The Product service.
+   */
+  @Autowired
+  private transient ProductService productService;
 
   /**
    * Create Product.
@@ -71,6 +79,24 @@ public class ProductController {
     Product result = productApplication.getProductById(id);
 
     LOG.debug("end getProductById, get product is : {}", result.toString());
+
+    return result;
+  }
+
+  /**
+   * Gets product by slug.
+   *
+   * @param slug the slug
+   * @return the product by slug
+   */
+  public Product getProductBySlug(@PathVariable(value = PRODUCT_SLUG)
+                                  @ApiParam(value = "Product Slug", required = true)
+                                  String slug) {
+    LOG.debug("enter getProductBySlug, slug is : {}", slug);
+
+    Product result = productService.getProductBySlug(slug);
+
+    LOG.debug("end getProductBySlug, get product : {}", result.toString());
 
     return result;
   }

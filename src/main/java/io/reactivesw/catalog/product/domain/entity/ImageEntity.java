@@ -19,7 +19,7 @@ import javax.persistence.Table;
  * Created by Davis on 16/11/23.
  */
 @Data
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "catalog_product_image")
 @TypeDef(name = "Dimensions", typeClass = JSONBUserType.class, parameters = {

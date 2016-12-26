@@ -7,6 +7,7 @@ import io.reactivesw.common.entity.MoneyEntity;
 import io.reactivesw.common.model.CustomFields;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
@@ -25,6 +26,7 @@ import javax.persistence.Table;
  * Created by Davis on 16/11/23.
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "catalog_product_price")
 @TypeDef(name = "Custom", typeClass = JSONBUserType.class, parameters = {

@@ -52,6 +52,6 @@ public class ProductTypeEntity extends BaseAllEntity {
   /**
    * attributes.
    */
-  @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+  @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
   private List<AttributeDefinitionEntity> attributes;
 }
