@@ -1,15 +1,8 @@
 package io.reactivesw.common.model;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.reactivesw.catalog.category.application.model.action.CategoryUpdateAction;
-import io.reactivesw.catalog.category.application.model.action.SetSlug;
 import io.reactivesw.catalog.inventory.application.model.action.InventoryEntryUpdateAction;
 import io.reactivesw.catalog.producttype.application.model.action.ProductTypeUpdateAction;
-import io.reactivesw.common.model.action.SetDescription;
-import io.reactivesw.common.model.action.SetLocalizedDescription;
-import io.reactivesw.common.model.action.SetLocalizedName;
-import io.reactivesw.common.model.action.SetName;
 import io.reactivesw.order.cart.application.model.action.CartUpdateAction;
 import io.reactivesw.order.cartdiscount.application.model.action.CartDiscountUpdateAction;
 import io.reactivesw.order.discountcode.application.model.action.DiscountCodeUpdateAction;

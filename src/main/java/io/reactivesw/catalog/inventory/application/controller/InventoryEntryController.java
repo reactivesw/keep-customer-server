@@ -6,6 +6,7 @@ import static io.reactivesw.route.InventoryEntryRouter.INVENTORY_ENTRY_WITH_ID;
 
 import io.reactivesw.catalog.inventory.application.model.InventoryEntry;
 import io.reactivesw.catalog.inventory.application.model.InventoryEntryDraft;
+import io.reactivesw.catalog.inventory.application.model.action.InventoryEntryUpdateAction;
 import io.reactivesw.catalog.inventory.domain.service.InventoryEntryService;
 import io.reactivesw.common.model.PagedQueryResult;
 import io.reactivesw.common.model.UpdateRequest;
@@ -101,7 +102,8 @@ public class InventoryEntryController {
                                              @RequestBody
                                              @ApiParam(value = "InventoryEntry Update Request",
                                                  required = true)
-                                                 UpdateRequest updateRequest) {
+                                                 UpdateRequest<InventoryEntryUpdateAction>
+                                                 updateRequest) {
     LOG.debug("enter updateInventoryEntry, id is {}, update InventoryEntry is {}",
         id, updateRequest.toString());
 
