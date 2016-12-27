@@ -27,9 +27,7 @@ public final class TaxCategoryMapper {
    */
   public static TaxCategoryEntity modelToEntity(TaxCategoryDraft draft) {
     TaxCategoryEntity entity = new TaxCategoryEntity();
-
-    //1 should be a config for all entity
-    entity.setVersion(1);
+    
     entity.setName(draft.getName());
     entity.setDescription(draft.getDescription());
     entity.setRates(TaxRateMapper.modelToEntity(draft.getRates()));

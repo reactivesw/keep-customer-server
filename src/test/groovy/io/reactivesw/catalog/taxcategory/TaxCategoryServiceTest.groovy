@@ -76,6 +76,7 @@ class TaxCategoryServiceTest extends Specification {
         def id = "314334"
         def version = 1
         taxCategory = TaxCategoryMapper.modelToEntity(taxCategoryDraft)
+        taxCategory.version = version
         taxCategoryRepository.findOne(_) >> taxCategory
 
         when:
@@ -105,6 +106,7 @@ class TaxCategoryServiceTest extends Specification {
         def version = 1
         taxCategory = TaxCategoryMapper.modelToEntity(taxCategoryDraft)
         taxCategory.id = id
+        taxCategory.version = version
         taxCategoryRepository.findOne(_) >> taxCategory
         taxCategoryRepository.save(taxCategory) >> taxCategory
 

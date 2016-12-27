@@ -10,6 +10,9 @@ import lombok.EqualsAndHashCode;
 
 import java.time.ZonedDateTime;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by Davis on 16/11/17.
  */
@@ -20,11 +23,14 @@ public class InventoryEntryDraft {
   /**
    * The Sku.
    */
+  @NotNull
   private String sku;
 
   /**
    * The Quantity on stock.
    */
+  @NotNull
+  @Min(0)
   private Integer quantityOnStock;
 
   /**
