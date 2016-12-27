@@ -1,8 +1,10 @@
 package io.reactivesw.order.shippingmethod.application.controller;
 
+import io.reactivesw.common.model.UpdateAction;
 import io.reactivesw.common.model.UpdateRequest;
 import io.reactivesw.order.shippingmethod.application.model.ShippingMethod;
 import io.reactivesw.order.shippingmethod.application.model.ShippingMethodDraft;
+import io.reactivesw.order.shippingmethod.application.model.action.ShippingMethodUpdateAction;
 import io.reactivesw.order.shippingmethod.application.model.mapper.ShippingMethodMapper;
 import io.reactivesw.order.shippingmethod.application.service.ShippingMethodApplication;
 import io.reactivesw.order.shippingmethod.domain.entity.ShippingMethodEntity;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by umasuo on 16/12/21.
@@ -140,11 +143,11 @@ public class ShippingMethodController {
   @PutMapping(ShippingMethodRouter.SHIPPING_METHOD_WITH_ID)
   public ShippingMethod update(
       @PathVariable @ApiParam(required = true) String id,
-      @RequestBody @ApiParam(required = true) UpdateRequest updateRequest) {
+      @RequestBody @ApiParam(required = true) UpdateRequest<ShippingMethodUpdateAction>
+          updateRequest) {
     LOG.info("enter: id: {}, UpdateRequest: {}", id, updateRequest);
 
-    ShippingMethodEntity entity = service.update(id, updateRequest.getVersion(), updateRequest
-        .getActions());
+    ShippingMethodEntity entity = service.update(id, updateRequest.getVersion(), updateRequest.getActions());
 
     LOG.info("exit: ShippingMethodEntity: {}", entity);
     return ShippingMethodMapper.entityToModel(entity);

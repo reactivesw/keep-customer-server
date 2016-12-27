@@ -21,14 +21,6 @@ import io.reactivesw.order.zone.application.model.action.ZoneUpdateAction;
  * and this action also extends other action configure in each service.
  * Created by umasuo on 16/11/21.
  */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "action")
-@JsonSubTypes( {
-    @JsonSubTypes.Type(value = SetName.class, name = "setName"),
-    @JsonSubTypes.Type(value = SetDescription.class, name = "setDescription"),
-    @JsonSubTypes.Type(value = SetLocalizedName.class, name = "setLocalizedName"),
-    @JsonSubTypes.Type(value = SetLocalizedDescription.class, name = "setLocalizedDescription"),
-    @JsonSubTypes.Type(value = SetSlug.class, name = "setSlug"),
-})
 public interface UpdateAction
     extends
     CartDiscountUpdateAction,
@@ -39,5 +31,6 @@ public interface UpdateAction
     CategoryUpdateAction,
     InventoryEntryUpdateAction,
     ProductTypeUpdateAction {
+
 
 }

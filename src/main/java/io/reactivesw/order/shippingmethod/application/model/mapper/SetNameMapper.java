@@ -2,6 +2,7 @@ package io.reactivesw.order.shippingmethod.application.model.mapper;
 
 import io.reactivesw.common.model.UpdateAction;
 import io.reactivesw.common.model.action.SetName;
+import io.reactivesw.order.shippingmethod.application.model.action.ShippingMethodUpdateAction;
 import io.reactivesw.order.shippingmethod.domain.entity.ShippingMethodEntity;
 
 /**
