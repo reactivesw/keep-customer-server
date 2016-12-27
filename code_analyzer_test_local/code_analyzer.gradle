@@ -3,7 +3,7 @@ apply plugin: 'pmd'
 apply plugin: 'findbugs'
 
 // apply all configurations
-apply from:'code_analyzer_test/code_analyzer_config.gradle'
+apply from: 'code_analyzer_test/code_analyzer_config.gradle'
 
 ext {
     application_java = 'io/reactivesw/Application.java'
@@ -14,30 +14,18 @@ ext {
 
     repositories_exception = 'io/reactivesw/**/repository/**'
 
-    //TODO
-    authentication = 'io/reactivesw/customer/server/authorization/*'
+    utils = '**/util/**'
 
-    //customer entity
-    customer_entity_folder = 'io/reactivesw/customer/server/customer/entity/'
-    customer_entity_folder_all = customer_entity_folder + '*'
-
-    customer_model_folder = 'io/reactivesw/customer/server/customer/model/'
-    customer_model_folder_all = customer_model_folder + '*'
-
-    customer_repositories_folder = 'io/reactivesw/customer/server/customer/repository/'
-    customer_repositories_folder_all = customer_repositories_folder + '*'
 }
 
 /*************checkstyle(use google java style)***************/
-checkstyle{
+checkstyle {
     //exclude the package you do not want to check
+    checkstyleMain.exclude application_java
     checkstyleMain.exclude common_exception
-    checkstyleMain.exclude authentication
-    checkstyleMain.exclude customer_entity_folder_all
-    checkstyleMain.exclude customer_model_folder_all
-    checkstyleMain.exclude customer_repositories_folder_all
     checkstyleMain.exclude model_exception
     checkstyleMain.exclude repositories_exception
+    checkstyleMain.exclude utils
 }
 
 /*************PMD(Project Manager Design)***************/
@@ -45,12 +33,9 @@ tasks.withType(Pmd) {
     //exclude the package you do not want to check
     exclude application_java
     exclude common_exception
-    exclude authentication
-    exclude customer_entity_folder_all
-    exclude customer_model_folder_all
-    exclude customer_repositories_folder_all
     exclude model_exception
     exclude repositories_exception
+    exclude utils
 }
 
 /*************find bug***************/
@@ -58,21 +43,18 @@ tasks.withType(FindBugs) {
     //exclude the package you do not want to check
     // findBugs doesn't work if the filter is empty. Comment all if nothing to exclude
     classes = classes.filter {
+        !it.path.contains(application_java)
+    }
+    classes = classes.filter {
         !it.path.contains(common_exception)
+    }
+    classes = classes.filter {
+        !it.path.contains(model_exception)
     }
     classes = classes.filter {
         !it.path.contains(repositories_exception)
     }
     classes = classes.filter {
-        !it.path.contains(authentication)
-    }
-    classes = classes.filter {
-        !it.path.contains(customer_entity_folder)
-    }
-    classes = classes.filter {
-        !it.path.contains(customer_model_folder)
-    }
-    classes = classes.filter {
-        !it.path.contains(customer_repositories_folder)
+        !it.path.contains(utils)
     }
 }

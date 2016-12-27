@@ -18,7 +18,7 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @EntityListeners(AuditingEntityListener.class)
-public abstract class BaseAllEntity  extends BaseIdEntity{
+public abstract class BaseAllEntity extends BaseIdEntity {
 
   /**
    * The Created at.
