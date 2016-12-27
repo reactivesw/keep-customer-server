@@ -94,12 +94,13 @@ public class CategoryService {
     CategoryEntity entity = this.getById(id);
     validateVersion(entity, version);
 
-    List<String> subCategoryIds = categoryRepository.queryCategoryIdsByAncestorId(id);
-    List<String> totalCategoryIds = Lists.newArrayList(id);
-    if (subCategoryIds != null && !subCategoryIds.isEmpty()) {
-      totalCategoryIds.addAll(subCategoryIds);
+    List<CategoryEntity> tatalCategoryEitities = Lists.newArrayList(entity);
+    List<CategoryEntity> subCategories = categoryRepository.querySubCategoriesByAncestorId(id);
+    if (subCategories != null && !subCategories.isEmpty()) {
+      tatalCategoryEitities.addAll(subCategories);
     }
-    categoryRepository.deleteCategoryById(totalCategoryIds);
+
+    categoryRepository.delete(tatalCategoryEitities);
 
     //TODO send message for:
     // remove from all those product that had that category assigned in their ProductData

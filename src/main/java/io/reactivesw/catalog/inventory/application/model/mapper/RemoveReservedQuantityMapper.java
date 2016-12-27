@@ -17,7 +17,8 @@ public class RemoveReservedQuantityMapper implements
     int srcQuantity = entity.getQuantityOnStock();
     int srcReservedQuantity = entity.getReservedQuantity();
     if (removeQuantity > srcQuantity || removeQuantity > srcReservedQuantity) {
-      throw new ParametersException("");
+      throw new ParametersException(
+          "remove quantity can not be greater than quantityOnStock or reservedQuantity");
     }
     entity.setQuantityOnStock(srcQuantity - removeQuantity);
     entity.setReservedQuantity(srcReservedQuantity - removeQuantity);

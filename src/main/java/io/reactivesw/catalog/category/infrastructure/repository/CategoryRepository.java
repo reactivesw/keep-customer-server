@@ -21,8 +21,8 @@ public interface CategoryRepository extends JpaRepository<CategoryEntity, String
    * @param ancestorId the ancestorId
    * @return the list
    */
-  @Query(value = "select c.id from CategoryEntity c where ?1 member of c.ancestors")
-  List<String> queryCategoryIdsByAncestorId(String ancestorId);
+  @Query(value = "select c from CategoryEntity c where ?1 member of c.ancestors")
+  List<CategoryEntity> querySubCategoriesByAncestorId(String ancestorId);
 
   /**
    * Query category by parent list.
