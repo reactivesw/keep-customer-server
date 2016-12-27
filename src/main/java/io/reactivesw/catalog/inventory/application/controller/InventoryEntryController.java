@@ -26,6 +26,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 /**
  * Created by Davis on 16/12/21.
  */
@@ -50,7 +52,10 @@ public class InventoryEntryController {
    */
   @ApiOperation("create InventoryEntry")
   @PostMapping(INVENTORY_ENTRY_ROOT)
-  public InventoryEntry createInventoryEntry(InventoryEntryDraft draft) {
+  public InventoryEntry createInventoryEntry(@RequestBody
+                                             @ApiParam(value = "InventoryEntry Draft",
+                                                 required = true)
+                                             @Valid InventoryEntryDraft draft) {
     LOG.debug("enter createInventoryEntry, inventory entry draft is : {}", draft.toString());
 
     InventoryEntry result = inventoryEntryService.createInventoryEntry(draft);
@@ -138,7 +143,8 @@ public class InventoryEntryController {
   @ApiOperation("query InventoryEntries by Sku names")
   @GetMapping(INVENTORY_ENTRY_ROOT)
   public PagedQueryResult<InventoryEntry> queryInventoryEntriesBySkuNames(@RequestParam("skuNames")
-                                                                    List<String> skuNames) {
+                                                                              List<String>
+                                                                              skuNames) {
     LOG.debug("enter queryInventoryEntriesBySkuNames, query conditions is : {}", skuNames);
 
     List<InventoryEntry> inventoryEntries = inventoryEntryService.queryBySkuNames(skuNames);

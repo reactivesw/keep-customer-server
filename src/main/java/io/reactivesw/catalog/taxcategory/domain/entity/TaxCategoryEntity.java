@@ -4,8 +4,10 @@ import io.reactivesw.common.entity.BaseAllEntity;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
@@ -39,7 +41,7 @@ public class TaxCategoryEntity extends BaseAllEntity {
   /**
    * The Rates.
    */
-  @OneToMany
+  @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
   private Set<TaxRateEntity> rates;
 
   /**
