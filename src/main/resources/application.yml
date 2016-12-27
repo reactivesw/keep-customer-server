@@ -9,7 +9,7 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     database-platform: io.reactivesw.common.dialect.JSONBPostgreSQLDialect
-    show-sql: false
+    show-sql: true
     hibernate:
       ddl-auto: update
 

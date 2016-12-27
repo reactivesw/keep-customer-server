@@ -46,7 +46,7 @@ public class CategoryEntity extends BaseAllEntity {
   /**
    * The Name.
    */
-  @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private Set<LocalizedStringEntity> name;
 
   /**

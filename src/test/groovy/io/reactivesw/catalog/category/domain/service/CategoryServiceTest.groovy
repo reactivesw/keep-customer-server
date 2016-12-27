@@ -106,7 +106,7 @@ class CategoryServiceTest extends Specification {
         given:
         categoryEntity.version = version
         categoryRepository.findOne(_) >> categoryEntity
-        categoryRepository.queryCategoryIdsByAncestorId(_) >> Lists.newArrayList(categoryEntity)
+        categoryRepository.querySubCategoriesByAncestorId(_) >> Lists.newArrayList(categoryEntity)
 
         when:
         categoryService.deleteCategory(id, version)

@@ -32,7 +32,7 @@ class CategoryEntityTest extends Specification {
 //        def parentId = "first"
 //
 //        when:
-//        def result = repository.queryCategoryIdsByAncestorId(parentId)
+//        def result = repository.querySubCategoriesByAncestorId(parentId)
 //
 //        then:
 //        result != null

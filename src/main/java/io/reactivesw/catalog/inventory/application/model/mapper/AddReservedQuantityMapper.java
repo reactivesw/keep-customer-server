@@ -17,7 +17,8 @@ public class AddReservedQuantityMapper implements InventoryEntryUpdateMapper<Inv
     int srcReservedQuantity = entity.getReservedQuantity();
 
     if (addReservedQuantity > srcAvailableQuantity || addReservedQuantity > srcQuantity) {
-      throw new ParametersException("");
+      throw new ParametersException(
+          "addReservedQuantity can not be greater than availabelQuantity and quantityOnStock");
     }
 
     entity.setAvailableQuantity(srcAvailableQuantity - addReservedQuantity);
