@@ -3,6 +3,7 @@ package io.reactivesw.catalog.category.domain.service
 import com.google.common.collect.Lists
 import io.reactivesw.catalog.category.application.model.action.SetSlug
 import io.reactivesw.common.exception.AlreadyExistException
+import io.reactivesw.common.exception.ConflictException
 import io.reactivesw.common.model.QueryConditions
 import io.reactivesw.common.model.action.SetLocalizedName
 import io.reactivesw.catalog.category.domain.entity.CategoryEntity
@@ -94,7 +95,7 @@ class CategoryServiceTest extends Specification {
         categoryService.deleteCategory(id, version)
 
         then:
-        thrown(ParametersException)
+        thrown(ConflictException)
     }
 
     def "test 2.3 : delete Category"() {

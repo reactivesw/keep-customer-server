@@ -9,6 +9,8 @@ import io.reactivesw.catalog.category.application.model.mapper.CategoryUpdateMap
 import io.reactivesw.catalog.category.domain.entity.CategoryEntity;
 import io.reactivesw.catalog.category.infrastructure.repository.CategoryRepository;
 import io.reactivesw.catalog.category.infrastructure.validator.CategoryNameValidator;
+import io.reactivesw.common.exception.AlreadyExistException;
+import io.reactivesw.common.exception.ConflictException;
 import io.reactivesw.common.exception.NotExistException;
 import io.reactivesw.common.exception.ParametersException;
 import io.reactivesw.common.model.PagedQueryResult;
@@ -20,6 +22,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -70,7 +73,13 @@ public class CategoryService {
     entity.setParent(parentId);
     entity.setAncestors(ancestors);
 
-    CategoryEntity savedEntity = categoryRepository.save(entity);
+    CategoryEntity savedEntity = null;
+    try {
+      savedEntity = categoryRepository.save(entity);
+    } catch (DataIntegrityViolationException e) {
+      LOG.debug("slug is already exist", e);
+      throw new AlreadyExistException("Slug is already exist");
+    }
 
     Category category = CategoryMapper.entityToModel(savedEntity);
     LOG.debug("end createCategory, new CategoryEntity is: {}", category.toString());
@@ -204,7 +213,7 @@ public class CategoryService {
     if (!Objects.equals(version, entity.getVersion())) {
       LOG.debug("Version not match, input version:{}, entity version:{}",
           version, entity.getVersion());
-      throw new ParametersException("Version not match");
+      throw new ConflictException("Version not match");
     }
   }
 
