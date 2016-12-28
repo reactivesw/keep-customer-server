@@ -1,4 +1,4 @@
-package io.reactivesw.customer.model;
+package io.reactivesw.customer.customer.application.model;
 
 import java.time.ZonedDateTime;
 import java.util.List;
