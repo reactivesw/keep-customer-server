@@ -28,7 +28,7 @@ public final class AttributeNameValidator {
   private AttributeNameValidator() {}
   
   /**
-   * validate attribute name.
+   * validateNull attribute name.
    *
    * @param attributeDefinitions List of AttributeDefinition
    * @param productDraft         ProductDraft

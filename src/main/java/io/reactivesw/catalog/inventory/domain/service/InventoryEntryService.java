@@ -155,7 +155,7 @@ public class InventoryEntryService {
   }
 
   /**
-   * validate version.
+   * validateNull version.
    * @param entity the entity
    * @param version the version
    */

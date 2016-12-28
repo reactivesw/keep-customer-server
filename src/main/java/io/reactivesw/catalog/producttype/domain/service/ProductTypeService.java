@@ -70,7 +70,7 @@ public class ProductTypeService {
     ProductTypeEntity entity = getProductTypeEntityById(id);
     validateVersion(version, entity);
 
-    // TODO: 16/12/8 validate if has product
+    // TODO: 16/12/8 validateNull if has product
 
     productTypeRepository.delete(id);
 
@@ -91,7 +91,7 @@ public class ProductTypeService {
     ProductTypeEntity entity = getProductTypeEntityByKey(key);
     validateVersion(version, entity);
 
-    // TODO: 16/12/8 validate if has product
+    // TODO: 16/12/8 validateNull if has product
 
     productTypeRepository.delete(entity);
 
@@ -186,7 +186,7 @@ public class ProductTypeService {
   }
 
   /**
-   * validate version.
+   * validateNull version.
    *
    * @param version the version
    * @param entity  the entity

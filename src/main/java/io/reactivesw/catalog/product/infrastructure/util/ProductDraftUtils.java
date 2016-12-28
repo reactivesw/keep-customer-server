@@ -1,4 +1,4 @@
-package io.reactivesw.catalog.product.infrastructure.utils;
+package io.reactivesw.catalog.product.infrastructure.util;
 
 import com.google.common.collect.Lists;
 
@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  */
 public final class ProductDraftUtils {
   /**
-   * Instantiates a new Product draft utils.
+   * Instantiates a new Product draft util.
    */
   private ProductDraftUtils() {
   }

@@ -4,8 +4,8 @@ import com.google.common.collect.Sets;
 
 import io.reactivesw.catalog.product.application.model.ProductDraft;
 import io.reactivesw.catalog.product.domain.entity.ProductEntity;
-import io.reactivesw.catalog.product.infrastructure.utils.ProductDraftUtils;
-import io.reactivesw.catalog.product.infrastructure.utils.ProductUtils;
+import io.reactivesw.catalog.product.infrastructure.util.ProductDraftUtils;
+import io.reactivesw.catalog.product.infrastructure.util.ProductUtils;
 import io.reactivesw.common.exception.ConflictException;
 import io.reactivesw.common.exception.ParametersException;
 
@@ -39,7 +39,7 @@ public final class SkuNameValidator {
     //get all sku name
     List<String> skuNames = ProductDraftUtils.getSkuNames(productDraft);
 
-    //validate if has same name
+    //validateNull if has same name
     Set skuNameSet = Sets.newHashSet(skuNames);
     if (skuNameSet.size() < skuNames.size()) {
       LOG.debug("sku should have difference name");

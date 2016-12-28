@@ -58,11 +58,11 @@ public class ProductTypeController {
    * @param productTypeDraft the product type draft
    * @return the product type
    */
-  @ApiOperation(value = "Create ProductType")
+  @ApiOperation("Create ProductType")
   @PostMapping(PRODUCT_TYPE_ROOT)
   public ProductType createProductType(@RequestBody
                                        @ApiParam(value = "ProductType Draft", required = true)
-                                         @Valid ProductTypeDraft productTypeDraft) {
+                                       @Valid ProductTypeDraft productTypeDraft) {
     LOG.debug("enter createProductType, draft is:{}", productTypeDraft.toString());
 
     ProductType result = productTypeService.createProductType(productTypeDraft);
@@ -132,8 +132,8 @@ public class ProductTypeController {
                                            @ApiParam(value = "ProductType Update Fields",
                                                required = true)
                                                UpdateRequest updateRequest) {
-    LOG.debug("enter updateProductTypeById,id is {}, update request is {}", id, updateRequest
-        .toString());
+    LOG.debug("enter updateProductTypeById,id is {}, update request is {}",
+        id, updateRequest.toString());
 
     ProductType result = productTypeService.updateProductTypeById(id, updateRequest.getVersion(),
         updateRequest.getActions());
@@ -160,8 +160,8 @@ public class ProductTypeController {
                                             @ApiParam(value = "ProductType Update Fields",
                                                 required = true)
                                                 UpdateRequest updateRequest) {
-    LOG.debug("enter updateProductTypeById,key is {}, update request is {}", key, updateRequest
-        .toString());
+    LOG.debug("enter updateProductTypeById,key is {}, update request is {}",
+        key, updateRequest.toString());
 
     ProductType result = productTypeService.updateProductTypeByKey(key, updateRequest.getVersion(),
         updateRequest.getActions());
@@ -200,8 +200,11 @@ public class ProductTypeController {
                                          @ApiParam(value = "ProductTyle key", required = true)
                                              String key) {
     LOG.debug("enter getProductTypeByKey, key is : {}", key);
+
     ProductType result = productTypeService.getProductTypeByKey(key);
+
     LOG.debug("end getProductTypeById, get ProductType : {}", result.toString());
+
     return result;
   }
 

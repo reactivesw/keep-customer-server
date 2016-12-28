@@ -3,7 +3,7 @@ package io.reactivesw.catalog.product
 import com.google.common.collect.Lists
 import io.reactivesw.catalog.product.application.model.attributes.AttributeConstraint
 import io.reactivesw.catalog.product.application.model.attributes.AttributeDefinition
-import io.reactivesw.catalog.product.infrastructure.utils.AttributeUtils
+import io.reactivesw.catalog.product.infrastructure.util.AttributeUtils
 import spock.lang.Specification
 
 /**

@@ -8,10 +8,9 @@ import io.reactivesw.catalog.category.application.model.mapper.CategoryMapper;
 import io.reactivesw.catalog.category.application.model.mapper.CategoryUpdateMapper;
 import io.reactivesw.catalog.category.domain.entity.CategoryEntity;
 import io.reactivesw.catalog.category.infrastructure.repository.CategoryRepository;
-import io.reactivesw.common.entity.LocalizedStringEntity;
+import io.reactivesw.catalog.category.infrastructure.validator.CategoryNameValidator;
 import io.reactivesw.common.exception.NotExistException;
 import io.reactivesw.common.exception.ParametersException;
-import io.reactivesw.common.model.LocalizedString;
 import io.reactivesw.common.model.PagedQueryResult;
 import io.reactivesw.common.model.QueryConditions;
 import io.reactivesw.common.model.Reference;
@@ -25,7 +24,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 import javax.transaction.Transactional;
@@ -65,7 +63,8 @@ public class CategoryService {
       CategoryEntity parent = getParentCategory(parentId);
       ancestors = setAncestors(parentId, parent);
     }
-    validateCategoryName(categoryDraft.getName(), parentId);
+    List<CategoryEntity> sameRootCategories = categoryRepository.queryCategoryByParent(parentId);
+    CategoryNameValidator.validateEqual(categoryDraft.getName(), sameRootCategories);
 
     CategoryEntity entity = CategoryMapper.modelToEntity(categoryDraft);
     entity.setParent(parentId);
@@ -238,7 +237,7 @@ public class CategoryService {
   }
 
   /**
-   * validate parent category.
+   * validateNull parent category.
    *
    * @param parentId parent id
    * @param parent   parent category
@@ -247,46 +246,7 @@ public class CategoryService {
   private void validateParentCategory(String parentId, CategoryEntity parent) {
     if (parent == null) {
       LOG.debug("can not find parent category by id:{}", parentId);
-      throw new ParametersException("Can not find parent category by id:" + parentId);
+      throw new NotExistException("Can not find parent category by id : " + parentId);
     }
-  }
-
-  /**
-   * judge category name, if equals to exist name, should return exception.
-   *
-   * @param name     name to validate
-   * @param parentId the parent id
-   * @throws ParametersException if name has exist
-   */
-  private void validateCategoryName(LocalizedString name, String parentId) {
-    List<CategoryEntity> sameRootCategories = categoryRepository.queryCategoryByParent(parentId);
-    List<LocalizedStringEntity> categoryNames = getAllCategoryNames(sameRootCategories);
-    Map<String, String> localizedName = name.getLocalized();
-    for (Map.Entry entry : localizedName.entrySet()) {
-      String key = entry.getKey().toString();
-      String value = entry.getValue().toString();
-      for (LocalizedStringEntity categoryName : categoryNames) {
-        if (key.equals(categoryName.getLanguage()) && value.equals(categoryName.getText())) {
-          LOG.debug("can not create category with same name : {}, key: {}", value, key);
-          throw new ParametersException("Can not create category with same name");
-        }
-      }
-    }
-  }
-
-  /**
-   * get all names from list of CategoryEntity.
-   *
-   * @param categories list of CategoryEntity
-   * @return list of LocalizedStringEntity
-   */
-  private List<LocalizedStringEntity> getAllCategoryNames(List<CategoryEntity> categories) {
-    List<LocalizedStringEntity> subCategoryNames = new ArrayList<>();
-    if (categories != null) {
-      categories.stream()
-          .map(categoryEntity -> categoryEntity.getName())
-          .forEach(subCategoryNames::addAll);
-    }
-    return subCategoryNames;
   }
 }

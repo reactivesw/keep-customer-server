@@ -2,18 +2,16 @@ package io.reactivesw.catalog.producttype.application.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.util.List;
-
 import io.reactivesw.catalog.product.application.model.AttributeDefinitionDraft;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import lombok.Data;
 
+import java.util.List;
+
 import javax.validation.Valid;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**

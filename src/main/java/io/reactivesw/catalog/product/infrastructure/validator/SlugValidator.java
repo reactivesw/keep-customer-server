@@ -25,7 +25,7 @@ public final class SlugValidator {
   }
 
   /**
-   * validate slug.
+   * validateNull slug.
    *
    * @param slug     the slug.
    * @param products the products.
@@ -41,7 +41,7 @@ public final class SlugValidator {
   }
 
   /**
-   * validate slug.
+   * validateNull slug.
    *
    * @param slug    the slug
    * @param product the product

@@ -1,4 +1,4 @@
-package io.reactivesw.catalog.product.infrastructure.utils;
+package io.reactivesw.catalog.product.infrastructure.util;
 
 import io.reactivesw.catalog.product.application.model.attributes.AttributeConstraint;
 import io.reactivesw.catalog.product.application.model.attributes.AttributeDefinition;

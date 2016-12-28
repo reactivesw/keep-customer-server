@@ -2,6 +2,7 @@ package io.reactivesw.catalog.category.domain.service
 
 import com.google.common.collect.Lists
 import io.reactivesw.catalog.category.application.model.action.SetSlug
+import io.reactivesw.common.exception.AlreadyExistException
 import io.reactivesw.common.model.QueryConditions
 import io.reactivesw.common.model.action.SetLocalizedName
 import io.reactivesw.catalog.category.domain.entity.CategoryEntity
@@ -25,8 +26,14 @@ class CategoryServiceTest extends Specification {
     def categoryEntity = new CategoryEntity()
     def id = "11111111"
     def version = 1
+    CategoryDraft categoryDraft = new CategoryDraft()
 
     def setup() {
+        LocalizedString name = new LocalizedString()
+        name.addKeyValue("en", "cup")
+        name.addKeyValue("zn", "杯子")
+        categoryDraft.name = name
+
         categoryEntity.id = id
         categoryEntity.parent = "000000000000"
     }
@@ -117,11 +124,6 @@ class CategoryServiceTest extends Specification {
 
     def "test 3.1 : create Category"() {
         given:
-        CategoryDraft categoryDraft = new CategoryDraft()
-        LocalizedString name = new LocalizedString()
-        name.addKeyValue("en", "cup")
-        name.addKeyValue("zn", "杯子")
-        categoryDraft.name = name
         categoryRepository.save(_) >> categoryEntity
 
         when:
@@ -133,11 +135,6 @@ class CategoryServiceTest extends Specification {
 
     def "test 3.2 : create Category with parent and subCategory with difference name"() {
         given:
-        CategoryDraft categoryDraft = new CategoryDraft()
-        LocalizedString name = new LocalizedString()
-        name.addKeyValue("en", "cup")
-        name.addKeyValue("zn", "杯子")
-        categoryDraft.name = name
         def parentId = "1"
         categoryDraft.parent = new Reference(ReferenceTypes.CATEGORY.getType(), parentId)
         categoryRepository.save(_) >> categoryEntity
@@ -160,11 +157,6 @@ class CategoryServiceTest extends Specification {
 
     def "test 3.3 : create Category with parent and subCategory with same name"() {
         given:
-        CategoryDraft categoryDraft = new CategoryDraft()
-        LocalizedString name = new LocalizedString()
-        name.addKeyValue("en", "cup")
-        name.addKeyValue("zn", "杯子")
-        categoryDraft.name = name
         def parentId = "1"
         categoryDraft.parent = new Reference(ReferenceTypes.CATEGORY.getType(), parentId)
         categoryRepository.save(_) >> categoryEntity
@@ -182,7 +174,21 @@ class CategoryServiceTest extends Specification {
         def category = categoryService.createCategory(categoryDraft)
 
         then:
-        thrown(ParametersException)
+        thrown(AlreadyExistException)
+    }
+
+    def "test 3.4 : create Category with parent and get null parent"() {
+        given:
+        def parentId = "1"
+        categoryDraft.parent = new Reference(ReferenceTypes.CATEGORY.getType(), parentId)
+        categoryRepository.save(_) >> categoryEntity
+        categoryRepository.findOne(parentId) >> null
+
+        when:
+        def category = categoryService.createCategory(categoryDraft)
+
+        then:
+        thrown(NotExistException)
     }
 
     def "test 4.1 : update Category"() {

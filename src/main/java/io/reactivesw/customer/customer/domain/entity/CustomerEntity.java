@@ -2,6 +2,7 @@ package io.reactivesw.customer.customer.domain.entity;
 
 import io.reactivesw.common.entity.BaseAllEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.ZonedDateTime;
 import java.util.Set;
@@ -17,6 +18,7 @@ import javax.persistence.Version;
  */
 @Entity
 @Data
+@EqualsAndHashCode(callSuper = false)
 @Table(name = "customer")
 public class CustomerEntity extends BaseAllEntity {
 

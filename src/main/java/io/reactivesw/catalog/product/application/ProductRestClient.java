@@ -2,7 +2,7 @@ package io.reactivesw.catalog.product.application;
 
 import io.reactivesw.catalog.inventory.application.model.InventoryEntry;
 import io.reactivesw.catalog.product.application.model.Product;
-import io.reactivesw.catalog.product.infrastructure.utils.ProductUtils;
+import io.reactivesw.catalog.product.infrastructure.util.ProductUtils;
 import io.reactivesw.catalog.producttype.application.model.ProductType;
 import io.reactivesw.common.model.PagedQueryResult;
 

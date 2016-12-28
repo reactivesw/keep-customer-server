@@ -5,7 +5,7 @@ import com.google.common.collect.Lists;
 import io.reactivesw.catalog.product.application.model.ProductDraft;
 import io.reactivesw.catalog.product.application.model.attributes.AttributeConstraint;
 import io.reactivesw.catalog.product.application.model.attributes.AttributeDefinition;
-import io.reactivesw.catalog.product.infrastructure.utils.AttributeUtils;
+import io.reactivesw.catalog.product.infrastructure.util.AttributeUtils;
 import io.reactivesw.common.exception.ParametersException;
 
 import org.apache.commons.collections4.CollectionUtils;

@@ -1,4 +1,4 @@
-package io.reactivesw.catalog.product.infrastructure.utils;
+package io.reactivesw.catalog.product.infrastructure.util;
 
 import io.reactivesw.common.model.QueryConditions;
 
@@ -8,7 +8,7 @@ import io.reactivesw.common.model.QueryConditions;
 public final class QueryConditionUtils {
 
   /**
-   * Instantiates a new Query condition utils.
+   * Instantiates a new Query condition util.
    */
   private QueryConditionUtils() {}
 

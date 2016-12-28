@@ -1,4 +1,4 @@
-package io.reactivesw.catalog.product.infrastructure.utils;
+package io.reactivesw.catalog.product.infrastructure.util;
 
 import io.reactivesw.catalog.inventory.application.model.InventoryEntry;
 import io.reactivesw.catalog.product.application.model.Product;
@@ -16,7 +16,7 @@ import java.util.List;
 public final class ProductInventoryUtils {
 
   /**
-   * Instantiates a new Product inventory utils.
+   * Instantiates a new Product inventory util.
    */
   private ProductInventoryUtils() {}
 
