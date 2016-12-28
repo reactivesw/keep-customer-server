@@ -2,7 +2,7 @@ package io.reactivesw.catalog.product.application;
 
 import io.reactivesw.catalog.inventory.application.model.InventoryEntry;
 import io.reactivesw.catalog.product.application.model.Product;
-import io.reactivesw.catalog.product.infrastructure.utils.ProductInventoryUtils;
+import io.reactivesw.catalog.product.infrastructure.utils.ProductUtils;
 import io.reactivesw.catalog.producttype.application.model.ProductType;
 import io.reactivesw.common.model.PagedQueryResult;
 
@@ -48,7 +48,7 @@ public class ProductRestClient {
    * @return the inventory entry
    */
   public List<InventoryEntry> getInventoryEntry(Product product) {
-    List<String> skuNames = ProductInventoryUtils.getProductSkuNames(product);
+    List<String> skuNames = ProductUtils.getSkuNames(product);
     String url = "http://localhost:8088/inventory";
 
     UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url)
