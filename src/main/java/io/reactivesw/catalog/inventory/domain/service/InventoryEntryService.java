@@ -161,7 +161,7 @@ public class InventoryEntryService {
    */
   private void validateVersion(InventoryEntryEntity entity, Integer version) {
     if (!Objects.equals(version, entity.getVersion())) {
-      LOG.debug("Version not match, input version:{}, entity version:{}",
+      LOG.debug("Version not match, input version : {}, entity version : {}",
           version, entity.getVersion());
       throw new ConflictException("Version not match");
     }

@@ -14,6 +14,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 /**
  * Created by Davis on 16/11/17.
@@ -33,7 +34,7 @@ public class ProductTypeDraft {
    * The Key.
    */
   @ApiModelProperty(required = false)
-  @Max(value = 256, message = "product type key should less than 256 characters")
+  @Size(max = 256, message = "product type key should less than 256 characters")
   private String key;
 
   /**

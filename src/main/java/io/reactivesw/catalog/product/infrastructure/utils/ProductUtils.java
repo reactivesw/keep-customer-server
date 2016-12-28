@@ -2,9 +2,14 @@ package io.reactivesw.catalog.product.infrastructure.utils;
 
 import com.google.common.collect.Lists;
 
+import io.reactivesw.catalog.product.application.model.Product;
+import io.reactivesw.catalog.product.application.model.ProductData;
 import io.reactivesw.catalog.product.domain.entity.ProductCatalogDataEntity;
 import io.reactivesw.catalog.product.domain.entity.ProductDataEntity;
 import io.reactivesw.catalog.product.domain.entity.ProductEntity;
+import io.reactivesw.common.util.ListUtils;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,7 +60,7 @@ public final class ProductUtils {
     skuNames.addAll(getSkuNames(currentData));
     skuNames.addAll(getSkuNames(stagedData));
 
-    return skuNames;
+    return ListUtils.removeDuplicateString(skuNames);
   }
 
   /**
@@ -77,6 +82,47 @@ public final class ProductUtils {
             return variant.getSku();
           }
       ).collect(Collectors.toList()));
+    }
+
+    return skuNames;
+  }
+
+  /**
+   * Gets product sku names.
+   *
+   * @param product the product
+   * @return the product sku names
+   */
+  public static List<String> getSkuNames(Product product) {
+    List<String> skuNames = Lists.newArrayList();
+
+    ProductData currentData = product.getMasterData().getCurrent();
+    ProductData stagedData = product.getMasterData().getStaged();
+    skuNames.addAll(getSkuNames(currentData));
+    skuNames.addAll(getSkuNames(stagedData));
+
+    return ListUtils.removeDuplicateString(skuNames);
+  }
+
+  /**
+   * Gets sku names.
+   *
+   * @param productData the product data
+   * @return the sku names
+   */
+  public static List<String> getSkuNames(ProductData productData) {
+    List<String> skuNames = Lists.newArrayList(productData.getMasterVariant().getSku());
+
+    if (productData.getVariants() != null && !productData.getVariants().isEmpty()) {
+      skuNames.addAll(productData.getVariants().stream()
+          .filter(
+              variant -> StringUtils.isNotBlank(variant.getSku())
+          )
+          .map(
+              variant -> {
+                return variant.getSku();
+              }
+          ).collect(Collectors.toList()));
     }
 
     return skuNames;
