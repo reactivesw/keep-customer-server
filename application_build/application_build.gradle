@@ -31,7 +31,7 @@ dependencies {
 
     //commons-collections
     compile('org.apache.commons:commons-collections4:4.1')
-    compile ("commons-validator:commons-validator:1.4.0")
+    compile("commons-validator:commons-validator:1.4.0")
 
     //lombok
     compile('org.projectlombok:lombok:1.16.12')
@@ -50,6 +50,9 @@ dependencies {
     //for zoneddatetime
     compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.8.5')
 
+    //email tools
+    compile('com.sun.mail:javax.mail:1.5.1')
+
     //spring boot test
     testCompile('org.springframework.boot:spring-boot-starter-test:1.4.0.RELEASE')
 
@@ -62,6 +65,5 @@ dependencies {
     //spock spring
     testCompile('org.spockframework:spock-spring:1.0-groovy-2.4')
 
-    //email tools
-    compile('com.sun.mail:javax.mail:1.5.1')
+
 }

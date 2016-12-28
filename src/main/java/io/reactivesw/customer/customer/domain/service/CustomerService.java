@@ -27,6 +27,12 @@ public class CustomerService {
   private final static Logger LOG = LoggerFactory.getLogger(CustomerService.class);
 
   /**
+   * token redis ops.
+   */
+//  @Resource(name = "redisTemplate")
+//  private ValueOperations<String, Token> tokenRedisOps;
+
+  /**
    * customer repository.
    */
   @Autowired
@@ -172,7 +178,7 @@ public class CustomerService {
    */
   public void createResetToken(String email) {
     LOG.debug("enter: email: {}", email);
-    //TODO
+    //TODO generate an token and send a email to the address.
   }
 
   /**
@@ -184,7 +190,7 @@ public class CustomerService {
    */
   public void resetPassword(String token, String newPassword, Integer version) {
     LOG.debug("enter: token: {}, newPassword: {}, version: {}", token, newPassword, version);
-
+    //TODO decode the token, see if the token is available
   }
 
   /**
