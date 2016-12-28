@@ -34,7 +34,7 @@ public class InventoryEntryEntity extends BaseAllEntity {
    * version.
    */
   @Version
-  @Column
+  @Column(name = "version")
   private Integer version;
 
   /**

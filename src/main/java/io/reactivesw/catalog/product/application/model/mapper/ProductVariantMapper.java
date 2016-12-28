@@ -18,7 +18,7 @@ public class ProductVariantMapper {
 
   public static Set<ProductVariantEntity> modelToEntity(List<ProductVariantDraft> models) {
     Set entities = Sets.newHashSet();
-    for (int i = 0; i <= models.size(); i ++) {
+    for (int i = 0; i < models.size(); i ++) {
       int id = i + 2;
       ProductVariantEntity entity = modelToEntity(id, models.get(i));
       entities.add(entity);
