@@ -14,7 +14,9 @@ import io.reactivesw.order.cart.application.model.action.SetCustomType;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property =
     "action")
 @JsonSubTypes( {
+    @JsonSubTypes.Type(value = SetLocalizedName.class, name = "setName"),
     @JsonSubTypes.Type(value = SetSlug.class, name = "setSlug"),
+    @JsonSubTypes.Type(value = SetLocalizedDescription.class, name = "setDescription"),
     @JsonSubTypes.Type(value = SetParent.class, name = "setParent"),
     @JsonSubTypes.Type(value = SetOrderHint.class, name = "setOrderHint"),
     @JsonSubTypes.Type(value = SetExternalID.class, name = "setExternalID"),

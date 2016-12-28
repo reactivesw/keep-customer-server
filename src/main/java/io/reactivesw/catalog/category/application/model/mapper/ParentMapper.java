@@ -13,5 +13,6 @@ public class ParentMapper implements CategoryUpdateMapper<CategoryEntity> {
   public void handle(CategoryEntity entity, UpdateAction action) {
     SetParent setParent = (SetParent)action;
     entity.setParent(setParent.getParent().getId());
+    // TODO: 16/12/28 should change ancestors and subCategory's ancestors
   }
 }

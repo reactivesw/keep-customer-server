@@ -69,17 +69,9 @@ public class CategoryService {
     List<CategoryEntity> sameRootCategories = categoryRepository.queryCategoryByParent(parentId);
     CategoryNameValidator.validateEqual(categoryDraft.getName(), sameRootCategories);
 
-    CategoryEntity entity = CategoryMapper.modelToEntity(categoryDraft);
-    entity.setParent(parentId);
-    entity.setAncestors(ancestors);
+    CategoryEntity entity = CategoryMapper.modelToEntity(categoryDraft, parentId, ancestors);
 
-    CategoryEntity savedEntity = null;
-    try {
-      savedEntity = categoryRepository.save(entity);
-    } catch (DataIntegrityViolationException e) {
-      LOG.debug("slug is already exist", e);
-      throw new AlreadyExistException("Slug is already exist");
-    }
+    CategoryEntity savedEntity = saveCategoryEntity(entity);
 
     Category category = CategoryMapper.entityToModel(savedEntity);
     LOG.debug("end createCategory, new CategoryEntity is: {}", category.toString());
@@ -177,6 +169,24 @@ public class CategoryService {
     pagedQueryResult.setResults(result);
 
     return pagedQueryResult;
+  }
+
+
+  /**
+   * Save category entity.
+   *
+   * @param entity the entity
+   * @return the category entity
+   */
+  private CategoryEntity saveCategoryEntity(CategoryEntity entity) {
+    CategoryEntity savedEntity = null;
+    try {
+      savedEntity = categoryRepository.save(entity);
+    } catch (DataIntegrityViolationException e) {
+      LOG.debug("slug is already exist", e);
+      throw new AlreadyExistException("Slug is already exist");
+    }
+    return savedEntity;
   }
 
   /**
