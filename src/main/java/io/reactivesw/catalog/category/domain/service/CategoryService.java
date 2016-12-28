@@ -12,7 +12,6 @@ import io.reactivesw.catalog.category.infrastructure.validator.CategoryNameValid
 import io.reactivesw.common.exception.AlreadyExistException;
 import io.reactivesw.common.exception.ConflictException;
 import io.reactivesw.common.exception.NotExistException;
-import io.reactivesw.common.exception.ParametersException;
 import io.reactivesw.common.model.PagedQueryResult;
 import io.reactivesw.common.model.QueryConditions;
 import io.reactivesw.common.model.Reference;

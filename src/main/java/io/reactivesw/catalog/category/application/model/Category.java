@@ -30,33 +30,33 @@ public class Category {
   /**
    *  The unique ID of the category.
    */
-  @ApiModelProperty(value = "The unique ID of the category")
+  @ApiModelProperty(value = "The unique ID of the category", required = true)
   private String id;
 
   /**
    *  The current version of the category.
    */
-  @ApiModelProperty(value = "The current version of the category")
+  @ApiModelProperty(value = "The current version of the category", required = true)
   private Integer version;
 
   /**
    * create time.
    */
-  @ApiModelProperty(value = "Create Time")
+  @ApiModelProperty(value = "Create Time", required = true)
   @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime createdAt;
 
   /**
    * last modified time.
    */
-  @ApiModelProperty(value = "Last Modified Time")
+  @ApiModelProperty(value = "Last Modified Time", required = true)
   @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime lastModifiedAt;
 
   /**
    * The Name.
    */
-  @ApiModelProperty(value = "CategoryEntity Name")
+  @ApiModelProperty(value = "CategoryEntity Name", required = true)
   @JsonUnwrapped
   private LocalizedString name;
 
@@ -65,7 +65,7 @@ public class Category {
    * Each slug is unique across a project,
    * but a category can have the same slug for different languages.
    */
-  @ApiModelProperty(value = "CategoryEntity Slug")
+  @ApiModelProperty(value = "CategoryEntity Slug", required = true)
   private String slug;
 
   /**
@@ -95,7 +95,8 @@ public class Category {
   /**
    * externalId.
    */
-  @ApiModelProperty(value = "CategoryEntity externalId")
+  @ApiModelProperty(value =
+      "ID which can be used as additional identifier for external Systems like CRM or ERP")
   private String externalId;
 
   /**
