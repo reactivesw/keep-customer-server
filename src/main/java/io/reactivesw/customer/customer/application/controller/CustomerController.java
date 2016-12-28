@@ -12,4 +12,5 @@ public class CustomerController {
    * logger.
    */
 //  private final static Logger LOG = LoggerFactory.getLogger(CustomerController.class);
+
 }
