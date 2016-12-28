@@ -84,8 +84,6 @@ public class CategoryService {
    *
    * @param id      the id
    * @param version the version
-   * @throws NotExistException   if the can not find CategoryEntity by the id.
-   * @throws ParametersException if the version can not match.
    */
   @Transactional
   public void deleteCategory(String id, Integer version) {
@@ -146,7 +144,14 @@ public class CategoryService {
    */
   public Category getCategoryById(String id) {
     LOG.debug("enter getCategoryById, id is {}", id);
-    return CategoryMapper.entityToModel(getById(id));
+
+    CategoryEntity entity = getById(id);
+
+    Category result = CategoryMapper.entityToModel(entity);
+
+    LOG.debug("end getCategoryById, get category is : {}", result.toString());
+
+    return result;
   }
 
   /**
@@ -177,6 +182,7 @@ public class CategoryService {
    *
    * @param entity the entity
    * @return the category entity
+   * @throws AlreadyExistException if slug is already exist and get DataIntegrityViolationException
    */
   private CategoryEntity saveCategoryEntity(CategoryEntity entity) {
     CategoryEntity savedEntity = null;
@@ -216,8 +222,7 @@ public class CategoryService {
    *
    * @param entity  the CategoryEntity
    * @param version the version
-   * @throws NotExistException   when entity is null
-   * @throws ParametersException when version not match
+   * @throws ConflictException when version not match
    */
   private void validateVersion(CategoryEntity entity, Integer version) {
     if (!Objects.equals(version, entity.getVersion())) {
@@ -260,7 +265,7 @@ public class CategoryService {
    *
    * @param parentId parent id
    * @param parent   parent category
-   * @throws ParametersException when parent category is null
+   * @throws NotExistException when parent category is null
    */
   private void validateParentCategory(String parentId, CategoryEntity parent) {
     if (parent == null) {
