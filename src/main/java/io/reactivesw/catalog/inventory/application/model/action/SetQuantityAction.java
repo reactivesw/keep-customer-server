@@ -18,4 +18,9 @@ public class SetQuantityAction implements UpdateAction {
    */
   @Min(0)
   private Integer quantity;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

@@ -17,4 +17,9 @@ public class SetExpectedDelivery implements UpdateAction {
    * The Expected delivery.
    */
   private ZonedDateTime expectedDelivery;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

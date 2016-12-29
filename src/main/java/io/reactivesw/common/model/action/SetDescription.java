@@ -14,5 +14,9 @@ public class SetDescription implements UpdateAction {
   protected String description;
 
   protected String name;
-  
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

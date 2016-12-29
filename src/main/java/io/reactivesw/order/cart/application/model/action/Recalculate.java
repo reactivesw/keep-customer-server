@@ -15,4 +15,9 @@ public class Recalculate implements UpdateAction {
    * If set to false, only the prices and tax rates will be updated.
    */
   private Boolean updateProductData;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

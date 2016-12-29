@@ -18,4 +18,9 @@ public class SetLineItemTotalPrice implements UpdateAction {
   private String lineItemId;
 
   private ExternalLineItemTotalPrice externalTotalPrice;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

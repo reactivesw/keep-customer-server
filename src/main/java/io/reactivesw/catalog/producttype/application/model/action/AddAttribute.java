@@ -16,4 +16,9 @@ public class AddAttribute implements UpdateAction {
    * The Attribute.
    */
   private AttributeDefinitionDraft attribute;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

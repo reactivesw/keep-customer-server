@@ -14,4 +14,9 @@ public class SetSortOrder implements UpdateAction {
    * A discount with greater sortOrder is prioritized higher than a discount with lower sortOrder.
    */
   private String sortOrder;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

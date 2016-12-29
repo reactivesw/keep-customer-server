@@ -30,4 +30,9 @@ public class SetTaxCategory implements UpdateAction {
   public void setTaxCategory(Reference taxCategory) {
     this.taxCategory = taxCategory;
   }
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

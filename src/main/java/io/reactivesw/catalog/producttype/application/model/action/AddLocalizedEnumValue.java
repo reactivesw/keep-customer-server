@@ -21,4 +21,9 @@ public class AddLocalizedEnumValue implements UpdateAction {
    * The Value.
    */
   private LocalizedEnumValue value;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

@@ -12,4 +12,9 @@ import java.time.ZonedDateTime;
 public class SetValidFrom implements UpdateAction {
 
   private ZonedDateTime validFrom;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

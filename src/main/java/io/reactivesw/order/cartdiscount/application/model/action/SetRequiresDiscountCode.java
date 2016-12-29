@@ -13,4 +13,9 @@ public class SetRequiresDiscountCode implements UpdateAction {
    * if requires a discount code.
    */
   private Boolean requiresDiscountCode;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

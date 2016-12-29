@@ -15,4 +15,9 @@ public class AddTaxRate implements UpdateAction {
    * The Tax rate.
    */
   private TaxRateDraft taxRate;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

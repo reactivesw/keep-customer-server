@@ -9,4 +9,8 @@ import io.swagger.annotations.ApiModel;
  */
 @ApiModel
 public class AddLineItem extends LineItemDraft implements UpdateAction {
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

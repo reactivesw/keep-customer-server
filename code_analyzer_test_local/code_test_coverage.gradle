@@ -47,6 +47,7 @@ jacocoTestReport {
                     'io/reactivesw/common/util/**',
                     'io/reactivesw/common/dialect/**',
                     'io/reactivesw/common/specification/**',
+                    'io/reactivesw/catalog/category/domain/service/update/**',
                     //先去掉
                     'io/reactivesw/catalog/product/application/**Client**',
                     'io/reactivesw/catalog/product/infrastructure/util/**',

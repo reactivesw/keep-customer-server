@@ -18,4 +18,9 @@ public class SetRestockableInDays implements UpdateAction {
    */
   @Min(1)
   private Integer restockableInDays;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

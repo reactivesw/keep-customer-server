@@ -16,4 +16,8 @@ public class SetCartPredicate implements UpdateAction {
    */
   private String cartPredicate;
 
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

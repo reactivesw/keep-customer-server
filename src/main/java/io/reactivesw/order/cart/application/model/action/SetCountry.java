@@ -13,4 +13,9 @@ public class SetCountry implements UpdateAction {
    * A two-digit country code as per ↗ ISO 3166-1 alpha-2 .
    */
   private String country;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

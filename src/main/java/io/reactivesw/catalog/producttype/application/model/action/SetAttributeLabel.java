@@ -21,4 +21,9 @@ public class SetAttributeLabel implements UpdateAction {
    * The Label.
    */
   private LocalizedString label;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

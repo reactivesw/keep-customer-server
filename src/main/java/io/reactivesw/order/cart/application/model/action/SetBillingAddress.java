@@ -14,4 +14,9 @@ public class SetBillingAddress implements UpdateAction {
    * billing address.
    */
   private Address address;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

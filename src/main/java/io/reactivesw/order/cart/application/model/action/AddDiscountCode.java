@@ -15,4 +15,9 @@ public class AddDiscountCode implements UpdateAction {
    * this code must be an available code.
    */
   private String code;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

@@ -14,4 +14,9 @@ public class RemoveTaxRate implements UpdateAction {
    * The Tax rate id.
    */
   private String taxRateId;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

@@ -14,4 +14,9 @@ public class SetTarget implements UpdateAction {
    * discount target.
    */
   private CartDiscountTarget target;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

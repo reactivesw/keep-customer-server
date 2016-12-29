@@ -14,4 +14,9 @@ public class RemoveDiscountCode implements UpdateAction {
    * discount code.
    */
   private String code;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

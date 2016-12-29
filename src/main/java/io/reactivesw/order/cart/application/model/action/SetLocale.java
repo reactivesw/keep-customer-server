@@ -11,4 +11,9 @@ import lombok.Data;
 public class SetLocale implements UpdateAction {
 
   private String locale;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

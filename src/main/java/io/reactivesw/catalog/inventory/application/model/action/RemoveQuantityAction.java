@@ -15,4 +15,9 @@ public class RemoveQuantityAction implements UpdateAction {
    * The Quantity.
    */
   private Integer quantity;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

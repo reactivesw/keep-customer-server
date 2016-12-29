@@ -18,4 +18,9 @@ public class ChangeAttributeOrder implements UpdateAction {
    * The Attributes.
    */
   private List<AttributeDefinition> attributes;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

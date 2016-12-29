@@ -16,4 +16,9 @@ public class SetSupplyChannel implements UpdateAction {
    * The Supply channel.
    */
   private Reference supplyChannel;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

@@ -29,4 +29,9 @@ public class SetMaxApplications implements UpdateAction {
   public void setMaxApplications(Integer maxApplications) {
     this.maxApplications = maxApplications;
   }
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

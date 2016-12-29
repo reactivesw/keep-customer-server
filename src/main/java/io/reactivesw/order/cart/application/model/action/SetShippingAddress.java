@@ -19,4 +19,9 @@ public class SetShippingAddress implements UpdateAction {
    * shipping address.
    */
   private Address address;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

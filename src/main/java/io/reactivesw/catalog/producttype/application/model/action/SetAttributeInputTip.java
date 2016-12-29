@@ -21,4 +21,9 @@ public class SetAttributeInputTip implements UpdateAction {
    * The Input tip.
    */
   private LocalizedString inputTip;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

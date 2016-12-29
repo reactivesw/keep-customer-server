@@ -18,4 +18,9 @@ public class AddReservedQuantityAction implements UpdateAction {
    */
   @Min(1)
   private int addReservedQuantity;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

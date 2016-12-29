@@ -1,5 +1,6 @@
 package io.reactivesw.catalog.category.application.model.action;
 
+import io.reactivesw.catalog.category.infrastructure.util.UpdateActionUtils;
 import io.reactivesw.common.model.UpdateAction;
 
 import lombok.Getter;
@@ -21,4 +22,9 @@ public class SetSlug implements UpdateAction {
   @NotNull
   @Pattern(regexp = "[-a-zA-Z0-9_]{2,256}", message = "category slug can not match")
   private String slug;
+
+  @Override
+  public String getActionName() {
+    return UpdateActionUtils.SET_NAME;
+  }
 }

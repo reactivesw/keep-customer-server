@@ -33,4 +33,9 @@ public class SetActive implements UpdateAction {
   public void setActive(Boolean active) {
     isActive = active;
   }
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

@@ -18,4 +18,9 @@ public class SetCustomerId implements UpdateAction {
    * If set, a customer with the given ID must exist in the project.
    */
   private String customerId;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

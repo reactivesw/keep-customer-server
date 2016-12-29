@@ -20,4 +20,9 @@ public class SetShippingMethod implements UpdateAction {
    * An external tax rate can be set if the cart has the External TaxMode.
    */
   private ExternalTaxRateDraft externalTaxRate;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

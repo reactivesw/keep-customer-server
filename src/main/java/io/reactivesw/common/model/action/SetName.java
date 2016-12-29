@@ -15,4 +15,9 @@ public class SetName implements UpdateAction {
    * The Name.
    */
   private String name;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

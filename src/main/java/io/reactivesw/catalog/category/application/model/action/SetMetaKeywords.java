@@ -1,32 +1,25 @@
 package io.reactivesw.catalog.category.application.model.action;
 
+import io.reactivesw.catalog.category.infrastructure.util.UpdateActionUtils;
 import io.reactivesw.common.model.UpdateAction;
 import io.reactivesw.common.model.LocalizedString;
+
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Created by Davis on 16/12/6.
  */
+@Getter
+@Setter
 public class SetMetaKeywords implements UpdateAction {
   /**
    * The Meta keywords.
    */
   private LocalizedString metaKeywords;
 
-  /**
-   * Gets meta keywords.
-   *
-   * @return the meta keywords
-   */
-  public LocalizedString getMetaKeywords() {
-    return metaKeywords;
-  }
-
-  /**
-   * Sets meta keywords.
-   *
-   * @param metaKeywords the meta keywords
-   */
-  public void setMetaKeywords(LocalizedString metaKeywords) {
-    this.metaKeywords = metaKeywords;
+  @Override
+  public String getActionName() {
+    return UpdateActionUtils.SET_META_KEYWORD;
   }
 }

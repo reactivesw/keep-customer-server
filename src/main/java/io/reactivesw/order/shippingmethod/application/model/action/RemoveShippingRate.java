@@ -55,4 +55,9 @@ public class RemoveShippingRate implements UpdateAction {
   public void setShippingRate(ShippingRate shippingRate) {
     this.shippingRate = shippingRate;
   }
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

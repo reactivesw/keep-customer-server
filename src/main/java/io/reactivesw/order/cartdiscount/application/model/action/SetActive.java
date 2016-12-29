@@ -16,4 +16,8 @@ public class SetActive implements UpdateAction {
    */
   private Boolean active;
 
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

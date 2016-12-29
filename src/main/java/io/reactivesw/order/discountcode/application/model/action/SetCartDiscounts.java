@@ -32,4 +32,9 @@ public class SetCartDiscounts implements UpdateAction {
   public void setCartDiscounts(List<Reference> cartDiscounts) {
     this.cartDiscounts = cartDiscounts;
   }
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

@@ -13,4 +13,9 @@ public class AddPayment implements UpdateAction {
    * payment id.
    */
   private String payment;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

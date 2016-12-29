@@ -13,4 +13,9 @@ public class SetCustomerEmail implements UpdateAction {
    * new email.
    */
   private String email;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

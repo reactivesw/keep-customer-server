@@ -24,6 +24,5 @@ public interface UpdateAction
     CategoryUpdateAction,
     InventoryEntryUpdateAction,
     ProductTypeUpdateAction {
-
-
+  String getActionName();
 }

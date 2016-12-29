@@ -12,4 +12,8 @@ public class SetValue implements UpdateAction {
 
   private CartDiscountValue value;
 
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

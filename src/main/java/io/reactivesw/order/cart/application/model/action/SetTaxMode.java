@@ -15,4 +15,9 @@ import lombok.Data;
 public class SetTaxMode implements UpdateAction {
 
   TaxMode taxMode;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }
