@@ -3,16 +3,27 @@ package io.reactivesw.catalog.category.infrastructure.util;
 /**
  * Created by Davis on 16/12/29.
  */
-public final class UpdateActionUtils {
+public final class CategoryActionUtils {
   /**
    * Instantiates a new Update action utils.
    */
-  private UpdateActionUtils() {}
+  private CategoryActionUtils() {
+  }
 
   /**
    * The constant SET_NAME.
    */
-  public static final String SET_NAME = "category_set_slug";
+  public static final String SET_NAME = "category_set_name";
+
+  /**
+   * The constant SET_DESCRIPTION.
+   */
+  public static final String SET_DESCRIPTION = "category_set_description";
+
+  /**
+   * The constant SET_SLUG.
+   */
+  public static final String SET_SLUG = "category_set_slug";
 
   /**
    * The constant SET_PARENT.

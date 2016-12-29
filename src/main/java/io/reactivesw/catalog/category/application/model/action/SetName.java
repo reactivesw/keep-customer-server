@@ -8,18 +8,18 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Created by Davis on 16/12/6.
+ * Created by Davis on 16/12/29.
  */
 @Getter
 @Setter
-public class SetMetaTitle implements UpdateAction {
+public class SetName implements UpdateAction {
   /**
-   * The Meta title.
+   * name.
    */
-  private LocalizedString metaTitle;
+  private LocalizedString name;
 
   @Override
   public String getActionName() {
-    return CategoryActionUtils.SET_META_TITLE;
+    return CategoryActionUtils.SET_NAME;
   }
 }

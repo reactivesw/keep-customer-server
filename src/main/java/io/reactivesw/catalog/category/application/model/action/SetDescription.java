@@ -1,6 +1,5 @@
 package io.reactivesw.catalog.category.application.model.action;
 
-import io.reactivesw.catalog.category.infrastructure.util.CategoryActionUtils;
 import io.reactivesw.common.model.LocalizedString;
 import io.reactivesw.common.model.UpdateAction;
 
@@ -8,18 +7,18 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Created by Davis on 16/12/6.
+ * Created by Davis on 16/12/29.
  */
 @Getter
 @Setter
-public class SetMetaTitle implements UpdateAction {
+public class SetDescription implements UpdateAction {
   /**
-   * The Meta title.
+   * If the description parameter is not included, the field will be emptied.
    */
-  private LocalizedString metaTitle;
+  private LocalizedString description;
 
   @Override
   public String getActionName() {
-    return CategoryActionUtils.SET_META_TITLE;
+    return null;
   }
 }

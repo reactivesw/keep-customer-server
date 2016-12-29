@@ -1,6 +1,6 @@
 package io.reactivesw.catalog.category.application.model.action;
 
-import io.reactivesw.catalog.category.infrastructure.util.UpdateActionUtils;
+import io.reactivesw.catalog.category.infrastructure.util.CategoryActionUtils;
 import io.reactivesw.common.model.UpdateAction;
 
 import lombok.Getter;
@@ -25,6 +25,6 @@ public class SetSlug implements UpdateAction {
 
   @Override
   public String getActionName() {
-    return UpdateActionUtils.SET_NAME;
+    return CategoryActionUtils.SET_SLUG;
   }
 }

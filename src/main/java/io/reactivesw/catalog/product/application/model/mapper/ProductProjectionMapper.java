@@ -2,13 +2,10 @@ package io.reactivesw.catalog.product.application.model.mapper;
 
 import com.google.common.collect.Lists;
 
-import io.reactivesw.catalog.category.application.model.mapper.OrderHintMapper;
-import io.reactivesw.catalog.product.application.model.ProductCatalogData;
 import io.reactivesw.catalog.product.application.model.ProductProjection;
 import io.reactivesw.catalog.product.domain.entity.ProductCatalogDataEntity;
 import io.reactivesw.catalog.product.domain.entity.ProductDataEntity;
 import io.reactivesw.catalog.product.domain.entity.ProductEntity;
-import io.reactivesw.catalog.producttype.application.model.ProductType;
 import io.reactivesw.common.enums.ReferenceTypes;
 import io.reactivesw.common.model.Reference;
 import io.reactivesw.common.model.mapper.LocalizedStringMapper;

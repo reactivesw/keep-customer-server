@@ -1,6 +1,6 @@
 package io.reactivesw.catalog.category.application.model.action;
 
-import io.reactivesw.catalog.category.infrastructure.util.UpdateActionUtils;
+import io.reactivesw.catalog.category.infrastructure.util.CategoryActionUtils;
 import io.reactivesw.common.model.LocalizedString;
 import io.reactivesw.common.model.UpdateAction;
 
@@ -20,6 +20,6 @@ public class SetMetaDescription implements UpdateAction {
 
   @Override
   public String getActionName() {
-    return UpdateActionUtils.SET_META_DESCRIPTION;
+    return CategoryActionUtils.SET_META_DESCRIPTION;
   }
 }

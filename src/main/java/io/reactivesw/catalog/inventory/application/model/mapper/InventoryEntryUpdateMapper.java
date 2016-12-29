@@ -2,7 +2,6 @@ package io.reactivesw.catalog.inventory.application.model.mapper;
 
 import com.google.common.collect.ImmutableMap;
 
-import io.reactivesw.catalog.category.application.model.mapper.CategoryUpdateMapper;
 import io.reactivesw.catalog.inventory.application.model.action.AddQuantityAction;
 import io.reactivesw.catalog.inventory.application.model.action.AddReservedQuantityAction;
 import io.reactivesw.catalog.inventory.application.model.action.RemoveQuantityAction;
@@ -12,8 +11,6 @@ import io.reactivesw.catalog.inventory.application.model.action.SetQuantityActio
 import io.reactivesw.catalog.inventory.application.model.action.SetRestockableInDays;
 import io.reactivesw.catalog.inventory.application.model.action.SetSupplyChannel;
 import io.reactivesw.common.model.Update;
-
-import org.apache.commons.collections4.Put;
 
 import java.util.Map;
 
