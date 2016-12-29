@@ -19,9 +19,11 @@ import io.reactivesw.common.model.UpdateAction;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.exception.ConstraintViolationException;
+import org.postgresql.util.PSQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -58,7 +60,6 @@ public class CategoryService {
    * @param categoryDraft the category draft
    * @return the category
    */
-  @Transactional
   public Category createCategory(CategoryDraft categoryDraft) {
     LOG.debug("enter createCategory, CategoryDraft is {}", categoryDraft.toString());
 
@@ -188,11 +189,12 @@ public class CategoryService {
    * @return the category entity
    * @throws AlreadyExistException if slug is already exist and get DataIntegrityViolationException
    */
+  @Transactional
   private CategoryEntity saveCategoryEntity(CategoryEntity entity) {
     CategoryEntity savedEntity = null;
     try {
       savedEntity = categoryRepository.save(entity);
-    } catch (ConstraintViolationException e) {
+    }catch (DataIntegrityViolationException e){
       LOG.debug("slug is already exist", e);
       throw new AlreadyExistException("Slug is already exist");
     }
