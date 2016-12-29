@@ -18,10 +18,10 @@ import io.reactivesw.common.model.Reference;
 import io.reactivesw.common.model.UpdateAction;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -192,7 +192,7 @@ public class CategoryService {
     CategoryEntity savedEntity = null;
     try {
       savedEntity = categoryRepository.save(entity);
-    } catch (DataIntegrityViolationException e) {
+    } catch (ConstraintViolationException e) {
       LOG.debug("slug is already exist", e);
       throw new AlreadyExistException("Slug is already exist");
     }
