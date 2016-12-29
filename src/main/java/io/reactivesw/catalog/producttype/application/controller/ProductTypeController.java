@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -83,7 +84,7 @@ public class ProductTypeController {
   public void deleteProductTypeById(@PathVariable(value = PRODUCT_TYPE_ID)
                                     @ApiParam(value = PRODUCT_TYPE_ID_STRING, required = true)
                                         String id,
-                                    @RequestBody
+                                    @RequestParam
                                     @ApiParam(value = "ProductType Version", required = true)
                                     @NotNull Integer version) {
     LOG.debug("enter deleteProductTypeById, id is : {}, version is : {}", id, version);
@@ -104,7 +105,7 @@ public class ProductTypeController {
   public void deleteProductTypeByKey(@PathVariable(value = PRODUCT_TYPE_KEY)
                                      @ApiParam(value = "ProductType Key", required = true)
                                          String key,
-                                     @RequestBody
+                                     @RequestParam
                                      @ApiParam(value = "ProductType Version", required = true)
                                      @NotNull Integer version) {
     LOG.debug("enter deleteProductTypeById, key is : {}, version is : {}", key, version);
