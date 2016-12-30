@@ -24,10 +24,14 @@ use `psql` to connect postgres database by following command:
 and input password
 
 #### 2.2.2 create database
-use command `create dataabase reactivesw` to create a new database name `reactivesw`.
+use command `create database reactivesw;` to create a new database name `reactivesw`.
 
 ps: database password `root` and database name `reactivesw` can be changed to other words,
 but you need to change the config on `application.yaml`.
+
+#### 2.2.2 drop database
+if you need to drop database, connect to `postgres` by command `\c postgres` and 
+use command `drop database reactivesw;` to drop database.
 
 ### 2.3 build 
 run command `./gradlew clean build` to build the project
