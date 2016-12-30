@@ -10,6 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import io.reactivesw.common.exception.ConflictException;
 import io.reactivesw.common.exception.NotExistException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,6 +51,7 @@ public class ExceptionHandler implements HandlerExceptionResolver {
     EXCEPTION_MAP.put(AlreadyExistException.class, HttpStatus.CONFLICT);
     EXCEPTION_MAP.put(AuthenticationFailedException.class, HttpStatus.UNAUTHORIZED);
     EXCEPTION_MAP.put(NotExistException.class, HttpStatus.NOT_FOUND);
+    EXCEPTION_MAP.put(ConflictException.class, HttpStatus.CONFLICT);
   }
 
   /**
