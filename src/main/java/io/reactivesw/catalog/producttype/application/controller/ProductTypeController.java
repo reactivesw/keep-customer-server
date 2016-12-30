@@ -8,6 +8,7 @@ import static io.reactivesw.route.ProductTypeRouter.PRODUCT_TYPE_WITH_KEY;
 
 import io.reactivesw.catalog.producttype.application.model.ProductType;
 import io.reactivesw.catalog.producttype.application.model.ProductTypeDraft;
+import io.reactivesw.catalog.producttype.application.model.action.ProductTypeUpdateAction;
 import io.reactivesw.catalog.producttype.domain.service.ProductTypeService;
 import io.reactivesw.common.model.PagedQueryResult;
 import io.reactivesw.common.model.QueryConditions;
@@ -132,7 +133,8 @@ public class ProductTypeController {
                                            @RequestBody
                                            @ApiParam(value = "ProductType Update Fields",
                                                required = true)
-                                               UpdateRequest updateRequest) {
+                                               UpdateRequest<ProductTypeUpdateAction>
+                                               updateRequest) {
     LOG.debug("enter updateProductTypeById,id is {}, update request is {}",
         id, updateRequest.toString());
 

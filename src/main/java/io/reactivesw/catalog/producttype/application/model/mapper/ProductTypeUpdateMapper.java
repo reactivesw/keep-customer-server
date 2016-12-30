@@ -32,7 +32,6 @@ public interface ProductTypeUpdateMapper<E> extends Update<E> {
   Map<Class<?>, ProductTypeUpdateMapper> updateMappers = ImmutableMap.<Class<?>,
       ProductTypeUpdateMapper>builder()
       .put(SetKey.class, new SetKeyMapper())
-      .put(SetName.class, new SetNameMapper())
       .put(SetDescription.class, new SetDescriptionMapper())
       .put(AddAttributeDefinition.class, new AddAttributeMapper())
       .put(RemoveAttributeDefinition.class, new RemoveAttributeMapper())

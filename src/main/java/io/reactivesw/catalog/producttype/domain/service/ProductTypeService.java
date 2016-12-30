@@ -3,15 +3,15 @@ package io.reactivesw.catalog.producttype.domain.service;
 import io.reactivesw.catalog.producttype.application.model.ProductType;
 import io.reactivesw.catalog.producttype.application.model.ProductTypeDraft;
 import io.reactivesw.catalog.producttype.application.model.mapper.ProductTypeMapper;
-import io.reactivesw.catalog.producttype.application.model.mapper.ProductTypeUpdateMapper;
 import io.reactivesw.catalog.producttype.domain.entity.ProductTypeEntity;
+import io.reactivesw.catalog.producttype.domain.service.update.ProductTypeUpdateService;
 import io.reactivesw.catalog.producttype.infrastructure.repository.ProductTypeRepository;
 import io.reactivesw.catalog.producttype.infrastructure.validator.AttributeDefinitionNameValidator;
 import io.reactivesw.common.exception.ConflictException;
 import io.reactivesw.common.exception.NotExistException;
-import io.reactivesw.common.model.UpdateAction;
 import io.reactivesw.common.model.PagedQueryResult;
 import io.reactivesw.common.model.QueryConditions;
+import io.reactivesw.common.model.UpdateAction;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +36,12 @@ public class ProductTypeService {
    */
   @Autowired
   private transient ProductTypeRepository productTypeRepository;
+
+  /**
+   * ProductTypeUpdateService.
+   */
+  @Autowired
+  private transient ProductTypeUpdateService updateService;
 
   /**
    * Create product type.
@@ -240,8 +246,11 @@ public class ProductTypeService {
   private ProductType updateProductTypeEntity(Integer version, List<UpdateAction> actions,
                                               ProductTypeEntity entity) {
     validateVersion(version, entity);
-    actions.parallelStream().forEach(action -> ProductTypeUpdateMapper.getMapper(action.getClass())
-        .handle(entity, action));
+
+    actions.parallelStream().forEach(action -> {
+      updateService.handle(entity, action);
+    });
+
     ProductTypeEntity updatedEntity = productTypeRepository.save(entity);
     return ProductTypeMapper.entityToModel(updatedEntity);
   }
