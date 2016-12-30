@@ -68,13 +68,13 @@ public class ProductVariantEntity {
    * attributes.
    */
   @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-  private Set<AttributeEntity> attributes;
+  private List<AttributeEntity> attributes;
 
   /**
    * images.
    */
-  @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-  private Set<ImageEntity> images;
+  @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+  private List<ImageEntity> images;
 
   /**
    * assetIds.
