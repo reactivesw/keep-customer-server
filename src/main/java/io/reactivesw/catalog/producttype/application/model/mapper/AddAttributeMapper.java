@@ -1,6 +1,6 @@
 package io.reactivesw.catalog.producttype.application.model.mapper;
 
-import io.reactivesw.catalog.producttype.application.model.action.AddAttribute;
+import io.reactivesw.catalog.producttype.application.model.action.AddAttributeDefinition;
 import io.reactivesw.catalog.producttype.domain.entity.AttributeDefinitionEntity;
 import io.reactivesw.catalog.producttype.domain.entity.ProductTypeEntity;
 import io.reactivesw.common.model.UpdateAction;
@@ -15,7 +15,7 @@ import java.util.List;
 public class AddAttributeMapper implements ProductTypeUpdateMapper<ProductTypeEntity> {
   @Override
   public void handle(ProductTypeEntity entity, UpdateAction action) {
-    AddAttribute addAttributeDefinition = (AddAttribute) action;
+    AddAttributeDefinition addAttributeDefinition = (AddAttributeDefinition) action;
     AttributeDefinitionEntity attributeDefinitionEntity = AttributeDefinitionMapper.modelToEntity
         (addAttributeDefinition.getAttribute());
 

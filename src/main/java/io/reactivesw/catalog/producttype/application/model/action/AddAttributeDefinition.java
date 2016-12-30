@@ -1,6 +1,7 @@
 package io.reactivesw.catalog.producttype.application.model.action;
 
 import io.reactivesw.catalog.product.application.model.AttributeDefinitionDraft;
+import io.reactivesw.catalog.producttype.infrastructure.util.ProductTypeActionUtils;
 import io.reactivesw.common.model.UpdateAction;
 
 import lombok.Getter;
@@ -11,7 +12,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class AddAttribute implements UpdateAction {
+public class AddAttributeDefinition implements UpdateAction {
   /**
    * The Attribute.
    */
@@ -19,6 +20,6 @@ public class AddAttribute implements UpdateAction {
 
   @Override
   public String getActionName() {
-    return null;
+    return ProductTypeActionUtils.ADD_ATTRIBUTE_DEFINITION;
   }
 }

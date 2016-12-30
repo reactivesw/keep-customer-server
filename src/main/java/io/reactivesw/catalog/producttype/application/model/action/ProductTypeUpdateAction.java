@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY,
     property = "action")
 @JsonSubTypes( {
-    @JsonSubTypes.Type(value = AddAttribute.class, name = "addAttribute"),
+    @JsonSubTypes.Type(value = SetName.class, name = "setName"),
+    @JsonSubTypes.Type(value = SetDescription.class, name = "setDescription"),
+    @JsonSubTypes.Type(value = AddAttributeDefinition.class, name = "addAttributeDefinition"),
 })
 public interface ProductTypeUpdateAction {
 }

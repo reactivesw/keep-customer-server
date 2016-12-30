@@ -3,11 +3,11 @@ package io.reactivesw.catalog.producttype.infrastructure.util;
 /**
  * Created by Davis on 16/12/30.
  */
-public final class ProductActionUtils {
+public final class ProductTypeActionUtils {
   /**
    * Instantiates a new Product action utils.
    */
-  private ProductActionUtils() {
+  private ProductTypeActionUtils() {
   }
 
   /**
