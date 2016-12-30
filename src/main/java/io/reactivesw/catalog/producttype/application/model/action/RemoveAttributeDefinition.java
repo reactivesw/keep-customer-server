@@ -1,9 +1,7 @@
 package io.reactivesw.catalog.producttype.application.model.action;
 
-import io.reactivesw.catalog.product.application.model.attributes.AttributeDefinition;
+import io.reactivesw.catalog.producttype.infrastructure.util.ProductTypeActionUtils;
 import io.reactivesw.common.model.UpdateAction;
-
-import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,14 +11,14 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class ChangeAttributeOrder implements UpdateAction {
+public class RemoveAttributeDefinition implements UpdateAction {
   /**
-   * The Attributes.
+   * The Name.
    */
-  private List<AttributeDefinition> attributes;
+  private String name;
 
   @Override
   public String getActionName() {
-    return null;
+    return ProductTypeActionUtils.REMOVE_ATTRIBUTE_DEFINITION;
   }
 }

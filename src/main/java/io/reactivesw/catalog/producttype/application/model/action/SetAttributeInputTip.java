@@ -1,5 +1,6 @@
 package io.reactivesw.catalog.producttype.application.model.action;
 
+import io.reactivesw.catalog.producttype.infrastructure.util.ProductTypeActionUtils;
 import io.reactivesw.common.model.UpdateAction;
 import io.reactivesw.common.model.LocalizedString;
 
@@ -24,6 +25,6 @@ public class SetAttributeInputTip implements UpdateAction {
 
   @Override
   public String getActionName() {
-    return null;
+    return ProductTypeActionUtils.SET_ATTRIBUTE_DEFINITION_INPUTTIP;
   }
 }

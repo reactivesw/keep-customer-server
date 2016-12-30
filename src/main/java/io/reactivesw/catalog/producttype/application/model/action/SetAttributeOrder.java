@@ -1,8 +1,10 @@
 package io.reactivesw.catalog.producttype.application.model.action;
 
+import io.reactivesw.catalog.product.application.model.attributes.AttributeDefinition;
 import io.reactivesw.catalog.producttype.infrastructure.util.ProductTypeActionUtils;
 import io.reactivesw.common.model.UpdateAction;
-import io.reactivesw.common.model.LocalizedString;
+
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,19 +14,14 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class SetAttributeLabel implements UpdateAction {
+public class SetAttributeOrder implements UpdateAction {
   /**
-   * The Attribute name.
+   * The Attributes.
    */
-  private String attributeName;
-
-  /**
-   * The Label.
-   */
-  private LocalizedString label;
+  private List<AttributeDefinition> attributes;
 
   @Override
   public String getActionName() {
-    return ProductTypeActionUtils.SET_ATTRIBUTE_DEFINITION_LABEL;
+    return ProductTypeActionUtils.SET_ATTRIBUTE_ORDER;
   }
 }

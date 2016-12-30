@@ -1,5 +1,6 @@
 package io.reactivesw.catalog.producttype.application.model.action;
 
+import io.reactivesw.catalog.producttype.infrastructure.util.ProductTypeActionUtils;
 import io.reactivesw.common.model.LocalizedEnumValue;
 import io.reactivesw.common.model.UpdateAction;
 
@@ -24,6 +25,6 @@ public class AddLocalizedEnumValue implements UpdateAction {
 
   @Override
   public String getActionName() {
-    return null;
+    return ProductTypeActionUtils.ADD_LOCALIZED_ENUM_VALUE;
   }
 }

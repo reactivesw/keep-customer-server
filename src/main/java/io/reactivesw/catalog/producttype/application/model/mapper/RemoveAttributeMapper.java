@@ -1,6 +1,6 @@
 package io.reactivesw.catalog.producttype.application.model.mapper;
 
-import io.reactivesw.catalog.producttype.application.model.action.RemoveAttribute;
+import io.reactivesw.catalog.producttype.application.model.action.RemoveAttributeDefinition;
 import io.reactivesw.catalog.producttype.domain.entity.ProductTypeEntity;
 import io.reactivesw.common.exception.NotExistException;
 import io.reactivesw.common.model.UpdateAction;
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class RemoveAttributeMapper implements ProductTypeUpdateMapper<ProductTypeEntity> {
   @Override
   public void handle(ProductTypeEntity entity, UpdateAction action) {
-    String attributeName = ((RemoveAttribute) action).getName();
+    String attributeName = ((RemoveAttributeDefinition) action).getName();
 
     List updateAttributes = entity.getAttributes().stream().filter(
         attribute -> !Objects.equals(attribute.getName(), attributeName)

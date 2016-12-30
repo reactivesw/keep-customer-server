@@ -42,10 +42,12 @@ public final class ProductTypeActionUtils {
   public static final String REMOVE_ATTRIBUTE_DEFINITION = PRODUCT_TYPE_ROOT +
       "remove_attribute_definition";
 
+
   /**
-   * The constant set_attribute_definition.
+   * The constant SET_ATTRIBUTE_DEFINITION_LABEL.
    */
-  public static final String SET_ATTRIBUTE_DEFINITION = PRODUCT_TYPE_ROOT + "set_attribute_label";
+  public static final String SET_ATTRIBUTE_DEFINITION_LABEL = PRODUCT_TYPE_ROOT +
+      "set_attribute_label";
 
   /**
    * The constant set_attribute_definition_inputtip.

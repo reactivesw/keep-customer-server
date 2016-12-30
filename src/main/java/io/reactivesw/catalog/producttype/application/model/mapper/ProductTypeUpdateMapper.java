@@ -3,7 +3,7 @@ package io.reactivesw.catalog.producttype.application.model.mapper;
 import io.reactivesw.catalog.producttype.application.model.action.AddAttributeDefinition;
 import io.reactivesw.catalog.producttype.application.model.action.AddLocalizedEnumValue;
 import io.reactivesw.catalog.producttype.application.model.action.AddPlainEnumValue;
-import io.reactivesw.catalog.producttype.application.model.action.RemoveAttribute;
+import io.reactivesw.catalog.producttype.application.model.action.RemoveAttributeDefinition;
 import io.reactivesw.catalog.producttype.application.model.action.SetAttributeInputTip;
 import io.reactivesw.catalog.producttype.application.model.action.SetAttributeLabel;
 import io.reactivesw.catalog.producttype.application.model.action.SetKey;
@@ -35,7 +35,7 @@ public interface ProductTypeUpdateMapper<E> extends Update<E> {
       .put(SetName.class, new SetNameMapper())
       .put(SetDescription.class, new SetDescriptionMapper())
       .put(AddAttributeDefinition.class, new AddAttributeMapper())
-      .put(RemoveAttribute.class, new RemoveAttributeMapper())
+      .put(RemoveAttributeDefinition.class, new RemoveAttributeMapper())
       .put(SetAttributeLabel.class, new SetAttributeLabelMapper())
       .put(SetAttributeInputTip.class, new SetAttributeLabelMapper())
       .put(AddPlainEnumValue.class, new AddPlainEnumValueMapper())
