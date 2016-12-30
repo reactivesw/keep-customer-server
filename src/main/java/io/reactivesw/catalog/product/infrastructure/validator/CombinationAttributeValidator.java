@@ -42,7 +42,13 @@ public final class CombinationAttributeValidator {
     List<String> combinationUniqueAttribute = AttributeUtils.getAttributeNameByConstraint
         (attributeDefinitions,
         AttributeConstraint.CombinationUnique);
+
+    if (combinationUniqueAttribute == null || combinationUniqueAttribute.isEmpty()) {
+      return;
+    }
+
     // TODO: 16/12/19 List<String> should be List<JsonNode>
+
     List<List<String>> attributes = Lists.newArrayList();
 
     if (productDraft.getMasterVariant() != null

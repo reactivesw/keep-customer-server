@@ -30,7 +30,7 @@ public class ImageEntity extends BaseIdEntity {
   /**
    * url.
    */
-  @Column(name = "url")
+  @Column(name = "url", length = 1024)
   private String url;
 
   /**
