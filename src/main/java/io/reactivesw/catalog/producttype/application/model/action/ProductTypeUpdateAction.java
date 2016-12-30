@@ -18,6 +18,12 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     @JsonSubTypes.Type(value = AddPlainEnumValue.class, name = "addPlainEnumValue"),
     @JsonSubTypes.Type(value = AddLocalizedEnumValue.class, name = "addLocalizedEnumValue"),
     @JsonSubTypes.Type(value = SetAttributeOrder.class, name = "setAttributeOrder"),
+    @JsonSubTypes.Type(value = SetPlainEnumValueOrder.class, name = "setPlainEnumValueOrder"),
+    @JsonSubTypes.Type(value = SetLocalizedEnumValueOrder.class,
+        name = "setLocalizedEnumValueOrder"),
+    @JsonSubTypes.Type(value = SetPlainEnumValueLabel.class, name = "setPlainEnumValueLabel"),
+    @JsonSubTypes.Type(value = SetLocalizedEnumValueLabel.class,
+        name = "setLocalizedEnumValueLabel"),
 })
 public interface ProductTypeUpdateAction {
 }
