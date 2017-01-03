@@ -67,7 +67,7 @@ public class ProductVariantEntity {
   /**
    * attributes.
    */
-  @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+  @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
   private List<AttributeEntity> attributes;
 
   /**
