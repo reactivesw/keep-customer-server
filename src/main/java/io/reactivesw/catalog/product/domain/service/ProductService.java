@@ -7,6 +7,7 @@ import io.reactivesw.catalog.product.domain.entity.ProductEntity;
 import io.reactivesw.catalog.product.infrastructure.repository.ProductRepository;
 import io.reactivesw.catalog.product.infrastructure.validator.SkuNameValidator;
 import io.reactivesw.catalog.product.infrastructure.validator.SlugValidator;
+import io.reactivesw.common.exception.ConflictException;
 import io.reactivesw.common.exception.NotExistException;
 
 import org.apache.commons.lang3.StringUtils;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -137,5 +139,39 @@ public class ProductService {
       throw new NotExistException("Product Not Found");
     }
     return entity;
+  }
+
+  /**
+   * Delete product.
+   *
+   * @param id      the id
+   * @param version the version
+   */
+  public void deleteProduct(String id, Integer version) {
+    LOG.debug("enter deleteProduct, id:{}, version:{}", id, version);
+
+    ProductEntity entity = this.getProductEntityById(id);
+    validateVersion(entity, version);
+
+    productRepository.delete(entity);
+
+    //TODO send message for:
+
+    LOG.debug("end deleteProduct, id:{}, version:{}", id, version);
+  }
+
+
+  /**
+   * Validate version.
+   *
+   * @param entity  the entity
+   * @param version the version
+   */
+  private void validateVersion(ProductEntity entity, Integer version) {
+    if (!Objects.equals(version, entity.getVersion())) {
+      LOG.debug("Version not match, input version:{}, entity version:{}",
+          version, entity.getVersion());
+      throw new ConflictException("Version not match");
+    }
   }
 }

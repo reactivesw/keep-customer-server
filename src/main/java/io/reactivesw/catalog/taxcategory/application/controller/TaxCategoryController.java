@@ -81,10 +81,10 @@ public class TaxCategoryController {
                                 @NotNull
                                     Integer version) {
 
-    LOG.debug("enter deleteCategory, id is {}, version is {}", id, version);
+    LOG.debug("enter deleteProduct, id is {}, version is {}", id, version);
 
 
-    LOG.debug("end deleteCategory, id is {}, version is {}", id, version);
+    LOG.debug("end deleteProduct, id is {}, version is {}", id, version);
   }
 
 

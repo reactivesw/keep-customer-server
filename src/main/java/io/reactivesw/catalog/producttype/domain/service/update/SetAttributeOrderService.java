@@ -30,28 +30,61 @@ public class SetAttributeOrderService implements Update<ProductTypeEntity> {
       return;
     }
 
-    List<String> attributeName = entity.getAttributes().parallelStream().map(
-        attribute -> {
-          return attribute.getName();
-        }
-    ).collect(Collectors.toList());
+    List<String> attributeName = getEntityAttributeNames(entity);
 
-    List<String> orderdAttributeName = ((SetAttributeOrder)action).getAttributes().parallelStream()
-        .map( attribute -> {
-              return attribute.getName();
-            }
-        ).collect(Collectors.toList());
+    List<String> orderdAttributeName = getOrderdAttributeNames((SetAttributeOrder) action);
 
     if (!CollectionUtils.isEqualCollection(attributeName, orderdAttributeName)) {
       throw new ParametersException("Attributes must be equal to the product type attributes");
     }
 
-    List<AttributeDefinitionEntity> orderdAttributes = entity.getAttributes().stream()
-        .sorted((a1, a2) ->
-            Integer.compare(orderdAttributeName.indexOf(a1.getName()),
-            orderdAttributeName.indexOf(a2.getName())))
-        .collect(Collectors.toList());
+    List<AttributeDefinitionEntity> orderdAttributes = sortAttributeByOrder(entity,
+        orderdAttributeName);
 
     entity.setAttributes(orderdAttributes);
+  }
+
+  /**
+   * Sort attribute by order list.
+   *
+   * @param entity              the entity
+   * @param orderdAttributeName the orderd attribute name
+   * @return the list
+   */
+  private List<AttributeDefinitionEntity> sortAttributeByOrder(ProductTypeEntity entity,
+                                                               List<String> orderdAttributeName) {
+    return entity.getAttributes().stream()
+          .sorted((a1, a2) ->
+              Integer.compare(orderdAttributeName.indexOf(a1.getName()),
+              orderdAttributeName.indexOf(a2.getName())))
+          .collect(Collectors.toList());
+  }
+
+  /**
+   * Gets orderd attribute names.
+   *
+   * @param action the action
+   * @return the orderd attribute names
+   */
+  private List<String> getOrderdAttributeNames(SetAttributeOrder action) {
+    return action.getAttributes().parallelStream()
+          .map( attribute -> {
+                return attribute.getName();
+              }
+          ).collect(Collectors.toList());
+  }
+
+  /**
+   * Gets entity attribute names.
+   *
+   * @param entity the entity
+   * @return the entity attribute names
+   */
+  private List<String> getEntityAttributeNames(ProductTypeEntity entity) {
+    return entity.getAttributes().parallelStream().map(
+          attribute -> {
+            return attribute.getName();
+          }
+      ).collect(Collectors.toList());
   }
 }

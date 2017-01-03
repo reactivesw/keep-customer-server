@@ -5,6 +5,7 @@ import io.reactivesw.catalog.producttype.application.model.action.SetPlainEnumVa
 import io.reactivesw.catalog.producttype.domain.entity.AttributeDefinitionEntity;
 import io.reactivesw.catalog.producttype.domain.entity.ProductTypeEntity;
 import io.reactivesw.catalog.producttype.infrastructure.util.ProductTypeActionUtils;
+import io.reactivesw.common.exception.NotExistException;
 import io.reactivesw.common.exception.ParametersException;
 import io.reactivesw.common.model.Update;
 import io.reactivesw.common.model.UpdateAction;
@@ -28,14 +29,19 @@ public class SetPlainEnumValueOrderService implements Update<ProductTypeEntity> 
    */
   @Override
   public void handle(ProductTypeEntity entity, UpdateAction action) {
+    if (entity.getAttributes() == null || entity.getAttributes().isEmpty()) {
+      return ;
+    }
     SetPlainEnumValueOrder setPlainEnumValueOrder = (SetPlainEnumValueOrder) action;
     List<AttributeDefinitionEntity> attributes = entity.getAttributes();
     Optional<AttributeDefinitionEntity> enumAttribute = attributes.parallelStream().filter(
         attribute -> attribute.getName().equals(setPlainEnumValueOrder.getActionName())
+            && attribute.getType() instanceof EnumAttributeType
     ).findAny();
 
     if (!enumAttribute.isPresent()) {
-      return;
+      throw new NotExistException("can not find enum attribute type named : " +
+          setPlainEnumValueOrder.getAttributeName());
     }
     List<String> orderdKeys = setPlainEnumValueOrder.getValues().parallelStream()
         .map(
