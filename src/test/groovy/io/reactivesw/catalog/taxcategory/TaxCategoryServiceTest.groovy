@@ -8,6 +8,7 @@ import io.reactivesw.catalog.taxcategory.application.model.TaxRateDraft
 import io.reactivesw.catalog.taxcategory.application.model.mapper.TaxCategoryMapper
 import io.reactivesw.catalog.taxcategory.domain.entity.TaxCategoryEntity
 import io.reactivesw.catalog.taxcategory.domain.service.TaxCategoryService
+import io.reactivesw.catalog.taxcategory.domain.service.update.TaxCategoryUpdateService
 import io.reactivesw.catalog.taxcategory.infrastructure.repository.TaxCategoryRepository
 import io.reactivesw.common.exception.ConflictException
 import io.reactivesw.common.exception.NotExistException
@@ -21,8 +22,10 @@ import spock.lang.Specification
  */
 class TaxCategoryServiceTest extends Specification {
 
+    TaxCategoryUpdateService updateService = Mock()
     TaxCategoryRepository taxCategoryRepository = Mock()
-    def taxCategoryService = new TaxCategoryService(taxCategoryRepository: taxCategoryRepository)
+    def taxCategoryService = new TaxCategoryService(taxCategoryRepository: taxCategoryRepository,
+            updateService: updateService)
     def taxCategory = new TaxCategoryEntity()
     def taxCategoryDraft = new TaxCategoryDraft()
 
@@ -109,6 +112,7 @@ class TaxCategoryServiceTest extends Specification {
         taxCategory.version = version
         taxCategoryRepository.findOne(_) >> taxCategory
         taxCategoryRepository.save(taxCategory) >> taxCategory
+        updateService.handle(_,_) >> null
 
         def actions = new ArrayList<UpdateAction>()
         def setName = new SetName()
@@ -120,8 +124,6 @@ class TaxCategoryServiceTest extends Specification {
 
         then:
         result != null
-        result.id == taxCategory.id
-        result.name == setName.name
     }
 
     def "test 4.1 : get TaxCategory by Id"() {

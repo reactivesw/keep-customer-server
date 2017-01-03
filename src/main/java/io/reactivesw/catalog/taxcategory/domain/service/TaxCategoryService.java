@@ -3,8 +3,8 @@ package io.reactivesw.catalog.taxcategory.domain.service;
 import io.reactivesw.catalog.taxcategory.application.model.TaxCategory;
 import io.reactivesw.catalog.taxcategory.application.model.TaxCategoryDraft;
 import io.reactivesw.catalog.taxcategory.application.model.mapper.TaxCategoryMapper;
-import io.reactivesw.catalog.taxcategory.application.model.mapper.TaxCategoryUpdateMapper;
 import io.reactivesw.catalog.taxcategory.domain.entity.TaxCategoryEntity;
+import io.reactivesw.catalog.taxcategory.domain.service.update.TaxCategoryUpdateService;
 import io.reactivesw.catalog.taxcategory.infrastructure.repository.TaxCategoryRepository;
 import io.reactivesw.common.exception.ConflictException;
 import io.reactivesw.common.exception.NotExistException;
@@ -12,6 +12,7 @@ import io.reactivesw.common.exception.ParametersException;
 import io.reactivesw.common.model.UpdateAction;
 import io.reactivesw.common.model.PagedQueryResult;
 import io.reactivesw.common.model.QueryConditions;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,12 @@ public class TaxCategoryService {
    */
   @Autowired
   private transient TaxCategoryRepository taxCategoryRepository;
+
+  /**
+   * TaxCategoryUpdateService.
+   */
+  @Autowired
+  private transient TaxCategoryUpdateService updateService;
 
   /**
    * Create TaxCategory.
@@ -92,8 +99,7 @@ public class TaxCategoryService {
     TaxCategoryEntity entity = getEntityById(id);
     validateVersion(entity, version);
 
-    actions.parallelStream().forEach(action -> TaxCategoryUpdateMapper.getMapper(action.getClass())
-        .handle(entity, action));
+    actions.parallelStream().forEach(action -> updateService.handle(entity, action));
 
     TaxCategoryEntity updatedEntity = taxCategoryRepository.save(entity);
 

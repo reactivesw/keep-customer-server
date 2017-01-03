@@ -1,27 +1,30 @@
 package io.reactivesw.catalog.taxcategory.application.model.action;
 
-import io.reactivesw.catalog.taxcategory.application.model.TaxRateDraft;
 import io.reactivesw.catalog.taxcategory.infrastructure.util.TaxCategoryActionUtils;
 import io.reactivesw.common.model.UpdateAction;
+
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
- * Created by Davis on 16/12/11.
+ * Created by Davis on 17/1/3.
  */
 @Getter
 @Setter
-public class AddTaxRate implements UpdateAction {
+public class SetName implements UpdateAction {
+
   /**
-   * The Tax rate.
+   * The Name.
    */
   @NotNull
-  private TaxRateDraft taxRate;
+  @Size(min = 1)
+  private String name;
 
   @Override
   public String getActionName() {
-    return TaxCategoryActionUtils.ADD_TAX_RATE;
+    return TaxCategoryActionUtils.SET_NAME;
   }
 }
