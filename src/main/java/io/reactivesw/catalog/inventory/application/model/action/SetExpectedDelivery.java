@@ -1,5 +1,6 @@
 package io.reactivesw.catalog.inventory.application.model.action;
 
+import io.reactivesw.catalog.inventory.infrastructure.util.InventoryEntryActionUtils;
 import io.reactivesw.common.model.UpdateAction;
 
 import lombok.Data;
@@ -20,6 +21,6 @@ public class SetExpectedDelivery implements UpdateAction {
 
   @Override
   public String getActionName() {
-    return null;
+    return InventoryEntryActionUtils.SET_EXPECTED_DELIVERY;
   }
 }

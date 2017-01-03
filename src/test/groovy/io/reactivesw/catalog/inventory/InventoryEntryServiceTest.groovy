@@ -6,6 +6,7 @@ import io.reactivesw.catalog.inventory.application.model.action.SetExpectedDeliv
 import io.reactivesw.catalog.inventory.application.model.mapper.InventoryEntryMapper
 import io.reactivesw.catalog.inventory.domain.entity.InventoryEntryEntity
 import io.reactivesw.catalog.inventory.domain.service.InventoryEntryService
+import io.reactivesw.catalog.inventory.domain.service.update.InventoryEntryUpdateService
 import io.reactivesw.catalog.inventory.infrastructure.repository.InventoryEntryRepository
 import io.reactivesw.common.enums.ReferenceTypes
 import io.reactivesw.common.exception.ConflictException
@@ -21,7 +22,9 @@ import java.time.ZonedDateTime
  */
 class InventoryEntryServiceTest extends Specification {
     InventoryEntryRepository inventoryEntryRepository = Mock()
-    def inventoryEntryService = new InventoryEntryService(inventoryEntryRepository: inventoryEntryRepository)
+    InventoryEntryUpdateService updateService = Mock()
+    def inventoryEntryService = new InventoryEntryService(inventoryEntryRepository: inventoryEntryRepository,
+            updateService: updateService)
     def inventoryEntryDraft = new InventoryEntryDraft()
     def inventoryEntryEntity = new InventoryEntryEntity()
     def id = "1234566"
@@ -82,6 +85,7 @@ class InventoryEntryServiceTest extends Specification {
         inventoryEntryRepository.save(_) >> inventoryEntryEntity
         SetExpectedDelivery action = new SetExpectedDelivery(expectedDelivery: ZonedDateTime.now())
         List<UpdateAction> actions = Lists.newArrayList(action)
+        updateService.handle(_, _) >> null
 
         when:
         def result = inventoryEntryService.updateInventoryEntry(id, version, actions)
