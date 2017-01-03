@@ -23,6 +23,7 @@ public class SetPlainEnumValueOrder implements UpdateAction {
    * The Attribute name.
    */
   @NotNull
+  @Size(min = 1)
   private String attributeName;
 
   /**
@@ -33,7 +34,6 @@ public class SetPlainEnumValueOrder implements UpdateAction {
   private List<PlainEnumValue> values;
 
   @Override
-
   public String getActionName() {
     return ProductTypeActionUtils.SET_ENUM_VALUE_ORDER;
   }
