@@ -33,34 +33,31 @@ public class SetPlainEnumValueOrderService implements Update<ProductTypeEntity> 
       return ;
     }
     SetPlainEnumValueOrder setPlainEnumValueOrder = (SetPlainEnumValueOrder) action;
-    List<AttributeDefinitionEntity> attributes = entity.getAttributes();
-    Optional<AttributeDefinitionEntity> enumAttribute = attributes.parallelStream().filter(
-        attribute -> attribute.getName().equals(setPlainEnumValueOrder.getActionName())
-            && attribute.getType() instanceof EnumAttributeType
-    ).findAny();
 
-    if (!enumAttribute.isPresent()) {
-      throw new NotExistException("can not find enum attribute type named : " +
-          setPlainEnumValueOrder.getAttributeName());
-    }
-    List<String> orderdKeys = setPlainEnumValueOrder.getValues().parallelStream()
-        .map(
-            value -> {
-              return value.getKey();
-            }
-        ).collect(Collectors.toList());
-    EnumAttributeType enumType = (EnumAttributeType) enumAttribute.get().getType();
-    List<String> enumValueKeys = enumType.getValues().parallelStream().map(
-        value -> {
-          return value.getKey();
-        }
-    ).collect(Collectors.toList());
+    String enumAttributeName = setPlainEnumValueOrder.getActionName();
 
-    if (!CollectionUtils.isEqualCollection(orderdKeys, enumValueKeys)) {
+    EnumAttributeType enumType = getEnumAttributeType(entity, enumAttributeName);
+    List<String> enumValueKeys = getEnumAttributeKeys(enumType);
+
+    List<String> orderKeys = getOrderKeys(setPlainEnumValueOrder);
+
+    if (!CollectionUtils.isEqualCollection(orderKeys, enumValueKeys)) {
       throw new ParametersException(
           "The values must be equal to the values of the attribute enum values");
     }
 
+    setEnumValueOrder(entity, enumAttributeName, enumType, orderKeys);
+  }
+
+  /**
+   * Sets enum value order.
+   *  @param entity                 the entity
+   * @param enumAttributeName the set plain enum value order
+   * @param enumType               the enum type
+   * @param orderdKeys             the orderd keys
+   */
+  private void setEnumValueOrder(ProductTypeEntity entity, String
+      enumAttributeName, EnumAttributeType enumType, List<String> orderdKeys) {
     enumType.setValues(enumType.getValues().parallelStream().sorted(
         (v1, v2) -> Integer.compare(orderdKeys.indexOf(v1.getKey()),
             orderdKeys.indexOf(v2.getKey()))
@@ -68,10 +65,60 @@ public class SetPlainEnumValueOrderService implements Update<ProductTypeEntity> 
 
     entity.getAttributes().parallelStream().forEach(
         attribute -> {
-          if (attribute.getName().equals(setPlainEnumValueOrder.getActionName())) {
+          if (attribute.getName().equals(enumAttributeName)) {
             attribute.setType(enumType);
           }
         }
     );
+  }
+
+  /**
+   * Gets orderd keys.
+   *
+   * @param setPlainEnumValueOrder the set plain enum value order
+   * @return the orderd keys
+   */
+  private List<String> getOrderKeys(SetPlainEnumValueOrder setPlainEnumValueOrder) {
+    return setPlainEnumValueOrder.getValues().parallelStream()
+          .map(
+              value -> {
+                return value.getKey();
+              }
+          ).collect(Collectors.toList());
+  }
+
+  /**
+   * Gets enum attribute keys.
+   *
+   * @param enumType the enum type
+   * @return the enum attribute keys
+   */
+  private List<String> getEnumAttributeKeys(EnumAttributeType enumType) {
+    return enumType.getValues().parallelStream().map(
+          value -> {
+            return value.getKey();
+          }
+      ).collect(Collectors.toList());
+  }
+
+  /**
+   * Gets enum attribute type.
+   *
+   * @param entity                 the entity
+   * @param enumAttributeName the set plain enum value order
+   * @return the enum attribute type
+   */
+  private EnumAttributeType getEnumAttributeType(ProductTypeEntity entity,
+                                                 String enumAttributeName) {
+    List<AttributeDefinitionEntity> attributes = entity.getAttributes();
+    Optional<AttributeDefinitionEntity> enumAttribute = attributes.parallelStream().filter(
+        attribute -> attribute.getName().equals(enumAttributeName)
+            && attribute.getType() instanceof EnumAttributeType
+    ).findAny();
+
+    if (!enumAttribute.isPresent()) {
+      throw new NotExistException("can not find enum attribute type named : " + enumAttributeName);
+    }
+    return (EnumAttributeType) enumAttribute.get().getType();
   }
 }
