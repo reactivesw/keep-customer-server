@@ -9,6 +9,9 @@ import lombok.Setter;
 
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 /**
  * Created by Davis on 16/12/30.
  */
@@ -19,11 +22,15 @@ public class SetLocalizedEnumValueOrder implements UpdateAction {
   /**
    * The Attribute name.
    */
+  @NotNull
+  @Size(min = 1)
   private String attributeName;
 
   /**
    * The Values.
    */
+  @NotNull
+  @Size(min = 1)
   private List<LocalizedEnumValue> values;
 
   @Override
