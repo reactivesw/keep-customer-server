@@ -24,9 +24,13 @@ public class LineItemMapper {
 
       entity.setVariant(model.getVariantId());
 
-      entity.setSupplyChannel(model.getSupplyChannel().getId());
+      String supplyChannel = model.getSupplyChannel() == null ? null : model.getSupplyChannel()
+          .getId();
+      entity.setSupplyChannel(supplyChannel);
 
-      entity.setDistributionChannel(model.getDistributionChannel().getId());
+      String distributionChannel = model.getDistributionChannel() == null ? null : model
+          .getDistributionChannel().getId();
+      entity.setDistributionChannel(distributionChannel);
     }
 
     return entity;
