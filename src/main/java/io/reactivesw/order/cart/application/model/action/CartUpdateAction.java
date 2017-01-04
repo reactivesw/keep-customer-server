@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "action")
 @JsonSubTypes( {
     @JsonSubTypes.Type(value = AddLineItem.class, name = "addLineItem"),
-    @JsonSubTypes.Type(value = AddPayment.class, name = "addPayment"),
     @JsonSubTypes.Type(value = RemoveLineItem.class, name = "removeLineItem"),
     @JsonSubTypes.Type(value = SetBillingAddress.class, name = "setBillingAddress"),
     @JsonSubTypes.Type(value = SetCountry.class, name = "setCountry"),
@@ -19,5 +18,5 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     @JsonSubTypes.Type(value = SetShippingMethod.class, name = "setShippingMethod"),
     @JsonSubTypes.Type(value = SetTaxMode.class, name = "setTaxMode")
 })
-public interface CartUpdateAction  {
+public interface CartUpdateAction {
 }
