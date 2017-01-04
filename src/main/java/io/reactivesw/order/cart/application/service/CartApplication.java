@@ -11,14 +11,13 @@ import io.reactivesw.order.cart.domain.entity.CartEntity;
 import io.reactivesw.order.cart.domain.entity.value.LineItemValue;
 import io.reactivesw.order.cart.domain.entity.value.ShippingInfoValue;
 import io.reactivesw.order.cart.domain.service.CartService;
-import io.reactivesw.order.shippingmethod.application.model.ShippingMethod;
-import io.reactivesw.order.shippingmethod.application.model.ShippingRate;
-import io.reactivesw.order.shippingmethod.application.model.ZoneRate;
+import io.reactivesw.order.shippingmethod.application.model.*;
 import io.reactivesw.order.zone.application.model.Zone;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -29,6 +28,7 @@ import java.util.Set;
 /**
  * Created by umasuo on 16/12/28.
  */
+@Service
 public class CartApplication {
 
   /**
@@ -85,7 +85,18 @@ public class CartApplication {
 
     CartEntity result = this.cartService.updateCart(id, version, cart);
 
-    Cart data = this.fillData(result);
+    return this.getFullCart(result);
+  }
+
+  /**
+   * get full Cart from an cart entity.
+   *
+   * @param entity CartEntity
+   * @return Cart
+   */
+  public Cart getFullCart(CartEntity entity) {
+
+    Cart data = this.fillData(entity);
 
     this.calculateCartPrice(data);
 
