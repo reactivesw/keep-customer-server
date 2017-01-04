@@ -4,6 +4,8 @@ import io.reactivesw.common.model.UpdateAction;
 import io.reactivesw.order.cart.application.model.action.SetTaxMode;
 import io.reactivesw.order.cart.domain.entity.CartEntity;
 import io.reactivesw.order.cart.infrastructure.enums.TaxMode;
+import io.reactivesw.order.cart.infrastructure.util.CartUpdateActionUtils;
+import org.springframework.stereotype.Service;
 
 /**
  * Changes the TaxMode of a cart. When a tax mode is changed from External to Platform or
@@ -12,6 +14,7 @@ import io.reactivesw.order.cart.infrastructure.enums.TaxMode;
  * rate for the given shipping address.
  * Created by umasuo on 16/12/19.
  */
+@Service(value = CartUpdateActionUtils.SET_TAX_MODE)
 public class SetTaxModeService extends CartUpdateService {
 
 

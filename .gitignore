@@ -85,5 +85,4 @@ hs_err_pid*
 src/main/resources/static/css
 .gems
 
-# Ignore for application config
-src/main/resources/application-test.yaml
+src/main/resources/application-test.yml

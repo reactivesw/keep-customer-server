@@ -111,14 +111,16 @@ public class ProductService {
     LOG.debug("enter getProductBySlug, slug is : {}", slug);
 
     List<ProductEntity> products = productRepository.findAll();
-    Optional<ProductEntity> optional = products.parallelStream().filter(
+    ProductEntity productEntity = products.parallelStream().filter(
         product -> StringUtils.equals(slug, product.getMasterData().getCurrent().getSlug())
-    ).findAny();
+    ).findAny().orElse(null);
 
-    Product result = new Product();
-    if (optional.isPresent()) {
-      result = ProductMapper.entityToModel(optional.get());
+
+    if (productEntity == null) {
+      throw new NotExistException();
     }
+    
+    Product result = ProductMapper.entityToModel(productEntity);
 
     LOG.debug("end getProductBySlug, get product : {}", result.toString());
 

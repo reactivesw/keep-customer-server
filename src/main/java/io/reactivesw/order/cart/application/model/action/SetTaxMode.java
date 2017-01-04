@@ -2,6 +2,7 @@ package io.reactivesw.order.cart.application.model.action;
 
 import io.reactivesw.common.model.UpdateAction;
 import io.reactivesw.order.cart.infrastructure.enums.TaxMode;
+import io.reactivesw.order.cart.infrastructure.util.CartUpdateActionUtils;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -21,6 +22,6 @@ public class SetTaxMode implements UpdateAction {
 
   @Override
   public String getActionName() {
-    return null;
+    return CartUpdateActionUtils.SET_TAX_MODE;
   }
 }

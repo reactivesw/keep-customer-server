@@ -64,7 +64,7 @@ public class ZoneController {
    * @return List of Zone
    */
   @ApiOperation("Get by locatino: country & state")
-  @GetMapping(ZoneRouter.ZONE_BASE_URL)
+  @GetMapping(ZoneRouter.ZONE_ROOT)
   public List<Zone> getByLocation(@RequestParam(name = "country") @ApiParam("country") String
                                       country,
                                   @RequestParam(required = false, name = "state")

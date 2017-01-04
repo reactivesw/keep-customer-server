@@ -1,6 +1,7 @@
 package io.reactivesw.order.cart.application.model.action;
 
 import io.reactivesw.common.model.UpdateAction;
+import io.reactivesw.order.cart.infrastructure.util.CartUpdateActionUtils;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
@@ -26,6 +27,6 @@ public class RemoveLineItem implements UpdateAction {
 
   @Override
   public String getActionName() {
-    return null;
+    return CartUpdateActionUtils.REMOVE_LINE_ITEM;
   }
 }

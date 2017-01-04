@@ -1,6 +1,7 @@
 package io.reactivesw.order.cart.application.model.action;
 
 import io.reactivesw.common.model.UpdateAction;
+import io.reactivesw.order.cart.infrastructure.util.CartUpdateActionUtils;
 import lombok.Data;
 
 import javax.validation.Valid;
@@ -18,6 +19,6 @@ public class SetCountry implements UpdateAction {
 
   @Override
   public String getActionName() {
-    return null;
+    return CartUpdateActionUtils.SET_COUNTRY;
   }
 }

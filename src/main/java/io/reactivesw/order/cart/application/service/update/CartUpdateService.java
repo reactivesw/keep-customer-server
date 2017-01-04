@@ -1,13 +1,11 @@
 package io.reactivesw.order.cart.application.service.update;
 
-import com.google.common.collect.ImmutableMap;
 import io.reactivesw.common.model.Update;
 import io.reactivesw.common.model.UpdateAction;
-import io.reactivesw.order.cart.application.model.action.mapper.CartUpdateMapper;
 import io.reactivesw.order.cart.domain.entity.CartEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
-
-import java.util.Map;
 
 /**
  * Created by umasuo on 16/12/16.
@@ -16,9 +14,10 @@ import java.util.Map;
 public class CartUpdateService implements Update<CartEntity> {
 
   /**
-   * ImmutableMap for cart update service.
+   * application context.
    */
-  private transient Map<Class<?>, Update> updateMappers = ImmutableMap.of();
+  @Autowired
+  private transient ApplicationContext context;
 
   /**
    * use update service or updateMapper to update the entity.
@@ -28,13 +27,7 @@ public class CartUpdateService implements Update<CartEntity> {
    */
   @Override
   public void handle(CartEntity cart, UpdateAction action) {
-    Update updateService = updateMappers.get(action.getClass());
-    if (updateService == null) {
-      //use the data
-      CartUpdateMapper.mapData(cart, action);
-    } else {
-      updateService.handle(cart, action);
-    }
+    handle(cart, action, context);
   }
 
 }

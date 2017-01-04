@@ -11,15 +11,13 @@ import io.reactivesw.order.cart.domain.entity.CartEntity;
 import io.reactivesw.order.cart.domain.entity.value.LineItemValue;
 import io.reactivesw.order.cart.domain.entity.value.ShippingInfoValue;
 import io.reactivesw.order.cart.domain.service.CartService;
-import io.reactivesw.order.shippingmethod.application.model.ShippingMethod;
-import io.reactivesw.order.shippingmethod.application.model.ShippingRate;
-import io.reactivesw.order.shippingmethod.application.model.ZoneRate;
+import io.reactivesw.order.shippingmethod.application.model.*;
 import io.reactivesw.order.zone.application.model.Zone;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +27,7 @@ import java.util.Set;
 /**
  * Created by umasuo on 16/12/28.
  */
+@Service
 public class CartApplication {
 
   /**
@@ -41,6 +40,12 @@ public class CartApplication {
    */
   @Autowired
   private transient CartService cartService;
+
+  /**
+   * rest client.
+   */
+  @Autowired
+  private transient CartRestClient restClient;
 
   /**
    * cart update service.
@@ -61,13 +66,6 @@ public class CartApplication {
   private transient ShippingInfoService shippingInfoService;
 
   /**
-   * rest template.
-   */
-  @Autowired
-  private transient RestTemplate restTemplate = new RestTemplate();
-
-
-  /**
    * update cart for with action list.
    *
    * @param id      String of cart id
@@ -76,6 +74,7 @@ public class CartApplication {
    * @return CartEntity
    */
   public Cart updateCart(String id, Integer version, List<UpdateAction> actions) {
+    LOG.debug("enter: id{}, version: {}, actions: {}", id, version, actions);
     CartEntity cart = this.cartService.getById(id);
 
     //update data from action
@@ -85,10 +84,24 @@ public class CartApplication {
 
     CartEntity result = this.cartService.updateCart(id, version, cart);
 
-    Cart data = this.fillData(result);
+    LOG.debug("exit: result: {}", result);
+    return this.getFullCart(result);
+  }
+
+  /**
+   * get full Cart from an cart entity.
+   *
+   * @param entity CartEntity
+   * @return Cart
+   */
+  public Cart getFullCart(CartEntity entity) {
+    LOG.debug("enter: entity: {}", entity);
+
+    Cart data = this.fillData(entity);
 
     this.calculateCartPrice(data);
 
+    LOG.debug("exit: cart: {}", data);
     return data;
   }
 
@@ -98,6 +111,7 @@ public class CartApplication {
    * @return Cart
    */
   private Cart fillData(CartEntity entity) {
+    LOG.debug("enter: entity: {}", entity);
     //got the base info
     Cart cart = CartMapper.entityToModel(entity);
 
@@ -113,6 +127,7 @@ public class CartApplication {
     //fill the shipping info
     this.fillShippingInfo(cart, entity.getShippingInfo());
 
+    LOG.debug("exit: cart: {}", cart);
     return cart;
   }
 
@@ -124,10 +139,12 @@ public class CartApplication {
    * @param addressId address id.
    */
   private void fillShippingAddress(Cart cart, String addressId) {
+    LOG.debug("enter: cart: {}, addressId: {}", cart, addressId);
     if (StringUtils.isNotBlank(addressId)) {
-      //TODO get address from customer service
-      Address address = restTemplate.getForObject("shipping", Address.class);
+      //get address from customer service
+      Address address = restClient.getAddress(addressId);
       cart.setShippingAddress(address);
+      LOG.debug("enter: cart: {}, address: {}", cart, address);
     }
   }
 
@@ -138,10 +155,12 @@ public class CartApplication {
    * @param addressId String address id
    */
   private void fillBillingAddress(Cart cart, String addressId) {
+    LOG.debug("enter: cart: {}, addressId: {}", cart, addressId);
     if (StringUtils.isNotBlank(addressId)) {
-      //TODO get address from customer service
-      Address address = restTemplate.getForObject("billing", Address.class);
+      //get address from customer service
+      Address address = restClient.getAddress(addressId);
       cart.setBillingAddress(address);
+      LOG.debug("enter: cart: {}, addressId: {}", cart, addressId);
     }
   }
 
@@ -153,6 +172,7 @@ public class CartApplication {
    * @param lineItems Set<LineItemValue>
    */
   private void fillLineItem(Cart cart, Set<LineItemValue> lineItems) {
+    LOG.debug("enter: cart: {}, lineItems: {}", cart, lineItems);
     if (lineItems != null) {
       List<LineItem> items = new ArrayList<>();
       lineItems.parallelStream().forEach(
@@ -160,7 +180,7 @@ public class CartApplication {
             LineItem item = new LineItem();
             this.setLineItemBaseInfo(item, lineItemValue);
             //TODO get Product from product service.
-            Product product = restTemplate.getForObject("item", Product.class);
+            Product product = restClient.getProduct(item.getProductId());
             if (product == null) {
               //TODO if the product has been deleted , then remove it from cart
               LOG.warn("Remove non-existing product");
@@ -176,11 +196,13 @@ public class CartApplication {
                     shippingAddress.getState());
                 item.setTaxRate(taxRate);
               }
-              items.add(item);
+              if (item.getProductVariant() != null) {
+                items.add(item);
+              }
             }
           }
       );
-
+      LOG.debug("exit: cart: {}", cart);
       cart.setLineItems(items);
     }
   }
@@ -192,6 +214,7 @@ public class CartApplication {
    * @param lineItemValue LineItemEntity
    */
   private void setLineItemBaseInfo(LineItem item, LineItemValue lineItemValue) {
+    LOG.debug("enter: LineItem: {}, LineItemValue: {}", item, lineItemValue);
     item.setId(lineItemValue.getId());
     item.setQuantity(lineItemValue.getQuantity());
     item.setProductId(lineItemValue.getProductId());
@@ -199,6 +222,8 @@ public class CartApplication {
         lineItemValue.getDistributionChannel()));
     item.setSupplyChannel(new Reference(ReferenceTypes.CHANNEL.getType(),
         lineItemValue.getSupplyChannel()));
+
+    LOG.debug("exit: LineItem: {}", item);
   }
 
   /**
@@ -209,6 +234,7 @@ public class CartApplication {
    * @param variantId   Integer of variantId
    */
   private void setLineItemProductInfo(LineItem item, ProductData productData, Integer variantId) {
+    LOG.debug("enter: LineItem: {}, productData: {}, variantId: {}", item, productData, variantId);
     item.setName(productData.getName());
     item.setSlug(productData.getSlug());
 
@@ -222,6 +248,7 @@ public class CartApplication {
     } else {
       item.setProductVariant(variant);
     }
+    LOG.debug("exit: LineItem: {}", item);
   }
 
   /**
@@ -231,15 +258,16 @@ public class CartApplication {
    * @param infoValue ShippingInfoValue
    */
   private void fillShippingInfo(Cart cart, ShippingInfoValue infoValue) {
+    LOG.debug("enter: cart: {}, ShippingInfoValue: {}", cart, infoValue);
     String shippingMethodId = infoValue == null ? null : infoValue.getShippingMethod();
     if (shippingMethodId != null) {
-      //TODO get shipping method from shipping method service.
-      ShippingMethod shippingMethod = restTemplate.getForObject("shippingInfo", ShippingMethod
-          .class);
+      // get shipping method from shipping method service.
+      ShippingMethod shippingMethod = restClient.getShippingMethod(shippingMethodId);
       if (shippingMethod == null) {
         //TODO remove the shipping method, the customer need to select again.
         LOG.warn("Remove non-existing shipping method.");
       } else {
+
         ShippingInfo info = new ShippingInfo();
         info.setShippingMethod(new Reference(ReferenceTypes.SHIPPING_METHOD.getType(),
             shippingMethod.getId()));
@@ -263,6 +291,7 @@ public class CartApplication {
         cart.setShippingInfo(info);
       }
     }
+    LOG.debug("exit: cart: {}", cart);
   }
 
   /**
@@ -276,12 +305,14 @@ public class CartApplication {
    */
   private ShippingRate getShippingRate(List<ZoneRate> zoneRates, String country, String state,
                                        String currency) {
+    LOG.debug("enter: zoneRates: {}, country: {}, state: {}, currency: {}", zoneRates, country,
+        state, currency);
     ShippingRate shippingRate = null;
     if (zoneRates != null) {
       ZoneRate rate = zoneRates.parallelStream().filter(
           zoneRate -> {
             //TODO get zone id by country & state
-            Zone zone = restTemplate.getForObject("zone", Zone.class);
+            Zone zone = restClient.getZone(zoneRate.getZone().getId());
             LOG.debug("Zone got by country: {}, state: {}, Zone:{}", country, state, zone);
             return StringUtils.equals(zone.getId(), zoneRate.getZone().getId());
           }
@@ -296,6 +327,7 @@ public class CartApplication {
       ).findAny().orElse(null);
     }
 
+    LOG.debug("exit: shippingRate: {}", shippingRate);
     return shippingRate;
   }
 
@@ -308,13 +340,14 @@ public class CartApplication {
    * @return TaxRate
    */
   private TaxRate getTaxRate(Reference txRef, String country, String state) {
+    LOG.debug("enter: Reference: {}, country: {}, state: {}", txRef, country, state);
     TaxRate taxRate = null;
     if (txRef != null && txRef.getId() != null) {
-//      String taxCategoryId = txRef.getId();
-      //TODO
-      TaxCategory taxCategory = restTemplate.getForObject("tax", TaxCategory.class);
+      String taxCategoryId = txRef.getId();
+      TaxCategory taxCategory = restClient.getTaxCategory(taxCategoryId);
       taxRate = this.getTaxRate(taxCategory, country, state);
     }
+    LOG.debug("exit: TaxRate: {}", taxRate);
     return taxRate;
   }
 
@@ -328,6 +361,7 @@ public class CartApplication {
    * @return TaxRate
    */
   private TaxRate getTaxRate(TaxCategory tc, String country, String state) {
+    LOG.debug("enter: TaxCategory: {}, country: {}, state: {}", tc, country, state);
     TaxRate taxRate = null;
     if (tc != null) {
       taxRate = tc.getRates().parallelStream().filter(
@@ -341,6 +375,7 @@ public class CartApplication {
           }
       ).findAny().orElse(null);
     }
+    LOG.debug("exit: TaxRate: {}", taxRate);
     return taxRate;
   }
 
@@ -350,7 +385,7 @@ public class CartApplication {
    * @param cart Cart
    */
   private void calculateCartPrice(Cart cart) {
-
+    LOG.debug("enter: cart: {}", cart);
     String currencyCode = cart.getCurrencyCode();
     String country = cart.getCountry();
     List<LineItem> items = cart.getLineItems();
@@ -364,17 +399,21 @@ public class CartApplication {
       );
       //count total price of all line item
       lineItemTotalPrice = items.parallelStream().mapToInt(
-          lineItem -> lineItem.getTotalPrice().getCentAmount()
+          lineItem -> lineItem.getTotalPrice() == null ? 0 : lineItem.getTotalPrice()
+              .getCentAmount()
       ).sum();
     }
 
     //select and calculate shipping price
     int shippingPrice = 0;
     ShippingInfo shippingInfo = cart.getShippingInfo();
-    this.shippingInfoService.calculateShippingPrice(shippingInfo, currencyCode, lineItemTotalPrice);
-    Money shippingInfoPrice = shippingInfo.getPrice();
-    if (shippingInfoPrice != null) {
-      shippingPrice = shippingInfoPrice.getCentAmount();
+    if (shippingInfo != null) {
+      this.shippingInfoService.calculateShippingPrice(shippingInfo, currencyCode,
+          lineItemTotalPrice);
+      Money shippingInfoPrice = shippingInfo.getPrice();
+      if (shippingInfoPrice != null) {
+        shippingPrice = shippingInfoPrice.getCentAmount();
+      }
     }
 
     int cartTotalPrice = lineItemTotalPrice + shippingPrice;
@@ -382,8 +421,6 @@ public class CartApplication {
     cartTotal.setCurrencyCode(cart.getCurrencyCode());
     cartTotal.setCentAmount(cartTotalPrice);
     cart.setTotalPrice(cartTotal);
-
+    LOG.debug("exit: cart: {}", cart);
   }
-
-
 }
