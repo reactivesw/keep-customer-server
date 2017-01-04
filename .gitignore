@@ -84,3 +84,6 @@ hs_err_pid*
 .sass-cache
 src/main/resources/static/css
 .gems
+
+# Ignore for application config
+src/main/resources/application-test.yaml

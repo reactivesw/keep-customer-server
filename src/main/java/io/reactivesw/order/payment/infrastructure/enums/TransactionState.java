@@ -1,4 +1,4 @@
-package io.reactivesw.order.payment.enums;
+package io.reactivesw.order.payment.infrastructure.enums;
 
 /**
  * Transactions can be in one of the following state:

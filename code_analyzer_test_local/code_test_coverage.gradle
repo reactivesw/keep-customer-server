@@ -49,6 +49,7 @@ jacocoTestReport {
                     'io/reactivesw/common/specification/**',
                     '**/update/**',
                     //先去掉
+                    '**/config/**',
                     'io/reactivesw/catalog/product/application/**Client**',
                     'io/reactivesw/catalog/product/infrastructure/util/**',
                     //先去掉auth的检查,后面再加回来

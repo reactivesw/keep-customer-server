@@ -1,4 +1,4 @@
-package io.reactivesw.order.payment.model;
+package io.reactivesw.order.payment.application.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

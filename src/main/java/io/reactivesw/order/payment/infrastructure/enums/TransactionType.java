@@ -1,4 +1,4 @@
-package io.reactivesw.order.payment.enums;
+package io.reactivesw.order.payment.infrastructure.enums;
 
 /**
  * Not all payment methods support all of the following defined model:
