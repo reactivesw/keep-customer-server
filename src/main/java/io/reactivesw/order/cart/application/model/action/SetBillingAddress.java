@@ -1,6 +1,5 @@
 package io.reactivesw.order.cart.application.model.action;
 
-import io.reactivesw.common.model.Address;
 import io.reactivesw.common.model.UpdateAction;
 import lombok.Data;
 
@@ -13,7 +12,7 @@ public class SetBillingAddress implements UpdateAction {
   /**
    * billing address.
    */
-  private Address address;
+  private String addressId;
 
   @Override
   public String getActionName() {

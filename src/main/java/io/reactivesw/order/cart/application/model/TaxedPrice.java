@@ -1,15 +1,16 @@
 package io.reactivesw.order.cart.application.model;
 
-import java.util.List;
-
 import io.reactivesw.common.model.Money;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 /**
  * Created by umasuo on 16/11/17.
  */
-@ApiModel(description = "TaxedPrice fields that can be used in query predicates: totalNet, totalGross.")
+@ApiModel(description = "TaxedPrice fields that can be used in query predicates: totalNet, " +
+    "totalGross.")
+@Data
 public class TaxedPrice {
 
   @ApiModelProperty(required = true)
@@ -18,30 +19,4 @@ public class TaxedPrice {
   @ApiModelProperty(required = true)
   private Money totalGross;
 
-  @ApiModelProperty(required = true)
-  private List<TaxPortion> taxPortions;
-
-  public Money getTotalNet() {
-    return totalNet;
-  }
-
-  public void setTotalNet(Money totalNet) {
-    this.totalNet = totalNet;
-  }
-
-  public Money getTotalGross() {
-    return totalGross;
-  }
-
-  public void setTotalGross(Money totalGross) {
-    this.totalGross = totalGross;
-  }
-
-  public List<TaxPortion> getTaxPortions() {
-    return taxPortions;
-  }
-
-  public void setTaxPortions(List<TaxPortion> taxPortions) {
-    this.taxPortions = taxPortions;
-  }
 }

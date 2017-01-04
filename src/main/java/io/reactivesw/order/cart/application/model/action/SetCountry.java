@@ -3,6 +3,8 @@ package io.reactivesw.order.cart.application.model.action;
 import io.reactivesw.common.model.UpdateAction;
 import lombok.Data;
 
+import javax.validation.Valid;
+
 /**
  * Created by umasuo on 16/12/15.
  */

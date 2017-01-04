@@ -15,7 +15,8 @@ import org.springframework.stereotype.Repository;
  * Created by umasuo on 16/11/29.
  */
 @Repository
-public interface CartRepository extends JpaRepository<CartEntity, String>, CrudRepository<CartEntity, String> {
+public interface CartRepository extends JpaRepository<CartEntity, String>,
+    CrudRepository<CartEntity, String> {
 
   /**
    * find by customer id.
@@ -23,7 +24,7 @@ public interface CartRepository extends JpaRepository<CartEntity, String>, CrudR
    * @param customerId String
    * @return list of cart, but can contains one at most.
    */
-  public List<CartEntity> findByCustomerId(String customerId);
+  List<CartEntity> findByCustomerId(String customerId);
 
   /**
    * find the active cart by customer id.
@@ -31,6 +32,14 @@ public interface CartRepository extends JpaRepository<CartEntity, String>, CrudR
    * @param customerId String
    * @return list of cart, but can contains one at most.
    */
-  public List<CartEntity> findByCustomerIdAndCartState(String customerId, CartState cartState);
+  List<CartEntity> findByCustomerIdAndCartState(String customerId, CartState cartState);
+
+  /**
+   * find the active cart by anonymous id.
+   *
+   * @param anonymousId String
+   * @return cart
+   */
+  CartEntity findOneByAnonymousId(String anonymousId);
 
 }

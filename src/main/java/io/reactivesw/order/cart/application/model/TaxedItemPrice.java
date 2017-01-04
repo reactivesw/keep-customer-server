@@ -3,11 +3,13 @@ package io.reactivesw.order.cart.application.model;
 import io.reactivesw.common.model.Money;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 /**
  * Created by umasuo on 16/11/17.
  */
 @ApiModel(description = "TaxedItemPrice fields can not be used in query predicates.\n")
+@Data
 public class TaxedItemPrice {
 
   @ApiModelProperty(required = true)
@@ -16,19 +18,4 @@ public class TaxedItemPrice {
   @ApiModelProperty(required = true)
   private Money totalGross;
 
-  public Money getTotalNet() {
-    return totalNet;
-  }
-
-  public void setTotalNet(Money totalNet) {
-    this.totalNet = totalNet;
-  }
-
-  public Money getTotalGross() {
-    return totalGross;
-  }
-
-  public void setTotalGross(Money totalGross) {
-    this.totalGross = totalGross;
-  }
 }

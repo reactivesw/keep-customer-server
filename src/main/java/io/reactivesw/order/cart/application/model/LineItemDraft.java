@@ -1,7 +1,5 @@
 package io.reactivesw.order.cart.application.model;
 
-import io.reactivesw.catalog.taxcategory.application.model.ExternalTaxRateDraft;
-import io.reactivesw.common.model.CustomFieldsDraft;
 import io.reactivesw.common.model.Reference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -25,21 +23,11 @@ public class LineItemDraft {
   private Integer quantity;
 
   @ApiModelProperty(value = "The supply channel identifies the inventory entries that should be " +
-      "reserved. The channel has the role InventorySupply.",
-      required = false)
+      "reserved. The channel has the role InventorySupply.")
   private Reference supplyChannel;
 
   @ApiModelProperty(value = "The distribution channel is used to select a ProductPrice. The " +
-      "channel has the role ProductDistribution.",
-      required = false)
+      "channel has the role ProductDistribution.")
   private Reference distributionChannel;
-
-  @ApiModelProperty(value = "An external tax rate can be set if the cart has the External " +
-      "TaxMode.",
-      required = false)
-  private ExternalTaxRateDraft externalTaxRate;
-
-  @ApiModelProperty(required = false)
-  private CustomFieldsDraft custom;
 
 }

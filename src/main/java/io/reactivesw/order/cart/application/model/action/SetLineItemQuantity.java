@@ -4,9 +4,11 @@ import io.reactivesw.common.model.UpdateAction;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 /**
- * Decreases the quantity of the given LineItem. If after the update the quantity of the line
- * item is not greater than 0 or the quantity is not specified, the line item is removed from the
+ * Set the LineItem quantity, minimum is 1.
  * cart.
  * Created by umasuo on 16/12/5.
  */
@@ -16,12 +18,18 @@ public class SetLineItemQuantity implements UpdateAction {
 
   /**
    * line item id.
+   * required.
    */
+  @NotNull
   private String lineItemId;
 
   /**
    * quantity.
+   * required.
+   * the minimum is 1.
    */
+  @Min(value = 1)
+  @NotNull
   private Integer quantity;
 
   @Override

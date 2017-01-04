@@ -2,6 +2,7 @@ package io.reactivesw.order.cart.application.controller;
 
 import io.reactivesw.common.model.UpdateRequest;
 import io.reactivesw.order.cart.application.model.Cart;
+import io.reactivesw.order.cart.application.model.action.CartUpdateAction;
 import io.reactivesw.order.cart.application.model.mapper.CartMapper;
 import io.reactivesw.order.cart.domain.entity.CartEntity;
 import io.reactivesw.order.cart.domain.service.CartService;
@@ -72,13 +73,14 @@ public class CartController {
    */
   @PutMapping(CartRouter.CART_WITH_ID)
   public Cart updateCart(@ApiParam(required = true) @PathVariable(CartRouter.CART_ID) String id,
-                         @RequestBody UpdateRequest updateRequest) {
+                         @RequestBody UpdateRequest<CartUpdateAction> updateRequest) {
     LOG.info("id:{}", id);
 
-    CartEntity entity = this.cartService.updateCart(id, updateRequest.getVersion(), updateRequest
-        .getActions());
+//    CartEntity entity = this.cartService.updateCart(id, updateRequest.getVersion(), updateRequest
+//        .getActions());
 
-    return CartMapper.entityToModel(entity);
+//    return CartMapper.entityToModel(entity);
+    return null;
   }
 
 }
