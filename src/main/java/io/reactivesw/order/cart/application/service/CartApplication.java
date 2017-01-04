@@ -187,7 +187,9 @@ public class CartApplication {
                     shippingAddress.getState());
                 item.setTaxRate(taxRate);
               }
-              items.add(item);
+              if (item.getProductVariant() != null) {
+                items.add(item);
+              }
             }
           }
       );
@@ -375,17 +377,21 @@ public class CartApplication {
       );
       //count total price of all line item
       lineItemTotalPrice = items.parallelStream().mapToInt(
-          lineItem -> lineItem.getTotalPrice().getCentAmount()
+          lineItem -> lineItem.getTotalPrice() == null ? 0 : lineItem.getTotalPrice()
+              .getCentAmount()
       ).sum();
     }
 
     //select and calculate shipping price
     int shippingPrice = 0;
     ShippingInfo shippingInfo = cart.getShippingInfo();
-    this.shippingInfoService.calculateShippingPrice(shippingInfo, currencyCode, lineItemTotalPrice);
-    Money shippingInfoPrice = shippingInfo.getPrice();
-    if (shippingInfoPrice != null) {
-      shippingPrice = shippingInfoPrice.getCentAmount();
+    if (shippingInfo != null) {
+      this.shippingInfoService.calculateShippingPrice(shippingInfo, currencyCode,
+          lineItemTotalPrice);
+      Money shippingInfoPrice = shippingInfo.getPrice();
+      if (shippingInfoPrice != null) {
+        shippingPrice = shippingInfoPrice.getCentAmount();
+      }
     }
 
     int cartTotalPrice = lineItemTotalPrice + shippingPrice;
@@ -395,6 +401,4 @@ public class CartApplication {
     cart.setTotalPrice(cartTotal);
 
   }
-
-
 }

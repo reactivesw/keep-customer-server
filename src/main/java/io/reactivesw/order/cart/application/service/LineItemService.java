@@ -1,6 +1,7 @@
 package io.reactivesw.order.cart.application.service;
 
 import io.reactivesw.catalog.product.application.model.Price;
+import io.reactivesw.catalog.product.application.model.ProductVariant;
 import io.reactivesw.catalog.taxcategory.application.model.TaxRate;
 import io.reactivesw.common.model.Money;
 import io.reactivesw.order.cart.application.model.LineItem;
@@ -33,22 +34,25 @@ public class LineItemService {
    */
   public void selectItemPrice(LineItem item, String currencyCode, String country) {
     LOG.debug("enter: LineItem: {}, currencyCode: {}, country: {}", item, currencyCode, country);
-    List<Price> prices = item.getProductVariant().getPrices();
+    ProductVariant variant = item.getProductVariant();
+    if (variant != null) {
+      List<Price> prices = variant.getPrices();
 
-    Price selectedPrice = prices.parallelStream().filter(
-        price -> {
-          String savedCurrencyCode = price.getValue().getCurrencyCode();
-          String savedCountry = price.getCountry();
-          boolean onlyCurrency = StringUtils.equals(currencyCode, savedCurrencyCode)
-              && country == null;
-          boolean bothCurrencyAndCountry = StringUtils.equals(currencyCode, savedCurrencyCode)
-              && StringUtils.equals(country, savedCountry);
+      Price selectedPrice = prices.parallelStream().filter(
+          price -> {
+            String savedCurrencyCode = price.getValue().getCurrencyCode();
+            String savedCountry = price.getCountry();
+            boolean onlyCurrency = StringUtils.equals(currencyCode, savedCurrencyCode)
+                && country == null;
+            boolean bothCurrencyAndCountry = StringUtils.equals(currencyCode, savedCurrencyCode)
+                && StringUtils.equals(country, savedCountry);
 
-          return onlyCurrency | bothCurrencyAndCountry;
-        }
-    ).findAny().orElse(null);
+            return onlyCurrency | bothCurrencyAndCountry;
+          }
+      ).findAny().orElse(null);
 
-    item.setPrice(selectedPrice);
+      item.setPrice(selectedPrice);
+    }
   }
 
 
@@ -66,10 +70,8 @@ public class LineItemService {
       int totalPrice = price.getCentAmount() * quantity;
       total.setCentAmount(totalPrice);
       item.setTotalPrice(total);
-
       //for tax price, this should split to an single function
       this.calculateTaxedPrice(item);
-
     }
   }
 

@@ -313,4 +313,38 @@ class CartApplicationTest extends Specification {
         then:
         noExceptionThrown()
     }
+
+
+    def "Test 1.10: Update Cart with product variant non-exist"() {
+
+        product.getMasterData().current.variants = new ArrayList<>()
+        when:
+        cartService.getById(_) >> cartEntity
+        cartService.updateCart(_, _, _) >> cartEntity
+        restTemplate.getForObject("shipping", _) >> address
+        restTemplate.getForObject("billing", _) >> address
+        restTemplate.getForObject("item", _) >> product
+        restTemplate.getForObject("tax", _) >> taxCategory
+        restTemplate.getForObject("shippingInfo", _) >> shippingMethod
+        restTemplate.getForObject("zone", _) >> zone
+        cartApplication.updateCart(cartId, version, actions)
+        then:
+        noExceptionThrown()
+    }
+
+    def "Test 1.11: Update Cart with shipping method non-existing"() {
+
+        when:
+        cartService.getById(_) >> cartEntity
+        cartService.updateCart(_, _, _) >> cartEntity
+        restTemplate.getForObject("shipping", _) >> address
+        restTemplate.getForObject("billing", _) >> address
+        restTemplate.getForObject("item", _) >> product
+        restTemplate.getForObject("tax", _) >> taxCategory
+        restTemplate.getForObject("shippingInfo", _) >> null
+        restTemplate.getForObject("zone", _) >> zone
+        cartApplication.updateCart(cartId, version, actions)
+        then:
+        noExceptionThrown()
+    }
 }
