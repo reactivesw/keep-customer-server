@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  * Created by Davis on 16/12/14.
  */
 public class ImageMapper {
-  public static List<Image> entityToModel(Set<ImageEntity> entities) {
+  public static List<Image> entityToModel(List<ImageEntity> entities) {
     return entities.stream().map(
         entity -> {
           return entityToModel(entity);
@@ -29,12 +29,12 @@ public class ImageMapper {
     return model;
   }
 
-  public static Set<ImageEntity> modelToEntity(List<Image> models) {
+  public static List<ImageEntity> modelToEntity(List<Image> models) {
     return models.stream().map(
         model -> {
           return modelToEntity(model);
         }
-    ).collect(Collectors.toSet());
+    ).collect(Collectors.toList());
   }
 
   public static ImageEntity modelToEntity(Image model) {

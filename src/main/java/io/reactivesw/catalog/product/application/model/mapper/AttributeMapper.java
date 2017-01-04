@@ -13,19 +13,18 @@ import java.util.stream.Collectors;
  * Created by Davis on 16/12/14.
  */
 public class AttributeMapper {
-  public static Set<AttributeEntity> modelToEntity(List<Attribute> models) {
+  public static List<AttributeEntity> modelToEntity(List<Attribute> models) {
     return models.stream().map(
         model -> {
           AttributeEntity entity = new AttributeEntity();
           entity.setName(model.getName());
           entity.setValue(model.getValue());
           return entity;
-//          return new AttributeEntity(model.getName(), model.getValue());
         }
-    ).collect(Collectors.toSet());
+    ).collect(Collectors.toList());
   }
 
-  public static List<Attribute> entityToModel(Set<AttributeEntity> entities) {
+  public static List<Attribute> entityToModel(List<AttributeEntity> entities) {
     return entities.stream().map(
         entity -> {
           return entityToModel(entity);

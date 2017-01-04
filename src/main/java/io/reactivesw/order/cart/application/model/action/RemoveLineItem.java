@@ -24,4 +24,8 @@ public class RemoveLineItem implements UpdateAction {
    */
   private Integer quantity;
 
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

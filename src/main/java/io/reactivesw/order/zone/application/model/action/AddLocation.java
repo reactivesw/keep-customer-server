@@ -16,4 +16,9 @@ public class AddLocation implements UpdateAction {
    * location.
    */
   private Location location;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

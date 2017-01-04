@@ -1,32 +1,24 @@
 package io.reactivesw.catalog.category.application.model.action;
 
+import io.reactivesw.catalog.category.infrastructure.util.CategoryActionUtils;
 import io.reactivesw.common.model.UpdateAction;
+
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Created by Davis on 16/12/6.
  */
-public class SetOrderHint
-    implements UpdateAction {
+@Getter
+@Setter
+public class SetOrderHint implements UpdateAction {
   /**
    * The Order hint.
    */
   private String orderHint;
 
-  /**
-   * Gets order hint.
-   *
-   * @return the order hint
-   */
-  public String getOrderHint() {
-    return orderHint;
-  }
-
-  /**
-   * Sets order hint.
-   *
-   * @param orderHint the order hint
-   */
-  public void setOrderHint(String orderHint) {
-    this.orderHint = orderHint;
+  @Override
+  public String getActionName() {
+    return CategoryActionUtils.SET_ORDER_HINT;
   }
 }

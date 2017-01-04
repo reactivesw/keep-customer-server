@@ -86,6 +86,33 @@ class ProductServiceTest extends Specification {
         result.id != null
     }
 
+    def "test 2.1 : delete product"() {
+        given:
+        def version = 1
+        productEntity.version = version
+        productRepository.findOne(_) >> productEntity
+
+        when:
+        productService.deleteProduct(id, version)
+
+        then:
+        true;
+    }
+
+    def "test 2.2 : delete product and version not match"() {
+        given:
+        def version = 1
+        productEntity.version = version + 1
+        productRepository.findOne(_) >> productEntity
+
+        when:
+        productService.deleteProduct(id, version)
+
+        then:
+        thrown(ConflictException)
+    }
+
+
     def "test 4.1 : get Product by Id"() {
         given:
         productRepository.findOne(id) >> productEntity

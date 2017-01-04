@@ -13,4 +13,9 @@ public class SetDefault implements UpdateAction {
    * The Is default.
    */
   private Boolean isDefault;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

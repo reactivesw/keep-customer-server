@@ -29,4 +29,9 @@ public class SetMaxApplicationsPerCustomer implements UpdateAction {
   public void setMaxApplicationsPerCustomer(Integer maxApplicationsPerCustomer) {
     this.maxApplicationsPerCustomer = maxApplicationsPerCustomer;
   }
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

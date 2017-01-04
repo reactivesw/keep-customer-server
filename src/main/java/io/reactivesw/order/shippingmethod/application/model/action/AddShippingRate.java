@@ -21,4 +21,14 @@ public class AddShippingRate implements UpdateAction {
    * The Shipping rate.
    */
   private ShippingRate shippingRate;
+
+  /**
+   * action name.
+   *
+   * @return String
+   */
+  @Override
+  public String getActionName() {
+    return "addShippingRate";
+  }
 }

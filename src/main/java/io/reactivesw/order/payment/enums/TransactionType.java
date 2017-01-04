@@ -31,5 +31,4 @@ public enum TransactionType {
    * - Customer-triggered transfer of money back to the customer.
    */
   Chargeback;
-
 }

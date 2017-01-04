@@ -5,8 +5,8 @@ import com.google.common.collect.Lists;
 import io.reactivesw.catalog.category.application.model.Category;
 import io.reactivesw.catalog.category.application.model.CategoryDraft;
 import io.reactivesw.catalog.category.application.model.mapper.CategoryMapper;
-import io.reactivesw.catalog.category.application.model.mapper.CategoryUpdateMapper;
 import io.reactivesw.catalog.category.domain.entity.CategoryEntity;
+import io.reactivesw.catalog.category.domain.service.update.CategoryUpdateService;
 import io.reactivesw.catalog.category.infrastructure.repository.CategoryRepository;
 import io.reactivesw.catalog.category.infrastructure.validator.CategoryNameValidator;
 import io.reactivesw.common.exception.AlreadyExistException;
@@ -47,12 +47,17 @@ public class CategoryService {
   private transient CategoryRepository categoryRepository;
 
   /**
+   * category update service.
+   */
+  @Autowired
+  private transient CategoryUpdateService updateService;
+
+  /**
    * Create category.
    *
    * @param categoryDraft the category draft
    * @return the category
    */
-  @Transactional
   public Category createCategory(CategoryDraft categoryDraft) {
     LOG.debug("enter createCategory, CategoryDraft is {}", categoryDraft.toString());
 
@@ -122,8 +127,7 @@ public class CategoryService {
     validateVersion(entity, version);
 
     actions.parallelStream().forEach(action -> {
-      CategoryUpdateMapper.getMapper(action.getClass())
-        .handle(entity, action);
+      updateService.handle(entity, action);
     });
 
     CategoryEntity updatedEntity = categoryRepository.save(entity);
@@ -183,11 +187,12 @@ public class CategoryService {
    * @return the category entity
    * @throws AlreadyExistException if slug is already exist and get DataIntegrityViolationException
    */
+  @Transactional
   private CategoryEntity saveCategoryEntity(CategoryEntity entity) {
     CategoryEntity savedEntity = null;
     try {
       savedEntity = categoryRepository.save(entity);
-    } catch (DataIntegrityViolationException e) {
+    }catch (DataIntegrityViolationException e){
       LOG.debug("slug is already exist", e);
       throw new AlreadyExistException("Slug is already exist");
     }

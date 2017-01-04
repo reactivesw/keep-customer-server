@@ -4,6 +4,7 @@ import com.google.common.collect.Lists
 import io.reactivesw.catalog.producttype.application.model.ProductTypeDraft
 import io.reactivesw.catalog.producttype.application.model.mapper.ProductTypeMapper
 import io.reactivesw.catalog.producttype.domain.entity.ProductTypeEntity
+import io.reactivesw.catalog.producttype.domain.service.update.ProductTypeUpdateService
 import io.reactivesw.catalog.producttype.infrastructure.repository.ProductTypeRepository
 import io.reactivesw.common.exception.ConflictException
 import io.reactivesw.common.exception.NotExistException
@@ -17,8 +18,10 @@ import spock.lang.Specification
  */
 class ProductTypeServiceTest extends Specification {
 
+    ProductTypeUpdateService productTypeUpdateService = Mock()
     ProductTypeRepository productTypeRepository = Mock()
-    ProductTypeService productTypeService = new ProductTypeService(productTypeRepository: productTypeRepository)
+    ProductTypeService productTypeService = new ProductTypeService(productTypeRepository: productTypeRepository,
+            updateService: productTypeUpdateService)
     def entity = new ProductTypeEntity()
     def draft = new ProductTypeDraft()
     def id = "1111111"

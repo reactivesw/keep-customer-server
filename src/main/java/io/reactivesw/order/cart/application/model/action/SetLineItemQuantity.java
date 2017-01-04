@@ -32,4 +32,8 @@ public class SetLineItemQuantity implements UpdateAction {
   @NotNull
   private Integer quantity;
 
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

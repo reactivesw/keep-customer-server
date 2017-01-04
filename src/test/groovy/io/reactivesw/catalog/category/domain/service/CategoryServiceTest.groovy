@@ -2,6 +2,7 @@ package io.reactivesw.catalog.category.domain.service
 
 import com.google.common.collect.Lists
 import io.reactivesw.catalog.category.application.model.action.SetSlug
+import io.reactivesw.catalog.category.domain.service.update.CategoryUpdateService
 import io.reactivesw.common.exception.AlreadyExistException
 import io.reactivesw.common.exception.ConflictException
 import io.reactivesw.common.model.QueryConditions
@@ -22,8 +23,10 @@ import spock.lang.Specification
  * Created by Davis on 16/11/28.
  */
 class CategoryServiceTest extends Specification {
+    CategoryUpdateService categoryUpdateService = Mock()
     CategoryRepository categoryRepository = Mock();
-    CategoryService categoryService = new CategoryService(categoryRepository: categoryRepository);
+    CategoryService categoryService = new CategoryService(categoryRepository: categoryRepository,
+            updateService: categoryUpdateService);
     def categoryEntity = new CategoryEntity()
     def id = "11111111"
     def version = 1
@@ -204,6 +207,7 @@ class CategoryServiceTest extends Specification {
         categoryEntity.version = version
         categoryRepository.findOne(_) >> categoryEntity
         categoryRepository.save(_) >> categoryEntity
+        categoryUpdateService.handle(_, _) >> null
 
         when:
         def category = categoryService.updateCategory(id, version, updateActions)

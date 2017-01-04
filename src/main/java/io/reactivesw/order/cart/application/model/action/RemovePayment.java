@@ -13,4 +13,9 @@ public class RemovePayment implements UpdateAction {
    * reference to an payment.
    */
   private String payment;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

@@ -6,6 +6,7 @@ import static io.reactivesw.route.CategoryRouter.CATEGORY_WITH_ID;
 
 import io.reactivesw.catalog.category.application.model.Category;
 import io.reactivesw.catalog.category.application.model.CategoryDraft;
+import io.reactivesw.catalog.category.application.model.action.CategoryUpdateAction;
 import io.reactivesw.catalog.category.domain.service.CategoryService;
 import io.reactivesw.catalog.category.infrastructure.validator.CategoryNameValidator;
 import io.reactivesw.common.model.PagedQueryResult;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -77,14 +79,14 @@ public class CategoryController {
   public void deleteCategory(@PathVariable(value = CATEGORY_ID)
                              @ApiParam(value = "CategoryEntity ID", required = true)
                                  String id,
-                             @RequestBody
+                             @RequestParam
                              @ApiParam(value = "CategoryEntity Version", required = true)
                                  Integer version) {
-    LOG.debug("enter deleteCategory, id is {}, version is {}", id, version);
+    LOG.debug("enter deleteProduct, id is {}, version is {}", id, version);
 
     categoryService.deleteCategory(id, version);
 
-    LOG.debug("end deleteCategory, id is {}, version is {}", id, version);
+    LOG.debug("end deleteProduct, id is {}, version is {}", id, version);
   }
 
   /**
@@ -101,7 +103,7 @@ public class CategoryController {
                                      String id,
                                  @RequestBody
                                  @ApiParam(value = "CategoryEntity Update Fields", required = true)
-                                 @Valid UpdateRequest updateRequest) {
+                                 @Valid UpdateRequest<CategoryUpdateAction> updateRequest) {
     LOG.debug("enter updateCategory,id is {}, update request is {}", id, updateRequest.toString());
 
     Category result = categoryService.updateCategory(id, updateRequest.getVersion(),

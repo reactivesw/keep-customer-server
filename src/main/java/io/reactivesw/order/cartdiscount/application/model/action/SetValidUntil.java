@@ -13,4 +13,8 @@ public class SetValidUntil implements UpdateAction {
 
   private ZonedDateTime validUntil;
 
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

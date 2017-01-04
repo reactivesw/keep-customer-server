@@ -1,5 +1,6 @@
 package io.reactivesw.catalog.inventory.application.model.action;
 
+import io.reactivesw.catalog.inventory.infrastructure.util.InventoryEntryActionUtils;
 import io.reactivesw.common.model.UpdateAction;
 
 import lombok.Data;
@@ -18,4 +19,9 @@ public class AddReservedQuantityAction implements UpdateAction {
    */
   @Min(1)
   private int addReservedQuantity;
+
+  @Override
+  public String getActionName() {
+    return InventoryEntryActionUtils.ADD_RESERVED_QUANTITY;
+  }
 }

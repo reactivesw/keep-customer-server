@@ -1,5 +1,6 @@
 package io.reactivesw.catalog.category.application.model.action;
 
+import io.reactivesw.catalog.category.infrastructure.util.CategoryActionUtils;
 import io.reactivesw.common.model.Reference;
 import io.reactivesw.common.model.UpdateAction;
 
@@ -16,4 +17,9 @@ public class SetParent implements UpdateAction {
    * The Parent.
    */
   private Reference parent;
+
+  @Override
+  public String getActionName() {
+    return CategoryActionUtils.SET_PARENT;
+  }
 }

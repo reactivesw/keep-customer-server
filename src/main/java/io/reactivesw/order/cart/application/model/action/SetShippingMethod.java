@@ -1,8 +1,7 @@
 package io.reactivesw.order.cart.application.model.action;
 
-import io.reactivesw.catalog.taxcategory.application.model.ExternalTaxRateDraft;
-import io.reactivesw.common.model.UpdateAction;
 import io.reactivesw.common.model.Reference;
+import io.reactivesw.common.model.UpdateAction;
 import lombok.Data;
 
 /**
@@ -16,4 +15,8 @@ public class SetShippingMethod implements UpdateAction {
    */
   private Reference shippingMethod;
 
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

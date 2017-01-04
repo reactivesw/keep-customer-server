@@ -31,4 +31,9 @@ public class RemoveZone implements UpdateAction {
   public void setZone(Reference zone) {
     this.zone = zone;
   }
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

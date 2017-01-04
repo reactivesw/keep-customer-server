@@ -2,10 +2,9 @@ package io.reactivesw.catalog.category.application.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import io.reactivesw.common.model.CustomFieldsDraft;
 import io.reactivesw.common.model.LocalizedString;
 import io.reactivesw.common.model.Reference;
-import io.reactivesw.common.model.CustomFieldsDraft;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 

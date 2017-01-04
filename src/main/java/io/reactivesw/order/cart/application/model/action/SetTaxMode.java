@@ -18,4 +18,9 @@ public class SetTaxMode implements UpdateAction {
 
   @NotNull
   TaxMode taxMode;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

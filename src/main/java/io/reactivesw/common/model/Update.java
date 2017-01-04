@@ -1,8 +1,6 @@
 package io.reactivesw.common.model;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Service;
 
 /**
  * we may got two kind of update: just use the data in action, or still use data from other service.
@@ -19,4 +17,9 @@ public interface Update<E> {
    * @param action UpdateAction
    */
   void handle(E entity, UpdateAction action);
+
+  default void handle(E entity, UpdateAction action, ApplicationContext context) {
+    Update service = (Update) context.getBean(action.getActionName());
+    service.handle(entity, action);
+  }
 }

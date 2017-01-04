@@ -5,8 +5,8 @@ import com.google.common.collect.Lists;
 import io.reactivesw.catalog.inventory.application.model.InventoryEntry;
 import io.reactivesw.catalog.inventory.application.model.InventoryEntryDraft;
 import io.reactivesw.catalog.inventory.application.model.mapper.InventoryEntryMapper;
-import io.reactivesw.catalog.inventory.application.model.mapper.InventoryEntryUpdateMapper;
 import io.reactivesw.catalog.inventory.domain.entity.InventoryEntryEntity;
+import io.reactivesw.catalog.inventory.domain.service.update.InventoryEntryUpdateService;
 import io.reactivesw.catalog.inventory.infrastructure.repository.InventoryEntryRepository;
 import io.reactivesw.common.exception.ConflictException;
 import io.reactivesw.common.exception.NotExistException;
@@ -37,6 +37,12 @@ public class InventoryEntryService {
    */
   @Autowired
   private transient InventoryEntryRepository inventoryEntryRepository;
+
+  /**
+   * InventoryEntryUpdateService.
+   */
+  @Autowired
+  private transient InventoryEntryUpdateService updateService;
 
   /**
    * Create inventory entry inventory entry.
@@ -80,7 +86,8 @@ public class InventoryEntryService {
    * @return the inventory entry
    */
   @Transactional
-  public InventoryEntry updateInventoryEntry(String id, Integer version, List<UpdateAction> actions) {
+  public InventoryEntry updateInventoryEntry(String id, Integer version, List<UpdateAction>
+      actions) {
     LOG.debug("enter updateInventoryEntry, id is {}, version is {}, update action is {}",
         id, version, actions);
 
@@ -88,8 +95,7 @@ public class InventoryEntryService {
     validateVersion(entity, version);
 
     actions.parallelStream().forEach(action -> {
-      InventoryEntryUpdateMapper.getMapper(action.getClass())
-          .handle(entity, action);
+      updateService.handle(entity, action);
     });
 
     InventoryEntryEntity updatedEntity = inventoryEntryRepository.save(entity);
@@ -126,7 +132,8 @@ public class InventoryEntryService {
    */
   public List<InventoryEntry> queryBySkuNames(List<String> skuNames) {
     LOG.debug("enter queryBySkuNames, sku names is : {}", skuNames);
-    List<InventoryEntryEntity> inventoryEntryEntities = inventoryEntryRepository.queryBySkuNames(skuNames);
+    List<InventoryEntryEntity> inventoryEntryEntities = inventoryEntryRepository.queryBySkuNames
+        (skuNames);
 
     List<InventoryEntry> result = Lists.newArrayList();
 
@@ -156,7 +163,8 @@ public class InventoryEntryService {
 
   /**
    * validateNull version.
-   * @param entity the entity
+   *
+   * @param entity  the entity
    * @param version the version
    */
   private void validateVersion(InventoryEntryEntity entity, Integer version) {

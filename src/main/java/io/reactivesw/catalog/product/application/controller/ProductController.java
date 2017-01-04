@@ -3,6 +3,7 @@ package io.reactivesw.catalog.product.application.controller;
 import static io.reactivesw.route.ProductRouter.PRODUCT_ID;
 import static io.reactivesw.route.ProductRouter.PRODUCT_ROOT;
 import static io.reactivesw.route.ProductRouter.PRODUCT_SLUG;
+import static io.reactivesw.route.ProductRouter.PRODUCT_WITH_ID;
 import static io.reactivesw.route.ProductRouter.PRODUCT_WITH_SLUG;
 
 import io.reactivesw.catalog.product.application.ProductApplication;
@@ -15,10 +16,12 @@ import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -101,5 +104,26 @@ public class ProductController {
     LOG.debug("end getProductBySlug, get product : {}", result.toString());
 
     return result;
+  }
+
+  /**
+   * Delete product by id.
+   *
+   * @param id      the id
+   * @param version the version
+   */
+  @ApiOperation(value = "delete product by id")
+  @DeleteMapping(PRODUCT_WITH_ID)
+  public void deleteProductById(@PathVariable(value = PRODUCT_ID)
+                                  @ApiParam(value = "Product ID", required = true)
+                                      String id,
+                                @RequestParam
+                                  @ApiParam(value = "Product Version", required = true)
+                                      Integer version){
+    LOG.debug("enter deleteProductById, id is {}, version is {}", id, version);
+
+    productService.deleteProduct(id, version);
+
+    LOG.debug("end deleteProductById, id is {}, version is {}", id, version);
   }
 }

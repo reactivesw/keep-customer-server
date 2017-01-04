@@ -15,4 +15,9 @@ public class SetKey implements UpdateAction {
    * The Key.
    */
   private String key;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

@@ -1,6 +1,5 @@
 package io.reactivesw.order.cart.application.model.action;
 
-import io.reactivesw.common.model.Address;
 import io.reactivesw.common.model.UpdateAction;
 import lombok.Data;
 
@@ -19,4 +18,9 @@ public class SetShippingAddress implements UpdateAction {
    * shipping address.
    */
   private String addressId;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }

@@ -52,7 +52,7 @@ public class CategoryEntity extends BaseAllEntity {
   /**
    * slug.
    */
-  @Column(unique = true)
+  @Column(length = 256, unique = true)
   private String slug;
 
   /**

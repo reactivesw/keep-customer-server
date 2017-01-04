@@ -13,11 +13,25 @@ this project use following technology:
 ### 2.1 install jdk 1.8
 
 ### 2.2 install postgresql 
-install postgresql 9.6 and set user and password to be `root`,
-create a new database name `reactivesw`.
+download [postgresql 9.6](https://www.postgresql.org/) and install it, set the password to `root`,
 
-ps: user name, password and database name can be changed to other words,
+#### 2.2.1 connect to postgres database
+run following command in terminal to config psql:
+`export PATH=/Library/PostgreSQL/9.6/bin:$PATH`
+
+use `psql` to connect postgres database by following command:
+`psql -U postgres -h 127.0.0.1 -p 5432`
+and input password
+
+#### 2.2.2 create database
+use command `create database reactivesw;` to create a new database name `reactivesw`.
+
+ps: database password `root` and database name `reactivesw` can be changed to other words,
 but you need to change the config on `application.yaml`.
+
+#### 2.2.2 drop database
+if you need to drop database, connect to `postgres` by command `\c postgres` and 
+use command `drop database reactivesw;` to drop database.
 
 ### 2.3 build 
 run command `./gradlew clean build` to build the project

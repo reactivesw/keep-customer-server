@@ -21,4 +21,9 @@ public class SetCustomerId implements UpdateAction {
    */
   @NotNull
   private String customerId;
+
+  @Override
+  public String getActionName() {
+    return null;
+  }
 }
