@@ -13,5 +13,5 @@ public class SetBillingAddress implements UpdateAction {
   /**
    * billing address.
    */
-  private Address address;
+  private String addressId;
 }

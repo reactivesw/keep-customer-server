@@ -37,26 +37,16 @@ public class Cart {
   @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime lastModifiedAt;
 
-  @ApiModelProperty(value = "Customer Id.", required = false)
+  @ApiModelProperty(value = "Customer Id.")
   private String customerId;
-
-  @ApiModelProperty(value = "Customer email.", required = false)
-  private String customerEmail;
 
   @ApiModelProperty(value =
       "Identifies cart and order belonging to an anonymous session (the customer has not signed " +
-          "up/in yet).",
-      required = false)
+          "up/in yet).")
   private String anonymousId;
 
-  /**
-   * The Line items.
-   */
   @ApiModelProperty(value = "List of line Item", required = true)
   List<LineItem> lineItems;
-
-  @ApiModelProperty(value = "Array of CustomLineItem", required = true)
-  private List<CustomLineItem> customLineItems;
 
   @ApiModelProperty(value = "Total price", required = true)
   private Money totalPrice;
@@ -64,18 +54,17 @@ public class Cart {
   @ApiModelProperty(value =
       "Not set until the shipping address is set. Will be set automatically in the Platform " +
           "TaxMode. For the External tax mode it will be set as soon as the external tax rates " +
-          "for all line items, custom line items, and shipping in the cart are set.",
-      required = false)
+          "for all line items, custom line items, and shipping in the cart are set.")
   private TaxedPrice taxedPrice;
 
   @ApiModelProperty(value = "Cart State", required = true)
   private CartState cartState;
 
   @ApiModelProperty(value = "The shipping address is also used to determine tax rate of the line " +
-      "items.", required = false)
+      "items.")
   private Address shippingAddress;
 
-  @ApiModelProperty(value = "Billing Address.", required = false)
+  @ApiModelProperty(value = "Billing Address.")
   private Address billingAddress;
 
   @ApiModelProperty(value = "Inventory Mode", required = true)
@@ -85,27 +74,17 @@ public class Cart {
   private TaxMode taxMode;
 
   @ApiModelProperty(value = "Set automatically when the customer is set and the customer is a " +
-      "member of a customer group. Used for product variant price selection.",
-      required = false)
+      "member of a customer group. Used for product variant price selection.")
   private Reference customerGroup;
 
   @ApiModelProperty(value = "A two-digit country code as per ↗ ISO 3166-1 alpha-2 . Used for " +
-      "product variant price selection.",
-      required = false)
+      "product variant price selection.")
   private String country;
 
-  @ApiModelProperty(value = "Set automatically once the ShippingMethod is set.", required = false)
+  @ApiModelProperty(value = "currency code for this cart")
+  private String currencyCode;
+
+  @ApiModelProperty(value = "Set automatically once the ShippingMethod is set.")
   private ShippingInfo shippingInfo;
 
-  @ApiModelProperty(value = "List of DiscountCodeInfo.", required = true)
-  private List<DiscountCodeInfo> discountCodes;
-
-  @ApiModelProperty(value = "List of DiscountCodeInfo.", required = false)
-  private CustomFields custom;
-
-  @ApiModelProperty(value = "PaymentInfo.", required = false)
-  private PaymentInfo paymentInfo;
-
-  @ApiModelProperty(value = "String conforming to ↗ IETF language tag ", required = false)
-  private String locale;
 }

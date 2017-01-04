@@ -16,8 +16,4 @@ public class SetShippingMethod implements UpdateAction {
    */
   private Reference shippingMethod;
 
-  /**
-   * An external tax rate can be set if the cart has the External TaxMode.
-   */
-  private ExternalTaxRateDraft externalTaxRate;
 }

@@ -1,27 +1,59 @@
 # Cart service design
 This micro-service provide services for handle cart requirements, such as create cart, merge cart, change cart etc.
-And cart should keep an snapshot of the product that added to it.
+
+***Key Points:***
+
+- Each customer can and can only has one cart, if the cart not exist, the the system will create a new one for the customer.
+
+- Cart only keep the basic ids of the data that related to. Such as product id, variant id, customer id, shipping method id. 
+
+- Every time we got a cart, the system will gather the data from other service, if the data(like a product) dose not exist any more, the system will delete the data id in the cart.
+
+- After gather data, the system will calculate the price of the cart automatic.
+
+- `TaxRate` only depend on `ShippingAddress`, once the `ShippingAddress` been set, then the `TaxRate` of the `LineItem` and `ShippingMethod` will be set automatically.
+ 
+- `TaxMode` for now we only support Platform TaxMode, it means the tax will be calculate by the platform automatically.
+
+- When we calculate `TaxedPrice`, we use `Math.round`, it means, 1.4 or less -> 1, 1.5 and bigger -> 2,
+
+
+***Cart Price Calculator:***
+Cart price contains two kind: `Total Price`, `Taxed Price`
+
+- **Total Price:** 
+The sum of all totalPrice fields of the lineItems, and the price field of shippingInfo (if it exists). TotalPrice may or may not include the taxes: it depends on the taxRate.includedInPrice property of each price.
+
+- **Taxed Price:** 
+The sum of all TaxedPrice fields of the lineItems, and the TaxedPrice field of shipping info(if it exists). Not set until the shipping address is set. Will be set automatically.
+
+***LineItem Price Calculator***
+LineItem Price contain two kind: `Total Price`, `Taxed Price`
+
+- **LineItem Total Price:** 
+Product price multiplied by the quantity. TotalPrice may or may not include the taxes: it depends on the taxRate.includedInPrice
+
+- **Taxed Item Price:**
+`Taxed Item Price` will be set once the `TaxRate` be set. And the TaxedItemPrice is the TotalPrice that include taxes.
+ 
+***Shipping Price Calculator***
+ Shipping Price depend on these factors: `ShippingMethod`, `ShippingAddress`, `LineItemTotalPrice`
+ `ShippingMethod` and `ShippingAddress` will define how much money that should cost.
+ `LineItemTotalPrice` may make the shipping free if it above some bar. Use `FreeAbove` attribute in `ShippingRate`
+ 
+- **Price** 
+Determined based on the `ShippingRate`, that selected use `ShippingMethod` & `ShippingAddress`, and the sum of LineItem prices.
+
+- **TaxedPrice**
+This will be set once the `TaxRate` be set
+
 
 # 1. DataBase
 TableName                   |Type                   |Description
 |---|---|---
 CartEntity                  |Entity Object          |The cart, hold all info of the cart.
-AddressValue                |Value Object           |The address used in cart, include shipping address and the billing address.
 ShippingInfoValue           |Value Object           |The shipping info of the cart.
-ShippingRateValue           |Value Object           |Shipping rate, apart of shipping info.
-PaymentInfoValue            |Value Object           |The payment info of this cart.
-TaxedPriceValue             |Value Object           |The taxed price of the cart.
-TaxPortionValue             |Value Object           |The tax portion, apart of taxed price.
 LineItemValue               |Value Object           |The snapshot of the product added to the cart
-ProductVariantValue         |Value Object           |The snapshot of the product variant that added to the cart.
-PriceValue                  |Value Object           |Price used in product variant. apart of the product snapshot.
-AttributeValue              |Value Object           |Attribute of the product variant, apart of the product snapshot.
-ImageValue                  |Value OBject           |Image used in product variant, apart of the product snapshot.
-CustomLineItemValue         |Value Object           |The snapshot of the custom Item.
-ItemStateValue              |Value Object           |The Item state.
-TaxedItemPriceValue         |Value Object           |Taxed Item Price used in Item.
-TaxRateValue                |Value Object           |Tax Rate, used in Item for record tax rate.
-SubRateValue                |Value Object           |Sub Rate of tax rate.
 
 # 2. CartState
 `Active` : only cart in this state can be update.
@@ -33,14 +65,20 @@ SubRateValue                |Value Object           |Sub Rate of tax rate.
 ## 3.1 Get cart
 Get a cart by some conditions.
 
+
 ### 3.1.1 Get cart by cart id
 Get a cart by the cart ID, and return the cart.
+- 
 
 ### 3.1.2 Get cart by customer id
 Get a cart by the customer's id, return the one that has been modified most recently, and the cart's state should be `Active`.
 Each customer should has only one cart that is active.
 
+### 3.1.3 Get cart by anonymous id
+Get a cart by the anonymous id, one anonymous id can only has one cart.
+
 ## 3.2 Query cart
+TODO
 System can Use `where`,`sort`,`expand`,`limit`,`offset` to query carts.
 
 ## 3.3 Create cart

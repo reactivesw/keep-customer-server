@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import io.reactivesw.common.model.action.SetLocalizedDescription;
 import io.reactivesw.common.model.action.SetLocalizedName;
-import io.reactivesw.order.cart.application.model.action.SetCustomField;
-import io.reactivesw.order.cart.application.model.action.SetCustomType;
 
 /**
  * Created by Davis on 16/12/22.
@@ -23,8 +21,6 @@ import io.reactivesw.order.cart.application.model.action.SetCustomType;
     @JsonSubTypes.Type(value = SetMetaTitle.class, name = "setMetaTitle"),
     @JsonSubTypes.Type(value = SetMetaDescription.class, name = "setMetaDescription"),
     @JsonSubTypes.Type(value = SetMetaKeywords.class, name = "setMetaKeywords"),
-    @JsonSubTypes.Type(value = SetCustomType.class, name = "setCustomType"),
-    @JsonSubTypes.Type(value = SetCustomField.class, name = "setCustomField"),
 })
 public interface CategoryUpdateAction {
 }

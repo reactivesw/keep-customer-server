@@ -1,47 +1,35 @@
 package io.reactivesw.order.cart.domain.entity;
 
 import io.reactivesw.common.entity.BaseAllEntity;
-import io.reactivesw.common.entity.MoneyEntity;
-import io.reactivesw.common.model.CustomFields;
-import io.reactivesw.common.model.Statics;
-import io.reactivesw.common.util.converter.CustomFieldsJsonConverter;
-import io.reactivesw.common.util.converter.ListJsonConverter;
-import io.reactivesw.order.cart.domain.entity.value.BillingAddressValue;
-import io.reactivesw.order.cart.domain.entity.value.CustomLineItemValue;
 import io.reactivesw.order.cart.domain.entity.value.LineItemValue;
-import io.reactivesw.order.cart.domain.entity.value.ShippingAddressValue;
 import io.reactivesw.order.cart.domain.entity.value.ShippingInfoValue;
-import io.reactivesw.order.cart.domain.entity.value.TaxedPriceValue;
 import io.reactivesw.order.cart.infrastructure.enums.CartState;
-import io.reactivesw.order.cart.infrastructure.enums.InventoryMode;
 import io.reactivesw.order.cart.infrastructure.enums.TaxMode;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 /**
  * cart entity.
  * Created by umasuo on 16/11/25.
  */
 @Entity
-@Table(name = "order_cart_cart")
+@Table(name = "order_cart")
 @Data
-@EqualsAndHashCode(callSuper = false)
 public class CartEntity extends BaseAllEntity {
 
   /**
    * version.
    */
   @Column
+  @Version
   private Integer version;
 
   /**
@@ -51,15 +39,9 @@ public class CartEntity extends BaseAllEntity {
   private String customerId;
 
   /**
-   * customer email.
+   * anonymous id. each anonymous id only has one cart.
    */
-  @Column(name = "customer_email")
-  private String customerEmail;
-
-  /**
-   * anonymous id.
-   */
-  @Column(name = "anonymous_id")
+  @Column(name = "anonymous_id", unique = true)
   private String anonymousId;
 
   /**
@@ -67,26 +49,6 @@ public class CartEntity extends BaseAllEntity {
    */
   @OneToMany
   private Set<LineItemValue> lineItems;
-
-  /**
-   * list of custom line items.
-   */
-  @OneToMany
-  private Set<CustomLineItemValue> customLineItems;
-
-  /**
-   * total price.
-   */
-  @OneToOne
-  private MoneyEntity totalPrice;
-
-  /**
-   * Not set until the shipping address is set. Will be set automatically in the Platform TaxMode.
-   * For the External tax mode it will be set as soon as the external tax rates for all line items,
-   * custom line items, and shipping in the cart are set.
-   */
-  @OneToOne
-  private TaxedPriceValue taxedPrice;
 
   /**
    * cart status.
@@ -97,73 +59,38 @@ public class CartEntity extends BaseAllEntity {
   /**
    * the shipping address.
    */
-  @OneToOne
-  private ShippingAddressValue shippingAddress;
+  @Column(name = "shipping_address_id")
+  private String shippingAddress;
 
   /**
    * the billing address.
    */
-  @OneToOne
-  private BillingAddressValue billingAddress;
-
-  /**
-   * inventory mode.
-   */
-  @Column
-  private InventoryMode inventoryMode;
+  @Column(name = "billing_address_id")
+  private String billingAddress;
 
   /**
    * tax mode.
    */
-  @Column
+  @Column(name = "tax_mode")
   private TaxMode taxMode;
-
-  /**
-   * Set automatically when the customer is set and the customer is a member of a customer group.
-   * Used for product variant price selection.
-   */
-  @Column
-  private String customerGroup;
 
   /**
    * A two-digit country code as per ↗ ISO 3166-1 alpha-2 . Used for product variant price
    * selection.
    */
-  @Column
+  @Column(name = "country")
   private String country;
+
+  /**
+   * the currency code for this cart.
+   */
+  @Column(name = "currency_code")
+  private String currencyCode;
 
   /**
    * Set automatically once the ShippingMethod is set.
    */
   @OneToOne
   private ShippingInfoValue shippingInfo;
-
-  /**
-   * the id list of discount codes.
-   */
-  @Column(name = "discount_codes", columnDefinition = Statics.JSON)
-  @Convert(converter = ListJsonConverter.class)
-  private List<String> discountCodes;
-
-  /**
-   * custom fields.
-   */
-  @Column(name = "custom", columnDefinition = Statics.JSON)
-  @Convert(converter = CustomFieldsJsonConverter.class)
-  private CustomFields custom;
-
-  /**
-   * list of payment id.
-   */
-  @Column(name = "payment_info", columnDefinition = Statics.JSON)
-  @Convert(converter = ListJsonConverter.class)
-  private List<String> paymentInfo;
-
-  /**
-   * locale.
-   */
-  @Column
-  private String locale;
-
 
 }

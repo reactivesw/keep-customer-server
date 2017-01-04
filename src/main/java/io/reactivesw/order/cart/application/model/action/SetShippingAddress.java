@@ -18,5 +18,5 @@ public class SetShippingAddress implements UpdateAction {
   /**
    * shipping address.
    */
-  private Address address;
+  private String addressId;
 }

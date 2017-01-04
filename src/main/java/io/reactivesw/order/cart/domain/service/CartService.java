@@ -5,10 +5,7 @@ import io.reactivesw.common.exception.ConflictException;
 import io.reactivesw.common.exception.ImmutableException;
 import io.reactivesw.common.exception.NotExistException;
 import io.reactivesw.common.exception.ParametersException;
-import io.reactivesw.common.model.UpdateAction;
-import io.reactivesw.common.model.Statics;
 import io.reactivesw.order.cart.domain.entity.CartEntity;
-import io.reactivesw.order.cart.domain.service.update.CartUpdateService;
 import io.reactivesw.order.cart.infrastructure.enums.CartState;
 import io.reactivesw.order.cart.infrastructure.repository.CartRepository;
 import org.apache.commons.lang3.StringUtils;
@@ -16,15 +13,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Created by umasuo on 16/11/29.
  */
 @Service
 public class CartService {
+
   /**
    * logger.
    */
@@ -35,12 +35,6 @@ public class CartService {
    */
   @Autowired
   private transient CartRepository cartRepository;
-
-  /**
-   * cart update service.
-   */
-  @Autowired
-  private transient CartUpdateService cartUpdateService;
 
   /**
    * Create an new active cart with sample.
@@ -89,6 +83,7 @@ public class CartService {
     if (entity == null) {
       throw new NotExistException("Cart not exist with id: " + cartId);
     }
+
     return entity;
   }
 
@@ -116,12 +111,14 @@ public class CartService {
 
     List<CartEntity> result = this.cartRepository.findByCustomerIdAndCartState(customerId,
         CartState.Active);
+    Optional<CartEntity> op = result.parallelStream().findAny();
+
     CartEntity entity;
-    if (result.isEmpty()) {
+    if (op.isPresent()) {
       //each customer should have one
-      entity = this.createActiveCartWithCustomerId(customerId);
+      entity = op.get();
     } else {
-      entity = result.get(Statics.FIRST_VALUE_IN_ARRAY);
+      entity = this.createActiveCartWithCustomerId(customerId);
     }
 
     return entity;
@@ -135,29 +132,28 @@ public class CartService {
    * @param anonymousId String
    * @return CartEntity
    */
-  public CartEntity getActiveCartByAnonymousId(String anonymousId) {
+  public CartEntity getCartByAnonymousId(String anonymousId) {
     LOG.debug("anonymousId:{}", anonymousId);
 
-    List<CartEntity> result = this.cartRepository.findByCustomerIdAndCartState(anonymousId,
-        CartState.Active);
-    CartEntity entity;
-    if (result.isEmpty()) {
-      entity = this.createActiveCartWithAnonymousId(anonymousId);
-    } else {
-      entity = result.get(Statics.FIRST_VALUE_IN_ARRAY);
+    CartEntity result = this.cartRepository.findOneByAnonymousId(anonymousId);
+
+    if (result == null) {
+      result = this.createActiveCartWithAnonymousId(anonymousId);
     }
-    return entity;
+
+    return result;
   }
 
   /**
    * update cart for with action list.
    *
-   * @param id      String of cart id
-   * @param version Integer
-   * @param actions list of actions
+   * @param id         String of cart id
+   * @param version    Integer
+   * @param cartEntity CartEntity
    * @return CartEntity
    */
-  public CartEntity updateCart(String id, Integer version, List<UpdateAction> actions) {
+  @Transactional
+  public CartEntity updateCart(String id, Integer version, CartEntity cartEntity) {
     CartEntity cart = this.getById(id);
 
     this.checkVersion(version, cart.getVersion());
@@ -167,14 +163,7 @@ public class CartService {
       throw new ImmutableException("Only active Cart can be changed");
     }
 
-    //update data from action
-    actions.parallelStream().forEach(
-        action -> {
-          cartUpdateService.handle(cart, action);
-        }
-    );
-
-    return this.cartRepository.save(cart);
+    return this.cartRepository.save(cartEntity);
   }
 
   /**
@@ -211,21 +200,27 @@ public class CartService {
    * @return CartEntity
    */
   private CartEntity createActiveCartWithAnonymousId(String anonymousId) {
+    LOG.debug("enter, anonymousId: {}", anonymousId);
+
     CartEntity entity = new CartEntity();
     entity.setAnonymousId(anonymousId);
     entity.setCartState(CartState.Active);
     CartEntity retEntity = cartRepository.save(entity);
-    LOG.info("Create a new active cart with anonymousId:{}, entity:{}", anonymousId, retEntity
+
+    LOG.debug("Create a new active cart with anonymousId:{}, entity:{}", anonymousId, retEntity
         .toString());
     return retEntity;
   }
 
   /**
    * delete cart.
-   * @param id String
+   *
+   * @param id      String
    * @param version Integer
    */
+  @Transactional
   public void deleteCart(String id, Integer version) {
+    LOG.debug("enter, id: {}, version: {}", id, version);
     CartEntity cart = this.getById(id);
 
     this.checkVersion(version, cart.getVersion());
