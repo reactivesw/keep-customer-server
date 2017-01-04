@@ -101,7 +101,7 @@ public class CartApplication {
 
     this.calculateCartPrice(data);
 
-    LOG.debug("exit: cart: {}", data);
+    LOG.debug("exit cart: {}", data);
     return data;
   }
 
@@ -127,7 +127,7 @@ public class CartApplication {
     //fill the shipping info
     this.fillShippingInfo(cart, entity.getShippingInfo());
 
-    LOG.debug("exit: cart: {}", cart);
+    LOG.debug("end fillData, exit: cart: {}", cart);
     return cart;
   }
 

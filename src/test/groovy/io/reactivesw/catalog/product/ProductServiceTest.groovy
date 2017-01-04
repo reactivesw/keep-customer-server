@@ -176,6 +176,6 @@ class ProductServiceTest extends Specification {
         def result = productService.getProductBySlug(productSlug)
 
         then:
-        result != null
+        thrown(NotExistException)
     }
 }

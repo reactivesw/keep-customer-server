@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -114,7 +113,6 @@ public class ProductService {
     ProductEntity productEntity = products.parallelStream().filter(
         product -> StringUtils.equals(slug, product.getMasterData().getCurrent().getSlug())
     ).findAny().orElse(null);
-
 
     if (productEntity == null) {
       throw new NotExistException();

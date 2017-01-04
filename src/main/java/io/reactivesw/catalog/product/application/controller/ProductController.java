@@ -2,9 +2,7 @@ package io.reactivesw.catalog.product.application.controller;
 
 import static io.reactivesw.route.ProductRouter.PRODUCT_ID;
 import static io.reactivesw.route.ProductRouter.PRODUCT_ROOT;
-import static io.reactivesw.route.ProductRouter.PRODUCT_SLUG;
 import static io.reactivesw.route.ProductRouter.PRODUCT_WITH_ID;
-import static io.reactivesw.route.ProductRouter.PRODUCT_WITH_SLUG;
 
 import io.reactivesw.catalog.product.application.ProductApplication;
 import io.reactivesw.catalog.product.application.model.Product;
@@ -72,8 +70,8 @@ public class ProductController {
    * @param id the id
    * @return the Product
    */
-//  @ApiOperation(value = "Get Product By Id")
-//  @GetMapping(PRODUCT_WITH_ID)
+  @ApiOperation(value = "Get Product By Id")
+  @GetMapping(PRODUCT_WITH_ID)
   public Product getProductById(@PathVariable(value = PRODUCT_ID)
                                 @ApiParam(value = "Product ID", required = true)
                                     String id) {
@@ -93,8 +91,8 @@ public class ProductController {
    * @return the product by slug
    */
   @ApiOperation(value = "Get Product By Slug")
-  @GetMapping(PRODUCT_WITH_SLUG)
-  public Product getProductBySlug(@PathVariable(value = PRODUCT_SLUG)
+  @GetMapping(PRODUCT_ROOT)
+  public Product getProductBySlug(@RequestParam
                                   @ApiParam(value = "Product Slug", required = true)
                                       String slug) {
     LOG.debug("enter getProductBySlug, slug is : {}", slug);
