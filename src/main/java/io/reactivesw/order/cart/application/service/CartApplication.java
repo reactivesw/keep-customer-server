@@ -18,7 +18,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +42,12 @@ public class CartApplication {
   private transient CartService cartService;
 
   /**
+   * rest client.
+   */
+  @Autowired
+  private transient CartRestClient restClient;
+
+  /**
    * cart update service.
    */
   @Autowired
@@ -59,13 +64,6 @@ public class CartApplication {
    */
   @Autowired
   private transient ShippingInfoService shippingInfoService;
-
-  /**
-   * rest template.
-   */
-  @Autowired
-  private transient RestTemplate restTemplate = new RestTemplate();
-
 
   /**
    * update cart for with action list.
@@ -136,8 +134,8 @@ public class CartApplication {
    */
   private void fillShippingAddress(Cart cart, String addressId) {
     if (StringUtils.isNotBlank(addressId)) {
-      //TODO get address from customer service
-      Address address = restTemplate.getForObject("shipping", Address.class);
+      //get address from customer service
+      Address address = restClient.getAddress(addressId);
       cart.setShippingAddress(address);
     }
   }
@@ -150,8 +148,8 @@ public class CartApplication {
    */
   private void fillBillingAddress(Cart cart, String addressId) {
     if (StringUtils.isNotBlank(addressId)) {
-      //TODO get address from customer service
-      Address address = restTemplate.getForObject("billing", Address.class);
+      //get address from customer service
+      Address address = restClient.getAddress(addressId);
       cart.setBillingAddress(address);
     }
   }
@@ -171,7 +169,7 @@ public class CartApplication {
             LineItem item = new LineItem();
             this.setLineItemBaseInfo(item, lineItemValue);
             //TODO get Product from product service.
-            Product product = restTemplate.getForObject("item", Product.class);
+            Product product = restClient.getProduct(item.getProductId());
             if (product == null) {
               //TODO if the product has been deleted , then remove it from cart
               LOG.warn("Remove non-existing product");
@@ -247,8 +245,7 @@ public class CartApplication {
     String shippingMethodId = infoValue == null ? null : infoValue.getShippingMethod();
     if (shippingMethodId != null) {
       //TODO get shipping method from shipping method service.
-      ShippingMethod shippingMethod = restTemplate.getForObject("shippingInfo", ShippingMethod
-          .class);
+      ShippingMethod shippingMethod = restClient.getShippingMethod(shippingMethodId);
       if (shippingMethod == null) {
         //TODO remove the shipping method, the customer need to select again.
         LOG.warn("Remove non-existing shipping method.");
@@ -294,7 +291,7 @@ public class CartApplication {
       ZoneRate rate = zoneRates.parallelStream().filter(
           zoneRate -> {
             //TODO get zone id by country & state
-            Zone zone = restTemplate.getForObject("zone", Zone.class);
+            Zone zone = restClient.getZone(zoneRate.getZone().getId());
             LOG.debug("Zone got by country: {}, state: {}, Zone:{}", country, state, zone);
             return StringUtils.equals(zone.getId(), zoneRate.getZone().getId());
           }
@@ -323,9 +320,8 @@ public class CartApplication {
   private TaxRate getTaxRate(Reference txRef, String country, String state) {
     TaxRate taxRate = null;
     if (txRef != null && txRef.getId() != null) {
-//      String taxCategoryId = txRef.getId();
-      //TODO
-      TaxCategory taxCategory = restTemplate.getForObject("tax", TaxCategory.class);
+      String taxCategoryId = txRef.getId();
+      TaxCategory taxCategory = restClient.getTaxCategory(taxCategoryId);
       taxRate = this.getTaxRate(taxCategory, country, state);
     }
     return taxRate;

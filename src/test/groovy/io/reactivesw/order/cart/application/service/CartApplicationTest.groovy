@@ -42,7 +42,7 @@ class CartApplicationTest extends Specification {
 
     ShippingInfoService shippingInfoService = new ShippingInfoService()
 
-    RestTemplate restTemplate = Mock(RestTemplate);
+    CartRestClient restClient = Mock(CartRestClient);
 
     def id = "tmpCartId"
 
@@ -93,6 +93,8 @@ class CartApplicationTest extends Specification {
 
     def shippingAddressId = "tmpShippingAddressId"
 
+    def billingAddressId = "tmpBillingAddressId"
+
     Address address
 
     CartEntity cartEntity
@@ -133,7 +135,7 @@ class CartApplicationTest extends Specification {
         cartEntity = new CartEntity(version: version, customerId: customerId, anonymousId: anonymousId, id: cartId, lineItems: lineItems, shippingInfo: shippingInfoValue, shippingAddress: shippingAddressId, billingAddress: shippingAddressId, currencyCode: currencyCode, country: country)
 
         address = new Address(id: shippingAddressId, country: country)
-        cartApplication = new CartApplication(cartService: cartService, cartUpdateService: cartUpdateService, lineItemService: lineItemService, shippingInfoService: shippingInfoService, restTemplate: restTemplate)
+        cartApplication = new CartApplication(cartService: cartService, cartUpdateService: cartUpdateService, lineItemService: lineItemService, shippingInfoService: shippingInfoService, restClient: restClient)
 
 
         List<Price> prices = new ArrayList<>()
@@ -169,12 +171,12 @@ class CartApplicationTest extends Specification {
         when:
         cartService.getById(_) >> cartEntity
         cartService.updateCart(_, _, _) >> cartEntity
-        restTemplate.getForObject("shipping", _) >> address
-        restTemplate.getForObject("billing", _) >> address
-        restTemplate.getForObject("item", _) >> product
-        restTemplate.getForObject("tax", _) >> taxCategory
-        restTemplate.getForObject("shippingInfo", _) >> shippingMethod
-        restTemplate.getForObject("zone", _) >> zone
+        restClient.getAddress(shippingAddressId) >> address
+        restClient.getAddress(billingAddressId) >> address
+        restClient.getProduct(productId) >> product
+        restClient.getTaxCategory(taxCategoryId) >> taxCategory
+        restClient.getShippingMethod(shippingMethodId) >> shippingMethod
+        restClient.getZone(zoneId) >> zone
         cartApplication.updateCart(cartId, version, actions)
         then:
         noExceptionThrown()
@@ -186,12 +188,12 @@ class CartApplicationTest extends Specification {
         when:
         cartService.getById(_) >> cartEntity
         cartService.updateCart(_, _, _) >> cartEntity
-        restTemplate.getForObject("shipping", _) >> address
-        restTemplate.getForObject("billing", _) >> address
-        restTemplate.getForObject("item", _) >> product
-        restTemplate.getForObject("tax", _) >> taxCategory
-        restTemplate.getForObject("shippingInfo", _) >> shippingMethod
-        restTemplate.getForObject("zone", _) >> zone
+        restClient.getAddress(shippingAddressId) >> address
+        restClient.getAddress(billingAddressId) >> address
+        restClient.getProduct(productId) >> product
+        restClient.getTaxCategory(taxCategoryId) >> taxCategory
+        restClient.getShippingMethod(shippingMethodId) >> shippingMethod
+        restClient.getZone(zoneId) >> zone
         cartApplication.updateCart(cartId, version, actions)
         then:
         noExceptionThrown()
@@ -203,12 +205,12 @@ class CartApplicationTest extends Specification {
         when:
         cartService.getById(_) >> cartEntity
         cartService.updateCart(_, _, _) >> cartEntity
-        restTemplate.getForObject("shipping", _) >> address
-        restTemplate.getForObject("billing", _) >> address
-        restTemplate.getForObject("item", _) >> product
-        restTemplate.getForObject("tax", _) >> taxCategory
-        restTemplate.getForObject("shippingInfo", _) >> shippingMethod
-        restTemplate.getForObject("zone", _) >> zone
+        restClient.getAddress(shippingAddressId) >> address
+        restClient.getAddress(billingAddressId) >> address
+        restClient.getProduct(productId) >> product
+        restClient.getTaxCategory(taxCategoryId) >> taxCategory
+        restClient.getShippingMethod(shippingMethodId) >> shippingMethod
+        restClient.getZone(zoneId) >> zone
         cartApplication.updateCart(cartId, version, actions)
         then:
         noExceptionThrown()
@@ -220,12 +222,12 @@ class CartApplicationTest extends Specification {
         when:
         cartService.getById(_) >> cartEntity
         cartService.updateCart(_, _, _) >> cartEntity
-        restTemplate.getForObject("shipping", _) >> address
-        restTemplate.getForObject("billing", _) >> address
-        restTemplate.getForObject("item", _) >> null
-        restTemplate.getForObject("tax", _) >> taxCategory
-        restTemplate.getForObject("shippingInfo", _) >> shippingMethod
-        restTemplate.getForObject("zone", _) >> zone
+        restClient.getAddress(shippingAddressId) >> address
+        restClient.getAddress(billingAddressId) >> address
+        restClient.getProduct(productId) >> null
+        restClient.getTaxCategory(taxCategoryId) >> taxCategory
+        restClient.getShippingMethod(shippingMethodId) >> shippingMethod
+        restClient.getZone(zoneId) >> zone
         cartApplication.updateCart(cartId, version, actions)
         then:
         noExceptionThrown()
@@ -236,12 +238,12 @@ class CartApplicationTest extends Specification {
         when:
         cartService.getById(_) >> cartEntity
         cartService.updateCart(_, _, _) >> cartEntity
-        restTemplate.getForObject("shipping", _) >> address
-        restTemplate.getForObject("billing", _) >> address
-        restTemplate.getForObject("item", _) >> null
-        restTemplate.getForObject("tax", _) >> taxCategory
-        restTemplate.getForObject("shippingInfo", _) >> shippingMethod
-        restTemplate.getForObject("zone", _) >> zone
+        restClient.getAddress(shippingAddressId) >> address
+        restClient.getAddress(billingAddressId) >> address
+        restClient.getProduct(productId) >> null
+        restClient.getTaxCategory(taxCategoryId) >> taxCategory
+        restClient.getShippingMethod(shippingMethodId) >> shippingMethod
+        restClient.getZone(zoneId) >> zone
         cartApplication.updateCart(cartId, version, actions)
         then:
         noExceptionThrown()
@@ -252,12 +254,12 @@ class CartApplicationTest extends Specification {
         when:
         cartService.getById(_) >> cartEntity
         cartService.updateCart(_, _, _) >> cartEntity
-        restTemplate.getForObject("shipping", _) >> address
-        restTemplate.getForObject("billing", _) >> address
-        restTemplate.getForObject("item", _) >> product
-        restTemplate.getForObject("tax", _) >> null
-        restTemplate.getForObject("shippingInfo", _) >> shippingMethod
-        restTemplate.getForObject("zone", _) >> zone
+        restClient.getAddress(shippingAddressId) >> address
+        restClient.getAddress(billingAddressId) >> address
+        restClient.getProduct(productId) >> product
+        restClient.getTaxCategory(taxCategoryId) >> null
+        restClient.getShippingMethod(shippingMethodId) >> shippingMethod
+        restClient.getZone(zoneId) >> zone
         cartApplication.updateCart(cartId, version, actions)
         then:
         noExceptionThrown()
@@ -269,12 +271,12 @@ class CartApplicationTest extends Specification {
         when:
         cartService.getById(_) >> cartEntity
         cartService.updateCart(_, _, _) >> cartEntity
-        restTemplate.getForObject("shipping", _) >> address
-        restTemplate.getForObject("billing", _) >> address
-        restTemplate.getForObject("item", _) >> product
-        restTemplate.getForObject("tax", _) >> taxCategory
-        restTemplate.getForObject("shippingInfo", _) >> shippingMethod
-        restTemplate.getForObject("zone", _) >> zone
+        restClient.getAddress(shippingAddressId) >> address
+        restClient.getAddress(billingAddressId) >> address
+        restClient.getProduct(productId) >> product
+        restClient.getTaxCategory(taxCategoryId) >> taxCategory
+        restClient.getShippingMethod(shippingMethodId) >> shippingMethod
+        restClient.getZone(zoneId) >> zone
         cartApplication.updateCart(cartId, version, actions)
         then:
         noExceptionThrown()
@@ -286,12 +288,12 @@ class CartApplicationTest extends Specification {
         when:
         cartService.getById(_) >> cartEntity
         cartService.updateCart(_, _, _) >> cartEntity
-        restTemplate.getForObject("shipping", _) >> address
-        restTemplate.getForObject("billing", _) >> address
-        restTemplate.getForObject("item", _) >> product
-        restTemplate.getForObject("tax", _) >> taxCategory
-        restTemplate.getForObject("shippingInfo", _) >> shippingMethod
-        restTemplate.getForObject("zone", _) >> zone
+        restClient.getAddress(shippingAddressId) >> address
+        restClient.getAddress(billingAddressId) >> address
+        restClient.getProduct(productId) >> product
+        restClient.getTaxCategory(taxCategoryId) >> taxCategory
+        restClient.getShippingMethod(shippingMethodId) >> shippingMethod
+        restClient.getZone(zoneId) >> zone
         cartApplication.updateCart(cartId, version, actions)
         then:
         noExceptionThrown()
@@ -303,12 +305,12 @@ class CartApplicationTest extends Specification {
         when:
         cartService.getById(_) >> cartEntity
         cartService.updateCart(_, _, _) >> cartEntity
-        restTemplate.getForObject("shipping", _) >> address
-        restTemplate.getForObject("billing", _) >> address
-        restTemplate.getForObject("item", _) >> product
-        restTemplate.getForObject("tax", _) >> taxCategory
-        restTemplate.getForObject("shippingInfo", _) >> shippingMethod
-        restTemplate.getForObject("zone", _) >> zone
+        restClient.getAddress(shippingAddressId) >> address
+        restClient.getAddress(billingAddressId) >> address
+        restClient.getProduct(productId) >> product
+        restClient.getTaxCategory(taxCategoryId) >> taxCategory
+        restClient.getShippingMethod(shippingMethodId) >> shippingMethod
+        restClient.getZone(zoneId) >> zone
         cartApplication.updateCart(cartId, version, actions)
         then:
         noExceptionThrown()
@@ -321,12 +323,12 @@ class CartApplicationTest extends Specification {
         when:
         cartService.getById(_) >> cartEntity
         cartService.updateCart(_, _, _) >> cartEntity
-        restTemplate.getForObject("shipping", _) >> address
-        restTemplate.getForObject("billing", _) >> address
-        restTemplate.getForObject("item", _) >> product
-        restTemplate.getForObject("tax", _) >> taxCategory
-        restTemplate.getForObject("shippingInfo", _) >> shippingMethod
-        restTemplate.getForObject("zone", _) >> zone
+        restClient.getAddress(shippingAddressId) >> address
+        restClient.getAddress(billingAddressId) >> address
+        restClient.getProduct(productId) >> product
+        restClient.getTaxCategory(taxCategoryId) >> taxCategory
+        restClient.getShippingMethod(shippingMethodId) >> shippingMethod
+        restClient.getZone(zoneId) >> zone
         cartApplication.updateCart(cartId, version, actions)
         then:
         noExceptionThrown()
@@ -337,12 +339,12 @@ class CartApplicationTest extends Specification {
         when:
         cartService.getById(_) >> cartEntity
         cartService.updateCart(_, _, _) >> cartEntity
-        restTemplate.getForObject("shipping", _) >> address
-        restTemplate.getForObject("billing", _) >> address
-        restTemplate.getForObject("item", _) >> product
-        restTemplate.getForObject("tax", _) >> taxCategory
-        restTemplate.getForObject("shippingInfo", _) >> null
-        restTemplate.getForObject("zone", _) >> zone
+        restClient.getAddress(shippingAddressId) >> address
+        restClient.getAddress(billingAddressId) >> address
+        restClient.getProduct(productId) >> product
+        restClient.getTaxCategory(taxCategoryId) >> taxCategory
+        restClient.getShippingMethod(shippingMethodId) >> null
+        restClient.getZone(zoneId) >> zone
         cartApplication.updateCart(cartId, version, actions)
         then:
         noExceptionThrown()

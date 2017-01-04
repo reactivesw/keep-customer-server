@@ -18,7 +18,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     @JsonSubTypes.Type(value = SetShippingAddress.class, name = "setShippingAddress"),
     @JsonSubTypes.Type(value = SetShippingMethod.class, name = "setShippingMethod"),
     @JsonSubTypes.Type(value = SetTaxMode.class, name = "setTaxMode")
-
 })
-public interface CartUpdateAction {
+public interface CartUpdateAction  {
 }
