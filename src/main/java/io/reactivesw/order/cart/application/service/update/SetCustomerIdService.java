@@ -3,6 +3,7 @@ package io.reactivesw.order.cart.application.service.update;
 import io.reactivesw.common.model.UpdateAction;
 import io.reactivesw.order.cart.application.model.action.SetCustomerId;
 import io.reactivesw.order.cart.domain.entity.CartEntity;
+import io.reactivesw.order.cart.infrastructure.util.CartUpdateActionUtils;
 import org.springframework.stereotype.Service;
 
 /**
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
  * Customer with the given ID must exist in the project.
  * Created by umasuo on 16/12/19.
  */
-@Service
+@Service(value = CartUpdateActionUtils.SET_CUSTOMER_ID)
 public class SetCustomerIdService extends CartUpdateService {
   /**
    * set the customer id, then update the price and merge the customer's active cart.

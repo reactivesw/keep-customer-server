@@ -5,6 +5,8 @@ import io.reactivesw.common.model.UpdateAction;
 import io.reactivesw.order.cart.application.model.action.SetShippingMethod;
 import io.reactivesw.order.cart.domain.entity.CartEntity;
 import io.reactivesw.order.cart.domain.entity.value.ShippingInfoValue;
+import io.reactivesw.order.cart.infrastructure.util.CartUpdateActionUtils;
+import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
@@ -12,6 +14,7 @@ import java.util.Objects;
  * Sets the ShippingMethod. Prerequisite: The cart must contain a shipping address.
  * Created by umasuo on 16/12/19.
  */
+@Service(value = CartUpdateActionUtils.SET_SHIPPING_METHOD)
 public class SetShippingMethodService extends CartUpdateService {
 
   /**
@@ -52,7 +55,7 @@ public class SetShippingMethodService extends CartUpdateService {
   private void setShippingMethod(CartEntity cart, String shippingMethodId) {
 
     ShippingInfoValue shippingInfo = this.getShippingInfo(cart);
-    
+
     shippingInfo.setShippingMethod(shippingMethodId);
 
     cart.setShippingInfo(shippingInfo);

@@ -1,9 +1,5 @@
 package io.reactivesw.order.cart.application.model.mapper;
 
-import io.reactivesw.catalog.product.application.model.ProductVariant;
-import io.reactivesw.common.enums.ReferenceTypes;
-import io.reactivesw.common.model.Reference;
-import io.reactivesw.order.cart.application.model.LineItem;
 import io.reactivesw.order.cart.application.model.LineItemDraft;
 import io.reactivesw.order.cart.domain.entity.value.LineItemValue;
 

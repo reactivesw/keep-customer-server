@@ -6,12 +6,13 @@ import io.reactivesw.order.cart.application.model.action.AddLineItem;
 import io.reactivesw.order.cart.application.model.mapper.LineItemMapper;
 import io.reactivesw.order.cart.domain.entity.CartEntity;
 import io.reactivesw.order.cart.domain.entity.value.LineItemValue;
+import io.reactivesw.order.cart.infrastructure.util.CartUpdateActionUtils;
 import org.springframework.stereotype.Service;
 
 /**
  * Created by umasuo on 16/12/16.
  */
-@Service
+@Service(value = CartUpdateActionUtils.ADD_LINE_ITEM)
 public class AddLineItemService extends CartUpdateService {
 
   /**

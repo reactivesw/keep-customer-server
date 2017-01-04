@@ -5,6 +5,7 @@ import io.reactivesw.common.model.UpdateAction;
 import io.reactivesw.order.cart.application.model.action.RemoveLineItem;
 import io.reactivesw.order.cart.domain.entity.CartEntity;
 import io.reactivesw.order.cart.domain.entity.value.LineItemValue;
+import io.reactivesw.order.cart.infrastructure.util.CartUpdateActionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ import java.util.Set;
 /**
  * Created by umasuo on 16/12/16.
  */
-@Service
+@Service(value = CartUpdateActionUtils.REMOVE_LINE_ITEM)
 public class RemoveLineItemService extends CartUpdateService {
 
   /**
