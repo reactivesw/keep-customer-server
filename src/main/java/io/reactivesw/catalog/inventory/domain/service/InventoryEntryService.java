@@ -52,6 +52,7 @@ public class InventoryEntryService {
    */
   public InventoryEntry createInventoryEntry(InventoryEntryDraft draft) {
     LOG.debug("enter createInventoryEntry, inventory entry draft is : {}", draft.toString());
+    // TODO: 17/1/4 validate product sku name
 
     InventoryEntryEntity entity = InventoryEntryMapper.modelToEntity(draft);
     InventoryEntryEntity savedEntity = inventoryEntryRepository.save(entity);

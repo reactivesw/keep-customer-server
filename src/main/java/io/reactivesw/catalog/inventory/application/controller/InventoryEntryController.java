@@ -77,7 +77,7 @@ public class InventoryEntryController {
   public void deleteInventoryEntry(@PathVariable(value = INVENTORY_ENTRY_ID)
                                    @ApiParam(value = "InventoryEntry Id", required = true)
                                        String id,
-                                   @RequestBody
+                                   @RequestParam
                                    @ApiParam(value = "InventoryEntry Version", required = true)
                                        Integer version) {
     LOG.debug("enter deleteInventoryEntry, id is : {}, version is : {}", id, version);
