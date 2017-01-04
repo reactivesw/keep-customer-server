@@ -13,11 +13,11 @@ public class ZoneRouter extends BaseRouter {
   /**
    * ZONE BASE URL.
    */
-  public static final String ZONE_BASE_URL = URL_ROOT + "/zones";
+  public static final String ZONE_ROOT = URL_ROOT + "/zones";
 
   /**
    * ZONE IDENTIFIED BY ID.
    */
-  public static final String ZONE_WITH_ID = ZONE_BASE_URL + "/{" + ZONE_ID + "}";
+  public static final String ZONE_WITH_ID = ZONE_ROOT + "/{" + ZONE_ID + "}";
 
 }

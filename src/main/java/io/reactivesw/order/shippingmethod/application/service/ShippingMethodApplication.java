@@ -131,7 +131,7 @@ public class ShippingMethodApplication {
   private String buildUrl(String country, String state) {
     //TODO use the service register for this
     StringBuffer result = new StringBuffer();
-    result.append(ZoneRouter.ZONE_BASE_URL)
+    result.append(ZoneRouter.ZONE_ROOT)
         .append("?country=").append(country)
         .append("&state=").append(state);
     return result.toString();

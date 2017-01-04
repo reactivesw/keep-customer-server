@@ -79,5 +79,4 @@ public class CartRestClient {
     return restTemplate.getForObject(url, ShippingMethod.class);
   }
 
-
 }
