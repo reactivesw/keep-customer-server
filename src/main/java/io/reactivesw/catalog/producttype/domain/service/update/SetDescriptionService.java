@@ -1,10 +1,10 @@
 package io.reactivesw.catalog.producttype.domain.service.update;
 
+import io.reactivesw.catalog.producttype.application.model.action.SetDescription;
 import io.reactivesw.catalog.producttype.domain.entity.ProductTypeEntity;
 import io.reactivesw.catalog.producttype.infrastructure.util.ProductTypeActionUtils;
 import io.reactivesw.common.model.Update;
 import io.reactivesw.common.model.UpdateAction;
-import io.reactivesw.common.model.action.SetDescription;
 import org.springframework.stereotype.Service;
 
 /**
