@@ -4,6 +4,8 @@ import lombok.Data;
 
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by Davis on 16/11/17.
  */
@@ -12,13 +14,14 @@ public class ZoneDraft {
   /**
    * The Name.
    */
-  String name;
+  @NotNull
+  private String name;
   /**
    * The Description.
    */
-  String description;
+  private String description;
   /**
    * The Locations.
    */
-  List<Location> locations;
+  private List<Location> locations;
 }
