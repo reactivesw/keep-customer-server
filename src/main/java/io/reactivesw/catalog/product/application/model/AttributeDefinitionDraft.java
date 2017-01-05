@@ -69,8 +69,7 @@ public class AttributeDefinitionDraft {
    * Provides a visual representation type for this attribute.
    * only relevant for text-based attribute model like TextType and LocalizableTextType.
    */
-  @ApiModelProperty(required = true)
-  @NotNull
+  @ApiModelProperty(required = false)
   private TextInputHint inputHint;
 
   /**

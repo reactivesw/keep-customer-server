@@ -15,6 +15,12 @@ spring:
   profiles:
     active: test
 
+braintree:
+  environment: "sanbox"
+  merchant-id: "zd4ykzzngrhgnbdv"
+  public-key: "j55k9vx4y7kp48yw"
+  private-key: "e993538bfa75c350dac4f3c95b377e26"
+
 app:
   domain:
     name: http://localhost:8088
