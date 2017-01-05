@@ -21,6 +21,6 @@ public class SetNameService implements Update<ProductTypeEntity> {
   @Override
   public void handle(ProductTypeEntity entity, UpdateAction action) {
     SetName setName = (SetName)action;
-    entity.setKey(setName.getName());
+    entity.setName(setName.getName());
   }
 }
