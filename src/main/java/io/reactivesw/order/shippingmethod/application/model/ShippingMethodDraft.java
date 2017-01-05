@@ -2,6 +2,8 @@ package io.reactivesw.order.shippingmethod.application.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.reactivesw.common.model.Reference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -14,6 +16,8 @@ import lombok.Data;
 @ApiModel(description = "This representation needs to be given with a Create ShippingMethod " +
     "request.")
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ShippingMethodDraft {
 
   @ApiModelProperty(required = true)

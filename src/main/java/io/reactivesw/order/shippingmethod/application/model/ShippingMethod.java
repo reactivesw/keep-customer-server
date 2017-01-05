@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.ZonedDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.reactivesw.common.model.Reference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -19,6 +21,8 @@ import lombok.Data;
     "rates for different geographic locations. Example shipping methods are “DHL”, “DHL Express” " +
     "and “UPS”.")
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ShippingMethod {
 
   @ApiModelProperty(value = "The unique ID of the shipping method.", required = true)

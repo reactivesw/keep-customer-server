@@ -1,5 +1,7 @@
 package io.reactivesw.order.shippingmethod.application.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.reactivesw.common.model.Money;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -11,6 +13,8 @@ import lombok.Data;
 @ApiModel(description = "The shipping is free if the order total (the sum of line item prices) " +
     "exceeds the freeAbove value.")
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ShippingRate {
 
   @ApiModelProperty(required = true)

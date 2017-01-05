@@ -64,7 +64,7 @@ public class LineItemService {
   public void calculateItemPrice(LineItem item) {
     if (item.getPrice() != null) {
       Money price = item.getPrice().getValue();
-      int quantity = item.getQuantity();
+      int quantity = item.getQuantity() == null ? 0 : item.getQuantity();
       Money total = new Money();
       total.setCurrencyCode(price.getCurrencyCode());
       int totalPrice = price.getCentAmount() * quantity;
