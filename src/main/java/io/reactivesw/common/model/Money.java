@@ -16,5 +16,4 @@ public class Money {
    * The Cent amount.
    */
   private Integer centAmount;
-
 }
