@@ -35,7 +35,7 @@ public class SetLocalizedEnumValueOrderService implements Update<ProductTypeEnti
     }
     SetLocalizedEnumValueOrder setLocalizedEnumValueOrder = (SetLocalizedEnumValueOrder) action;
 
-    String localizedEnumAttributeName = setLocalizedEnumValueOrder.getActionName();
+    String localizedEnumAttributeName = setLocalizedEnumValueOrder.getAttributeName();
 
     LocalizedEnumAttributeType enumType =
         getLocalizedEnumAttributeType(entity, localizedEnumAttributeName);

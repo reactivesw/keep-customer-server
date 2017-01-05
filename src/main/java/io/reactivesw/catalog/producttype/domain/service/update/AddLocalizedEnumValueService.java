@@ -7,6 +7,7 @@ import io.reactivesw.catalog.producttype.infrastructure.util.ProductTypeActionUt
 import io.reactivesw.common.model.LocalizedEnumValue;
 import io.reactivesw.common.model.Update;
 import io.reactivesw.common.model.UpdateAction;
+
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -18,6 +19,7 @@ import java.util.Objects;
 public class AddLocalizedEnumValueService implements Update<ProductTypeEntity> {
   /**
    * add localized enum value.
+   *
    * @param entity E
    * @param action UpdateAction
    */
@@ -28,14 +30,13 @@ public class AddLocalizedEnumValueService implements Update<ProductTypeEntity> {
     LocalizedEnumValue value = addLocalizedEnumValue.getValue();
 
     entity.getAttributes().stream()
-        .map(attribute -> {
+        .forEach(attribute -> {
           if (Objects.equals(attributeName, attribute.getName())) {
             LocalizedEnumAttributeType lenumAttribute = (LocalizedEnumAttributeType) attribute
                 .getType();
             lenumAttribute.getValues().add(value);
             attribute.setType(lenumAttribute);
           }
-          return attribute;
         });
 
   }

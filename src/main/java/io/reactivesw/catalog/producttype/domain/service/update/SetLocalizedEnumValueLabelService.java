@@ -29,7 +29,7 @@ public class SetLocalizedEnumValueLabelService implements Update<ProductTypeEnti
     entity.getAttributes().forEach(
         attribute -> {
           if (attribute.getName().equals(setPlainEnumValueLabel.getAttributeName())
-              && attribute.getType() instanceof SetLocalizedEnumValueLabel){
+              && attribute.getType() instanceof LocalizedEnumAttributeType){
               ((LocalizedEnumAttributeType) attribute.getType()).getValues().forEach(
                   type -> {
                     if (type.getKey().equals(setPlainEnumValueLabel.getNewValue().getKey())) {

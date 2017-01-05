@@ -8,6 +8,7 @@ import io.reactivesw.common.enums.EnumValue;
 import io.reactivesw.common.model.Update;
 import io.reactivesw.common.model.UpdateAction;
 import io.reactivesw.common.model.mapper.EnumValueMapper;
+
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -19,26 +20,26 @@ import java.util.Objects;
 public class AddPlainEnumValueService implements Update<ProductTypeEntity> {
   /**
    * add enum value.
+   *
    * @param entity E
    * @param action UpdateAction
    */
   @Override
   public void handle(ProductTypeEntity entity, UpdateAction action) {
-    AddPlainEnumValue setAttributeInputTip = (AddPlainEnumValue) action;
-    String attributeName = setAttributeInputTip.getAttributeName();
-    EnumValue enumValue = EnumValueMapper.modelToEntity(setAttributeInputTip.getValue());
+    AddPlainEnumValue addPlainEnumValue = (AddPlainEnumValue) action;
+    String attributeName = addPlainEnumValue.getAttributeName();
+    EnumValue enumValue = EnumValueMapper.modelToEntity(addPlainEnumValue.getValue());
 
     entity.getAttributes()
-        .stream().map(
-            attribute -> {
-              if (Objects.equals(attributeName, attribute.getName())) {
-                EnumAttributeType enumAttributeType = (EnumAttributeType)attribute.getType();
-                // TODO: 16/12/12 if values is null?
-                enumAttributeType.getValues().add(enumValue);
-                attribute.setType(enumAttributeType);
-              }
-             return attribute;
-            }
+        .stream().forEach(
+        attribute -> {
+          if (Objects.equals(attributeName, attribute.getName())) {
+            EnumAttributeType enumAttributeType = (EnumAttributeType) attribute.getType();
+            // TODO: 16/12/12 if values is null?
+            enumAttributeType.getValues().add(enumValue);
+            attribute.setType(enumAttributeType);
+          }
+        }
     );
   }
 }

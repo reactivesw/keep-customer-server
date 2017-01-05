@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 /**
  * Created by Davis on 16/12/14.
  */
@@ -54,7 +56,7 @@ public class ProductController {
   @PostMapping(PRODUCT_ROOT)
   public Product createProduct(@RequestBody
                                @ApiParam(value = "Product Draft", required = true)
-                                   ProductDraft productDraft) {
+                               @Valid ProductDraft productDraft) {
     LOG.debug("enter createProduct, ProductDraft is : {}", productDraft.toString());
 
     Product result = productApplication.createProduct(productDraft);

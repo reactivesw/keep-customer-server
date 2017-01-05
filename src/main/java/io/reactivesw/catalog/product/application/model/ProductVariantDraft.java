@@ -4,17 +4,25 @@ import io.reactivesw.catalog.product.application.model.attributes.Attribute;
 import io.reactivesw.common.model.AssetDraft;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
+
+import javax.validation.constraints.Pattern;
 
 /**
  * Created by Davis on 16/11/17.
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
 public class ProductVariantDraft {
 
   /**
    * The Sku.
    */
+  @Pattern(regexp = "[-a-zA-Z0-9_]{2,256}", message = "category slug can not match")
   private String sku;
 
   /**
@@ -48,128 +56,4 @@ public class ProductVariantDraft {
    * Optional.
    */
   private List<Attribute> attributes;
-
-  /**
-   * Gets sku.
-   *
-   * @return the sku
-   */
-  public String getSku() {
-    return sku;
-  }
-
-  /**
-   * Sets sku.
-   *
-   * @param sku the sku
-   */
-  public void setSku(String sku) {
-    this.sku = sku;
-  }
-
-  /**
-   * Gets key.
-   *
-   * @return the key
-   */
-  public String getKey() {
-    return key;
-  }
-
-  /**
-   * Sets key.
-   *
-   * @param key the key
-   */
-  public void setKey(String key) {
-    this.key = key;
-  }
-
-  /**
-   * Gets prices.
-   *
-   * @return the prices
-   */
-  public List<PriceDraft> getPrices() {
-    return prices;
-  }
-
-  /**
-   * Sets prices.
-   *
-   * @param prices the prices
-   */
-  public void setPrices(List<PriceDraft> prices) {
-    this.prices = prices;
-  }
-
-  /**
-   * Gets images.
-   *
-   * @return the images
-   */
-  public List<Image> getImages() {
-    return images;
-  }
-
-  /**
-   * Sets images.
-   *
-   * @param images the images
-   */
-  public void setImages(List<Image> images) {
-    this.images = images;
-  }
-
-  /**
-   * Gets assets.
-   *
-   * @return the assets
-   */
-  public List<AssetDraft> getAssets() {
-    return assets;
-  }
-
-  /**
-   * Sets assets.
-   *
-   * @param assets the assets
-   */
-  public void setAssets(List<AssetDraft> assets) {
-    this.assets = assets;
-  }
-
-  /**
-   * Gets attributes.
-   *
-   * @return the attributes
-   */
-  public List<Attribute> getAttributes() {
-    return attributes;
-  }
-
-  /**
-   * Sets attributes.
-   *
-   * @param attributes the attributes
-   */
-  public void setAttributes(List<Attribute> attributes) {
-    this.attributes = attributes;
-  }
-
-  /**
-   * toString method.
-   * @return String
-   */
-  @Override
-  public String toString() {
-    return "ProductVariantDraft{" +
-        "sku='" + sku + '\'' +
-        ", key='" + key + '\'' +
-        ", prices=" + prices +
-        ", images=" + images +
-        ", assets=" + assets +
-        ", attributes=" + attributes +
-        '}';
-  }
 }
