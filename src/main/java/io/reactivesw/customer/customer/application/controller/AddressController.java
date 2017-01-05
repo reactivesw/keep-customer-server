@@ -31,9 +31,10 @@ public class AddressController {
   private transient AddressService addressService;
 
   /**
+   * get address by id.
    *
-   * @param addressId
-   * @return
+   * @param addressId String address id.
+   * @return Address
    */
   @ApiOperation(value = "get address by address id")
   @GetMapping(CustomerRouter.ADDRESS_WITH_ID)

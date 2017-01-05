@@ -1,4 +1,4 @@
-package io.reactivesw.order.cart.domain.entity.value;
+package io.reactivesw.project.domain.entity;
 
 import io.reactivesw.common.entity.BaseIdEntity;
 import lombok.Data;
@@ -9,19 +9,23 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
- * Created by umasuo on 16/11/28.
+ * Created by umasuo on 17/1/5.
  */
 @Entity
-@Table(name = "order_cart_shipping_info")
+@Table(name = "project_currency")
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class ShippingInfoValue extends BaseIdEntity {
-
+public class CurrencyValue extends BaseIdEntity {
 
   /**
-   * shipping method.
+   * currency code.
    */
-  @Column(name = "shipping_method_id")
-  private String shippingMethod;
+  @Column
+  private String currencyCode;
 
+  /**
+   * name.
+   */
+  @Column
+  private String name;
 }

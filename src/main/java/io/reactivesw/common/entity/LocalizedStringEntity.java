@@ -1,5 +1,8 @@
 package io.reactivesw.common.entity;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -9,6 +12,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "common_localized_String")
+@Data
+@EqualsAndHashCode(callSuper = false)
 public class LocalizedStringEntity extends BaseIdEntity {
 
   /**
@@ -41,48 +46,4 @@ public class LocalizedStringEntity extends BaseIdEntity {
     this.text = text;
   }
 
-  /**
-   * Gets language.
-   *
-   * @return the language
-   */
-  public String getLanguage() {
-    return language;
-  }
-
-  /**
-   * Sets language.
-   *
-   * @param language the language
-   */
-  public void setLanguage(String language) {
-    this.language = language;
-  }
-
-  /**
-   * Gets text.
-   *
-   * @return the text
-   */
-  public String getText() {
-    return text;
-  }
-
-  /**
-   * Sets text.
-   *
-   * @param text the text
-   */
-  public void setText(String text) {
-    this.text = text;
-  }
-
-  @Override
-  public String toString() {
-    return "LocalizedStringEntity{"
-            + "id=" + id
-            + "language='" + language + '\''
-            + ", text='" + text + '\''
-            + '}';
-  }
 }

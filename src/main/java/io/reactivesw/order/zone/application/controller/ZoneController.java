@@ -2,6 +2,7 @@ package io.reactivesw.order.zone.application.controller;
 
 import io.reactivesw.common.model.UpdateRequest;
 import io.reactivesw.order.zone.application.model.Zone;
+import io.reactivesw.order.zone.application.model.ZoneDraft;
 import io.reactivesw.order.zone.application.model.mapper.ZoneMapper;
 import io.reactivesw.order.zone.domain.entity.ZoneEntity;
 import io.reactivesw.order.zone.domain.service.ZoneService;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,6 +40,23 @@ public class ZoneController {
    */
   @Autowired
   private transient ZoneService service;
+
+  /**
+   * create zone from draft.
+   *
+   * @param zoneDraft ZoneDraft
+   * @return Zone
+   */
+  @PostMapping(ZoneRouter.ZONE_ROOT)
+  public Zone create(@RequestBody ZoneDraft zoneDraft) {
+    LOG.debug("enter: draft: {}", zoneDraft);
+
+    ZoneEntity entity = ZoneMapper.modelToEntity(zoneDraft);
+    ZoneEntity result = service.createZone(entity);
+
+    LOG.debug("exit: entity: {}", result);
+    return ZoneMapper.entityToModel(result);
+  }
 
   /**
    * get by id.

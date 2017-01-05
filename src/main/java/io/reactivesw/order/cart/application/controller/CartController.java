@@ -104,7 +104,7 @@ public class CartController {
   @PutMapping(CartRouter.CART_WITH_ID)
   public Cart updateCart(@ApiParam(required = true) @PathVariable(CartRouter.CART_ID) String id,
                          @RequestBody UpdateRequest<CartUpdateAction> updateRequest) {
-    LOG.info("id:{}", id);
+    LOG.info("id:{}, updateRequest: {}", id, updateRequest);
 
     Cart result = this.cartApplication.updateCart(id, updateRequest.getVersion(), updateRequest
         .getActions());

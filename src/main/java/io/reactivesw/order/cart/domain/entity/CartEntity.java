@@ -6,6 +6,7 @@ import io.reactivesw.order.cart.domain.entity.value.ShippingInfoValue;
 import io.reactivesw.order.cart.infrastructure.enums.CartState;
 import io.reactivesw.order.cart.infrastructure.enums.TaxMode;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Set;
 
@@ -25,6 +26,7 @@ import javax.persistence.Version;
 @Entity
 @Table(name = "order_cart")
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class CartEntity extends BaseAllEntity {
 
   /**

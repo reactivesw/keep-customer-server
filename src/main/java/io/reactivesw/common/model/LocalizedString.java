@@ -3,6 +3,7 @@ package io.reactivesw.common.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.reactivesw.common.util.LocalizedStringSerializer;
+import lombok.Data;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,6 +12,7 @@ import java.util.Map;
  * Created by Davis on 16/11/16.
  */
 @JsonSerialize(using = LocalizedStringSerializer.class)
+@Data
 public class LocalizedString {
 
   /**
@@ -30,8 +32,8 @@ public class LocalizedString {
   @Override
   public String toString() {
     return "LocalizedString{" +
-            "localized=" + localized +
-            '}';
+        "localized=" + localized +
+        '}';
   }
 
   @JsonCreator

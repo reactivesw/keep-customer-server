@@ -20,7 +20,8 @@ import java.util.List;
 public class CartDraft {
 
   @ApiModelProperty(value = "A three-digit currency code as per ↗ ISO 4217 .", required = true)
-  private String currency;
+  private String
+      currency;
 
   @ApiModelProperty(value = "Customer Id.", required = false)
   private String customerId;
