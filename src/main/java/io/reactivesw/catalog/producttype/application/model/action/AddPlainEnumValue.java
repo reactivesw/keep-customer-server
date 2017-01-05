@@ -26,6 +26,7 @@ public class AddPlainEnumValue implements UpdateAction {
   /**
    * The Value.
    */
+  @NotNull
   private PlainEnumValue value;
 
   @Override

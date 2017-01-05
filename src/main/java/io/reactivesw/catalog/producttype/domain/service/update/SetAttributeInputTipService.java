@@ -36,7 +36,7 @@ public class SetAttributeInputTipService implements Update<ProductTypeEntity> {
         .map(
             attribute -> {
               if (Objects.equals(attributeName, attribute.getName())) {
-                attribute.setLabel(inputTip);
+                attribute.setInputTip(inputTip);
               }
               return attribute;
             }

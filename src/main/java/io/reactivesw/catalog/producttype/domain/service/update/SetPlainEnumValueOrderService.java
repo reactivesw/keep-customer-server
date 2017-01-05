@@ -34,7 +34,7 @@ public class SetPlainEnumValueOrderService implements Update<ProductTypeEntity> 
     }
     SetPlainEnumValueOrder setPlainEnumValueOrder = (SetPlainEnumValueOrder) action;
 
-    String enumAttributeName = setPlainEnumValueOrder.getActionName();
+    String enumAttributeName = setPlainEnumValueOrder.getAttributeName();
 
     EnumAttributeType enumType = getEnumAttributeType(entity, enumAttributeName);
     List<String> enumValueKeys = getEnumAttributeKeys(enumType);

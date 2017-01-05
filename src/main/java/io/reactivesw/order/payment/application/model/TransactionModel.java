@@ -10,6 +10,9 @@ import io.reactivesw.common.model.Money;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * A representation of a financial transactions. Transactions are either created by the solution
  * implementation to trigger a new transaction at the PSP or created by the PSP integration as the
@@ -17,7 +20,9 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @ApiModel(description = "A representation of a financial transactions. " +
         "Transactions are either created by the solution implementation to trigger a new transaction at the PSP or created by the PSP integration as the result of a notification by the PSP.")
-public class Transaction {
+@Getter
+@Setter
+public class TransactionModel {
 
   @ApiModelProperty(value = "The unique ID of this object.", required = true)
   private String id;
@@ -40,52 +45,4 @@ public class Transaction {
   @ApiModelProperty(value = "The state of this transaction.",
           required = true)
   private TransactionState state;
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public ZonedDateTime getTimestamp() {
-    return timestamp;
-  }
-
-  public void setTimestamp(ZonedDateTime timestamp) {
-    this.timestamp = timestamp;
-  }
-
-  public TransactionType getType() {
-    return type;
-  }
-
-  public void setType(TransactionType type) {
-    this.type = type;
-  }
-
-  public Money getAmount() {
-    return amount;
-  }
-
-  public void setAmount(Money amount) {
-    this.amount = amount;
-  }
-
-  public String getInteractionId() {
-    return interactionId;
-  }
-
-  public void setInteractionId(String interactionId) {
-    this.interactionId = interactionId;
-  }
-
-  public TransactionState getState() {
-    return state;
-  }
-
-  public void setState(TransactionState state) {
-    this.state = state;
-  }
 }

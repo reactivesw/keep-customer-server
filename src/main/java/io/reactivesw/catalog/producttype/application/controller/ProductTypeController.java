@@ -133,6 +133,7 @@ public class ProductTypeController {
                                            @RequestBody
                                            @ApiParam(value = "ProductType Update Fields",
                                                required = true)
+                                           @Valid
                                                UpdateRequest<ProductTypeUpdateAction>
                                                updateRequest) {
     LOG.debug("enter updateProductTypeById,id is {}, update request is {}",
@@ -162,6 +163,7 @@ public class ProductTypeController {
                                             @RequestBody
                                             @ApiParam(value = "ProductType Update Fields",
                                                 required = true)
+                                            @Valid
                                                 UpdateRequest updateRequest) {
     LOG.debug("enter updateProductTypeById,key is {}, update request is {}",
         key, updateRequest.toString());
