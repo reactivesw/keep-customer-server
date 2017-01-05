@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-import io.reactivesw.common.model.Address;
 import io.reactivesw.common.model.CustomFields;
 import io.reactivesw.common.model.Reference;
 import io.swagger.annotations.ApiModel;

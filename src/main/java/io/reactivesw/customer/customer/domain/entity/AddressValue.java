@@ -2,7 +2,6 @@ package io.reactivesw.customer.customer.domain.entity;
 
 import io.reactivesw.common.entity.BaseIdEntity;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +13,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "customer_address")
 @Data
-@EqualsAndHashCode(callSuper = false)
 public class AddressValue extends BaseIdEntity {
 
   /**

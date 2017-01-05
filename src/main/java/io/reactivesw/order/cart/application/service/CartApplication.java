@@ -4,6 +4,7 @@ import io.reactivesw.catalog.product.application.model.*;
 import io.reactivesw.catalog.taxcategory.application.model.*;
 import io.reactivesw.common.enums.ReferenceTypes;
 import io.reactivesw.common.model.*;
+import io.reactivesw.customer.customer.application.model.Address;
 import io.reactivesw.order.cart.application.model.*;
 import io.reactivesw.order.cart.application.model.mapper.CartMapper;
 import io.reactivesw.order.cart.application.service.update.CartUpdateService;
