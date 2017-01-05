@@ -6,6 +6,7 @@ import io.reactivesw.order.cart.application.model.action.SetLineItemQuantity;
 import io.reactivesw.order.cart.domain.entity.CartEntity;
 import io.reactivesw.order.cart.domain.entity.value.LineItemValue;
 import io.reactivesw.order.cart.infrastructure.util.CartUpdateActionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -41,10 +42,11 @@ public class SetLineItemQuantityService extends CartUpdateService {
    */
   private LineItemValue getLineItem(CartEntity cart, String lineItemId) {
     Set<LineItemValue> lineItems = cart.getLineItems();
-    LineItemValue item = lineItems.stream().filter(tmpItem -> tmpItem.getId() == lineItemId)
-        .findAny().orElse(null);
+    LineItemValue item = lineItems.stream().filter(
+        tmpItem -> StringUtils.equals(tmpItem.getId(), lineItemId)
+    ).findAny().orElse(null);
     if (item == null) {
-      throw new NotExistException("LineItem not existing when for cartId: " + lineItemId +
+      throw new NotExistException("LineItem not existing when for cartId: " + cart.getId() +
           "lineItemId:" + lineItemId);
     }
     return item;
