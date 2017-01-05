@@ -186,6 +186,7 @@ public class CartService {
     CartEntity entity = new CartEntity();
     entity.setCustomerId(customerId);
     entity.setCartState(CartState.Active);
+    entity.setCurrencyCode("USD");
     CartEntity retEntity = cartRepository.save(entity);
     LOG.info("Create a new active cart with customerId:{}, entity:{}", customerId, retEntity
         .toString());
@@ -205,6 +206,7 @@ public class CartService {
     CartEntity entity = new CartEntity();
     entity.setAnonymousId(anonymousId);
     entity.setCartState(CartState.Active);
+    entity.setCurrencyCode("USD");
     CartEntity retEntity = cartRepository.save(entity);
 
     LOG.debug("Create a new active cart with anonymousId:{}, entity:{}", anonymousId, retEntity

@@ -1,14 +1,12 @@
 package io.reactivesw.order.cart.application.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.reactivesw.common.model.Address;
-import io.reactivesw.common.model.CustomFields;
+import io.reactivesw.customer.customer.application.model.Address;
 import io.reactivesw.common.model.Money;
 import io.reactivesw.common.model.Reference;
 import io.reactivesw.order.cart.infrastructure.enums.CartState;
 import io.reactivesw.order.cart.infrastructure.enums.InventoryMode;
 import io.reactivesw.order.cart.infrastructure.enums.TaxMode;
-import io.reactivesw.order.discountcode.application.model.DiscountCodeInfo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

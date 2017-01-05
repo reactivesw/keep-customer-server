@@ -1,7 +1,7 @@
 package io.reactivesw.order.order.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.reactivesw.common.model.Address;
+import io.reactivesw.customer.customer.application.model.Address;
 import io.reactivesw.common.model.CustomFields;
 import io.reactivesw.common.model.Money;
 import io.reactivesw.common.model.Reference;

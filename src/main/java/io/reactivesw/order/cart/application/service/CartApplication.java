@@ -4,6 +4,7 @@ import io.reactivesw.catalog.product.application.model.*;
 import io.reactivesw.catalog.taxcategory.application.model.*;
 import io.reactivesw.common.enums.ReferenceTypes;
 import io.reactivesw.common.model.*;
+import io.reactivesw.customer.customer.application.model.Address;
 import io.reactivesw.order.cart.application.model.*;
 import io.reactivesw.order.cart.application.model.mapper.CartMapper;
 import io.reactivesw.order.cart.application.service.update.CartUpdateService;
@@ -187,6 +188,11 @@ public class CartApplication {
             } else {
               // the product from the cart.
               ProductData productData = product.getMasterData().getCurrent();
+              ProductVariant masterVariant = productData.getMasterVariant();
+              if (masterVariant != null) {
+                productData.getVariants().add(masterVariant);
+              }
+
               this.setLineItemProductInfo(item, productData, lineItemValue.getVariant());
 
               Address shippingAddress = cart.getShippingAddress();

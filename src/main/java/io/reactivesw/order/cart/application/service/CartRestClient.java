@@ -2,7 +2,7 @@ package io.reactivesw.order.cart.application.service;
 
 import io.reactivesw.catalog.product.application.model.Product;
 import io.reactivesw.catalog.taxcategory.application.model.TaxCategory;
-import io.reactivesw.common.model.Address;
+import io.reactivesw.customer.customer.application.model.Address;
 import io.reactivesw.order.shippingmethod.application.model.ShippingMethod;
 import io.reactivesw.order.zone.application.model.Zone;
 import org.slf4j.Logger;

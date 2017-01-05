@@ -7,11 +7,10 @@ import io.reactivesw.catalog.product.application.model.ProductData
 import io.reactivesw.catalog.product.application.model.ProductVariant
 import io.reactivesw.catalog.taxcategory.application.model.TaxCategory
 import io.reactivesw.catalog.taxcategory.application.model.TaxRate
-import io.reactivesw.common.model.Address
+import io.reactivesw.customer.customer.application.model.Address
 import io.reactivesw.common.model.Money
 import io.reactivesw.common.model.Reference
 import io.reactivesw.common.model.UpdateAction
-import io.reactivesw.order.cart.application.model.LineItem
 import io.reactivesw.order.cart.application.model.ShippingInfo
 import io.reactivesw.order.cart.application.model.action.SetCustomerId
 import io.reactivesw.order.cart.application.service.update.CartUpdateService
@@ -24,7 +23,6 @@ import io.reactivesw.order.shippingmethod.application.model.ShippingRate
 import io.reactivesw.order.shippingmethod.application.model.ZoneRate
 import io.reactivesw.order.zone.application.model.Location
 import io.reactivesw.order.zone.application.model.Zone
-import org.springframework.web.client.RestTemplate
 import spock.lang.Specification
 
 /**

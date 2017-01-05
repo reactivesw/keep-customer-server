@@ -1,7 +1,7 @@
 package io.reactivesw.order.shippingmethod.application.service
 
 import io.reactivesw.common.exception.NotExistException
-import io.reactivesw.common.model.Address
+import io.reactivesw.customer.customer.application.model.Address
 import io.reactivesw.order.shippingmethod.domain.entity.ShippingMethodEntity
 import io.reactivesw.order.shippingmethod.domain.service.ShippingMethodService
 import io.reactivesw.order.zone.application.model.Location

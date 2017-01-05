@@ -1,7 +1,7 @@
 package io.reactivesw.order.cart.application.model;
 
 import io.reactivesw.catalog.taxcategory.application.model.ExternalTaxRateDraft;
-import io.reactivesw.common.model.Address;
+import io.reactivesw.customer.customer.application.model.Address;
 import io.reactivesw.common.model.CustomFieldsDraft;
 import io.reactivesw.common.model.Reference;
 import io.reactivesw.order.cart.infrastructure.enums.InventoryMode;

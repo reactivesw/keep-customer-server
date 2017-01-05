@@ -3,7 +3,7 @@ package io.reactivesw.route;
 /**
  * Created by umasuo on 16/12/20.
  */
-public class CustomerRouter extends BaseRouter {
+public final class CustomerRouter extends BaseRouter {
 
   /**
    * The ROOTER.
@@ -13,12 +13,12 @@ public class CustomerRouter extends BaseRouter {
   /**
    * customer id.
    */
-  public static final String CUSTOMER_ID = "customerId";
+  public static final String CUSTOMER_ID = "id";
 
   /**
    * customer root with id.
    */
-  public static final String CUSTOMER_ROOT_WITH_ID = CUSTOMER_ROOT + "/{" + CUSTOMER_ID + "}";
+  public static final String CUSTOMER_WITH_ID = CUSTOMER_ROOT + "/{" + CUSTOMER_ID + "}";
 
   /**
    * customer address.
@@ -34,5 +34,30 @@ public class CustomerRouter extends BaseRouter {
    * address with id.
    */
   public static final String ADDRESS_WITH_ID = ADDRESS_ROOT + "/{" + ADDRESS_ID + "}";
+
+
+  private CustomerRouter(){
+    super();
+  }
+  /**
+   * get path with customer id.
+   *
+   * @param customerId customer id
+   * @return String
+   */
+  public static String getCustomerWithId(String customerId) {
+    return CUSTOMER_ROOT + "/" + customerId;
+  }
+
+  /**
+   * url builder: get address with id.
+   *
+   * @param addressId String
+   * @return String
+   */
+  public static String getAddressWithId(String addressId) {
+    return ADDRESS_ROOT + "/" + addressId;
+  }
+
 
 }

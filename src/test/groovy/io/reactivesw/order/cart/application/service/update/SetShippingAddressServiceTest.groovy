@@ -1,6 +1,6 @@
 package io.reactivesw.order.cart.application.service.update
 
-import io.reactivesw.common.model.Address
+import io.reactivesw.customer.customer.application.model.Address
 import io.reactivesw.order.cart.application.model.action.SetShippingAddress
 import io.reactivesw.order.cart.domain.entity.CartEntity
 import spock.lang.Specification
