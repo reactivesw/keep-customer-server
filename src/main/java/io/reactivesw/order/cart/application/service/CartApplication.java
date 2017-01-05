@@ -187,6 +187,11 @@ public class CartApplication {
             } else {
               // the product from the cart.
               ProductData productData = product.getMasterData().getCurrent();
+              ProductVariant masterVariant = productData.getMasterVariant();
+              if (masterVariant != null) {
+                productData.getVariants().add(masterVariant);
+              }
+
               this.setLineItemProductInfo(item, productData, lineItemValue.getVariant());
 
               Address shippingAddress = cart.getShippingAddress();
