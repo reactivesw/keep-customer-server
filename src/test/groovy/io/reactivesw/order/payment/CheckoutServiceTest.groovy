@@ -32,10 +32,10 @@ class CheckoutServiceTest extends Specification {
 
     def "test 2 : checkout"() {
         given:
+        String amount = "12.34"
         Result<Transaction> transactionResult = new Result<>()
         Transaction transaction = Mock()
         transactionResult.transaction = transaction
-        String amount = "12.34"
         String nonce = "sdlkjfdskfoiylcnvlkshdjkfsd"
         gateway.transaction() >> transactionGateway
         transactionGateway.sale(_) >> transactionResult

@@ -22,7 +22,7 @@ import lombok.Setter;
         "Transactions are either created by the solution implementation to trigger a new transaction at the PSP or created by the PSP integration as the result of a notification by the PSP.")
 @Getter
 @Setter
-public class Transaction {
+public class TransactionModel {
 
   @ApiModelProperty(value = "The unique ID of this object.", required = true)
   private String id;

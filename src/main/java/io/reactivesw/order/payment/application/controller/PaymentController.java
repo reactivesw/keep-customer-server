@@ -2,6 +2,8 @@ package io.reactivesw.order.payment.application.controller;
 
 import com.braintreegateway.Transaction;
 
+import io.reactivesw.order.payment.application.model.TransactionModel;
+import io.reactivesw.order.payment.application.model.mapper.TransactionMapper;
 import io.reactivesw.order.payment.domain.service.CheckoutService;
 import io.swagger.annotations.ApiOperation;
 
@@ -51,11 +53,14 @@ public class PaymentController {
    */
   @ApiOperation("checkout")
   @PostMapping("/payments")
-  public Transaction checkout(String amount, String nonce) {
+  public TransactionModel checkout(String amount, String nonce) {
     LOG.debug("enter checkout, amount is : {}, nonce is : {}", amount, nonce);
+
     Transaction result = checkoutService.checkout(amount, nonce);
+
     LOG.debug("end checkout, result is : {}", result.toString());
-    return result;
+
+    return TransactionMapper.entityToModel(result);
   }
 
   /**
@@ -66,10 +71,13 @@ public class PaymentController {
    */
   @ApiOperation("get transaction by id")
   @GetMapping("/payments/{transactionId}")
-  public Transaction getTransaction(String transactionId) {
+  public TransactionModel getTransaction(String transactionId) {
     LOG.debug("enter getTransaction, id is : {}", transactionId);
+
     Transaction result = checkoutService.getTransactionById(transactionId);
+
     LOG.debug("end getTransaction, get result : {}", result.toString());
-    return result;
+
+    return TransactionMapper.entityToModel(result);
   }
 }

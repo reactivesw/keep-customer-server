@@ -1,7 +1,9 @@
 package io.reactivesw.order.payment.application.model.mapper;
 
+import com.braintreegateway.Transaction;
+
 import io.reactivesw.common.model.Money;
-import io.reactivesw.order.payment.application.model.Transaction;
+import io.reactivesw.order.payment.application.model.TransactionModel;
 import io.reactivesw.order.payment.infrastructure.enums.TransactionState;
 import io.reactivesw.order.payment.infrastructure.enums.TransactionType;
 
@@ -14,7 +16,7 @@ import java.time.ZonedDateTime;
  */
 public final class TransactionMapper {
   /**
-   * Instantiates a new Transaction mapper.
+   * Instantiates a new TransactionModel mapper.
    */
   private TransactionMapper() {
   }
@@ -30,8 +32,8 @@ public final class TransactionMapper {
    * @param entity the entity
    * @return the transaction
    */
-  public static Transaction entityToModel(com.braintreegateway.Transaction entity) {
-    Transaction model = new Transaction();
+  public static TransactionModel entityToModel(Transaction entity) {
+    TransactionModel model = new TransactionModel();
 
     model.setId(entity.getId());
     model.setTimestamp(ZonedDateTime.ofInstant(entity.getCreatedAt().toInstant(),
@@ -45,18 +47,18 @@ public final class TransactionMapper {
     return model;
   }
 
-  private static TransactionState getTransactionState(com.braintreegateway.Transaction entity) {
+  private static TransactionState getTransactionState(Transaction entity) {
     TransactionState transactionState = TransactionState.Pending;
-    if (entity.getStatus().equals(com.braintreegateway.Transaction.Status
+    if (entity.getStatus().equals(Transaction.Status
         .SUBMITTED_FOR_SETTLEMENT)) {
       transactionState = TransactionState.Success;
-    } else if (entity.getStatus().equals(com.braintreegateway.Transaction.Status.FAILED)) {
+    } else if (entity.getStatus().equals(Transaction.Status.FAILED)) {
       transactionState = TransactionState.Failure;
     }
     return transactionState;
   }
 
-  private static Money getAmount(com.braintreegateway.Transaction entity) {
+  private static Money getAmount(Transaction entity) {
     Money amount = new Money();
 
     amount.setCurrencyCode(entity.getCurrencyIsoCode());
@@ -65,7 +67,7 @@ public final class TransactionMapper {
     return amount;
   }
 
-  private static TransactionType getTransactionType(com.braintreegateway.Transaction entity) {
+  private static TransactionType getTransactionType(Transaction entity) {
     TransactionType transactionType = null;
 
     // TODO: 17/1/5
