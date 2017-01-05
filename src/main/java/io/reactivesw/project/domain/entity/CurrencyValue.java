@@ -1,6 +1,7 @@
 package io.reactivesw.project.domain.entity;
 
 import io.reactivesw.common.entity.BaseIdEntity;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -22,6 +23,12 @@ public class CurrencyValue extends BaseIdEntity {
    */
   @Column
   private String currencyCode;
+
+  /**
+   * conversion factor.
+   */
+  @Column
+  private String conversionFactor;
 
   /**
    * name.

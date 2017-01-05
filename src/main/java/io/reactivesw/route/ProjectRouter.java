@@ -14,6 +14,4 @@ public class ProjectRouter extends BaseRouter {
    * project currency root.
    */
   public static final String CURRENCY_ROOT = PROJECT_ROOT + "/currencies";
-
-
 }

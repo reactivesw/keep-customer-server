@@ -5,13 +5,17 @@ import com.braintreegateway.Transaction;
 import io.reactivesw.order.payment.application.model.TransactionModel;
 import io.reactivesw.order.payment.application.model.mapper.TransactionMapper;
 import io.reactivesw.order.payment.domain.service.CheckoutService;
+import io.reactivesw.route.PaymentRouter;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -36,7 +40,7 @@ public class PaymentController {
    * @return the client token
    */
   @ApiOperation("get braintree client token")
-  @GetMapping("/payments/client-token")
+  @GetMapping(PaymentRouter.PAYMENT_CLIENT_TOKEN)
   public String getClientToken() {
     LOG.debug("enter getClientToken");
     String clientToken = checkoutService.getClientToken();
@@ -52,8 +56,14 @@ public class PaymentController {
    * @return the result
    */
   @ApiOperation("checkout")
-  @PostMapping("/payments")
-  public TransactionModel checkout(String amount, String nonce) {
+  @PostMapping(PaymentRouter.PAYMENT_ROOT)
+  public TransactionModel checkout(
+      @RequestParam
+      @ApiParam(value = "amount", required = true)
+          String amount,
+      @RequestParam
+      @ApiParam(value = "nonce", required = true)
+          String nonce) {
     LOG.debug("enter checkout, amount is : {}, nonce is : {}", amount, nonce);
 
     Transaction result = checkoutService.checkout(amount, nonce);
@@ -70,8 +80,10 @@ public class PaymentController {
    * @return the transaction
    */
   @ApiOperation("get transaction by id")
-  @GetMapping("/payments/{transactionId}")
-  public TransactionModel getTransaction(String transactionId) {
+  @GetMapping(PaymentRouter.PAYMENT_WITH_TRANSACTION_ID)
+  public TransactionModel getTransaction(@PathVariable(PaymentRouter.PAYMENT_TRANSACTIONID)
+                                         @ApiParam(value = "transaction id", required = true)
+                                             String transactionId) {
     LOG.debug("enter getTransaction, id is : {}", transactionId);
 
     Transaction result = checkoutService.getTransactionById(transactionId);
