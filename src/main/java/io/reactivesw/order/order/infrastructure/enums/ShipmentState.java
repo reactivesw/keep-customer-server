@@ -1,4 +1,4 @@
-package io.reactivesw.order.order.enums;
+package io.reactivesw.order.order.infrastructure.enums;
 
 /**
  * Values of the ShipmentState enumeration.

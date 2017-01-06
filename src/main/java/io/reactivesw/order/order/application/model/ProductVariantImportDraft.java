@@ -1,4 +1,4 @@
-package io.reactivesw.order.order.model;
+package io.reactivesw.order.order.application.model;
 
 import io.reactivesw.catalog.product.application.model.attributes.Attribute;
 import io.reactivesw.catalog.product.application.model.Image;

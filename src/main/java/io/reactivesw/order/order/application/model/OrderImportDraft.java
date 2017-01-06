@@ -1,4 +1,4 @@
-package io.reactivesw.order.order.model;
+package io.reactivesw.order.order.application.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.reactivesw.customer.customer.application.model.Address;
@@ -8,9 +8,9 @@ import io.reactivesw.common.model.Reference;
 import io.reactivesw.order.cart.application.model.ShippingInfo;
 import io.reactivesw.order.cart.application.model.TaxedPrice;
 import io.reactivesw.order.cart.infrastructure.enums.InventoryMode;
-import io.reactivesw.order.order.enums.OrderState;
-import io.reactivesw.order.order.enums.PaymentState;
-import io.reactivesw.order.order.enums.ShipmentState;
+import io.reactivesw.order.order.infrastructure.enums.OrderState;
+import io.reactivesw.order.order.infrastructure.enums.PaymentState;
+import io.reactivesw.order.order.infrastructure.enums.ShipmentState;
 import lombok.Data;
 
 import java.time.ZonedDateTime;

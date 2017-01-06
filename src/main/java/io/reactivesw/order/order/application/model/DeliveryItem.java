@@ -1,4 +1,4 @@
-package io.reactivesw.order.order.model;
+package io.reactivesw.order.order.application.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

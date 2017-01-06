@@ -1,4 +1,4 @@
-package io.reactivesw.order.order.model;
+package io.reactivesw.order.order.application.model;
 
 import io.reactivesw.order.cart.application.model.ItemState;
 import io.reactivesw.catalog.product.application.model.Price;
