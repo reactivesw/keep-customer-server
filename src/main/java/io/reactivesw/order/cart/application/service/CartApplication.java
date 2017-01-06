@@ -182,7 +182,7 @@ public class CartApplication {
             this.setLineItemBaseInfo(item, lineItemValue);
             //TODO get Product from product service.
             Product product = restClient.getProduct(item.getProductId());
-            if (product == null) {
+            if (product == null || lineItemValue.getQuantity() <= 0) {
               //TODO if the product has been deleted , then remove it from cart
               LOG.warn("Remove non-existing product");
             } else {
