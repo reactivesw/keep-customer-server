@@ -36,9 +36,10 @@ public final class CustomerRouter extends BaseRouter {
   public static final String ADDRESS_WITH_ID = ADDRESS_ROOT + "/{" + ADDRESS_ID + "}";
 
 
-  private CustomerRouter(){
+  private CustomerRouter() {
     super();
   }
+
   /**
    * get path with customer id.
    *

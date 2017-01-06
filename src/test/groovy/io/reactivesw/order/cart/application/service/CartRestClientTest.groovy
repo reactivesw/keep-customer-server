@@ -1,5 +1,6 @@
 package io.reactivesw.order.cart.application.service
 
+import io.reactivesw.common.util.ServiceLocator
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.client.RestTemplate
 import spock.lang.Specification
@@ -13,8 +14,11 @@ class CartRestClientTest extends Specification {
 
     CartRestClient cartRestClient
 
+    ServiceLocator serviceLocator
+
     def setup() {
-        cartRestClient = new CartRestClient(restTemplate: restTemplate)
+        serviceLocator = new ServiceLocator()
+        cartRestClient = new CartRestClient(restTemplate: restTemplate, serviceLocator: serviceLocator)
     }
 
     def "Test 1.1: Test get address"() {
