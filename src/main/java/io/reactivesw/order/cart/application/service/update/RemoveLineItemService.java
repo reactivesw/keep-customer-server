@@ -41,7 +41,7 @@ public class RemoveLineItemService extends CartUpdateService {
       Integer remainQuantity = currentQuantity - quantity;
       itemValue.setQuantity(remainQuantity);
     }
-
+    entity.setLineItems(lineItems);
   }
 
   /**

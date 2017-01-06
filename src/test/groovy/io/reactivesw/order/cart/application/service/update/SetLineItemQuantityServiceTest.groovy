@@ -62,4 +62,20 @@ class SetLineItemQuantityServiceTest extends Specification {
         then:
         thrown(NotExistException)
     }
+
+    def "Test 1.3: Set quantity to 0"() {
+        setLineItemQuantity.quantity = 0
+        when:
+        setLineItemQuantityService.handle(cartEntity, setLineItemQuantity)
+        then:
+        cartEntity.getLineItems().size() == 0
+    }
+
+    def "Test 1.4: Set quantity to null"() {
+        setLineItemQuantity.quantity = null
+        when:
+        setLineItemQuantityService.handle(cartEntity, setLineItemQuantity)
+        then:
+        cartEntity.getLineItems().size() == 0
+    }
 }

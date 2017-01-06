@@ -30,7 +30,11 @@ public class SetLineItemQuantityService extends CartUpdateService {
     String lineItemId = quantityAction.getLineItemId();
 
     LineItemValue item = this.getLineItem(entity, lineItemId);
-    item.setQuantity(quantity);
+    if (quantity == null || quantity == 0) {
+      entity.getLineItems().remove(item);
+    } else {
+      item.setQuantity(quantity);
+    }
   }
 
   /**
