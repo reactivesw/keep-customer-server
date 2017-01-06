@@ -5,7 +5,9 @@ import io.reactivesw.common.entity.MoneyEntity;
 
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -19,13 +21,13 @@ public class ShippingRateValue extends BaseIdEntity {
   /**
    * price.
    */
-  @OneToOne
+  @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
   private MoneyEntity price;
 
   /**
    * free above.
    */
-  @OneToOne
+  @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
   private MoneyEntity freeAbove;
 
   /**

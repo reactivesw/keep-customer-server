@@ -6,8 +6,10 @@ import lombok.EqualsAndHashCode;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -29,6 +31,6 @@ public class ZoneRateValue extends BaseIdEntity {
   /**
    * shipping rates.
    */
-  @OneToMany
+  @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
   private Set<ShippingRateValue> shippingRates;
 }
