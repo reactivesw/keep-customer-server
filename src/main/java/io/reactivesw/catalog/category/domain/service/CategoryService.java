@@ -9,8 +9,9 @@ import io.reactivesw.catalog.category.domain.entity.CategoryEntity;
 import io.reactivesw.catalog.category.domain.service.update.CategoryUpdateService;
 import io.reactivesw.catalog.category.infrastructure.repository.CategoryRepository;
 import io.reactivesw.catalog.category.infrastructure.validator.CategoryNameValidator;
+import io.reactivesw.catalog.category.infrastructure.validator.CategoryVersionValidator;
+import io.reactivesw.catalog.category.infrastructure.validator.ParentCategoryValidator;
 import io.reactivesw.common.exception.AlreadyExistException;
-import io.reactivesw.common.exception.ConflictException;
 import io.reactivesw.common.exception.NotExistException;
 import io.reactivesw.common.model.PagedQueryResult;
 import io.reactivesw.common.model.QueryConditions;
@@ -27,7 +28,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Created by Davis on 16/11/28.
@@ -93,7 +93,7 @@ public class CategoryService {
     LOG.debug("enter deleteCategory, id:{}, version:{}", id, version);
 
     CategoryEntity entity = this.getById(id);
-    validateVersion(entity, version);
+    CategoryVersionValidator.validate(entity, version);
 
     List<CategoryEntity> tatalCategoryEitities = Lists.newArrayList(entity);
     List<CategoryEntity> subCategories = categoryRepository.querySubCategoriesByAncestorId(id);
@@ -122,7 +122,7 @@ public class CategoryService {
         id, version, actions);
 
     CategoryEntity entity = getById(id);
-    validateVersion(entity, version);
+    CategoryVersionValidator.validate(entity, version);
 
     CategoryEntity updatedEntity = updateCategoryEntity(actions, entity);
     //TODO send message, if slug be updated
@@ -173,7 +173,6 @@ public class CategoryService {
     return pagedQueryResult;
   }
 
-
   /**
    * Save category entity.
    *
@@ -186,7 +185,7 @@ public class CategoryService {
     CategoryEntity savedEntity = null;
     try {
       savedEntity = categoryRepository.save(entity);
-    }catch (DataIntegrityViolationException e){
+    } catch (DataIntegrityViolationException e) {
       LOG.debug("slug is already exist", e);
       throw new AlreadyExistException("Slug is already exist");
     }
@@ -231,21 +230,6 @@ public class CategoryService {
   }
 
   /**
-   * judge entity and version.
-   *
-   * @param entity  the CategoryEntity
-   * @param version the version
-   * @throws ConflictException when version not match
-   */
-  private void validateVersion(CategoryEntity entity, Integer version) {
-    if (!Objects.equals(version, entity.getVersion())) {
-      LOG.debug("Version not match, input version:{}, entity version:{}",
-          version, entity.getVersion());
-      throw new ConflictException("Version not match");
-    }
-  }
-
-  /**
    * Gets parent category.
    *
    * @param parentId the parent id
@@ -253,7 +237,7 @@ public class CategoryService {
    */
   private CategoryEntity getParentCategory(String parentId) {
     CategoryEntity parent = categoryRepository.findOne(parentId);
-    validateParentCategory(parentId, parent);
+    ParentCategoryValidator.validate(parentId, parent);
     return parent;
   }
 
@@ -271,19 +255,5 @@ public class CategoryService {
     }
     ancestors.add(parentId);
     return ancestors;
-  }
-
-  /**
-   * validateNull parent category.
-   *
-   * @param parentId parent id
-   * @param parent   parent category
-   * @throws NotExistException when parent category is null
-   */
-  private void validateParentCategory(String parentId, CategoryEntity parent) {
-    if (parent == null) {
-      LOG.debug("can not find parent category by id:{}", parentId);
-      throw new NotExistException("Can not find parent category by id : " + parentId);
-    }
   }
 }
