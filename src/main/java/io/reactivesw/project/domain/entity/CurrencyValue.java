@@ -2,8 +2,10 @@ package io.reactivesw.project.domain.entity;
 
 import io.reactivesw.common.entity.BaseIdEntity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +17,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "project_currency")
 @Data
-@EqualsAndHashCode(callSuper = false)
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = false, of = {"currencyCode", "conversionFactor", "name"})
 public class CurrencyValue extends BaseIdEntity {
 
   /**

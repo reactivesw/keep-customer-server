@@ -1,11 +1,12 @@
 package io.reactivesw.project.domain.service
 
 import com.google.common.collect.Lists
-import io.reactivesw.common.exception.AlreadyExistException
-import io.reactivesw.common.exception.NotExistException
+import io.reactivesw.common.model.UpdateAction
 import io.reactivesw.project.application.model.Currency
+import io.reactivesw.project.application.model.action.SetDefaultCurrencyAction
 import io.reactivesw.project.domain.entity.CurrencyValue
 import io.reactivesw.project.domain.entity.InternationalEntity
+import io.reactivesw.project.domain.service.update.InternationalUpdateService
 import io.reactivesw.project.infrastructure.repository.InternationalRepository
 import org.springframework.stereotype.Service
 import spock.lang.Specification
@@ -15,9 +16,11 @@ import spock.lang.Specification
  */
 class InternationalServiceTest extends Specification {
 
-    InternationalRepository repository = Mock(InternationalRepository)
+    InternationalRepository repository = Mock()
 
-    InternationalService service
+    InternationalUpdateService updateService = Mock()
+
+    InternationalService service = new InternationalService(repository: repository,updateService: updateService)
 
     CurrencyValue currencyValue
 
@@ -31,88 +34,61 @@ class InternationalServiceTest extends Specification {
         currency.name = "us dollar"
         currency.conversionFactor = "100"
 
-
-        service = new InternationalService(repository: repository)
-
         currencyValue = new CurrencyValue(currencyCode: "USD")
 
-        internationalEntity = new InternationalEntity(defaultCurrency: currencyValue)
+        internationalEntity = new InternationalEntity(defaultCurrency: currencyValue,
+                supportedCurrency: Lists.newArrayList(currencyValue))
     }
 
-    def "Test 1.1: get default currency"() {
-        List<InternationalEntity> entities = new ArrayList<>()
-        entities.add(internationalEntity)
-        when:
-        repository.findAll() >> entities
-        service.getDefaultCurrency()
-        then:
-        noExceptionThrown()
-    }
-
-    def "Test 1.2: get default currency with defualt not exist"() {
-        List<InternationalEntity> entities = new ArrayList<>()
-        entities.add(internationalEntity)
-        internationalEntity.setDefaultCurrency(null)
-        when:
-        repository.findAll() >> entities
-        service.getDefaultCurrency()
-        then:
-        noExceptionThrown()
-    }
-
-    def "Test 1.3 : get default currency and find null internation"() {
+    def "test 1.1 : get international"() {
         given:
-        repository.findAll() >> null
+        repository.findAll() >> Lists.newArrayList(internationalEntity)
 
         when:
-        service.getDefaultCurrency()
-
-        then:
-        thrown(NotExistException)
-    }
-
-    def "test 1.4 : get default currency and find empty internation"() {
-        given:
-        repository.findAll() >> new ArrayList<InternationalEntity>()
-
-        when:
-        service.getDefaultCurrency()
-
-        then:
-        thrown(NotExistException)
-    }
-
-
-    def "test 2.1 : create default currency"() {
-        given:
-        repository.findAll() >> null
-        repository.save(_) >> internationalEntity
-
-        when:
-        def result = service.createDefaultCurrency(currency)
+        def result = service.getInternational()
 
         then:
         result != null
     }
 
-    def "test 2.2 : create default currency and find internaion"() {
+    def "test 1.2 : get international and get null list"() {
         given:
-        repository.findAll() >> Lists.newArrayList(internationalEntity)
+        repository.findAll() >> null
+        repository.save(_) >> new InternationalEntity(id: "lskdjfsjdhfksdfsdfsjdhfoiy")
 
         when:
-        service.createDefaultCurrency(currency)
+        def result = service.getInternational()
 
         then:
-        thrown(AlreadyExistException)
+        result != null
     }
 
-    def "test 3.1 : add currency"() {
+    def "test 1.3 : get international and get empty list"() {
         given:
-        repository.findAll() >> Lists.newArrayList(internationalEntity)
+        repository.findAll() >> new ArrayList<InternationalEntity>()
+        repository.save(_) >> new InternationalEntity(id: "lskdjfsjdhfksdfsdfsjdhfoiy")
+
+        when:
+        def result = service.getInternational()
+
+        then:
+        result != null
+    }
+
+    def "test 2.1 : update international"() {
+        given:
+        repository.findAll() >> Lists.newArrayList(new InternationalEntity())
+
+        SetDefaultCurrencyAction action = new SetDefaultCurrencyAction()
+        action.setCurrencyCode("USD")
+        List<UpdateAction> actions = Lists.newArrayList(action)
+
+        updateService.handle(_, _) >> null
+
         repository.save(_) >> internationalEntity
 
         when:
-        def result = service.addCurrency(currency)
+        def result = service.updateInternational(actions)
 
         then:
         result != null

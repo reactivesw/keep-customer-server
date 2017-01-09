@@ -11,7 +11,7 @@ public class ProjectRouter extends BaseRouter {
   public static final String PROJECT_ROOT = URL_ROOT + "/projects";
 
   /**
-   * project currency root.
+   * project international root.
    */
-  public static final String CURRENCY_ROOT = PROJECT_ROOT + "/currencies";
+  public static final String INTERNATIONAL_ROOT = PROJECT_ROOT + "/international";
 }

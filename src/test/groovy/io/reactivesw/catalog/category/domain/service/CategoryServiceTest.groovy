@@ -1,22 +1,21 @@
 package io.reactivesw.catalog.category.domain.service
 
 import com.google.common.collect.Lists
-import io.reactivesw.catalog.category.application.model.action.SetSlug
-import io.reactivesw.catalog.category.domain.service.update.CategoryUpdateService
-import io.reactivesw.common.exception.AlreadyExistException
-import io.reactivesw.common.exception.ConflictException
-import io.reactivesw.common.model.QueryConditions
-import io.reactivesw.common.model.action.SetLocalizedName
-import io.reactivesw.catalog.category.domain.entity.CategoryEntity
 import io.reactivesw.catalog.category.application.model.CategoryDraft
+import io.reactivesw.catalog.category.application.model.action.SetSlug
+import io.reactivesw.catalog.category.domain.entity.CategoryEntity
+import io.reactivesw.catalog.category.domain.service.update.CategoryUpdateService
 import io.reactivesw.catalog.category.infrastructure.repository.CategoryRepository
 import io.reactivesw.common.entity.LocalizedStringEntity
 import io.reactivesw.common.enums.ReferenceTypes
+import io.reactivesw.common.exception.AlreadyExistException
+import io.reactivesw.common.exception.ConflictException
 import io.reactivesw.common.exception.NotExistException
-import io.reactivesw.common.exception.ParametersException
 import io.reactivesw.common.model.LocalizedString
+import io.reactivesw.common.model.QueryConditions
 import io.reactivesw.common.model.Reference
 import io.reactivesw.common.model.UpdateAction
+import io.reactivesw.common.model.action.SetLocalizedName
 import spock.lang.Specification
 
 /**

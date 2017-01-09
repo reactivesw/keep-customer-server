@@ -14,7 +14,8 @@ public final class InternationalMapper {
   /**
    * Instantiates a new International mapper.
    */
-  private InternationalMapper() {}
+  private InternationalMapper() {
+  }
 
   /**
    * Model to entity international entity.
@@ -42,8 +43,12 @@ public final class InternationalMapper {
   public static International entityToModel(InternationalEntity entity) {
     International model = new International();
 
-    model.setDefaultCurrency(CurrencyMapper.entityToModel(entity.getDefaultCurrency()));
-    model.setSupportCurrencies(CurrencyMapper.entityToModel(entity.getSupportedCurrency()));
+    if (entity.getDefaultCurrency() != null) {
+      model.setDefaultCurrency(CurrencyMapper.entityToModel(entity.getDefaultCurrency()));
+    }
+    if (entity.getSupportedCurrency() != null) {
+      model.setSupportCurrencies(CurrencyMapper.entityToModel(entity.getSupportedCurrency()));
+    }
 
     return model;
   }

@@ -1,17 +1,22 @@
 package io.reactivesw.project.application.controller;
 
-import io.reactivesw.project.application.model.Currency;
-import io.reactivesw.project.application.model.mapper.CurrencyMapper;
-import io.reactivesw.project.domain.entity.CurrencyValue;
+import io.reactivesw.common.model.UpdateRequest;
+import io.reactivesw.project.application.model.International;
+import io.reactivesw.project.application.model.action.InternationalUpdateAction;
 import io.reactivesw.project.domain.service.InternationalService;
 import io.reactivesw.route.ProjectRouter;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 /**
  * Created by umasuo on 17/1/5.
@@ -31,37 +36,41 @@ public class InternationalController {
   private transient InternationalService service;
 
   /**
-   * get default currency.
-   * TODO change the url path.
+   * Gets international.
    *
-   * @return Currency default currency
+   * @return the international
    */
-  @ApiOperation(value = "get default currency of this project")
-  @GetMapping(value = ProjectRouter.CURRENCY_ROOT)
-  public Currency getDefaultCurrency() {
+  @ApiOperation(value = "get international of this project")
+  @GetMapping(value = ProjectRouter.INTERNATIONAL_ROOT)
+  public International getInternational() {
+    LOG.debug("enter getInternational");
 
-    CurrencyValue currencyValue = service.getDefaultCurrency();
+    International international = service.getInternational();
 
-    LOG.debug("Default currency: {}", currencyValue);
+    LOG.debug("end getInternational, reuslt is : {}", international.toString());
 
-    return CurrencyMapper.entityToModel(currencyValue);
+    return international;
   }
 
   /**
-   * Create default currency currency.
+   * Update international international.
    *
-   * @param currency the currency
-   * @return the currency
+   * @return the international
    */
-  @ApiOperation(value = "create default currency of this project")
-  @PostMapping(value = ProjectRouter.CURRENCY_ROOT)
-  public Currency createDefaultCurrency(Currency currency) {
-    LOG.debug("enter createDefaultCurrency, currency is : {}", currency.toString());
+  @ApiOperation(value = "update international")
+  @PutMapping(value = ProjectRouter.INTERNATIONAL_ROOT)
+  public International updateInternational(@RequestBody
+                                           @ApiParam(value = "International Update Fields",
+                                               required = true)
+                                           @Valid
+                                               UpdateRequest<InternationalUpdateAction>
+                                                 updateRequest) {
+    LOG.debug("enter updateInternational");
 
-    Currency savedCurrency = service.createDefaultCurrency(currency);
+    International result = service.updateInternational(updateRequest.getActions());
 
-    LOG.debug("end createDefaultCurrency, currency is : {}", savedCurrency.toString());
+    LOG.debug("end updateInternational, updated international is : {}", result.toString());
 
-    return savedCurrency;
+    return result;
   }
 }
