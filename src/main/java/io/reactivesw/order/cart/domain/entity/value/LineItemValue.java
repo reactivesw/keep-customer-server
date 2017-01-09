@@ -1,6 +1,7 @@
 package io.reactivesw.order.cart.domain.entity.value;
 
 import io.reactivesw.common.entity.BaseIdEntity;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,8 +14,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "order_cart_line_item")
-@Getter
-@Setter
+@Data
 public class LineItemValue extends BaseIdEntity {
 
   /**
