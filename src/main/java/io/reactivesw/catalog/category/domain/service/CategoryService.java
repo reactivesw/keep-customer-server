@@ -23,12 +23,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import javax.transaction.Transactional;
 
 /**
  * Created by Davis on 16/11/28.
@@ -118,7 +117,6 @@ public class CategoryService {
    * @param actions the update action
    * @return the category
    */
-  @Transactional
   public Category updateCategory(String id, Integer version, List<UpdateAction> actions) {
     LOG.debug("enter updateCategory, id is {}, version is {}, update action is {}",
         id, version, actions);
@@ -126,11 +124,7 @@ public class CategoryService {
     CategoryEntity entity = getById(id);
     validateVersion(entity, version);
 
-    actions.parallelStream().forEach(action -> {
-      updateService.handle(entity, action);
-    });
-
-    CategoryEntity updatedEntity = categoryRepository.save(entity);
+    CategoryEntity updatedEntity = updateCategoryEntity(actions, entity);
     //TODO send message, if slug be updated
     Category result = CategoryMapper.entityToModel(updatedEntity);
 
@@ -197,6 +191,21 @@ public class CategoryService {
       throw new AlreadyExistException("Slug is already exist");
     }
     return savedEntity;
+  }
+
+  /**
+   * update category entity.
+   * @param actions update actions
+   * @param entity CategoryEntity
+   * @return updated category entity.
+   */
+  @Transactional
+  private CategoryEntity updateCategoryEntity(List<UpdateAction> actions, CategoryEntity entity) {
+    actions.parallelStream().forEach(action -> {
+      updateService.handle(entity, action);
+    });
+
+    return categoryRepository.save(entity);
   }
 
   /**
