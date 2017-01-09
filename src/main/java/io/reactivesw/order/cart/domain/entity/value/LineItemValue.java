@@ -2,8 +2,6 @@ package io.reactivesw.order.cart.domain.entity.value;
 
 import io.reactivesw.common.entity.BaseIdEntity;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
