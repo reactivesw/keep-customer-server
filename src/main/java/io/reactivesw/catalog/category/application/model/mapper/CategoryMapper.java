@@ -66,8 +66,7 @@ public final class CategoryMapper {
    * @param model the draft
    * @return the category entity
    */
-  public static CategoryEntity modelToEntity(CategoryDraft model,
-                                             String parentId, List<String> ancestors) {
+  public static CategoryEntity modelToEntity(CategoryDraft model) {
     CategoryEntity entity = new CategoryEntity();
 
     entity.setName(LocalizedStringMapper.modelToEntityDefaultNull(model.getName
@@ -87,8 +86,6 @@ public final class CategoryMapper {
     if (model.getCustom() == null) {
       entity.setCustom(null);
     }
-    entity.setParent(parentId);
-    entity.setAncestors(ancestors);
     return entity;
   }
 

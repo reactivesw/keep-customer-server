@@ -26,7 +26,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -60,19 +59,12 @@ public class CategoryService {
   public Category createCategory(CategoryDraft categoryDraft) {
     LOG.debug("enter createCategory, CategoryDraft is {}", categoryDraft.toString());
 
-    String parentId = "";
-    List<String> ancestors = new ArrayList<>();
-
-    Reference parentReference = categoryDraft.getParent();
-    if (parentReference != null && StringUtils.isNotBlank(parentReference.getId())) {
-      parentId = parentReference.getId();
-      CategoryEntity parent = getParentCategory(parentId);
-      ancestors = setAncestors(parentId, parent);
-    }
+    String parentId = getParentId(categoryDraft);
     List<CategoryEntity> sameRootCategories = categoryRepository.queryCategoryByParent(parentId);
     CategoryNameValidator.validateEqual(categoryDraft.getName(), sameRootCategories);
 
-    CategoryEntity entity = CategoryMapper.modelToEntity(categoryDraft, parentId, ancestors);
+    CategoryEntity entity = CategoryMapper.modelToEntity(categoryDraft);
+    setParentAndAncestors(entity, parentId);
 
     CategoryEntity savedEntity = saveCategoryEntity(entity);
 
@@ -173,6 +165,40 @@ public class CategoryService {
     return pagedQueryResult;
   }
 
+
+  /**
+   * gete parent id by CategoryDraft.
+   * @param categoryDraft the CategoryDraft
+   * @return parent id
+   */
+  private String getParentId(CategoryDraft categoryDraft) {
+    String parentId = "";
+    Reference parentReference = categoryDraft.getParent();
+    if (parentReference != null && StringUtils.isNotBlank(parentReference.getId())) {
+      parentId = parentReference.getId();
+    }
+    return parentId;
+  }
+
+  /**
+   * set parent id and ancestors.
+   * @param entity category entity
+   * @param parentId parent id
+   * @return CategoryEntity
+   */
+  public CategoryEntity setParentAndAncestors(CategoryEntity entity, String parentId) {
+    List<String> ancestors = Lists.newArrayList();
+    if (StringUtils.isNotBlank(parentId)) {
+      CategoryEntity parent = getParentCategory(parentId);
+      ancestors = setAncestors(parentId, parent);
+    }
+    entity.setParent(parentId);
+    entity.setAncestors(ancestors);
+
+    return entity;
+  }
+
+
   /**
    * Save category entity.
    *
@@ -194,8 +220,9 @@ public class CategoryService {
 
   /**
    * update category entity.
+   *
    * @param actions update actions
-   * @param entity CategoryEntity
+   * @param entity  CategoryEntity
    * @return updated category entity.
    */
   @Transactional
