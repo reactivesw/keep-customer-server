@@ -3,7 +3,7 @@ package io.reactivesw.route;
 /**
  * Created by umasuo on 17/1/5.
  */
-public class ProjectRouter extends BaseRouter {
+public final class ProjectRouter extends BaseRouter {
 
   /**
    * project root.

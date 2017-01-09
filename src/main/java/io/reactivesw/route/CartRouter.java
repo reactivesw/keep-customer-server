@@ -3,7 +3,7 @@ package io.reactivesw.route;
 /**
  * Created by umasuo on 16/12/20.
  */
-public class CartRouter extends BaseRouter {
+public final class CartRouter extends BaseRouter {
   /**
    * root url of cart.
    */
@@ -15,7 +15,7 @@ public class CartRouter extends BaseRouter {
   public static final String CART_ID = "cartId";
 
   /**
-   *  id pattern.
+   * id pattern.
    */
   public static final String ID_PATTERN = "{" + CART_ID + "}";
 
@@ -28,4 +28,21 @@ public class CartRouter extends BaseRouter {
    * get one cart's shipping address.
    */
   public static final String CART_SHIPPING_ADDRESS = CART_WITH_ID + "/shipping-address";
+
+  /**
+   * private constructor.
+   */
+  private CartRouter() {
+    super();
+  }
+
+  /**
+   * path builder: get cart with id.
+   *
+   * @param id cart id
+   * @return path
+   */
+  public static String getCartWithId(String id) {
+    return CARTS_ROOT + "/" + id;
+  }
 }

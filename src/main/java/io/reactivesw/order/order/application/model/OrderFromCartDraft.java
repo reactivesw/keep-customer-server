@@ -1,6 +1,6 @@
-package io.reactivesw.order.order.model;
+package io.reactivesw.order.order.application.model;
 
-import io.reactivesw.order.order.enums.PaymentState;
+import io.reactivesw.order.order.infrastructure.enums.PaymentState;
 import io.swagger.annotations.ApiModelProperty;
 
 /**

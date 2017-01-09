@@ -6,10 +6,13 @@ import lombok.EqualsAndHashCode;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 /**
  * Created by umasuo on 16/12/8.
@@ -24,6 +27,7 @@ public class ShippingMethodEntity extends BaseAllEntity {
    * version.
    */
   @Column
+  @Version
   private Integer version;
 
   /**
@@ -47,7 +51,7 @@ public class ShippingMethodEntity extends BaseAllEntity {
   /**
    * zone rates.
    */
-  @OneToMany
+  @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
   private Set<ZoneRateValue> zoneRates;
 
   /**

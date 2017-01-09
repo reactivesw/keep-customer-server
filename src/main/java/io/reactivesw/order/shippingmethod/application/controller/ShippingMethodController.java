@@ -73,7 +73,7 @@ public class ShippingMethodController {
    * @param cartId String
    * @return List of Shipping method
    */
-  @GetMapping(value = ShippingMethodRouter.SHIPPING_METHOD_BASE_URL, params = "cartId")
+  @GetMapping(value = ShippingMethodRouter.SHIPPING_METHOD_ROOT, params = "cartId")
   public List<ShippingMethod> getForCart(
       @RequestParam @ApiParam(required = true) String cartId) {
     LOG.info("enter: cartId: {}", cartId);
@@ -93,7 +93,7 @@ public class ShippingMethodController {
    * @return List of Shipping method
    */
   @ApiOperation("get shipping method for location")
-  @GetMapping(value = ShippingMethodRouter.SHIPPING_METHOD_BASE_URL, params = "country")
+  @GetMapping(value = ShippingMethodRouter.SHIPPING_METHOD_ROOT, params = "country")
   public List<ShippingMethod> getForLocation(
       @RequestParam @ApiParam(required = true) String country,
       @RequestParam(required = false) @ApiParam() String state,
@@ -118,7 +118,7 @@ public class ShippingMethodController {
    * @return shipping method
    */
   @ApiOperation("create shipping method with draft")
-  @PostMapping(ShippingMethodRouter.SHIPPING_METHOD_BASE_URL)
+  @PostMapping(ShippingMethodRouter.SHIPPING_METHOD_ROOT)
   public ShippingMethod createWithDraft(
       @RequestBody @ApiParam(required = true) ShippingMethodDraft draft) {
     LOG.info("enter: draft: {}", draft);
