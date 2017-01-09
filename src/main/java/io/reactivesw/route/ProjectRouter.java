@@ -14,4 +14,14 @@ public final class ProjectRouter extends BaseRouter {
    * project international root.
    */
   public static final String INTERNATIONAL_ROOT = PROJECT_ROOT + "/international";
+
+  /**
+   * The constant default_currency_root.
+   */
+  public static final String DEFAULT_CURRENCY_ROOT = INTERNATIONAL_ROOT + "/default-currency";
+
+  /**
+   * The constant support_currency_root.
+   */
+  public static final String SUPPORT_CURRENCY_ROOT = INTERNATIONAL_ROOT + "/support-currencies";
 }

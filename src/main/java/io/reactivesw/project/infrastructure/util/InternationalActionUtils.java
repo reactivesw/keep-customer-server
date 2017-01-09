@@ -22,4 +22,10 @@ public final class InternationalActionUtils {
    * The constant add_support_currency.
    */
   public static final String ADD_SUPPORT_CURRENCY = INTERNATIONAL_ROOT + "add_support_currency";
+
+  /**
+   * The constant remove_support_currency.
+   */
+  public static final String REMOVE_SUPPORT_CURRENCY = INTERNATIONAL_ROOT +
+      "remove_support_currency";
 }

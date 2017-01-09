@@ -1,6 +1,7 @@
 package io.reactivesw.project.application.controller;
 
 import io.reactivesw.common.model.UpdateRequest;
+import io.reactivesw.project.application.model.Currency;
 import io.reactivesw.project.application.model.International;
 import io.reactivesw.project.application.model.action.InternationalUpdateAction;
 import io.reactivesw.project.domain.service.InternationalService;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -55,6 +58,7 @@ public class InternationalController {
   /**
    * Update international international.
    *
+   * @param updateRequest the update request
    * @return the international
    */
   @ApiOperation(value = "update international")
@@ -71,6 +75,34 @@ public class InternationalController {
 
     LOG.debug("end updateInternational, updated international is : {}", result.toString());
 
+    return result;
+  }
+
+  /**
+   * Gets default currency.
+   *
+   * @return the default currency
+   */
+  @ApiOperation(value = "get default currency")
+  @GetMapping(value = ProjectRouter.DEFAULT_CURRENCY_ROOT)
+  public Currency getDefaultCurrency() {
+    LOG.debug("enter getDefaultCurrency");
+    Currency currency = service.getInternational().getDefaultCurrency();
+    LOG.debug("end getDefaultCurrency, get result is : {}", currency);
+    return currency;
+  }
+
+  /**
+   * Gets support currencies.
+   *
+   * @return the support currencies
+   */
+  @ApiOperation(value = "get support currencies")
+  @GetMapping(value = ProjectRouter.SUPPORT_CURRENCY_ROOT)
+  public List<Currency> getSupportCurrencies() {
+    LOG.debug("enter getSupportCurrencies");
+    List result = service.getInternational().getSupportCurrencies();
+    LOG.debug("end getSupportCurrencies, get result is : {}", result);
     return result;
   }
 }

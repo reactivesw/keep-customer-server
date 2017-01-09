@@ -14,6 +14,7 @@ import io.reactivesw.catalog.inventory.application.model.action.AddQuantityActio
 @JsonSubTypes( {
     @JsonSubTypes.Type(value = SetDefaultCurrencyAction.class, name = "setDefaultCurrency"),
     @JsonSubTypes.Type(value = AddSupportCurrencyAction.class, name = "addSupportCurrency"),
+    @JsonSubTypes.Type(value = RemoveSupportCurrencyAction.class, name = "removeSupportCurrency"),
 })
 public interface InternationalUpdateAction {
 }
