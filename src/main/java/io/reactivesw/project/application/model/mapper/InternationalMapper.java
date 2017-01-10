@@ -29,7 +29,7 @@ public final class InternationalMapper {
     CurrencyValue defaultCurrency = CurrencyMapper.modelToEntity(model);
 
     entity.setDefaultCurrency(defaultCurrency);
-    entity.setSupportedCurrency(Sets.newHashSet(defaultCurrency));
+    entity.setSupportedCurrencies(Sets.newHashSet(defaultCurrency));
 
     return entity;
   }
@@ -46,14 +46,14 @@ public final class InternationalMapper {
     if (entity.getDefaultCurrency() != null) {
       model.setDefaultCurrency(CurrencyMapper.entityToModel(entity.getDefaultCurrency()));
     }
-    if (entity.getSupportedCurrency() != null) {
-      model.setSupportCurrencies(CurrencyMapper.entityToModel(entity.getSupportedCurrency()));
+    if (entity.getSupportedCurrencies() != null) {
+      model.setSupportedCurrencies(CurrencyMapper.entityToModel(entity.getSupportedCurrencies()));
     }
     if (entity.getDefaultLanguage() != null) {
       model.setDefaultLanguage(LanguageMapper.entityToModel(entity.getDefaultLanguage()));
     }
-    if (entity.getSupportedLanguage() != null) {
-      model.setSupportLanguages(LanguageMapper.entityToModel(entity.getSupportedLanguage()));
+    if (entity.getSupportedLanguages() != null) {
+      model.setSupportedLanguages(LanguageMapper.entityToModel(entity.getSupportedLanguages()));
     }
 
     return model;

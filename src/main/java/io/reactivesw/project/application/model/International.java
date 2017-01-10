@@ -20,7 +20,7 @@ public class International {
   /**
    * supported currency in this project.
    */
-  private List<Currency> supportCurrencies;
+  private List<Currency> supportedCurrencies;
 
   /**
    * default language.
@@ -30,5 +30,5 @@ public class International {
   /**
    * support languages.
    */
-  private List<Language> supportLanguages;
+  private List<Language> supportedLanguages;
 }

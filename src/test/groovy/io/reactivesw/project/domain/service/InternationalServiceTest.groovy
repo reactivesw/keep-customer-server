@@ -37,7 +37,7 @@ class InternationalServiceTest extends Specification {
         currencyValue = new CurrencyValue(currencyCode: "USD")
 
         internationalEntity = new InternationalEntity(defaultCurrency: currencyValue,
-                supportedCurrency: Lists.newArrayList(currencyValue))
+                supportedCurrencies: Lists.newArrayList(currencyValue))
     }
 
     def "test 1.1 : get international"() {

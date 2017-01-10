@@ -20,8 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 /**
  * Created by umasuo on 17/1/5.
  */
@@ -67,7 +65,6 @@ public class InternationalController {
   public International updateInternational(@RequestBody
                                            @ApiParam(value = "International Update Fields",
                                                required = true)
-                                           @Valid
                                                UpdateRequest<InternationalUpdateAction>
                                                updateRequest) {
     LOG.debug("enter updateInternational");
@@ -102,7 +99,7 @@ public class InternationalController {
   @GetMapping(value = ProjectRouter.SUPPORT_CURRENCY_ROOT)
   public List<Currency> getSupportCurrencies() {
     LOG.debug("enter getSupportCurrencies");
-    List result = service.getInternational().getSupportCurrencies();
+    List result = service.getInternational().getSupportedCurrencies();
     LOG.debug("end getSupportCurrencies, get result is : {}", result);
     return result;
   }
@@ -131,7 +128,7 @@ public class InternationalController {
   @GetMapping(value = ProjectRouter.SUPPORT_LANGUAGE_ROOT)
   public List<Language> getSupportLanguages() {
     LOG.debug("enter getSupportLanguages");
-    List result = service.getInternational().getSupportLanguages();
+    List result = service.getInternational().getSupportedLanguages();
     LOG.debug("end getSupportLanguages, get result is : {}", result);
     return result;
   }

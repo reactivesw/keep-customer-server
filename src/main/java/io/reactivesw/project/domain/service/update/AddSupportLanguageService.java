@@ -17,7 +17,7 @@ import java.util.Set;
 /**
  * Created by Davis on 17/1/9.
  */
-@Service(value = InternationalActionUtils.ADD_SUPPORT_CURRENCY)
+@Service(value = InternationalActionUtils.ADD_SUPPORTED_LANGUAGE)
 public class AddSupportLanguageService implements Update<InternationalEntity> {
 
   /**
@@ -36,9 +36,9 @@ public class AddSupportLanguageService implements Update<InternationalEntity> {
     LanguageValue languageValue = LanguageMapper.modelToEntity(
         LanguageMap.getLanguageByCode(languageCode));
 
-    Set<LanguageValue> supportedLanguage = entity.getSupportedLanguage();
+    Set<LanguageValue> supportedLanguage = entity.getSupportedLanguages();
     supportedLanguage.add(languageValue);
 
-    entity.setSupportedLanguage(supportedLanguage);
+    entity.setSupportedLanguages(supportedLanguage);
   }
 }

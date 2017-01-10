@@ -17,7 +17,7 @@ import java.util.Set;
 /**
  * Created by Davis on 17/1/9.
  */
-@Service(value = InternationalActionUtils.ADD_SUPPORTED_LANGUAGE)
+@Service(value = InternationalActionUtils.ADD_SUPPORT_CURRENCY)
 public class AddSupportCurrencyService implements Update<InternationalEntity> {
 
   /**
@@ -36,9 +36,9 @@ public class AddSupportCurrencyService implements Update<InternationalEntity> {
     CurrencyValue currencyValue = CurrencyMapper.modelToEntity(
         CurrencyMap.getCurrencyByCode(currencyCode));
 
-    Set<CurrencyValue> supportCurrencies = entity.getSupportedCurrency();
+    Set<CurrencyValue> supportCurrencies = entity.getSupportedCurrencies();
     supportCurrencies.add(currencyValue);
 
-    entity.setSupportedCurrency(supportCurrencies);
+    entity.setSupportedCurrencies(supportCurrencies);
   }
 }
