@@ -21,4 +21,14 @@ public class International {
    * supported currency in this project.
    */
   private List<Currency> supportCurrencies;
+
+  /**
+   * default language.
+   */
+  private Language defaultLanguage;
+
+  /**
+   * support languages.
+   */
+  private List<Language> supportLanguages;
 }

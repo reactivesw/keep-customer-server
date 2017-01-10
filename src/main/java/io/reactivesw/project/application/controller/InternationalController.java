@@ -3,6 +3,7 @@ package io.reactivesw.project.application.controller;
 import io.reactivesw.common.model.UpdateRequest;
 import io.reactivesw.project.application.model.Currency;
 import io.reactivesw.project.application.model.International;
+import io.reactivesw.project.application.model.Language;
 import io.reactivesw.project.application.model.action.InternationalUpdateAction;
 import io.reactivesw.project.domain.service.InternationalService;
 import io.reactivesw.route.ProjectRouter;
@@ -103,6 +104,35 @@ public class InternationalController {
     LOG.debug("enter getSupportCurrencies");
     List result = service.getInternational().getSupportCurrencies();
     LOG.debug("end getSupportCurrencies, get result is : {}", result);
+    return result;
+  }
+
+
+  /**
+   * Gets default language.
+   *
+   * @return the default language
+   */
+  @ApiOperation(value = "get default language")
+  @GetMapping(value = ProjectRouter.DEFAULT_LANGUAGE_ROOT)
+  public Language getDefaultLanguage() {
+    LOG.debug("enter getDefaultLanguage");
+    Language result = service.getInternational().getDefaultLanguage();
+    LOG.debug("end getDefaultLanguage, get result is : {}", result);
+    return result;
+  }
+
+  /**
+   * Gets support languages.
+   *
+   * @return the support languages
+   */
+  @ApiOperation(value = "get support currencies")
+  @GetMapping(value = ProjectRouter.SUPPORT_LANGUAGE_ROOT)
+  public List<Language> getSupportLanguages() {
+    LOG.debug("enter getSupportLanguages");
+    List result = service.getInternational().getSupportLanguages();
+    LOG.debug("end getSupportLanguages, get result is : {}", result);
     return result;
   }
 }

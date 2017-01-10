@@ -49,6 +49,12 @@ public final class InternationalMapper {
     if (entity.getSupportedCurrency() != null) {
       model.setSupportCurrencies(CurrencyMapper.entityToModel(entity.getSupportedCurrency()));
     }
+    if (entity.getDefaultLanguage() != null) {
+      model.setDefaultLanguage(LanguageMapper.entityToModel(entity.getDefaultLanguage()));
+    }
+    if (entity.getSupportedLanguage() != null) {
+      model.setSupportLanguages(LanguageMapper.entityToModel(entity.getSupportedLanguage()));
+    }
 
     return model;
   }
