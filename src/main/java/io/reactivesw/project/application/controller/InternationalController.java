@@ -20,8 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 /**
  * Created by umasuo on 17/1/5.
  */
