@@ -46,5 +46,4 @@ public class LineItemValue extends BaseIdEntity {
   @Column(name = "distribution_channel")
   private String distributionChannel;
 
-
 }

@@ -85,8 +85,8 @@ public class CartController {
    */
   @ApiOperation(value = "get cart by anonymous id")
   @GetMapping(value = CartRouter.CARTS_ROOT, params = "anonymousId")
-  public Cart getCartByAnonymousId(@ApiParam(value = "anonymousId") @RequestParam String
-                                       anonymousId) {
+  public Cart getCartByAnonymousId(
+      @ApiParam(value = "anonymousId") @RequestParam String anonymousId) {
     LOG.info("anonymousId:{}", anonymousId);
 
     CartEntity entity = this.cartService.getCartByAnonymousId(anonymousId);

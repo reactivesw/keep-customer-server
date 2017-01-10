@@ -127,10 +127,6 @@ public class CustomerEntity extends BaseAllEntity {
   @Column(name = "customer_group_id")
   private String customerGroupId;
 
-//  TODO add custom fields
-//  @Column
-//  private CustomFields custom;
-
   /**
    * locale.
    */

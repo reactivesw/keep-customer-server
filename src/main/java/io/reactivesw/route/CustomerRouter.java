@@ -21,6 +21,11 @@ public final class CustomerRouter extends BaseRouter {
   public static final String CUSTOMER_WITH_ID = CUSTOMER_ROOT + "/{" + CUSTOMER_ID + "}";
 
   /**
+   * customer login.
+   */
+  public static final String CUSTOMER_LOGIN = CUSTOMER_ROOT + "/signin";
+
+  /**
    * customer address.
    */
   public static final String ADDRESS_ROOT = CUSTOMER_ROOT + "/addresses";
