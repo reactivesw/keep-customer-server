@@ -2,6 +2,7 @@ package io.reactivesw.order.cart.domain.entity.value;
 
 import io.reactivesw.common.entity.BaseIdEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "order_cart_line_item")
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class LineItemValue extends BaseIdEntity {
 
   /**

@@ -3,6 +3,7 @@ package io.reactivesw.order.order.domain.entity.value;
 import io.reactivesw.common.entity.BaseIdEntity;
 import io.reactivesw.common.entity.MoneyEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Set;
 
@@ -17,6 +18,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "order_taxed_price")
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class TaxedPriceValue extends BaseIdEntity {
 
   /**

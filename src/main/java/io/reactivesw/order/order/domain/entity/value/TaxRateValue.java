@@ -2,6 +2,7 @@ package io.reactivesw.order.order.domain.entity.value;
 
 import io.reactivesw.common.entity.BaseIdEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Set;
 
@@ -17,6 +18,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "order_tax_rate")
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class TaxRateValue extends BaseIdEntity {
 
   /**

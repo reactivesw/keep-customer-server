@@ -2,6 +2,7 @@ package io.reactivesw.order.order.domain.entity.value;
 
 import io.reactivesw.common.util.converter.ListJsonConverter;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
@@ -21,6 +22,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "order_cart_product_variant")
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class ProductVariantValue {
 
   /**
