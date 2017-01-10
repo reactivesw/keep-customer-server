@@ -30,10 +30,10 @@ public class InternationalController {
   /**
    * logger.
    */
-  private final static Logger LOG = LoggerFactory.getLogger(InternationalController.class);
+  private static final Logger LOG = LoggerFactory.getLogger(InternationalController.class);
 
   /**
-   * service
+   * service.
    */
   @Autowired
   private transient InternationalService service;
@@ -68,7 +68,7 @@ public class InternationalController {
                                                required = true)
                                            @Valid
                                                UpdateRequest<InternationalUpdateAction>
-                                                 updateRequest) {
+                                               updateRequest) {
     LOG.debug("enter updateInternational");
 
     International result = service.updateInternational(updateRequest.getActions());

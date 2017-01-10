@@ -61,7 +61,7 @@ public class ZoneController {
   /**
    * get by id.
    *
-   * @param id
+   * @param id String
    * @return Zone
    */
   @ApiOperation("Get by id")
