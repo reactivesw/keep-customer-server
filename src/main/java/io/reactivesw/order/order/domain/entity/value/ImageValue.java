@@ -4,6 +4,7 @@ import io.reactivesw.common.entity.BaseIdEntity;
 import io.reactivesw.common.model.AssetDimensions;
 import io.reactivesw.common.util.converter.AssetDimensionsJsonConverter;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -16,6 +17,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "order_image")
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class ImageValue extends BaseIdEntity {
 
   /**

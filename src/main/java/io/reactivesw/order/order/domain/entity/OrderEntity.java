@@ -14,6 +14,7 @@ import io.reactivesw.order.order.domain.entity.value.ShippingAddressValue;
 import io.reactivesw.order.order.domain.entity.value.TaxedPriceValue;
 import io.reactivesw.order.order.infrastructure.enums.OrderState;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -33,6 +34,7 @@ import javax.persistence.Version;
 @Entity
 @Table(name = "order_order")
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class OrderEntity extends BaseAllEntity {
 
   /**

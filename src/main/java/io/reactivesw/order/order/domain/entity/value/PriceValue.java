@@ -7,6 +7,7 @@ import io.reactivesw.common.model.CustomFields;
 import io.reactivesw.common.util.converter.CustomFieldsJsonConverter;
 import io.reactivesw.common.util.converter.DiscountedPriceJsonConverter;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.ZonedDateTime;
 
@@ -22,6 +23,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "order_cart_price")
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class PriceValue extends BaseIdEntity {
 
   /**

@@ -2,6 +2,7 @@ package io.reactivesw.order.order.domain.entity.value;
 
 import io.reactivesw.common.entity.BaseIdEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "order_item_state")
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class ItemStateValue extends BaseIdEntity {
 
   /**
