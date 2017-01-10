@@ -3,7 +3,7 @@ package io.reactivesw.project.domain.service.update;
 import io.reactivesw.common.exception.ParametersException;
 import io.reactivesw.common.model.Update;
 import io.reactivesw.common.model.UpdateAction;
-import io.reactivesw.project.application.model.action.AddSupportCurrencyAction;
+import io.reactivesw.project.application.model.action.RemoveSupportCurrencyAction;
 import io.reactivesw.project.domain.entity.CurrencyValue;
 import io.reactivesw.project.domain.entity.InternationalEntity;
 import io.reactivesw.project.infrastructure.util.InternationalActionUtils;
@@ -36,7 +36,7 @@ public class RemoveSupportCurrencyService implements Update<InternationalEntity>
   @Override
   public void handle(InternationalEntity entity, UpdateAction action) {
 
-    String currencyCode = ((AddSupportCurrencyAction) action).getCurrencyCode();
+    String currencyCode = ((RemoveSupportCurrencyAction) action).getCurrencyCode();
 
     CurrencyValidator.validate(currencyCode);
 

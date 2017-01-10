@@ -7,14 +7,15 @@ package io.reactivesw.project.application.model.action;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-import io.reactivesw.catalog.inventory.application.model.action.AddQuantityAction;
-
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property =
     "action")
 @JsonSubTypes( {
     @JsonSubTypes.Type(value = SetDefaultCurrencyAction.class, name = "setDefaultCurrency"),
     @JsonSubTypes.Type(value = AddSupportCurrencyAction.class, name = "addSupportCurrency"),
     @JsonSubTypes.Type(value = RemoveSupportCurrencyAction.class, name = "removeSupportCurrency"),
+    @JsonSubTypes.Type(value = SetDefaultLanguageAction.class, name = "setDefaultLanguage"),
+    @JsonSubTypes.Type(value = AddSupportLanguageAction.class, name = "addSupportLanguage"),
+    @JsonSubTypes.Type(value = RemoveSupportLanguageAction.class, name = "removeSupportLanguage"),
 })
 public interface InternationalUpdateAction {
 }
