@@ -9,8 +9,9 @@ import io.reactivesw.catalog.category.domain.entity.CategoryEntity;
 import io.reactivesw.catalog.category.domain.service.update.CategoryUpdateService;
 import io.reactivesw.catalog.category.infrastructure.repository.CategoryRepository;
 import io.reactivesw.catalog.category.infrastructure.validator.CategoryNameValidator;
+import io.reactivesw.catalog.category.infrastructure.validator.CategoryVersionValidator;
+import io.reactivesw.catalog.category.infrastructure.validator.ParentCategoryValidator;
 import io.reactivesw.common.exception.AlreadyExistException;
-import io.reactivesw.common.exception.ConflictException;
 import io.reactivesw.common.exception.NotExistException;
 import io.reactivesw.common.model.PagedQueryResult;
 import io.reactivesw.common.model.QueryConditions;
@@ -25,9 +26,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Created by Davis on 16/11/28.
@@ -60,19 +59,12 @@ public class CategoryService {
   public Category createCategory(CategoryDraft categoryDraft) {
     LOG.debug("enter createCategory, CategoryDraft is {}", categoryDraft.toString());
 
-    String parentId = "";
-    List<String> ancestors = new ArrayList<>();
-
-    Reference parentReference = categoryDraft.getParent();
-    if (parentReference != null && StringUtils.isNotBlank(parentReference.getId())) {
-      parentId = parentReference.getId();
-      CategoryEntity parent = getParentCategory(parentId);
-      ancestors = setAncestors(parentId, parent);
-    }
+    String parentId = getParentId(categoryDraft);
     List<CategoryEntity> sameRootCategories = categoryRepository.queryCategoryByParent(parentId);
     CategoryNameValidator.validateEqual(categoryDraft.getName(), sameRootCategories);
 
-    CategoryEntity entity = CategoryMapper.modelToEntity(categoryDraft, parentId, ancestors);
+    CategoryEntity entity = CategoryMapper.modelToEntity(categoryDraft);
+    setParentAndAncestors(entity, parentId);
 
     CategoryEntity savedEntity = saveCategoryEntity(entity);
 
@@ -93,7 +85,7 @@ public class CategoryService {
     LOG.debug("enter deleteCategory, id:{}, version:{}", id, version);
 
     CategoryEntity entity = this.getById(id);
-    validateVersion(entity, version);
+    CategoryVersionValidator.validate(entity, version);
 
     List<CategoryEntity> tatalCategoryEitities = Lists.newArrayList(entity);
     List<CategoryEntity> subCategories = categoryRepository.querySubCategoriesByAncestorId(id);
@@ -122,7 +114,7 @@ public class CategoryService {
         id, version, actions);
 
     CategoryEntity entity = getById(id);
-    validateVersion(entity, version);
+    CategoryVersionValidator.validate(entity, version);
 
     CategoryEntity updatedEntity = updateCategoryEntity(actions, entity);
     //TODO send message, if slug be updated
@@ -175,6 +167,39 @@ public class CategoryService {
 
 
   /**
+   * gete parent id by CategoryDraft.
+   * @param categoryDraft the CategoryDraft
+   * @return parent id
+   */
+  private String getParentId(CategoryDraft categoryDraft) {
+    String parentId = "";
+    Reference parentReference = categoryDraft.getParent();
+    if (parentReference != null && StringUtils.isNotBlank(parentReference.getId())) {
+      parentId = parentReference.getId();
+    }
+    return parentId;
+  }
+
+  /**
+   * set parent id and ancestors.
+   * @param entity category entity
+   * @param parentId parent id
+   * @return CategoryEntity
+   */
+  public CategoryEntity setParentAndAncestors(CategoryEntity entity, String parentId) {
+    List<String> ancestors = Lists.newArrayList();
+    if (StringUtils.isNotBlank(parentId)) {
+      CategoryEntity parent = getParentCategory(parentId);
+      ancestors = setAncestors(parentId, parent);
+    }
+    entity.setParent(parentId);
+    entity.setAncestors(ancestors);
+
+    return entity;
+  }
+
+
+  /**
    * Save category entity.
    *
    * @param entity the entity
@@ -186,7 +211,7 @@ public class CategoryService {
     CategoryEntity savedEntity = null;
     try {
       savedEntity = categoryRepository.save(entity);
-    }catch (DataIntegrityViolationException e){
+    } catch (DataIntegrityViolationException e) {
       LOG.debug("slug is already exist", e);
       throw new AlreadyExistException("Slug is already exist");
     }
@@ -195,8 +220,9 @@ public class CategoryService {
 
   /**
    * update category entity.
+   *
    * @param actions update actions
-   * @param entity CategoryEntity
+   * @param entity  CategoryEntity
    * @return updated category entity.
    */
   @Transactional
@@ -231,21 +257,6 @@ public class CategoryService {
   }
 
   /**
-   * judge entity and version.
-   *
-   * @param entity  the CategoryEntity
-   * @param version the version
-   * @throws ConflictException when version not match
-   */
-  private void validateVersion(CategoryEntity entity, Integer version) {
-    if (!Objects.equals(version, entity.getVersion())) {
-      LOG.debug("Version not match, input version:{}, entity version:{}",
-          version, entity.getVersion());
-      throw new ConflictException("Version not match");
-    }
-  }
-
-  /**
    * Gets parent category.
    *
    * @param parentId the parent id
@@ -253,7 +264,7 @@ public class CategoryService {
    */
   private CategoryEntity getParentCategory(String parentId) {
     CategoryEntity parent = categoryRepository.findOne(parentId);
-    validateParentCategory(parentId, parent);
+    ParentCategoryValidator.validate(parentId, parent);
     return parent;
   }
 
@@ -271,19 +282,5 @@ public class CategoryService {
     }
     ancestors.add(parentId);
     return ancestors;
-  }
-
-  /**
-   * validateNull parent category.
-   *
-   * @param parentId parent id
-   * @param parent   parent category
-   * @throws NotExistException when parent category is null
-   */
-  private void validateParentCategory(String parentId, CategoryEntity parent) {
-    if (parent == null) {
-      LOG.debug("can not find parent category by id:{}", parentId);
-      throw new NotExistException("Can not find parent category by id : " + parentId);
-    }
   }
 }

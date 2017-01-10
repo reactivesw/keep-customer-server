@@ -45,9 +45,6 @@ dependencies {
     //cglib for Spock
     compile('cglib:cglib-nodep:3.2.4')
 
-    // model mapper for data
-    compile('org.modelmapper:modelmapper:0.7.6')
-
     compile('org.apache.commons:commons-collections4:4.1')
 
     //for zoneddatetime

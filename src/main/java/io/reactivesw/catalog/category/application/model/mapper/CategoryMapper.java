@@ -1,13 +1,13 @@
 package io.reactivesw.catalog.category.application.model.mapper;
 
+import io.reactivesw.catalog.category.application.model.Category;
 import io.reactivesw.catalog.category.application.model.CategoryDraft;
 import io.reactivesw.catalog.category.domain.entity.CategoryEntity;
-import io.reactivesw.catalog.category.application.model.Category;
 import io.reactivesw.common.enums.ReferenceTypes;
 import io.reactivesw.common.model.Reference;
 import io.reactivesw.common.model.mapper.LocalizedStringMapper;
+
 import org.apache.commons.lang3.StringUtils;
-import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +17,6 @@ import java.util.stream.Collectors;
  * Created by Davis on 16/11/28.
  */
 public final class CategoryMapper {
-  /**
-   * model mapper.
-   */
-  private static ModelMapper mapper = new ModelMapper();
 
   /**
    * constructor.
@@ -35,25 +31,31 @@ public final class CategoryMapper {
    * @return the category
    */
   public static Category entityToModel(CategoryEntity entity) {
-    Category category = mapper.map(entity, Category.class);
+    Category category = new Category();
     //add reference type.
+    category.setId(entity.getId());
     category.setAncestors(convertToReferenceList(entity.getAncestors()));
     String parentId = entity.getParent();
     //add reference type to parent.
     if (StringUtils.isNotBlank(parentId)) {
       category.setParent(new Reference(ReferenceTypes.CATEGORY.getType(), parentId));
     }
-    //TODO extract to other method
     category.setName(LocalizedStringMapper.entityToModelDefaultNull(entity.getName()));
     category.setSlug(entity.getSlug());
     category.setDescription(LocalizedStringMapper.entityToModelDefaultNull(entity
         .getDescription()));
+    category.setOrderHint(entity.getOrderHint());
+    category.setExternalId(entity.getExternalId());
     category.setMetaTitle(LocalizedStringMapper.entityToModelDefaultNull(entity
         .getMetaTitle()));
     category.setMetaKeywords(LocalizedStringMapper.entityToModelDefaultNull(entity
         .getMetaKeyWords()));
     category.setMetaDescription(LocalizedStringMapper.entityToModelDefaultNull(entity
         .getMetaDescription()));
+    category.setVersion(entity.getVersion());
+    category.setCreatedAt(entity.getCreatedAt());
+    category.setLastModifiedAt(entity.getLastModifiedAt());
+    category.setCustom(entity.getCustom());
     return category;
   }
 
@@ -64,14 +66,16 @@ public final class CategoryMapper {
    * @param model the draft
    * @return the category entity
    */
-  public static CategoryEntity modelToEntity(CategoryDraft model, String parentId,
-                                             List<String> ancestors) {
-    CategoryEntity entity = mapper.map(model, CategoryEntity.class);
+  public static CategoryEntity modelToEntity(CategoryDraft model) {
+    CategoryEntity entity = new CategoryEntity();
+
     entity.setName(LocalizedStringMapper.modelToEntityDefaultNull(model.getName
         ()));
     entity.setDescription(LocalizedStringMapper.modelToEntityDefaultNull(model
         .getDescription()));
     entity.setSlug(model.getSlug());
+    entity.setOrderHint(model.getOrderHint());
+    entity.setExternalId(model.getExternalId());
     entity.setMetaTitle(LocalizedStringMapper.modelToEntityDefaultNull(model
         .getMetaTitle()));
     entity.setMetaDescription(LocalizedStringMapper.modelToEntityDefaultNull(model
@@ -82,8 +86,6 @@ public final class CategoryMapper {
     if (model.getCustom() == null) {
       entity.setCustom(null);
     }
-    entity.setParent(parentId);
-    entity.setAncestors(ancestors);
     return entity;
   }
 

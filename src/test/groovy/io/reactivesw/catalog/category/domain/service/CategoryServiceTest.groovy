@@ -16,6 +16,7 @@ import io.reactivesw.common.model.QueryConditions
 import io.reactivesw.common.model.Reference
 import io.reactivesw.common.model.UpdateAction
 import io.reactivesw.common.model.action.SetLocalizedName
+import org.springframework.dao.DataIntegrityViolationException
 import spock.lang.Specification
 
 /**
@@ -23,7 +24,7 @@ import spock.lang.Specification
  */
 class CategoryServiceTest extends Specification {
     CategoryUpdateService categoryUpdateService = Mock()
-    CategoryRepository categoryRepository = Mock();
+    CategoryRepository categoryRepository = Mock(CategoryRepository);
     CategoryService categoryService = new CategoryService(categoryRepository: categoryRepository,
             updateService: categoryUpdateService);
     def categoryEntity = new CategoryEntity()
@@ -100,10 +101,24 @@ class CategoryServiceTest extends Specification {
         thrown(ConflictException)
     }
 
-    def "test 2.3 : delete Category"() {
+    def "test 2.3.1 : delete Category and get empty subcategory list"() {
         given:
         categoryEntity.version = version
         categoryRepository.findOne(_) >> categoryEntity
+        categoryRepository.querySubCategoriesByAncestorId(_) >> Lists.newArrayList()
+
+        when:
+        categoryService.deleteCategory(id, version)
+
+        then:
+        true
+    }
+
+    def "test 2.3.2 : delete Category and get null subcategory list"() {
+        given:
+        categoryEntity.version = version
+        categoryRepository.findOne(_) >> categoryEntity
+        categoryRepository.querySubCategoriesByAncestorId(_) >> null
 
         when:
         categoryService.deleteCategory(id, version)
@@ -134,6 +149,17 @@ class CategoryServiceTest extends Specification {
 
         then:
         category != null
+    }
+
+    def "test 3.2 : create Category and slug is already exist"() {
+        given:
+        categoryRepository.save(_) >> { throw new DataIntegrityViolationException("could not execute statement") }
+
+        when:
+        categoryService.createCategory(categoryDraft)
+
+        then:
+        thrown(AlreadyExistException)
     }
 
     def "test 3.2 : create Category with parent and subCategory with difference name"() {
