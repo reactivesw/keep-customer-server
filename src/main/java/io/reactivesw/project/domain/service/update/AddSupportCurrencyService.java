@@ -17,7 +17,7 @@ import java.util.Set;
 /**
  * Created by Davis on 17/1/9.
  */
-@Service(value = InternationalActionUtils.ADD_SUPPORT_CURRENCY)
+@Service(value = InternationalActionUtils.ADD_SUPPORTED_LANGUAGE)
 public class AddSupportCurrencyService implements Update<InternationalEntity> {
 
   /**

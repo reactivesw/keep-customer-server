@@ -17,7 +17,6 @@ public final class InternationalActionUtils {
    */
   public static final String SET_DEFAULT_CURRENCY = INTERNATIONAL_ROOT + "set_default_currency";
 
-
   /**
    * The constant add_support_currency.
    */
@@ -28,4 +27,20 @@ public final class InternationalActionUtils {
    */
   public static final String REMOVE_SUPPORT_CURRENCY = INTERNATIONAL_ROOT +
       "remove_support_currency";
+
+  /**
+   * The constant set_default_language.
+   */
+  public static final String SET_DEFAULT_LANGUAGE = INTERNATIONAL_ROOT + "set_default_language";
+
+  /**
+   * The constant add_supported_language.
+   */
+  public static final String ADD_SUPPORTED_LANGUAGE = INTERNATIONAL_ROOT + "add_supported_language";
+
+  /**
+   * The constant remove_support_language.
+   */
+  public static final String REMOVE_SUPPORT_LANGUAGE = INTERNATIONAL_ROOT +
+      "remove_supported_language";
 }

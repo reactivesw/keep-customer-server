@@ -1,5 +1,6 @@
 package io.reactivesw.catalog.category.application.model.action;
 
+import io.reactivesw.catalog.category.infrastructure.util.CategoryActionUtils;
 import io.reactivesw.common.model.LocalizedString;
 import io.reactivesw.common.model.UpdateAction;
 
@@ -19,6 +20,6 @@ public class SetDescription implements UpdateAction {
 
   @Override
   public String getActionName() {
-    return null;
+    return CategoryActionUtils.SET_DESCRIPTION;
   }
 }

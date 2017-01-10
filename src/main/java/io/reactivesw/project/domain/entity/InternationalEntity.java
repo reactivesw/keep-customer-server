@@ -1,6 +1,7 @@
 package io.reactivesw.project.domain.entity;
 
 import io.reactivesw.common.entity.BaseAllEntity;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -33,4 +34,16 @@ public class InternationalEntity extends BaseAllEntity {
    */
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private Set<CurrencyValue> supportedCurrency;
+
+  /**
+   * default language.
+   */
+  @OneToOne
+  private LanguageValue defaultLanguage;
+
+  /**
+   * supported language.
+   */
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private Set<LanguageValue> supportedLanguage;
 }

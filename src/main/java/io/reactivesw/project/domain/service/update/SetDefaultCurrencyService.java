@@ -20,9 +20,10 @@ import java.util.Set;
  * Created by Davis on 17/1/9.
  */
 @Service(value = InternationalActionUtils.SET_DEFAULT_CURRENCY)
-public class SetDefaultCurrencyService implements Update<InternationalEntity>{
+public class SetDefaultCurrencyService implements Update<InternationalEntity> {
   /**
    * set default currency.
+   *
    * @param entity E
    * @param action UpdateAction
    */
@@ -41,14 +42,12 @@ public class SetDefaultCurrencyService implements Update<InternationalEntity>{
     Set<CurrencyValue> currencyValues = entity.getSupportedCurrency();
 
     if (currencyValues.isEmpty()) {
-      entity.setDefaultCurrency(currencyValue);
       currencyValues = Sets.newHashSet(currencyValue);
-      entity.setSupportedCurrency(currencyValues);
     } else {
-      entity.setDefaultCurrency(currencyValue);
       currencyValues.remove(defaultCurrency);
       currencyValues.add(currencyValue);
-      entity.setSupportedCurrency(currencyValues);
     }
+    entity.setDefaultCurrency(currencyValue);
+    entity.setSupportedCurrency(currencyValues);
   }
 }

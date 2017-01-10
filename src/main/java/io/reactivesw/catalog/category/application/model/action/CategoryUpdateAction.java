@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     @JsonSubTypes.Type(value = SetDescription.class, name = "setDescription"),
     @JsonSubTypes.Type(value = SetParent.class, name = "setParent"),
     @JsonSubTypes.Type(value = SetOrderHint.class, name = "setOrderHint"),
-    @JsonSubTypes.Type(value = SetExternalID.class, name = "setExternalID"),
+    @JsonSubTypes.Type(value = SetExternalID.class, name = "setExternalId"),
     @JsonSubTypes.Type(value = SetMetaTitle.class, name = "setMetaTitle"),
     @JsonSubTypes.Type(value = SetMetaDescription.class, name = "setMetaDescription"),
     @JsonSubTypes.Type(value = SetMetaKeywords.class, name = "setMetaKeywords"),
