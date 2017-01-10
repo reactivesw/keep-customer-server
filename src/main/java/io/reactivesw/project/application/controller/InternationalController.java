@@ -67,7 +67,6 @@ public class InternationalController {
   public International updateInternational(@RequestBody
                                            @ApiParam(value = "International Update Fields",
                                                required = true)
-                                           @Valid
                                                UpdateRequest<InternationalUpdateAction>
                                                updateRequest) {
     LOG.debug("enter updateInternational");
