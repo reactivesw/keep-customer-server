@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -51,7 +52,7 @@ public class CustomerService {
       LOG.warn("customer not exist: id:{}", id);
       throw new NotExistException("customer not exist. id:" + id);
     }
-    LOG.debug("exit: entity:{}", entity);
+    LOG.debug("exit: id:{}, customer:{}", id, entity);
     return entity;
   }
 
@@ -68,7 +69,7 @@ public class CustomerService {
       LOG.debug("customer not exist: name:{}", name);
       throw new NotExistException("customer not exist. name:" + name);
     }
-    LOG.debug("exit: entity:{}", entity);
+    LOG.debug("exit: name: {}, Customer:{}", name, entity);
     return entity;
   }
 
@@ -79,15 +80,32 @@ public class CustomerService {
    * @return
    */
   public CustomerEntity getByEmail(String email) {
-    LOG.debug("enter: name:{}", email);
+    LOG.debug("enter: email:{}", email);
     String lcEmail = email.toLowerCase(Locale.ENGLISH);
     CustomerEntity entity = this.customerRepository.findOneByEmail(lcEmail);
     if (entity == null) {
       LOG.debug("customer not exist: email:{}", lcEmail);
       throw new NotExistException("customer not exist. email:" + lcEmail);
     }
-    LOG.debug("exit: entity:{}", entity);
+    LOG.debug("exit: email:{}, customer:{}", email, entity);
     return entity;
+  }
+
+  /**
+   * get customer by customer name.
+   *
+   * @param externalId String
+   * @return CustomerEntity
+   */
+  public CustomerEntity getByExternalId(String externalId) {
+    LOG.debug("enter: externalId:{}", externalId);
+
+    List<CustomerEntity> customers = this.customerRepository.findByExternalId(externalId);
+
+    CustomerEntity customerEntity = customers.parallelStream().findAny().orElse(null);
+    
+    LOG.debug("exit: externalId:{}, customer:{}", externalId, customerEntity);
+    return customerEntity;
   }
 
   /**
@@ -110,8 +128,9 @@ public class CustomerService {
     }
 
 
-    String email = sample.getEmail().toLowerCase(Locale.ENGLISH);
+    String email = sample.getEmail();
     if (StringUtils.isNotBlank(email)) {
+      email = email.toLowerCase(Locale.ENGLISH);
       CustomerEntity existValue = this.customerRepository.findOneByEmail(email);
       if (existValue != null) {
         LOG.debug("error: customer already exist. email: {}", email);
@@ -128,13 +147,25 @@ public class CustomerService {
   }
 
   /**
+   * create customer with external info.
+   * used for sign up.
+   *
+   * @param external CustomerEntity
+   * @return CustomerEntity
+   */
+  public CustomerEntity createWithExternal(CustomerEntity external) {
+    LOG.debug("external info: {}", external);
+    return this.customerRepository.save(external);
+  }
+
+  /**
    * sign in for customer.
    *
    * @param email    String
    * @param password String
    * @return CustomerEntity
    */
-  public CustomerEntity signIn(String email, String password) {
+  public CustomerEntity signInWithEmail(String email, String password) {
     LOG.debug("enter: email: {}", email);
     CustomerEntity existCustomer = this.getByEmail(email);
 

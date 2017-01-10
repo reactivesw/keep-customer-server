@@ -40,7 +40,7 @@ public class Customer {
    * changed anymore.
    */
   @JsonProperty
-  private String customerNumber;
+  private String customerName;
 
   /**
    * create time.

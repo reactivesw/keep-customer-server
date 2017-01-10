@@ -131,7 +131,7 @@ class CustomerServiceTest extends Specification {
         when:
         repository.findOneByEmail(_) >> entity
 
-        service.signIn(email, password)
+        service.signInWithEmail(email, password)
         then:
         noExceptionThrown()
     }
@@ -141,7 +141,7 @@ class CustomerServiceTest extends Specification {
         when:
         repository.findOneByEmail(_) >> entity
 
-        service.signIn(email, fakePassword)
+        service.signInWithEmail(email, fakePassword)
         then:
         thrown(PasswordErrorException)
     }
@@ -205,5 +205,33 @@ class CustomerServiceTest extends Specification {
         noExceptionThrown()
     }
 
+    def "Test 12.1: get by external id"() {
+        def externalId = "externalId"
+        List<CustomerEntity> customers = new ArrayList<>()
+        customers.add(entity)
+        when:
+        repository.findByExternalId(_) >> customers
+        service.getByExternalId(externalId)
+        then:
+        noExceptionThrown()
+    }
+
+    def "Test 12.2: get by external id with customer not exist"() {
+        def externalId = "externalId"
+        List<CustomerEntity> customers = new ArrayList<>()
+        when:
+        repository.findByExternalId(_) >> customers
+        service.getByExternalId(externalId)
+        then:
+        noExceptionThrown()
+    }
+
+    def "Test 13.1: create with external info"() {
+        when:
+        repository.save(_) >> entity
+        service.createWithExternal(entity)
+        then:
+        noExceptionThrown()
+    }
 
 }
