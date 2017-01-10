@@ -46,13 +46,13 @@ public class RemoveSupportLanguageService implements Update<InternationalEntity>
       throw new ParametersException("Can not remove support language which is default language.");
     }
 
-    Set<LanguageValue> supportedLanguage = entity.getSupportedLanguage();
+    Set<LanguageValue> supportedLanguage = entity.getSupportedLanguages();
 
     Predicate<LanguageValue> predicate = languageValue -> languageValue
         .getLanguageCode().equals(languageCode);
 
     supportedLanguage.removeIf(predicate);
 
-    entity.setSupportedLanguage(supportedLanguage);
+    entity.setSupportedLanguages(supportedLanguage);
   }
 }

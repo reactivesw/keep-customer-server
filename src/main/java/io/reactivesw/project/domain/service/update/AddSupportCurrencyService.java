@@ -36,9 +36,9 @@ public class AddSupportCurrencyService implements Update<InternationalEntity> {
     CurrencyValue currencyValue = CurrencyMapper.modelToEntity(
         CurrencyMap.getCurrencyByCode(currencyCode));
 
-    Set<CurrencyValue> supportCurrencies = entity.getSupportedCurrency();
+    Set<CurrencyValue> supportCurrencies = entity.getSupportedCurrencies();
     supportCurrencies.add(currencyValue);
 
-    entity.setSupportedCurrency(supportCurrencies);
+    entity.setSupportedCurrencies(supportCurrencies);
   }
 }

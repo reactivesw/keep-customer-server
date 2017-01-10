@@ -33,7 +33,7 @@ public class InternationalEntity extends BaseAllEntity {
    * supported currency.
    */
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-  private Set<CurrencyValue> supportedCurrency;
+  private Set<CurrencyValue> supportedCurrencies;
 
   /**
    * default language.
@@ -45,5 +45,5 @@ public class InternationalEntity extends BaseAllEntity {
    * supported language.
    */
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-  private Set<LanguageValue> supportedLanguage;
+  private Set<LanguageValue> supportedLanguages;
 }

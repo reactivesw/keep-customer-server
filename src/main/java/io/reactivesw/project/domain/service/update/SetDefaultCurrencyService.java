@@ -39,7 +39,7 @@ public class SetDefaultCurrencyService implements Update<InternationalEntity> {
 
     CurrencyValue defaultCurrency = entity.getDefaultCurrency();
 
-    Set<CurrencyValue> currencyValues = entity.getSupportedCurrency();
+    Set<CurrencyValue> currencyValues = entity.getSupportedCurrencies();
 
     if (currencyValues.isEmpty()) {
       currencyValues = Sets.newHashSet(currencyValue);
@@ -48,6 +48,6 @@ public class SetDefaultCurrencyService implements Update<InternationalEntity> {
       currencyValues.add(currencyValue);
     }
     entity.setDefaultCurrency(currencyValue);
-    entity.setSupportedCurrency(currencyValues);
+    entity.setSupportedCurrencies(currencyValues);
   }
 }

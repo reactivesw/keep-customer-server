@@ -39,7 +39,7 @@ public class SetDefaultLanguageService implements Update<InternationalEntity> {
 
     LanguageValue defaultLanguage = entity.getDefaultLanguage();
 
-    Set<LanguageValue> supportedLanguage = entity.getSupportedLanguage();
+    Set<LanguageValue> supportedLanguage = entity.getSupportedLanguages();
 
     if (supportedLanguage.isEmpty()) {
       supportedLanguage = Sets.newHashSet(languageValue);
@@ -48,6 +48,6 @@ public class SetDefaultLanguageService implements Update<InternationalEntity> {
       supportedLanguage.add(languageValue);
     }
     entity.setDefaultLanguage(languageValue);
-    entity.setSupportedLanguage(supportedLanguage);
+    entity.setSupportedLanguages(supportedLanguage);
   }
 }

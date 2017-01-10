@@ -46,13 +46,13 @@ public class RemoveSupportCurrencyService implements Update<InternationalEntity>
       throw new ParametersException("Can not remove support currency which is default currency.");
     }
 
-    Set<CurrencyValue> supportCurrencies = entity.getSupportedCurrency();
+    Set<CurrencyValue> supportCurrencies = entity.getSupportedCurrencies();
 
     Predicate<CurrencyValue> predicate = currencyValue -> currencyValue
         .getCurrencyCode().equals(currencyCode);
 
     supportCurrencies.removeIf(predicate);
 
-    entity.setSupportedCurrency(supportCurrencies);
+    entity.setSupportedCurrencies(supportCurrencies);
   }
 }

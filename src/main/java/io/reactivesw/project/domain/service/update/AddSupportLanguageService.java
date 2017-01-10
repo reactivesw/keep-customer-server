@@ -36,9 +36,9 @@ public class AddSupportLanguageService implements Update<InternationalEntity> {
     LanguageValue languageValue = LanguageMapper.modelToEntity(
         LanguageMap.getLanguageByCode(languageCode));
 
-    Set<LanguageValue> supportedLanguage = entity.getSupportedLanguage();
+    Set<LanguageValue> supportedLanguage = entity.getSupportedLanguages();
     supportedLanguage.add(languageValue);
 
-    entity.setSupportedLanguage(supportedLanguage);
+    entity.setSupportedLanguages(supportedLanguage);
   }
 }
