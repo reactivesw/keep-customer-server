@@ -19,8 +19,8 @@ dependencies {
 
     //security, like password encoder.
     compile('org.springframework.security:spring-security-crypto')
-//    compile('org.springframework.security:spring-security-web')
-//    compile('org.springframework.security:spring-security-config')
+    compile('org.springframework.security:spring-security-web')
+    compile('org.springframework.security:spring-security-config')
     compile('com.google.api-client:google-api-client:1.22.0')
 
     //postgresql driver
