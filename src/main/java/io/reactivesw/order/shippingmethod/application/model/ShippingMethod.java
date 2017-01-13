@@ -51,7 +51,7 @@ public class ShippingMethod {
   @ApiModelProperty(required = true)
   private List<ZoneRate> zoneRates;
 
-  @ApiModelProperty(value = "One shipping method in a project can be default.", required = true)
+  @ApiModelProperty(value = "One shipping method in a merchant can be default.", required = true)
   private Boolean isDefault;
 
 }

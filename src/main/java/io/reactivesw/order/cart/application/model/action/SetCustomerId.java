@@ -18,7 +18,7 @@ public class SetCustomerId implements UpdateAction {
 
   /**
    * customer id.
-   * If set, a customer with the given ID must exist in the project.
+   * If set, a customer with the given ID must exist in the merchant.
    */
   @NotNull
   private String customerId;

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * Sets the customer ID of the cart. When the customer ID is set, the LineItem prices are updated.
- * Customer with the given ID must exist in the project.
+ * Customer with the given ID must exist in the merchant.
  * Created by umasuo on 16/12/19.
  */
 @Service(value = CartUpdateActionUtils.SET_CUSTOMER_ID)

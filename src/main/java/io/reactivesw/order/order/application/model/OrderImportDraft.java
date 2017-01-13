@@ -25,7 +25,7 @@ public class OrderImportDraft {
   /**
    * String that unique identifies an order.
    * It can be used to create more human-readable (in contrast to ID) identifier for the order.
-   * It should be unique within a project.
+   * It should be unique within a merchant.
    */
   private String orderNumber;
 

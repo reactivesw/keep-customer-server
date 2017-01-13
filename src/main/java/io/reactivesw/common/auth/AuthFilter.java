@@ -50,6 +50,7 @@ public class AuthFilter implements Filter {
     try {
       // verify if access should be granted
       checkCallAuthorization((HttpServletRequest) request);
+
       next.doFilter(request, response);
     } catch (AuthenticationFailedException ex) {
       LOG.debug("check auth failed. request:{}", request, ex);

@@ -79,7 +79,6 @@ public class ProductTypeService {
     // TODO: 16/12/8 validateNull if has product
 
     productTypeRepository.delete(id);
-
     // TODO: 16/12/8 send a message
 
     LOG.debug("end deleteProductTypeById, id is : {}, version is : {}", id, version);

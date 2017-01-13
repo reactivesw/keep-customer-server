@@ -116,7 +116,7 @@ public class AddressValue extends BaseIdEntity {
   /**
    * p0box.
    */
-  @Column(name = "p0box")
+  @Column(name = "pobox")
   private String box;
 
   /**

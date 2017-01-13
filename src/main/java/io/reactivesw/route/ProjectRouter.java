@@ -6,12 +6,12 @@ package io.reactivesw.route;
 public final class ProjectRouter extends BaseRouter {
 
   /**
-   * project root.
+   * merchant root.
    */
   public static final String PROJECT_ROOT = URL_ROOT + "/projects";
 
   /**
-   * project international root.
+   * merchant international root.
    */
   public static final String INTERNATIONAL_ROOT = PROJECT_ROOT + "/international";
 

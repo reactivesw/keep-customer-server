@@ -36,7 +36,7 @@ public class Customer {
 
   /**
    * The customer number can be used to create a more human-readable (in contrast to ID) identifier
-   * for the customer. It should be unique across a project. Once the field was set it cannot be
+   * for the customer. It should be unique across a merchant. Once the field was set it cannot be
    * changed anymore.
    */
   @JsonProperty

@@ -55,7 +55,7 @@ public class ShippingMethodEntity extends BaseAllEntity {
   private Set<ZoneRateValue> zoneRates;
 
   /**
-   * is default for a project.
+   * is default for a merchant.
    */
   @Column
   private Boolean asDefault;

@@ -47,7 +47,7 @@ public class CategoryDraft {
    * human-readable identifier usually used as deep-link URL to the related category.
    * Allowed are alphabetic, numeric, underscore (_) and hyphen (-) characters.
    * Maximum size is 256.
-   * Must be unique across a project!
+   * Must be unique across a merchant!
    * The same category can have the same slug for different languages.
    */
   @ApiModelProperty(value =

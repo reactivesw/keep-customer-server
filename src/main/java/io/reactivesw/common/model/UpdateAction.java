@@ -8,7 +8,7 @@ import io.reactivesw.order.cartdiscount.application.model.action.CartDiscountUpd
 import io.reactivesw.order.discountcode.application.model.action.DiscountCodeUpdateAction;
 import io.reactivesw.order.shippingmethod.application.model.action.ShippingMethodUpdateAction;
 import io.reactivesw.order.zone.application.model.action.ZoneUpdateAction;
-import io.reactivesw.project.application.model.action.InternationalUpdateAction;
+import io.reactivesw.merchant.application.model.action.InternationalUpdateAction;
 
 /**
  * configurations for common update actions that will be used in more thant one service

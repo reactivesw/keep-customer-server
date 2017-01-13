@@ -16,7 +16,7 @@ public class OrderFromCartDraft {
 
   @ApiModelProperty(value = "String that uniquely identifies an order. " +
           "It can be used to create more human-readable (in contrast to ID) identifier for the order." +
-          " It should be unique across a project. Once it’s set it cannot be changed.",
+          " It should be unique across a merchant. Once it’s set it cannot be changed.",
           required = false)
   private String orderNumber;
 
