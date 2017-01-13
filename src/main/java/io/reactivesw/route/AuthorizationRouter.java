@@ -6,7 +6,7 @@ package io.reactivesw.route;
 public final class AuthorizationRouter extends BaseRouter {
 
   /**
-   * authorization root.
+   * authentication root.
    */
   public static final String AUTHORIZATION_ROOT = "/auth";
 

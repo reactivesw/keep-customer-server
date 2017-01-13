@@ -1,4 +1,4 @@
-package io.reactivesw.authorization.infrastructure.util;
+package io.reactivesw.authentication.infrastructure.util;
 
 /**
  * Created by umasuo on 17/1/10.

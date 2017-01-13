@@ -1,4 +1,4 @@
-package io.reactivesw.authorization.infrastructure.enums;
+package io.reactivesw.authentication.infrastructure.enums;
 
 /**
  * Created by umasuo on 16/11/21.

@@ -1,6 +1,6 @@
-package io.reactivesw.authorization.application.controller;
+package io.reactivesw.authentication.application.controller;
 
-import io.reactivesw.authorization.application.model.LoginResult;
+import io.reactivesw.authentication.application.model.LoginResult;
 import io.reactivesw.route.AuthorizationRouter;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -45,7 +45,7 @@ public class LoginController {
    * @return LoginResult
    */
   @PostMapping(value = AuthorizationRouter.AUTHORIZATION_LOGIN, params = "gToken")
-  public LoginResult loginWithGoogle(String gToken) {
+  public LoginResult loginWithGoogle(@RequestParam String gToken) {
     LOG.info("enter: gToken: {}", gToken);
 
 

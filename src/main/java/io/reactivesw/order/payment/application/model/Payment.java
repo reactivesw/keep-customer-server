@@ -42,7 +42,7 @@ public class Payment {
   @ApiModelProperty(value = "The amount of money that has been authorized (i.e. reliably reserved, but not transferred).", required = false)
   private Money amountAuthorized;
 
-  @ApiModelProperty(value = "Until when the authorization is valid. Can only be set when amountAuthorized is set, too.", required = false)
+  @ApiModelProperty(value = "Until when the authentication is valid. Can only be set when amountAuthorized is set, too.", required = false)
   private String authorizedUntil;
 
   @ApiModelProperty(value = "The amount of money that has been received from the customer. " +

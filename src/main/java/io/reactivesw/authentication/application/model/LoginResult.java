@@ -1,4 +1,4 @@
-package io.reactivesw.authorization.application.model;
+package io.reactivesw.authentication.application.model;
 
 import io.reactivesw.customer.customer.application.model.Customer;
 import io.swagger.annotations.ApiModel;

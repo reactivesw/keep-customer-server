@@ -34,7 +34,7 @@ public class PaymentDraft {
           required = false)
   private Money amountAuthorized;
 
-  @ApiModelProperty(value = "Until when the authorization is valid. Can only be set when amountAuthorized is set, too.",
+  @ApiModelProperty(value = "Until when the authentication is valid. Can only be set when amountAuthorized is set, too.",
           required = false)
   private String authorizedUntil;
 
