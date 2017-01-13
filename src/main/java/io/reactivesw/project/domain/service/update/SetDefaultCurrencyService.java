@@ -41,7 +41,7 @@ public class SetDefaultCurrencyService implements Update<InternationalEntity> {
 
     Set<CurrencyValue> currencyValues = entity.getSupportedCurrencies();
 
-    if (currencyValues.isEmpty()) {
+    if (currencyValues == null || currencyValues.isEmpty()) {
       currencyValues = Sets.newHashSet(currencyValue);
     } else {
       currencyValues.remove(defaultCurrency);

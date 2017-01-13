@@ -41,7 +41,7 @@ public class SetDefaultLanguageService implements Update<InternationalEntity> {
 
     Set<LanguageValue> supportedLanguage = entity.getSupportedLanguages();
 
-    if (supportedLanguage.isEmpty()) {
+    if (supportedLanguage == null || supportedLanguage.isEmpty()) {
       supportedLanguage = Sets.newHashSet(languageValue);
     } else {
       supportedLanguage.remove(defaultLanguage);
