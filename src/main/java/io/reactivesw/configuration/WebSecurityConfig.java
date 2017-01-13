@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration
     .WebSecurityConfigurerAdapter;
+import org.springframework.web.cors.CorsUtils;
 
 /**
  * Created by umasuo on 17/1/10.
@@ -22,8 +23,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
    */
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests().antMatchers("/**").permitAll();
-    http.csrf().disable();
+    http.authorizeRequests()
+        .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()//就是这一行啦
+        .antMatchers("/**").permitAll()
+//        .antMatchers("/admin/**").hasRole("ADMIN")
+//        .antMatchers("/teacher/**").hasRole("CUSTOMER")
+        .anyRequest().authenticated()
+        .and().csrf().disable();
   }
 
   /**
