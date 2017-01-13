@@ -2,9 +2,11 @@ package io.reactivesw.authorization.application.controller;
 
 import io.reactivesw.authorization.application.model.LoginResult;
 import io.reactivesw.route.AuthorizationRouter;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -25,8 +27,9 @@ public class LoginController {
    * @param password String
    * @return LoginResult
    */
+  @ApiOperation("login with email")
   @PostMapping(value = AuthorizationRouter.AUTHORIZATION_LOGIN, params = "email")
-  public LoginResult loginWithEmail(String email, String password) {
+  public LoginResult loginWithEmail(@RequestParam String email, @RequestParam String password) {
     LOG.info("enter: email:", email);
 
 

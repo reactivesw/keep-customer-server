@@ -5,29 +5,29 @@ package io.reactivesw.authorization.infrastructure.enums;
  */
 public enum Scope {
   /**
-   * Grants full access to the APIs for the specified project.
+   * Grants full access to the APIs for the specified merchant.
    */
   manageProject,
 
   /**
    * Grants access to the APIs for creating, modifying and viewing anything related to product in a
-   * project. Implies view_products for the same project.
+   * merchant. Implies view_products for the same merchant.
    */
   manageProducts,
 
   /**
-   * Grants access to the APIs for viewing anything related to product in a project.
+   * Grants access to the APIs for viewing anything related to product in a merchant.
    */
   viewProducts,
 
   /**
    * Grants access to the APIs for creating, modifying and viewing anything related to order in a
-   * project. Implies view_orders for the same project.
+   * merchant. Implies view_orders for the same merchant.
    */
   manageOrders,
 
   /**
-   * Grants access to the APIs for viewing anything related to order in a project.
+   * Grants access to the APIs for viewing anything related to order in a merchant.
    */
   viewOrders,
 
@@ -41,12 +41,12 @@ public enum Scope {
 
   /**
    * Grants access to the APIs for creating, modifying and viewing anything related to customer in
-   * a project. Implies view_customers for the same project.
+   * a merchant. Implies view_customers for the same merchant.
    */
   manageCustomers,
 
   /**
-   * Grants access to the APIs for viewing anything related to customer in a project.
+   * Grants access to the APIs for viewing anything related to customer in a merchant.
    */
   viewCustomers,
 
@@ -59,23 +59,23 @@ public enum Scope {
 
   /**
    * Grants access to the APIs for creating, modifying and viewing anything related to model in a
-   * project.
+   * merchant.
    */
   manageTypes,
 
   /**
-   * Grants access to the APIs for viewing anything related to model in a project.
+   * Grants access to the APIs for viewing anything related to model in a merchant.
    */
   viewTypes,
 
   /**
    * Grants access to the APIs for creating, modifying and viewing anything related to payment in a
-   * project.
+   * merchant.
    */
   managePayments,
 
   /**
-   * Grants access to the APIs for viewing anything related to payment in a project.
+   * Grants access to the APIs for viewing anything related to payment in a merchant.
    */
   viewPayments,
 
@@ -86,7 +86,7 @@ public enum Scope {
 
   /**
    * Grants access to the APIs for creating, modifying and viewing anything related to subscriptions
-   * in a project.
+   * in a merchant.
    */
   manageSubscriptions;
 }

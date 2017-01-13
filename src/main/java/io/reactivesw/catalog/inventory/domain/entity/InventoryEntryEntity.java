@@ -3,10 +3,8 @@ package io.reactivesw.catalog.inventory.domain.entity;
 import io.reactivesw.common.dialect.JSONBUserType;
 import io.reactivesw.common.entity.BaseAllEntity;
 import io.reactivesw.common.model.CustomFields;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;

@@ -40,7 +40,7 @@ public class ProductDraft {
 
   /**
    * human-readable identifiers usually used as deep-link URL to the related product. Each slug
-   * must be unique across a project, but a product can have the same slug for different
+   * must be unique across a merchant, but a product can have the same slug for different
    * languages. Allowed are alphabetic, numeric, underscore (_) and hyphen (-) characters.
    * Maximum size is 256.
    */

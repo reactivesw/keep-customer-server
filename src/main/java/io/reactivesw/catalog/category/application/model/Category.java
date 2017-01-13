@@ -62,7 +62,7 @@ public class Category {
 
   /**
    * human-readable identifiers usually used as deep-link URL to the related category.
-   * Each slug is unique across a project,
+   * Each slug is unique across a merchant,
    * but a category can have the same slug for different languages.
    */
   @ApiModelProperty(value = "CategoryEntity Slug", required = true)

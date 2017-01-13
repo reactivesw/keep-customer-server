@@ -95,7 +95,7 @@ public class ProductApplication {
   }
 
   /**
-   * Query product project list.
+   * Query product merchant list.
    * TODO: 16/12/21 only for query product by category now.
    * query example:
    * categoryId:"1234567890"

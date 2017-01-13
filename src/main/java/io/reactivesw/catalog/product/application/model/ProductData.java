@@ -41,7 +41,7 @@ public class ProductData {
 
   /**
    * human-readable identifiers usually used as deep-link URL to the related product.
-   * Each slug is unique across a project,
+   * Each slug is unique across a merchant,
    * but a product can have the same slug for different languages.
    */
   private String slug;
