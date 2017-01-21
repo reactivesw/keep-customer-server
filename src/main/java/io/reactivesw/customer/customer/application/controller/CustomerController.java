@@ -38,15 +38,14 @@ public class CustomerController {
   /**
    * login with email.
    *
-   * @param email    String
-   * @param password String
+   * @param email String
    * @return Customer
    */
-  @PostMapping(value = CustomerRouter.CUSTOMER_LOGIN, params = "email")
-  public Customer loginWithEmail(String email, String password) {
+  @PostMapping(value = CustomerRouter.CUSTOMER_ROOT, params = "email")
+  public Customer getCustomerWithEmail(String email) {
     LOG.info("enter: email:", email);
 
-    CustomerEntity entity = customerService.signInWithEmail(email, password);
+    CustomerEntity entity = customerService.getByEmail(email);
 
     Customer customer = CustomerMapper.entityToModel(entity);
 
@@ -60,11 +59,12 @@ public class CustomerController {
    * @param gToken String
    * @return Customer
    */
-  @PostMapping(value = CustomerRouter.CUSTOMER_LOGIN, params = "gToken")
-  public Customer loginWithGoogle(String gToken) throws Exception {
+  @PostMapping(value = CustomerRouter.CUSTOMER_ROOT, params = "gToken")
+  public Customer getCustomerWithGoogleToken(String gToken) throws Exception {
     LOG.info("enter: idToken:", gToken);
 
-    Customer customer = customerApplication.loginWithGoogleToken(gToken);
+    Customer customer = customerApplication.getOrCreateWithGoogleToken(gToken);
+
 
     LOG.info("exit: customer:", customer);
     return customer;

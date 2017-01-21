@@ -1,6 +1,7 @@
 package io.reactivesw.authentication.application.controller;
 
 import io.reactivesw.authentication.application.model.LoginResult;
+import io.reactivesw.authentication.application.service.LoginService;
 import io.reactivesw.route.AuthorizationRouter;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -21,6 +22,11 @@ public class LoginController {
   private final static Logger LOG = LoggerFactory.getLogger(LoginController.class);
 
   /**
+   * login service.
+   */
+  private transient LoginService loginService;
+
+  /**
    * login with email.
    *
    * @param email    String
@@ -32,9 +38,10 @@ public class LoginController {
   public LoginResult loginWithEmail(@RequestParam String email, @RequestParam String password) {
     LOG.info("enter: email:", email);
 
+    LoginResult result = loginService.loginWithEmail(email, password);
 
-    LOG.info("exit: customer:");
-    return null;
+    LOG.info("exit: loginResult:", result);
+    return result;
   }
 
 
