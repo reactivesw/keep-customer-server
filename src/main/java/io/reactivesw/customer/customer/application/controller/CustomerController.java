@@ -9,7 +9,9 @@ import io.reactivesw.route.CustomerRouter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -41,8 +43,8 @@ public class CustomerController {
    * @param email String
    * @return Customer
    */
-  @PostMapping(value = CustomerRouter.CUSTOMER_ROOT, params = "email")
-  public Customer getCustomerWithEmail(String email) {
+  @GetMapping(value = CustomerRouter.CUSTOMER_ROOT, params = "email")
+  public Customer getCustomerWithEmail(@RequestParam String email) {
     LOG.info("enter: email:", email);
 
     CustomerEntity entity = customerService.getByEmail(email);
@@ -59,12 +61,28 @@ public class CustomerController {
    * @param gToken String
    * @return Customer
    */
-  @PostMapping(value = CustomerRouter.CUSTOMER_ROOT, params = "gToken")
-  public Customer getCustomerWithGoogleToken(String gToken) throws Exception {
+  @GetMapping(value = CustomerRouter.CUSTOMER_ROOT, params = "gToken")
+  public Customer getCustomerWithGoogleToken(@RequestParam String gToken) throws Exception {
     LOG.info("enter: idToken:", gToken);
 
     Customer customer = customerApplication.getOrCreateWithGoogleToken(gToken);
 
+    LOG.info("exit: customer:", customer);
+    return customer;
+  }
+
+  /**
+   * get customer by id.
+   *
+   * @param id String customer id
+   * @return Customer
+   */
+  @GetMapping(value = CustomerRouter.CUSTOMER_WITH_ID)
+  public Customer getCustomerWithId(@PathVariable String id) {
+    LOG.info("enter: id: {}", id);
+
+    CustomerEntity customerEntity = customerService.getById(id);
+    Customer customer = CustomerMapper.entityToModel(customerEntity);
 
     LOG.info("exit: customer:", customer);
     return customer;
