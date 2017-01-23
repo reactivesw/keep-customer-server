@@ -13,12 +13,12 @@ import org.springframework.web.client.RestTemplate;
  * Created by umasuo on 17/1/21.
  */
 @Component
-public class LoginRestClient {
+public class RestClient {
 
   /**
    * logger.
    */
-  private static final Logger LOG = LoggerFactory.getLogger(LoginRestClient.class);
+  private static final Logger LOG = LoggerFactory.getLogger(RestClient.class);
 
   /**
    * RestTemplate.
@@ -57,6 +57,24 @@ public class LoginRestClient {
     LOG.debug("enter: google token: {}", gToken);
 
     String url = serviceLocator.getCustomer() + CustomerRouter.getCustomerWithGoogle(gToken);
+    Customer customer = restTemplate.getForObject(url, Customer.class);
+
+    return customer;
+  }
+
+  /**
+   * create customer with email & password.
+   *
+   * @param email
+   * @param password
+   * @return
+   */
+  public Customer createCustomerByEmail(String email, String password) {
+    LOG.debug("enter: email: {}", email);
+
+    String url = serviceLocator.getCustomer() + CustomerRouter.createCustomerWithEmail(email,
+        password);
+    //TODO here we should use post.
     Customer customer = restTemplate.getForObject(url, Customer.class);
 
     return customer;

@@ -10,11 +10,11 @@ import spock.lang.Specification
 /**
  * Created by umasuo on 17/1/21.
  */
-class LoginServiceTest extends Specification {
+class LoginApplicationTest extends Specification {
 
-    LoginService loginService
+    LoginApplication loginService
 
-    LoginRestClient loginRestClient = Mock(LoginRestClient)
+    RestClient loginRestClient = Mock(RestClient)
 
     Customer customer
 
@@ -28,7 +28,7 @@ class LoginServiceTest extends Specification {
 
     def setup() {
         customer = new Customer(password: hashedPassword, email: email)
-        loginService = new LoginService(loginRestClient: loginRestClient)
+        loginService = new LoginApplication(restClient: loginRestClient)
 
     }
 

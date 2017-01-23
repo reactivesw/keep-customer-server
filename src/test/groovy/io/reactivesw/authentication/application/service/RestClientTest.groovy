@@ -8,9 +8,9 @@ import spock.lang.Specification
 /**
  * Created by umasuo on 17/1/21.
  */
-class LoginRestClientTest extends Specification {
+class RestClientTest extends Specification {
 
-    LoginRestClient loginRestClient
+    RestClient RestClient
 
     RestTemplate restTemplate = Mock(RestTemplate)
 
@@ -20,11 +20,13 @@ class LoginRestClientTest extends Specification {
 
     def email = "test@test.com"
 
+    def password = "password"
+
     def gToken = "tmpGoogleToken"
 
     def setup() {
         serviceLocator = new ServiceLocator()
-        loginRestClient = new LoginRestClient(restTemplate: restTemplate, serviceLocator: serviceLocator)
+        RestClient = new RestClient(restTemplate: restTemplate, serviceLocator: serviceLocator)
         customer = new Customer()
     }
 
@@ -32,7 +34,7 @@ class LoginRestClientTest extends Specification {
 
         when:
         restTemplate.getForObject(_, _) >> customer
-        Customer result = loginRestClient.getCustomerByEmail(email)
+        Customer result = RestClient.getCustomerByEmail(email)
         then:
         customer == result
         noExceptionThrown()
@@ -42,7 +44,17 @@ class LoginRestClientTest extends Specification {
 
         when:
         restTemplate.getForObject(_, _) >> customer
-        Customer result = loginRestClient.getCustomerByGoogleToken(gToken)
+        Customer result = RestClient.getCustomerByGoogleToken(gToken)
+        then:
+        customer == result
+        noExceptionThrown()
+    }
+
+    def "Test 1.3: create customer with email"() {
+
+        when:
+        restTemplate.getForObject(_, _) >> customer
+        Customer result = RestClient.createCustomerByEmail(email, password)
         then:
         customer == result
         noExceptionThrown()

@@ -12,19 +12,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * Created by umasuo on 17/1/21.
  */
-public class LoginService {
+public class LoginApplication {
 
 
   /**
    * logger.
    */
-  private final static Logger LOG = LoggerFactory.getLogger(LoginService.class);
+  private final static Logger LOG = LoggerFactory.getLogger(LoginApplication.class);
 
   /**
    * login Rest client.
    */
   @Autowired
-  private transient LoginRestClient loginRestClient;
+  private transient RestClient restClient;
 
   /**
    * login with email and password.
@@ -68,7 +68,7 @@ public class LoginService {
    * @return Customer
    */
   private Customer getLegalCustomer(String email, String password) {
-    Customer customer = loginRestClient.getCustomerByEmail(email);
+    Customer customer = restClient.getCustomerByEmail(email);
     if (customer == null) {
       //TODO return error message.
       throw new NotExistException("Customer Not exist.");
@@ -89,7 +89,7 @@ public class LoginService {
    * @return Customer
    */
   private Customer getLegalCustomer(String gToken) {
-    Customer customer = this.loginRestClient.getCustomerByGoogleToken(gToken);
+    Customer customer = this.restClient.getCustomerByGoogleToken(gToken);
     if (customer == null) {
       //TODO return error message.
       throw new NotExistException("Customer Not exist.");
