@@ -24,7 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests()
-        .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()//就是这一行啦
+        .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
         .antMatchers("/**").permitAll()
 //        .antMatchers("/admin/**").hasRole("ADMIN")
 //        .antMatchers("/teacher/**").hasRole("CUSTOMER")

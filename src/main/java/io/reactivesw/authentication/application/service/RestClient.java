@@ -55,11 +55,8 @@ public class RestClient {
    */
   public Customer getCustomerByGoogleToken(String gToken) {
     LOG.debug("enter: google token: {}", gToken);
-
     String url = serviceLocator.getCustomer() + CustomerRouter.getCustomerWithGoogle(gToken);
-    Customer customer = restTemplate.getForObject(url, Customer.class);
-
-    return customer;
+    return restTemplate.getForObject(url, Customer.class);
   }
 
   /**

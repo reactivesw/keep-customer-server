@@ -1,6 +1,7 @@
 package io.reactivesw.authentication.application.service;
 
 import io.reactivesw.authentication.application.model.LoginResult;
+import io.reactivesw.authentication.infrastructure.util.JwtUtil;
 import io.reactivesw.common.exception.NotExistException;
 import io.reactivesw.common.exception.PasswordErrorException;
 import io.reactivesw.customer.customer.application.model.Customer;
@@ -29,6 +30,13 @@ public class LoginApplication {
   private transient RestClient restClient;
 
   /**
+   * JWT(json web token) util
+   */
+  @Autowired
+  private transient JwtUtil jwtUtil;
+
+
+  /**
    * login with email and password.
    *
    * @param email    String
@@ -39,7 +47,7 @@ public class LoginApplication {
     LOG.debug("enter: email: {}", email);
     Customer customer = this.getLegalCustomer(email, password);
 
-    String token = this.getToken(customer);
+    String token = this.jwtUtil.generateToken(customer);
 
     LoginResult result = new LoginResult(customer, token);
 
@@ -55,7 +63,7 @@ public class LoginApplication {
   public LoginResult loginWithGoogle(String gToken) {
     Customer customer = this.getLegalCustomer(gToken);
 
-    String token = this.getToken(customer);
+    String token = this.jwtUtil.generateToken(customer);
 
     LoginResult result = new LoginResult(customer, token);
 
@@ -99,14 +107,4 @@ public class LoginApplication {
     return customer;
   }
 
-  /**
-   * get customer token.
-   *
-   * @param customer Customer
-   * @return String token
-   */
-  private String getToken(Customer customer) {
-
-    return customer.getPassword();
-  }
 }

@@ -1,6 +1,7 @@
 package io.reactivesw.authentication.application.service
 
 import io.reactivesw.authentication.application.model.LoginResult
+import io.reactivesw.authentication.infrastructure.util.JwtUtil
 import io.reactivesw.common.exception.NotExistException
 import io.reactivesw.common.exception.PasswordErrorException
 import io.reactivesw.customer.customer.application.model.Customer
@@ -16,6 +17,8 @@ class LoginApplicationTest extends Specification {
 
     RestClient loginRestClient = Mock(RestClient)
 
+    JwtUtil jwtUtil
+
     Customer customer
 
     def email = "test@test.com"
@@ -28,7 +31,8 @@ class LoginApplicationTest extends Specification {
 
     def setup() {
         customer = new Customer(password: hashedPassword, email: email)
-        loginService = new LoginApplication(restClient: loginRestClient)
+        jwtUtil = new JwtUtil(secret: "QWERTYUIOPASDGHJKLZXCVBNM",expiresIn: 7200000)
+        loginService = new LoginApplication(restClient: loginRestClient, jwtUtil: jwtUtil)
 
     }
 

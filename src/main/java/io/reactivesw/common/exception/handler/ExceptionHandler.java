@@ -23,7 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.common.collect.ImmutableList;
 
 import io.reactivesw.common.exception.AlreadyExistException;
-import io.reactivesw.common.exception.AuthenticationFailedException;
+import io.reactivesw.common.exception.AuthFailedException;
 
 /**
  * Created by BruceLiu on 16/11/14.
@@ -45,11 +45,11 @@ public class ExceptionHandler implements HandlerExceptionResolver {
    * exception that do not log.
    */
   private static final ImmutableList<?> OMITTED_EXCEPTIONS = ImmutableList
-      .of(AlreadyExistException.class, AuthenticationFailedException.class);
+      .of(AlreadyExistException.class, AuthFailedException.class);
 
   static {
     EXCEPTION_MAP.put(AlreadyExistException.class, HttpStatus.CONFLICT);
-    EXCEPTION_MAP.put(AuthenticationFailedException.class, HttpStatus.UNAUTHORIZED);
+    EXCEPTION_MAP.put(AuthFailedException.class, HttpStatus.UNAUTHORIZED);
     EXCEPTION_MAP.put(NotExistException.class, HttpStatus.NOT_FOUND);
     EXCEPTION_MAP.put(ConflictException.class, HttpStatus.CONFLICT);
   }
