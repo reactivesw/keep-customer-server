@@ -6,6 +6,7 @@ import io.reactivesw.route.AuthorizationRouter;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,7 @@ public class LoginController {
   /**
    * login service.
    */
+  @Autowired
   private transient LoginApplication loginApplication;
 
   /**
@@ -54,9 +56,10 @@ public class LoginController {
   public LoginResult loginWithGoogle(@RequestParam String gToken) {
     LOG.info("enter: gToken: {}", gToken);
 
+    LoginResult result = loginApplication.loginWithGoogle(gToken);
 
     LOG.info("exit: customer:");
-    return null;
+    return result;
   }
 
   /**

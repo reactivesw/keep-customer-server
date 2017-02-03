@@ -8,10 +8,12 @@ import io.reactivesw.customer.customer.infrastructure.util.PasswordUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by umasuo on 17/1/21.
  */
+@Service
 public class LoginApplication {
 
 
