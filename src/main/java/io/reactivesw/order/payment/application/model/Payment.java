@@ -11,9 +11,14 @@ import io.reactivesw.common.model.Reference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 /**
  * Created by umasuo on 16/11/17.
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
 @ApiModel
 public class Payment {
 
@@ -79,140 +84,4 @@ public class Payment {
   @ApiModelProperty(required = true)
   @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
   private ZonedDateTime lastModifiedAt;
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public Integer getVersion() {
-    return version;
-  }
-
-  public void setVersion(Integer version) {
-    this.version = version;
-  }
-
-  public Reference getCustomer() {
-    return customer;
-  }
-
-  public void setCustomer(Reference customer) {
-    this.customer = customer;
-  }
-
-  public String getExternalId() {
-    return externalId;
-  }
-
-  public void setExternalId(String externalId) {
-    this.externalId = externalId;
-  }
-
-  public String getInterfaceId() {
-    return interfaceId;
-  }
-
-  public void setInterfaceId(String interfaceId) {
-    this.interfaceId = interfaceId;
-  }
-
-  public Money getAmountPlanned() {
-    return amountPlanned;
-  }
-
-  public void setAmountPlanned(Money amountPlanned) {
-    this.amountPlanned = amountPlanned;
-  }
-
-  public Money getAmountAuthorized() {
-    return amountAuthorized;
-  }
-
-  public void setAmountAuthorized(Money amountAuthorized) {
-    this.amountAuthorized = amountAuthorized;
-  }
-
-  public String getAuthorizedUntil() {
-    return authorizedUntil;
-  }
-
-  public void setAuthorizedUntil(String authorizedUntil) {
-    this.authorizedUntil = authorizedUntil;
-  }
-
-  public Money getAmountPaid() {
-    return amountPaid;
-  }
-
-  public void setAmountPaid(Money amountPaid) {
-    this.amountPaid = amountPaid;
-  }
-
-  public Money getAmountRefunded() {
-    return amountRefunded;
-  }
-
-  public void setAmountRefunded(Money amountRefunded) {
-    this.amountRefunded = amountRefunded;
-  }
-
-  public PaymentMethodInfo getPaymentMethodInfo() {
-    return paymentMethodInfo;
-  }
-
-  public void setPaymentMethodInfo(PaymentMethodInfo paymentMethodInfo) {
-    this.paymentMethodInfo = paymentMethodInfo;
-  }
-
-  public PaymentStatus getPaymentStatus() {
-    return paymentStatus;
-  }
-
-  public void setPaymentStatus(PaymentStatus paymentStatus) {
-    this.paymentStatus = paymentStatus;
-  }
-
-  public List<TransactionModel> getTransactions() {
-    return transactions;
-  }
-
-  public void setTransactions(List<TransactionModel> transactions) {
-    this.transactions = transactions;
-  }
-
-  public List<CustomFields> getInterfaceInteractions() {
-    return interfaceInteractions;
-  }
-
-  public void setInterfaceInteractions(List<CustomFields> interfaceInteractions) {
-    this.interfaceInteractions = interfaceInteractions;
-  }
-
-  public CustomFields getCustom() {
-    return custom;
-  }
-
-  public void setCustom(CustomFields custom) {
-    this.custom = custom;
-  }
-
-  public ZonedDateTime getCreatedAt() {
-    return createdAt;
-  }
-
-  public void setCreatedAt(ZonedDateTime createdAt) {
-    this.createdAt = createdAt;
-  }
-
-  public ZonedDateTime getLastModifiedAt() {
-    return lastModifiedAt;
-  }
-
-  public void setLastModifiedAt(ZonedDateTime lastModifiedAt) {
-    this.lastModifiedAt = lastModifiedAt;
-  }
 }
