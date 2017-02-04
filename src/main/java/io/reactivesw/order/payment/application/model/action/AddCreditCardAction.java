@@ -11,7 +11,13 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AddCreditCardAction {
-  String action;
-  String customerId;
-  CreditCard creditCart;
+  /**
+   * The Action.
+   */
+  private String action;
+
+  /**
+   * The Credit cart.
+   */
+  private CreditCard creditCart;
 }

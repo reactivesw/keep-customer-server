@@ -24,4 +24,25 @@ public final class PaymentRouter {
    */
   public static final String PAYMENT_WITH_TRANSACTION_ID = PAYMENT_ROOT + "/{" +
       PAYMENT_TRANSACTIONID + "}";
+
+  /**
+   * customer id.
+   */
+  public static final String CUSTOMER_ID = "customerId";
+
+  /**
+   * credit card.
+   */
+  public static final String CREDIT_CARDS = "credit-cards";
+
+  /**
+   * The constant PAYMENT_WITH_CREDIT_CARDS.
+   */
+  public static final String PAYMENT_WITH_CREDIT_CARDS = PAYMENT_ROOT + "/" + CREDIT_CARDS;
+
+  /**
+   * payment with credit cards and customer id, /payments/credit-cards/{customerId}.
+   */
+  public static final String PAYMENT_WITH_CUSTOMER_ID = PAYMENT_WITH_CREDIT_CARDS +
+      "/{" + CUSTOMER_ID + "}";
 }

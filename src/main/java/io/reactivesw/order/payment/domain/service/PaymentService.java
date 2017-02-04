@@ -47,10 +47,12 @@ public class PaymentService {
 
   /**
    * get credit cards by customer id.
+   *
    * @param customerId customer id
    * @return list of credit card
    */
   public List<CreditCard> getCreditCards(String customerId) {
+    LOG.debug("enter getCreditCards, customer id is : {}", customerId);
     List<CreditCard> result = Lists.newArrayList();
     Customer customer = gateway.customer().find(restClient.getBraintreeCustomerId(customerId));
     if (customer == null) {
@@ -60,39 +62,55 @@ public class PaymentService {
     } else {
       result = CreditCardMapper.entityToModel(customer.getCreditCards());
     }
+    LOG.debug("end getCreditCards, get result : {}", result);
     return result;
   }
 
   /**
    * add credit card.
+   *
    * @param addCreditCartAction update action
    * @return list of credit cards
    */
-  public List<CreditCard> addCreditCard(AddCreditCardAction addCreditCartAction) {
+  public List<CreditCard> addCreditCard(String customerId,
+                                        AddCreditCardAction addCreditCartAction) {
 
-    String braintreeCustomerId = restClient.getBraintreeCustomerId(addCreditCartAction
-        .getCustomerId());
+    LOG.debug("enter addCreditCard, customer id is : {}, credit card is : {}", customerId,
+        addCreditCartAction.getCreditCart());
+    String braintreeCustomerId = restClient.getBraintreeCustomerId(customerId);
 
     CustomerRequest request = CustomerRequestMapper.of(addCreditCartAction.getCreditCart());
     Result<Customer> result = null;
     if (StringUtils.isBlank(braintreeCustomerId)) {
       result = gateway.customer().create(request);
-      restClient.saveBraintreeCustomerId(addCreditCartAction.getCustomerId(), result.getTarget()
+      restClient.saveBraintreeCustomerId(customerId, result.getTarget()
           .getId());
     } else {
       result = gateway.customer().update(braintreeCustomerId, request);
     }
+
+    LOG.debug("end addCreditCard");
 
     return CreditCardMapper.entityToModel(result.getTarget().getCreditCards());
   }
 
   /**
    * checkout.
-   * @param decimalAmount amount to paid
-   * @param token payment method token
+   *
+   * @param amount amount to paid
+   * @param token         payment method token
    * @return Transaction
    */
-  public Transaction checkout(BigDecimal decimalAmount, String token) {
+  public Transaction checkout(String amount, String token) {
+
+    LOG.debug("enter checkout, amount is : {}, payment method token is : {}", amount, token);
+
+    BigDecimal decimalAmount = null;
+    try {
+      decimalAmount = new BigDecimal(amount);
+    } catch (NumberFormatException e) {
+      LOG.debug("can not parse amount : {} to BigDecimal", amount);
+    }
 
     TransactionRequest request = TransactionRequestMapper.of(decimalAmount, token);
     Result<Transaction> result = gateway.transaction().sale(request);

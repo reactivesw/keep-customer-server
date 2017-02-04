@@ -57,7 +57,7 @@ class PaymentServiceTest extends Specification {
         gateway.transaction() >> transactionGateway
 
         when:
-        def result = paymentService.checkout(new BigDecimal(amount), nonce)
+        def result = paymentService.checkout(amount, nonce)
 
         then:
         result != null
