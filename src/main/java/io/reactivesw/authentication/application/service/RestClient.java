@@ -1,12 +1,18 @@
 package io.reactivesw.authentication.application.service;
 
+import io.reactivesw.authentication.infrastructure.util.JwtUtil;
 import io.reactivesw.common.util.ServiceLocator;
 import io.reactivesw.customer.customer.application.model.Customer;
 import io.reactivesw.route.CustomerRouter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -29,8 +35,26 @@ public class RestClient {
    * service locator.
    * //TODO we should use register to replace this.
    */
-  @Autowired
   private transient ServiceLocator serviceLocator;
+
+  /**
+   * http token for call other services.
+   */
+  private transient final HttpHeaders headers;
+
+  /**
+   * constructor. generate the service token here.
+   *
+   * @param serviceLocator
+   * @param jwtUtil
+   */
+  @Autowired
+  public RestClient(ServiceLocator serviceLocator, JwtUtil jwtUtil) {
+    this.serviceLocator = serviceLocator;
+    String token = jwtUtil.generateServiceToken("authentication");
+    headers = new HttpHeaders();
+    headers.set("Authorization", "Bearer " + token);
+  }
 
   /**
    * Gets Address from customer service.
@@ -56,7 +80,15 @@ public class RestClient {
   public Customer getCustomerByGoogleToken(String gToken) {
     LOG.debug("enter: google token: {}", gToken);
     String url = serviceLocator.getCustomer() + CustomerRouter.getCustomerWithGoogle(gToken);
-    return restTemplate.getForObject(url, Customer.class);
+    Customer result = null;
+    try {
+      ResponseEntity responseEntity = restTemplate.exchange(url, HttpMethod.GET, new
+          HttpEntity<Object>(headers), Customer.class);
+      result = (Customer) responseEntity.getBody();
+    } catch (RestClientException e) {
+      LOG.warn("RestClientException: when call customer service with google token.");
+    }
+    return result;
   }
 
   /**
@@ -72,10 +104,16 @@ public class RestClient {
     String url = serviceLocator.getCustomer() + CustomerRouter.createCustomerWithEmail(email,
         password);
     //TODO here we should use post.
-    Customer customer = restTemplate.getForObject(url, Customer.class);
-
-    return customer;
+    return restTemplate.getForObject(url, Customer.class);
   }
 
 
+  /**
+   * rest setter for test.
+   *
+   * @param restTemplate
+   */
+  protected void setRestTemplate(RestTemplate restTemplate) {
+    this.restTemplate = restTemplate;
+  }
 }

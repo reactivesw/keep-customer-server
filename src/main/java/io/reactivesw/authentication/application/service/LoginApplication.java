@@ -102,7 +102,7 @@ public class LoginApplication {
     Customer customer = this.restClient.getCustomerByGoogleToken(gToken);
     if (customer == null) {
       //TODO return error message.
-      throw new NotExistException("Customer Not exist.");
+      throw new NotExistException("Login failed.");
     }
     return customer;
   }

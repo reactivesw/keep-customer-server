@@ -43,7 +43,11 @@ public class JwtUtil {
       tk.setCustomerName(body.getSubject());
       tk.setCustomerId((String) body.get("customerId"));
       tk.setGenerateTime((Long) body.get("generateTime"));
-      tk.setExpiresIn(((Integer) body.get("expiresIn")).longValue());
+      if (body.get("expiresIn") instanceof Integer) {
+        tk.setExpiresIn(((Integer) body.get("expiresIn")).longValue());
+      } else {
+        tk.setExpiresIn((Long) body.get("expiresIn"));
+      }
 //      u.setScope((String) body.get("scope"));
 
       return tk;
@@ -66,6 +70,25 @@ public class JwtUtil {
     claims.put("customerId", customer.getId());
     claims.put("generateTime", System.currentTimeMillis());
     claims.put("expiresIn", expiresIn);
+//    claims.put("scope", u.getRole());// TODO set role or scope
+
+    return Jwts.builder()
+        .setClaims(claims)
+        .signWith(SignatureAlgorithm.HS512, secret)
+        .compact();
+  }
+
+  /**
+   * generate service token for service.
+   *
+   * @param serviceName service name
+   * @return String
+   */
+  public String generateServiceToken(String serviceName) {
+    Claims claims = Jwts.claims().setSubject(serviceName);
+    claims.put("customerId", serviceName);//TODO set the service id.
+    claims.put("generateTime", System.currentTimeMillis());
+    claims.put("expiresIn", Integer.MAX_VALUE);
 //    claims.put("scope", u.getRole());// TODO set role or scope
 
     return Jwts.builder()

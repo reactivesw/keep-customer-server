@@ -81,9 +81,11 @@ public class ExceptionHandler implements HandlerExceptionResolver {
       // only log those ones that are real failures
       LOG.error("request {}, response {}, obj {}, status {}", request, response, obj, status,
           throwable);
+
     }
 
     response.setStatus(status.value());
+    response.setHeader("error message", ex.getMessage());
     response.setContentType(MediaType.APPLICATION_JSON.getType());
     return throwable;
   }
