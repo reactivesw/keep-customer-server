@@ -22,8 +22,10 @@ public final class PaymentMapper {
    * @return the payment entity
    * TODO
    */
-  public static PaymentEntity of(Transaction transaction) {
+  public static PaymentEntity of(String customerId, Transaction transaction) {
     PaymentEntity entity = new PaymentEntity();
+
+
 
     return entity;
   }

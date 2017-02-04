@@ -111,7 +111,7 @@ public class PaymentService {
    * @param token         payment method token
    * @return Transaction
    */
-  public Payment checkout(String amount, String token) {
+  public Payment checkout(String customerId, String amount, String token) {
 
     LOG.debug("enter checkout, amount is : {}, payment method token is : {}", amount, token);
 
@@ -128,7 +128,7 @@ public class PaymentService {
     // TODO: 17/2/4 处理不同的结果
     
     Transaction transaction = result.getTransaction();
-    PaymentEntity entity = PaymentMapper.of(transaction);
+    PaymentEntity entity = PaymentMapper.of(customerId, transaction);
     PaymentEntity savedEntity = paymentRepository.save(entity);
 
     return PaymentMapper.entityToModel(savedEntity);

@@ -1,6 +1,7 @@
 package io.reactivesw.order.payment.application.controller;
 
 import static io.reactivesw.route.PaymentRouter.CUSTOMER_ID;
+import static io.reactivesw.route.PaymentRouter.PAYMENT_ROOT;
 import static io.reactivesw.route.PaymentRouter.PAYMENT_WITH_CUSTOMER_ID;
 
 import io.reactivesw.order.payment.application.model.CreditCard;
@@ -68,11 +69,12 @@ public class PaymentController {
   @ApiOperation("update customer credit card")
   @PutMapping(PAYMENT_WITH_CUSTOMER_ID)
   public List<CreditCard> addCreditCards(@PathVariable(CUSTOMER_ID)
-                                            @ApiParam(value = "customerId", required = true)
-                                                String customerId,
-                                            @RequestBody
-                                            @ApiParam(value = "CategoryEntity Update Fields", required = true)
-                                            @Valid AddCreditCardAction addCreditCardAction) {
+                                         @ApiParam(value = "customerId", required = true)
+                                             String customerId,
+                                         @RequestBody
+                                         @ApiParam(value = "CategoryEntity Update Fields",
+                                             required = true)
+                                         @Valid AddCreditCardAction addCreditCardAction) {
     LOG.debug("enter updateCreditCards, customer id is : {}", customerId);
 
     List<CreditCard> result = paymentService.addCreditCard(customerId, addCreditCardAction);
@@ -90,11 +92,14 @@ public class PaymentController {
    * @return Payment
    */
   @ApiOperation("checkout")
-  @PostMapping("/payment")
-  public Payment checkout(@RequestParam String amount, @RequestParam
-      String token) {
-    LOG.debug("enter checkout, amount is : {}, token is : {}", amount, token);
-    Payment result = paymentService.checkout(amount, token);
+  @PostMapping(PAYMENT_ROOT)
+  public Payment checkout(@RequestParam String customerId,
+                          @RequestParam String amount,
+                          @RequestParam String token) {
+
+    LOG.debug("enter checkout, customer id is : {} amount is : {}, token is : {}",
+        customerId, amount, token);
+    Payment result = paymentService.checkout(customerId, amount, token);
     LOG.debug("end checkout, result is : {}", result);
     return result;
   }
