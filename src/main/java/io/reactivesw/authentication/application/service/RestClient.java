@@ -1,6 +1,7 @@
 package io.reactivesw.authentication.application.service;
 
 import io.reactivesw.authentication.infrastructure.util.JwtUtil;
+import io.reactivesw.common.exception.ConflictException;
 import io.reactivesw.common.exception.CreateResourceFailed;
 import io.reactivesw.common.util.ServiceLocator;
 import io.reactivesw.customer.customer.application.model.Customer;
@@ -12,8 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -112,7 +115,7 @@ public class RestClient {
     LOG.debug("enter: email: {}", email);
 
     String url = serviceLocator.getCustomer() + CustomerRouter.CUSTOMER_ROOT;
-    Customer customer = null;
+    Customer customer;
     SignupWithEmail emailModel = new SignupWithEmail();
     emailModel.setEmail(email);
     emailModel.setPassword(password);
@@ -120,8 +123,11 @@ public class RestClient {
       ResponseEntity responseEntity = restTemplate.exchange(url, HttpMethod.POST,
           new HttpEntity<SignupWithEmail>(emailModel, headers), Customer.class);
       customer = (Customer) responseEntity.getBody();
-    } catch (RestClientException e) {
+    } catch (HttpClientErrorException e) {
       LOG.warn("RestClientException: when call customer service with email.");
+      if (e.getStatusCode() == HttpStatus.CONFLICT) {
+        throw new ConflictException("Customer already exist.");
+      }
       throw new CreateResourceFailed("Create new customer with email failed.");
     }
     LOG.debug("exit: customer: {}", customer);
