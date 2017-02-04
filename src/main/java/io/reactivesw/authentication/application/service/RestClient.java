@@ -1,8 +1,10 @@
 package io.reactivesw.authentication.application.service;
 
 import io.reactivesw.authentication.infrastructure.util.JwtUtil;
+import io.reactivesw.common.exception.CreateResourceFailed;
 import io.reactivesw.common.util.ServiceLocator;
 import io.reactivesw.customer.customer.application.model.Customer;
+import io.reactivesw.customer.customer.application.model.SignupWithEmail;
 import io.reactivesw.route.CustomerRouter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +19,7 @@ import org.springframework.web.client.RestTemplate;
 
 /**
  * Created by umasuo on 17/1/21.
+ * TODO Rest call should be replaced.
  */
 @Component
 public class RestClient {
@@ -65,8 +68,14 @@ public class RestClient {
     LOG.debug("enter: email: {}", email);
 
     String url = serviceLocator.getCustomer() + CustomerRouter.getCustomerWithEmail(email);
-    Customer customer = restTemplate.getForObject(url, Customer.class);
-
+    Customer customer = null;
+    try {
+      ResponseEntity responseEntity = restTemplate.exchange(url, HttpMethod.GET, new
+          HttpEntity<Object>(headers), Customer.class);
+      customer = (Customer) responseEntity.getBody();
+    } catch (RestClientException e) {
+      LOG.warn("RestClientException: when call customer service with google token.");
+    }
     LOG.debug("exit: customer: {}", customer);
     return customer;
   }
@@ -80,15 +89,16 @@ public class RestClient {
   public Customer getCustomerByGoogleToken(String gToken) {
     LOG.debug("enter: google token: {}", gToken);
     String url = serviceLocator.getCustomer() + CustomerRouter.getCustomerWithGoogle(gToken);
-    Customer result = null;
+    Customer customer = null;
     try {
       ResponseEntity responseEntity = restTemplate.exchange(url, HttpMethod.GET, new
           HttpEntity<Object>(headers), Customer.class);
-      result = (Customer) responseEntity.getBody();
+      customer = (Customer) responseEntity.getBody();
     } catch (RestClientException e) {
       LOG.warn("RestClientException: when call customer service with google token.");
     }
-    return result;
+    LOG.debug("exit: customer: {}", customer);
+    return customer;
   }
 
   /**
@@ -101,10 +111,21 @@ public class RestClient {
   public Customer createCustomerByEmail(String email, String password) {
     LOG.debug("enter: email: {}", email);
 
-    String url = serviceLocator.getCustomer() + CustomerRouter.createCustomerWithEmail(email,
-        password);
-    //TODO here we should use post.
-    return restTemplate.getForObject(url, Customer.class);
+    String url = serviceLocator.getCustomer() + CustomerRouter.CUSTOMER_ROOT;
+    Customer customer = null;
+    SignupWithEmail emailModel = new SignupWithEmail();
+    emailModel.setEmail(email);
+    emailModel.setPassword(password);
+    try {
+      ResponseEntity responseEntity = restTemplate.exchange(url, HttpMethod.POST,
+          new HttpEntity<SignupWithEmail>(emailModel, headers), Customer.class);
+      customer = (Customer) responseEntity.getBody();
+    } catch (RestClientException e) {
+      LOG.warn("RestClientException: when call customer service with email.");
+      throw new CreateResourceFailed("Create new customer with email failed.");
+    }
+    LOG.debug("exit: customer: {}", customer);
+    return customer;
   }
 
 

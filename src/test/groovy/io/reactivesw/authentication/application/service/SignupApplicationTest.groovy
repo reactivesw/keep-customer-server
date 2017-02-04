@@ -1,6 +1,7 @@
 package io.reactivesw.authentication.application.service
 
 import io.reactivesw.authentication.application.model.LoginResult
+import io.reactivesw.authentication.infrastructure.util.JwtUtil
 import io.reactivesw.common.exception.NotExistException
 import io.reactivesw.common.exception.PasswordErrorException
 import io.reactivesw.customer.customer.application.model.Customer
@@ -16,6 +17,8 @@ class SignupApplicationTest extends Specification {
 
     RestClient restClient = Mock(RestClient)
 
+    JwtUtil jwtUtil = Mock(JwtUtil)
+
     Customer customer
 
     def email = "test@test.com"
@@ -26,9 +29,10 @@ class SignupApplicationTest extends Specification {
 
     def gToken = "tmpGoogleToken"
 
+
     def setup() {
         customer = new Customer(password: hashedPassword, email: email)
-        signupApplication = new SignupApplication(restClient: restClient)
+        signupApplication = new SignupApplication(restClient: restClient, jwtUtil: jwtUtil)
 
     }
 

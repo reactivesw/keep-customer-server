@@ -80,14 +80,4 @@ public final class CustomerRouter extends BaseRouter {
     return CUSTOMER_ROOT + "?gToken=" + gToken;
   }
 
-  /**
-   * create customer with email.
-   *
-   * @param email String
-   * @param password String
-   * @return String
-   */
-  public static String createCustomerWithEmail(String email, String password) {
-    return CUSTOMER_ROOT + "?email=" + email + "&password=" + password;
-  }
 }

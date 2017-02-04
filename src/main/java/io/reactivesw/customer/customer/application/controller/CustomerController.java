@@ -1,6 +1,7 @@
 package io.reactivesw.customer.customer.application.controller;
 
 import io.reactivesw.customer.customer.application.model.Customer;
+import io.reactivesw.customer.customer.application.model.SignupWithEmail;
 import io.reactivesw.customer.customer.application.model.mapper.CustomerMapper;
 import io.reactivesw.customer.customer.application.service.CustomerApplication;
 import io.reactivesw.customer.customer.domain.entity.CustomerEntity;
@@ -11,6 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -51,7 +54,7 @@ public class CustomerController {
 
     Customer customer = CustomerMapper.entityToModel(entity);
 
-    LOG.info("exit: customer:", customer);
+    LOG.info("exit: customer: {}", customer);
     return customer;
   }
 
@@ -67,7 +70,7 @@ public class CustomerController {
 
     Customer customer = customerApplication.getOrCreateWithGoogleToken(gToken);
 
-    LOG.info("exit: customer:", customer);
+    LOG.info("exit: customer: {}", customer);
     return customer;
   }
 
@@ -84,7 +87,24 @@ public class CustomerController {
     CustomerEntity customerEntity = customerService.getById(id);
     Customer customer = CustomerMapper.entityToModel(customerEntity);
 
-    LOG.info("exit: customer:", customer);
+    LOG.info("exit: customer: {}", customer);
+    return customer;
+  }
+
+  /**
+   * create new customer with email and password.
+   *
+   * @param emailModel email model.
+   * @return
+   */
+  @PostMapping(value = CustomerRouter.CUSTOMER_ROOT)
+  public Customer createCustomerWithEmail(
+      @RequestBody SignupWithEmail emailModel) {
+    LOG.info("enter: email: {}", emailModel.getEmail());
+    CustomerEntity customerEntity = customerService.createWithEmail(emailModel.getEmail(),
+        emailModel.getPassword());
+    Customer customer = CustomerMapper.entityToModel(customerEntity);
+    LOG.info("exit: customer:{}", customer);
     return customer;
   }
 

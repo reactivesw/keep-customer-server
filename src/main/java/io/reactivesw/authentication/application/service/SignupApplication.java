@@ -1,16 +1,17 @@
 package io.reactivesw.authentication.application.service;
 
 import io.reactivesw.authentication.application.model.LoginResult;
+import io.reactivesw.authentication.infrastructure.util.JwtUtil;
 import io.reactivesw.customer.customer.application.model.Customer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by umasuo on 17/1/23.
  */
-@RestController
+@Service
 public class SignupApplication {
 
   /**
@@ -26,6 +27,12 @@ public class SignupApplication {
   private transient RestClient restClient;
 
   /**
+   * jwt tool for generate token.
+   */
+  @Autowired
+  private transient JwtUtil jwtUtil;
+
+  /**
    * signup with email.
    *
    * @param email    email
@@ -37,8 +44,7 @@ public class SignupApplication {
 
     Customer customer = restClient.createCustomerByEmail(email, password);
 
-    //TODO generate the token
-    String token = null;
+    String token = jwtUtil.generateToken(customer);
 
     LoginResult loginResult = new LoginResult(customer, token);
 

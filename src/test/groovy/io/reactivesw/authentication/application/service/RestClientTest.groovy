@@ -38,8 +38,10 @@ class RestClientTest extends Specification {
 
     def "Test 1.1: get customer by email"() {
 
+        ResponseEntity responseEntity = Mock(ResponseEntity)
         when:
-        restTemplate.getForObject(_, _) >> customer
+        restTemplate.exchange(_, _, _, _) >> responseEntity
+        responseEntity.getBody() >> customer
         Customer result = restClient.getCustomerByEmail(email)
         then:
         customer == result
@@ -59,8 +61,10 @@ class RestClientTest extends Specification {
 
     def "Test 1.3: create customer with email"() {
 
+        ResponseEntity responseEntity = Mock(ResponseEntity)
         when:
-        restTemplate.getForObject(_, _) >> customer
+        restTemplate.exchange(_, _, _, _) >> responseEntity
+        responseEntity.getBody() >> customer
         Customer result = restClient.createCustomerByEmail(email, password)
         then:
         customer == result
