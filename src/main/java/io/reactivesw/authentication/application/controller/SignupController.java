@@ -2,13 +2,14 @@ package io.reactivesw.authentication.application.controller;
 
 import io.reactivesw.authentication.application.model.LoginResult;
 import io.reactivesw.authentication.application.service.SignupApplication;
+import io.reactivesw.customer.customer.application.model.SignupWithEmail;
 import io.reactivesw.route.AuthorizationRouter;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -32,16 +33,16 @@ public class SignupController {
   /**
    * generate the token.
    *
-   * @param email
-   * @param password
+   * @param emailModel
    * @return
    */
   @ApiOperation("sign up with email & password")
   @PostMapping(AuthorizationRouter.AUTHORIZATION_SIGN_UP)
-  public LoginResult signupWithEmail(@RequestParam String email, @RequestParam String password) {
-    LOG.info("enter: email:", email);
+  public LoginResult signupWithEmail(@RequestBody SignupWithEmail emailModel) {
+    LOG.info("enter: email:", emailModel.getEmail());
 
-    LoginResult result = signupApplication.signupWithEmail(email, password);
+    LoginResult result = signupApplication.signupWithEmail(emailModel.getEmail(), emailModel
+        .getPassword());
 
     LOG.info("exit: loginResult:", result);
     return result;

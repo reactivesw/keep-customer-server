@@ -43,6 +43,9 @@ public class AuthFilter implements Filter {
   static {
     EXCLUDE_URL.add("/auth");
     EXCLUDE_URL.add("/products");
+    EXCLUDE_URL.add("/swagger");
+    EXCLUDE_URL.add("/webjars");
+    EXCLUDE_URL.add("/v2");
   }
 
   /**
