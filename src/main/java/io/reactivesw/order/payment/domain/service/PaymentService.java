@@ -9,10 +9,14 @@ import com.braintreegateway.TransactionRequest;
 import com.google.api.client.util.Lists;
 
 import io.reactivesw.order.payment.application.model.CreditCard;
+import io.reactivesw.order.payment.application.model.Payment;
 import io.reactivesw.order.payment.application.model.action.AddCreditCardAction;
 import io.reactivesw.order.payment.application.model.mapper.CreditCardMapper;
 import io.reactivesw.order.payment.application.model.mapper.CustomerRequestMapper;
+import io.reactivesw.order.payment.application.model.mapper.PaymentMapper;
 import io.reactivesw.order.payment.application.model.mapper.TransactionRequestMapper;
+import io.reactivesw.order.payment.domain.entity.PaymentEntity;
+import io.reactivesw.order.payment.infrastructure.repository.PaymentRepository;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -44,6 +48,12 @@ public class PaymentService {
    */
   @Autowired
   private transient PaymentRestClient restClient;
+
+  /**
+   * payment repository.
+   */
+  @Autowired
+  private transient PaymentRepository paymentRepository;
 
   /**
    * get credit cards by customer id.
@@ -101,7 +111,7 @@ public class PaymentService {
    * @param token         payment method token
    * @return Transaction
    */
-  public Transaction checkout(String amount, String token) {
+  public Payment checkout(String amount, String token) {
 
     LOG.debug("enter checkout, amount is : {}, payment method token is : {}", amount, token);
 
@@ -115,8 +125,12 @@ public class PaymentService {
     TransactionRequest request = TransactionRequestMapper.of(decimalAmount, token);
     Result<Transaction> result = gateway.transaction().sale(request);
 
-    // TODO: 17/2/3 save transaction
+    // TODO: 17/2/4 处理不同的结果
+    
+    Transaction transaction = result.getTransaction();
+    PaymentEntity entity = PaymentMapper.of(transaction);
+    PaymentEntity savedEntity = paymentRepository.save(entity);
 
-    return result.getTarget();
+    return PaymentMapper.entityToModel(savedEntity);
   }
 }

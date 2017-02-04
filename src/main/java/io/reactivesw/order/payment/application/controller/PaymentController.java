@@ -3,9 +3,8 @@ package io.reactivesw.order.payment.application.controller;
 import static io.reactivesw.route.PaymentRouter.CUSTOMER_ID;
 import static io.reactivesw.route.PaymentRouter.PAYMENT_WITH_CUSTOMER_ID;
 
-import com.braintreegateway.Transaction;
-
 import io.reactivesw.order.payment.application.model.CreditCard;
+import io.reactivesw.order.payment.application.model.Payment;
 import io.reactivesw.order.payment.application.model.action.AddCreditCardAction;
 import io.reactivesw.order.payment.domain.service.PaymentService;
 import io.swagger.annotations.ApiOperation;
@@ -88,14 +87,14 @@ public class PaymentController {
    *
    * @param amount amount to paid
    * @param token  payment method token
-   * @return transaction transaction
+   * @return Payment
    */
   @ApiOperation("checkout")
   @PostMapping("/payment")
-  public Transaction checkout(@RequestParam String amount, @RequestParam
+  public Payment checkout(@RequestParam String amount, @RequestParam
       String token) {
     LOG.debug("enter checkout, amount is : {}, token is : {}", amount, token);
-    Transaction result = paymentService.checkout(amount, token);
+    Payment result = paymentService.checkout(amount, token);
     LOG.debug("end checkout, result is : {}", result);
     return result;
   }
