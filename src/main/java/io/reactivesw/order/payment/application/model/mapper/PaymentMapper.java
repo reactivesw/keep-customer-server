@@ -25,7 +25,7 @@ public final class PaymentMapper {
   public static PaymentEntity of(String customerId, Transaction transaction) {
     PaymentEntity entity = new PaymentEntity();
 
-
+    entity.setCustomerId(customerId);
 
     return entity;
   }
