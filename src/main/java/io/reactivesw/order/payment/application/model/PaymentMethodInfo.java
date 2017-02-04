@@ -4,10 +4,15 @@ import io.reactivesw.common.model.LocalizedString;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * Created by umasuo on 16/11/17.
  */
 @ApiModel
+@Getter
+@Setter
 public class PaymentMethodInfo {
 
   @ApiModelProperty(value = "The interface that handles the payment (usually a PSP). " +
@@ -23,28 +28,4 @@ public class PaymentMethodInfo {
   @ApiModelProperty(value = "A human-readable, localized name for the payment method, e.g. ‘Credit Card’.",
           required = false)
   private LocalizedString name;
-
-  public String getPaymentInterface() {
-    return paymentInterface;
-  }
-
-  public void setPaymentInterface(String paymentInterface) {
-    this.paymentInterface = paymentInterface;
-  }
-
-  public String getMethod() {
-    return method;
-  }
-
-  public void setMethod(String method) {
-    this.method = method;
-  }
-
-  public LocalizedString getName() {
-    return name;
-  }
-
-  public void setName(LocalizedString name) {
-    this.name = name;
-  }
 }
