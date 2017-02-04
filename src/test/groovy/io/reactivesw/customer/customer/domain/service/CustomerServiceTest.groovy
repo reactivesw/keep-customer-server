@@ -234,4 +234,12 @@ class CustomerServiceTest extends Specification {
         noExceptionThrown()
     }
 
+    def "Test 14.1: create new customer with email"() {
+        when:
+        repository.save(_) >> entity
+        service.createWithEmail(email, password)
+        then:
+        noExceptionThrown()
+    }
+
 }

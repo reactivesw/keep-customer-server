@@ -44,7 +44,7 @@ class CustomerApplicationTest extends Specification {
         verifier.verify(_) >> idToken
         customerService.getByExternalId(_) >> null
         customerService.createWithExternal(_) >> customerEntity
-        Customer customer = customerApplication.loginWithGoogleToken(token)
+        Customer customer = customerApplication.getOrCreateWithGoogleToken(token)
         then:
         customer.getExternalId() == payload.getSubject()
         noExceptionThrown()
@@ -53,7 +53,7 @@ class CustomerApplicationTest extends Specification {
     def "Test 1.2: Login with google token and token verify failed"() {
         when:
         verifier.verify(_) >> null
-        customerApplication.loginWithGoogleToken(token)
+        customerApplication.getOrCreateWithGoogleToken(token)
         then:
         thrown(ParametersException)
     }
@@ -63,7 +63,7 @@ class CustomerApplicationTest extends Specification {
         verifier.verify(_) >> idToken
         customerService.getByExternalId(_) >> customerEntity
         customerService.createWithExternal(_) >> customerEntity
-        Customer customer = customerApplication.loginWithGoogleToken(token)
+        Customer customer = customerApplication.getOrCreateWithGoogleToken(token)
         then:
         customer.getExternalId() == payload.getSubject()
         noExceptionThrown()

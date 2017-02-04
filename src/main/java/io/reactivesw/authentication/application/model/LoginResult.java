@@ -20,4 +20,21 @@ public class LoginResult {
    * customer.
    */
   Customer customer;
+
+  /**
+   * default constructor.
+   */
+  public LoginResult() {
+  }
+
+  /**
+   * constructor with full data.
+   *
+   * @param customer Customer
+   * @param token    String
+   */
+  public LoginResult(Customer customer, String token) {
+    this.customer = customer;
+    this.token = token;
+  }
 }

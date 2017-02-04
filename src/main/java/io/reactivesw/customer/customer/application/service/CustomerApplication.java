@@ -70,7 +70,8 @@ public class CustomerApplication {
    * @throws GeneralSecurityException
    * @throws IOException
    */
-  public Customer loginWithGoogleToken(String gToken) throws GeneralSecurityException, IOException {
+  public Customer getOrCreateWithGoogleToken(String gToken) throws GeneralSecurityException,
+      IOException {
     LOG.debug("enter: gToken: {}", gToken);
     GoogleIdToken idToken = this.verifyToken(gToken);
 

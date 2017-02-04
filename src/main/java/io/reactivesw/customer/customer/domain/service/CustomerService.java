@@ -103,7 +103,7 @@ public class CustomerService {
     List<CustomerEntity> customers = this.customerRepository.findByExternalId(externalId);
 
     CustomerEntity customerEntity = customers.parallelStream().findAny().orElse(null);
-    
+
     LOG.debug("exit: externalId:{}, customer:{}", externalId, customerEntity);
     return customerEntity;
   }
@@ -129,14 +129,7 @@ public class CustomerService {
 
 
     String email = sample.getEmail();
-    if (StringUtils.isNotBlank(email)) {
-      email = email.toLowerCase(Locale.ENGLISH);
-      CustomerEntity existValue = this.customerRepository.findOneByEmail(email);
-      if (existValue != null) {
-        LOG.debug("error: customer already exist. email: {}", email);
-        throw new AlreadyExistException("Customer already exist. email: " + email);
-      }
-    }
+    this.checkEmail(email);
 
     //email should be case-insensitive.
     sample.setEmail(email);
@@ -144,6 +137,22 @@ public class CustomerService {
     sample.setPassword(PasswordUtil.hashPassword(sample.getPassword()));
     LOG.debug("exit: customer create success.");
     return this.customerRepository.save(sample);
+  }
+
+  /**
+   * create new customer with email and password.
+   *
+   * @param email    String
+   * @param password String
+   * @return CustomerEntity
+   */
+  public CustomerEntity createWithEmail(String email, String password) {
+
+    this.checkEmail(email);
+    CustomerEntity entity = new CustomerEntity();
+    entity.setEmail(email);
+    entity.setPassword(PasswordUtil.hashPassword(password));
+    return this.customerRepository.save(entity);
   }
 
   /**
@@ -285,6 +294,22 @@ public class CustomerService {
     if (!result) {
       LOG.debug("Password not correct ");
       throw new PasswordErrorException("Password not correct.");
+    }
+  }
+
+  /**
+   * check if the mail is unique.
+   *
+   * @param email
+   */
+  private void checkEmail(String email) {
+    if (StringUtils.isNotBlank(email)) {
+      String tmmEmail = email.toLowerCase(Locale.ENGLISH);
+      CustomerEntity existValue = this.customerRepository.findOneByEmail(tmmEmail);
+      if (existValue != null) {
+        LOG.debug("error: customer already exist. email: {}", email);
+        throw new AlreadyExistException("Customer already exist. email: " + tmmEmail);
+      }
     }
   }
 }

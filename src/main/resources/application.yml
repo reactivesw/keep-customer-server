@@ -24,3 +24,7 @@ braintree:
 app:
   domain:
     name: http://localhost:8088
+
+jwt:
+  secret: QWERTYUIOPASDFGHJKLZXCVBNM
+  expiresin: 123456789

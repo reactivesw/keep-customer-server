@@ -16,21 +16,21 @@ import java.io.Serializable;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @ApiModel
 @Data
-public class Token implements Serializable{
+public class Token implements Serializable {
 
-  @JsonProperty("access_token")
-  private String accessToken;
+  @JsonProperty("customer_id")
+  private String customerId;
 
-  @ApiModelProperty("expire time in secondes")
+  @JsonProperty("customer_name")
+  private String customerName;
+
   @JsonProperty("expires_in")
   private Long expiresIn;
+
+  @JsonProperty("generate_time")
+  private Long generateTime;
 
   @JsonProperty("scope")
   private String scope;
 
-  @JsonProperty("refresh_token")
-  private String refreshToken;
-
-  @JsonProperty("token_type")
-  private String tokenType;
 }

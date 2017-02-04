@@ -21,11 +21,6 @@ public final class CustomerRouter extends BaseRouter {
   public static final String CUSTOMER_WITH_ID = CUSTOMER_ROOT + "/{" + CUSTOMER_ID + "}";
 
   /**
-   * customer login.
-   */
-  public static final String CUSTOMER_LOGIN = CUSTOMER_ROOT + "/signin";
-
-  /**
    * customer address.
    */
   public static final String ADDRESS_ROOT = CUSTOMER_ROOT + "/addresses";
@@ -65,5 +60,24 @@ public final class CustomerRouter extends BaseRouter {
     return ADDRESS_ROOT + "/" + addressId;
   }
 
+  /**
+   * path builder: get customer with email.
+   *
+   * @param email String
+   * @return String
+   */
+  public static String getCustomerWithEmail(String email) {
+    return CUSTOMER_ROOT + "?email=" + email;
+  }
+
+  /**
+   * path builder:get customer with google token
+   *
+   * @param gToken google token
+   * @return String
+   */
+  public static String getCustomerWithGoogle(String gToken) {
+    return CUSTOMER_ROOT + "?gToken=" + gToken;
+  }
 
 }
