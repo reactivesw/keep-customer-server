@@ -35,4 +35,13 @@ class OrderRestClientTest extends Specification {
         true
     }
 
+    def "test 3 : changeInventoryEntry"() {
+        given:
+
+        when:
+        orderRestClient.changeInventoryEntry()
+
+        then:
+        true
+    }
 }

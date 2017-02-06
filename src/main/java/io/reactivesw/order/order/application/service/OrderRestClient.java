@@ -1,5 +1,6 @@
 package io.reactivesw.order.order.application.service;
 
+import io.reactivesw.catalog.inventory.application.model.InventoryEntry;
 import io.reactivesw.order.cart.application.model.Cart;
 import io.reactivesw.order.payment.application.model.Payment;
 
@@ -65,6 +66,22 @@ public class OrderRestClient {
 
     Payment result = restTemplate.postForObject(url, request, Payment.class);
     LOG.debug("end checkout, result is : {}", result);
+    return result;
+  }
+
+  /**
+   * Change inventory entry inventory entry.
+   *
+   * @return the inventory entry
+   */
+  public InventoryEntry changeInventoryEntry() {
+    LOG.debug("enter changeInventoryEntry");
+
+    // TODO: 17/2/6
+    InventoryEntry result = null;
+    
+    LOG.debug("end changeInventoryEntry");
+
     return result;
   }
 }

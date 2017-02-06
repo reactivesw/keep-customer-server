@@ -54,6 +54,8 @@ public class OrderService {
     Payment payment = orderRestClient.checkout(amount.getCentAmount(), draft
         .getPaymentMethodToken());
 
+    // TODO: 17/2/6 change inventory
+
     OrderEntity entity = OrderMapper.of(cart, payment);
     OrderEntity savedEntity = orderRepository.save(entity);
 
