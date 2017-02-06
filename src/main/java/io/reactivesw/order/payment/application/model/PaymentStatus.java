@@ -4,10 +4,15 @@ import io.reactivesw.common.model.Reference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * Created by umasuo on 16/11/17.
  */
 @ApiModel
+@Getter
+@Setter
 public class PaymentStatus {
 
   @ApiModelProperty(value = "A code describing the current status returned by the interface that processes the payment.",
@@ -20,28 +25,4 @@ public class PaymentStatus {
 
   @ApiModelProperty(required = false)
   private Reference state;
-
-  public String getInterfaceCode() {
-    return interfaceCode;
-  }
-
-  public void setInterfaceCode(String interfaceCode) {
-    this.interfaceCode = interfaceCode;
-  }
-
-  public String getInterfaceText() {
-    return interfaceText;
-  }
-
-  public void setInterfaceText(String interfaceText) {
-    this.interfaceText = interfaceText;
-  }
-
-  public Reference getState() {
-    return state;
-  }
-
-  public void setState(Reference state) {
-    this.state = state;
-  }
 }

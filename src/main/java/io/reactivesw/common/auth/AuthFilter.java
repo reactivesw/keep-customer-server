@@ -27,7 +27,7 @@ import io.reactivesw.common.exception.handler.ExceptionHandler;
 /**
  * Created by Bruce on 16/11/15.
  */
-@Component
+//@Component
 public class AuthFilter implements Filter {
 
   /**

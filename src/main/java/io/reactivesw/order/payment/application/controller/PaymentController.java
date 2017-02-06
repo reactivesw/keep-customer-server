@@ -1,11 +1,13 @@
 package io.reactivesw.order.payment.application.controller;
 
-import com.braintreegateway.Transaction;
+import static io.reactivesw.route.PaymentRouter.CUSTOMER_ID;
+import static io.reactivesw.route.PaymentRouter.PAYMENT_ROOT;
+import static io.reactivesw.route.PaymentRouter.PAYMENT_WITH_CUSTOMER_ID;
 
-import io.reactivesw.order.payment.application.model.TransactionModel;
-import io.reactivesw.order.payment.application.model.mapper.TransactionMapper;
-import io.reactivesw.order.payment.domain.service.CheckoutService;
-import io.reactivesw.route.PaymentRouter;
+import io.reactivesw.order.payment.application.model.CreditCard;
+import io.reactivesw.order.payment.application.model.Payment;
+import io.reactivesw.order.payment.application.model.action.AddCreditCardAction;
+import io.reactivesw.order.payment.domain.service.PaymentService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
@@ -15,8 +17,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+import javax.validation.Valid;
 
 /**
  * Created by Davis on 17/1/4.
@@ -29,67 +37,70 @@ public class PaymentController {
   private static final Logger LOG = LoggerFactory.getLogger(PaymentController.class);
 
   /**
-   * checkout service.
+   * payment service.
    */
   @Autowired
-  private transient CheckoutService checkoutService;
+  private transient PaymentService paymentService;
 
   /**
-   * Gets client token.
+   * get credit cards by customer id.
    *
-   * @return the client token
+   * @param customerId customer id
+   * @return list of credit cards
    */
-  @ApiOperation("get braintree client token")
-  @GetMapping(PaymentRouter.PAYMENT_CLIENT_TOKEN)
-  public String getClientToken() {
-    LOG.debug("enter getClientToken");
-    String clientToken = checkoutService.getClientToken();
-    LOG.debug("end getClientToken, client token is : {}", clientToken);
-    return clientToken;
+  @ApiOperation("get credit cards by customer id")
+  @GetMapping(PAYMENT_WITH_CUSTOMER_ID)
+  public List<CreditCard> getCreditCards(@PathVariable(CUSTOMER_ID)
+                                         @ApiParam(value = "customerId", required = true)
+                                             String customerId) {
+    LOG.debug("enter getCreditCards, customer id is : {}", customerId);
+    List<CreditCard> result = paymentService.getCreditCards(customerId);
+    LOG.debug("end getCreditCards, result size is : {}", result.size());
+    return result;
   }
 
   /**
-   * Checkout result.
+   * Add credit cards list.
    *
-   * @param amount the amount
-   * @param nonce  the nonce
-   * @return the result
+   * @param customerId          the customer id
+   * @param addCreditCardAction the add credit card action
+   * @return the list
+   */
+  @ApiOperation("update customer credit card")
+  @PutMapping(PAYMENT_WITH_CUSTOMER_ID)
+  public List<CreditCard> addCreditCards(@PathVariable(CUSTOMER_ID)
+                                         @ApiParam(value = "customerId", required = true)
+                                             String customerId,
+                                         @RequestBody
+                                         @ApiParam(value = "CategoryEntity Update Fields",
+                                             required = true)
+                                         @Valid AddCreditCardAction addCreditCardAction) {
+    LOG.debug("enter updateCreditCards, customer id is : {}", customerId);
+
+    List<CreditCard> result = paymentService.addCreditCard(customerId, addCreditCardAction);
+
+    LOG.debug("end updateCreditCards");
+
+    return result;
+  }
+
+  /**
+   * checkout.
+   *
+   * @param amount amount to paid
+   * @param token  payment method token
+   * @return Payment
    */
   @ApiOperation("checkout")
-  @PostMapping(PaymentRouter.PAYMENT_ROOT)
-  public TransactionModel checkout(
-      @RequestParam
-      @ApiParam(value = "amount", required = true)
-          String amount,
-      @RequestParam
-      @ApiParam(value = "nonce", required = true)
-          String nonce) {
-    LOG.debug("enter checkout, amount is : {}, nonce is : {}", amount, nonce);
+  @PostMapping(PAYMENT_ROOT)
+  public Payment checkout(@RequestParam String customerId,
+                          @RequestParam String amount,
+                          @RequestParam String token) {
 
-    Transaction result = checkoutService.checkout(amount, nonce);
-
-    LOG.debug("end checkout, result is : {}", result.toString());
-
-    return TransactionMapper.entityToModel(result);
-  }
-
-  /**
-   * Gets transaction.
-   *
-   * @param transactionId the transaction id
-   * @return the transaction
-   */
-  @ApiOperation("get transaction by id")
-  @GetMapping(PaymentRouter.PAYMENT_WITH_TRANSACTION_ID)
-  public TransactionModel getTransaction(@PathVariable(PaymentRouter.PAYMENT_TRANSACTIONID)
-                                         @ApiParam(value = "transaction id", required = true)
-                                             String transactionId) {
-    LOG.debug("enter getTransaction, id is : {}", transactionId);
-
-    Transaction result = checkoutService.getTransactionById(transactionId);
-
-    LOG.debug("end getTransaction, get result : {}", result.toString());
-
-    return TransactionMapper.entityToModel(result);
+    LOG.debug("enter checkout, customer id is : {} amount is : {}, token is : {}",
+        customerId, amount, token);
+    Payment result = paymentService.checkout(customerId, amount, token);
+    LOG.debug("end checkout, result is : {}", result);
+    return result;
   }
 }

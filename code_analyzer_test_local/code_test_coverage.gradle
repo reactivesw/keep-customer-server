@@ -52,6 +52,8 @@ jacocoTestReport {
                     '**/config/**',
                     'io/reactivesw/catalog/product/application/**Client**',
                     'io/reactivesw/catalog/product/infrastructure/util/**',
+                    //braintree 的东西无法使用单元测试
+                    'io/reactivesw/order/payment/domain/service/**',
                     //先去掉auth的检查,后面再加回来
                     'io/reactivesw/common/auth/**',
                     '**/cartdiscount/**',
