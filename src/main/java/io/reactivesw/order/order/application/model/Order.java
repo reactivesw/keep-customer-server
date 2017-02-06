@@ -6,7 +6,6 @@ import io.reactivesw.common.model.Money;
 import io.reactivesw.common.model.Reference;
 import io.reactivesw.customer.customer.application.model.Address;
 import io.reactivesw.order.cart.application.model.LineItem;
-import io.reactivesw.order.cart.application.model.PaymentInfo;
 import io.reactivesw.order.cart.application.model.ShippingInfo;
 import io.reactivesw.order.cart.application.model.TaxedPrice;
 import io.reactivesw.order.cart.infrastructure.enums.InventoryMode;
@@ -157,7 +156,7 @@ public class Order {
   /**
    * The Payment info.
    */
-  private PaymentInfo paymentInfo;
+  private Reference paymentInfo;
 
   /**
    * The Inventory mode.

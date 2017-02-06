@@ -85,7 +85,7 @@ public final class OrderMapper {
     model.setShipmentState(null);
     model.setShippingInfo(ShippingInfoMapper.entityToModel(entity.getShippingInfo()));
     model.setCart(null);
-    model.setPaymentInfo(null);
+    model.setPaymentInfo(new Reference(ReferenceTypes.PAYMENT.toString(), entity.getPaymentInfo()));
     model.setInventoryMode(null);
 
     return model;

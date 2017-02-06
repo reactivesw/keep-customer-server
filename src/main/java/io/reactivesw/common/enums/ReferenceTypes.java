@@ -25,6 +25,8 @@ public enum ReferenceTypes {
 
   CUSTOMER("customer"),
 
+  PAYMENT("payment"),
+
   TAXCATEGORY("tax-category");
 
   private String value;
