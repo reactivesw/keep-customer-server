@@ -21,6 +21,10 @@ public enum ReferenceTypes {
 
   SHIPPING_METHOD("shipping-method"),
 
+  STATE("state"),
+
+  CUSTOMER("customer"),
+
   TAXCATEGORY("tax-category");
 
   private String value;

@@ -118,6 +118,7 @@ public class PaymentService {
     BigDecimal decimalAmount = null;
     try {
       decimalAmount = new BigDecimal(amount);
+      decimalAmount = decimalAmount.divide(new BigDecimal("100"));
     } catch (NumberFormatException e) {
       LOG.debug("can not parse amount : {} to BigDecimal", amount);
     }
@@ -128,7 +129,7 @@ public class PaymentService {
     // TODO: 17/2/4 处理不同的结果
     
     Transaction transaction = result.getTransaction();
-    PaymentEntity entity = PaymentMapper.of(customerId, transaction);
+    PaymentEntity entity = PaymentMapper.of(amount, customerId, transaction);
     PaymentEntity savedEntity = paymentRepository.save(entity);
 
     return PaymentMapper.entityToModel(savedEntity);
