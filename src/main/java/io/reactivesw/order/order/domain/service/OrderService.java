@@ -2,11 +2,8 @@ package io.reactivesw.order.order.domain.service;
 
 import io.reactivesw.order.order.application.model.Order;
 import io.reactivesw.order.order.application.model.OrderFromCartDraft;
-import io.reactivesw.order.order.infrastructure.repository.OrderRepository;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
