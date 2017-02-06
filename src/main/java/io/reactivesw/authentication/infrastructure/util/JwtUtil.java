@@ -14,6 +14,7 @@ import java.util.UUID;
 
 /**
  * Created by umasuo on 17/2/3.
+ * JSON WEB TOKEN UTIL.
  */
 @Configuration
 @Data
