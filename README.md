@@ -58,7 +58,6 @@ to pull the submodules from github.
 
 or when you get following error:
 
-if you get following error
 >FAILURE: Build failed with an exception.
 >* Where:
 Script '/Users/rai/it/project/reactivesw/customer_server/code_analyzer_test_local/code_analyzer.gradle' line: 6
