@@ -24,7 +24,7 @@ public class PaymentRestClient {
    */
   public String getBraintreeCustomerId(String customerId) {
     // TODO: 17/2/3
-//    LOG.debug("enter getBraintreeCustomerId, system customer id is : {}" + customerId);
+//    LOG.debug("enter getBraintreeCustomerId, system customer id is : {}" + subjectId);
 
     restTemplate.delete("");
 

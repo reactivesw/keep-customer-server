@@ -103,7 +103,7 @@ public class CartService {
    * @return CartEntity
    */
   public CartEntity getActiveCartByCustomerId(String customerId) {
-    LOG.debug("customerId:{}", customerId);
+    LOG.debug("subjectId:{}", customerId);
 
     List<CartEntity> result = this.cartRepository.findByCustomerIdAndCartState(customerId,
         CartState.Active);
@@ -184,7 +184,7 @@ public class CartService {
     entity.setCartState(CartState.Active);
     entity.setCurrencyCode("USD");
     CartEntity retEntity = cartRepository.save(entity);
-    LOG.info("Create a new active cart with customerId:{}, entity:{}", customerId, retEntity
+    LOG.info("Create a new active cart with subjectId:{}, entity:{}", customerId, retEntity
         .toString());
     return retEntity;
   }

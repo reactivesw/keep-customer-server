@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by umasuo on 17/1/10.
  */
 @RestController
-public class LoginController {
+public class SigninController {
 
   /**
    * logger.
    */
-  private final static Logger LOG = LoggerFactory.getLogger(LoginController.class);
+  private final static Logger LOG = LoggerFactory.getLogger(SigninController.class);
 
   /**
    * login service.

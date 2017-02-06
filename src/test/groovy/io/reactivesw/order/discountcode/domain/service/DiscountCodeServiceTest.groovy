@@ -35,7 +35,7 @@ class DiscountCodeServiceTest extends Specification {
         LOG.info("init discount code service test.")
         discountCodeRepository = Mock(DiscountCodeRepository)
         discountCodeService = new DiscountCodeService(discountCodeRepository: discountCodeRepository)
-        discountCodeEntity = new DiscountCodeEntity(id: discountCodeId, version: 1, code: "ERTYUIJHGFDCVBN", active: false, cartPredicate: "customerId=QWEYUIOJH")
+        discountCodeEntity = new DiscountCodeEntity(id: discountCodeId, version: 1, code: "ERTYUIJHGFDCVBN", active: false, cartPredicate: "subjectId=QWEYUIOJH")
         updateActions = new ArrayList<>()
 
     }

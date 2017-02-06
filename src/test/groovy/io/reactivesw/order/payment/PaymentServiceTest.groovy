@@ -25,7 +25,7 @@ class PaymentServiceTest extends Specification {
 
     def "test 1 : get credit carts"() {
 //        given:
-//        String customerId = "customerId"
+//        String subjectId = "subjectId"
 //        String braintreeCustomerId = "sdfljksdf"
 //        Customer customer = Mock()
 //        CreditCard creditCard = Mock()
@@ -38,7 +38,7 @@ class PaymentServiceTest extends Specification {
 //        customer.getCreditCards() >> creditCards
 //
 //        when:
-////        def result = paymentService.getCreditCards(customerId)
+////        def result = paymentService.getCreditCards(subjectId)
 //        println(creditCard.getLast4())
 //
 //        then:

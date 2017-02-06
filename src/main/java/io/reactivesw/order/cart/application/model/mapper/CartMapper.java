@@ -18,7 +18,7 @@ public class CartMapper {
 
   /**
    * convert entity to model.
-   * only map the basic info: id, version,time, customerId, anonymousId, state, taxMode, country
+   * only map the basic info: id, version,time, subjectId, anonymousId, state, taxMode, country
    *
    * @param entity CartEntity
    * @return Cart

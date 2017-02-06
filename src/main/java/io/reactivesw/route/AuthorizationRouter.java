@@ -26,6 +26,11 @@ public final class AuthorizationRouter extends BaseRouter {
   public static final String AUTHORIZATION_SIGN_UP = AUTHORIZATION_ROOT + "/signup";
 
   /**
+   * sign up.
+   */
+  public static final String AUTHORIZATION_ANONYMOUS = AUTHORIZATION_ROOT + "/anonymous";
+
+  /**
    * private default constructor.
    */
   private AuthorizationRouter() {
