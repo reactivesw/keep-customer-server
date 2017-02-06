@@ -18,6 +18,9 @@ import java.io.Serializable;
 @Data
 public class Token implements Serializable {
 
+  /**
+   * customer id, service id, anonymous id.
+   */
   @JsonProperty("subject_id")
   private String subjectId;
 
