@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     @JsonSubTypes.Type(value = RemoveLineItem.class, name = "removeLineItem"),
     @JsonSubTypes.Type(value = SetBillingAddress.class, name = "setBillingAddress"),
     @JsonSubTypes.Type(value = SetCountry.class, name = "setCountry"),
-    @JsonSubTypes.Type(value = SetCustomerId.class, name = "setCustomerId"),
+    @JsonSubTypes.Type(value = SetCustomerId.class, name = "setSubjectId"),
     @JsonSubTypes.Type(value = SetLineItemQuantity.class, name = "setLineItemQuantity"),
     @JsonSubTypes.Type(value = SetShippingAddress.class, name = "setShippingAddress"),
     @JsonSubTypes.Type(value = SetShippingMethod.class, name = "setShippingMethod"),

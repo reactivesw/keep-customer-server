@@ -43,6 +43,7 @@ public class AuthFilter implements Filter {
   static {
     EXCLUDE_URL.add("/auth");
     EXCLUDE_URL.add("/products");
+    EXCLUDE_URL.add("/categories");
     EXCLUDE_URL.add("/swagger");
     EXCLUDE_URL.add("/webjars");
     EXCLUDE_URL.add("/v2");
@@ -76,7 +77,7 @@ public class AuthFilter implements Filter {
       // verify if access should be granted
       String path = ((HttpServletRequest) request).getRequestURI();
       if (this.shouldCheckAuth(path)) {
-        checkAuth((HttpServletRequest) request);// TODO enable later
+//        checkAuth((HttpServletRequest) request);// TODO enable later
       }
 
       next.doFilter(request, response);

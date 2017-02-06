@@ -18,11 +18,11 @@ import java.io.Serializable;
 @Data
 public class Token implements Serializable {
 
-  @JsonProperty("customer_id")
-  private String customerId;
+  @JsonProperty("subject_id")
+  private String subjectId;
 
-  @JsonProperty("customer_name")
-  private String customerName;
+  @JsonProperty("token_type")
+  private String tokenType;
 
   @JsonProperty("expires_in")
   private Long expiresIn;

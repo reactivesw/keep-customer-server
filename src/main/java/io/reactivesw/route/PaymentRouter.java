@@ -28,7 +28,7 @@ public final class PaymentRouter {
   /**
    * customer id.
    */
-  public static final String CUSTOMER_ID = "customerId";
+  public static final String CUSTOMER_ID = "subjectId";
 
   /**
    * credit card.
@@ -41,7 +41,7 @@ public final class PaymentRouter {
   public static final String PAYMENT_WITH_CREDIT_CARDS = PAYMENT_ROOT + "/" + CREDIT_CARDS;
 
   /**
-   * payment with credit cards and customer id, /payments/credit-cards/{customerId}.
+   * payment with credit cards and customer id, /payments/credit-cards/{subjectId}.
    */
   public static final String PAYMENT_WITH_CUSTOMER_ID = PAYMENT_WITH_CREDIT_CARDS +
       "/{" + CUSTOMER_ID + "}";

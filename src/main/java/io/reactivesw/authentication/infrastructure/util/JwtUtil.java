@@ -10,6 +10,8 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.UUID;
+
 /**
  * Created by umasuo on 17/2/3.
  */
@@ -40,8 +42,8 @@ public class JwtUtil {
           .getBody();
 
       Token tk = new Token();
-      tk.setCustomerName(body.getSubject());
-      tk.setCustomerId((String) body.get("customerId"));
+      tk.setTokenType(body.getSubject());
+      tk.setSubjectId((String) body.get("subjectId"));
       tk.setGenerateTime((Long) body.get("generateTime"));
       if (body.get("expiresIn") instanceof Integer) {
         tk.setExpiresIn(((Integer) body.get("expiresIn")).longValue());
@@ -66,8 +68,8 @@ public class JwtUtil {
    * @return the JWT token
    */
   public String generateToken(Customer customer) {
-    Claims claims = Jwts.claims().setSubject(customer.getCustomerName());
-    claims.put("customerId", customer.getId());
+    Claims claims = Jwts.claims().setSubject("customer");
+    claims.put("subjectId", customer.getId());
     claims.put("generateTime", System.currentTimeMillis());
     claims.put("expiresIn", expiresIn);
 //    claims.put("scope", u.getRole());// TODO set role or scope
@@ -81,14 +83,32 @@ public class JwtUtil {
   /**
    * generate service token for service.
    *
-   * @param serviceName service name
+   * @param serviceId service name
    * @return String
    */
-  public String generateServiceToken(String serviceName) {
-    Claims claims = Jwts.claims().setSubject(serviceName);
-    claims.put("customerId", serviceName);//TODO set the service id.
+  public String generateServiceToken(String serviceId) {
+    Claims claims = Jwts.claims().setSubject("service");
+    claims.put("subjectId", serviceId);
     claims.put("generateTime", System.currentTimeMillis());
     claims.put("expiresIn", Integer.MAX_VALUE);
+//    claims.put("scope", u.getRole());// TODO set role or scope
+
+    return Jwts.builder()
+        .setClaims(claims)
+        .signWith(SignatureAlgorithm.HS512, secret)
+        .compact();
+  }
+
+  /**
+   * generate anonymous token.
+   *
+   * @return String
+   */
+  public String generateAnonymousToken() {
+    Claims claims = Jwts.claims().setSubject("anonymous");
+    claims.put("subjectId", UUID.randomUUID().toString());//use uuid as customer id
+    claims.put("generateTime", System.currentTimeMillis());
+    claims.put("expiresIn", expiresIn);
 //    claims.put("scope", u.getRole());// TODO set role or scope
 
     return Jwts.builder()

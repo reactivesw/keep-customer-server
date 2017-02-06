@@ -66,10 +66,10 @@ public class CartController {
    * @return the cart by customer id
    */
   @ApiOperation(value = "get cart by customer id")
-  @GetMapping(value = CartRouter.CARTS_ROOT, params = "customerId")
-  public Cart getActiveCartByCustomerId(@ApiParam(value = "customerId") @RequestParam String
+  @GetMapping(value = CartRouter.CARTS_ROOT, params = "subjectId")
+  public Cart getActiveCartByCustomerId(@ApiParam(value = "subjectId") @RequestParam String
                                             customerId) {
-    LOG.info("customerId:{}", customerId);
+    LOG.info("subjectId:{}", customerId);
 
     CartEntity entity = this.cartService.getActiveCartByCustomerId(customerId);
 

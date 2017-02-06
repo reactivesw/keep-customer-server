@@ -51,7 +51,7 @@ public class PaymentController {
   @ApiOperation("get credit cards by customer id")
   @GetMapping(PAYMENT_WITH_CUSTOMER_ID)
   public List<CreditCard> getCreditCards(@PathVariable(CUSTOMER_ID)
-                                         @ApiParam(value = "customerId", required = true)
+                                         @ApiParam(value = "subjectId", required = true)
                                              String customerId) {
     LOG.debug("enter getCreditCards, customer id is : {}", customerId);
     List<CreditCard> result = paymentService.getCreditCards(customerId);
@@ -69,7 +69,7 @@ public class PaymentController {
   @ApiOperation("update customer credit card")
   @PutMapping(PAYMENT_WITH_CUSTOMER_ID)
   public List<CreditCard> addCreditCards(@PathVariable(CUSTOMER_ID)
-                                         @ApiParam(value = "customerId", required = true)
+                                         @ApiParam(value = "subjectId", required = true)
                                              String customerId,
                                          @RequestBody
                                          @ApiParam(value = "CategoryEntity Update Fields",

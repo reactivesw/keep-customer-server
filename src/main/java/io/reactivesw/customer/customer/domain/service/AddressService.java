@@ -60,7 +60,7 @@ public class AddressService {
    * @return A set of Address value
    */
   public Set<AddressValue> getAllAddressByCustomerId(String customerId) {
-    LOG.debug("enter: customerId: {}", customerId);
+    LOG.debug("enter: subjectId: {}", customerId);
 
     CustomerEntity customer = customerService.getById(customerId);
     Set<AddressValue> addresses = customer.getAddresses();
