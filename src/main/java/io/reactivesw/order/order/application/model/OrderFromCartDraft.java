@@ -29,4 +29,7 @@ public class OrderFromCartDraft {
 
   @ApiModelProperty(required = false)
   private PaymentState paymentState;
+
+  @ApiModelProperty(value = "payment method token", required = false)
+  private String paymentMethodToken;
 }

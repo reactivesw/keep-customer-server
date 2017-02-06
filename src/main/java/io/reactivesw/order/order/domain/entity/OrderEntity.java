@@ -7,7 +7,7 @@ import io.reactivesw.common.model.Statics;
 import io.reactivesw.common.util.converter.CustomFieldsJsonConverter;
 import io.reactivesw.common.util.converter.ListJsonConverter;
 import io.reactivesw.order.cart.domain.entity.value.LineItemValue;
-import io.reactivesw.order.cart.domain.entity.value.ShippingInfoValue;
+import io.reactivesw.order.order.domain.entity.value.ShippingInfoValue;
 import io.reactivesw.order.cart.infrastructure.enums.TaxMode;
 import io.reactivesw.order.order.domain.entity.value.BillingAddressValue;
 import io.reactivesw.order.order.domain.entity.value.ShippingAddressValue;

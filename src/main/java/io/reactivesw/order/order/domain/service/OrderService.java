@@ -1,8 +1,14 @@
 package io.reactivesw.order.order.domain.service;
 
+import io.reactivesw.common.model.Money;
+import io.reactivesw.order.cart.application.model.Cart;
 import io.reactivesw.order.order.application.model.Order;
 import io.reactivesw.order.order.application.model.OrderFromCartDraft;
+import io.reactivesw.order.order.application.model.mapper.OrderMapper;
+import io.reactivesw.order.order.application.service.OrderRestClient;
+import io.reactivesw.order.order.domain.entity.OrderEntity;
 import io.reactivesw.order.order.infrastructure.repository.OrderRepository;
+import io.reactivesw.order.payment.application.model.Payment;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,10 +26,16 @@ public class OrderService {
   private static final Logger LOG = LoggerFactory.getLogger(OrderService.class);
 
   /**
+   * order rest client.
+   */
+  @Autowired
+  private transient OrderRestClient orderRestClient;
+
+  /**
    * order repository.
    */
-//  @Autowired
-//  private transient OrderRepository orderRepository;
+  @Autowired
+  private transient OrderRepository orderRepository;
 
   /**
    * Create order from cart order.
@@ -33,8 +45,21 @@ public class OrderService {
    */
   public Order createOrderFromCart(OrderFromCartDraft draft) {
     LOG.debug("enter createOrderFromCart, draft is : {}", draft.toString());
-    Order result = new Order();
 
+    String cartId = draft.getId();
+    Integer version = draft.getVersion();
+    Cart cart = orderRestClient.getCart(cartId, version);
+
+    Money amount = cart.getTotalPrice();
+    Payment payment = orderRestClient.checkout(amount.getCentAmount(), draft
+        .getPaymentMethodToken());
+
+    OrderEntity entity = OrderMapper.of(cart, payment);
+    OrderEntity savedEntity = orderRepository.save(entity);
+
+    Order result = OrderMapper.entityToModel(savedEntity);
+
+    LOG.debug("end createOrderFromCart, result is : {}", result);
     return result;
   }
 }
