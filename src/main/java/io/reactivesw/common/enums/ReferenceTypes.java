@@ -25,6 +25,8 @@ public enum ReferenceTypes {
 
   CUSTOMER("customer"),
 
+  ORDER("order"),
+
   PAYMENT("payment"),
 
   TAXCATEGORY("tax-category");

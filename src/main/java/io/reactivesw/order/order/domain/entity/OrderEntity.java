@@ -130,7 +130,7 @@ public class OrderEntity extends BaseAllEntity {
   private ShippingInfoValue shippingInfo;
 
   /**
-   * list of payment id.
+   * payment id.
    */
   @Column
   private String paymentInfo;
