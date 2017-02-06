@@ -77,7 +77,6 @@ public final class OrderMapper {
     model.setCompletedAt(entity.getCompletedAt());
     model.setOrderNumber(entity.getOrderName());
     model.setCustomerId(entity.getCustomerId());
-    model.setCustomerEmail(entity.getCustomerEmail());
     model.setAnonymousId(entity.getAnonymousId());
     model.setLineItems(null);
     model.setTotalPrice(MoneyMapper.entityToModel(entity.getTotalPrice()));
@@ -90,14 +89,8 @@ public final class OrderMapper {
     model.setState(null);
     model.setShipmentState(null);
     model.setShippingInfo(ShippingInfoMapper.entityToModel(entity.getShippingInfo()));
-    model.setSyncInfo(null);
-    model.setReturnInfo(null);
-    model.setDiscountCodes(null);
-    model.setLastMessageSequenceNumber(null);
     model.setCart(null);
-    model.setCustom(null);
     model.setPaymentInfo(null);
-    model.setLocale(entity.getLocale());
     model.setInventoryMode(null);
 
     return model;
