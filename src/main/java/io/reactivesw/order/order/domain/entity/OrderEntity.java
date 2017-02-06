@@ -2,26 +2,21 @@ package io.reactivesw.order.order.domain.entity;
 
 import io.reactivesw.common.entity.BaseAllEntity;
 import io.reactivesw.common.entity.MoneyEntity;
-import io.reactivesw.common.model.CustomFields;
-import io.reactivesw.common.model.Statics;
-import io.reactivesw.common.util.converter.CustomFieldsJsonConverter;
-import io.reactivesw.common.util.converter.ListJsonConverter;
 import io.reactivesw.order.cart.domain.entity.value.LineItemValue;
-import io.reactivesw.order.order.domain.entity.value.ShippingInfoValue;
 import io.reactivesw.order.cart.infrastructure.enums.TaxMode;
 import io.reactivesw.order.order.domain.entity.value.BillingAddressValue;
 import io.reactivesw.order.order.domain.entity.value.ShippingAddressValue;
+import io.reactivesw.order.order.domain.entity.value.ShippingInfoValue;
 import io.reactivesw.order.order.domain.entity.value.TaxedPriceValue;
 import io.reactivesw.order.order.infrastructure.enums.OrderState;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.time.ZonedDateTime;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -63,12 +58,6 @@ public class OrderEntity extends BaseAllEntity {
    */
   @Column(name = "customer_id")
   private String customerId;
-
-  /**
-   * customer email.
-   */
-  @Column(name = "customer_email")
-  private String customerEmail;
 
   /**
    * anonymous id.
@@ -141,25 +130,10 @@ public class OrderEntity extends BaseAllEntity {
   private ShippingInfoValue shippingInfo;
 
   /**
-   * the id list of discount codes.
-   */
-  @Column(name = "discount_codes", columnDefinition = Statics.JSON)
-  @Convert(converter = ListJsonConverter.class)
-  private List<String> discountCodes;
-
-  /**
-   * custom fields.
-   */
-  @Column(name = "custom", columnDefinition = Statics.JSON)
-  @Convert(converter = CustomFieldsJsonConverter.class)
-  private CustomFields custom;
-
-  /**
    * list of payment id.
    */
-  @Column(name = "payment_info", columnDefinition = Statics.JSON)
-  @Convert(converter = ListJsonConverter.class)
-  private List<String> paymentInfo;
+  @Column
+  private String paymentInfo;
 
   /**
    * locale.

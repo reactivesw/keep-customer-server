@@ -1,7 +1,5 @@
 package io.reactivesw.order.order.application.model.mapper;
 
-import com.google.common.collect.Lists;
-
 import io.reactivesw.common.enums.ReferenceTypes;
 import io.reactivesw.common.model.Reference;
 import io.reactivesw.common.model.mapper.MoneyMapper;
@@ -38,7 +36,6 @@ public final class OrderMapper {
     entity.setCompletedAt(null);
     entity.setOrderName(null);
     entity.setCustomerId(cart.getCustomerId());
-    entity.setCustomerEmail(null);
     entity.setAnonymousId(cart.getAnonymousId());
     entity.setLineItems(null);
     entity.setTotalPrice(MoneyMapper.modelToEntity(cart.getTotalPrice()));
@@ -53,9 +50,7 @@ public final class OrderMapper {
     entity.setCountry(cart.getCountry());
     entity.setOrderState(OrderState.Complete);
     entity.setShippingInfo(ShippingInfoMapper.modelToEntity(cart.getShippingInfo()));
-    entity.setDiscountCodes(null);
-    entity.setCustom(null);
-    entity.setPaymentInfo(Lists.newArrayList(payment.getId()));
+    entity.setPaymentInfo(payment.getId());
     entity.setLocale(null);
 
     return entity;
