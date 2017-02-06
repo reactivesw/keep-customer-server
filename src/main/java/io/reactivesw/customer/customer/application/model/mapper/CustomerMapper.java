@@ -27,6 +27,7 @@ public class CustomerMapper {
     if (entity != null) {
       model = new Customer();
       model.setId(entity.getId());
+      model.setPassword(entity.getPassword());
       model.setCustomerName(entity.getCustomerName());
       model.setVersion(entity.getVersion());
       model.setEmail(entity.getEmail());
