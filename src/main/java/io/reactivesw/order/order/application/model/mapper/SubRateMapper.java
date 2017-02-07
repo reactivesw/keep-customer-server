@@ -45,7 +45,11 @@ public final class SubRateMapper {
    * @return the sub rate value
    */
   public static SubRateValue modelToEntity(SubRate model) {
-    // TODO: 17/2/7
-    return null;
+    SubRateValue entity = new SubRateValue();
+
+    entity.setAmount(model.getAmount());
+    entity.setName(model.getName());
+
+    return entity;
   }
 }
