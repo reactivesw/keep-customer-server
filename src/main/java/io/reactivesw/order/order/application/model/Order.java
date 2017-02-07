@@ -1,25 +1,23 @@
 package io.reactivesw.order.order.application.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.reactivesw.customer.customer.application.model.Address;
-import io.reactivesw.common.model.CustomFields;
+
 import io.reactivesw.common.model.Money;
 import io.reactivesw.common.model.Reference;
+import io.reactivesw.customer.customer.application.model.Address;
 import io.reactivesw.order.cart.application.model.LineItem;
-import io.reactivesw.order.cart.application.model.PaymentInfo;
 import io.reactivesw.order.cart.application.model.ShippingInfo;
 import io.reactivesw.order.cart.application.model.TaxedPrice;
 import io.reactivesw.order.cart.infrastructure.enums.InventoryMode;
 import io.reactivesw.order.cart.infrastructure.enums.TaxMode;
-import io.reactivesw.order.discountcode.application.model.DiscountCodeInfo;
 import io.reactivesw.order.order.infrastructure.enums.OrderState;
 import io.reactivesw.order.order.infrastructure.enums.PaymentState;
 import io.reactivesw.order.order.infrastructure.enums.ShipmentState;
+
 import lombok.Data;
 
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Davis on 16/11/17.
@@ -66,11 +64,6 @@ public class Order {
    * The Customer id.
    */
   private String customerId;
-
-  /**
-   * The Customer email.
-   */
-  private String customerEmail;
 
   /**
    * Identifies cart and order belonging to an anonymous session
@@ -154,27 +147,6 @@ public class Order {
   private ShippingInfo shippingInfo;
 
   /**
-   * Set of ReturnItem.
-   */
-  private Set<SyncInfo> syncInfo;
-
-  /**
-   * Set of ReturnInfo.
-   */
-  private Set<ReturnInfo> returnInfo;
-
-  /**
-   * Array of DiscountCodeInfo.
-   */
-  private List<DiscountCodeInfo> discountCodes;
-
-  /**
-   * The sequence number of the last order message produced by changes to this order.
-   * 0 means, that no message were created yet.
-   */
-  private Integer lastMessageSequenceNumber;
-
-  /**
    * Reference to a Cart.
    * Set when this order was created from a cart. The cart will have the state Ordered.
    * Optional.
@@ -182,20 +154,9 @@ public class Order {
   private Reference cart;
 
   /**
-   * The Custom.
-   */
-  private CustomFields custom;
-
-  /**
    * The Payment info.
    */
-  private PaymentInfo paymentInfo;
-
-  /**
-   * conforming to IETF language tag.
-   * Optional.
-   */
-  private String locale;
+  private Reference paymentInfo;
 
   /**
    * The Inventory mode.
