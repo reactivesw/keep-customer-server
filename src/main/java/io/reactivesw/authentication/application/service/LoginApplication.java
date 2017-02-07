@@ -88,7 +88,7 @@ public class LoginApplication {
     if (!pwdResult) {
       throw new PasswordErrorException("password or email not correct.");
     }
-
+    customer.setPassword(null);
     return customer;
   }
 
