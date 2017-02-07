@@ -116,4 +116,9 @@ public class Customer {
 
   @JsonProperty
   private String locale;
+
+  @JsonProperty
+  private String paymentId;
+
+
 }

@@ -4,6 +4,8 @@ import io.reactivesw.common.exception.AlreadyExistException;
 import io.reactivesw.common.exception.ConflictException;
 import io.reactivesw.common.exception.NotExistException;
 import io.reactivesw.common.exception.PasswordErrorException;
+import io.reactivesw.common.model.UpdateAction;
+import io.reactivesw.customer.customer.application.model.mapper.CustomerUpdateMapper;
 import io.reactivesw.customer.customer.domain.entity.CustomerEntity;
 import io.reactivesw.customer.customer.infrastructure.repository.CustomerRepository;
 import io.reactivesw.customer.customer.infrastructure.util.PasswordUtil;
@@ -269,6 +271,28 @@ public class CustomerService {
     this.customerRepository.delete(id);
   }
 
+  /**
+   * update customer with with update actions.
+   *
+   * @param id      customer id.
+   * @param version current version
+   * @param actions update actions
+   * @return Customer entity
+   */
+  public CustomerEntity updateCustomer(String id, Integer version, List<UpdateAction> actions) {
+    LOG.debug("enter: id: {}, version: {}, actions: {}", id, version, actions);
+
+    CustomerEntity valueInDb = this.getById(id);
+    LOG.debug("data in db: {}", valueInDb);
+    checkVersion(version, valueInDb.getVersion());
+
+    actions.parallelStream().forEach(
+        action -> CustomerUpdateMapper.getMapper(action.getClass()).handle(valueInDb, action)
+    );
+
+    LOG.debug("data updated: {}", valueInDb);
+    return this.customerRepository.save(valueInDb);
+  }
 
   /**
    * check the version.

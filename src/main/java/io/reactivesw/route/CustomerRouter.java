@@ -35,6 +35,21 @@ public final class CustomerRouter extends BaseRouter {
    */
   public static final String ADDRESS_WITH_ID = ADDRESS_ROOT + "/{" + ADDRESS_ID + "}";
 
+  /**
+   * customer's payment relationship.
+   */
+  public static final String PAYMENT_ROOT = CUSTOMER_WITH_ID + "/payments";
+
+  /**
+   * payment id.
+   */
+  public static final String PAYMENT_ID = "paymentId";
+
+  /**
+   * customer's payment with id.
+   */
+  public static final String PAYMENT_ROOT_WITH_ID = PAYMENT_ROOT + "/{" + PAYMENT_ID + "}";
+
 
   private CustomerRouter() {
     super();
