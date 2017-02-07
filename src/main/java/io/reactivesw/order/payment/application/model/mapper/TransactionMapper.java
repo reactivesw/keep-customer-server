@@ -2,8 +2,6 @@ package io.reactivesw.order.payment.application.model.mapper;
 
 import com.braintreegateway.Transaction;
 import com.google.api.client.util.Lists;
-import com.sun.jndi.cosnaming.CNCtx;
-
 import io.reactivesw.common.entity.MoneyEntity;
 import io.reactivesw.common.model.Money;
 import io.reactivesw.common.model.mapper.MoneyMapper;
@@ -11,7 +9,6 @@ import io.reactivesw.order.payment.application.model.TransactionModel;
 import io.reactivesw.order.payment.domain.entity.value.TransactionValue;
 import io.reactivesw.order.payment.infrastructure.enums.TransactionState;
 import io.reactivesw.order.payment.infrastructure.enums.TransactionType;
-import io.reactivesw.order.zone.application.model.Zone;
 
 import java.math.BigDecimal;
 import java.time.ZoneId;
