@@ -1,5 +1,7 @@
 package io.reactivesw.order.order.application.model.mapper;
 
+import io.reactivesw.common.enums.ReferenceTypes;
+import io.reactivesw.common.model.Reference;
 import io.reactivesw.common.model.mapper.MoneyMapper;
 import io.reactivesw.order.cart.application.model.ShippingInfo;
 import io.reactivesw.order.order.domain.entity.value.ShippingInfoValue;
@@ -45,13 +47,23 @@ public final class ShippingInfoMapper {
   /**
    * Entity to model shipping info.
    *
-   * @param shippingInfo the shipping info
+   * @param entity the shipping info
    * @return the shipping info
    */
-  public static ShippingInfo entityToModel(ShippingInfoValue shippingInfo) {
+  public static ShippingInfo entityToModel(ShippingInfoValue entity) {
     ShippingInfo model = new ShippingInfo();
 
-    // TODO: 17/2/6
+    if (entity != null) {
+      model.setShippingMethod(new Reference(
+          ReferenceTypes.SHIPPING_METHOD.toString(), entity.getShippingMethod()));
+      model.setShippingMethodName(entity.getShippingMethodName());
+      model.setPrice(MoneyMapper.entityToModel(entity.getPrice()));
+      model.setShippingRate(ShippingRateMapper.entityToModel(entity.getShippingRate()));
+      model.setTaxedPrice(TaxedItemPriceMapper.entityToModel(entity.getTaxedPrice()));
+      model.setTaxRate(TaxRateMapper.entityToModel(entity.getTaxRate()));
+      model.setTaxCategory(new Reference(
+          ReferenceTypes.TAXCATEGORY.toString(), entity.getTaxCategory()));
+    }
 
     return model;
   }

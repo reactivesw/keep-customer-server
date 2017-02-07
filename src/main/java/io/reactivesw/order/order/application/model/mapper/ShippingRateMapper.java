@@ -28,4 +28,15 @@ public final class ShippingRateMapper {
 
     return entity;
   }
+
+  /**
+   * Entity to model shipping rate.
+   *
+   * @param entity the entity
+   * @return the shipping rate
+   */
+  public static ShippingRate entityToModel(ShippingRateValue entity) {
+    // TODO: 17/2/7
+    return null;
+  }
 }

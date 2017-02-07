@@ -33,4 +33,15 @@ public final class TaxRateMapper {
 
     return entity;
   }
+
+  /**
+   * Entity to model tax rate.
+   *
+   * @param entity the entity
+   * @return the tax rate
+   */
+  public static TaxRate entityToModel(TaxRateValue entity) {
+    // TODO: 17/2/7
+    return null;
+  }
 }

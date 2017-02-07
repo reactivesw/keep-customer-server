@@ -30,4 +30,15 @@ public final class TaxedItemPriceMapper {
 
     return entity;
   }
+
+  /**
+   * Entity to model taxed item price.
+   *
+   * @param entity the entity
+   * @return the taxed item price
+   */
+  public static TaxedItemPrice entityToModel(TaxedItemPriceValue entity) {
+    // TODO: 17/2/7
+    return null;
+  }
 }
