@@ -295,6 +295,25 @@ public class CustomerService {
   }
 
   /**
+   * set customer payment id.
+   *
+   * @param id        customer id
+   * @param paymentId String
+   * @return Customer entity
+   */
+  public CustomerEntity setCustomerPaymentId(String id, String paymentId) {
+    LOG.debug("enter: id: {}, paymentId: {}", id, paymentId);
+
+    CustomerEntity valueInDb = this.getById(id);
+    LOG.debug("data in db: {}", valueInDb);
+
+    valueInDb.setPaymentId(paymentId);
+
+    LOG.debug("data updated: {}", valueInDb);
+    return this.customerRepository.save(valueInDb);
+  }
+
+  /**
    * check the version.
    *
    * @param inputVersion Integer

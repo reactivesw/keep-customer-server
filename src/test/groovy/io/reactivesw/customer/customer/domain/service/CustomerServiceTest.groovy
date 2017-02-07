@@ -23,6 +23,8 @@ class CustomerServiceTest extends Specification {
 
     def customerId = "tmpCustomerId"
 
+    def paymentId = "tmpPaymentId"
+
     def version = 1
 
     def customerName = "tmpCustomerName"
@@ -238,6 +240,15 @@ class CustomerServiceTest extends Specification {
         when:
         repository.save(_) >> entity
         service.createWithEmail(email, password)
+        then:
+        noExceptionThrown()
+    }
+
+    def "Test 15.1: set customer payment id."() {
+        when:
+        repository.findOne(_) >> entity
+        repository.save(_) >> entity
+        service.setCustomerPaymentId(customerId, paymentId)
         then:
         noExceptionThrown()
     }

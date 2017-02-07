@@ -140,13 +140,14 @@ public class CustomerController {
    *
    * @param id            customer id String
    * @param updateRequest update request
-   * @return updated Zone
+   * @return updated Customer
    */
   @ApiOperation("Update Customer with id")
   @PutMapping(CustomerRouter.CUSTOMER_WITH_ID)
-  public Customer updateZone(@PathVariable @ApiParam("customer id") String id,
-                             @RequestBody @ApiParam("update request with version & update actions")
-                                 UpdateRequest updateRequest) {
+  public Customer updateCustomer(@PathVariable @ApiParam("customer id") String id,
+                                 @RequestBody @ApiParam("update request with version & update " +
+                                     "actions")
+                                     UpdateRequest updateRequest) {
     LOG.info("enter: id: {}, UpdateRequest: {}", id, updateRequest);
 
     CustomerEntity entity = customerService.updateCustomer(id, updateRequest.getVersion(),
@@ -157,4 +158,25 @@ public class CustomerController {
     LOG.info(EXIT_LOG_INFO, customer);
     return customer;
   }
+
+  /**
+   * Set Customer Payment id.
+   *
+   * @param id customer id String
+   * @return updated Customer
+   */
+  @ApiOperation("Update Customer with id")
+  @PutMapping(CustomerRouter.PAYMENT_ROOT)
+  public Customer setCustomerPaymentId(@PathVariable @ApiParam("customer id") String id,
+                                       @RequestBody String paymentId) {
+    LOG.info("enter: customer id: {}", id);
+
+    CustomerEntity entity = customerService.setCustomerPaymentId(id, paymentId);
+    Customer customer = CustomerMapper.entityToModel(entity);
+
+    LOG.info(EXIT_LOG_INFO, customer);
+    return customer;
+  }
+
+
 }
