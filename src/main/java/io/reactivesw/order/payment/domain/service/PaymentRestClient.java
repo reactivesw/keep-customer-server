@@ -49,6 +49,9 @@ public class PaymentRestClient {
    * @param paymentAccountId braintree customer id
    */
   public void savePaymentAccountId(String customerId, String paymentAccountId) {
-    // TODO: 17/2/3
+    LOG.debug("enter savePaymentAccountId, customer id is : {}, payment account id is : {}",
+        customerId, paymentAccountId);
+
+    LOG.debug("end savePaymentAccountId");
   }
 }
