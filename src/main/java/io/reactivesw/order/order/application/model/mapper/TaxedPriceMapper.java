@@ -36,14 +36,17 @@ public final class TaxedPriceMapper {
   /**
    * Entity to model taxed price.
    *
-   * @param taxedPrice the taxed price
+   * @param entity the taxed price
    * @return the taxed price
    */
-  public static TaxedPrice entityToModel(TaxedPriceValue taxedPrice) {
+  public static TaxedPrice entityToModel(TaxedPriceValue entity) {
     TaxedPrice model = new TaxedPrice();
 
-    // TODO: 17/2/6
-    
+    if (entity != null) {
+      model.setTotalNet(MoneyMapper.entityToModel(entity.getTotalNet()));
+      model.setTotalGross(MoneyMapper.entityToModel(entity.getTotalGross()));
+    }
+
     return model;
   }
 }
