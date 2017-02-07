@@ -2,7 +2,7 @@ package io.reactivesw.order.order.domain.entity;
 
 import io.reactivesw.common.entity.BaseAllEntity;
 import io.reactivesw.common.entity.MoneyEntity;
-import io.reactivesw.order.cart.domain.entity.value.LineItemValue;
+import io.reactivesw.order.order.domain.entity.value.LineItemValue;
 import io.reactivesw.order.cart.infrastructure.enums.TaxMode;
 import io.reactivesw.order.order.domain.entity.value.BillingAddressValue;
 import io.reactivesw.order.order.domain.entity.value.ShippingAddressValue;

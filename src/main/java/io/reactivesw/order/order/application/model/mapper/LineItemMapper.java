@@ -1,9 +1,14 @@
 package io.reactivesw.order.order.application.model.mapper;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+
 import io.reactivesw.order.cart.application.model.LineItem;
 import io.reactivesw.order.order.domain.entity.value.LineItemValue;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by Davis on 17/2/7.
@@ -21,8 +26,18 @@ public final class LineItemMapper {
    * @param models the models
    * @return the list
    */
-  public static List<LineItemValue> modelToEntity(List<LineItem> models) {
-    return null;
+  public static Set<LineItemValue> modelToEntity(List<LineItem> models) {
+    Set<LineItemValue> entities = Sets.newHashSet();
+
+    if (models != null) {
+      entities = models.parallelStream().map(
+          model -> {
+            return modelToEntity(model);
+          }
+      ).collect(Collectors.toSet());
+    }
+
+    return entities;
   }
 
   /**

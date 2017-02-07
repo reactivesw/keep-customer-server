@@ -37,7 +37,7 @@ public final class OrderMapper {
     entity.setOrderName(null);
     entity.setCustomerId(cart.getCustomerId());
     entity.setAnonymousId(cart.getAnonymousId());
-    entity.setLineItems(null);
+    entity.setLineItems(LineItemMapper.modelToEntity(cart.getLineItems()));
     entity.setTotalPrice(MoneyMapper.modelToEntity(cart.getTotalPrice()));
     entity.setTaxedPrice(TaxedPriceMapper.modelToEntity(cart.getTaxedPrice()));
     entity.setShippingAddress(ShippingAddressMapper.modelToEntity(cart.getShippingAddress()));
