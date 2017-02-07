@@ -64,7 +64,7 @@ public class PaymentService {
   public List<CreditCard> getCreditCards(String customerId) {
     LOG.debug("enter getCreditCards, customer id is : {}", customerId);
     List<CreditCard> result = Lists.newArrayList();
-    Customer customer = gateway.customer().find(restClient.getBraintreeCustomerId(customerId));
+    Customer customer = gateway.customer().find(restClient.getPaymentAccountId(customerId));
     if (customer == null) {
       LOG.debug("can not find customer by id : {}", customerId);
     } else if (customer.getCreditCards() == null) {
@@ -87,13 +87,13 @@ public class PaymentService {
 
     LOG.debug("enter addCreditCard, customer id is : {}, credit card is : {}", customerId,
         addCreditCartAction.getCreditCart());
-    String braintreeCustomerId = restClient.getBraintreeCustomerId(customerId);
+    String braintreeCustomerId = restClient.getPaymentAccountId(customerId);
 
     CustomerRequest request = CustomerRequestMapper.of(addCreditCartAction.getCreditCart());
     Result<Customer> result = null;
     if (StringUtils.isBlank(braintreeCustomerId)) {
       result = gateway.customer().create(request);
-      restClient.saveBraintreeCustomerId(customerId, result.getTarget()
+      restClient.savePaymentAccountId(customerId, result.getTarget()
           .getId());
     } else {
       result = gateway.customer().update(braintreeCustomerId, request);

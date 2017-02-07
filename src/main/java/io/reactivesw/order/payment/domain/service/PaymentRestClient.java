@@ -1,5 +1,7 @@
 package io.reactivesw.order.payment.domain.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,11 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class PaymentRestClient {
   /**
+   * log.
+   */
+  private static final Logger LOG = LoggerFactory.getLogger(PaymentRestClient.class);
+
+  /**
    * rest template.
    */
   @Autowired
@@ -19,26 +26,29 @@ public class PaymentRestClient {
 
   /**
    * get braintree customer id.
+   *
    * @param customerId system customer id
    * @return braintree customer id
    */
-  public String getBraintreeCustomerId(String customerId) {
-    // TODO: 17/2/3
-//    LOG.debug("enter getBraintreeCustomerId, system customer id is : {}" + subjectId);
+  public String getPaymentAccountId(String customerId) {
+    LOG.debug("enter getPaymentAccountId, customer id is : {}", customerId);
 
-    restTemplate.delete("");
+    String url = "http://localhost:8088/customers/" + customerId + "/payments";
 
-//    LOG.debug("end getBraintreeCustomerId");
+    String paymentAccountId = restTemplate.getForObject(url, String.class);
 
-    return "";
+    LOG.debug("end getPaymentAccountId, get id is : {}", paymentAccountId);
+
+    return paymentAccountId;
   }
 
   /**
    * save braintree customer id.
-   * @param customerId system customer id
-   * @param braintreeCustomerId braintree customer id
+   *
+   * @param customerId       system customer id
+   * @param paymentAccountId braintree customer id
    */
-  public void saveBraintreeCustomerId(String customerId, String braintreeCustomerId) {
+  public void savePaymentAccountId(String customerId, String paymentAccountId) {
     // TODO: 17/2/3
   }
 }

@@ -14,12 +14,14 @@ class PaymentRestClientTest extends Specification {
     def "test 1 : get braintree customer id"() {
         given:
         String customerId = "sdfdfdfs"
+        String paymentAccountId = "sdkkkdhfd"
+        restTemplate.getForObject(_, _) >> paymentAccountId
 
         when:
-        def result = restClient.getBraintreeCustomerId(customerId)
+        def result = restClient.getPaymentAccountId(customerId)
 
         then:
-        result != null
+        result == paymentAccountId
     }
 
     def "test 2 : save braintree customer id"() {
@@ -28,7 +30,7 @@ class PaymentRestClientTest extends Specification {
         String btCustomerId = "slkdhfkjd"
 
         when:
-        restClient.saveBraintreeCustomerId(customreId, btCustomerId)
+        restClient.savePaymentAccountId(customreId, btCustomerId)
 
         then:
         true
