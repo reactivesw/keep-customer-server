@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -57,13 +59,15 @@ public class OrderRestClient {
    * @param paymentMethodToken the payment method token
    * @return the payment
    */
-  public Payment checkout(Integer centAmount, String paymentMethodToken) {
+  public Payment checkout(String customerId, Integer centAmount, String paymentMethodToken) {
     LOG.debug("enter checkout, centAmount is : {}, payment method token is : {}", centAmount,
         paymentMethodToken);
 
-    // TODO: 17/2/6 set url and request
-    String url = "";
-    Object request = null;
+    String url = "http://localhost:8088/payments";
+    MultiValueMap<String, String> request = new LinkedMultiValueMap<String, String>();
+    request.add("customerId", customerId);
+    request.add("amount", String.valueOf(centAmount));
+    request.add("token", paymentMethodToken);
 
     Payment result = restTemplate.postForObject(url, request, Payment.class);
     LOG.debug("end checkout, result is : {}", result);

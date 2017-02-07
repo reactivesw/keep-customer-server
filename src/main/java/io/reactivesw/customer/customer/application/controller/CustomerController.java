@@ -3,6 +3,7 @@ package io.reactivesw.customer.customer.application.controller;
 import io.reactivesw.common.model.UpdateRequest;
 import io.reactivesw.customer.customer.application.model.Customer;
 import io.reactivesw.customer.customer.application.model.SignupWithEmail;
+import io.reactivesw.customer.customer.application.model.action.CustomerUpdateAction;
 import io.reactivesw.customer.customer.application.model.mapper.CustomerMapper;
 import io.reactivesw.customer.customer.application.service.CustomerApplication;
 import io.reactivesw.customer.customer.domain.entity.CustomerEntity;
@@ -147,7 +148,7 @@ public class CustomerController {
   public Customer updateCustomer(@PathVariable @ApiParam("customer id") String id,
                                  @RequestBody @ApiParam("update request with version & update " +
                                      "actions")
-                                     UpdateRequest updateRequest) {
+                                     UpdateRequest<CustomerUpdateAction> updateRequest) {
     LOG.info("enter: id: {}, UpdateRequest: {}", id, updateRequest);
 
     CustomerEntity entity = customerService.updateCustomer(id, updateRequest.getVersion(),

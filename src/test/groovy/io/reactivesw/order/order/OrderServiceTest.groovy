@@ -26,7 +26,7 @@ class OrderServiceTest extends Specification {
         Cart cart = new Cart()
         cart.setTotalPrice(new Money("USD", 1000))
         orderRestClient.getCart(_, _) >> cart
-        orderRestClient.checkout(_, _) >> new Payment()
+        orderRestClient.checkout(_,_, _) >> new Payment()
         orderRepository.save(_) >> new OrderEntity()
 
         when:
