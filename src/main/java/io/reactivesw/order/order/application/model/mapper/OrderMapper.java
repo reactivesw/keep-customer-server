@@ -32,7 +32,6 @@ public final class OrderMapper {
   public static OrderEntity of(Cart cart, Payment payment) {
     OrderEntity entity = new OrderEntity();
 
-    // TODO: 17/2/6
     entity.setCompletedAt(null);
     entity.setOrderName(null);
     entity.setCustomerId(cart.getCustomerId());

@@ -23,6 +23,28 @@ public final class BillingAddressMapper {
     BillingAddressValue entity = new BillingAddressValue();
 
     // TODO: 17/2/6
+    entity.setTitle(null);
+    entity.setSalutation(null);
+    entity.setFirstName(null);
+    entity.setLastName(null);
+    entity.setStreetName(null);
+    entity.setStreetNumber(null);
+    entity.setAdditionalStreetInfo(null);
+    entity.setPostalCode(null);
+    entity.setCity(null);
+    entity.setRegion(null);
+    entity.setState(null);
+    entity.setCountry(null);
+    entity.setCompany(null);
+    entity.setDepartment(null);
+    entity.setBuilding(null);
+    entity.setApartment(null);
+    entity.setBox(null);
+    entity.setMobile(null);
+    entity.setEmail(null);
+    entity.setFax(null);
+    entity.setAdditionalAddressInfo(null);
+    entity.setExternalId(null);
 
     return entity;
   }
