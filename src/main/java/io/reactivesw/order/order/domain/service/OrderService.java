@@ -44,6 +44,11 @@ public class OrderService {
    * @return the order
    */
   public Order createOrderFromCart(OrderFromCartDraft draft) {
+    /* TODO: 17/2/7
+    1. get cart
+    2. update inventory
+    3. checkout
+     */
     LOG.debug("enter createOrderFromCart, draft is : {}", draft.toString());
 
     String cartId = draft.getId();
@@ -53,8 +58,6 @@ public class OrderService {
     Money amount = cart.getTotalPrice();
     Payment payment = orderRestClient.checkout(cart.getCustomerId(), amount.getCentAmount(), draft
         .getPaymentMethodToken());
-
-    // TODO: 17/2/6 change inventory
 
     OrderEntity entity = OrderMapper.of(cart, payment);
     OrderEntity savedEntity = orderRepository.save(entity);
