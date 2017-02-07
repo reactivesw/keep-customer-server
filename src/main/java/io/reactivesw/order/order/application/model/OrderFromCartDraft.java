@@ -7,6 +7,10 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 /**
  * Created by umasuo on 16/11/17.
  */
@@ -16,9 +20,13 @@ import lombok.ToString;
 public class OrderFromCartDraft {
 
   @ApiModelProperty(value = "The unique id of the cart from which an order is created.", required = true)
+  @NotNull
+  @Size(min = 1)
   private String id;
 
   @ApiModelProperty(required = true)
+  @NotNull
+  @Min(0)
   private Integer version;
 
   @ApiModelProperty(value = "String that uniquely identifies an order. " +
@@ -30,6 +38,8 @@ public class OrderFromCartDraft {
   @ApiModelProperty(required = false)
   private PaymentState paymentState;
 
-  @ApiModelProperty(value = "payment method token", required = false)
+  @ApiModelProperty(value = "payment method token", required = true)
+  @NotNull
+  @Size(min = 1)
   private String paymentMethodToken;
 }
