@@ -23,8 +23,10 @@ public final class TaxedItemPriceMapper {
   public static TaxedItemPriceValue modelToEntity(TaxedItemPrice model) {
     TaxedItemPriceValue entity = new TaxedItemPriceValue();
 
-    entity.setTotalNet(MoneyMapper.modelToEntity(model.getTotalNet()));
-    entity.setTotalGross(MoneyMapper.modelToEntity(model.getTotalGross()));
+    if (model != null) {
+      entity.setTotalNet(MoneyMapper.modelToEntity(model.getTotalNet()));
+      entity.setTotalGross(MoneyMapper.modelToEntity(model.getTotalGross()));
+    }
 
     return entity;
   }

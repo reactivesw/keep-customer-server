@@ -22,12 +22,14 @@ public final class TaxRateMapper {
   public static TaxRateValue modelToEntity(TaxRate model) {
     TaxRateValue entity = new TaxRateValue();
 
-    entity.setName(model.getName());
-    entity.setAmount(model.getAmount());
-    entity.setIncludedInPrice(model.getIncludedInPrice());
-    entity.setCountry(model.getCountry());
-    entity.setState(model.getState());
-    entity.setSubRates(SubRateMapper.modelToEntity(model.getSubRates()));
+    if (model != null) {
+      entity.setName(model.getName());
+      entity.setAmount(model.getAmount());
+      entity.setIncludedInPrice(model.getIncludedInPrice());
+      entity.setCountry(model.getCountry());
+      entity.setState(model.getState());
+      entity.setSubRates(SubRateMapper.modelToEntity(model.getSubRates()));
+    }
 
     return entity;
   }
