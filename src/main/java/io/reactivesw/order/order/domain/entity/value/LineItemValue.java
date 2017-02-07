@@ -45,8 +45,8 @@ public class LineItemValue extends BaseIdEntity {
   /**
    * product slug in localized string.
    */
-  @OneToMany
-  private Set<LocalizedStringEntity> productSlug;
+  @Column
+  private String productSlug;
 
   /**
    * product variant.
