@@ -132,4 +132,10 @@ public class CustomerEntity extends BaseAllEntity {
    */
   @Column(name = "locale")
   private String locale;
+
+  /**
+   * each customer has one payment info.
+   */
+  @Column(name = "payment_id")
+  private String paymentId;
 }
