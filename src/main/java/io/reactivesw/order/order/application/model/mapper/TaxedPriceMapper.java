@@ -1,5 +1,6 @@
 package io.reactivesw.order.order.application.model.mapper;
 
+import io.reactivesw.common.model.mapper.MoneyMapper;
 import io.reactivesw.order.cart.application.model.TaxedPrice;
 import io.reactivesw.order.order.domain.entity.value.TaxedPriceValue;
 
@@ -22,7 +23,10 @@ public final class TaxedPriceMapper {
   public static TaxedPriceValue modelToEntity(TaxedPrice model) {
     TaxedPriceValue entity = new TaxedPriceValue();
 
+    entity.setTotalNet(MoneyMapper.modelToEntity(model.getTotalNet()));
+    entity.setTotalGross(MoneyMapper.modelToEntity(model.getTotalGross()));
     // TODO: 17/2/6
+    entity.setTaxPortions(null);
 
     return entity;
   }
