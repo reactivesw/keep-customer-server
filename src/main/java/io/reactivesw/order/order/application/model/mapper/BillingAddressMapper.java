@@ -3,8 +3,6 @@ package io.reactivesw.order.order.application.model.mapper;
 import io.reactivesw.customer.customer.application.model.Address;
 import io.reactivesw.order.order.domain.entity.value.BillingAddressValue;
 
-import java.nio.file.NotLinkException;
-
 /**
  * Created by Davis on 17/2/6.
  */
@@ -42,6 +40,7 @@ public final class BillingAddressMapper {
       entity.setBuilding(model.getBuilding());
       entity.setApartment(model.getApartment());
       entity.setBox(model.getPOBox());
+      entity.setPhone(model.getPhone());
       entity.setMobile(model.getMobile());
       entity.setEmail(model.getEmail());
       entity.setFax(model.getFax());
