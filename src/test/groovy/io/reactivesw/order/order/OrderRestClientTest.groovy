@@ -30,9 +30,10 @@ class OrderRestClientTest extends Specification {
         given:
         Integer centAmount = Integer.valueOf("10000")
         def token = "payment-token"
+        def customerId = "customerId"
 
         when:
-        orderRestClient.checkout(centAmount, token)
+        orderRestClient.checkout(customerId, centAmount, token)
 
         then:
         true

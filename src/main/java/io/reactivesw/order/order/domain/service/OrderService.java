@@ -51,7 +51,7 @@ public class OrderService {
     Cart cart = orderRestClient.getCart(cartId, version);
 
     Money amount = cart.getTotalPrice();
-    Payment payment = orderRestClient.checkout(amount.getCentAmount(), draft
+    Payment payment = orderRestClient.checkout(cart.getCustomerId(), amount.getCentAmount(), draft
         .getPaymentMethodToken());
 
     // TODO: 17/2/6 change inventory
