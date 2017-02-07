@@ -50,7 +50,6 @@ public final class LineItemMapper {
   public static LineItemValue modelToEntity(LineItem model) {
     LineItemValue entity = new LineItemValue();
 
-    // TODO: 17/2/7
     entity.setProductId(model.getProductId());
     entity.setName(LocalizedStringMapper.modelToEntityDefaultNull(model.getName()));
     entity.setProductSlug(model.getSlug());
