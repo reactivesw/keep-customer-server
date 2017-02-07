@@ -1,5 +1,6 @@
 package io.reactivesw.order.order
 
+import io.reactivesw.order.cart.application.model.Cart
 import io.reactivesw.order.order.application.service.OrderRestClient
 import org.springframework.web.client.RestTemplate
 import spock.lang.Specification
@@ -15,6 +16,8 @@ class OrderRestClientTest extends Specification {
         given:
         def cartId = "dsfsd"
         def version = 1
+        Cart cart = new Cart(version: version)
+        restTemplate.getForObject(_,_) >> cart
 
         when:
         orderRestClient.getCart(cartId, version)

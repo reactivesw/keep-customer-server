@@ -2,6 +2,7 @@ package io.reactivesw.order.order.application.service;
 
 import io.reactivesw.catalog.inventory.application.model.InventoryEntry;
 import io.reactivesw.order.cart.application.model.Cart;
+import io.reactivesw.order.order.infrastructure.validator.CartValidator;
 import io.reactivesw.order.payment.application.model.Payment;
 
 import org.slf4j.Logger;
@@ -38,11 +39,11 @@ public class OrderRestClient {
    */
   public Cart getCart(String cartId, Integer version) {
     LOG.debug("enter getCart, cart id is : {}, cart version is : {}", cartId, version);
-    Cart result = new Cart();
 
-    // TODO: 17/2/6 set url
-    String url = "";
-    restTemplate.getForObject(url, Cart.class);
+    String url = "http://localhost:8088/carts/" + cartId;
+    Cart result = restTemplate.getForObject(url, Cart.class);
+
+    CartValidator.validateVersion(result, version);
 
     LOG.debug("end getCart, result is : {}", result);
     return result;
