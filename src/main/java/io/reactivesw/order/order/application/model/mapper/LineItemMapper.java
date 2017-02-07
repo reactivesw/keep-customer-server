@@ -2,6 +2,8 @@ package io.reactivesw.order.order.application.model.mapper;
 
 import com.google.common.collect.Sets;
 
+import io.reactivesw.common.model.mapper.LocalizedStringMapper;
+import io.reactivesw.common.model.mapper.MoneyMapper;
 import io.reactivesw.order.cart.application.model.LineItem;
 import io.reactivesw.order.order.domain.entity.value.LineItemValue;
 
@@ -50,15 +52,15 @@ public final class LineItemMapper {
 
     // TODO: 17/2/7
     entity.setProductId(model.getProductId());
-    entity.setName(null);
-    entity.setProductSlug(null);
+    entity.setName(LocalizedStringMapper.modelToEntityDefaultNull(model.getName()));
+    entity.setProductSlug(model.getSlug());
     entity.setVariant(null);
-    entity.setPrice(null);
-    entity.setTaxedPrice(null);
-    entity.setTotalPrice(null);
+    entity.setPrice(PriceMapper.modelToEntity(model.getPrice()));
+    entity.setTaxedPrice(TaxedItemPriceMapper.modelToEntity(model.getTaxedPrice()));
+    entity.setTotalPrice(MoneyMapper.modelToEntity(model.getTotalPrice()));
     entity.setQuantity(model.getQuantity());
     entity.setState(null);
-    entity.setTaxRate(null);
+    entity.setTaxRate(TaxRateMapper.modelToEntity(model.getTaxRate()));
 
     String supplyChannel = model.getSupplyChannel() == null ? null : model.getSupplyChannel()
         .getId();
