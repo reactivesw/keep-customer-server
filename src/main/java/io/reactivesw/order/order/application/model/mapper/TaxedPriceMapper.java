@@ -23,10 +23,12 @@ public final class TaxedPriceMapper {
   public static TaxedPriceValue modelToEntity(TaxedPrice model) {
     TaxedPriceValue entity = new TaxedPriceValue();
 
-    entity.setTotalNet(MoneyMapper.modelToEntity(model.getTotalNet()));
-    entity.setTotalGross(MoneyMapper.modelToEntity(model.getTotalGross()));
-    // TODO: 17/2/6
-    entity.setTaxPortions(null);
+    if (model != null) {
+      entity.setTotalNet(MoneyMapper.modelToEntity(model.getTotalNet()));
+      entity.setTotalGross(MoneyMapper.modelToEntity(model.getTotalGross()));
+      // TODO: 17/2/6
+      entity.setTaxPortions(null);
+    }
 
     return entity;
   }
