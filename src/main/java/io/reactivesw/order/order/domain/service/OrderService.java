@@ -55,7 +55,10 @@ public class OrderService {
     Integer version = draft.getVersion();
     Cart cart = orderRestClient.getCart(cartId, version);
 
+
+
     Money amount = cart.getTotalPrice();
+
     Payment payment = orderRestClient.checkout(cart.getCustomerId(), amount.getCentAmount(), draft
         .getPaymentMethodToken());
 

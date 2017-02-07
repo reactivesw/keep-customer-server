@@ -134,11 +134,4 @@ public class OrderEntity extends BaseAllEntity {
    */
   @Column
   private String paymentInfo;
-
-  /**
-   * locale.
-   */
-  @Column
-  private String locale;
-
 }

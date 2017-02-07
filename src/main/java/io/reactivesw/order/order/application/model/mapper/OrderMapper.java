@@ -51,7 +51,6 @@ public final class OrderMapper {
     entity.setOrderState(OrderState.Complete);
     entity.setShippingInfo(ShippingInfoMapper.modelToEntity(cart.getShippingInfo()));
     entity.setPaymentInfo(payment.getId());
-    entity.setLocale(null);
 
     return entity;
   }
