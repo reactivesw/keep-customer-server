@@ -42,8 +42,8 @@ public final class OrderMapper {
     entity.setShippingAddress(ShippingAddressMapper.modelToEntity(cart.getShippingAddress()));
     entity.setBillingAddress(BillingAddressMapper.modelToEntity(cart.getBillingAddress()));
     entity.setTaxMode(cart.getTaxMode());
-    if (cart.getCustomerGroup() != null && StringUtils.isNotBlank(cart.getCustomerGroup().getId()
-    )) {
+    if (cart.getCustomerGroup() != null &&
+        StringUtils.isNotBlank(cart.getCustomerGroup().getId())) {
       entity.setCustomerGroup(cart.getCustomerGroup().getId());
     }
     entity.setCountry(cart.getCountry());
@@ -71,7 +71,7 @@ public final class OrderMapper {
     model.setOrderNumber(entity.getOrderName());
     model.setCustomerId(entity.getCustomerId());
     model.setAnonymousId(entity.getAnonymousId());
-    model.setLineItems(null);
+    model.setLineItems(LineItemMapper.entityToModel(entity.getLineItems()));
     model.setTotalPrice(MoneyMapper.entityToModel(entity.getTotalPrice()));
     model.setTaxedPrice(TaxedPriceMapper.entityToModel(entity.getTaxedPrice()));
     model.setTaxMode(entity.getTaxMode());
