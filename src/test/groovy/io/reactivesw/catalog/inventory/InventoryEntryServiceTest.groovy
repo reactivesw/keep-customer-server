@@ -2,6 +2,7 @@ package io.reactivesw.catalog.inventory
 
 import com.google.common.collect.Lists
 import io.reactivesw.catalog.inventory.application.model.InventoryEntryDraft
+import io.reactivesw.catalog.inventory.application.model.InventoryRequest
 import io.reactivesw.catalog.inventory.application.model.action.SetExpectedDelivery
 import io.reactivesw.catalog.inventory.application.model.mapper.InventoryEntryMapper
 import io.reactivesw.catalog.inventory.domain.entity.InventoryEntryEntity
@@ -11,6 +12,7 @@ import io.reactivesw.catalog.inventory.infrastructure.repository.InventoryEntryR
 import io.reactivesw.common.enums.ReferenceTypes
 import io.reactivesw.common.exception.ConflictException
 import io.reactivesw.common.exception.NotExistException
+import io.reactivesw.common.exception.ParametersException
 import io.reactivesw.common.model.Reference
 import io.reactivesw.common.model.UpdateAction
 import spock.lang.Specification
@@ -142,5 +144,35 @@ class InventoryEntryServiceTest extends Specification {
         then:
         result != null
         result.size() == 0
+    }
+
+    def "test 6.1 : update inventory entry by list of request"() {
+        given:
+        InventoryRequest request = new InventoryRequest(skuName: skuName, quantity: 10)
+        List<InventoryRequest> requests = Lists.newArrayList(request)
+        def skuNames = Lists.newArrayList(skuName)
+        def inventoryList = Lists.newArrayList(inventoryEntryEntity)
+        inventoryEntryRepository.queryBySkuNames(skuNames) >> inventoryList
+
+        when:
+        inventoryEntryService.updateInventoryBySkuNames(requests)
+
+        then:
+        true
+    }
+
+    def "test 6.1 : update inventory entry by list of request and quantity more than availabelQuantity and quantityOnStock"() {
+        given:
+        InventoryRequest request = new InventoryRequest(skuName: skuName, quantity: 130)
+        List<InventoryRequest> requests = Lists.newArrayList(request)
+        def skuNames = Lists.newArrayList(skuName)
+        def inventoryList = Lists.newArrayList(inventoryEntryEntity)
+        inventoryEntryRepository.queryBySkuNames(skuNames) >> inventoryList
+
+        when:
+        inventoryEntryService.updateInventoryBySkuNames(requests)
+
+        then:
+        thrown(ParametersException)
     }
 }

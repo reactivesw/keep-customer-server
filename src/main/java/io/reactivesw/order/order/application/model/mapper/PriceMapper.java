@@ -23,18 +23,20 @@ public final class PriceMapper {
   public static PriceValue modelToEntity(Price model) {
     PriceValue entity = new PriceValue();
 
-    entity.setValue(MoneyMapper.modelToEntity(model.getValue()));
-    entity.setCountry(model.getCountry());
-    if (model.getCustomerGroup() != null) {
-      entity.setCustomerGroup(model.getCustomerGroup().getId());
+    if (model != null) {
+      entity.setValue(MoneyMapper.modelToEntity(model.getValue()));
+      entity.setCountry(model.getCountry());
+      if (model.getCustomerGroup() != null) {
+        entity.setCustomerGroup(model.getCustomerGroup().getId());
+      }
+      if (model.getChannel() != null) {
+        entity.setChannel(model.getChannel().getId());
+      }
+      entity.setValidFrom(model.getValidFrom());
+      entity.setValidUntil(model.getValidUntil());
+      entity.setDiscounted(model.getDiscounted());
+      entity.setCustom(model.getCustom());
     }
-    if (model.getChannel() != null) {
-      entity.setChannel(model.getChannel().getId());
-    }
-    entity.setValidFrom(model.getValidFrom());
-    entity.setValidUntil(model.getValidUntil());
-    entity.setDiscounted(model.getDiscounted());
-    entity.setCustom(model.getCustom());
 
     return entity;
   }

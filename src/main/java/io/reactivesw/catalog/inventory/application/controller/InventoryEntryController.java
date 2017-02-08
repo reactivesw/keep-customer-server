@@ -119,17 +119,19 @@ public class InventoryEntryController {
   /**
    * Update inventory entry by list.
    *
-   * @param inventoryRequests the inventory requests
+   * @param requests the inventory requests
    * @return the list
    */
+  @ApiOperation(value = "Update InventoryEntry")
+  @PutMapping(INVENTORY_ENTRY_ROOT)
   public List<InventoryEntry> updateInventoryEntryByList(@RequestBody
-                                                         @ApiParam(value = "list of update " +
-                                                             "request", required = true)
-                                                             List<InventoryRequest>
-                                                             inventoryRequests) {
-    LOG.debug("enter updateInventoryEntryByList, update request is : {}", inventoryRequests);
+                                                         @ApiParam(value = "list of update request",
+                                                             required = true)
+                                                             List<InventoryRequest> requests) {
+    LOG.debug("enter updateInventoryEntryByList, update request is : {}", requests);
 
     // TODO: 17/2/8
+    inventoryEntryService.updateInventoryBySkuNames(requests);
 
     LOG.debug("end updateInventoryEntryByList");
     return null;

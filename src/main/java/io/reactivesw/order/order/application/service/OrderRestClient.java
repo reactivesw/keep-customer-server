@@ -1,6 +1,7 @@
 package io.reactivesw.order.order.application.service;
 
 import io.reactivesw.catalog.inventory.application.model.InventoryEntry;
+import io.reactivesw.order.order.application.model.InventoryRequest;
 import io.reactivesw.order.cart.application.model.Cart;
 import io.reactivesw.order.order.infrastructure.validator.CartValidator;
 import io.reactivesw.order.payment.application.model.Payment;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 /**
  * Created by Davis on 17/2/6.
@@ -79,7 +82,7 @@ public class OrderRestClient {
    *
    * @return the inventory entry
    */
-  public InventoryEntry changeInventoryEntry() {
+  public InventoryEntry changeInventoryEntry(List<InventoryRequest> inventoryRequestList) {
     LOG.debug("enter changeInventoryEntry");
 
     // TODO: 17/2/6

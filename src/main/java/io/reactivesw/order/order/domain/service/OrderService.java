@@ -2,6 +2,7 @@ package io.reactivesw.order.order.domain.service;
 
 import io.reactivesw.common.model.Money;
 import io.reactivesw.order.cart.application.model.Cart;
+import io.reactivesw.order.order.application.model.InventoryRequest;
 import io.reactivesw.order.order.application.model.Order;
 import io.reactivesw.order.order.application.model.OrderFromCartDraft;
 import io.reactivesw.order.order.application.model.mapper.OrderMapper;
@@ -14,6 +15,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Davis on 17/2/6.
@@ -53,6 +57,10 @@ public class OrderService {
 
     Cart cart = orderRestClient.getCart(draft.getId(), draft.getVersion());
 
+    List<InventoryRequest> inventoryRequests = getInventoryRequest(cart);
+
+    orderRestClient.changeInventoryEntry(inventoryRequests);
+
     Money amount = cart.getTotalPrice();
 
     Payment payment = orderRestClient.checkout(cart.getCustomerId(), amount.getCentAmount(), draft
@@ -64,6 +72,23 @@ public class OrderService {
     Order result = OrderMapper.entityToModel(savedEntity);
 
     LOG.debug("end createOrderFromCart, result is : {}", result);
+    return result;
+  }
+
+  /**
+   * get inventory request by cart.
+   *
+   * @param cart Cart
+   * @return list of Inventory Request
+   */
+  private List<InventoryRequest> getInventoryRequest(Cart cart) {
+    List<InventoryRequest> result = cart.getLineItems().parallelStream().map(
+        lineItem -> {
+          return new InventoryRequest(
+              lineItem.getProductVariant().getSku(), lineItem.getQuantity());
+        }
+    ).collect(Collectors.toList());
+
     return result;
   }
 }

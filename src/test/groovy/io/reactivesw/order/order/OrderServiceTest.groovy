@@ -1,7 +1,10 @@
 package io.reactivesw.order.order
 
+import com.google.common.collect.Lists
+import io.reactivesw.catalog.product.application.model.ProductVariant
 import io.reactivesw.common.model.Money
 import io.reactivesw.order.cart.application.model.Cart
+import io.reactivesw.order.cart.application.model.LineItem
 import io.reactivesw.order.order.application.model.OrderFromCartDraft
 import io.reactivesw.order.order.application.service.OrderRestClient
 import io.reactivesw.order.order.domain.entity.OrderEntity
@@ -25,6 +28,10 @@ class OrderServiceTest extends Specification {
         draft.setPaymentMethodToken("payment-token")
         Cart cart = new Cart()
         cart.setTotalPrice(new Money("USD", 1000))
+        LineItem lineItem = new LineItem()
+        lineItem.totalPrice = new Money("USD", 10000)
+        lineItem.productVariant = new ProductVariant(sku: "skuName")
+        cart.lineItems = Lists.newArrayList(lineItem)
         orderRestClient.getCart(_, _) >> cart
         orderRestClient.checkout(_,_, _) >> new Payment()
         orderRepository.save(_) >> new OrderEntity()

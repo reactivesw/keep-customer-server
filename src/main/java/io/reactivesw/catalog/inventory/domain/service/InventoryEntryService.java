@@ -4,12 +4,14 @@ import com.google.common.collect.Lists;
 
 import io.reactivesw.catalog.inventory.application.model.InventoryEntry;
 import io.reactivesw.catalog.inventory.application.model.InventoryEntryDraft;
+import io.reactivesw.catalog.inventory.application.model.InventoryRequest;
 import io.reactivesw.catalog.inventory.application.model.mapper.InventoryEntryMapper;
 import io.reactivesw.catalog.inventory.domain.entity.InventoryEntryEntity;
 import io.reactivesw.catalog.inventory.domain.service.update.InventoryEntryUpdateService;
 import io.reactivesw.catalog.inventory.infrastructure.repository.InventoryEntryRepository;
 import io.reactivesw.catalog.inventory.infrastructure.validator.InventoryEntryValidator;
 import io.reactivesw.common.exception.NotExistException;
+import io.reactivesw.common.exception.ParametersException;
 import io.reactivesw.common.model.UpdateAction;
 
 import org.slf4j.Logger;
@@ -18,6 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -104,6 +108,43 @@ public class InventoryEntryService {
 
     LOG.debug("end updateInventoryEntry, updated InventoryEntry is {}", result);
     return result;
+  }
+
+  /**
+   * update inventory by sku names.
+   * @param requests update request
+   */
+  public void updateInventoryBySkuNames(List<InventoryRequest> requests) {
+    List<String> skuNames = requests.parallelStream().map(
+        request -> {
+          return request.getSkuName();
+        }
+    ).collect(Collectors.toList());
+
+    Map<String, Integer> skuQuantity = requests.parallelStream().collect(
+        Collectors.toMap(InventoryRequest::getSkuName, InventoryRequest::getQuantity)
+    );
+
+    List<InventoryEntryEntity> inventoryEntryEntities = inventoryEntryRepository.queryBySkuNames
+        (skuNames);
+
+    inventoryEntryEntities.parallelStream().forEach(
+        entity -> {
+          Integer addReservedQuantity = skuQuantity.get(entity.getSku());
+          int srcQuantity = entity.getQuantityOnStock();
+          int srcAvailableQuantity = entity.getAvailableQuantity();
+
+          if (addReservedQuantity > srcAvailableQuantity || addReservedQuantity > srcQuantity) {
+            throw new ParametersException(
+                "addReservedQuantity can not be greater than availabelQuantity and quantityOnStock");
+          }
+
+          entity.setAvailableQuantity(srcAvailableQuantity - addReservedQuantity);
+          entity.setReservedQuantity(entity.getReservedQuantity() + addReservedQuantity);
+        }
+    );
+
+    inventoryEntryRepository.save(inventoryEntryEntities);
   }
 
   /**
