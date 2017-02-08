@@ -8,7 +8,7 @@ import io.reactivesw.catalog.inventory.application.model.mapper.InventoryEntryMa
 import io.reactivesw.catalog.inventory.domain.entity.InventoryEntryEntity;
 import io.reactivesw.catalog.inventory.domain.service.update.InventoryEntryUpdateService;
 import io.reactivesw.catalog.inventory.infrastructure.repository.InventoryEntryRepository;
-import io.reactivesw.common.exception.ConflictException;
+import io.reactivesw.catalog.inventory.infrastructure.validator.InventoryEntryValidator;
 import io.reactivesw.common.exception.NotExistException;
 import io.reactivesw.common.model.UpdateAction;
 
@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 
 import javax.transaction.Transactional;
 
@@ -73,7 +72,7 @@ public class InventoryEntryService {
   public void deleteInventoryEntry(String id, Integer version) {
     LOG.debug("enter deleteInventoryEntry, id is : {}, version is : {}", id, version);
     InventoryEntryEntity entity = getInventoryEntryEntity(id);
-    validateVersion(entity, version);
+    InventoryEntryValidator.validateVersion(entity, version);
     inventoryEntryRepository.delete(id);
     LOG.debug("end deleteInventoryEntry, id is : {}, version is : {}", id, version);
   }
@@ -93,7 +92,7 @@ public class InventoryEntryService {
         id, version, actions);
 
     InventoryEntryEntity entity = getInventoryEntryEntity(id);
-    validateVersion(entity, version);
+    InventoryEntryValidator.validateVersion(entity, version);
 
     actions.parallelStream().forEach(action -> {
       updateService.handle(entity, action);
@@ -160,19 +159,5 @@ public class InventoryEntryService {
       throw new NotExistException("InventoryEntry Not Found");
     }
     return entity;
-  }
-
-  /**
-   * validateNull version.
-   *
-   * @param entity  the entity
-   * @param version the version
-   */
-  private void validateVersion(InventoryEntryEntity entity, Integer version) {
-    if (!Objects.equals(version, entity.getVersion())) {
-      LOG.debug("Version not match, input version : {}, entity version : {}",
-          version, entity.getVersion());
-      throw new ConflictException("Version not match");
-    }
   }
 }
