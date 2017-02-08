@@ -3,6 +3,8 @@ package io.reactivesw.order.order.application.model.mapper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
+import io.reactivesw.common.enums.ReferenceTypes;
+import io.reactivesw.common.model.Reference;
 import io.reactivesw.common.model.mapper.LocalizedStringMapper;
 import io.reactivesw.common.model.mapper.MoneyMapper;
 import io.reactivesw.order.cart.application.model.LineItem;
@@ -103,7 +105,20 @@ public final class LineItemMapper {
     if (entity != null) {
       model.setId(entity.getId());
       model.setProductId(entity.getProductId());
-      // TODO: 17/2/8
+      model.setName(LocalizedStringMapper.entityToModelDefaultNew(entity.getName()));
+      model.setSlug(entity.getProductSlug());
+      model.setProductVariant(null);
+      model.setPrice(PriceMapper.entityToModel(entity.getPrice()));
+      model.setTaxedPrice(TaxedItemPriceMapper.entityToModel(entity.getTaxedPrice()));
+      model.setTotalPrice(MoneyMapper.entityToModel(entity.getTotalPrice()));
+      model.setQuantity(entity.getQuantity());
+      model.setItemState(null);
+      model.setTaxRate(TaxRateMapper.entityToModel(entity.getTaxRate()));
+      model.setSupplyChannel(new Reference(
+          ReferenceTypes.CHANNEL.toString(), entity.getSupplyChannel()));
+      model.setDistributionChannel(new Reference(
+          ReferenceTypes.CHANNEL.toString(), entity.getDistributionChannel()
+      ));
     }
 
     return model;

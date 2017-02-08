@@ -40,4 +40,15 @@ public final class PriceMapper {
 
     return entity;
   }
+
+  /**
+   * Entity to model price.
+   *
+   * @param entity the entity
+   * @return the price
+   */
+  public static Price entityToModel(PriceValue entity) {
+    // TODO: 17/2/8
+    return null;
+  }
 }
