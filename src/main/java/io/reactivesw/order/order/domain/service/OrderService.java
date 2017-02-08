@@ -57,9 +57,7 @@ public class OrderService {
 
     Cart cart = orderRestClient.getCart(draft.getId(), draft.getVersion());
 
-    List<InventoryRequest> inventoryRequests = getInventoryRequest(cart);
-
-    orderRestClient.changeInventoryEntry(inventoryRequests);
+    orderRestClient.changeInventoryEntry(getInventoryRequest(cart));
 
     Money amount = cart.getTotalPrice();
 

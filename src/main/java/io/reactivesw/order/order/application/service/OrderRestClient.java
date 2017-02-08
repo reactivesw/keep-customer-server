@@ -79,15 +79,19 @@ public class OrderRestClient {
 
   /**
    * Change inventory entry inventory entry.
-   *
+   *changeInventoryEntry
    * @return the inventory entry
    */
   public InventoryEntry changeInventoryEntry(List<InventoryRequest> inventoryRequestList) {
     LOG.debug("enter changeInventoryEntry");
 
     // TODO: 17/2/6
+    String url = "http://localhost:8088/inventory";
+    MultiValueMap<String, List> request = new LinkedMultiValueMap<>();
+    request.add("requests", inventoryRequestList);
+    restTemplate.put(url, request);
+
     InventoryEntry result = null;
-    
     LOG.debug("end changeInventoryEntry");
 
     return result;
