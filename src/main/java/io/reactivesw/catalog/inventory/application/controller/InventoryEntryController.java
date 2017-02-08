@@ -6,6 +6,7 @@ import static io.reactivesw.route.InventoryEntryRouter.INVENTORY_ENTRY_WITH_ID;
 
 import io.reactivesw.catalog.inventory.application.model.InventoryEntry;
 import io.reactivesw.catalog.inventory.application.model.InventoryEntryDraft;
+import io.reactivesw.catalog.inventory.application.model.InventoryRequest;
 import io.reactivesw.catalog.inventory.application.model.action.InventoryEntryUpdateAction;
 import io.reactivesw.catalog.inventory.domain.service.InventoryEntryService;
 import io.reactivesw.common.model.PagedQueryResult;
@@ -113,6 +114,25 @@ public class InventoryEntryController {
     LOG.debug("end updateInventoryEntry, updated InventoryEntry is {}", result.toString());
 
     return result;
+  }
+
+  /**
+   * Update inventory entry by list.
+   *
+   * @param inventoryRequests the inventory requests
+   * @return the list
+   */
+  public List<InventoryEntry> updateInventoryEntryByList(@RequestBody
+                                                         @ApiParam(value = "list of update " +
+                                                             "request", required = true)
+                                                             List<InventoryRequest>
+                                                             inventoryRequests) {
+    LOG.debug("enter updateInventoryEntryByList, update request is : {}", inventoryRequests);
+
+    // TODO: 17/2/8
+
+    LOG.debug("end updateInventoryEntryByList");
+    return null;
   }
 
   /**
