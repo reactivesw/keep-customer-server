@@ -23,8 +23,10 @@ public final class ShippingRateMapper {
   public static ShippingRateValue modelToEntity(ShippingRate model) {
     ShippingRateValue entity = new ShippingRateValue();
 
-    entity.setPrice(MoneyMapper.modelToEntity(model.getPrice()));
-    entity.setFreeAbove(MoneyMapper.modelToEntity(model.getFreeAbove()));
+    if (model != null) {
+      entity.setPrice(MoneyMapper.modelToEntity(model.getPrice()));
+      entity.setFreeAbove(MoneyMapper.modelToEntity(model.getFreeAbove()));
+    }
 
     return entity;
   }
@@ -36,7 +38,13 @@ public final class ShippingRateMapper {
    * @return the shipping rate
    */
   public static ShippingRate entityToModel(ShippingRateValue entity) {
-    // TODO: 17/2/7
-    return null;
+    ShippingRate model = new ShippingRate();
+
+    if (entity != null) {
+      model.setPrice(MoneyMapper.entityToModel(entity.getPrice()));
+      model.setFreeAbove(MoneyMapper.entityToModel(entity.getFreeAbove()));
+    }
+
+    return model;
   }
 }
