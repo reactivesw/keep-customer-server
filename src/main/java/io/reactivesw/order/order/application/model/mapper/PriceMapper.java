@@ -1,6 +1,8 @@
 package io.reactivesw.order.order.application.model.mapper;
 
 import io.reactivesw.catalog.product.application.model.Price;
+import io.reactivesw.common.enums.ReferenceTypes;
+import io.reactivesw.common.model.Reference;
 import io.reactivesw.common.model.mapper.MoneyMapper;
 import io.reactivesw.order.order.domain.entity.value.PriceValue;
 
@@ -48,7 +50,23 @@ public final class PriceMapper {
    * @return the price
    */
   public static Price entityToModel(PriceValue entity) {
-    // TODO: 17/2/8
-    return null;
+    Price model = new Price();
+
+    if (entity != null) {
+      model.setId(entity.getId());
+      model.setValue(MoneyMapper.entityToModel(entity.getValue()));
+      model.setCountry(entity.getCountry());
+      model.setCustomerGroup(new Reference(
+          ReferenceTypes.CUSTOMERGROUP.toString(), entity.getCustomerGroup()));
+      model.setChannel(new Reference(
+          ReferenceTypes.CHANNEL.toString(), entity.getChannel()
+      ));
+      model.setValidFrom(entity.getValidFrom());
+      model.setValidUntil(entity.getValidUntil());
+      model.setDiscounted(entity.getDiscounted());
+      model.setCustom(entity.getCustom());
+    }
+
+    return model;
   }
 }

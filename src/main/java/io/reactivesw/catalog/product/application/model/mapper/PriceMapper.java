@@ -3,7 +3,6 @@ package io.reactivesw.catalog.product.application.model.mapper;
 import io.reactivesw.catalog.product.application.model.Price;
 import io.reactivesw.catalog.product.application.model.PriceDraft;
 import io.reactivesw.catalog.product.domain.entity.PriceEntity;
-import io.reactivesw.catalog.productdiscount.model.mapper.DiscountedPriceMapper;
 import io.reactivesw.common.enums.ReferenceTypes;
 import io.reactivesw.common.model.Reference;
 import io.reactivesw.common.model.mapper.CustomFieldsMapper;
@@ -12,8 +11,6 @@ import io.reactivesw.common.model.mapper.MoneyMapper;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import antlr.StringUtils;
 
 /**
  * Created by Davis on 16/12/14.
