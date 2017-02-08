@@ -9,6 +9,7 @@ import io.reactivesw.catalog.inventory.application.model.mapper.InventoryEntryMa
 import io.reactivesw.catalog.inventory.domain.entity.InventoryEntryEntity;
 import io.reactivesw.catalog.inventory.domain.service.update.InventoryEntryUpdateService;
 import io.reactivesw.catalog.inventory.infrastructure.repository.InventoryEntryRepository;
+import io.reactivesw.catalog.inventory.infrastructure.util.InventoryRequestUtils;
 import io.reactivesw.catalog.inventory.infrastructure.validator.InventoryEntryValidator;
 import io.reactivesw.common.exception.NotExistException;
 import io.reactivesw.common.exception.ParametersException;
@@ -21,7 +22,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -115,19 +115,26 @@ public class InventoryEntryService {
    * @param requests update request
    */
   public void updateInventoryBySkuNames(List<InventoryRequest> requests) {
-    List<String> skuNames = requests.parallelStream().map(
-        request -> {
-          return request.getSkuName();
-        }
-    ).collect(Collectors.toList());
+    List<String> skuNames = InventoryRequestUtils.getSkuNames(requests);
 
-    Map<String, Integer> skuQuantity = requests.parallelStream().collect(
-        Collectors.toMap(InventoryRequest::getSkuName, InventoryRequest::getQuantity)
-    );
+    Map<String, Integer> skuQuantity = InventoryRequestUtils.getSkuQuantityMap(requests);
 
     List<InventoryEntryEntity> inventoryEntryEntities = inventoryEntryRepository.queryBySkuNames
         (skuNames);
 
+    inventoryEntryEntities = updateInventoryByRequestMap(skuQuantity, inventoryEntryEntities);
+
+    inventoryEntryRepository.save(inventoryEntryEntities);
+  }
+
+  /**
+   * update inventory entry entity.
+   * @param skuQuantity sku name and quantity map
+   * @param inventoryEntryEntities list of inventory entry entity
+   * @return updated list of inventory entry entity
+   */
+  private List<InventoryEntryEntity> updateInventoryByRequestMap(Map<String, Integer> skuQuantity,
+                                                                 List<InventoryEntryEntity> inventoryEntryEntities) {
     inventoryEntryEntities.parallelStream().forEach(
         entity -> {
           Integer addReservedQuantity = skuQuantity.get(entity.getSku());
@@ -143,8 +150,7 @@ public class InventoryEntryService {
           entity.setReservedQuantity(entity.getReservedQuantity() + addReservedQuantity);
         }
     );
-
-    inventoryEntryRepository.save(inventoryEntryEntities);
+    return inventoryEntryEntities;
   }
 
   /**
