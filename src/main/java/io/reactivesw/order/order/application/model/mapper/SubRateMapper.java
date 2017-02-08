@@ -52,4 +52,15 @@ public final class SubRateMapper {
 
     return entity;
   }
+
+  /**
+   * Entity to model list.
+   *
+   * @param models the models
+   * @return the list
+   */
+  public static List<SubRate> entityToModel(Set<SubRateValue> models) {
+    // TODO: 17/2/8
+    return null;
+  }
 }

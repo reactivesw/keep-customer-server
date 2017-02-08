@@ -41,7 +41,17 @@ public final class TaxRateMapper {
    * @return the tax rate
    */
   public static TaxRate entityToModel(TaxRateValue entity) {
-    // TODO: 17/2/7
-    return null;
+    TaxRate model = new TaxRate();
+
+    if (entity != null) {
+      model.setName(entity.getName());
+      model.setAmount(entity.getAmount());
+      model.setIncludedInPrice(entity.getIncludedInPrice());
+      model.setCountry(entity.getCountry());
+      model.setState(entity.getState());
+      model.setSubRates(SubRateMapper.entityToModel(entity.getSubRates()));
+    }
+
+    return model;
   }
 }
