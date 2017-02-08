@@ -51,11 +51,7 @@ public class OrderService {
      */
     LOG.debug("enter createOrderFromCart, draft is : {}", draft.toString());
 
-    String cartId = draft.getId();
-    Integer version = draft.getVersion();
-    Cart cart = orderRestClient.getCart(cartId, version);
-
-
+    Cart cart = orderRestClient.getCart(draft.getId(), draft.getVersion());
 
     Money amount = cart.getTotalPrice();
 
