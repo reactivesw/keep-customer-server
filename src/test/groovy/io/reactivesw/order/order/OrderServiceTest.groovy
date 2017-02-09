@@ -2,6 +2,7 @@ package io.reactivesw.order.order
 
 import com.google.common.collect.Lists
 import io.reactivesw.catalog.product.application.model.ProductVariant
+import io.reactivesw.common.exception.ConflictException
 import io.reactivesw.common.exception.NotExistException
 import io.reactivesw.common.model.Money
 import io.reactivesw.order.cart.application.model.Cart
@@ -67,5 +68,33 @@ class OrderServiceTest extends Specification {
 
         then:
         thrown(NotExistException)
+    }
+
+    def "test 3.1 : delete order"() {
+        given:
+        def orderId = "orderId"
+        Integer version = 1
+        OrderEntity orderEntity = new OrderEntity(id: orderId, version: version)
+        orderRepository.findOne(orderId) >> orderEntity
+
+        when:
+        orderService.deleteOrder(orderId, version)
+
+        then:
+        true
+    }
+
+    def "test 3.2 : delete order and version not match"() {
+        given:
+        def orderId = "orderId"
+        Integer version = 1
+        OrderEntity orderEntity = new OrderEntity(id: orderId, version: version+1)
+        orderRepository.findOne(orderId) >> orderEntity
+
+        when:
+        orderService.deleteOrder(orderId, version)
+
+        then:
+        thrown(ConflictException)
     }
 }

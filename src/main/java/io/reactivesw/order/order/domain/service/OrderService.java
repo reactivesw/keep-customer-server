@@ -1,5 +1,6 @@
 package io.reactivesw.order.order.domain.service;
 
+import io.reactivesw.common.exception.ConflictException;
 import io.reactivesw.common.exception.NotExistException;
 import io.reactivesw.common.model.Money;
 import io.reactivesw.order.cart.application.model.Cart;
@@ -111,6 +112,7 @@ public class OrderService {
 
   /**
    * get order entity.
+   *
    * @param orderId the order id
    * @return the order entity
    */
@@ -123,5 +125,34 @@ public class OrderService {
     }
     LOG.debug("end getOrderEntity, result is : {}", result);
     return result;
+  }
+
+  /**
+   * Delete order.
+   *
+   * @param orderId the order id
+   * @param version the order version
+   */
+  public void deleteOrder(String orderId, Integer version) {
+    LOG.debug("enter deleteOrder, order id is : {}", orderId);
+
+    OrderEntity entity = getOrderEntity(orderId);
+    validateVersion(entity, version);
+    orderRepository.delete(entity);
+
+    LOG.debug("end deleteOrder");
+  }
+
+  /**
+   * validate order version.
+   * @param entity order entity
+   * @param version expect version
+   */
+  private void validateVersion(OrderEntity entity, Integer version) {
+    if (!version.equals(entity.getVersion())){
+      LOG.debug("order version can not match, expect version is : {}, real version is : {}",
+          version, entity.getVersion());
+      throw new ConflictException("Order Version Not Match");
+    }
   }
 }

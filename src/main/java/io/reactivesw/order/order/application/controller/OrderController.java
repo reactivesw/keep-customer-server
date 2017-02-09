@@ -13,10 +13,12 @@ import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -76,5 +78,26 @@ public class OrderController {
     LOG.debug("end getOrderById, result is : {}", result);
 
     return result;
+  }
+
+  /**
+   * Delete order.
+   *
+   * @param orderId the order id
+   * @param version the order version
+   */
+  @ApiOperation("delete order")
+  @DeleteMapping(ORDER_WITH_ID)
+  public void deleteOrder(@PathVariable(ORDER_ID)
+                          @ApiParam(value = "order id", required = true)
+                              String orderId,
+                          @RequestParam
+                          @ApiParam(value = "order version", required = true)
+                              Integer version) {
+    LOG.debug("enter deleteOrder, order id is : {}", orderId);
+
+    orderService.deleteOrder(orderId, version);
+
+    LOG.debug("end deleteOrder");
   }
 }
