@@ -52,6 +52,7 @@ public class OrderService {
     1. get cart
     2. update inventory
     3. checkout
+    4. change cart status
      */
     LOG.debug("enter createOrderFromCart, draft is : {}", draft.toString());
 
@@ -64,7 +65,7 @@ public class OrderService {
     Payment payment = orderRestClient.checkout(cart.getCustomerId(), amount.getCentAmount(), draft
         .getPaymentMethodToken());
 
-    OrderEntity entity = OrderMapper.of(cart, payment);
+    OrderEntity entity = OrderMapper.of(cart, payment.getId());
     OrderEntity savedEntity = orderRepository.save(entity);
 
     Order result = OrderMapper.entityToModel(savedEntity);

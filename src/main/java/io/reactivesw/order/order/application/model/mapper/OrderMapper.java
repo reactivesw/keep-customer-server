@@ -26,10 +26,10 @@ public final class OrderMapper {
    * Of order entity.
    *
    * @param cart    the cart
-   * @param payment the payment
+   * @param paymentId the payment id
    * @return the order entity
    */
-  public static OrderEntity of(Cart cart, Payment payment) {
+  public static OrderEntity of(Cart cart, String paymentId) {
     OrderEntity entity = new OrderEntity();
 
     entity.setCompletedAt(null);
@@ -49,7 +49,7 @@ public final class OrderMapper {
     entity.setCountry(cart.getCountry());
     entity.setOrderState(OrderState.Complete);
     entity.setShippingInfo(ShippingInfoMapper.modelToEntity(cart.getShippingInfo()));
-    entity.setPaymentInfo(payment.getId());
+    entity.setPaymentInfo(paymentId);
 
     return entity;
   }
