@@ -1,5 +1,9 @@
 package io.reactivesw.order.order.application.controller;
 
+import static io.reactivesw.route.OrderRouter.ORDER_ID;
+import static io.reactivesw.route.OrderRouter.ORDER_ROOT;
+import static io.reactivesw.route.OrderRouter.ORDER_WITH_ID;
+
 import io.reactivesw.order.order.application.model.Order;
 import io.reactivesw.order.order.application.model.OrderFromCartDraft;
 import io.reactivesw.order.order.domain.service.OrderService;
@@ -9,6 +13,8 @@ import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,11 +39,12 @@ public class OrderController {
 
   /**
    * create order from cart.
+   *
    * @param draft OrderFromCartDraft
-   * @return Order
+   * @return Order order
    */
   @ApiOperation("Create Order from Cart")
-  @PostMapping("/orders")
+  @PostMapping(ORDER_ROOT)
   public Order createOrderFromCart(@RequestBody
                                    @ApiParam(value = "order from cart draft", required = true)
                                    @Valid OrderFromCartDraft draft) {
@@ -46,6 +53,27 @@ public class OrderController {
     Order result = orderService.createOrderFromCart(draft);
 
     LOG.debug("end createOrderFromCart, result is : {}", result.toString());
+
+    return result;
+  }
+
+
+  /**
+   * Gets order by id.
+   *
+   * @param orderId the order id
+   * @return the order by id
+   */
+  @ApiOperation("get order by id")
+  @GetMapping(ORDER_WITH_ID)
+  public Order getOrderById(@PathVariable(ORDER_ID)
+                            @ApiParam(value = "order id", required = true)
+                                String orderId) {
+    LOG.debug("enter getOrderById, order id is : {}", orderId);
+
+    Order result = orderService.getOrderById(orderId);
+
+    LOG.debug("end getOrderById, result is : {}", result);
 
     return result;
   }

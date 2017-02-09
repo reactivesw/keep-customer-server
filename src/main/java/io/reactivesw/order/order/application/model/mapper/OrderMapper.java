@@ -7,7 +7,6 @@ import io.reactivesw.order.cart.application.model.Cart;
 import io.reactivesw.order.order.application.model.Order;
 import io.reactivesw.order.order.domain.entity.OrderEntity;
 import io.reactivesw.order.order.infrastructure.enums.OrderState;
-import io.reactivesw.order.payment.application.model.Payment;
 
 import org.apache.commons.lang3.StringUtils;
 

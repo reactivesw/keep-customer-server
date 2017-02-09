@@ -2,6 +2,7 @@ package io.reactivesw.order.order
 
 import com.google.common.collect.Lists
 import io.reactivesw.catalog.product.application.model.ProductVariant
+import io.reactivesw.common.exception.NotExistException
 import io.reactivesw.common.model.Money
 import io.reactivesw.order.cart.application.model.Cart
 import io.reactivesw.order.cart.application.model.LineItem
@@ -41,5 +42,30 @@ class OrderServiceTest extends Specification {
 
         then:
         true
+    }
+
+    def "test 2.1 : get order by id"() {
+        given:
+        def orderId = "orderId"
+        OrderEntity orderEntity = new OrderEntity()
+        orderRepository.findOne(orderId) >> orderEntity
+
+        when:
+        def result = orderService.getOrderById(orderId)
+
+        then:
+        result != null
+    }
+
+    def "test 2.2 : get order by id and find null entity"() {
+        given:
+        def orderId = "orderId"
+        orderRepository.findOne(orderId) >> null
+
+        when:
+        def result = orderService.getOrderById(orderId)
+
+        then:
+        thrown(NotExistException)
     }
 }

@@ -1,5 +1,6 @@
 package io.reactivesw.order.order.domain.service;
 
+import io.reactivesw.common.exception.NotExistException;
 import io.reactivesw.common.model.Money;
 import io.reactivesw.order.cart.application.model.Cart;
 import io.reactivesw.order.order.application.model.InventoryRequest;
@@ -88,6 +89,39 @@ public class OrderService {
         }
     ).collect(Collectors.toList());
 
+    return result;
+  }
+
+  /**
+   * Gets order by id.
+   *
+   * @param orderId the order id
+   * @return the order by id
+   */
+  public Order getOrderById(String orderId) {
+    LOG.debug("enter getOrderById, order id is : {}", orderId);
+
+    OrderEntity entity = getOrderEntity(orderId);
+    Order result = OrderMapper.entityToModel(entity);
+
+    LOG.debug("end getOrderById, result is : {}", result);
+
+    return result;
+  }
+
+  /**
+   * get order entity.
+   * @param orderId the order id
+   * @return the order entity
+   */
+  public OrderEntity getOrderEntity(String orderId) {
+    LOG.debug("enter getOrderEntity, order is is : {}", orderId);
+    OrderEntity result = orderRepository.findOne(orderId);
+    if (result == null) {
+      LOG.debug("can not find order by id : {}", orderId);
+      throw new NotExistException("Order Not Exist");
+    }
+    LOG.debug("end getOrderEntity, result is : {}", result);
     return result;
   }
 }
